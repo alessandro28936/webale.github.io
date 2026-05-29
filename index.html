@@ -62,24 +62,34 @@
 
         .btn-orange {
             background-color: #FF6B35;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-orange:hover {
             background-color: #E85A2A;
-            transition: 0.3s;
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 20px 25px -5px rgb(255 107 53 / 0.25), 0 8px 10px -6px rgb(255 107 53 / 0.25);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0) scale(0.98);
         }
 
         .btn-whatsapp {
             background-color: #ffffff;
             color: #000000;
             border: 1px solid #e5e7eb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-whatsapp:hover {
             background-color: #f9fafb;
-            transition: 0.3s;
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08);
+        }
+
+        .btn-whatsapp:active {
+            transform: translateY(0) scale(0.98);
         }
 
         /* Animasi */
@@ -329,8 +339,9 @@
             </button>
             <a href="https://wa.me/6281805438908?text=Halo%20Aksaradeutsch!%20Saya%20mau%20tanya-tanya%20dan%20konsultasi%20gratis%20tentang%20kelas%20bahasa%20Jerman%20yang%20pas%20buat%20saya.%20Terima%20kasih!"
                 target="_blank" rel="noopener noreferrer"
-                class="btn-whatsapp flex items-center gap-2 px-3 sm:px-6 md:px-7 py-3 rounded-2xl font-bold shadow-lg shadow-gray-100 text-xs sm:text-base whitespace-nowrap">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                class="btn-whatsapp flex items-center gap-2 px-3 sm:px-6 md:px-7 py-3 rounded-2xl font-bold shadow-lg shadow-gray-100 text-xs sm:text-base whitespace-nowrap hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#25D366] group-hover:scale-110 transition-transform duration-300"
+                    fill="currentColor" viewBox="0 0 24 24">
                     <path
                         d="M20.52 3.48A11.78 11.78 0 0012.15 0C5.62 0 .31 5.31.31 11.84c0 2.09.55 4.13 1.59 5.93L.21 24l6.38-1.67a11.8 11.8 0 005.56 1.42h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.16-1.23-6.13-3.48-8.43zM12.16 21.75h-.01a9.82 9.82 0 01-5.01-1.37l-.36-.22-3.79.99 1.01-3.69-.24-.38a9.8 9.8 0 01-1.5-5.24C2.26 6.41 6.72 2 12.16 2c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 7.01c0 5.43-4.42 9.84-9.88 9.84zm5.4-7.36c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z">
                     </path>
@@ -400,9 +411,9 @@
                     </svg>
                 </a>
                 <a href="#kelas-gratis"
-                    class="bg-white border border-gray-800 text-gray-800 flex-1 sm:flex-none px-4 sm:px-7 md:px-8 py-3 sm:py-3 md:py-4 rounded-2xl font-extrabold text-[11px] sm:text-base md:text-lg flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-gray-200/50 transition-all hover:-translate-y-1 hover:bg-gray-50 whitespace-nowrap group">
+                    class="bg-white border border-gray-800 text-gray-800 flex-1 sm:flex-none px-4 sm:px-7 md:px-8 py-3 sm:py-3 md:py-4 rounded-2xl font-extrabold text-[11px] sm:text-base md:text-lg flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-gray-200/50 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 hover:bg-gray-50 whitespace-nowrap group">
                     Coba Kelas Gratis
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transform group-hover:scale-110 transition-transform"
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transform group-hover:scale-110 transition-transform duration-300"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                             d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -508,124 +519,97 @@
     </section>
 
     <!-- Section Kurikulum Aksaradeutch.id -->
-    <section id="materi" class="py-8 md:py-12 lg:py-6 bg-[#F9FAFB] overflow-hidden" x-data="{ 
+    <section id="materi" class="py-12 md:py-16 bg-[#F9FAFB] overflow-hidden" x-data="{ 
             activeMateri: null,
             currentTab: 'A1.1',
-            carouselPosition: 0,
-            isMobile: false,
-            init() {
-                this.updateViewport();
-                window.addEventListener('resize', () => this.updateViewport());
-            },
-            updateViewport() {
-                this.isMobile = window.innerWidth < 768;
-                this.carouselPosition = Math.min(this.visibleCards() - 1, this.carouselPosition);
-            },
-            visibleCards() {
-                return this.isMobile ? 6 : 3;
-            },
             materiDetails: {
                 1: {
-                    title: 'Guten Tag!',
-                    summary: 'Mulai mengenal dasar percakapan dalam bahasa Jerman.',
-                    detail: 'Di materi ini kamu akan belajar cara menyapa orang, memperkenalkan diri, menyebutkan nama, asal negara, bahasa, serta angka dan nomor telepon. Cocok banget untuk pemula yang baru mulai dari nol.',
+                    title: 'Hallo! Wie geht\'s?',
+                    summary: 'Sapaan, perkenalan diri, dan dasar angka.',
+                    detail: 'Kamu akan belajar cara menyapa orang secara formal maupun santai, memperkenalkan diri dan teman, menyebutkan asal negara serta bahasa, melafalkan angka 1-100, hingga mengeja nama menggunakan alfabet Jerman. Topik ini dibekali dengan tata bahasa dasar seperti konjugasi kata kerja (heißen, sein, kommen, wohnen) dan kalimat tanya (W-Fragen).',
+                    categoryLabel: 'Dasar',
+                    categoryClass: 'bg-orange-50 text-orange-600 border border-orange-100'
                 },
                 2: {
-                    title: 'Freunde, Kollegen und ich',
-                    summary: 'Percakapan seputar kehidupan sehari-hari.',
-                    detail: 'Kamu akan memahami cara membicarakan hobi, pekerjaan, aktivitas harian, serta membuat janji dengan orang lain menggunakan kalimat sederhana.',
+                    title: 'Hobbys und Arbeit',
+                    summary: 'Waktu senggang, hobi, dan dunia profesi.',
+                    detail: 'Sesi ini mengajak kamu bercerita tentang aktivitas seru di waktu senggang, hobi mingguan, nama-nama hari (Wochentage), serta berbagai jenis pekerjaan (Berufe) dan tempat kerja. Kamu juga akan menguasai cara kerja konjugasi kata kerja dengan perubahan vokal, penggunaan kata kerja bantu (haben, sein), dan pembentukan kalimat tanya Ya/Tidak (Ja/Nein-Fragen).',
+                    categoryLabel: 'Sosial',
+                    categoryClass: 'bg-green-50 text-green-600 border border-green-100'
                 },
                 3: {
-                    title: 'In der Stadt',
-                    summary: 'Cara bertanya lokasi, mengenal tempat dan memahami petunjuk arah.',
-                    detail: 'Di materi ini kamu akan tahu bagaimana cara bertanya lokasi, memahami arah jalan, serta mengenal transportasi umum dan tempat-tempat penting di kota.',
+                    title: 'Meine Familie',
+                    summary: 'Anggota keluarga dan deskripsi karakter.',
+                    detail: 'Kamu akan mengeksplorasi cara menceritakan anggota keluarga besar, menjelaskan status hubungan, menyebutkan umur, serta menggambarkan sifat atau karakter seseorang dengan kosakata yang simpel. Pembahasan gramatika mencakup kata ganti kepemilikan (Possessivpronomen), kasus Nominatif, bentuk jamak kata benda, serta kalimat negasi menggunakan tidak/bukan.',
+                    categoryLabel: 'Keluarga',
+                    categoryClass: 'bg-rose-50 text-rose-600 border border-rose-100'
                 },
                 4: {
                     title: 'Guten Appetit!',
-                    summary: 'Mengenal kosakata makanan dan aktivitas belanja.',
-                    detail: 'Kamu akan mengenal kosakata seputar makanan dan minuman, cara memesan makanan, hingga percakapan sederhana saat berbelanja di supermarket atau restoran dalam bahasa Jerman.',
+                    summary: 'Makanan, minuman, dan belanja bahan pangan.',
+                    detail: 'Materi ini membimbing kamu mengenali nama-nama makanan dan minuman, berbelanja bahan makanan di supermarket sesuai takaran, hingga melakukan pemesanan serta pembayaran secara sopan di kafe atau restoran. Di sini, kamu mulai menggunakan kasus Akkusativ (perubahan artikel maskulin), artikel kata benda dasar, dan kata kerja modal keinginan (möchten).',
+                    categoryLabel: 'Belanja',
+                    categoryClass: 'bg-yellow-50 text-yellow-600 border border-yellow-100'
                 },
                 5: {
-                    title: 'Tag für Tag',
-                    summary: 'Memahami cara membicarakan rutinitas harian.',
-                    detail: 'Materi ini membantu kamu menjelaskan aktivitas sehari-hari, jam, jadwal, serta membicarakan keluarga dan kegiatan rutin dengan lebih percaya diri.',
+                    title: 'Mein Tag (Alltag)',
+                    summary: 'Rutinitas sehari-hari dan penunjukan jam.',
+                    detail: 'Kamu akan merangkai cerita tentang rutinitas harianmu dari bangun pagi sampai tidur malam, membaca penunjukan jam secara formal maupun kasual, serta membuat janji temu santai dengan teman. Fokus tata bahasanya adalah penggunaan kata kerja terpisah (Trennbare Verben), preposisi keterangan waktu (um, am, von...bis), dan modal verb keinginan (wollen).',
+                    categoryLabel: 'Waktu',
+                    categoryClass: 'bg-indigo-50 text-indigo-600 border border-indigo-100'
                 },
                 6: {
-                    title: 'Zeit mit Freunden',
-                    summary: 'Mengenal percakapan untuk bersosialisasi sehari-hari.',
-                    detail: 'Kamu akan memahami cara mengundang teman, membuat janji, berbicara tentang acara, hingga memesan makanan di restoran menggunakan bahasa Jerman sehari-hari.',
+                    title: 'In der Stadt',
+                    summary: 'Tempat di kota, transportasi, dan petunjuk arah.',
+                    detail: 'Sesi ini membantu kamu mengenali berbagai bangunan penting di kota, memanfaatkan transportasi umum, menanyakan keberadaan lokasi suatu tempat, dan memberikan rute petunjuk arah jalan kepada orang asing. Kamu akan menguasai penggunaan kasus Dativ, preposisi penunjuk tempat (in, an, vor, zu, dll.), serta kata tanya arah (Wo dan Wohin).',
+                    categoryLabel: 'Kota',
+                    categoryClass: 'bg-blue-50 text-blue-600 border border-blue-100'
                 },
                 7: {
-                    title: 'Kontakte',
-                    summary: 'Mengenal komunikasi dalam kehidupan kerja dan sosial.',
-                    detail: 'Di materi ini kamu akan tahu, bagaimana cara membuat janji, menggunakan telepon, menulis pesan sederhana, serta memahami percakapan sehari-hari.',
+                    title: 'Meine Wohnung',
+                    summary: 'Kosakata rumah, ruangan, dan tata letak perabot.',
+                    detail: 'Kamu akan menjelajahi kosakata nama ruangan di dalam rumah, berbagai jenis perabotan (Möbel), serta cara mendeskripsikan kondisi dan kenyamanan tempat tinggal Anda. Sesi ini memperkuat kemampuan tata bahasamu dalam membedakan kata kerja posisi statis/dinamis (stehen/stellen, liegen/legen) serta menerapkan preposisi ganda (Wechselpräpositionen) dengan kasus Akkusativ atau Dativ.',
+                    categoryLabel: 'Rumah',
+                    categoryClass: 'bg-purple-50 text-purple-600 border border-purple-100'
                 },
                 8: {
-                    title: 'Meine Wohnung',
-                    summary: 'Mengenal kosakata rumah dan tempat tinggal.',
-                    detail: 'Kamu akan memahami nama ruangan, furnitur, serta cara mendeskripsikan rumah atau tempat tinggal menggunakan kalimat sederhana.',
+                    title: 'Termine im Büro',
+                    summary: 'Komunikasi kerja, telepon, dan janji temu formal.',
+                    detail: 'Materi ini mempersiapkan kamu menghadapi dunia kerja dengan kosakata seputar rutinitas kantor, etika menelpon rekan bisnis, serta cara membuat, mengubah, atau membatalkan janji temu secara resmi. Gramatika penting yang akan kamu pelajari adalah kata kerja modal kewajiban/izin (müssen, dürfen), preposisi waktu kasus Dativ/Akkusativ, dan ungkapan sopan menggunakan Konjunktiv II (könnte, würde).',
+                    categoryLabel: 'Kerja',
+                    categoryClass: 'bg-cyan-50 text-cyan-600 border border-cyan-100'
                 },
                 9: {
-                    title: 'Alles Arbeit?',
-                    summary: 'Mengenal percakapan seputar pekerjaan dan pengalaman.',
-                    detail: 'Materi ini fokus pada dunia kerja, aktivitas sehari-hari, pengalaman masa lalu, serta cara berbicara tentang pekerjaan dan studi.',
+                    title: 'Pläne und Freizeit',
+                    summary: 'Harapan masa depan, liburan, dan perayaan pesta.',
+                    detail: 'Kamu akan berlatih mengekspresikan rencana masa depan seperti karier atau studi di Jerman, merencanakan liburan kelompok, mendiskusikan festival budaya, hingga memberikan ucapan selamat ulang tahun atau pernikahan. Topik ini didukung oleh tata bahasa modal verb (wollen/sollen), penulisan tanggal (Ordnungszahlen), serta pembentukan anak kalimat menggunakan konjungsi dass dan weil.',
+                    categoryLabel: 'Rencana',
+                    categoryClass: 'bg-teal-50 text-teal-600 border border-teal-100'
                 },
                 10: {
-                    title: 'Kleidung und Mode',
-                    summary: 'Mengenal kosakata pakaian dan belanja fashion.',
-                    detail: 'Kamu akan memahami nama pakaian, cara memilih barang di toko, bertanya ukuran dan warna, serta percakapan saat berbelanja.',
+                    title: 'Gesund und munter',
+                    summary: 'Kesehatan, bagian tubuh, dan konsultasi dokter.',
+                    detail: 'Sesi ini membekali kamu dengan kosakata anggota tubuh, cara mengomunikasikan gejala sakit atau penyakit, membeli obat di apotek, serta memahami saran medis dari dokter di klinik. Kamu akan mempelajari cara membuat kalimat perintah (Imperativ) dalam bentuk formal/informal, menyatakan kepemilikan bagian tubuh, dan menggunakan modalverb rekomendasi (sollen).',
+                    categoryLabel: 'Sehat',
+                    categoryClass: 'bg-emerald-50 text-emerald-600 border border-emerald-100'
                 },
                 11: {
-                    title: 'Gesund und munter',
-                    summary: 'Mengenal percakapan tentang kesehatan dan tubuh.',
-                    detail: 'Di materi ini kamu akan memahami nama bagian tubuh, menjelaskan kondisi kesehatan, membeli obat, dan berbicara dengan dokter menggunakan bahasa sederhana.',
+                    title: 'Kleidung und Mode',
+                    summary: 'Kosakata pakaian, warna, ukuran, dan belanja fesyen.',
+                    detail: 'Kamu akan menguasai cara berbelanja pakaian secara langsung maupun online, menyebutkan warna and ukuran baju, menanyakan opini penampilan, serta mengajukan keluhan jika barang tidak sesuai. Tata bahasanya mencakup penggunaan artikel demonstratif (dieser), kata tanya penunjuk pilihan (welcher), serta aturan dasar deklinasi kata sifat setelah artikel definit/indefinit.',
+                    categoryLabel: 'Mode',
+                    categoryClass: 'bg-pink-50 text-pink-600 border border-pink-100'
                 },
                 12: {
-                    title: 'Ab in den Urlaub!',
-                    summary: 'Mengenal percakapan yang digunakan saat traveling.',
-                    detail: 'Materi terakhir membahas perjalanan, cuaca, hotel, tempat wisata, hingga percakapan yang sering digunakan saat liburan di negara berbahasa Jerman.',
+                    title: 'Meine Reise',
+                    summary: 'Cuaca, reservasi hotel, dan liburan masa lalu.',
+                    detail: 'Materi penutup ini memandu kamu membicarakan kondisi cuaca dan musim di Eropa, memesan kamar hotel, serta menceritakan kembali momen menyenangkan selama liburan yang lalu. Kamu akan menguasai kalimat impersonal menggunakan es, kata keterangan waktu lampau, serta struktur pembentukan kalimat masa lalu (Perfekt dengan haben/sein & Präteritum war/hatte).',
+                    categoryLabel: 'Reise',
+                    categoryClass: 'bg-red-50 text-red-600 border border-red-100'
                 }
             },
             activeDetail() {
                 return this.materiDetails[this.activeMateri] || { title: '', summary: '', detail: '' };
-            },
-            getCarouselStep() {
-                const container = this.$refs.container;
-                const card = container?.querySelector('.snap-center');
-                if (!container || !card) return 0;
-                const gap = parseFloat(getComputedStyle(container).columnGap || getComputedStyle(container).gap) || 0;
-                return card.offsetWidth + gap;
-            },
-            handleScroll() {
-                const container = $refs.container;
-                if (!container) return;
-                const step = this.getCarouselStep();
-                if (!step) return;
-                this.carouselPosition = Math.min(this.visibleCards() - 1, Math.max(0, Math.round(container.scrollLeft / step)));
-            },
-            scrollToIndex(index) {
-                const container = $refs.container;
-                const step = this.getCarouselStep();
-                if (!container || !step) return;
-                container.scrollTo({ left: index * step, behavior: 'smooth' });
-                this.carouselPosition = index;
-            },
-            scrollNext() {
-                const nextIndex = Math.min(this.visibleCards() - 1, this.carouselPosition + 1);
-                this.scrollToIndex(nextIndex);
-            },
-            scrollPrev() {
-                const prevIndex = Math.max(0, this.carouselPosition - 1);
-                this.scrollToIndex(prevIndex);
-            },
-            resetCarousel() {
-                this.carouselPosition = 0;
-                this.$nextTick(() => {
-                    const container = this.$refs.container;
-                    if (container) {
-                        container.scrollTo({ left: 0, behavior: 'smooth' });
-                    }
-                });
             },
             toggleMateri(id) {
                 this.activeMateri = (this.activeMateri === id ? null : id);
@@ -633,7 +617,7 @@
                     this.$nextTick(() => {
                         const el = this.$refs.detailPanel;
                         if (el) {
-                            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
                     });
                 }
@@ -644,16 +628,19 @@
 
             <div class="section-heading-wrap is-compact curriculum-heading">
                 <div class="section-kicker">
-                    <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-500'"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" viewBox="0 0 24 24">
                         <path
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    <span class="section-kicker-text">Materi</span>
+                    <span class="section-kicker-text"
+                        :class="currentTab === 'A1.1' ? 'text-orange-600' : 'text-blue-600'">Materi</span>
                 </div>
                 <h2 class="section-title">
-                    Materi A1 yang bisa kamu ikuti <span class="text-orange-500 inline-block">step by
-                        step</span>
+                    Materi A1 yang bisa kamu ikuti <span
+                        :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-600'"
+                        class="inline-block transition-colors duration-300">step by step</span>
                 </h2>
                 <p class="section-subtitle">
                     Disusun khusus untuk pemula. Belajar pelan-pelan, dari dasar sampai kamu bisa terapkan dalam
@@ -663,15 +650,15 @@
                 <div class="text-center mt-10 mb-0">
                     <h4 class="text-lg font-bold text-navy mb-4 tracking-wide">Pilih Level Belajarmu</h4>
 
-                    <div
-                        class="inline-flex p-1.5 bg-orange-50 border border-orange-100 rounded-2xl mb-3 md:mb-4 shadow-sm shadow-orange-100/50">
-                        <button @click="currentTab = 'A1.1'; activeMateri = null; resetCarousel()"
-                            :class="currentTab === 'A1.1' ? 'bg-orange-500 text-white shadow-md shadow-orange-200' : 'text-orange-600 hover:bg-white hover:text-orange-500'"
+                    <div :class="currentTab === 'A1.1' ? 'bg-orange-50 border-orange-100 shadow-orange-100/50' : 'bg-blue-50 border-blue-100 shadow-blue-100/50'"
+                        class="inline-flex p-1.5 border rounded-2xl mb-3 md:mb-4 shadow-sm transition-all duration-300">
+                        <button @click="currentTab = 'A1.1'; activeMateri = null"
+                            :class="currentTab === 'A1.1' ? 'bg-orange-500 text-white shadow-md shadow-orange-200' : 'text-gray-500 hover:text-orange-500'"
                             class="px-8 py-3 rounded-xl font-bold transition-all duration-300">
                             Level A1.1
                         </button>
-                        <button @click="currentTab = 'A1.2'; activeMateri = null; resetCarousel()"
-                            :class="currentTab === 'A1.2' ? 'bg-orange-500 text-white shadow-md shadow-orange-200' : 'text-orange-600 hover:bg-white hover:text-orange-500'"
+                        <button @click="currentTab = 'A1.2'; activeMateri = null"
+                            :class="currentTab === 'A1.2' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' : 'text-gray-500 hover:text-blue-600'"
                             class="px-8 py-3 rounded-xl font-bold transition-all duration-300">
                             Level A1.2
                         </button>
@@ -680,302 +667,114 @@
             </div>
 
             <div class="text-center mb-3 md:mb-5 -mt-2 md:-mt-4">
-                <h3 class="text-1xl md:text-2xl font-extrabold text-navy mb-2">
-                    Materi yang akan kamu pelajari di <span x-text="currentTab" class="text-orange-500"></span>
+                <h3 class="text-xl md:text-2xl font-extrabold text-navy mb-2">
+                    Materi yang akan kamu pelajari di <span x-text="currentTab"
+                        :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-600'"></span>
                 </h3>
                 <div class="text-center">
                     <p
-                        class="text-[12px] sm:text-xs md:text-sm text-gray-400 flex items-center justify-center gap-1 sm:gap-2 whitespace-nowrap">
-                        <span class="text-orange-500">←</span> Swipe ke kiri atau kanan dan klik untuk lihat materi
-                        <span class="text-orange-500">→</span>
+                        class="text-[12px] sm:text-xs md:text-sm text-gray-400 flex items-center justify-center gap-1 sm:gap-2">
+                        Pilih & klik kartu materi di bawah untuk melihat detail pembelajarannya
                     </p>
                 </div>
             </div>
 
-            <div class="relative group">
-                <button @click="scrollPrev()"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-20 bg-white shadow-2xl rounded-full p-4 border border-gray-100 hover:bg-orange-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center">
-                    <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                </button>
-
-                <div x-ref="container" @scroll="handleScroll()"
-                    class="curriculum-carousel flex overflow-x-auto gap-6 pt-2 md:pt-4 pb-10 hide-scrollbar snap-x snap-mandatory scroll-smooth">
-
-                    <template x-if="currentTab === 'A1.1'">
-                        <div class="flex gap-6">
-                            <div @click="toggleMateri(1)"
-                                :class="activeMateri === 1 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all duration-300 snap-center group/card text-center">
-                                <div class="relative mb-2">
-                                    <span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold group-hover/card:bg-orange-500 group-hover/card:text-white transition-colors">1</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-1.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Guten Tag"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Guten Tag!</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mulai mengenal dasar
-                                    percakapan dalam bahasa Jerman.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-orange-50 text-orange-600 text-xs font-bold rounded-full">Dasar</span><span
-                                        x-text="activeMateri === 1 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 1 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(2)"
-                                :class="activeMateri === 2 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">2</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-2.png"
-                                            class="w-36 h-36 object-contain"
-                                            alt="Ilustrasi materi Freunde, Kollegen und ich" loading="lazy"
-                                            decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Freunde, Kollegen und ich</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Percakapan
-                                    seputar kehidupan sehari-hari.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full">Sosial</span><span
-                                        x-text="activeMateri === 2 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 2 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(3)"
-                                :class="activeMateri === 3 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">3</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-3.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi In der Stadt"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">In der Stadt</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Cara bertanya lokasi,
-                                    mengenal tempat dan memahami petunjuk arah.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full">Kota</span><span
-                                        x-text="activeMateri === 3 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 3 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(4)"
-                                :class="activeMateri === 4 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">4</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-4.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Guten Appetit"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Guten Appetit!</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal kosakata
-                                    seputar
-                                    makanan dan minuman, serta percakapan saat berbelanja.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded-full">Kuliner</span><span
-                                        x-text="activeMateri === 4 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 4 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(5)"
-                                :class="activeMateri === 5 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">5</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-5.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Tag für Tag"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Tag für Tag</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Memahami cara
-                                    membicarakan rutinitas harian.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-red-50 text-red-600 text-xs font-bold rounded-full">Rutinitas</span><span
-                                        x-text="activeMateri === 5 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 5 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(6)"
-                                :class="activeMateri === 6 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">6</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-11.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Zeit mit Freunden"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Zeit mit Freunden</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal percakapan
-                                    untuk bersosialisasi sehari-hari.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-red-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">Freizeit</span><span
-                                        x-text="activeMateri === 6 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 6 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template x-if="currentTab === 'A1.2'">
-                        <div class="flex gap-6">
-                            <div @click="toggleMateri(7)"
-                                :class="activeMateri === 7 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">7</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-6.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Kontakte"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Kontakte</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal komunikasi
-                                    dalam kehidupan kerja dan sosial.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-orange-50 text-orange-600 text-xs font-bold rounded-full">Kontak</span><span
-                                        x-text="activeMateri === 7 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 7 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(8)"
-                                :class="activeMateri === 8 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">8</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-7.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Meine Wohnung"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Meine Wohnung</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal kosakata
-                                    seputar
-                                    rumah dan tempat tinggal.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-full">Rumah</span><span
-                                        x-text="activeMateri === 8 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 8 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(9)"
-                                :class="activeMateri === 9 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">9</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-8.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Alles Arbeit"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Alles Arbeit?</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal percakapan
-                                    seputar pekerjaan dan pengalaman.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-yellow-50 text-yellow-600 text-xs font-bold rounded-full">Kerja</span><span
-                                        x-text="activeMateri === 9 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 9 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(10)"
-                                :class="activeMateri === 10 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">10</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-9.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Kleidung und Mode"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Kleidung und Mode</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal kosakata
-                                    pakaian dan belanja fashion.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full">Mode</span><span
-                                        x-text="activeMateri === 10 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 10 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(11)"
-                                :class="activeMateri === 11 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">11</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-10.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Gesund und munter"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Gesund und munter</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal percakapan
-                                    tentang kesehatan dan tubuh.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full">Sehat</span><span
-                                        x-text="activeMateri === 11 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 11 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                            <div @click="toggleMateri(12)"
-                                :class="activeMateri === 12 ? 'border-orange-500 ring-4 ring-orange-100' : 'border-transparent hover:border-orange-200 hover:-translate-y-2'"
-                                class="min-w-[280px] md:min-w-[320px] bg-white p-8 rounded-[32px] shadow-sm border-2 cursor-pointer transition-all hover:-translate-y-2 snap-center text-center">
-                                <div class="relative mb-2"><span
-                                        class="absolute left-0 top-0 w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-orange-500 font-bold">12</span>
-                                    <div class="flex justify-center pt-2"><img src="materi-12.png"
-                                            class="w-36 h-36 object-contain" alt="Ilustrasi materi Ab in den Urlaub"
-                                            loading="lazy" decoding="async"></div>
-                                </div>
-                                <h4 class="text-xl font-bold text-navy mb-2">Ab in den Urlaub!</h4>
-                                <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">Mengenal percakapan
-                                    yang digunakan saat traveling.</p>
-                                <div class="flex justify-between items-center"><span
-                                        class="px-4 py-1 bg-red-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">Reise</span><span
-                                        x-text="activeMateri === 12 ? 'Tutup ↑' : 'Detail ↓'"
-                                        :class="activeMateri === 12 ? 'text-orange-600 font-extrabold' : 'text-orange-500'"
-                                        class="text-xs font-bold transition-all duration-300">Detail ↓</span></div>
-                            </div>
-                        </div>
-                    </template>
-
+            <!-- ROADMAP TIMELINE VIEW -->
+            <div class="relative max-w-4xl mx-auto mt-12 mb-8 px-4">
+                <!-- Vertical Line -->
+                <div class="absolute left-10 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 border-l-2 border-dashed"
+                    :class="currentTab === 'A1.1' ? 'border-orange-300' : 'border-blue-300'">
                 </div>
 
-                <button @click="scrollNext()"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-20 bg-white shadow-2xl rounded-full p-4 border border-gray-100 hover:bg-orange-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center">
-                    <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-            </div>
+                <div class="space-y-10 relative">
+                    <template x-for="idx in (currentTab === 'A1.1' ? [1,2,3,4,5,6] : [7,8,9,10,11,12])" :key="idx">
+                        <div
+                            class="flex flex-col md:flex-row items-center justify-between w-full md:odd:flex-row-reverse relative pl-12 md:pl-0">
+                            <!-- Text Card -->
+                            <div @click="toggleMateri(idx)"
+                                :class="activeMateri === idx 
+                                     ? (currentTab === 'A1.1' ? 'border-orange-500 ring-4 ring-orange-100' : 'border-blue-600 ring-4 ring-blue-100')
+                                     : (currentTab === 'A1.1' ? 'border-gray-200 hover:border-orange-200' : 'border-gray-200 hover:border-blue-200')"
+                                class="w-full md:w-[45%] bg-white p-5 md:p-6 rounded-[28px] shadow-sm border-2 cursor-pointer transition-all duration-300 hover:-translate-y-1 text-left relative group">
+                                <div class="flex justify-between items-start gap-3">
+                                    <span class="px-3 py-1 text-xs font-extrabold rounded-full"
+                                        :class="materiDetails[idx].categoryClass"
+                                        x-text="materiDetails[idx].categoryLabel"></span>
+                                    <span :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-600'"
+                                        class="text-xs font-bold transition-all duration-300"
+                                        x-text="activeMateri === idx ? 'Tutup ↑' : 'Detail ↓'"></span>
+                                </div>
+                                <h4 class="text-lg md:text-xl font-bold text-navy mt-3 mb-1"
+                                    x-text="materiDetails[idx].title"></h4>
+                                <p class="text-gray-400 text-xs md:text-sm leading-relaxed"
+                                    x-text="materiDetails[idx].summary"></p>
+                            </div>
 
-            <!-- Carousel Navigation Dots -->
-            <div class="flex justify-center gap-2 mt-6">
-                <template x-for="(dot, index) in visibleCards()" :key="index">
-                    <button @click="scrollToIndex(index)"
-                        :class="index === carouselPosition ? 'w-8 bg-orange-500' : 'w-2.5 bg-gray-300'"
-                        class="h-2.5 rounded-full transition-all" :aria-label="'Lihat materi ' + (index + 1)">
-                    </button>
-                </template>
-            </div>
+                            <!-- Node Circle -->
+                            <div class="absolute left-10 md:left-1/2 transform -translate-x-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full border-4 flex items-center justify-center font-bold text-sm md:text-base cursor-pointer transition-all duration-300 z-10"
+                                @click="toggleMateri(idx)"
+                                :class="activeMateri === idx 
+                                     ? (currentTab === 'A1.1' ? 'bg-orange-500 text-white border-orange-200 ring-4 ring-orange-100 scale-110 shadow-lg' : 'bg-blue-600 text-white border-blue-200 ring-4 ring-blue-100 scale-110 shadow-lg') 
+                                     : (currentTab === 'A1.1' ? 'bg-white text-orange-500 border-orange-300 hover:bg-orange-50' : 'bg-white text-blue-600 border-blue-300 hover:bg-blue-50')">
+                                <span x-text="idx"></span>
+                            </div>
 
-            <div x-show="activeMateri !== null" x-ref="detailPanel"
-                x-transition:enter="transition ease-out duration-300 transform"
-                x-transition:enter-start="opacity-0 translate-y-6" x-transition:enter-end="opacity-100 translate-y-0"
-                x-transition:leave="transition ease-in duration-200 transform"
-                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-6"
-                class="max-w-4xl mx-auto bg-white border border-orange-100 rounded-[28px] p-6 md:p-8 shadow-lg mt-2">
-                <div class="flex justify-between items-center mb-2 border-b border-gray-50 pb-6 gap-4">
-                    <h3 class="text-lg md:text-2xl font-bold text-navy"
-                        x-text="activeMateri !== null ? 'Materi ' + activeMateri + ': ' + activeDetail().title : ''">
-                    </h3>
-                    <button @click="activeMateri = null"
-                        class="text-gray-400 hover:text-orange-500 font-bold text-xs md:text-sm flex items-center gap-1 whitespace-nowrap shrink-0 border border-gray-200 hover:border-orange-100 rounded-full px-2.5 py-1 transition-all duration-300">
-                        <span>Tutup</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+                            <!-- Spacer for desktop staggered alignment -->
+                            <div class="hidden md:block w-[45%]"></div>
+                        </div>
+                    </template>
                 </div>
-                <div class="space-y-3 pt-2">
-                    <p class="text-orange-500 font-extrabold text-base md:text-lg" x-text="activeDetail().summary"></p>
-                    <p class="text-gray-500 leading-[1.8] text-sm md:text-base" x-text="activeDetail().detail"></p>
+                <!-- Detail Modal (Dynamic Accent Colors + Glassmorphism Popup) -->
+                <div x-show="activeMateri !== null"
+                    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-sm"
+                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    @click="activeMateri = null" style="display: none;">
+
+                    <div @click.stop x-show="activeMateri !== null"
+                        x-transition:enter="transition ease-out duration-300 transform"
+                        x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-200 transform"
+                        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+                        :class="currentTab === 'A1.1' ? 'border-orange-200 shadow-orange-100/40' : 'border-blue-200 shadow-blue-100/40'"
+                        class="w-full max-w-2xl bg-white/90 backdrop-blur-md border rounded-[32px] p-6 md:p-10 shadow-2xl relative overflow-hidden">
+
+                        <!-- Decorative blurred accent blob inside the modal -->
+                        <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-40"
+                            :class="currentTab === 'A1.1' ? 'bg-orange-300' : 'bg-blue-300'"></div>
+
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-5 gap-4">
+                                <span class="inline-flex px-3 py-1 text-xs font-extrabold rounded-full"
+                                    :class="activeMateri !== null ? materiDetails[activeMateri].categoryClass : ''"
+                                    x-text="activeMateri !== null ? materiDetails[activeMateri].categoryLabel : ''"></span>
+                                <button @click="activeMateri = null"
+                                    :class="currentTab === 'A1.1' ? 'hover:text-orange-500 hover:border-orange-200 hover:bg-orange-50/50' : 'hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50/50'"
+                                    class="text-gray-400 font-bold text-xs md:text-sm flex items-center gap-1.5 whitespace-nowrap shrink-0 border border-gray-200 rounded-full px-3 py-1.5 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]">
+                                    <span>Tutup</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="space-y-4 pt-2">
+                                <span :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-600'"
+                                    class="text-xs font-extrabold uppercase tracking-widest block"
+                                    x-text="'Materi ' + activeMateri"></span>
+                                <h3 class="text-xl md:text-3xl font-extrabold text-navy leading-tight"
+                                    x-text="activeMateri !== null ? activeDetail().title : ''"></h3>
+                                <p :class="currentTab === 'A1.1' ? 'text-orange-600 bg-orange-50/50 border-orange-100' : 'text-blue-700 bg-blue-50/50 border-blue-100'"
+                                    class="font-bold text-sm md:text-base p-4 rounded-2xl border"
+                                    x-text="activeMateri !== null ? activeDetail().summary : ''"></p>
+                                <p class="text-gray-600 leading-[1.8] text-sm md:text-base pt-1"
+                                    x-text="activeMateri !== null ? activeDetail().detail : ''"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1038,8 +837,7 @@
                         </div>
                         <h3 class="text-3xl md:text-4xl font-extrabold text-navy mb-4">A1.1</h3>
                         <p class="text-gray-500 leading-[1.8] mb-8 pb-8 border-b border-gray-300">Cocok untuk kamu yang
-                            benar-benar mulai dari nol dan ingin membangun fundamental bahasa Jerman dengan santai tanpa
-                            tekanan.</p>
+                            belum punya basic sama sekali dan ingin membangun fondasi dasar tanpa tekanan.</p>
                         <div class="space-y-6">
                             <div class="flex items-start gap-5">
                                 <div
@@ -1550,8 +1348,13 @@
 
                             <a :href="'https://wa.me/6281805438908?text=' + encodeURIComponent(plan.level === 'A1.1' ? 'Halo Aksaradeutsch! Saya mau gabung kelas A1.1 (Level Pemula) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!' : 'Halo Aksaradeutsch! Saya mau gabung kelas A1.2 (Lanjutan A1) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!')"
                                 target="_blank" rel="noopener noreferrer" @click.stop
-                                class="w-full btn-orange text-white px-6 py-3.5 rounded-2xl font-extrabold text-base md:text-lg text-center shadow-lg shadow-orange-200 block">
-                                Gabung Kelas <span x-text="plan.level"></span>
+                                class="w-full btn-orange text-white px-6 py-3.5 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-2.5 shadow-lg shadow-orange-200 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
+                                <span>Gabung Kelas <span x-text="plan.level"></span></span>
+                                <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                                    </path>
+                                </svg>
                             </a>
                         </div>
                     </div>
@@ -1625,10 +1428,10 @@
                     </div>
                     <a href="https://wa.me/6281805438908?text=Halo%20Aksaradeutsch!%20Saya%20tertarik%20buat%20daftar%20Kelas%20Coba%20Gratis%20Perkenalan%20A1.1%20nih.%20Tolong%20daftarkan%20saya%20ya%2C%20danke!"
                         target="_blank" rel="noopener noreferrer"
-                        class="mt-6 inline-flex w-full items-center justify-center gap-2 btn-orange text-white px-6 py-4 rounded-2xl font-extrabold shadow-lg shadow-orange-200 transition-all group">
+                        class="mt-6 inline-flex w-full items-center justify-center gap-2 btn-orange text-white px-6 py-4 rounded-2xl font-extrabold shadow-lg shadow-orange-200 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 group">
                         Daftar Kelas Perkenalan A1.1
-                        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M5 12h14m-6-6l6 6-6 6"></path>
                         </svg>
@@ -1669,10 +1472,10 @@
                     </div>
                     <a href="https://wa.me/6281805438908?text=Halo%20Aksaradeutsch!%20Saya%20tertarik%20buat%20daftar%20Kelas%20Coba%20Gratis%20Komunikasi%20A1.2%20nih.%20Tolong%20daftarkan%20saya%20ya%2C%20danke!"
                         target="_blank" rel="noopener noreferrer"
-                        class="mt-6 inline-flex w-full items-center justify-center gap-2 bg-white border-2 border-blue-500 text-blue-600 px-6 py-4 rounded-2xl font-extrabold hover:bg-blue-50 transition-all group">
+                        class="mt-6 inline-flex w-full items-center justify-center gap-2 bg-white border-2 border-blue-500 text-blue-600 px-6 py-4 rounded-2xl font-extrabold hover:bg-blue-50 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
                         Daftar Kelas Komunikasi A1.2
-                        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M5 12h14m-6-6l6 6-6 6"></path>
                         </svg>
@@ -1683,7 +1486,68 @@
     </section>
 
     <!-- Section FAQ -->
-    <section id="faq" class="py-16 md:py-20 bg-white overflow-hidden" x-data="{ openFaq: null }">
+    <section id="faq" class="py-16 md:py-20 bg-white overflow-hidden" x-data="{ 
+        openFaq: null, 
+        searchQuery: '',
+        faqs: [
+            {
+                id: 1,
+                q: 'Apakah kelas ini cocok untuk pemula?',
+                sub: 'Iya, justru kelas ini dibuat dari nol banget. Kalau kamu belum pernah belajar bahasa Jerman sama sekali, ini tempat yang pas untuk mulai.',
+                a: 'Kamu akan mulai dari hal dasar seperti sapaan, perkenalan, kosakata harian, dan pola kalimat sederhana.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4 0-7 2-7 4.5V20h14v-1.5C19 16 16 14 12 14z'></path></svg>`
+            },
+            {
+                id: 2,
+                q: 'Kalau saya sibuk, masih bisa ikut?',
+                sub: 'Masih bisa. Kamu juga akan dapat rekaman kelas, jadi bisa belajar ulang kapan saja sesuai waktu luang kamu.',
+                a: 'Rekaman membantu kamu mengulang materi tanpa merasa tertinggal.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6v6l4 2m5-2a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>`
+            },
+            {
+                id: 3,
+                q: 'Apakah ada batas usia untuk ikut kelas?',
+                sub: 'Tidak ada batas usia. Siapa saja yang ingin mulai belajar bahasa Jerman boleh bergabung.',
+                a: 'Materi pembelajaran disusun khusus untuk pemula dengan cara belajar yang lebih santai, step-by-step, dan mudah dipahami, sehingga tetap nyaman diikuti meskipun belum pernah belajar bahasa Jerman sebelumnya.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'></path></svg>`
+            },
+            {
+                id: 4,
+                q: 'Apakah kelas ini hanya fokus grammatik saja?',
+                sub: 'Tidak. Di kelas ini kamu tidak hanya belajar grammatik, tetapi juga akan belajar cara menggunakan bahasa Jerman dalam kehidupan sehari-hari.',
+                a: 'Selama kelas, kamu akan belajar:\n1. Grammatik dasar\n2. Kosakata harian (Wortschatz)\n3. Cara berbicara & pengucapan bahasa Jerman (Sprechen & Aussprache)\n4. Latihan mendengarkan (Hören)\n5. Membuat kalimat sederhana\n6. Percakapan sehari-hari dalam bahasa Jerman',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9.75 17L9 21l3-1.5L15 21l-.75-4M6 8a6 6 0 1112 0c0 3.5-2.686 6-6 6S6 11.5 6 8z'></path></svg>`
+            },
+            {
+                id: 5,
+                q: 'Takut nggak bisa ngikutin, gimana?',
+                sub: 'Tenang, kamu nggak sendirian. Ada sesi diskusi dan kamu bisa tanya kalau ada yang belum paham.',
+                a: 'Kamu juga bisa mengulang materi lewat PDF dan rekaman kelas.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m7-4a4 4 0 10-8 0 4 4 0 008 0zm6 0a3 3 0 11-6 0 3 3 0 016 0z'></path></svg>`
+            },
+            {
+                id: 6,
+                q: 'Belajarnya online atau offline?',
+                sub: 'Semua kelas dilakukan secara online via Zoom, jadi kamu bisa ikut dari mana saja.',
+                a: 'Kamu cukup menyiapkan device, koneksi internet, dan waktu belajar.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9.75 17L9 21l3-1.5L15 21l-.75-4M5 8h14M7 4h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z'></path></svg>`
+            },
+            {
+                id: 7,
+                q: 'Apa saja yang akan saya dapat?',
+                sub: 'Kelas live interaktif, rekaman kelas, materi belajar PDF, latihan, dan group diskusi.',
+                a: 'Semua dibuat supaya kamu bisa belajar ulang dan tetap punya tempat bertanya.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7m16 0H4m16 0l-2-5H6l-2 5m8-5v14'></path></svg>`
+            },
+            {
+                id: 8,
+                q: 'Kalau masih ada pertanyaan lain?',
+                sub: 'Bisa langsung tanya ke kami. Kami bantu jawab dan arahkan kamu.',
+                a: 'Kamu bisa konsultasi dulu sebelum memilih level kelas.',
+                icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 10h8M8 14h5m-9 6l2.2-4.4A8 8 0 118 20H4z'></path></svg>`
+            }
+        ]
+    }">
         <div class="container mx-auto px-6 md:px-16 relative">
             <div class="absolute hidden lg:block left-8 top-4">
                 <div class="relative w-28 h-24">
@@ -1716,271 +1580,62 @@
                 </p>
             </div>
 
+            <!-- FAQ Search Bar -->
+            <div class="max-w-md mx-auto mb-12 relative px-4">
+                <input type="text" x-model="searchQuery" placeholder="Cari pertanyaan kamu di sini..."
+                    class="w-full pl-12 pr-4 py-3.5 bg-white border-2 border-gray-200 rounded-2xl shadow-sm text-sm focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all font-semibold text-navy">
+                <span class="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <!-- FAQ Grid using Alpine Template Loop -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 1 ? null : 1"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4 0-7 2-7 4.5V20h14v-1.5C19 16 16 14 12 14z">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">1. Apakah
-                                kelas ini cocok untuk pemula?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Iya, justru kelas
-                                ini dibuat dari nol banget. Kalau kamu belum pernah belajar bahasa Jerman sama sekali,
-                                ini tempat yang pas untuk mulai.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 1 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 1" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Kamu akan mulai dari hal dasar seperti sapaan, perkenalan, kosakata harian, dan pola kalimat
-                        sederhana.
+                <template
+                    x-for="faq in faqs.filter(f => f.q.toLowerCase().includes(searchQuery.toLowerCase()) || f.sub.toLowerCase().includes(searchQuery.toLowerCase()) || f.a.toLowerCase().includes(searchQuery.toLowerCase()))"
+                    :key="faq.id">
+                    <div class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-orange-200 transition-all duration-300"
+                        x-transition>
+                        <button type="button" @click="openFaq = openFaq === faq.id ? null : faq.id"
+                            class="w-full flex items-start gap-4 text-left group">
+                            <span
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
+                                x-html="faq.icon">
+                            </span>
+                            <span class="flex-1">
+                                <span
+                                    class="block font-extrabold text-navy text-base md:text-lg leading-snug group-hover:text-orange-500 transition-colors duration-300"
+                                    x-text="faq.id + '. ' + faq.q"></span>
+                                <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2"
+                                    x-text="faq.sub"></span>
+                            </span>
+                            <span class="text-navy pt-1" aria-hidden="true">
+                                <svg class="w-5 h-5 transition-transform duration-300"
+                                    :class="(openFaq === faq.id || searchQuery.trim() !== '') ? 'rotate-180 text-orange-500' : ''"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <div x-show="openFaq === faq.id || searchQuery.trim() !== ''"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 max-h-0 overflow-hidden"
+                            x-transition:enter-end="opacity-100 max-h-[1000px] overflow-hidden"
+                            class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8] whitespace-pre-line border-t border-gray-50 mt-4"
+                            x-text="faq.a">
+                        </div>
                     </div>
-                </div>
+                </template>
+            </div>
 
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 2 ? null : 2"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6l4 2m5-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">2. Kalau saya
-                                sibuk, masih bisa ikut?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Masih bisa. Kamu
-                                juga akan dapat rekaman kelas, jadi bisa belajar ulang kapan saja sesuai waktu luang
-                                kamu.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 2 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 2" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Rekaman membantu kamu mengulang materi tanpa merasa tertinggal.
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 3 ? null : 3"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">3. Apakah ada
-                                batas usia untuk ikut kelas?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Tidak ada batas
-                                usia. Siapa saja yang ingin mulai belajar bahasa Jerman boleh bergabung.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 3 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 3" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Materi pembelajaran disusun khusus untuk pemula dengan cara belajar yang lebih santai,
-                        step-by-step, dan mudah dipahami, sehingga tetap nyaman diikuti meskipun belum pernah belajar
-                        bahasa Jerman sebelumnya.
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 4 ? null : 4"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9.75 17L9 21l3-1.5L15 21l-.75-4M6 8a6 6 0 1112 0c0 3.5-2.686 6-6 6S6 11.5 6 8z">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">4. Apakah
-                                kelas ini hanya fokus grammatik saja?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Tidak. Di kelas
-                                ini kamu tidak hanya belajar grammatik, tetapi juga akan belajar cara menggunakan bahasa
-                                Jerman dalam kehidupan sehari-hari.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 4 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 4" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Selama kelas, kamu akan belajar:
-                        1. Grammatik dasar
-                        2. Kosakata harian (Wortschatz)
-                        3. Cara berbicara & pengucapan bahasa Jerman (Sprechen & Aussprache)
-                        4. Latihan mendengarkan (Hören)
-                        5. Membuat kalimat sederhana
-                        6. Percakapan sehari-hari dalam bahasa Jerman
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 5 ? null : 5"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m7-4a4 4 0 10-8 0 4 4 0 008 0zm6 0a3 3 0 11-6 0 3 3 0 016 0z">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">5. Takut
-                                nggak bisa ngikutin, gimana?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Tenang, kamu nggak
-                                sendirian. Ada sesi diskusi dan kamu bisa tanya kalau ada yang belum paham.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 5 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 5" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Kamu juga bisa mengulang materi lewat PDF dan rekaman kelas.
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 6 ? null : 6"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9.75 17L9 21l3-1.5L15 21l-.75-4M5 8h14M7 4h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">6. Belajarnya
-                                online atau offline?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Semua kelas
-                                dilakukan secara online via Zoom, jadi kamu bisa ikut dari mana saja.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 6 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 6" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Kamu cukup menyiapkan device, koneksi internet, dan waktu belajar.
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 7 ? null : 7"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7m16 0H4m16 0l-2-5H6l-2 5m8-5v14"></path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">7. Apa saja
-                                yang akan saya dapat?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Kelas live
-                                interaktif, rekaman kelas, materi belajar PDF, latihan, dan group diskusi.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 7 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 7" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Semua dibuat supaya kamu bisa belajar ulang dan tetap punya tempat bertanya.
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white border border-gray-100 rounded-[24px] md:rounded-[28px] p-5 md:p-6 shadow-sm hover:shadow-lg transition-all">
-                    <button type="button" @click="openFaq = openFaq === 8 ? null : 8"
-                        class="w-full flex items-start gap-4 text-left">
-                        <span
-                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 10h8M8 14h5m-9 6l2.2-4.4A8 8 0 118 20H4z"></path>
-                            </svg>
-                        </span>
-                        <span class="flex-1">
-                            <span class="block font-extrabold text-navy text-base md:text-lg leading-snug">8. Kalau
-                                masih ada pertanyaan lain?</span>
-                            <span class="block text-gray-500 text-sm md:text-base leading-[1.7] mt-2">Bisa langsung
-                                tanya ke kami. Kami bantu jawab dan arahkan kamu.</span>
-                        </span>
-                        <span class="text-navy pt-1" aria-hidden="true">
-                            <svg class="w-5 h-5 transition-transform" :class="openFaq === 8 ? 'rotate-180' : ''"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
-                    <div x-show="openFaq === 8" x-transition
-                        class="pl-16 md:pl-[72px] pr-2 pt-4 text-gray-500 text-sm leading-[1.8]">
-                        Kamu bisa konsultasi dulu sebelum memilih level kelas.
-                    </div>
-                </div>
+            <!-- Empty State -->
+            <div x-show="faqs.filter(f => f.q.toLowerCase().includes(searchQuery.toLowerCase()) || f.sub.toLowerCase().includes(searchQuery.toLowerCase()) || f.a.toLowerCase().includes(searchQuery.toLowerCase())).length === 0"
+                class="text-center py-10 text-gray-400 font-bold" x-transition>
+                Tidak menemukan pertanyaan yang cocok. Coba kata kunci lain atau hubungi kami lewat WhatsApp!
             </div>
         </div>
     </section>
@@ -2005,11 +1660,10 @@
                             Konsultasi gratis untuk temukan cara belajar yang paling cocok buat kamu.
                         </p>
                     </div>
-
                     <div class="w-full lg:pb-8">
                         <a href="https://wa.me/6281805438908?text=Halo%20Aksaradeutsch!%20Saya%20masih%20bingung%20dan%20ada%20pertanyaan%20nih.%20Mau%20tanya-tanya%20tentang%20program%20belajar%20bahasa%20Jerman%20di%20sini.%20Makasih!"
                             target="_blank" rel="noopener noreferrer"
-                            class="group bg-white border-2 border-green-500 rounded-[18px] p-3 md:p-4 flex items-center gap-3 hover:bg-green-50 transition-all">
+                            class="group bg-white border-2 border-green-500 rounded-[18px] p-3 md:p-4 flex items-center gap-3 hover:bg-green-50 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300">
                             <span
                                 class="w-9 h-9 md:w-11 md:h-11 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
                                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -2025,14 +1679,13 @@
                                 <span class="block text-gray-400 text-[10px] md:text-xs mt-1">Konsultasi gratis &
                                     cepat</span>
                             </span>
-                            <svg class="w-4 h-4 text-green-600 group-hover:translate-x-1 transition-transform"
+                            <svg class="w-4 h-4 text-green-600 group-hover:translate-x-1.5 transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                     d="M5 12h14m-6-6l6 6-6 6"></path>
                             </svg>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
