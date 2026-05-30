@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berufe-Zuordner - Aksaradeutch.id Mini Game</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.4s ease-in-out; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-[#FFFDF9] to-[#F9FAFB]">
+
+    <div x-data="professionMatcher()" x-init="initGame()" class="w-full max-w-xl glass-card rounded-[32px] p-6 md:p-8 shadow-xl border border-gray-100 relative overflow-hidden">
+        <!-- Background blobs -->
+        <div class="absolute w-48 h-48 bg-orange-100/40 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
+        <div class="absolute w-48 h-48 bg-blue-100/30 rounded-full blur-3xl -bottom-10 -right-10 pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <span class="inline-flex px-4 py-1.5 bg-orange-50 text-[#FF6B35] font-bold text-xs rounded-full border border-orange-100 mb-3 tracking-wide uppercase">
+                    Level A1.1 • Pekerjaan & Tempat Kerja
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-navy leading-tight">
+                    Berufe-Zuordner (Profession Matcher)
+                </h1>
+                <p class="text-gray-500 text-sm mt-1 max-w-sm mx-auto">
+                    Cocokkan profesi Jerman di bawah dengan lokasi tempat kerjanya yang tepat!
+                </p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="flex items-center justify-between bg-white/50 border border-gray-100 rounded-2xl p-4 mb-6 text-sm">
+                <div>
+                    <span class="text-gray-500 font-medium">Waktu:</span>
+                    <span class="font-extrabold text-navy font-mono" x-text="formatTime(seconds)">00:00</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Soal:</span>
+                    <span class="font-extrabold text-navy" x-text="`${currentIndex + 1}/${totalQuestions}`">1/10</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Skor:</span>
+                    <span class="font-extrabold text-green-600" x-text="score">0</span>
+                </div>
+            </div>
+
+            <!-- Question Board -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-6 sm:p-8 mb-6 text-center relative overflow-hidden shadow-sm transition-all"
+                 :class="{
+                     'border-green-500 bg-green-50/20 animate-pop': feedback === 'correct',
+                     'border-red-500 bg-red-50/20 animate-shake': feedback === 'wrong',
+                     'border-gray-200': feedback === 'idle'
+                 }">
+                
+                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-2">Di manakah profesi ini bekerja?</p>
+                <!-- Target Profession -->
+                <h2 class="text-2xl sm:text-3xl font-black text-[#FF6B35] leading-relaxed mb-1" x-text="currentQuestion ? currentQuestion.profession : ''"></h2>
+                
+
+                <!-- Feedback Display -->
+                <div class="mt-4 h-6 flex items-center justify-center">
+                    <span x-show="feedback === 'correct'" class="text-green-600 font-extrabold text-sm flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Richtig! (Benar)
+                    </span>
+                    <span x-show="feedback === 'wrong'" class="text-red-600 font-extrabold text-sm flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Falsch! (Salah, harusnya <span class="underline font-bold text-navy" x-text="currentQuestion?.correctWorkplace"></span>)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Options Grid (4 options) -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <template x-for="(option, idx) in currentOptions" :key="option">
+                    <button @click="guess(option)" :disabled="!gameStarted || feedback !== 'idle'"
+                            :class="{
+                                'border-gray-200 bg-white text-navy hover:border-[#FF6B35] hover:text-[#FF6B35]': feedback === 'idle',
+                                'border-green-500 bg-green-50 text-green-700 font-bold': feedback !== 'idle' && option === currentQuestion.correctWorkplace,
+                                'border-red-500 bg-red-50 text-red-700': feedback === 'wrong' && option === chosenOption
+                            }"
+                            class="p-5 rounded-2xl border-2 text-sm sm:text-base font-extrabold text-center transition-all duration-300 shadow-sm active:scale-95 disabled:cursor-not-allowed">
+                        <span x-text="option"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100">
+                <span class="text-xs text-gray-400">Tips: Nama tempat kerja sering menggunakan preposisi *bei* atau *in*.</span>
+                <button @click="resetGame()" :disabled="!gameStarted"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-gray-200 bg-white font-bold text-sm text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all disabled:opacity-50">
+                    Reset Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Start Screen Overlay -->
+        <div x-show="!gameStarted && !gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-orange-50 text-[#FF6B35] rounded-full flex items-center justify-center mb-4 border border-orange-100 shadow-lg shadow-orange-100/50 animate-pulse">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-orange-50 text-[#FF6B35] text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
+                Level A1.1
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Berufe-Zuordner</h2>
+            <p class="text-gray-500 text-sm max-w-sm mb-6 leading-relaxed">
+                Uji pengetahuan kosakata profesi dan tempat kerja kamu dalam bahasa Jerman. Selesaikan 10 soal pencocokan dengan benar!
+            </p>
+
+            <button @click="startGame()" 
+                    class="w-full max-w-xs py-3.5 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all text-lg group">
+                Mulai Mencocokkan
+                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Success Modal Overlay -->
+        <div x-show="gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4 border border-green-100 shadow-lg shadow-green-100/50 animate-bounce">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full mb-2">
+                Ausgezeichnet! (Luar Biasa!)
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Pencocokan Selesai!</h2>
+            <p class="text-gray-500 text-sm max-w-md mb-6 leading-relaxed">
+                Kamu menjawab dengan benar <span class="font-extrabold text-green-600 text-lg" x-text="score"></span> dari <span class="font-extrabold text-navy">10</span> profesi dalam waktu <span class="font-extrabold text-navy" x-text="formatTime(seconds)"></span>. Pengetahuan duniamu hebat!
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-xs justify-center">
+                <button @click="startGame()" 
+                        class="w-full py-3 rounded-2xl border border-gray-200 bg-white font-bold text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
+                    Main Lagi
+                </button>
+                <a href="index.html#kelas-a1" target="_parent"
+                   @click="if (isEmbedded) { window.parent.postMessage('closeBingoAndGoToKelasA1', '*'); }"
+                   class="w-full py-3 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    Lihat Kelas A1
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="!isEmbedded" class="mt-6 text-center">
+        <a href="index.html" target="_parent" class="text-sm font-semibold text-gray-500 hover:text-[#FF6B35] transition flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Kembali ke Beranda Aksaradeutch
+        </a>
+    </div>
+
+    <script>
+        function professionMatcher() {
+            return {
+                isEmbedded: window.self !== window.top,
+                professionPool: [
+                    { profession: 'der Lehrer', correctWorkplace: 'die Schule', meaning: 'Guru laki-laki', distractors: ['das Krankenhaus', 'das Restaurant', 'der Friseursalon'] },
+                    { profession: 'der Arzt', correctWorkplace: 'das Krankenhaus', meaning: 'Dokter laki-laki', distractors: ['die Schule', 'das Büro', 'der Supermarkt'] },
+                    { profession: 'der Kellner', correctWorkplace: 'das Restaurant', meaning: 'Pelayan restoran', distractors: ['die Küche', 'die Polizeistation', 'das Flugzeug'] },
+                    { profession: 'der Programmierer', correctWorkplace: 'das Büro', meaning: 'Programmer laki-laki', distractors: ['die Apotheke', 'das Krankenhaus', 'die Schule'] },
+                    { profession: 'die Verkäuferin', correctWorkplace: 'der Supermarkt', meaning: 'Penjual perempuan', distractors: ['das Restaurant', 'das Flugzeug', 'der Friseursalon'] },
+                    { profession: 'der Koch', correctWorkplace: 'die Küche', meaning: 'Koki laki-laki', distractors: ['die Polizeistation', 'das Büro', 'die Schule'] },
+                    { profession: 'der Polizist', correctWorkplace: 'die Polizeistation', meaning: 'Polisi laki-laki', distractors: ['das Restaurant', 'das Krankenhaus', 'die Apotheke'] },
+                    { profession: 'die Apothekerin', correctWorkplace: 'die Apotheke', meaning: 'Apoteker perempuan', distractors: ['die Schule', 'der Supermarkt', 'das Flugzeug'] },
+                    { profession: 'der Pilot', correctWorkplace: 'das Flugzeug', meaning: 'Pilot laki-laki', distractors: ['die Küche', 'das Restaurant', 'das Büro'] },
+                    { profession: 'der Friseur', correctWorkplace: 'der Friseursalon', meaning: 'Penata rambut laki-laki', distractors: ['die Polizeistation', 'das Krankenhaus', 'die Apotheke'] }
+                ],
+                
+                selectedQuestions: [],
+                currentIndex: 0,
+                currentQuestion: null,
+                currentOptions: [],
+                score: 0,
+                seconds: 0,
+                timerInterval: null,
+                gameStarted: false,
+                gameCompleted: false,
+                feedback: 'idle',
+                chosenOption: null,
+                totalQuestions: 10,
+                
+                initGame() {
+                    this.prepareGame();
+                },
+                
+                prepareGame() {
+                    this.currentIndex = 0;
+                    this.score = 0;
+                    this.seconds = 0;
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.gameCompleted = false;
+                    
+                    // Shuffle and select
+                    let shuffled = [...this.professionPool].sort(() => Math.random() - 0.5);
+                    this.selectedQuestions = shuffled.slice(0, this.totalQuestions);
+                    this.loadQuestion();
+                },
+                
+                loadQuestion() {
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.currentQuestion = this.selectedQuestions[this.currentIndex];
+                    
+                    // Prepare options
+                    let opts = [this.currentQuestion.correctWorkplace, ...this.currentQuestion.distractors];
+                    this.currentOptions = opts.sort(() => Math.random() - 0.5);
+                },
+                
+                startGame() {
+                    clearInterval(this.timerInterval);
+                    this.prepareGame();
+                    this.gameStarted = true;
+                    this.startTimer();
+                },
+                
+                resetGame() {
+                    clearInterval(this.timerInterval);
+                    this.gameStarted = false;
+                    this.gameCompleted = false;
+                    this.prepareGame();
+                },
+                
+                startTimer() {
+                    this.timerInterval = setInterval(() => {
+                        this.seconds++;
+                    }, 1000);
+                },
+                
+                formatTime(totalSeconds) {
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                },
+                
+                guess(chosen) {
+                    if (this.feedback !== 'idle' || !this.gameStarted) return;
+                    
+                    this.chosenOption = chosen;
+                    const isCorrect = chosen === this.currentQuestion.correctWorkplace;
+                    
+                    if (isCorrect) {
+                        this.feedback = 'correct';
+                        this.score++;
+                    } else {
+                        this.feedback = 'wrong';
+                    }
+                    
+                    setTimeout(() => {
+                        this.nextQuestion();
+                    }, 1500);
+                },
+                
+                nextQuestion() {
+                    this.currentIndex++;
+                    if (this.currentIndex < this.totalQuestions) {
+                        this.loadQuestion();
+                    } else {
+                        clearInterval(this.timerInterval);
+                        this.gameCompleted = true;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+
+

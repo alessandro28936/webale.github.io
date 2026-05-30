@@ -473,7 +473,9 @@
                         <h4
                             class="font-bold text-navy text-sm md:text-base mb-2 md:mb-3 leading-snug min-h-[40px] md:min-h-0 flex items-center justify-center">
                             Deutsch Challenge</h4>
-                        <p class="text-gray-400 text-[10px] sm:text-xs md:text-sm leading-relaxed">Asah kosakata, tata bahasa, dan pemahaman materi melalui permainan interaktif yang membuat proses belajar jadi lebih menyenangkan.</p>
+                        <p class="text-gray-400 text-[10px] sm:text-xs md:text-sm leading-relaxed">Asah kosakata, tata
+                            bahasa, dan pemahaman materi melalui permainan interaktif yang membuat proses belajar jadi
+                            lebih menyenangkan.</p>
                     </div>
                     <!-- Kartu 2 -->
                     <div
@@ -517,23 +519,32 @@
     </section>
 
     <!-- Section Kurikulum Aksaradeutch.id -->
-    <section id="materi" class="py-12 md:py-16 bg-[#F9FAFB] overflow-hidden" x-data="{ 
+    <section id="materi" class="py-12 md:py-16 bg-[#F9FAFB] overflow-hidden"
+        @message.window="if ($event.data === 'closeBingoAndGoToKelasA1') { activeMateri = null; showGameIframe = false; }"
+        x-data="{ 
             activeMateri: null,
             currentTab: 'A1.1',
+            showGameIframe: false,
             materiDetails: {
                 1: {
                     title: 'Hallo! Wie geht\'s?',
                     summary: 'Sapaan, perkenalan diri, dan angka.',
                     detail: 'Kamu akan belajar cara menyapa orang secara formal maupun informal, memperkenalkan diri dan teman, menyebutkan asal negara serta bahasa, melafalkan angka 1-100, hingga mengeja nama menggunakan alfabet Jerman. Topik ini dibekali dengan tata bahasa dasar seperti konjugasi kata kerja (heißen, sein, kommen, wohnen) dan kalimat tanya (W-Fragen).',
                     categoryLabel: 'Dasar',
-                    categoryClass: 'bg-orange-50 text-orange-600 border border-orange-100'
+                    categoryClass: 'bg-orange-50 text-orange-600 border border-orange-100',
+                    gameUrl: 'zahlen-bingo.html',
+                    gameName: 'Zahlen-Bingo',
+                    gameKicker: 'Yuk, Latih Pendengaran Angkamu!'
                 },
                 2: {
                     title: 'Hobbys und Arbeit',
                     summary: 'Waktu senggang, hobi, dan profesi.',
                     detail: 'Sesi ini mengajak kamu bercerita tentang aktivitas seru di waktu senggang, hobi mingguan, nama-nama hari (Wochentage), serta berbagai jenis pekerjaan (Berufe) dan tempat kerja. Kamu juga akan menguasai cara kerja konjugasi kata kerja dengan perubahan vokal, penggunaan kata kerja bantu (haben, sein), dan pembentukan kalimat tanya Ya/Tidak (Ja/Nein-Fragen).',
                     categoryLabel: 'Sosial',
-                    categoryClass: 'bg-green-50 text-green-600 border border-green-100'
+                    categoryClass: 'bg-green-50 text-green-600 border border-green-100',
+                    gameUrl: 'berufe-zuordner.html',
+                    gameName: 'Berufe-Zuordner',
+                    gameKicker: 'Yuk, Latih Kosakata Profesi!'
                 },
                 3: {
                     title: 'Meine Familie',
@@ -547,7 +558,10 @@
                     summary: 'Makanan, minuman, dan percakapan saat berbelanja.',
                     detail: 'Materi ini membimbing kamu mengenali nama-nama makanan dan minuman, berbelanja bahan makanan di supermarket sesuai takaran, hingga melakukan pemesanan serta pembayaran secara sopan di kafe atau restoran. Di sini, kamu mulai menggunakan kasus Akkusativ (perubahan artikel maskulin), artikel kata benda dasar, dan kata kerja modal keinginan (möchten).',
                     categoryLabel: 'Belanja',
-                    categoryClass: 'bg-yellow-50 text-yellow-600 border border-yellow-100'
+                    categoryClass: 'bg-yellow-50 text-yellow-600 border border-yellow-100',
+                    gameUrl: 'buchstaben-suppe.html',
+                    gameName: 'Buchstaben-Suppe',
+                    gameKicker: 'Yuk, Latih Kosakata Makanan & Minuman!'
                 },
                 5: {
                     title: 'Mein Tag (Alltag)',
@@ -568,21 +582,30 @@
                     summary: 'Kosakata rumah, ruangan, dan tata letak perabot.',
                     detail: 'Kamu akan menjelajahi kosakata nama ruangan di dalam rumah, berbagai jenis perabotan (Möbel), serta cara mendeskripsikan kondisi tempat tinggal. Sesi ini memperkuat kemampuan tata bahasamu dalam membedakan kata kerja posisi statis/dinamis (stehen/stellen, liegen/legen) serta menerapkan preposisi ganda (Wechselpräpositionen) dengan kasus Akkusativ atau Dativ.',
                     categoryLabel: 'Rumah',
-                    categoryClass: 'bg-purple-50 text-purple-600 border border-purple-100'
+                    categoryClass: 'bg-purple-50 text-purple-600 border border-purple-100',
+                    gameUrl: 'mobel-zimmerer.html',
+                    gameName: 'Möbel-Zimmerer',
+                    gameKicker: 'Yuk, Rapikan Rumah Virtualmu!'
                 },
                 8: {
                     title: 'Termine im Büro',
                     summary: 'Komunikasi kerja, telepon, dan janji temu formal.',
                     detail: 'Materi ini mempersiapkan kamu menghadapi dunia kerja dengan kosakata seputar rutinitas kantor, etika menelpon rekan bisnis, serta cara membuat, mengubah, atau membatalkan janji temu secara resmi. Grammatik penting yang akan kamu pelajari adalah kata kerja modal kewajiban/izin (müssen, dürfen), preposisi waktu kasus Dativ/Akkusativ, dan ungkapan sopan menggunakan Konjunktiv II (könnte, würde).',
                     categoryLabel: 'Pekerjaan',
-                    categoryClass: 'bg-cyan-50 text-cyan-600 border border-cyan-100'
+                    categoryClass: 'bg-cyan-50 text-cyan-600 border border-cyan-100',
+                    gameUrl: 'buro-regeln.html',
+                    gameName: 'Büro-Regeln',
+                    gameKicker: 'Yuk, Latih Tata Bahasa Aturan Kantor!'
                 },
                 9: {
                     title: 'Pläne und Freizeit',
                     summary: 'Rencana masa depan, liburan, dan perayaan pesta.',
                     detail: 'Kamu akan berlatih mengekspresikan rencana masa depan seperti karier atau studi di Jerman, merencanakan liburan kelompok, mendiskusikan festival budaya, hingga memberikan ucapan selamat ulang tahun atau pernikahan. Topik ini didukung oleh tata bahasa modal verb (wollen/sollen), penulisan tanggal (Ordnungszahlen), serta pembentukan anak kalimat menggunakan konjungsi dass dan weil.',
                     categoryLabel: 'Rencana',
-                    categoryClass: 'bg-teal-50 text-teal-600 border border-teal-100'
+                    categoryClass: 'bg-teal-50 text-teal-600 border border-teal-100',
+                    gameUrl: 'plane-freizeit.html',
+                    gameName: 'Pläne & Freizeit Hören',
+                    gameKicker: 'Yuk, Latih Pendengaran Rencana & Hobi!'
                 },
                 10: {
                     title: 'Gesund und munter',
@@ -610,6 +633,7 @@
                 return this.materiDetails[this.activeMateri] || { title: '', summary: '', detail: '' };
             },
             toggleMateri(id) {
+                this.showGameIframe = false;
                 this.activeMateri = (this.activeMateri === id ? null : id);
                 if (this.activeMateri !== null) {
                     this.$nextTick(() => {
@@ -728,7 +752,7 @@
                     x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
                     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                    @click="activeMateri = null" style="display: none;">
+                    @click="activeMateri = null; showGameIframe = false" style="display: none;">
 
                     <div @click.stop x-show="activeMateri !== null"
                         x-transition:enter="transition ease-out duration-300 transform"
@@ -738,18 +762,20 @@
                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                         x-transition:leave-end="opacity-0 scale-95 translate-y-4"
                         :class="currentTab === 'A1.1' ? 'border-orange-200 shadow-orange-100/40' : 'border-blue-200 shadow-blue-100/40'"
-                        class="w-full max-w-2xl bg-white/90 backdrop-blur-md border rounded-[32px] p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                        class="w-full max-w-2xl bg-white/90 backdrop-blur-md border rounded-[28px] sm:rounded-[32px] p-4 sm:p-6 md:p-10 shadow-2xl relative overflow-hidden">
 
                         <!-- Decorative blurred accent blob inside the modal -->
                         <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-40"
                             :class="currentTab === 'A1.1' ? 'bg-orange-300' : 'bg-blue-300'"></div>
 
                         <div class="relative z-10">
-                            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-5 gap-4">
+                            <!-- Main Modal Header -->
+                            <div x-show="!showGameIframe"
+                                class="flex justify-between items-center mb-3 sm:mb-4 border-b border-gray-100 pb-3 sm:pb-5 gap-4">
                                 <span class="inline-flex px-3 py-1 text-xs font-extrabold rounded-full"
                                     :class="activeMateri !== null ? materiDetails[activeMateri].categoryClass : ''"
                                     x-text="activeMateri !== null ? materiDetails[activeMateri].categoryLabel : ''"></span>
-                                <button @click="activeMateri = null"
+                                <button @click="activeMateri = null; showGameIframe = false"
                                     :class="currentTab === 'A1.1' ? 'hover:text-orange-500 hover:border-orange-200 hover:bg-orange-50/50' : 'hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50/50'"
                                     class="text-gray-400 font-bold text-xs md:text-sm flex items-center gap-1.5 whitespace-nowrap shrink-0 border border-gray-200 rounded-full px-3 py-1.5 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]">
                                     <span>Tutup</span>
@@ -759,17 +785,92 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div class="space-y-4 pt-2">
+
+                            <!-- Detail Content -->
+                            <div x-show="!showGameIframe" class="space-y-3 sm:space-y-4 pt-1 sm:pt-2">
                                 <span :class="currentTab === 'A1.1' ? 'text-orange-500' : 'text-blue-600'"
-                                    class="text-xs font-extrabold uppercase tracking-widest block"
+                                    class="text-[10px] sm:text-xs font-extrabold uppercase tracking-widest block"
                                     x-text="'Materi ' + activeMateri"></span>
-                                <h3 class="text-xl md:text-3xl font-extrabold text-navy leading-tight"
+                                <h3 class="text-lg sm:text-xl md:text-3xl font-extrabold text-navy leading-tight"
                                     x-text="activeMateri !== null ? activeDetail().title : ''"></h3>
                                 <p :class="currentTab === 'A1.1' ? 'text-orange-600 bg-orange-50/50 border-orange-100' : 'text-blue-700 bg-blue-50/50 border-blue-100'"
-                                    class="font-bold text-sm md:text-base p-4 rounded-2xl border"
+                                    class="font-bold text-xs sm:text-sm md:text-base p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border"
                                     x-text="activeMateri !== null ? activeDetail().summary : ''"></p>
-                                <p class="text-gray-600 leading-[1.8] text-sm md:text-base pt-1"
+                                <p class="text-gray-600 leading-relaxed md:leading-[1.8] text-xs sm:text-sm md:text-base pt-0.5 sm:pt-1"
                                     x-text="activeMateri !== null ? activeDetail().detail : ''"></p>
+
+                                <!-- Mini Game Panel -->
+                                <template
+                                    x-if="activeMateri !== null && materiDetails[activeMateri] && materiDetails[activeMateri].gameUrl">
+                                    <div
+                                        class="mt-5 sm:mt-8 p-4 sm:p-5 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl sm:rounded-2xl border border-orange-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                                        <div class="space-y-0.5 sm:space-y-1">
+                                            <div class="flex items-center gap-2">
+                                                <span
+                                                    class="inline-flex px-2 py-0.5 sm:px-2.5 sm:py-1 bg-orange-100 text-orange-600 font-extrabold text-[9px] sm:text-[10px] rounded-full uppercase tracking-wider">Mini
+                                                    Game</span>
+                                                <span class="text-[11px] sm:text-xs text-gray-500 font-semibold"
+                                                    x-text="materiDetails[activeMateri].gameName"></span>
+                                            </div>
+                                            <h4 class="font-extrabold text-navy text-xs sm:text-sm md:text-base"
+                                                x-text="materiDetails[activeMateri].gameKicker || 'Yuk, Latih Kosakata Jermanmu!'">
+                                            </h4>
+                                            <p class="text-[11px] sm:text-xs text-gray-400">Main game interaktif <span
+                                                    x-text="materiDetails[activeMateri].gameName"></span> langsung di
+                                                sini.</p>
+                                        </div>
+                                        <button @click="showGameIframe = true"
+                                            class="btn-orange text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-orange-100 hover:scale-[1.03] active:scale-[0.98] transition-all whitespace-nowrap">
+                                            <span>Mulai Bermain</span>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Iframe Container -->
+                            <div x-show="showGameIframe" class="w-full flex flex-col h-[550px]" style="display: none;">
+                                <!-- Header/Back button for iframe view -->
+                                <div class="flex items-center justify-between mb-4 border-b border-gray-100 pb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 bg-orange-500 rounded-full animate-ping"></span>
+                                        <h4 class="font-extrabold text-navy text-sm md:text-base">Mini Game:
+                                            <span
+                                                x-text="activeMateri !== null && materiDetails[activeMateri] ? materiDetails[activeMateri].gameName : ''"></span>
+                                        </h4>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button @click="showGameIframe = false"
+                                            class="text-xs font-bold text-gray-500 hover:text-navy border border-gray-200 rounded-full px-3.5 py-2 hover:bg-gray-50 transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 19l-7-7 7-7"></path>
+                                            </svg>
+                                            <span>Kembali</span>
+                                        </button>
+                                        <button @click="activeMateri = null; showGameIframe = false"
+                                            class="text-xs font-bold text-gray-400 hover:text-red-500 border border-gray-200 rounded-full p-2 hover:bg-red-50 transition-all flex items-center justify-center shadow-sm active:scale-95"
+                                            title="Tutup Modal">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                stroke-width="2.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Iframe -->
+                                <iframe
+                                    :src="activeMateri !== null && materiDetails[activeMateri] ? materiDetails[activeMateri].gameUrl : ''"
+                                    class="w-full flex-grow rounded-2xl border border-gray-100 shadow-inner"
+                                    style="min-height: 480px;"></iframe>
                             </div>
                         </div>
                     </div>

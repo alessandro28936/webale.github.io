@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Büro-Regeln - Aksaradeutch.id Mini Game</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.4s ease-in-out; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-[#FFFDF9] to-[#F9FAFB]">
+
+    <div x-data="rulesGame()" x-init="initGame()" class="w-full max-w-xl glass-card rounded-[32px] p-6 md:p-8 shadow-xl border border-gray-100 relative overflow-hidden">
+        <!-- Background blobs -->
+        <div class="absolute w-48 h-48 bg-[#EEF2F6]/50 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
+        <div class="absolute w-48 h-48 bg-[#FFF7ED]/30 rounded-full blur-3xl -bottom-10 -right-10 pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <span class="inline-flex px-4 py-1.5 bg-orange-50 text-[#FF6B35] font-bold text-xs rounded-full border border-orange-100 mb-3 tracking-wide uppercase">
+                    Level A1.2 • Modal Verbs: Müssen & Dürfen
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-navy leading-tight">
+                    Büro-Regeln (Office Rules)
+                </h1>
+                <p class="text-gray-500 text-sm mt-1 max-w-sm mx-auto">
+                    Pilih kata kerja modal (*müssen/dürfen*) dengan konjugasi yang tepat untuk kalimat!
+                </p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="flex items-center justify-between bg-white/50 border border-gray-100 rounded-2xl p-4 mb-6 text-sm">
+                <div>
+                    <span class="text-gray-500 font-medium">Waktu:</span>
+                    <span class="font-extrabold text-navy font-mono" x-text="formatTime(seconds)">00:00</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Soal:</span>
+                    <span class="font-extrabold text-navy" x-text="`${currentIndex + 1}/${totalQuestions}`">1/10</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Skor:</span>
+                    <span class="font-extrabold text-green-600" x-text="score">0</span>
+                </div>
+            </div>
+
+            <!-- Quiz Display Board -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-6 sm:p-8 mb-6 text-center relative overflow-hidden shadow-sm transition-all"
+                 :class="{
+                     'border-green-500 bg-green-50/20 animate-pop': feedback === 'correct',
+                     'border-red-500 bg-red-50/20 animate-shake': feedback === 'wrong',
+                     'border-gray-200': feedback === 'idle'
+                 }">
+                
+                <!-- Category badge -->
+                <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2"
+                      :class="currentQuestion?.type === 'Pflicht' ? 'bg-blue-50 text-blue-600 border border-blue-100' : 'bg-orange-50 text-[#FF6B35] border border-orange-100'"
+                      x-text="currentQuestion ? (currentQuestion.type === 'Pflicht' ? 'Kewajiban (Müssen)' : 'Izin/Larangan (Dürfen)') : ''">
+                </span>
+                
+                <!-- Main blank sentence -->
+                <h2 class="text-xl sm:text-2xl font-bold text-navy leading-relaxed mb-3">
+                    <span x-html="renderSentence()"></span>
+                </h2>
+                
+
+                <!-- Feedback Display -->
+                <div class="mt-4 h-6 flex items-center justify-center">
+                    <span x-show="feedback === 'correct'" class="text-green-600 font-extrabold text-sm flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Richtig! (Benar)
+                    </span>
+                    <span x-show="feedback === 'wrong'" class="text-red-600 font-extrabold text-sm flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Falsch! (Salah, harusnya <span class="underline font-bold text-navy" x-text="currentQuestion?.correct"></span>)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Options Grid (4 options) -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <template x-for="(option, idx) in currentOptions" :key="option">
+                    <button @click="guess(option)" :disabled="!gameStarted || feedback !== 'idle'"
+                            :class="{
+                                'border-gray-200 bg-white text-navy hover:border-[#FF6B35] hover:text-[#FF6B35]': feedback === 'idle',
+                                'border-green-500 bg-green-50 text-green-700 font-bold': feedback !== 'idle' && option === currentQuestion.correct,
+                                'border-red-500 bg-red-50 text-red-700': feedback === 'wrong' && option === chosenOption
+                            }"
+                            class="p-5 rounded-2xl border-2 text-base font-extrabold text-center transition-all duration-300 shadow-sm active:scale-95 disabled:cursor-not-allowed">
+                        <span x-text="option"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100">
+                <span class="text-xs text-gray-400">Tips: *müssen* = keharusan, *dürfen* = izin, *nicht dürfen* = larangan keras.</span>
+                <button @click="resetGame()" :disabled="!gameStarted"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-gray-200 bg-white font-bold text-sm text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all disabled:opacity-50">
+                    Reset Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Start Screen Overlay -->
+        <div x-show="!gameStarted && !gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-orange-50 text-[#FF6B35] rounded-full flex items-center justify-center mb-4 border border-orange-100 shadow-lg shadow-orange-100/50 animate-pulse">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-orange-50 text-[#FF6B35] text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
+                Level A1.2
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Büro-Regeln</h2>
+            <p class="text-gray-500 text-sm max-w-sm mb-6 leading-relaxed">
+                Uji keterampilan tata bahasa Jerman kamu tentang modal verb kewajiban (*müssen*) dan izin/larangan (*dürfen*). Selesaikan 10 soal dengan tepat!
+            </p>
+
+            <button @click="startGame()" 
+                    class="w-full max-w-xs py-3.5 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all text-lg group">
+                Mulai Bermain
+                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Success Modal Overlay -->
+        <div x-show="gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4 border border-green-100 shadow-lg shadow-green-100/50 animate-bounce">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full mb-2">
+                Hervorragend! (Hebat!)
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Karyawan Teladan!</h2>
+            <p class="text-gray-500 text-sm max-w-md mb-6 leading-relaxed">
+                Kamu menjawab dengan benar <span class="font-extrabold text-green-600 text-lg" x-text="score"></span> dari <span class="font-extrabold text-navy">10</span> peraturan kantor dalam waktu <span class="font-extrabold text-navy" x-text="formatTime(seconds)"></span>. Pemahaman tata tertib bisnismu mantap!
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-xs justify-center">
+                <button @click="startGame()" 
+                        class="w-full py-3 rounded-2xl border border-gray-200 bg-white font-bold text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
+                    Main Lagi
+                </button>
+                <a href="index.html#kelas-a1" 
+                   target="_parent"
+                   @click="if (isEmbedded) { window.parent.postMessage('closeBingoAndGoToKelasA1', '*'); }"
+                   class="w-full py-3 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    Lihat Kelas A1
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="!isEmbedded" class="mt-6 text-center">
+        <a href="index.html" target="_parent" class="text-sm font-semibold text-gray-500 hover:text-[#FF6B35] transition flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Kembali ke Beranda Aksaradeutsch
+        </a>
+    </div>
+
+    <script>
+        function rulesGame() {
+            return {
+                isEmbedded: window.self !== window.top,
+                rulesPool: [
+                    { type: 'Pflicht', full: 'Im Büro *___* ich E-Mails beantworten.', correct: 'muss', meaning: 'Di kantor saya harus menjawab email.', options: ['muss', 'darf', 'müssen', 'darfst'] },
+                    { type: 'Verbot', full: 'Hier *___* man nicht rauchen. Es ist verboten!', correct: 'darf', meaning: 'Di sini orang tidak boleh merokok. Itu dilarang!', options: ['darf', 'muss', 'darfst', 'müssen'] },
+                    { type: 'Pflicht', full: 'Wir *___* Berichte schreiben. Das ist unsere Arbeit.', correct: 'müssen', meaning: 'Kami harus menulis laporan. Itu pekerjaan kami.', options: ['müssen', 'dürfen', 'müsst', 'dürft'] },
+                    { type: 'Erlaubnis', full: '*___* ich hier mein Handy benutzen?', correct: 'Darf', meaning: 'Bolehkah saya menggunakan ponsel saya di sini?', options: ['Darf', 'Muss', 'Dürfen', 'Müssen'] },
+                    { type: 'Pflicht', full: 'Du *___* leise sein. Die Kollegen arbeiten.', correct: 'musst', meaning: 'Kamu harus tenang. Rekan kerja sedang bekerja.', options: ['musst', 'darfst', 'muss', 'darf'] },
+                    { type: 'Erlaubnis', full: 'Hier *___* man kostenlos Kaffee trinken.', correct: 'darf', meaning: 'Di sini orang boleh minum kopi gratis.', options: ['darf', 'muss', 'darfst', 'müsst'] },
+                    { type: 'Pflicht', full: 'Ihr *___* das Formular ausfüllen. Es ist Pflicht.', correct: 'müsst', meaning: 'Kalian harus mengisi formulir. Itu kewajiban.', options: ['müsst', 'dürft', 'müssen', 'dürfen'] },
+                    { type: 'Verbot', full: 'Kinder *___* hier nicht spielen. Das ist ein Arbeitsplatz!', correct: 'dürfen', meaning: 'Anak-anak tidak boleh bermain di sini. Ini tempat kerja!', options: ['dürfen', 'müssen', 'dürft', 'müsst'] },
+                    { type: 'Pflicht', full: '*___* wir heute Überstunden machen?', correct: 'Müssen', meaning: 'Apakah kita harus lembur hari ini?', options: ['Müssen', 'Dürfen', 'Musst', 'Darfst'] },
+                    { type: 'Pflicht', full: 'Er *___* heute zum Chef gehen.', correct: 'muss', meaning: 'Dia harus menemui Bos hari ini.', options: ['muss', 'darf', 'müssen', 'dürfen'] }
+                ],
+                
+                selectedQuestions: [],
+                currentIndex: 0,
+                currentQuestion: null,
+                currentOptions: [],
+                score: 0,
+                seconds: 0,
+                timerInterval: null,
+                gameStarted: false,
+                gameCompleted: false,
+                feedback: 'idle',
+                chosenOption: null,
+                totalQuestions: 10,
+                
+                initGame() {
+                    this.prepareGame();
+                },
+                
+                prepareGame() {
+                    this.currentIndex = 0;
+                    this.score = 0;
+                    this.seconds = 0;
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.gameCompleted = false;
+                    
+                    // Shuffle and select 10
+                    let shuffled = [...this.rulesPool].sort(() => Math.random() - 0.5);
+                    this.selectedQuestions = shuffled.slice(0, this.totalQuestions);
+                    this.loadQuestion();
+                },
+                
+                loadQuestion() {
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.currentQuestion = this.selectedQuestions[this.currentIndex];
+                    
+                    // Prepare options
+                    this.currentOptions = [...this.currentQuestion.options].sort(() => Math.random() - 0.5);
+                },
+                
+                renderSentence() {
+                    if (!this.currentQuestion) return '';
+                    if (this.feedback === 'idle') {
+                        return this.currentQuestion.full.replace(/\*___\*/, '<span class="px-4 py-0.5 border-b-2 border-dashed border-orange-400 text-orange-600 font-bold animate-pulse">_____</span>');
+                    } else {
+                        const styleClass = this.feedback === 'correct' ? 'text-green-600 font-black underline decoration-2' : 'text-red-600 font-black line-through';
+                        return this.currentQuestion.full.replace(/\*___\*/, `<span class="${styleClass}">${this.chosenOption}</span>`);
+                    }
+                },
+                
+                startGame() {
+                    clearInterval(this.timerInterval);
+                    this.prepareGame();
+                    this.gameStarted = true;
+                    this.startTimer();
+                },
+                
+                resetGame() {
+                    clearInterval(this.timerInterval);
+                    this.gameStarted = false;
+                    this.gameCompleted = false;
+                    this.prepareGame();
+                },
+                
+                startTimer() {
+                    this.timerInterval = setInterval(() => {
+                        this.seconds++;
+                    }, 1000);
+                },
+                
+                formatTime(totalSeconds) {
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                },
+                
+                guess(chosen) {
+                    if (this.feedback !== 'idle' || !this.gameStarted) return;
+                    
+                    this.chosenOption = chosen;
+                    const isCorrect = chosen === this.currentQuestion.correct;
+                    
+                    if (isCorrect) {
+                        this.feedback = 'correct';
+                        this.score++;
+                    } else {
+                        this.feedback = 'wrong';
+                    }
+                    
+                    setTimeout(() => {
+                        this.nextQuestion();
+                    }, 1500);
+                },
+                
+                nextQuestion() {
+                    this.currentIndex++;
+                    if (this.currentIndex < this.totalQuestions) {
+                        this.loadQuestion();
+                    } else {
+                        clearInterval(this.timerInterval);
+                        this.gameCompleted = true;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+
+
