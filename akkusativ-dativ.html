@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artikel-Jäger - Aksaradeutsch.id Mini Game</title>
+    <title>Fall-Sortierer - Aksaradeutsch.id Mini Game</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -49,22 +49,22 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-[#FFFDF9] to-[#F9FAFB]">
 
-    <div x-data="articleHunter()" x-init="initGame()" class="w-full max-w-xl glass-card rounded-[32px] p-6 md:p-8 shadow-xl border border-gray-100 relative overflow-hidden">
+    <div x-data="caseSorter()" x-init="initGame()" class="w-full max-w-xl glass-card rounded-[32px] p-6 md:p-8 shadow-xl border border-gray-100 relative overflow-hidden">
         <!-- Background blobs -->
-        <div class="absolute w-48 h-48 bg-blue-100/40 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
-        <div class="absolute w-48 h-48 bg-orange-100/30 rounded-full blur-3xl -bottom-10 -right-10 pointer-events-none"></div>
+        <div class="absolute w-48 h-48 bg-[#EEF2F6]/50 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
+        <div class="absolute w-48 h-48 bg-[#FFF7ED]/30 rounded-full blur-3xl -bottom-10 -right-10 pointer-events-none"></div>
 
         <div class="relative z-10">
             <!-- Header -->
             <div class="text-center mb-6">
-                <span class="inline-flex px-4 py-1.5 bg-blue-50 text-blue-600 font-bold text-xs rounded-full border border-blue-100 mb-3 tracking-wide uppercase">
-                    Level A1.1 & A1.2 • Grammatik
+                <span class="inline-flex px-4 py-1.5 bg-purple-50 text-purple-600 font-bold text-xs rounded-full border border-purple-100 mb-3 tracking-wide uppercase">
+                    Level A1.2 • Kasus & Tata Bahasa
                 </span>
                 <h1 class="text-2xl md:text-3xl font-extrabold text-navy leading-tight">
-                    Artikel-Jäger (Gender Hunt)
+                    Fall-Sortierer (Case Sorter)
                 </h1>
                 <p class="text-gray-500 text-sm mt-1 max-w-sm mx-auto">
-                    Tebak artikel kata benda (*der*, *die*, atau *das*) dengan benar!
+                    Klasifikasikan kata/frasa bercetak tebal dalam kalimat ke dalam kasus **Akkusativ** atau **Dativ**!
                 </p>
             </div>
 
@@ -84,48 +84,49 @@
                 </div>
             </div>
 
-            <!-- Noun Display Board -->
-            <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 mb-6 text-center relative overflow-hidden shadow-sm transition-all"
+            <!-- Card Display Board -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-6 sm:p-8 mb-6 text-center relative overflow-hidden shadow-sm transition-all"
                  :class="{
                      'border-green-500 bg-green-50/20 animate-pop': feedback === 'correct',
                      'border-red-500 bg-red-50/20 animate-shake': feedback === 'wrong',
                      'border-gray-200': feedback === 'idle'
                  }">
-                <span class="absolute top-4 right-4 text-xs font-bold text-gray-400 uppercase tracking-wide" x-text="currentNoun?.level"></span>
                 
-                <h2 class="text-3xl sm:text-4xl font-black text-navy tracking-wide mb-2" x-text="currentNoun?.word"></h2>
+                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-3">Tentukan Kasus Kalimat Ini:</p>
+                <!-- Render sentence with bold part highlighted in color -->
+                <h2 class="text-xl sm:text-2xl font-bold text-navy leading-relaxed mb-3">
+                    <span x-html="renderSentence()"></span>
+                </h2>
                 
-                
-                <!-- Feedback Icons -->
+
+                <!-- Feedback Display -->
                 <div class="mt-4 h-6 flex items-center justify-center">
                     <span x-show="feedback === 'correct'" class="text-green-600 font-extrabold text-sm flex items-center gap-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Richtig! (Benar)
                     </span>
                     <span x-show="feedback === 'wrong'" class="text-red-600 font-extrabold text-sm flex items-center gap-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Falsch! (Salah, harusnya <span class="underline" x-text="currentNoun?.gender"></span>)
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Falsch! (Salah, harusnya <span class="underline font-bold text-navy" x-text="currentQuestion?.correctCase"></span>)
                     </span>
                 </div>
             </div>
 
-            <!-- Action Buttons: der, die, das -->
-            <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
-                <button @click="guess('der')" :disabled="!gameStarted || feedback !== 'idle'"
-                        class="py-4 rounded-2xl border-2 border-blue-200 bg-blue-50/30 text-blue-700 font-black text-lg transition-all hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
-                    der
+            <!-- Sorting buckets buttons (Akkusativ vs Dativ) -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Akkusativ Box -->
+                <button @click="guess('Akkusativ')" :disabled="!gameStarted || feedback !== 'idle'"
+                        class="p-5 rounded-2xl border-2 border-indigo-200 bg-indigo-50/20 text-indigo-700 font-black text-lg transition-all hover:bg-indigo-600 hover:text-white hover:border-indigo-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Akkusativ
                 </button>
-                <button @click="guess('die')" :disabled="!gameStarted || feedback !== 'idle'"
-                        class="py-4 rounded-2xl border-2 border-pink-200 bg-pink-50/30 text-pink-700 font-black text-lg transition-all hover:bg-pink-600 hover:text-white hover:border-pink-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
-                    die
-                </button>
-                <button @click="guess('das')" :disabled="!gameStarted || feedback !== 'idle'"
-                        class="py-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 text-emerald-700 font-black text-lg transition-all hover:bg-emerald-600 hover:text-white hover:border-emerald-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
-                    das
+                <!-- Dativ Box -->
+                <button @click="guess('Dativ')" :disabled="!gameStarted || feedback !== 'idle'"
+                        class="p-5 rounded-2xl border-2 border-teal-200 bg-teal-50/20 text-teal-700 font-black text-lg transition-all hover:bg-teal-600 hover:text-white hover:border-teal-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Dativ
                 </button>
             </div>
 
             <!-- Footer Controls -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100">
-                <span class="text-xs text-gray-400">Petunjuk: Noun maskulin = der, feminin = die, netral = das.</span>
+                <span class="text-xs text-gray-400">Tips: Preposisi menentukan kasus (für = Akkusativ, mit = Dativ).</span>
                 <button @click="resetGame()" :disabled="!gameStarted"
                         class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-gray-200 bg-white font-bold text-sm text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all disabled:opacity-50">
                     Reset Game
@@ -140,23 +141,23 @@
              x-transition:enter-end="opacity-100 scale-100"
              class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
             
-            <div class="w-20 h-20 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-4 border border-blue-100 shadow-lg shadow-blue-100/50 animate-pulse">
+            <div class="w-20 h-20 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center mb-4 border border-purple-100 shadow-lg shadow-purple-100/50 animate-pulse">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
             </div>
 
-            <span class="inline-flex px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
-                Level A1.1 & A1.2
+            <span class="inline-flex px-3 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
+                Level A1.2
             </span>
-            <h2 class="text-3xl font-extrabold text-navy mb-2">Siap Berburu Artikel?</h2>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Kasus: Akkusativ & Dativ</h2>
             <p class="text-gray-500 text-sm max-w-sm mb-6 leading-relaxed">
-                Tentukan artikel gender (*der/die/das*) yang tepat untuk 10 kata benda bahasa Jerman secepat mungkin!
+                Uji pemahamanmu tentang perbedaan kasus kalimat Jerman. Pilah 10 kalimat ke dalam kelompok kasus yang benar!
             </p>
 
             <button @click="startGame()" 
                     class="w-full max-w-xs py-3.5 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all text-lg group">
-                Mulai Berburu
+                Mulai Menyortir
                 <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -178,11 +179,11 @@
             </div>
 
             <span class="inline-flex px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full mb-2">
-                Ausgezeichnet! (Luar Biasa!)
+                Hervorragend! (Luar Biasa!)
             </span>
-            <h2 class="text-3xl font-extrabold text-navy mb-2">Selesai Memburu!</h2>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Penyortiran Selesai!</h2>
             <p class="text-gray-500 text-sm max-w-md mb-6 leading-relaxed">
-                Kamu menjawab dengan benar <span class="font-extrabold text-green-600 text-lg" x-text="score"></span> dari <span class="font-extrabold text-navy">10</span> soal dalam waktu <span class="font-extrabold text-navy" x-text="formatTime(seconds)"></span>.
+                Kamu menjawab dengan benar <span class="font-extrabold text-green-600 text-lg" x-text="score"></span> dari <span class="font-extrabold text-navy">10</span> kalimat dalam waktu <span class="font-extrabold text-navy" x-text="formatTime(seconds)"></span>. Pemahaman tata bahasamu luar biasa!
             </p>
 
             <div class="flex flex-col sm:flex-row gap-3 w-full max-w-xs justify-center">
@@ -211,40 +212,33 @@
     </div>
 
     <script>
-        function articleHunter() {
+        function caseSorter() {
             return {
-                vocabPool: [
-                    { word: 'Tisch', gender: 'der', meaning: 'Meja', level: 'A1.1' },
-                    { word: 'Lampe', gender: 'die', meaning: 'Lampu', level: 'A1.1' },
-                    { word: 'Buch', gender: 'das', meaning: 'Buku', level: 'A1.1' },
-                    { word: 'Mann', gender: 'der', meaning: 'Laki-laki', level: 'A1.1' },
-                    { word: 'Frau', gender: 'die', meaning: 'Wanita', level: 'A1.1' },
-                    { word: 'Kind', gender: 'das', meaning: 'Anak', level: 'A1.1' },
-                    { word: 'Apfel', gender: 'der', meaning: 'Apel', level: 'A1.1' },
-                    { word: 'Banane', gender: 'die', meaning: 'Pisang', level: 'A1.1' },
-                    { word: 'Auto', gender: 'das', meaning: 'Mobil', level: 'A1.1' },
-                    { word: 'Lehrer', gender: 'der', meaning: 'Guru (Laki-laki)', level: 'A1.1' },
-                    { word: 'Stadt', gender: 'die', meaning: 'Kota', level: 'A1.2' },
-                    { word: 'Wohnung', gender: 'die', meaning: 'Apartemen', level: 'A1.2' },
-                    { word: 'Urlaub', gender: 'der', meaning: 'Liburan', level: 'A1.2' },
-                    { word: 'Küche', gender: 'die', meaning: 'Dapur', level: 'A1.2' },
-                    { word: 'Termin', gender: 'der', meaning: 'Janji Temu', level: 'A1.2' },
-                    { word: 'Büro', gender: 'das', meaning: 'Kantor', level: 'A1.2' },
-                    { word: 'Wetter', gender: 'das', meaning: 'Cuaca', level: 'A1.2' },
-                    { word: 'Kleidung', gender: 'die', meaning: 'Pakaian', level: 'A1.2' },
-                    { word: 'Gesundheit', gender: 'die', meaning: 'Kesehatan', level: 'A1.2' },
-                    { word: 'Sonderangebot', gender: 'das', meaning: 'Penawaran Khusus / Promo', level: 'A1.2' }
+                sentencesPool: [
+                    { full: 'Ich schenke *dem Vater* ein Buch.', highlighted: 'dem Vater', correctCase: 'Dativ', meaning: 'Saya menghadiahi ayah sebuah buku. (Objek tidak langsung)' },
+                    { full: 'Das Geschenk ist für *dich*.', highlighted: 'dich', correctCase: 'Akkusativ', meaning: 'Kado itu adalah untukmu. (Preposisi "für" selalu Akkusativ)' },
+                    { full: 'Wir gehen durch *den Park*.', highlighted: 'den Park', correctCase: 'Akkusativ', meaning: 'Kita berjalan melewati taman. (Preposisi "durch" selalu Akkusativ)' },
+                    { full: 'Er wohnt bei *seinen Eltern*.', highlighted: 'seinen Eltern', correctCase: 'Dativ', meaning: 'Dia tinggal bersama orang tuanya. (Preposisi "bei" selalu Dativ)' },
+                    { full: 'Sie spielt mit *dem Kind*.', highlighted: 'dem Kind', correctCase: 'Dativ', meaning: 'Dia bermain dengan anak itu. (Preposisi "mit" selalu Dativ)' },
+                    { full: 'Ich trinke *einen Tee*.', highlighted: 'einen Tee', correctCase: 'Akkusativ', meaning: 'Saya meminum secangkir teh. (Objek penderita langsung)' },
+                    { full: 'Das Buch liegt auf *dem Tisch*.', highlighted: 'dem Tisch', correctCase: 'Dativ', meaning: 'Buku itu terletak di atas meja. (Posisi diam / letak statis)' },
+                    { full: 'Ich lege das Buch auf *den Tisch*.', highlighted: 'den Tisch', correctCase: 'Akkusativ', meaning: 'Saya meletakkan buku ke atas meja. (Aktivitas bergerak / dinamis)' },
+                    { full: 'Wir fahren mit *der U-Bahn*.', highlighted: 'der U-Bahn', correctCase: 'Dativ', meaning: 'Kami pergi dengan kereta bawah tanah (U-Bahn). (Preposisi "mit")' },
+                    { full: 'Er kauft *ein Auto*.', highlighted: 'ein Auto', correctCase: 'Akkusativ', meaning: 'Dia membeli sebuah mobil. (Objek penderita langsung)' },
+                    { full: 'Ich gratuliere *dir* zum Geburtstag.', highlighted: 'dir', correctCase: 'Dativ', meaning: 'Saya menyelamatimu atas ulang tahun. (Verba "gratulieren" wajib Dativ)' },
+                    { full: 'Besuchst du *deine Großmutter*?', highlighted: 'deine Großmutter', correctCase: 'Akkusativ', meaning: 'Apakah kamu mengunjungi nenekmu? (Verba "besuchen" wajib Akkusativ)' }
                 ],
                 
-                selectedNouns: [],
+                selectedQuestions: [],
                 currentIndex: 0,
-                currentNoun: null,
+                currentQuestion: null,
                 score: 0,
                 seconds: 0,
                 timerInterval: null,
                 gameStarted: false,
                 gameCompleted: false,
-                feedback: 'idle', // idle, correct, wrong
+                feedback: 'idle',
+                chosenOption: null,
                 totalQuestions: 10,
                 
                 initGame() {
@@ -256,12 +250,25 @@
                     this.score = 0;
                     this.seconds = 0;
                     this.feedback = 'idle';
+                    this.chosenOption = null;
                     this.gameCompleted = false;
                     
-                    // Select 10 random words from pool
-                    let shuffled = [...this.vocabPool].sort(() => Math.random() - 0.5);
-                    this.selectedNouns = shuffled.slice(0, this.totalQuestions);
-                    this.currentNoun = this.selectedNouns[0];
+                    // Shuffle pool and select 10 questions
+                    let shuffled = [...this.sentencesPool].sort(() => Math.random() - 0.5);
+                    this.selectedQuestions = shuffled.slice(0, this.totalQuestions);
+                    this.loadQuestion();
+                },
+                
+                loadQuestion() {
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.currentQuestion = this.selectedQuestions[this.currentIndex];
+                },
+                
+                renderSentence() {
+                    if (!this.currentQuestion) return '';
+                    // Replace *text* with styled HTML span
+                    return this.currentQuestion.full.replace(/\*(.*?)\*/, '<span class="text-purple-600 underline decoration-wavy font-black">$1</span>');
                 },
                 
                 startGame() {
@@ -290,10 +297,12 @@
                     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                 },
                 
-                guess(chosenGender) {
+                guess(chosenCase) {
                     if (this.feedback !== 'idle' || !this.gameStarted) return;
                     
-                    const isCorrect = chosenGender === this.currentNoun.gender;
+                    this.chosenOption = chosenCase;
+                    const isCorrect = chosenCase === this.currentQuestion.correctCase;
+                    
                     if (isCorrect) {
                         this.feedback = 'correct';
                         this.score++;
@@ -307,13 +316,10 @@
                 },
                 
                 nextQuestion() {
-                    this.feedback = 'idle';
                     this.currentIndex++;
-                    
                     if (this.currentIndex < this.totalQuestions) {
-                        this.currentNoun = this.selectedNouns[this.currentIndex];
+                        this.loadQuestion();
                     } else {
-                        // End of game
                         clearInterval(this.timerInterval);
                         this.gameCompleted = true;
                     }
