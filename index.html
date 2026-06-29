@@ -1200,13 +1200,9 @@
                 deadline: 0,
                 now: Date.now(),
                 init() {
-                    const savedDeadline = localStorage.getItem('aksaraEarlyBirdDeadline');
-                    if (savedDeadline) {
-                        this.deadline = Number(savedDeadline);
-                    } else {
-                        this.deadline = Date.now() + (7 * 24 * 60 * 60 * 1000);
-                        localStorage.setItem('aksaraEarlyBirdDeadline', this.deadline);
-                    }
+                    // Deadline TETAP: 17 Juli 2026 pukul 23:59:59 WIB (UTC+7)
+                    // Sama untuk semua browser & semua pengguna
+                    this.deadline = new Date('2026-07-17T23:59:59+07:00').getTime();
                     setInterval(() => { this.now = Date.now() }, 1000);
                 },
                 get remaining() { return Math.max(0, this.deadline - this.now) },
