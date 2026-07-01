@@ -1228,8 +1228,8 @@
                     this.selectedPlan = plans[index].level;
                 },
                 plans: {
-                    'A1.1': { level: 'A1.1', label: 'Level Pemula', desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.', early: 'Rp90.000', normal: 'Rp149.000', color: 'orange' },
-                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp190.000', normal: 'Rp249.000', color: 'blue' }
+                    'A1.1': { level: 'A1.1', label: 'Level Pemula', desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.', early: 'Rp98.000', normal: 'Rp149.000', discount: '34%', startDate: '27 Juli 2026', color: 'orange' },
+                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp196.000', normal: 'Rp249.000', discount: '21%', startDate: '27 Juli 2026', color: 'blue' }
                 }
              }">
         <div class="container mx-auto px-6 md:px-16">
@@ -1311,7 +1311,7 @@
                             :class="plan.color === 'orange' ? 'bg-orange-100' : 'bg-blue-100'"></div>
 
                         <div class="relative z-10">
-                            <div class="flex items-start justify-between gap-4 mb-5 md:mb-6">
+                            <div class="flex items-start justify-between gap-4 mb-3">
                                 <div>
                                     <span
                                         class="inline-flex px-3.5 py-1.5 rounded-full text-xs md:text-sm font-bold border"
@@ -1321,8 +1321,19 @@
                                         x-text="plan.level"></h3>
                                 </div>
                                 <span
-                                    class="text-xs md:text-sm font-extrabold px-3.5 py-2 rounded-full bg-green-50 text-green-600"
+                                    class="text-xs md:text-sm font-extrabold px-3.5 py-2 rounded-full bg-green-50 text-green-600 whitespace-nowrap"
                                     x-show="earlyBirdActive">Early Bird</span>
+                            </div>
+                            <div class="mb-5 md:mb-6">
+                                <div class="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full border w-fit whitespace-nowrap"
+                                    :class="plan.color === 'orange' ? 'bg-orange-50 text-orange-600 border-orange-100' : 'bg-blue-50 text-blue-600 border-blue-100'">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    <span>Mulai Kelas: <span x-text="plan.startDate"></span></span>
+                                </div>
                             </div>
 
                             <p class="text-gray-500 text-sm md:text-base leading-[1.7] mb-6 md:mb-7 min-h-0 md:min-h-[64px]"
@@ -1334,6 +1345,9 @@
                                         x-text="earlyBirdActive ? plan.early : plan.normal"></p>
                                     <p class="text-gray-400 line-through font-bold pb-1.5 text-sm md:text-base"
                                         x-show="earlyBirdActive" x-text="plan.normal"></p>
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 bg-red-100 text-red-600 text-xs font-extrabold rounded-full border border-red-200 mb-1.5 shadow-sm"
+                                        x-show="earlyBirdActive" x-text="'-' + plan.discount"></span>
                                 </div>
                             </div>
 
@@ -1516,7 +1530,7 @@
                                 </svg>
                             </span>
                             <div data-nosnippet>
-                                <p class="font-extrabold text-navy">11 Juli 2026</p>
+                                <p class="font-extrabold text-navy">15 Juli 2026</p>
                                 <p class="text-sm">19.00 - 21.00 WIB via Google Meet</p>
                             </div>
                         </div>
@@ -1560,7 +1574,7 @@
                                 </svg>
                             </span>
                             <div data-nosnippet>
-                                <p class="font-extrabold text-navy">11 Juli 2026</p>
+                                <p class="font-extrabold text-navy">15 Juli 2026</p>
                                 <p class="text-sm">19.00 - 21.00 WIB via Google Meet</p>
                             </div>
                         </div>
