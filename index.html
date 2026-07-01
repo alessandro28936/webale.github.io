@@ -1027,7 +1027,7 @@
                         <img src="materi-pdf.png" alt="Icon materi PDF" class="w-12 h-12 md:w-14 md:h-14 object-contain"
                             loading="lazy" decoding="async">
                     </div>
-                    <h4 class="font-extrabold text-navy text-sm md:text-lg mb-2 md:mb-3 leading-snug">Materi PDF</h4>
+                    <h4 class="font-extrabold text-navy text-sm md:text-lg mb-2 md:mb-3 leading-snug">Materi</h4>
                     <p class="text-gray-500 text-xs md:text-sm leading-relaxed">
                         Semua materi belajar bisa kamu akses dan pelajari kembali kapan saja.
                     </p>
@@ -1089,7 +1089,7 @@
                     { name: 'Dini', initial: 'D', meta: 'Learner A1.1, persiapan studi', text: 'Kelasnya santai, tapi tetap terstruktur. Aku jadi tahu harus mulai dari mana dan latihan apa dulu.', color: 'purple' },
                     { name: 'Fajar', initial: 'F', meta: 'Learner A1.2, latihan speaking', text: 'Bagian latihan percakapannya membantu banget. Aku jadi lebih berani ngomong walaupun masih pelan-pelan.', color: 'orange' },
                     { name: 'Nabila', initial: 'N', meta: 'Learner A1.1, pemula total', text: 'Penjelasannya nggak ribet. Contohnya dekat dengan aktivitas sehari-hari, jadi gampang kebayang.', color: 'blue' },
-                    { name: 'Kevin', initial: 'K', meta: 'Learner A1.2, belajar malam', text: 'Jadwal malamnya cocok untuk aku. Rekaman dan materi PDF juga membantu saat mau mengulang.', color: 'green' },
+                    { name: 'Kevin', initial: 'K', meta: 'Learner A1.2, belajar malam', text: 'Jadwal malamnya cocok untuk aku. Rekaman dan materi juga membantu saat mau mengulang.', color: 'green' },
                     { name: 'Salsa', initial: 'S', meta: 'Learner A1.1, belajar mandiri', text: 'Aku merasa ditemani belajar, bukan cuma dikasih materi. Grup belajarnya juga bikin semangat.', color: 'purple' },
                     { name: 'Aldi', initial: 'A', meta: 'Learner A1.2, upgrade dasar', text: 'Dari A1.1 ke A1.2 transisinya enak. Topiknya makin luas tapi tetap mudah diikuti.', color: 'orange' },
                     { name: 'Tiara', initial: 'T', meta: 'Learner A1.1, baru mulai', text: 'Aku suka cara tutor menjelaskan pelan-pelan. Rasanya aman buat salah dan bertanya lagi.', color: 'blue' }
@@ -1229,7 +1229,7 @@
                 },
                 plans: {
                     'A1.1': { level: 'A1.1', label: 'Level Pemula', desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.', early: 'Rp98.000', normal: 'Rp149.000', discount: '34%', startDate: '27 Juli 2026', color: 'orange' },
-                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp196.000', normal: 'Rp249.000', discount: '21%', startDate: '27 Juli 2026', color: 'blue' }
+                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp196.000', normal: 'Rp249.000', discount: '21%', startDate: '28 Juli 2026', color: 'blue' }
                 }
              }">
         <div class="container mx-auto px-6 md:px-16">
@@ -1349,6 +1349,17 @@
                                         class="inline-flex items-center px-2.5 py-0.5 bg-red-100 text-red-600 text-xs font-extrabold rounded-full border border-red-200 mb-1.5 shadow-sm"
                                         x-show="earlyBirdActive" x-text="'-' + plan.discount"></span>
                                 </div>
+                                <!-- Urgency Text (Scarcity) -->
+                                <div class="flex items-start gap-1.5 mt-2 text-red-600" x-show="earlyBirdActive">
+                                    <span class="relative flex h-1.5 w-1.5 mt-1 flex-shrink-0">
+                                        <span
+                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-600"></span>
+                                    </span>
+                                    <span class="text-[10px] sm:text-xs font-extrabold tracking-wide">
+                                        Kuota Promo Terbatas! Hanya untuk 20 Pendaftar Pertama
+                                    </span>
+                                </div>
                             </div>
 
                             <div class="space-y-3 mb-6 md:mb-7">
@@ -1393,7 +1404,7 @@
                                         </svg>
                                     </span>
                                     <span class="text-gray-600 font-medium text-xs md:text-sm block">Akses Rekaman Kelas
-                                        & Materi PDF yang Bisa Dipelajari Kapan Saja</span>
+                                        & Materi yang Bisa Dipelajari Kapan Saja</span>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <span
@@ -1646,7 +1657,7 @@
             {
                 id: 7,
                 q: 'Apa saja yang akan saya dapat?',
-                sub: 'Kelas live interaktif, rekaman kelas, materi belajar PDF, latihan, dan group diskusi.',
+                sub: 'Kelas live interaktif, rekaman kelas, materi belajar, latihan, dan group diskusi.',
                 a: 'Semua dibuat supaya kamu bisa belajar ulang dan tetap punya tempat bertanya.',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7m16 0H4m16 0l-2-5H6l-2 5m8-5v14'></path></svg>`
             },
