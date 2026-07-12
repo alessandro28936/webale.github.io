@@ -371,8 +371,10 @@
         </a>
 
         <div class="hidden lg:flex gap-10 font-semibold text-gray-500">
-            <a href="#kelas-a1" data-pixel-event="Kelas A1" data-pixel-event-type="ViewContent" class="hover:text-orange-500 transition">Kelas A1</a>
-            <a href="#materi" data-pixel-event="Materi" data-pixel-event-type="ViewContent" class="hover:text-orange-500 transition">Materi</a>
+            <a href="#kelas-a1" data-pixel-event="Kelas A1" data-pixel-event-type="ViewContent"
+                class="hover:text-orange-500 transition">Kelas A1</a>
+            <a href="#materi" data-pixel-event="Materi" data-pixel-event-type="ViewContent"
+                class="hover:text-orange-500 transition">Materi</a>
             <a href="#biaya" class="hover:text-orange-500 transition">Biaya</a>
             <a href="/tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
         </div>
@@ -387,7 +389,8 @@
                 </svg>
             </button>
             <a href="https://wa.me/6281959896825?text=Halo%20Aksaradeutsch!%20Saya%20mau%20tanya-tanya%20dan%20konsultasi%20gratis%20tentang%20kelas%20bahasa%20Jerman%20yang%20pas%20buat%20saya.%20Terima%20kasih!"
-                target="_blank" rel="noopener noreferrer" data-pixel-event="WhatsApp Konsultasi" data-pixel-event-type="Contact"
+                target="_blank" rel="noopener noreferrer" data-pixel-event="WhatsApp Konsultasi"
+                data-pixel-event-type="Contact"
                 class="btn-whatsapp flex items-center gap-2 px-3 sm:px-6 md:px-7 py-3 rounded-2xl font-bold shadow-lg shadow-gray-100 text-xs sm:text-base whitespace-nowrap hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#25D366] group-hover:scale-110 transition-transform duration-300"
                     fill="currentColor" viewBox="0 0 24 24">
@@ -450,7 +453,8 @@
                 class="flex flex-row gap-3 sm:gap-4 pt-2 md:pt-4 max-w-xl mx-auto lg:mx-0 justify-center lg:justify-start px-5 sm:px-0">
 
                 <a href="https://wa.me/6281959896825?text=Halo%20Aksaradeutsch!%20Saya%20mau%20mulai%20belajar%20bahasa%20Jerman%20dari%20nol%20nih.%20Kelas%20mana%20ya%20yang%20paling%20cocok%20buat%20pemula%3F%20Info%20detailnya%20ya%2C%20makasih!"
-                    target="_blank" rel="noopener noreferrer" data-pixel-event="Mulai Belajar Sekarang" data-pixel-event-type="Lead" data-pixel-additional-events="Contact"
+                    target="_blank" rel="noopener noreferrer" data-pixel-event="Mulai Belajar Sekarang"
+                    data-pixel-event-type="Lead" data-pixel-additional-events="Contact"
                     class="btn-orange text-white flex-1 sm:flex-none px-4 sm:px-7 md:px-8 py-3 sm:py-3 md:py-4 rounded-2xl font-extrabold text-[11px] sm:text-base md:text-lg flex items-center justify-center gap-2 sm:gap-3 shadow-xl shadow-orange-200 transition-all whitespace-nowrap group">
                     Mulai Belajar Sekarang
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transform group-hover:translate-x-1 transition-transform"
@@ -757,8 +761,7 @@
                         <div
                             class="flex flex-col md:flex-row items-center justify-between w-full md:odd:flex-row-reverse relative pl-12 md:pl-0">
                             <!-- Text Card -->
-                            <div @click="toggleMateri(idx)"
-                                data-pixel-event-type="ViewContent"
+                            <div @click="toggleMateri(idx)" data-pixel-event-type="ViewContent"
                                 :data-pixel-event="'Materi ' + idx + ' - ' + materiDetails[idx].title"
                                 :class="activeMateri === idx 
                                      ? (currentTab === 'A1.1' ? 'border-orange-500 ring-4 ring-orange-100' : 'border-blue-600 ring-4 ring-blue-100')
@@ -1279,8 +1282,8 @@
                     this.selectedPlan = plans[index].level;
                 },
                 plans: {
-                    'A1.1': { level: 'A1.1', label: 'Level Pemula', desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.', early: 'Rp98.000', normal: 'Rp149.000', discount: '34%', startDate: '27 Juli 2026', color: 'orange' },
-                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp196.000', normal: 'Rp249.000', discount: '21%', startDate: '28 Juli 2026', color: 'blue' }
+                    'A1.1': { level: 'A1.1', label: 'Level Pemula', desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.', early: 'Rp98.000', normal: 'Rp149.000', discount: '34%', startDate: '27 Juli 2026', color: 'orange', promoText: 'Kuota Promo Hampir Habis! Tersisa 4 Pendaftar' },
+                    'A1.2': { level: 'A1.2', label: 'Lanjutan A1', desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!', early: 'Rp196.000', normal: 'Rp249.000', discount: '21%', startDate: '28 Juli 2026', color: 'blue', promoText: 'Kuota Promo Hampir Habis! Tersisa 3 Pendaftar' }
                 }
              }">
         <div class="container mx-auto px-6 md:px-16">
@@ -1407,9 +1410,8 @@
                                             class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                                         <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-600"></span>
                                     </span>
-                                    <span class="text-[10px] sm:text-xs font-extrabold tracking-wide">
-                                        Kuota Promo Terbatas! Hanya untuk 20 Pendaftar Pertama
-                                    </span>
+                                    <span class="text-[10px] sm:text-xs font-extrabold tracking-wide"
+                                        x-text="plan.promoText"></span>
                                 </div>
                             </div>
 
@@ -1520,7 +1522,8 @@
                             </div>
 
                             <a :href="'https://wa.me/6281959896825?text=' + encodeURIComponent(plan.level === 'A1.1' ? 'Halo Aksaradeutsch! Saya mau gabung kelas A1.1 (Level Pemula) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!' : 'Halo Aksaradeutsch! Saya mau gabung kelas A1.2 (Lanjutan A1) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!')"
-                                target="_blank" rel="noopener noreferrer" @click.stop :data-pixel-event="'Gabung Kelas ' + plan.level"
+                                target="_blank" rel="noopener noreferrer" @click.stop
+                                :data-pixel-event="'Gabung Kelas ' + plan.level"
                                 class="w-full btn-orange text-white px-6 py-3.5 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-2.5 shadow-lg shadow-orange-200 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
                                 <span>Gabung Kelas <span x-text="plan.level"></span></span>
                                 <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
@@ -1599,15 +1602,10 @@
                         <p class="leading-[1.8]">Belajar cara menyapa orang, memperkenalkan diri, menyebutkan nama, asal
                             negara, bahasa, serta angka dalam bahasa Jerman.</p>
                     </div>
-                    <a href="https://forms.gle/9kjQJpdJvSjZYTRr6" target="_blank" rel="noopener noreferrer" data-pixel-event="Coba Kelas Gratis A1.1"
-                        class="mt-auto inline-flex w-full items-center justify-center gap-2 btn-orange text-white px-6 py-4 rounded-2xl font-extrabold shadow-lg shadow-orange-200 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 group">
-                        Coba Kelas Gratis A1.1
-                        <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M5 12h14m-6-6l6 6-6 6"></path>
-                        </svg>
-                    </a>
+                    <button disabled
+                        class="mt-auto inline-flex w-full items-center justify-center gap-2 bg-gray-100 text-gray-400 border border-gray-200 px-6 py-4 rounded-2xl font-extrabold cursor-not-allowed">
+                        Kuota Sudah Penuh
+                    </button>
                 </div>
 
                 <div
@@ -1641,15 +1639,10 @@
                             personalpronomen im Dativ, trennbare verben, perbedaan Welcher,
                             Welches, Welche, serta Dieser, Dieses, und Diese dalam kalimat.</p>
                     </div>
-                    <a href="https://forms.gle/9kjQJpdJvSjZYTRr6" target="_blank" rel="noopener noreferrer" data-pixel-event="Coba Kelas Gratis A1.2"
-                        class="mt-auto inline-flex w-full items-center justify-center gap-2 bg-white border-2 border-blue-500 text-blue-600 px-6 py-4 rounded-2xl font-extrabold hover:bg-blue-50 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
-                        Coba Kelas Gratis A1.2
-                        <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M5 12h14m-6-6l6 6-6 6"></path>
-                        </svg>
-                    </a>
+                    <button disabled
+                        class="mt-auto inline-flex w-full items-center justify-center gap-2 bg-gray-50 border-2 border-gray-200 text-gray-400 px-6 py-4 rounded-2xl font-extrabold cursor-not-allowed">
+                        Kuota Sudah Penuh
+                    </button>
                 </div>
             </div>
         </div>
