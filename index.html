@@ -1256,7 +1256,7 @@
                 init() {
                     // Deadline TETAP: 17 Juli 2026 pukul 23:59:59 WIB (UTC+7)
                     // Sama untuk semua browser & semua pengguna
-                    this.deadline = new Date('2026-07-17T23:59:59+07:00').getTime();
+                    this.deadline = new Date('2026-07-14T23:59:59+07:00').getTime();
                     setInterval(() => { this.now = Date.now() }, 1000);
                 },
                 get remaining() { return Math.max(0, this.deadline - this.now) },
