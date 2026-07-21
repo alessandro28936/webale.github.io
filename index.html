@@ -22,6 +22,19 @@
             content_category: 'Landing Page'
         });
 
+        // Meta Conversion API Integration + Enhanced Pixel Tracking
+        const metaConversionConfig = {
+            pixelId: '888734697029141',
+            datasetId: '888734697029141',
+            conversions: {
+                'Mulai Belajar Sekarang': { event: 'Lead', conversionName: 'belajar_sekarang', value: 1 },
+                'Coba Kelas Gratis': { event: 'Lead', conversionName: 'coba_kelas_gratis', value: 0.5 },
+                'Gabung Kelas A1.1': { event: 'Purchase', conversionName: 'gabung_kelas_a1_1', value: 98000 },
+                'Gabung Kelas A1.2': { event: 'Purchase', conversionName: 'gabung_kelas_a1_2', value: 196000 }
+            }
+        };
+
+        // Enhanced event tracking dengan Meta Pixel + CAPI preparation
         document.addEventListener('click', function (event) {
             const trigger = event.target.closest('[data-pixel-event]');
             if (!trigger || typeof fbq !== 'function') return;
@@ -37,14 +50,89 @@
                 })
                 .filter(Boolean);
             const eventTypes = [primaryEvent].concat(additionalEvents);
+            
+            // Base parameters
             const params = {
-                content_name: buttonName
+                content_name: buttonName,
+                content_type: 'product',
+                source_url: window.location.href
             };
 
+            // Add conversion-specific data
+            const conversionData = metaConversionConfig.conversions[buttonName];
+            if (conversionData) {
+                params.value = conversionData.value;
+                params.currency = 'IDR';
+                params.conversion_type = conversionData.conversionName;
+            }
+
+            // Track with Meta Pixel
             eventTypes.forEach(function (eventType) {
                 fbq('track', eventType, params);
             });
+
+            // Send to CAPI (via webhook or cloud function)
+            sendToConversionAPI(buttonName, primaryEvent, params);
         });
+
+        // Function to send events to Conversion API
+        function sendToConversionAPI(buttonName, eventType, params) {
+            // For GitHub Pages: Send to external CAPI relay service
+            // This is prepared for future server-side implementation
+            const eventData = {
+                event_name: eventType,
+                event_source_url: params.source_url,
+                event_source: 'website',
+                action_source: 'website',
+                event_time: Math.floor(Date.now() / 1000),
+                user_data: {
+                    em: null, // Will be populated if user submits email
+                    ph: null,
+                    ge: null,
+                    db: null,
+                    ln: null,
+                    fn: null,
+                    external_id: null,
+                    client_ip_address: null,
+                    client_user_agent: navigator.userAgent,
+                    fbc: getFBCParam(),
+                    fbp: getFBPParam()
+                },
+                custom_data: {
+                    value: params.value,
+                    currency: params.currency,
+                    content_name: params.content_name,
+                    content_type: params.content_type,
+                    conversion_type: params.conversion_type
+                },
+                pixel_id: metaConversionConfig.pixelId
+            };
+
+            // Store event for debugging
+            console.log('CAPI Event (prepared):', eventData);
+
+            // TODO: When ready, send to your CAPI relay endpoint:
+            // fetch('YOUR_CAPI_RELAY_URL', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(eventData)
+            // });
+        }
+
+        // Helper functions for CAPI
+        function getFBCParam() {
+            const url = new URL(window.location);
+            return url.searchParams.get('fbc') || null;
+        }
+
+        function getFBPParam() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === '_fbp') return decodeURIComponent(value);
+            }
+            return null;
+        };
     </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=888734697029141&ev=PageView&noscript=1" /></noscript>
@@ -1534,6 +1622,7 @@
                             <a :href="'https://wa.me/6281959896825?text=' + encodeURIComponent(plan.level === 'A1.1' ? 'Halo Aksaradeutsch! Saya mau gabung kelas A1.1 (Level Pemula) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!' : 'Halo Aksaradeutsch! Saya mau gabung kelas A1.2 (Lanjutan A1) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!')"
                                 target="_blank" rel="noopener noreferrer" @click.stop
                                 :data-pixel-event="'Gabung Kelas ' + plan.level"
+                                data-pixel-event-type="Purchase"
                                 class="w-full btn-orange text-white px-6 py-3.5 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-2.5 shadow-lg shadow-orange-200 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
                                 <span>Gabung Kelas <span x-text="plan.level"></span></span>
                                 <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
