@@ -50,7 +50,7 @@
                 })
                 .filter(Boolean);
             const eventTypes = [primaryEvent].concat(additionalEvents);
-            
+
             // Base parameters
             const params = {
                 content_name: buttonName,
@@ -141,11 +141,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLXDT6LB3"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-RPLXDT6LB3');
+        gtag('config', 'G-RPLXDT6LB3');
     </script>
 
     <meta charset="UTF-8">
@@ -517,7 +517,7 @@
 
     <!-- Hero Section -->
     <main id="home"
-        class="container mx-auto px-6 md:px-16 py-8 md:py-12 lg:py-16 flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
+        class="container mx-auto px-6 md:px-16 py-8 md:py-12 lg:py-16 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
 
         <!-- Kolom Teks (Kiri) -->
         <div class="w-full lg:w-1/2 space-y-5 md:space-y-7 z-10 order-1 text-center lg:text-left">
@@ -535,10 +535,11 @@
                     Nol</span>
             </div>
 
-            <h1 class="text-[33px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-extrabold text-navy leading-[1.1]">
-                Mulai belajar <br>
-                bahasa Jerman <br>
-                dengan cara yang <br>
+            <h1
+                class="text-[33px] sm:text-[40px] md:text-[50px] lg:text-[54px] xl:text-[64px] font-extrabold text-navy leading-[1.1]">
+                Mulai belajar <br class="hidden sm:inline">
+                bahasa Jerman <br class="hidden sm:inline">
+                dengan cara yang <br class="hidden sm:inline">
                 <span class="text-orange-500">mudah & seru.</span>
             </h1>
 
@@ -578,14 +579,14 @@
         <!-- Kolom Gambar (Kanan) -->
         <div class="flex w-full lg:w-1/2 order-2 justify-center lg:justify-end relative mt-8 md:mt-4 lg:mt-0">
             <div
-                class="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[520px] lg:h-[520px] bg-blue-100/40 rounded-full blur-3xl -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                class="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] xl:w-[500px] xl:h-[500px] bg-blue-100/40 rounded-full blur-3xl -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             </div>
 
             <!-- Pembaruan: Gambar Karakter -->
             <div
-                class="floating max-w-[280px] sm:max-w-[360px] md:max-w-[430px] lg:max-w-[550px] xl:max-w-[590px] lg:-mt-2">
-                <img src="hero-character.png" alt="Karakter Belajar Bahasa Jerman"
-                    class="w-full h-auto drop-shadow-2xl transform scale-125" decoding="async">
+                class="floating w-full max-w-[280px] sm:max-w-[360px] md:max-w-[430px] lg:max-w-[460px] xl:max-w-[560px] lg:-mt-2">
+                <img src="hero-character.png" alt="Karakter Belajar Bahasa Jerman" class="w-full h-auto drop-shadow-2xl"
+                    decoding="async">
             </div>
         </div>
 
@@ -1621,8 +1622,7 @@
 
                             <a :href="'https://wa.me/6281959896825?text=' + encodeURIComponent(plan.level === 'A1.1' ? 'Halo Aksaradeutsch! Saya mau gabung kelas A1.1 (Level Pemula) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!' : 'Halo Aksaradeutsch! Saya mau gabung kelas A1.2 (Lanjutan A1) nih. Boleh minta info detail cara pendaftaran dan pembayaran terbarunya? Danke!')"
                                 target="_blank" rel="noopener noreferrer" @click.stop
-                                :data-pixel-event="'Gabung Kelas ' + plan.level"
-                                data-pixel-event-type="Purchase"
+                                :data-pixel-event="'Gabung Kelas ' + plan.level" data-pixel-event-type="Purchase"
                                 class="w-full btn-orange text-white px-6 py-3.5 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-2.5 shadow-lg shadow-orange-200 hover:scale-[1.03] active:scale-[0.98] hover:-translate-y-0.5 transition-all duration-300 group">
                                 <span>Gabung Kelas <span x-text="plan.level"></span></span>
                                 <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300"
@@ -1916,7 +1916,7 @@
                     <div class="text-center md:text-left flex-grow md:pb-6 lg:pb-8">
                         <h2
                             class="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold text-navy leading-tight mb-1">
-                            Masih ragu atau punya pertanyaan?
+                            Punya pertanyaan lain?
                         </h2>
                         <p class="text-gray-500 leading-snug text-xs sm:text-sm md:text-base max-w-xl mx-auto md:mx-0">
                             Konsultasi gratis untuk temukan cara belajar yang paling cocok buat kamu.
