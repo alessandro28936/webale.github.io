@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -29,14 +29,14 @@
             conversions: {
                 'Mulai Belajar Sekarang': { event: 'Lead', conversionName: 'belajar_sekarang', value: 1 },
                 'Coba Kelas Gratis': { event: 'Lead', conversionName: 'coba_kelas_gratis', value: 0.5 },
-                'Gabung Intensiv Klasse A1.1': { event: 'Purchase', conversionName: 'gabung_intensiv_a1_1', value: 439000 },
-                'Gabung Intensiv Klasse A1.2': { event: 'Purchase', conversionName: 'gabung_intensiv_a1_2', value: 539000 },
-                'Gabung Intensiv Klasse A2.1': { event: 'Purchase', conversionName: 'gabung_intensiv_a2_1', value: 439000 },
-                'Gabung Intensiv Klasse A2.2': { event: 'Purchase', conversionName: 'gabung_intensiv_a2_2', value: 539000 },
-                'Gabung Duo Klasse A1.1': { event: 'Purchase', conversionName: 'gabung_duo_a1_1', value: 1580000 },
-                'Gabung Duo Klasse A1.2': { event: 'Purchase', conversionName: 'gabung_duo_a1_2', value: 1680000 },
-                'Gabung Duo Klasse A2.1': { event: 'Purchase', conversionName: 'gabung_duo_a2_1', value: 1780000 },
-                'Gabung Duo Klasse A2.2': { event: 'Purchase', conversionName: 'gabung_duo_a2_2', value: 1880000 }
+                'Gabung Intensiv-Klasse A1.1': { event: 'Purchase', conversionName: 'gabung_intensiv_a1_1', value: 439000 },
+                'Gabung Intensiv-Klasse A1.2': { event: 'Purchase', conversionName: 'gabung_intensiv_a1_2', value: 539000 },
+                'Gabung Intensiv-Klasse A2.1': { event: 'Purchase', conversionName: 'gabung_intensiv_a2_1', value: 439000 },
+                'Gabung Intensiv-Klasse A2.2': { event: 'Purchase', conversionName: 'gabung_intensiv_a2_2', value: 539000 },
+                'Gabung Duo-Klasse A1.1': { event: 'Purchase', conversionName: 'gabung_duo_a1_1', value: 1580000 },
+                'Gabung Duo-Klasse A1.2': { event: 'Purchase', conversionName: 'gabung_duo_a1_2', value: 1680000 },
+                'Gabung Duo-Klasse A2.1': { event: 'Purchase', conversionName: 'gabung_duo_a2_1', value: 1780000 },
+                'Gabung Duo-Klasse A2.2': { event: 'Purchase', conversionName: 'gabung_duo_a2_2', value: 1880000 }
             }
         };
 
@@ -1388,11 +1388,11 @@
                     <div x-ref="classTrack" @scroll.debounce.80ms="updateClassIndicator()"
                         class="flex lg:grid lg:grid-cols-2 gap-5 md:gap-8 overflow-x-auto lg:overflow-visible hide-scrollbar snap-x snap-mandatory scroll-smooth pb-4 lg:pb-0 text-left">
 
-                        <!-- Option 1: Intensiv Klasse -->
+                        <!-- Option 1: Intensiv-Klasse -->
                         <div class="min-w-[85%] sm:min-w-[400px] lg:min-w-0 snap-center bg-white rounded-[28px] md:rounded-[32px] border border-gray-200 hover:border-orange-300 p-6 md:p-8 lg:p-9 shadow-sm hover:shadow-lg transition-all duration-300 relative flex flex-col justify-between"
                             :class="selectedMainLevel === 'A1' ? 'hover:border-orange-300' : 'hover:border-teal-300'">
                             <div>
-                                <h4 class="text-2xl md:text-3xl font-extrabold text-navy mb-2">Intensiv Klasse</h4>
+                                <h4 class="text-2xl md:text-3xl font-extrabold text-navy mb-2">Intensiv-Klasse</h4>
                                 <p class="text-xs md:text-sm text-gray-600 mb-6 leading-relaxed">
                                     Belajar Bahasa Jerman dalam <strong>kelompok kecil (maksimal 12 peserta)</strong>
                                     dengan pendampingan personal &amp; banyak kesempatan latihan percakapan interaktif.
@@ -1450,11 +1450,11 @@
                             </div>
                         </div>
 
-                        <!-- Option 2: Duo Klasse -->
+                        <!-- Option 2: Duo-Klasse -->
                         <div class="min-w-[85%] sm:min-w-[400px] lg:min-w-0 snap-center bg-white rounded-[28px] md:rounded-[32px] border border-gray-200 hover:border-teal-300 p-6 md:p-8 lg:p-9 shadow-sm hover:shadow-lg transition-all duration-300 relative flex flex-col justify-between"
                             :class="selectedMainLevel === 'A1' ? 'hover:border-orange-300' : 'hover:border-teal-300'">
                             <div>
-                                <h4 class="text-2xl md:text-3xl font-extrabold text-navy mb-2">Duo Klasse</h4>
+                                <h4 class="text-2xl md:text-3xl font-extrabold text-navy mb-2">Duo-Klasse</h4>
                                 <p class="text-xs md:text-sm text-gray-600 mb-6 leading-relaxed">
                                     Pilihan terbaik untuk kamu yang ingin belajar lebih cepat melalui kelas eksklusif
                                     <strong>maksimal 2 peserta</strong> dengan perhatian tutor yang lebih optimal.
@@ -1518,11 +1518,11 @@
                         <button type="button"
                             @click="activeClassIndex = 0; $refs.classTrack.scrollTo({ left: 0, behavior: 'smooth' })"
                             :class="activeClassIndex === 0 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
-                            class="h-2 rounded-full transition-all" aria-label="Lihat Intensiv Klasse"></button>
+                            class="h-2 rounded-full transition-all" aria-label="Lihat Intensiv-Klasse"></button>
                         <button type="button"
                             @click="activeClassIndex = 1; $refs.classTrack.scrollTo({ left: $refs.classTrack.clientWidth * 0.85, behavior: 'smooth' })"
                             :class="activeClassIndex === 1 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
-                            class="h-2 rounded-full transition-all" aria-label="Lihat Duo Klasse"></button>
+                            class="h-2 rounded-full transition-all" aria-label="Lihat Duo-Klasse"></button>
                     </div>
                 </div>
             </div>
@@ -1709,7 +1709,7 @@
                 classTypes: {
                     intensiv: {
                         id: 'intensiv',
-                        name: 'Intensiv Klasse',
+                        name: 'Intensiv-Klasse',
                         label: 'Kelompok Kecil',
                         desc: 'Belajar Bahasa Jerman dalam kelompok kecil maksimal 12 peserta.',
                         detail: 'Pendampingan lebih personal, lebih banyak kesempatan praktik, dan feedback langsung dari tutor.',
@@ -1719,7 +1719,7 @@
                     },
                     duo: {
                         id: 'duo',
-                        name: 'Duo Klasse',
+                        name: 'Duo-Klasse',
                         label: 'Lebih Personal',
                         desc: 'Belajar bersama maksimal 2 peserta dengan pendampingan tutor secara lebih intensif.',
                         detail: 'Cocok untuk kamu yang ingin belajar bersama teman, pasangan, atau saudara dengan pembelajaran yang lebih fokus dan personal.',
@@ -2020,7 +2020,7 @@
                                             &amp; Materi yang Bisa Dipelajari Kapan Saja.</span>
                                     </div>
 
-                                    <!-- Benefit 3 (Khusus Duo Klasse) -->
+                                    <!-- Benefit 3 (Khusus Duo-Klasse) -->
                                     <div x-show="selectedClass === 'duo'" class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
