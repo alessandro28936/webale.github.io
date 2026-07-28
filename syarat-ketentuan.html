@@ -2,6 +2,113 @@
 <html lang="id">
 
 <head>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '888734697029141');
+        fbq('track', 'PageView');
+
+        // Meta Conversion API Integration + Enhanced Pixel Tracking
+        const metaConversionConfig = {
+            pixelId: '888734697029141',
+            datasetId: '888734697029141',
+            conversions: {}
+        };
+
+        document.addEventListener('click', function (event) {
+            const trigger = event.target.closest('[data-pixel-event]');
+            if (!trigger) return;
+
+            const buttonName = trigger.getAttribute('data-pixel-event');
+            if (!buttonName) return;
+
+            const primaryEvent = trigger.getAttribute('data-pixel-event-type') || 'Lead';
+            const additionalEvents = (trigger.getAttribute('data-pixel-additional-events') || '')
+                .split(',')
+                .map(function (name) { return name.trim(); })
+                .filter(Boolean);
+            const eventTypes = [primaryEvent].concat(additionalEvents);
+
+            const params = {
+                content_name: buttonName,
+                content_type: 'product',
+                source_url: window.location.href
+            };
+
+            if (typeof fbq === 'function') {
+                eventTypes.forEach(function (eventType) {
+                    fbq('track', eventType, params);
+                });
+            }
+
+            if (typeof gtag === 'function') {
+                gtag('event', primaryEvent, {
+                    event_category: 'engagement',
+                    event_label: buttonName
+                });
+            }
+
+            sendToConversionAPI(buttonName, primaryEvent, params);
+        });
+
+        function sendToConversionAPI(buttonName, eventType, params) {
+            const eventData = {
+                event_name: eventType,
+                event_source_url: params.source_url,
+                event_source: 'website',
+                action_source: 'website',
+                event_time: Math.floor(Date.now() / 1000),
+                user_data: {
+                    client_user_agent: navigator.userAgent,
+                    fbc: getFBCParam(),
+                    fbp: getFBPParam()
+                },
+                custom_data: {
+                    content_name: params.content_name,
+                    content_type: params.content_type
+                },
+                pixel_id: metaConversionConfig.pixelId
+            };
+            console.log('CAPI Event (prepared):', eventData);
+        }
+
+        function getFBCParam() {
+            const url = new URL(window.location);
+            return url.searchParams.get('fbc') || null;
+        }
+
+        function getFBPParam() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === '_fbp') return decodeURIComponent(value);
+            }
+            return null;
+        };
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=888734697029141&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLXDT6LB3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RPLXDT6LB3');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="Icon-AksaraDeutsch.png">
@@ -23,6 +130,10 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
+        }
+
+        [x-cloak] {
+            display: none !important;
         }
 
         .text-navy {
@@ -86,16 +197,17 @@
 <body class="bg-[#F9FAFB] text-navy">
     <nav x-data="{ mobileMenuOpen: false }"
         class="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-16 py-3 md:py-4 bg-white/80 backdrop-blur-md sticky top-0 z-50 relative">
-        <a href="/#home" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
+        <a href="index.html" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
             <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo"
                 class="h-11 sm:h-14 md:h-[72px] w-auto max-w-[240px] sm:max-w-none object-contain">
         </a>
 
-        <div class="hidden lg:flex gap-10 font-semibold text-gray-500">
-            <a href="/#kelas-a1" class="hover:text-orange-500 transition">Kelas A1</a>
-            <a href="/#materi" class="hover:text-orange-500 transition">Materi</a>
-            <a href="/#biaya" class="hover:text-orange-500 transition">Biaya</a>
-            <a href="/tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
+        <div class="hidden lg:flex gap-10 font-semibold text-gray-500 items-center">
+            <a href="index.html" class="hover:text-orange-500 transition">Beranda</a>
+            <a href="index.html#materi" class="hover:text-orange-500 transition">Program Belajar</a>
+            <a href="index.html#materi" class="hover:text-orange-500 transition">Materi</a>
+            <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
+            <a href="tentang-kami.html" class="hover:text-orange-500 transition">Tentang Kami</a>
         </div>
 
         <div class="flex items-center gap-3 md:gap-5">
@@ -119,15 +231,17 @@
             </a>
         </div>
 
-        <div x-show="mobileMenuOpen" x-transition @click.outside="mobileMenuOpen = false"
+        <div x-cloak x-show="mobileMenuOpen" x-transition @click.outside="mobileMenuOpen = false"
             class="lg:hidden absolute left-5 right-5 top-full mt-3 bg-white border border-gray-300 rounded-[24px] shadow-xl p-4">
             <div class="grid gap-2 font-bold text-navy">
-                <a @click="mobileMenuOpen = false" href="/#kelas-a1"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Kelas A1</a>
-                <a @click="mobileMenuOpen = false" href="/#materi"
+                <a @click="mobileMenuOpen = false" href="index.html"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Beranda</a>
+                <a @click="mobileMenuOpen = false" href="index.html#materi"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Program Belajar</a>
+                <a @click="mobileMenuOpen = false" href="index.html#materi"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Materi</a>
-                <a @click="mobileMenuOpen = false" href="/#biaya"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Biaya</a>
+                <a @click="mobileMenuOpen = false" href="index.html#faq"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">FAQ</a>
                 <a @click="mobileMenuOpen = false" href="tentang-kami.html"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Tentang Kami</a>
             </div>
@@ -154,23 +268,37 @@
         <section class="py-12 md:py-20">
             <div class="container mx-auto px-6 md:px-16">
                 <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 lg:gap-14 items-start max-w-6xl mx-auto">
-                    
+
                     <!-- Sidebar Nav (Desktop Only) -->
-                    <aside class="hidden lg:block sticky top-28 bg-white border border-gray-200 rounded-[24px] p-6 shadow-sm">
+                    <aside
+                        class="hidden lg:block sticky top-28 bg-white border border-gray-200 rounded-[24px] p-6 shadow-sm">
                         <h4 class="font-extrabold text-navy mb-4 text-xs uppercase tracking-wider">Daftar Isi</h4>
                         <nav class="space-y-3 font-semibold text-sm text-gray-500">
-                            <a href="#umum" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">1. Ketentuan Umum</a>
-                            <a href="#layanan" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">2. Penggunaan Layanan</a>
-                            <a href="#pendaftaran" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">3. Pendaftaran & Akun</a>
-                            <a href="#hak-cipta" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">4. Hak Cipta & Materi</a>
-                            <a href="#tanggung-jawab" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">5. Batasan Tanggung Jawab</a>
-                            <a href="#perubahan" class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">6. Perubahan Ketentuan</a>
+                            <a href="#umum"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">1.
+                                Ketentuan Umum</a>
+                            <a href="#layanan"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">2.
+                                Penggunaan Layanan</a>
+                            <a href="#pendaftaran"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">3.
+                                Pendaftaran & Akun</a>
+                            <a href="#hak-cipta"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">4.
+                                Hak Cipta & Materi</a>
+                            <a href="#tanggung-jawab"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">5.
+                                Batasan Tanggung Jawab</a>
+                            <a href="#perubahan"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">6.
+                                Perubahan Ketentuan</a>
                         </nav>
                     </aside>
 
                     <!-- Policy Content -->
-                    <div class="bg-white border border-gray-200 rounded-[28px] p-6 md:p-10 shadow-sm leading-[1.8] text-gray-600 space-y-10">
-                        
+                    <div
+                        class="bg-white border border-gray-200 rounded-[28px] p-6 md:p-10 shadow-sm leading-[1.8] text-gray-600 space-y-10">
+
                         <!-- Section 1 -->
                         <div id="umum" class="scroll-mt-28">
                             <h2 class="text-xl md:text-2xl font-extrabold text-navy mb-4 flex items-center gap-3">
@@ -178,7 +306,10 @@
                                 1. Ketentuan Umum
                             </h2>
                             <p>
-                                Aksaradeutsch.com adalah platform edukasi online yang memfasilitasi program kursus dan pelatihan bahasa Jerman tingkat A1 secara interaktif. Dengan mengakses website kami, mendaftar kelas, atau berinteraksi dengan layanan kami, kamu menyetujui untuk terikat dan mematuhi Syarat dan Ketentuan ini.
+                                Aksaradeutsch.com adalah platform edukasi online yang memfasilitasi program kursus dan
+                                pelatihan bahasa Jerman tingkat A1 secara interaktif. Dengan mengakses website kami,
+                                mendaftar kelas, atau berinteraksi dengan layanan kami, kamu menyetujui untuk terikat
+                                dan mematuhi Syarat dan Ketentuan ini.
                             </p>
                         </div>
 
@@ -189,12 +320,16 @@
                                 2. Penggunaan Layanan
                             </h2>
                             <p class="mb-3">
-                                Kami ingin menjaga agar lingkungan belajar di Aksaradeutsch tetap aman, santai, dan suportif. Selaku pengguna, kamu setuju untuk:
+                                Kami ingin menjaga agar lingkungan belajar di Aksaradeutsch tetap aman, santai, dan
+                                suportif. Selaku pengguna, kamu setuju untuk:
                             </p>
                             <ul class="list-disc pl-6 space-y-2">
-                                <li>Hanya menggunakan situs web dan materi belajar kami untuk tujuan pembelajaran pribadi yang sah.</li>
-                                <li>Tidak mengganggu kenyamanan belajar peserta lain di dalam kelas live Google Meet maupun di dalam grup belajar WhatsApp.</li>
-                                <li>Tidak melakukan perundungan (bullying), mengirimkan pesan spam, atau menyebarkan konten yang tidak pantas di seluruh saluran komunikasi kelas kami.</li>
+                                <li>Hanya menggunakan situs web dan materi belajar kami untuk tujuan pembelajaran
+                                    pribadi yang sah.</li>
+                                <li>Tidak mengganggu kenyamanan belajar peserta lain di dalam kelas live Google Meet
+                                    maupun di dalam grup belajar WhatsApp.</li>
+                                <li>Tidak melakukan perundungan (bullying), mengirimkan pesan spam, atau menyebarkan
+                                    konten yang tidak pantas di seluruh saluran komunikasi kelas kami.</li>
                             </ul>
                         </div>
 
@@ -206,9 +341,14 @@
                             </h2>
                             <p class="mb-3">Untuk mengakses kelas online, rekaman, dan grup diskusi kami:</p>
                             <ul class="list-disc pl-6 space-y-2">
-                                <li>Kamu wajib memberikan data pendaftaran (seperti nama dan nomor WhatsApp) secara valid, jujur, dan akurat demi kelancaran administrasi pendaftaran kelas.</li>
-                                <li>Status kepesertaan kelas bersifat personal. Kamu tidak diperkenankan membagikan hak akses masuk kelas live Google Meet atau grup WhatsApp kepada orang lain yang tidak terdaftar.</li>
-                                <li>Aksaradeutsch berhak menangguhkan status kepesertaan atau akses belajarmu jika ditemukan pelanggaran serius terhadap kenyamanan bersama atau pemalsuan data identitas.</li>
+                                <li>Kamu wajib memberikan data pendaftaran (seperti nama dan nomor WhatsApp) secara
+                                    valid, jujur, dan akurat demi kelancaran administrasi pendaftaran kelas.</li>
+                                <li>Status kepesertaan kelas bersifat personal. Kamu tidak diperkenankan membagikan hak
+                                    akses masuk kelas live Google Meet atau grup WhatsApp kepada orang lain yang tidak
+                                    terdaftar.</li>
+                                <li>Aksaradeutsch berhak menangguhkan status kepesertaan atau akses belajarmu jika
+                                    ditemukan pelanggaran serius terhadap kenyamanan bersama atau pemalsuan data
+                                    identitas.</li>
                             </ul>
                         </div>
 
@@ -222,9 +362,14 @@
                                 Penting untuk dipahami bersama demi menghargai jerih payah pembuatan materi:
                             </p>
                             <ul class="list-disc pl-6 space-y-2">
-                                <li>Seluruh materi belajar (PDF modul pembelajaran, rekaman video kelas, lembar latihan, logo, desain visual, dan minigame interaktif) adalah Hak Kekayaan Intelektual resmi milik Aksaradeutsch.</li>
-                                <li>Kamu mendapatkan izin penuh untuk mengunduh dan menggunakannya untuk kebutuhan belajar mandirimu sendiri.</li>
-                                <li>Kamu dilarang keras untuk menyalin, menduplikasi, menyebarkan secara publik, mengunggah ulang ke platform lain, atau menjual kembali materi Aksaradeutsch untuk tujuan komersil maupun non-komersil tanpa izin tertulis dari kami.</li>
+                                <li>Seluruh materi belajar (PDF modul pembelajaran, rekaman video kelas, lembar latihan,
+                                    logo, desain visual, dan minigame interaktif) adalah Hak Kekayaan Intelektual resmi
+                                    milik Aksaradeutsch.</li>
+                                <li>Kamu mendapatkan izin penuh untuk mengunduh dan menggunakannya untuk kebutuhan
+                                    belajar mandirimu sendiri.</li>
+                                <li>Kamu dilarang keras untuk menyalin, menduplikasi, menyebarkan secara publik,
+                                    mengunggah ulang ke platform lain, atau menjual kembali materi Aksaradeutsch untuk
+                                    tujuan komersil maupun non-komersil tanpa izin tertulis dari kami.</li>
                             </ul>
                         </div>
 
@@ -235,7 +380,12 @@
                                 5. Batasan Tanggung Jawab
                             </h2>
                             <p>
-                                Kami di Aksaradeutsch berupaya semaksimal mungkin memberikan materi belajar yang terstruktur, cara mengajar yang mudah dipahami, serta bimbingan yang suportif. Namun, hasil pemahaman dan penguasaan bahasa Jerman A1 sangat dipengaruhi oleh tingkat kehadiran, partisipasi aktif di kelas, pengerjaan latihan, dan usaha belajar mandiri dari masing-masing peserta. Kami tidak memberikan jaminan kelulusan tes sertifikasi pihak ketiga secara otomatis tanpa adanya komitmen belajar yang baik dari peserta.
+                                Kami di Aksaradeutsch berupaya semaksimal mungkin memberikan materi belajar yang
+                                terstruktur, cara mengajar yang mudah dipahami, serta bimbingan yang suportif. Namun,
+                                hasil pemahaman dan penguasaan bahasa Jerman A1 sangat dipengaruhi oleh tingkat
+                                kehadiran, partisipasi aktif di kelas, pengerjaan latihan, dan usaha belajar mandiri
+                                dari masing-masing peserta. Kami tidak memberikan jaminan kelulusan tes sertifikasi
+                                pihak ketiga secara otomatis tanpa adanya komitmen belajar yang baik dari peserta.
                             </p>
                         </div>
 
@@ -246,7 +396,11 @@
                                 6. Perubahan Ketentuan
                             </h2>
                             <p>
-                                Aksaradeutsch berhak memperbarui, mengganti, atau mengubah sebagian isi dari Syarat & Ketentuan ini kapan saja demi menyesuaikan dengan perkembangan kelas online kami. Perubahan tersebut akan langsung berlaku secara efektif setelah diposting di halaman ini. Keterlibatan berkelanjutanmu dalam layanan kami dianggap sebagai persetujuan terhadap ketentuan terbaru.
+                                Aksaradeutsch berhak memperbarui, mengganti, atau mengubah sebagian isi dari Syarat &
+                                Ketentuan ini kapan saja demi menyesuaikan dengan perkembangan kelas online kami.
+                                Perubahan tersebut akan langsung berlaku secara efektif setelah diposting di halaman
+                                ini. Keterlibatan berkelanjutanmu dalam layanan kami dianggap sebagai persetujuan
+                                terhadap ketentuan terbaru.
                             </p>
                         </div>
 
@@ -261,7 +415,7 @@
         <div class="container mx-auto px-6 md:px-16 py-12 md:py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div class="lg:col-span-2">
-                    <a href="/#home" class="inline-flex items-center mb-5" aria-label="Aksaradeutsch.com beranda">
+                    <a href="index.html" class="inline-flex items-center mb-5" aria-label="Aksaradeutsch.com beranda">
                         <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo" class="h-14 md:h-20 w-auto"
                             loading="lazy" decoding="async">
                     </a>
@@ -291,28 +445,31 @@
                 <div>
                     <h3 class="font-extrabold text-navy mb-5">Navigasi</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="/#kelas-a1" class="hover:text-orange-500 transition">Detail Kelas</a>
-                        <a href="/#materi" class="hover:text-orange-500 transition">Materi</a>
-                        <a href="/#biaya" class="hover:text-orange-500 transition">Biaya</a>
-                        <a href="/tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
+                        <a href="index.html" class="hover:text-orange-500 transition">Beranda</a>
+                        <a href="index.html#materi" class="hover:text-orange-500 transition">Program Belajar</a>
+                        <a href="index.html#materi" class="hover:text-orange-500 transition">Materi</a>
+                        <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
+                        <a href="tentang-kami.html" class="hover:text-orange-500 transition">Tentang Kami</a>
                     </div>
                 </div>
 
                 <div>
                     <h3 class="font-extrabold text-navy mb-5">Bantuan</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="/#faq" class="hover:text-orange-500 transition">FAQ</a>
+                        <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
                     </div>
                 </div>
             </div>
 
             <div
                 class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 text-sm text-gray-500">
-                <p data-nosnippet class="text-right sm:text-left text-[11px] sm:text-sm">&copy; 2026 Aksaradeutsch.com. All rights reserved.</p>
-                <div class="flex flex-wrap justify-end gap-x-4 md:gap-x-6 font-semibold text-gray-400 text-[9px] sm:text-[10px] md:text-[11px]">
-                    <a href="/privacy-policy" class="hover:text-orange-500 transition">Privacy</a>
-                    <a href="/syarat-ketentuan" class="hover:text-orange-500 transition">Website Terms</a>
-                    <a href="/refund-policy" class="hover:text-orange-500 transition">Refund Policy</a>
+                <p data-nosnippet class="text-right sm:text-left text-[11px] sm:text-sm">&copy; 2026 Aksaradeutsch.com.
+                    All rights reserved.</p>
+                <div
+                    class="flex flex-wrap justify-end gap-x-4 md:gap-x-6 font-semibold text-gray-400 text-[9px] sm:text-[10px] md:text-[11px]">
+                    <a href="privacy-policy.html" class="hover:text-orange-500 transition">Privacy Policy</a>
+                    <a href="syarat-ketentuan.html" class="hover:text-orange-500 transition">Website Terms</a>
+                    <a href="refund-policy.html" class="hover:text-orange-500 transition">Refund Policy</a>
                 </div>
             </div>
         </div>
