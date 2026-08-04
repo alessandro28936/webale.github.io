@@ -411,36 +411,42 @@
                 if (!anchor) return;
                 
                 const href = anchor.getAttribute('href');
-                if (!href) return;
+                if (!href || !href.includes('#')) return;
                 
-                // Match both "#id" and "./#id" or "/#id" if it's on the same page
-                const isSamePageAnchor = href.startsWith('#') || 
-                    (href.startsWith('./#') && (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('index') || window.location.pathname === ''));
+                try {
+                    const url = new URL(anchor.href);
+                    const isSamePage = url.protocol === window.location.protocol && 
+                                       url.host === window.location.host && 
+                                       url.pathname === window.location.pathname;
                     
-                if (isSamePageAnchor) {
-                    const hashIndex = href.indexOf('#');
-                    const targetId = href.substring(hashIndex);
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth' });
+                    if (isSamePage && url.hash) {
+                        const target = document.querySelector(url.hash);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
                     }
+                } catch (err) {
+                    // Fallback
                 }
             });
 
             // 2. Clean URL hash on load
             if (window.location.hash) {
                 const hash = window.location.hash;
+                // Clear hash from URL immediately
+                try {
+                    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+                } catch (err) {}
+                
                 const target = document.querySelector(hash);
                 if (target) {
                     setTimeout(() => {
                         target.scrollIntoView({ behavior: 'smooth' });
-                        history.replaceState(null, document.title, window.location.pathname + window.location.search);
-                    }, 300);
+                    }, 100);
                 }
             }
         });
     </script>
 </body>
-
 </html>
