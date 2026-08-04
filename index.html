@@ -2528,6 +2528,45 @@
     </footer>
 
 
+    <!-- Clean Hash Navigation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Intercept same-page anchor link clicks
+            document.body.addEventListener('click', (e) => {
+                const anchor = e.target.closest('a');
+                if (!anchor) return;
+
+                const href = anchor.getAttribute('href');
+                if (!href) return;
+
+                // Match both "#id" and "./#id" or "/#id" if it's on the same page
+                const isSamePageAnchor = href.startsWith('#') ||
+                    (href.startsWith('./#') && (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('index') || window.location.pathname === ''));
+
+                if (isSamePageAnchor) {
+                    const hashIndex = href.indexOf('#');
+                    const targetId = href.substring(hashIndex);
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+
+            // 2. Clean URL hash on load
+            if (window.location.hash) {
+                const hash = window.location.hash;
+                const target = document.querySelector(hash);
+                if (target) {
+                    setTimeout(() => {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+                    }, 300);
+                }
+            }
+        });
+    </script>
 </body>
 
 
