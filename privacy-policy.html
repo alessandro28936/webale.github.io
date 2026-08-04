@@ -196,17 +196,17 @@
 <body class="bg-[#F9FAFB] text-navy">
     <nav x-data="{ mobileMenuOpen: false }"
         class="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-16 py-3 md:py-4 bg-white/80 backdrop-blur-md sticky top-0 z-50 relative">
-        <a href="index.html" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
+        <a href="./" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
             <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo"
                 class="h-11 sm:h-14 md:h-[72px] w-auto max-w-[240px] sm:max-w-none object-contain">
         </a>
 
         <div class="hidden lg:flex gap-10 font-semibold text-gray-500 items-center">
-            <a href="index.html" class="hover:text-orange-500 transition">Beranda</a>
-            <a href="index.html#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-            <a href="index.html#materi" class="hover:text-orange-500 transition">Materi</a>
-            <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
-            <a href="tentang-kami.html" class="hover:text-orange-500 transition">Tentang Kami</a>
+            <a href="./" class="hover:text-orange-500 transition">Beranda</a>
+            <a href="./#materi" class="hover:text-orange-500 transition">Program Belajar</a>
+            <a href="./#materi" class="hover:text-orange-500 transition">Materi</a>
+            <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
+            <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
         </div>
 
         <div class="flex items-center gap-3 md:gap-5">
@@ -233,15 +233,15 @@
         <div x-cloak x-show="mobileMenuOpen" x-transition @click.outside="mobileMenuOpen = false"
             class="lg:hidden absolute left-5 right-5 top-full mt-3 bg-white border border-gray-300 rounded-[24px] shadow-xl p-4">
             <div class="grid gap-2 font-bold text-navy">
-                <a @click="mobileMenuOpen = false" href="index.html"
+                <a @click="mobileMenuOpen = false" href="./"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Beranda</a>
-                <a @click="mobileMenuOpen = false" href="index.html#materi"
+                <a @click="mobileMenuOpen = false" href="./#materi"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Program Belajar</a>
-                <a @click="mobileMenuOpen = false" href="index.html#materi"
+                <a @click="mobileMenuOpen = false" href="./#materi"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Materi</a>
-                <a @click="mobileMenuOpen = false" href="index.html#faq"
+                <a @click="mobileMenuOpen = false" href="./#faq"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">FAQ</a>
-                <a @click="mobileMenuOpen = false" href="tentang-kami.html"
+                <a @click="mobileMenuOpen = false" href="tentang-kami"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Tentang Kami</a>
             </div>
         </div>
@@ -385,7 +385,7 @@
         <div class="container mx-auto px-6 md:px-16 py-12 md:py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div class="lg:col-span-2">
-                    <a href="index.html" class="inline-flex items-center mb-5" aria-label="Aksaradeutsch.com beranda">
+                    <a href="./" class="inline-flex items-center mb-5" aria-label="Aksaradeutsch.com beranda">
                         <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo" class="h-14 md:h-20 w-auto"
                             loading="lazy" decoding="async">
                     </a>
@@ -415,18 +415,18 @@
                 <div>
                     <h3 class="font-extrabold text-navy mb-5">Navigasi</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="index.html" class="hover:text-orange-500 transition">Beranda</a>
-                        <a href="index.html#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-                        <a href="index.html#materi" class="hover:text-orange-500 transition">Materi</a>
-                        <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
-                        <a href="tentang-kami.html" class="hover:text-orange-500 transition">Tentang Kami</a>
+                        <a href="./" class="hover:text-orange-500 transition">Beranda</a>
+                        <a href="./#materi" class="hover:text-orange-500 transition">Program Belajar</a>
+                        <a href="./#materi" class="hover:text-orange-500 transition">Materi</a>
+                        <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
+                        <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
                     </div>
                 </div>
 
                 <div>
                     <h3 class="font-extrabold text-navy mb-5">Bantuan</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
+                        <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
                     </div>
                 </div>
             </div>
@@ -435,9 +435,9 @@
                 class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 text-sm text-gray-500">
                 <p data-nosnippet class="text-right sm:text-left text-[11px] sm:text-sm">&copy; 2026 Aksaradeutsch.com. All rights reserved.</p>
                 <div class="flex flex-wrap justify-end gap-x-4 md:gap-x-6 font-semibold text-gray-400 text-[9px] sm:text-[10px] md:text-[11px]">
-                    <a href="privacy-policy.html" class="hover:text-orange-500 transition">Privacy Policy</a>
-                    <a href="syarat-ketentuan.html" class="hover:text-orange-500 transition">Website Terms</a>
-                    <a href="refund-policy.html" class="hover:text-orange-500 transition">Refund Policy</a>
+                    <a href="privacy-policy" class="hover:text-orange-500 transition">Privacy Policy</a>
+                    <a href="syarat-ketentuan" class="hover:text-orange-500 transition">Website Terms</a>
+                    <a href="refund-policy" class="hover:text-orange-500 transition">Refund Policy</a>
                 </div>
             </div>
         </div>
