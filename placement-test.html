@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '888734697029141');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent', {
+            content_name: 'Placement Test Page',
+            content_category: 'Assessment'
+        });
+
+        // Meta Conversion API Integration
+        const metaConversionConfig = {
+            pixelId: '888734697029141',
+            datasetId: '888734697029141',
+            conversions: {
+                'Mulai Placement Test': { event: 'Lead', conversionName: 'start_placement_test', value: 1 },
+                'Selesai Placement Test': { event: 'Lead', conversionName: 'complete_placement_test', value: 2 },
+                'WhatsApp Placement Result': { event: 'Contact', conversionName: 'wa_placement_consultation', value: 3 }
+            }
+        };
+
+        document.addEventListener('click', function (event) {
+            const trigger = event.target.closest('[data-pixel-event]');
+            if (!trigger || typeof fbq !== 'function') return;
+
+            const buttonName = trigger.getAttribute('data-pixel-event');
+            if (!buttonName) return;
+
+            const primaryEvent = trigger.getAttribute('data-pixel-event-type') || 'Lead';
+            const params = {
+                content_name: buttonName,
+                content_type: 'placement_test',
+                source_url: window.location.href
+            };
+
+            fbq('track', primaryEvent, params);
+        });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=888734697029141&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLXDT6LB3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RPLXDT6LB3');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="icon-baru-cream.jpeg">
+    <link rel="apple-touch-icon" href="icon-baru-cream.jpeg">
+    <meta name="description"
+        content="Tes Penentuan Level Bahasa Jerman (Placement Test) Online Gratis dari Aksaradeutsch. Cari tahu tingkat kemampuan bahasa Jerman Anda (A1.1, A1.2, A2.1, A2.2) hanya dalam 5-8 menit!">
+    <meta name="keywords"
+        content="placement test bahasa Jerman, tes level bahasa Jerman, tes kemampuan bahasa jerman, tes online A1 A2 Jerman, Aksaradeutsch">
+    <meta name="author" content="Aksaradeutsch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aksaradeutsch.com/placement-test.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aksaradeutsch.com/placement-test.html">
+    <meta property="og:title" content="Placement Test Bahasa Jerman - Aksaradeutsch.com">
+    <meta property="og:description"
+        content="Cari tahu tingkat kemampuan Bahasa Jerman kamu (A1.1/A1.2/A2.1/A2.2) melalui tes interaktif singkat gratis.">
+    <meta property="og:image" content="https://aksaradeutsch.com/Logo-Aksaradeutsch.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Placement Test Bahasa Jerman - Aksaradeutsch.com">
+    <meta name="twitter:description"
+        content="Tes penentuan level bahasa Jerman interaktif gratis. Temukan kelas yang paling pas untukmu!">
+
+    <title>Placement Test Bahasa Jerman (A1 - A2) - Aksaradeutsch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .text-navy {
+            color: #101828;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #E85A2A;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 25px -5px rgb(255 107 53 / 0.3);
+        }
+
+        .btn-teal {
+            background-color: #0d9488;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-teal:hover {
+            background-color: #0f766e;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 25px -5px rgb(13 148 136 / 0.3);
+        }
+
+        .btn-whatsapp {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #f9fafb;
+            transform: translateY(-2px) scale(1.02);
+        }
+    </style>
+</head>
+
+<body class="bg-[#F9FAFB] text-navy antialiased">
+
+    <!-- Navbar -->
+    <nav x-data="{ mobileMenuOpen: false }"
+        class="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-16 py-3 md:py-4 bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
+            <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                class="h-11 sm:h-14 md:h-[64px] w-auto max-w-[220px] sm:max-w-none object-contain">
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex gap-8 font-semibold text-gray-500 text-sm md:text-base">
+            <a href="index.html#materi" class="hover:text-orange-500 transition">Program Belajar</a>
+            <a href="placement-test" class="text-orange-500 font-extrabold">Placement Test</a>
+            <a href="index.html#faq" class="hover:text-orange-500 transition">FAQ</a>
+            <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
+        </div>
+
+        <!-- Right CTA Buttons -->
+        <div class="flex items-center gap-3">
+            <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
+                class="lg:hidden w-10 h-10 rounded-2xl bg-gray-50 text-navy flex items-center justify-center hover:bg-orange-50 transition"
+                aria-label="Buka menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 7h16M4 12h16M4 17h16">
+                    </path>
+                </svg>
+            </button>
+
+            <a href="https://wa.me/6281959896825?text=Halo%20Aksaradeutsch!%20Saya%20ingin%20konsultasi%20mengenai%20Placement%20Test%20dan%20pemilihan%20level%20kelas."
+                target="_blank" rel="noopener noreferrer" data-pixel-event="WhatsApp Konsultasi Navbar"
+                data-pixel-event-type="Contact"
+                class="btn-whatsapp hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold shadow-xs text-xs sm:text-sm whitespace-nowrap group">
+                <svg class="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M20.52 3.48A11.78 11.78 0 0012.15 0C5.62 0 .31 5.31.31 11.84c0 2.09.55 4.13 1.59 5.93L.21 24l6.38-1.67a11.8 11.8 0 005.56 1.42h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.16-1.23-6.13-3.48-8.43zM12.16 21.75h-.01a9.82 9.82 0 01-5.01-1.37l-.36-.22-3.79.99 1.01-3.69-.24-.38a9.8 9.8 0 01-1.5-5.24C2.26 6.41 6.72 2 12.16 2c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 7.01c0 5.43-4.42 9.84-9.88 9.84zm5.4-7.36c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z">
+                    </path>
+                </svg>
+                Konsultasi CS
+            </a>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div x-cloak x-show="mobileMenuOpen" x-transition @click.outside="mobileMenuOpen = false"
+            class="lg:hidden absolute left-5 right-5 top-full mt-2 bg-white border border-gray-100 rounded-3xl shadow-xl p-4 z-50">
+            <div class="grid gap-2 font-bold text-navy text-sm">
+                <a @click="mobileMenuOpen = false" href="index.html#materi"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Program Belajar</a>
+                <a @click="mobileMenuOpen = false" href="placement-test"
+                    class="px-4 py-3 rounded-2xl bg-orange-50 text-orange-600 transition">Placement Test</a>
+                <a @click="mobileMenuOpen = false" href="index.html#faq"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">FAQ</a>
+                <a @click="mobileMenuOpen = false" href="tentang-kami"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Tentang Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Placement Test Container (Alpine.js State) -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 md:py-12 max-w-4xl" x-data="placementTestApp()">
+
+        <!-- HEADER BANNER & REASSURANCE FOR RETURNING LEARNERS -->
+        <div x-show="gameState === 'intro'" class="space-y-5 sm:space-y-7 text-center" x-transition>
+            <div
+                class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-orange-50 border border-orange-200/80 rounded-full">
+                <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                <span class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-orange-600">PLACEMENT
+                    TEST</span>
+            </div>
+
+            <h1
+                class="text-[22px] sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-navy leading-relaxed sm:leading-normal md:leading-[1.35] tracking-tight">
+                Bingung Harus Mulai dari <br>
+                Level Apa? <span class="text-orange-500">Cek Kemampuan <br class="hidden sm:block">
+                    Bahasa Jermanmu di Sini!</span>
+            </h1>
+
+            <p class="text-gray-500 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-medium pt-1">
+                Jawab <strong>20 soal</strong> dalam waktu sekitar <strong>5–8 menit</strong> untuk mengetahui level
+                bahasa Jerman yang paling sesuai dengan kemampuanmu.
+            </p>
+
+            <!-- TAHAP SUMMARY INFO BOX -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 max-w-2xl mx-auto pt-1 sm:pt-2">
+                <div class="p-2.5 sm:p-3.5 bg-white border border-gray-200 rounded-2xl text-center shadow-xs">
+                    <span class="block text-[10px] sm:text-xs font-extrabold text-orange-500 uppercase">Tahap 1</span>
+                    <span class="block text-xs sm:text-base font-extrabold text-navy">Level A1.1</span>
+                    <span class="block text-[10px] sm:text-[11px] text-gray-500 font-medium">Pemula</span>
+                </div>
+                <div class="p-2.5 sm:p-3.5 bg-white border border-gray-200 rounded-2xl text-center shadow-xs">
+                    <span class="block text-[10px] sm:text-xs font-extrabold text-orange-500 uppercase">Tahap 2</span>
+                    <span class="block text-xs sm:text-base font-extrabold text-navy">Level A1.2</span>
+                    <span class="block text-[10px] sm:text-[11px] text-gray-500 font-medium">Lanjutan Pemula</span>
+                </div>
+                <div class="p-2.5 sm:p-3.5 bg-white border border-gray-200 rounded-2xl text-center shadow-xs">
+                    <span class="block text-[10px] sm:text-xs font-extrabold text-teal-600 uppercase">Tahap 3</span>
+                    <span class="block text-xs sm:text-base font-extrabold text-navy">Level A2.1</span>
+                    <span class="block text-[10px] sm:text-[11px] text-gray-500 font-medium">Menengah</span>
+                </div>
+                <div class="p-2.5 sm:p-3.5 bg-white border border-gray-200 rounded-2xl text-center shadow-xs">
+                    <span class="block text-[10px] sm:text-xs font-extrabold text-teal-600 uppercase">Tahap 4</span>
+                    <span class="block text-xs sm:text-base font-extrabold text-navy">Level A2.2</span>
+                    <span class="block text-[10px] sm:text-[11px] text-gray-500 font-medium">Lanjutan Menengah</span>
+                </div>
+            </div>
+
+            <!-- START BUTTON -->
+            <div class="pt-2 sm:pt-4">
+                <button type="button" @click="startQuiz()" data-pixel-event="Mulai Placement Test"
+                    class="w-full sm:w-auto btn-orange text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-extrabold text-sm sm:text-base md:text-lg inline-flex items-center justify-center gap-2.5 sm:gap-3 shadow-lg shadow-orange-200 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+                    <span>Cek Level Bahasa Jermanmu</span>
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- QUIZ ACTIVE STATE -->
+        <div x-show="gameState === 'active'" x-cloak class="space-y-3.5 sm:space-y-6" x-transition>
+            <!-- TOP PROGRESS BAR & LEVEL BADGE -->
+            <div class="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-xs">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                        <span
+                            class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wide bg-orange-100 text-orange-600"
+                            x-text="'Level ' + currentQuestion.tier"></span>
+                        <span
+                            class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wide"
+                            :class="{
+                                'bg-blue-100 text-blue-700': currentQuestion.skill === 'Lesen',
+                                'bg-purple-100 text-purple-700': currentQuestion.skill === 'Schreiben',
+                                'bg-amber-100 text-amber-700': currentQuestion.skill === 'Hören'
+                            }" x-text="currentQuestion.skill"></span>
+                        <span class="text-[11px] sm:text-xs text-gray-400 font-semibold ml-0.5 sm:ml-1"
+                            x-text="'Soal ' + (currentIndex + 1) + ' dari ' + questions.length"></span>
+                    </div>
+                    <span class="text-[11px] sm:text-xs font-extrabold text-navy shrink-0"
+                        x-text="Math.round(((currentIndex + 1) / questions.length) * 100) + '% Selesai'"></span>
+                </div>
+
+                <!-- Progress track -->
+                <div class="w-full bg-gray-100 rounded-full h-2 sm:h-3 overflow-hidden">
+                    <div class="h-2 sm:h-3 transition-all duration-500 rounded-full bg-orange-500"
+                        :style="'width: ' + (((currentIndex + 1) / questions.length) * 100) + '%'"></div>
+                </div>
+            </div>
+
+            <!-- QUESTION CARD -->
+            <div
+                class="bg-white border-2 border-gray-200 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-sm space-y-3.5 sm:space-y-5">
+
+                <!-- READABLE DIALOGUE / PASSAGE FOR LESEN -->
+                <template x-if="currentQuestion.dialogue">
+                    <div
+                        class="bg-blue-50/70 border border-blue-200/90 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-xs sm:text-sm space-y-2.5 text-left">
+                        <template x-if="currentQuestion.mapSvg">
+                            <div
+                                class="bg-white p-2 sm:p-3 rounded-xl border border-blue-100 shadow-xs flex flex-col items-center justify-center">
+                                <span
+                                    class="text-[10px] font-extrabold uppercase tracking-wider text-gray-400 mb-1.5">Peta
+                                    Petunjuk Arah (Wegbeschreibung)</span>
+                                <div class="w-full max-w-sm sm:max-w-md" x-html="currentQuestion.mapSvg"></div>
+                            </div>
+                        </template>
+                        <div>
+                            <span
+                                class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-blue-600 block mb-0.5">Teks
+                                Bacaan:</span>
+                            <p class="text-navy font-semibold leading-relaxed whitespace-pre-line text-xs sm:text-sm"
+                                x-text="currentQuestion.dialogue"></p>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- AUDIO PLAYER CARD FOR HÖREN -->
+                <template x-if="currentQuestion.skill === 'Hören'">
+                    <div
+                        class="bg-slate-50 border border-slate-200/90 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-navy shadow-xs space-y-2">
+                        <div class="flex items-center justify-between text-[11px] sm:text-xs font-extrabold">
+                            <span class="flex items-center gap-1.5 text-orange-600 uppercase tracking-wider">
+                                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor"
+                                    stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                </svg>
+                                Audio Percakapan
+                            </span>
+                            <span class="font-mono text-gray-500 font-bold" x-text="audioProgressText">00:00 /
+                                00:05</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 pt-0.5">
+                            <button type="button" @click="playAudioQuestion(currentQuestion)"
+                                class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white flex items-center justify-center shrink-0 transition-all shadow-xs cursor-pointer">
+                                <template x-if="!isPlayingAudio">
+                                    <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </template>
+                                <template x-if="isPlayingAudio">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                    </svg>
+                                </template>
+                            </button>
+
+                            <!-- Interactive Progress Bar Track -->
+                            <div class="flex-1 bg-slate-200 rounded-full h-2.5 overflow-hidden relative">
+                                <div class="bg-orange-500 h-full rounded-full transition-all duration-150"
+                                    :style="'width: ' + audioProgressPercent + '%'"></div>
+                            </div>
+
+                            <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.536 8.464a5 5 0 010 7.072M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Question Prompt -->
+                <h2 class="text-base sm:text-xl md:text-2xl font-bold text-navy leading-snug"
+                    x-text="currentQuestion.prompt"></h2>
+
+                <!-- TAP-TO-BUILD WORD BANK WIDGET (For Satzbau questions) -->
+                <template x-if="currentQuestion.wordBank">
+                    <div
+                        class="bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-3.5 sm:p-5 space-y-4 text-left shadow-xs">
+                        <!-- Top Answer Area (Selected Words Sequence) -->
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span
+                                    class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-500">Hasil
+                                    Susunan Kalimat:</span>
+                                <button type="button" @click="resetWordBank()"
+                                    :disabled="selectedOption !== null || selectedWords.length === 0"
+                                    class="text-[11px] sm:text-xs font-bold text-red-500 hover:text-red-600 disabled:opacity-30 disabled:pointer-events-none flex items-center gap-1 cursor-pointer">
+                                    <span>⌫ Reset / Hapus</span>
+                                </button>
+                            </div>
+
+                            <div class="min-h-[56px] sm:min-h-[64px] bg-white border-2 border-dashed rounded-xl p-2 sm:p-3 flex flex-wrap items-center gap-1.5 sm:gap-2 transition-all"
+                                :class="selectedOption !== null ? (selectedOption === currentQuestion.correct ? 'border-green-500 bg-green-50/50' : 'border-red-500 bg-red-50/50') : 'border-slate-300 hover:border-orange-300'">
+                                <template x-if="selectedWords.length === 0">
+                                    <span class="text-xs sm:text-sm font-medium text-slate-400 italic">Ketuk balok kata
+                                        di bawah untuk menyusun kalimat...</span>
+                                </template>
+                                <template x-for="(w, idx) in selectedWords" :key="idx">
+                                    <button type="button" @click="removeWordFromAnswer(idx)"
+                                        :disabled="selectedOption !== null"
+                                        class="bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg sm:rounded-xl font-extrabold text-xs sm:text-sm shadow-xs flex items-center gap-1.5 transition-all cursor-pointer">
+                                        <span x-text="w"></span>
+                                        <span class="text-[10px] opacity-75">✕</span>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Word Bank (Available Words) -->
+                        <div>
+                            <span
+                                class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-500 block mb-2">Bank
+                                Kata (Ketuk untuk Memilih):</span>
+                            <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                                <template x-for="(w, idx) in currentQuestion.wordBank" :key="idx">
+                                    <button type="button" @click="addWordToAnswer(w, idx)"
+                                        :disabled="selectedOption !== null || usedWordIndices.includes(idx)"
+                                        :class="usedWordIndices.includes(idx) ? 'opacity-30 bg-slate-200 border-slate-200 text-slate-400 pointer-events-none scale-95' : 'bg-white border-2 border-slate-200 text-navy hover:border-orange-500 hover:bg-orange-50 hover:text-orange-600 shadow-xs cursor-pointer active:scale-95'"
+                                        class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm border transition-all">
+                                        <span x-text="w"></span>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Check Answer Button -->
+                        <div x-show="selectedOption === null" class="pt-1">
+                            <button type="button" @click="checkWordBankAnswer()"
+                                :disabled="selectedWords.length !== currentQuestion.wordBank.length"
+                                class="w-full btn-orange text-white py-3 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-sm shadow-md disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
+                                CEK JAWABAN
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- MATCHING PAIR ZUORDNUNG WIDGET (For Matching questions) -->
+                <template x-if="currentQuestion.matchingPairs">
+                    <div
+                        class="bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-3.5 sm:p-5 space-y-4 text-left shadow-xs">
+                        <!-- Top Counter Indicator -->
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-slate-600">Hubungkan Pasangan Kata:</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 font-extrabold text-xs rounded-full"
+                                x-text="Object.keys(connectedPairs).length + '/' + currentQuestion.matchingPairs.length + ' Verbunden'"></span>
+                        </div>
+
+                        <!-- 2-Column Matching Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <!-- Left Column: German Words -->
+                            <div class="space-y-2">
+                                <span
+                                    class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Bahasa
+                                    Jerman:</span>
+                                <template x-for="(pair, idx) in currentQuestion.matchingPairs" :key="idx">
+                                    <button type="button" @click="selectMatchingLeft(idx)"
+                                        :disabled="selectedOption !== null" :class="getLeftMatchingClass(pair.de, idx)"
+                                        class="w-full p-3 rounded-xl border-2 text-left font-bold text-xs sm:text-sm flex items-center justify-between transition-all cursor-pointer">
+                                        <span x-text="pair.de"></span>
+                                        <template x-if="connectedPairs[pair.de]">
+                                            <span
+                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">✅</span>
+                                        </template>
+                                    </button>
+                                </template>
+                            </div>
+
+                            <!-- Right Column: Indonesian Meanings -->
+                            <div class="space-y-2">
+                                <span
+                                    class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Bahasa
+                                    Indonesia:</span>
+                                <template x-for="(idText, idx) in matchingRightOptions" :key="idx">
+                                    <button type="button" @click="selectMatchingRight(idText)"
+                                        :disabled="selectedOption !== null" :class="getRightMatchingClass(idText)"
+                                        class="w-full p-3 rounded-xl border-2 text-left font-bold text-xs sm:text-sm flex items-center justify-between transition-all cursor-pointer">
+                                        <span x-text="idText"></span>
+                                        <template x-if="isRightOptionConnected(idText)">
+                                            <span
+                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">✅</span>
+                                        </template>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Action Buttons: Reset & Submit -->
+                        <div class="pt-2 flex items-center justify-between gap-3">
+                            <button type="button" @click="resetMatchingPairs()"
+                                :disabled="selectedOption !== null || Object.keys(connectedPairs).length === 0"
+                                class="px-4 py-2.5 bg-white border border-slate-300 text-slate-600 hover:text-red-500 hover:border-red-300 rounded-xl font-bold text-xs flex items-center gap-1.5 transition disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
+                                <span>🔄 Zurücksetzen</span>
+                            </button>
+
+                            <button type="button" @click="checkMatchingAnswer()" x-show="selectedOption === null"
+                                :disabled="Object.keys(connectedPairs).length !== currentQuestion.matchingPairs.length"
+                                class="btn-orange text-white px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-md disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
+                                Cek Jawaban / Weiter →
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- OPTIONS GRID (Fallback for non-wordbank and non-matching questions) -->
+                <template x-if="!currentQuestion.wordBank && !currentQuestion.matchingPairs">
+                    <div class="grid grid-cols-1 gap-2 sm:gap-3.5">
+                        <template x-for="(opt, idx) in currentQuestion.options" :key="idx">
+                            <button type="button" @click="selectOption(idx)" :disabled="selectedOption !== null"
+                                :class="getOptionClass(idx)"
+                                class="w-full p-3 sm:p-4.5 rounded-xl sm:rounded-2xl border-2 text-left font-bold transition-all flex items-center justify-between group cursor-pointer">
+                                <div class="flex items-center gap-2.5 sm:gap-3.5">
+                                    <span
+                                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border"
+                                        :class="getOptionBadgeClass(idx)" x-text="['A', 'B', 'C', 'D'][idx]"></span>
+                                    <span class="text-xs sm:text-base font-bold" x-text="opt"></span>
+                                </div>
+
+                                <!-- Indicator Icons -->
+                                <div x-show="selectedOption !== null">
+                                    <template x-if="idx === currentQuestion.correct">
+                                        <span
+                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">✓</span>
+                                    </template>
+                                    <template x-if="selectedOption === idx && idx !== currentQuestion.correct">
+                                        <span
+                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">✕</span>
+                                    </template>
+                                </div>
+                            </button>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- INSTANT GRAMMAR EXPLANATION POPUP -->
+                <div x-show="selectedOption !== null" x-transition
+                    :class="selectedOption === currentQuestion.correct ? 'bg-green-50 border-green-200 text-green-900' : 'bg-amber-50 border-amber-200 text-amber-900'"
+                    class="border-2 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-xs sm:text-sm space-y-1.5">
+                    <div class="flex items-center gap-2 font-extrabold text-sm sm:text-base">
+                        <span
+                            x-text="selectedOption === currentQuestion.correct ? 'Jawaban Tepat!' : 'Penjelasan Grammatik:'"></span>
+                    </div>
+                    <p class="leading-relaxed font-medium text-xs sm:text-sm" x-text="currentQuestion.explanation"></p>
+                </div>
+
+                <!-- NEXT / FINISH BUTTON -->
+                <div x-show="selectedOption !== null" class="pt-1 sm:pt-2 flex justify-end">
+                    <button type="button" @click="nextQuestion()"
+                        class="w-full sm:w-auto btn-orange text-white px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-base inline-flex items-center justify-center gap-2 shadow-md cursor-pointer">
+                        <span
+                            x-text="currentIndex < questions.length - 1 ? 'Soal Berikutnya →' : 'Lihat Hasil Placement Test'"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUIZ RESULTS STATE -->
+        <div x-show="gameState === 'results'" x-cloak class="space-y-4 sm:space-y-6" x-transition>
+            <div
+                class="bg-white border-2 border-orange-200 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-lg text-center space-y-3.5 sm:space-y-5">
+                <!-- Result Badge -->
+                <div
+                    class="inline-flex items-center gap-2 px-3.5 py-1 bg-orange-100 text-orange-700 font-extrabold text-[11px] sm:text-xs uppercase tracking-wider rounded-full">
+                    Hasil Placement Test Bahasa Jerman
+                </div>
+
+                <!-- Title & Recommendation -->
+                <div>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-navy leading-snug">
+                        Rekomendasi Kelas Kamu: <br>
+                        <span class="text-orange-500 text-2xl sm:text-3xl md:text-4xl block mt-0.5"
+                            x-text="'Level ' + recommendation.level"></span>
+                    </h2>
+                    <p class="text-gray-500 text-xs sm:text-base mt-1 max-w-xl mx-auto leading-relaxed font-medium"
+                        x-text="recommendation.subtitle"></p>
+                </div>
+
+                <!-- TOTAL SCORE CARDS -->
+                <div
+                    class="bg-gray-50 border border-gray-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 max-w-xl mx-auto space-y-3">
+                    <div class="flex items-center justify-between text-left">
+                        <div>
+                            <span
+                                class="text-[10px] sm:text-xs font-extrabold text-gray-400 uppercase tracking-wide block">Total
+                                Skor Keseluruhan</span>
+                            <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-navy"
+                                x-text="totalScore + ' / 20'"></span>
+                        </div>
+                        <div class="text-right">
+                            <span
+                                class="text-[10px] sm:text-xs font-extrabold text-gray-400 uppercase tracking-wide block">Persentase
+                                Penguasaan</span>
+                            <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-orange-500"
+                                x-text="Math.round((totalScore / 20) * 100) + '%'"></span>
+                        </div>
+                    </div>
+
+                    <!-- FERTIGKEITEN SKILL BREAKDOWN (Clean text, no emojis) -->
+                    <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-2.5 border-t border-gray-200">
+                        <div
+                            class="bg-blue-50/80 p-2 sm:p-3 rounded-lg sm:rounded-xl border border-blue-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-blue-700">Lesen</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="fertigkeitScores['Lesen'] + '/4'"></span>
+                        </div>
+                        <div
+                            class="bg-purple-50/80 p-2 sm:p-3 rounded-lg sm:rounded-xl border border-purple-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-purple-700">Schreiben</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="fertigkeitScores['Schreiben'] + '/12'"></span>
+                        </div>
+                        <div
+                            class="bg-amber-50/80 p-2 sm:p-3 rounded-lg sm:rounded-xl border border-amber-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-amber-700">Hören</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="fertigkeitScores['Hören'] + '/4'"></span>
+                        </div>
+                    </div>
+
+                    <!-- TIER BREAKDOWN GRID -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-2.5 border-t border-gray-200">
+                        <div class="bg-white p-2 sm:p-3 rounded-lg sm:rounded-xl border border-gray-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-gray-500">Sub-level A1.1</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="tierScores['A1.1'] + '/5'"></span>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg sm:rounded-xl border border-gray-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-gray-500">Sub-level A1.2</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="tierScores['A1.2'] + '/5'"></span>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg sm:rounded-xl border border-gray-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-gray-500">Sub-level A2.1</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="tierScores['A2.1'] + '/5'"></span>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg sm:rounded-xl border border-gray-200 text-center">
+                            <span class="block text-[10px] sm:text-xs font-bold text-gray-500">Sub-level A2.2</span>
+                            <span class="block text-base sm:text-lg font-extrabold text-navy"
+                                x-text="tierScores['A2.2'] + '/5'"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PERSONALIZED RECOMMENDATION ADVICE -->
+                <div
+                    class="bg-orange-50/70 border border-orange-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-left max-w-xl mx-auto space-y-1 sm:space-y-2">
+                    <h4 class="font-extrabold text-orange-700 text-xs sm:text-sm">Analisis & Saran Tutor Aksaradeutsch:
+                    </h4>
+                    <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-medium"
+                        x-text="recommendation.advice"></p>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div
+                    class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 max-w-xl mx-auto">
+                    <!-- WhatsApp Consultation -->
+                    <a :href="generateWhatsAppLink()" target="_blank" rel="noopener noreferrer"
+                        data-pixel-event="WhatsApp Placement Result" data-pixel-event-type="Contact"
+                        class="w-full sm:w-auto btn-whatsapp border-2 border-green-500 px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-base flex items-center justify-center gap-2 text-green-700 hover:bg-green-50 transition shadow-sm">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20.52 3.48A11.78 11.78 0 0012.15 0C5.62 0 .31 5.31.31 11.84c0 2.09.55 4.13 1.59 5.93L.21 24l6.38-1.67a11.8 11.8 0 005.56 1.42h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.16-1.23-6.13-3.48-8.43zM12.16 21.75h-.01a9.82 9.82 0 01-5.01-1.37l-.36-.22-3.79.99 1.01-3.69-.24-.38a9.8 9.8 0 01-1.5-5.24C2.26 6.41 6.72 2 12.16 2c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 7.01c0 5.43-4.42 9.84-9.88 9.84zm5.4-7.36c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z">
+                            </path>
+                        </svg>
+                        <span>Konsultasi Hasil via WhatsApp</span>
+                    </a>
+
+                    <!-- View Curriculum -->
+                    <a href="index.html#materi"
+                        class="w-full sm:w-auto btn-orange text-white px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-base flex items-center justify-center gap-2 shadow-md">
+                        <span>Lihat Kurikulum & Jadwal Level</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Retake Test Link -->
+                <div class="pt-2">
+                    <button type="button" @click="resetQuiz()"
+                        class="text-xs font-bold text-gray-400 hover:text-orange-500 transition underline cursor-pointer">
+                        Ulangi Placement Test Dari Awal
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 mt-16">
+        <div class="container mx-auto px-6 md:px-16 py-10">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-500">
+                <p>&copy; 2026 Aksaradeutsch.com. All rights reserved.</p>
+                <div class="flex items-center gap-4 font-semibold text-gray-400">
+                    <a href="index.html" class="hover:text-orange-500 transition">Beranda</a>
+                    <a href="placement-test" class="hover:text-orange-500 transition text-orange-500">Placement
+                        Test</a>
+                    <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
+                    <a href="syarat-ketentuan" class="hover:text-orange-500 transition">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Placement Test Logic -->
+    <script>
+        function placementTestApp() {
+            return {
+                gameState: 'intro', // 'intro', 'active', 'results'
+                currentIndex: 0,
+                selectedOption: null,
+                tierScores: {
+                    'A1.1': 0,
+                    'A1.2': 0,
+                    'A2.1': 0,
+                    'A2.2': 0
+                },
+                fertigkeitScores: {
+                    'Lesen': 0,
+                    'Schreiben': 0,
+                    'Hören': 0
+                },
+                totalScore: 0,
+                isPlayingAudio: false,
+                audioElement: null,
+                audioProgressPercent: 0,
+                audioProgressText: '00:00 / 00:00',
+                audioInterval: null,
+
+                // Word Bank State for Satzbau questions
+                selectedWords: [],
+                usedWordIndices: [],
+
+                addWordToAnswer(word, index) {
+                    if (this.selectedOption !== null) return;
+                    if (this.usedWordIndices.includes(index)) return;
+                    this.selectedWords.push(word);
+                    this.usedWordIndices.push(index);
+                },
+
+                removeWordFromAnswer(selectedIndex) {
+                    if (this.selectedOption !== null) return;
+                    const word = this.selectedWords[selectedIndex];
+                    this.selectedWords.splice(selectedIndex, 1);
+                    const removeIdx = this.usedWordIndices.findIndex(idx => this.currentQuestion.wordBank[idx] === word);
+                    if (removeIdx !== -1) {
+                        this.usedWordIndices.splice(removeIdx, 1);
+                    }
+                },
+
+                resetWordBank() {
+                    this.selectedWords = [];
+                    this.usedWordIndices = [];
+                },
+
+                checkWordBankAnswer() {
+                    if (this.selectedOption !== null) return;
+                    const builtSentence = this.selectedWords.join(' ').trim().toLowerCase();
+                    const mainCorrect = this.currentQuestion.options[this.currentQuestion.correct].trim().toLowerCase();
+                    const validList = (this.currentQuestion.validSentences || [mainCorrect]).map(s => s.trim().toLowerCase());
+
+                    if (validList.includes(builtSentence) || builtSentence === mainCorrect) {
+                        this.selectOption(this.currentQuestion.correct);
+                    } else {
+                        const wrongIdx = this.currentQuestion.correct === 0 ? 1 : 0;
+                        this.selectOption(wrongIdx);
+                    }
+                },
+
+                // Matching Pair State for Zuordnung questions
+                selectedLeftIndex: null,
+                connectedPairs: {},
+                matchingRightOptions: [
+                    'Mengundang',
+                    'Terisi / Terpakai',
+                    'Menghasilkan (gaji/uang)',
+                    'Total / Secara keseluruhan',
+                    'Rajin / Tekun'
+                ],
+
+                selectMatchingLeft(idx) {
+                    if (this.selectedOption !== null) return;
+                    this.selectedLeftIndex = idx;
+                },
+
+                selectMatchingRight(idText) {
+                    if (this.selectedOption !== null) return;
+                    if (this.selectedLeftIndex === null) return;
+
+                    const deWord = this.currentQuestion.matchingPairs[this.selectedLeftIndex].de;
+
+                    for (const k in this.connectedPairs) {
+                        if (this.connectedPairs[k] === idText) {
+                            delete this.connectedPairs[k];
+                        }
+                    }
+
+                    this.connectedPairs[deWord] = idText;
+                    this.selectedLeftIndex = null;
+                },
+
+                isRightOptionConnected(idText) {
+                    for (const k in this.connectedPairs) {
+                        if (this.connectedPairs[k] === idText) return true;
+                    }
+                    return false;
+                },
+
+                getLeftMatchingClass(deWord, idx) {
+                    if (this.selectedOption !== null) {
+                        const targetId = this.currentQuestion.matchingPairs.find(p => p.de === deWord)?.id;
+                        if (this.connectedPairs[deWord] === targetId) {
+                            return 'border-teal-500 bg-teal-50 text-teal-900 font-extrabold';
+                        }
+                        return 'border-red-500 bg-red-50 text-red-900';
+                    }
+                    if (this.selectedLeftIndex === idx) {
+                        return 'border-orange-500 bg-orange-50 text-orange-700 shadow-xs ring-2 ring-orange-200';
+                    }
+                    if (this.connectedPairs[deWord]) {
+                        return 'border-teal-500 bg-teal-50/80 text-teal-900 font-extrabold';
+                    }
+                    return 'border-slate-200 bg-white text-navy hover:border-orange-400';
+                },
+
+                getRightMatchingClass(idText) {
+                    if (this.selectedOption !== null) {
+                        let isCorrect = false;
+                        for (const p of this.currentQuestion.matchingPairs) {
+                            if (p.id === idText && this.connectedPairs[p.de] === idText) {
+                                isCorrect = true;
+                                break;
+                            }
+                        }
+                        if (isCorrect) {
+                            return 'border-teal-500 bg-teal-50 text-teal-900 font-extrabold';
+                        }
+                        return 'border-red-500 bg-red-50 text-red-900';
+                    }
+                    if (this.isRightOptionConnected(idText)) {
+                        return 'border-teal-500 bg-teal-50/80 text-teal-900 font-extrabold';
+                    }
+                    return 'border-slate-200 bg-white text-navy hover:border-orange-400';
+                },
+
+                resetMatchingPairs() {
+                    this.selectedLeftIndex = null;
+                    this.connectedPairs = {};
+                },
+
+                checkMatchingAnswer() {
+                    if (this.selectedOption !== null) return;
+                    let correctCount = 0;
+                    for (const p of this.currentQuestion.matchingPairs) {
+                        if (this.connectedPairs[p.de] === p.id) {
+                            correctCount++;
+                        }
+                    }
+
+                    if (correctCount === this.currentQuestion.matchingPairs.length) {
+                        this.selectOption(this.currentQuestion.correct);
+                    } else {
+                        const wrongIdx = this.currentQuestion.correct === 0 ? 1 : 0;
+                        this.selectOption(wrongIdx);
+                    }
+                },
+
+                stopAudioTimer() {
+                    if (this.audioInterval) {
+                        clearInterval(this.audioInterval);
+                        this.audioInterval = null;
+                    }
+                },
+
+                stopAllAudio() {
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                    if (this.audioElement) {
+                        this.audioElement.pause();
+                        this.audioElement = null;
+                    }
+                    this.stopAudioTimer();
+                    this.isPlayingAudio = false;
+                    this.audioProgressPercent = 0;
+                    this.audioProgressText = '00:00 / 00:00';
+                },
+
+                playAudioQuestion(q) {
+                    if (!q) return;
+
+                    if (this.isPlayingAudio) {
+                        this.stopAllAudio();
+                        return;
+                    }
+
+                    this.stopAllAudio();
+
+                    const formatTime = (sec) => {
+                        if (isNaN(sec) || !isFinite(sec)) return '00:00';
+                        const m = Math.floor(sec / 60);
+                        const s = Math.floor(sec % 60);
+                        return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+                    };
+
+                    if (q.audioUrl) {
+                        try {
+                            const audio = new Audio(encodeURI(q.audioUrl));
+                            this.audioElement = audio;
+                            this.isPlayingAudio = true;
+
+                            audio.addEventListener('loadedmetadata', () => {
+                                const dur = audio.duration || 0;
+                                this.audioProgressText = `00:00 / ${formatTime(dur)}`;
+                            });
+
+                            audio.addEventListener('timeupdate', () => {
+                                if (!this.audioElement) return;
+                                const cur = audio.currentTime || 0;
+                                const dur = audio.duration || 1;
+                                this.audioProgressPercent = Math.min(100, Math.round((cur / dur) * 100));
+                                this.audioProgressText = `${formatTime(cur)} / ${formatTime(dur)}`;
+                            });
+
+                            audio.addEventListener('ended', () => {
+                                this.isPlayingAudio = false;
+                                this.audioProgressPercent = 100;
+                            });
+
+                            audio.addEventListener('error', () => {
+                                this.isPlayingAudio = false;
+                                alert('Gagal memutar file audio MP3.');
+                            });
+
+                            audio.play().catch(err => {
+                                console.error('Audio playback error:', err);
+                                this.isPlayingAudio = false;
+                            });
+                        } catch (e) {
+                            console.error(e);
+                            this.isPlayingAudio = false;
+                        }
+
+                    } else if (q.audioText) {
+                        if ('speechSynthesis' in window) {
+                            const text = q.audioText;
+                            const totalSeconds = Math.max(3, Math.ceil(text.length / 10));
+                            const durationFormatted = '00:' + (totalSeconds < 10 ? '0' + totalSeconds : totalSeconds);
+
+                            const utterance = new SpeechSynthesisUtterance(text);
+                            utterance.lang = 'de-DE';
+                            utterance.rate = 0.85;
+
+                            this.isPlayingAudio = true;
+                            this.audioProgressPercent = 0;
+                            this.audioProgressText = `00:00 / ${durationFormatted}`;
+
+                            let elapsedMs = 0;
+                            const totalMs = totalSeconds * 1000;
+
+                            this.audioInterval = setInterval(() => {
+                                elapsedMs += 100;
+                                const curSec = Math.min(totalSeconds, Math.floor(elapsedMs / 1000));
+                                const curSecFormatted = '00:' + (curSec < 10 ? '0' + curSec : curSec);
+                                this.audioProgressPercent = Math.min(100, Math.round((elapsedMs / totalMs) * 100));
+                                this.audioProgressText = `${curSecFormatted} / ${durationFormatted}`;
+                            }, 100);
+
+                            const handleEnd = () => {
+                                this.stopAudioTimer();
+                                this.isPlayingAudio = false;
+                                this.audioProgressPercent = 100;
+                                this.audioProgressText = `${durationFormatted} / ${durationFormatted}`;
+                            };
+
+                            utterance.onend = handleEnd;
+                            utterance.onerror = handleEnd;
+                            window.speechSynthesis.speak(utterance);
+                        } else {
+                            alert('Perangkat/browser Anda tidak mendukung pemutar suara audio.');
+                        }
+                    }
+                },
+
+                selectOption(idx) {
+                    if (this.selectedOption !== null) return;
+                    this.selectedOption = idx;
+
+                    if (idx === this.currentQuestion.correct) {
+                        this.totalScore++;
+                        this.tierScores[this.currentQuestion.tier]++;
+                        this.fertigkeitScores[this.currentQuestion.skill]++;
+                    }
+                },
+
+                nextQuestion() {
+                    this.stopAllAudio();
+                    this.resetWordBank();
+
+                    if (this.currentIndex < this.questions.length - 1) {
+                        this.currentIndex++;
+                        this.selectedOption = null;
+                    } else {
+                        this.gameState = 'results';
+                        if (typeof fbq === 'function') {
+                            fbq('track', 'Lead', {
+                                content_name: 'Placement Test Complete',
+                                score: this.totalScore,
+                                recommended_level: this.recommendation.level
+                            });
+                        }
+                    }
+                },
+
+                // 20 Curated Questions across 4 CEFR Tiers and 3 Fertigkeiten (Lesen, Schreiben, Hören)
+                questions: [
+                    // --- TIER 1: A1.1 (Soal 1-5) ---
+                    {
+                        tier: 'A1.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 1',
+                        prompt: 'Ich _____ in Berlin. Und wo _____ du?',
+                        options: ['wohnt / wohne', 'wohnen / wohnst', 'wohne / wohnt', 'wohne / wohnst'],
+                        correct: 3,
+                        explanation: 'Subjek "ich" menggunakan bentuk konjugasi kata kerja akhiran "-e" (wohne), sedangkan subjek "du" menggunakan akhiran "-st" (wohnst).'
+                    },
+                    {
+                        tier: 'A1.1',
+                        skill: 'Hören',
+                        topic: 'Soal 2',
+                        audioText: 'Einundzwanzig plus achtundsiebzig ist?',
+                        prompt: 'Manakah angka bahasa Jerman yang tepat untuk hasil penjumlahan tersebut?',
+                        options: ['neunundachtzig', 'neunundsiebzig', 'neunundneunzig', 'achtundneunzig'],
+                        correct: 2,
+                        explanation: 'Einundzwanzig (21) + achtundsiebzig (78) = 99. Ejaan angka 99 dalam bahasa Jerman adalah "neunundneunzig".'
+                    },
+                    {
+                        tier: 'A1.1',
+                        skill: 'Lesen',
+                        topic: 'Soal 3',
+                        mapSvg: `<svg viewBox="0 0 400 210" class="w-full h-auto rounded-xl bg-slate-50 border border-slate-200 font-sans">
+                            <!-- Roads Layout -->
+                            <rect x="20" y="160" width="360" height="28" fill="#E2E8F0" rx="4"/>
+                            <rect x="180" y="35" width="28" height="153" fill="#E2E8F0" rx="4"/>
+                            <rect x="20" y="75" width="360" height="28" fill="#E2E8F0" rx="4"/>
+
+                            <!-- Buildings -->
+                            <rect x="230" y="115" width="130" height="35" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" rx="6"/>
+                            <text x="295" y="136" font-size="10" font-weight="800" fill="#1E293B" text-anchor="middle">Hotel Zentral</text>
+
+                            <rect x="230" y="20" width="130" height="42" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" rx="6"/>
+                            <text x="295" y="45" font-size="10" font-weight="800" fill="#1E293B" text-anchor="middle">Markt</text>
+
+                            <rect x="30" y="20" width="130" height="42" fill="#FEF3C7" stroke="#FDE047" stroke-width="2" rx="6"/>
+                            <text x="95" y="45" font-size="11" font-weight="800" fill="#92400E" text-anchor="middle">🚉 Bahnhof (Stasiun)</text>
+
+                            <!-- Start Position Marker -->
+                            <circle cx="194" cy="174" r="9" fill="#EF4444"/>
+                            <text x="194" y="177.5" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">S</text>
+                            <text x="194" y="199" font-size="10" font-weight="800" fill="#EF4444" text-anchor="middle">START</text>
+
+                            <!-- Red Navigation Path Arrow (geradeaus -> links -> geradeaus) -->
+                            <path d="M 194 174 L 194 89 L 95 89 L 95 68" fill="none" stroke="#EF4444" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 3"/>
+                            <polygon points="95,58 89,70 101,70" fill="#EF4444"/>
+
+                            <!-- Step Badges (1: geradeaus, 2: links, 3: geradeaus) -->
+                            <circle cx="194" cy="130" r="8" fill="#FF6B35"/>
+                            <text x="194" y="133" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">1</text>
+
+                            <circle cx="145" cy="89" r="8" fill="#FF6B35"/>
+                            <text x="145" y="92" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">2</text>
+
+                            <circle cx="95" cy="74" r="8" fill="#FF6B35"/>
+                            <text x="95" y="77" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">3</text>
+                        </svg>`,
+                        dialogue: '○ Entschuldigung, wo ist der Bahnhof?\n● Gehen Sie hier (1) _____ und dann (2) _____. Gehen Sie immer (3) _____. Da ist der Bahnhof.\n○ Vielen Dank.\n● Bitte!',
+                        prompt: 'Lengkapi dialog petunjuk arah (Wegbeschreibung) di atas. Manakah urutan kata yang tepat untuk melengkapi (1), (2), dan (3)?',
+                        options: ['links / geradeaus / rechts', 'geradeaus / rechts / links', 'rechts / links / geradeaus', 'geradeaus / links / rechts'],
+                        correct: 3,
+                        explanation: 'Berdasarkan peta petunjuk arah (Wegbeschreibung): Pertama jalan lurus di sini (1: geradeaus), lalu belok kiri (2: links), dan belok kanan (3: rechts) menuju stasiun (Bahnhof).'
+                    },
+                    {
+                        tier: 'A1.1',
+                        skill: 'Hören',
+                        topic: 'Soal 4',
+                        audioUrl: '45 Netzwerk neu A1.1 KB.mp3',
+                        prompt: 'Mario und Elena planen eine Grillparty. Hören Sie das Audio. Was muss Mario im Supermarkt kaufen?',
+                        options: ['Tomaten, Eier, Öl, Gurken', 'Eier, Tomaten, Käse, die Getränke', 'Eier, Tomaten, Gurken', 'Käse, Öl und die Getränke'],
+                        correct: 3,
+                        explanation: 'Berdasarkan percakapan audio Netzwerk neu A1.1, barang yang harus dibeli Mario di supermarket untuk Grillparty adalah Käse (keju), Öl (minyak), dan die Getränke (minuman).'
+                    },
+                    {
+                        tier: 'A1.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 5',
+                        dialogue: 'Anna: Haben wir noch (1) _____ Tomaten im Kühlschrank?\nMaria: Nein, wir haben nur noch (2) _____ Gurke. Aber ich kaufe gleich (3) _____ Cola und (4) _____ Tomaten.',
+                        prompt: 'Nominativ oder Akkusativ? Ergänzen Sie "ein" in der richtigen Form.',
+                        options: ['ein / einen / eine / ein', 'keine / eine / ein / keine', 'eine / einen / eine / eine', '- / eine / eine / -'],
+                        correct: 3,
+                        explanation: 'Kata "Tomaten" berbentuk jamak (Plural) sehingga tidak menggunakan artikel "ein" (-). Kata benda "Gurke" (die Gurke) dan "Cola" (die Cola) bergender feminim dan berposisi sebagai objek Akkusativ sehingga menggunakan artikel "eine".'
+                    },
+
+                    // --- TIER 2: A1.2 (Soal 6-10) ---
+                    {
+                        tier: 'A1.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 6',
+                        prompt: 'Was ist an den Tagen? Am 16.7. _____ Sofia Geburtstag.',
+                        options: ['ist', 'haben', 'hat', 'hatte'],
+                        correct: 2,
+                        explanation: 'Subjek "Sofia" (sie - orang ketiga tunggal) menggunakan bentuk konjugasi kata kerja "haben" yaitu "hat" (Geburtstag haben).'
+                    },
+                    {
+                        tier: 'A1.2',
+                        skill: 'Lesen',
+                        topic: 'Soal 7',
+                        dialogue: 'Mein Praktikum in Köln\nEndlich bin ich in Köln und mache hier ein Praktikum! Das Leben ist ganz anders als in Sevilla ... das Wetter auch!\n\nDie Firma ist klein, aber es ist immer viel los. Ich muss schon um halb acht da sein – das ist nicht leicht für mich! Um zehn trinken meine Kollegen und ich zusammen Kaffee oder ich mache allein Pause. Das ist auch schön!\n\nAm Vormittag haben wir oft Besprechungen. Die Besprechungen sind interessant und meistens auch lustig. Meine Chefin und meine Kollegen sind sehr nett und erklären viel, aber manchmal haben sie keine Zeit für meine Fragen. Ich muss oft fragen „Was bedeutet das?“ oder „Wie mache ich das?“.\n\nIch kann schon viel allein machen, aber leider noch nicht alles und ich mache auch Fehler.\n\nIch telefoniere mit Kunden oder arbeite am Computer. Die Computerarbeit finde ich nicht so toll, aber ich telefoniere gern.\n\nMeine Chefin nimmt mich auch zu Kunden mit. Das finde ich super und da lerne ich viel.\n\nAm Wochenende gehe ich zum Club Español. Dort sprechen wir Deutsch und Spanisch. Die Leute sind supernett. Wir sehen zusammen Filme, singen Lieder oder kochen zusammen.\n\nIch möchte noch ganz lang hier in Köln bleiben!',
+                        prompt: 'Warum muss sie oft fragen?',
+                        options: ['Weil sie ihre Kollegen nicht mag.', 'Weil sie vieles noch nicht versteht.', 'Weil niemand Deutsch spricht.', 'Sie ist sehr nett.'],
+                        correct: 1,
+                        explanation: 'Berdasarkan teks cerita "Mein Praktikum in Köln", ia sering bertanya ("Was bedeutet das?" / "Wie mache ich das?") karena masih ada hal yang belum dipahami dan belum bisa dikerjakan sendiri ("leider noch nicht alles").'
+                    },
+                    {
+                        tier: 'A1.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 8',
+                        wordBank: ['diese Tabletten', 'ich', 'nehmen', 'muss', 'dreimal am Tag'],
+                        validSentences: [
+                            'Ich muss dreimal am Tag diese Tabletten nehmen',
+                            'Ich muss diese Tabletten dreimal am Tag nehmen'
+                        ],
+                        prompt: 'Susun kata-kata acak berikut menjadi kalimat yang benar (beim Arzt):',
+                        options: ['Ich nehmen dreimal am Tag diese Tabletten muss.', 'Dreimal am Tag ich muss diese Tabletten nehmen.', 'Ich muss nehmen dreimal am Tag diese Tabletten.', 'Ich muss dreimal am Tag diese Tabletten nehmen.'],
+                        correct: 3,
+                        explanation: 'Struktur kalimat dengan kata kerja modal (müssen): Modalverb yang berkonjugasi (muss) berada di posisi kedua, sedangkan kata kerja utama berbentuk Infinitiv (nehmen) SELALU berada di paling akhir kalimat. Urutan "dreimal am Tag diese Tabletten" maupun "diese Tabletten dreimal am Tag" keduanya benar secara gramatikal.'
+                    },
+                    {
+                        tier: 'A1.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 9',
+                        prompt: 'Ordnen Sie die deutschen Wörter den passenden indonesischen Bedeutungen zu.',
+                        matchingPairs: [
+                            { de: 'verdienen', id: 'Menghasilkan (gaji/uang)' },
+                            { de: 'einladen', id: 'Mengundang' },
+                            { de: 'fleißig', id: 'Rajin / Tekun' },
+                            { de: 'besetzt', id: 'Terisi / Terpakai' },
+                            { de: 'insgesamt', id: 'Total / Secara keseluruhan' }
+                        ],
+                        options: ['Semua 5 pasangan kata terhubung dengan tepat', 'Ada pasangan kata yang salah terhubung'],
+                        correct: 0,
+                        explanation: 'Pasangan kosakata A1.2:\n• verdienen = Menghasilkan (gaji/uang)\n• einladen = Mengundang\n• fleißig = Rajin / Tekun\n• besetzt = Terisi / Terpakai\n• insgesamt = Total / Secara keseluruhan'
+                    },
+                    {
+                        tier: 'A1.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 10',
+                        prompt: 'Ich _____ heute leider nicht kommen, _____ ich muss arbeiten.',
+                        options: ['kann / weil', 'können / dass', 'kann / denn', 'könnt / deshalb'],
+                        correct: 2,
+                        explanation: 'Subjek "ich" menggunakan bentuk konjugasi Modalverb "kann". Konjungsi "denn" (karena) digunakan untuk menghubungkan dua Hauptsatz tanpa mengubah struktur urutan kata (subjek "ich" tetap langsung setelah "denn").'
+                    },
+
+                    // --- TIER 3: A2.1 (Soal 11-15) ---
+                    {
+                        tier: 'A2.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 11',
+                        prompt: 'Ich fahre morgen mit _____ Zug zu _____ Tante.',
+                        options: ['dem / meiner', 'den / meine', 'der / meinem', 'das / meine'],
+                        correct: 0,
+                        explanation: 'Preposisi "mit" dan "zu" selalu membutuhkan Dativ. Der Zug -> dem Zug, dan meine Tante -> meiner Tante.'
+                    },
+                    {
+                        tier: 'A2.1',
+                        skill: 'Hören',
+                        topic: 'Soal 12',
+                        audioText: 'Gestern bin ich mit dem Bus nach Frankfurt gefahren und habe meine Großeltern besucht.',
+                        prompt: 'Womit ist die Person nach Frankfurt gefahren?',
+                        options: ['Mit dem Bus', 'Mit dem Zug', 'Mit dem Auto', 'Mit dem Fahrrad'],
+                        correct: 0,
+                        explanation: 'Audio menyebutkan "mit dem Bus nach Frankfurt gefahren".'
+                    },
+                    {
+                        tier: 'A2.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 13',
+                        dialogue: 'Ergänzen Sie die Sätze. Wo stehen die Verben?',
+                        prompt: 'Ich _____ nervös, _____ ich eine Prüfung _____.',
+                        options: ['bin / denn / habe', 'bin / dass / gehabt', 'bin / wenn / habe', 'bin / weil / ist'],
+                        correct: 2,
+                        explanation: 'Subjek "ich" menggunakan bentuk konjugasi "bin" (sein) dan "habe" (haben). Konjungsi subordinatif "wenn" (jika/apabila) memicu Nebensatz di mana kata kerja berkonjugasi (habe) SELALU berada di paling akhir kalimat.'
+                    },
+                    {
+                        tier: 'A2.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 14',
+                        prompt: 'Gestern _____ wir nach Berlin _____.',
+                        options: ['sind ... gefahren', 'haben ... gefahren', 'waren ... gefahrt', 'haben ... gefahrt'],
+                        correct: 0,
+                        explanation: 'Fahren adalah kata kerja perpindahan lokasi (Ortswechsel), sehingga bentuk Perfekt-nya menggunakan kata kerja bantu (Hilfsverb) "sein" (sind + gefahren).'
+                    },
+                    {
+                        tier: 'A2.1',
+                        skill: 'Schreiben',
+                        topic: 'Soal 15',
+                        prompt: 'Deutsch ist schwer, aber Grammatik ist noch _____ als Wortschatz. Am _____ finde ich Aussprache.',
+                        options: ['schwer / schwerer', 'am schwersten / schwerer', 'schwerer / schwersten', 'mehr schwer / schwerst'],
+                        correct: 2,
+                        explanation: 'Komparativ menggunakan akhiran -er (schwerer + als). Superlativ menggunakan am + -sten (am schwersten).'
+                    },
+
+                    // --- TIER 4: A2.2 (Soal 16-20 Terbaru & Lebih Menantang) ---
+                    {
+                        tier: 'A2.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 16',
+                        prompt: 'Er war krank. _____ er hohes Fieber hatte, _____ er gestern bis 20 Uhr arbeiten.',
+                        options: [
+                            'Weil / muss',
+                            'Obwohl / musste',
+                            'Dass / mussten',
+                            'Wenn / müsste'
+                        ],
+                        correct: 1,
+                        explanation: 'Kata hubung pertentangan "obwohl" (meskipun) memicu Nebensatz (verb "hatte" di paling akhir), dan subjek "er" membutuhkan kata kerja modal bentuk Präteritum ("musste").'
+                    },
+                    {
+                        tier: 'A2.2',
+                        skill: 'Hören',
+                        topic: 'Soal 17',
+                        audioText: 'Eigentlich wollte ich am Wochenende nach Berlin fahren, aber mein Zug hatte Verspätung und der Flug war zu teuer. Deshalb bin ich zu Hause geblieben und habe den ganzen Tag Deutsch gelernt.',
+                        prompt: 'Warum ist die Person am Wochenende zu Hause geblieben?',
+                        options: [
+                            'Weil sie lieber zu Hause in Berlin Deutsch lernen wollte.',
+                            'Weil sie keinen Urlaub bekommen hat.',
+                            'Weil der Zug Verspätung hatte und der Flug zu teuer war.',
+                            'Weil sie den Flug nach München verpasst hat.'
+                        ],
+                        correct: 2,
+                        explanation: 'Audio menguji penalaran alasan: Orang tersebut batal pergi karena kereta terlambat dan tiket pesawat terlalu mahal, sehingga memutuskan tetap di rumah.'
+                    },
+                    {
+                        tier: 'A2.2',
+                        skill: 'Lesen',
+                        topic: 'Soal 18',
+                        prompt: 'Manakah kalimat dengan struktur Relativsatz (Kalimat Relatif) yang 100% BENAR?',
+                        options: [
+                            'Das ist der Deutschkurs, der ich seit zwei Monaten besuche.',
+                            'Das ist der Deutschkurs, den besuche ich seit zwei Monaten.',
+                            'Das ist der Deutschkurs, wo ich besuche seit zwei Monaten.',
+                            'Das ist der Deutschkurs, den ich seit zwei Monaten besuche.'
+                        ],
+                        correct: 3,
+                        explanation: 'Kata ganti relatif untuk "der Kurs" sebagai objek Akkusativ adalah "den", dan kata kerja terkonjugasi ("besuche") wajib berada di posisi paling akhir Nebensatz.'
+                    },
+                    {
+                        tier: 'A2.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 19',
+                        prompt: 'Ich bin so müde. Ich _____ jetzt am liebsten im Urlaub in Deutschland und _____ keinen Stress!',
+                        options: [
+                            'wäre / hätte',
+                            'bin / habe',
+                            'war / hatte',
+                            'werde / habe'
+                        ],
+                        correct: 0,
+                        explanation: 'Pengandaian/keinginan irreal (Konjunktiv II) untuk subjek "ich" menggunakan bentuk "wäre" (seandainya berada) dan "hätte" (seandainya memiliki).'
+                    },
+                    {
+                        tier: 'A2.2',
+                        skill: 'Schreiben',
+                        topic: 'Soal 20',
+                        prompt: 'Wir sprechen oft _____ den Deutschkurs und ich nehme regelmäßig _____ den Übungen teil.',
+                        options: [
+                            'von / mit',
+                            'für / in',
+                            'über / an',
+                            'auf / bei'
+                        ],
+                        correct: 2,
+                        explanation: 'Pasangan preposisi kata kerja A2.2 yang tepat: "sprechen über" (+ Akkusativ) = berbicara tentang, dan "teilnehmen an" (+ Dativ) = berpartisipasi dalam.'
+                    }
+                ],
+
+                get currentQuestion() {
+                    return this.questions[this.currentIndex];
+                },
+
+                get recommendation() {
+                    const a11 = this.tierScores['A1.1'];
+                    const a12 = this.tierScores['A1.2'];
+                    const a21 = this.tierScores['A2.1'];
+                    const a22 = this.tierScores['A2.2'];
+
+                    if (a11 <= 3) {
+                        return {
+                            level: 'A1.1',
+                            subtitle: 'Cocok untuk membangun fondasi bahasa Jerman dari NOL secara terstruktur dan santai.',
+                            advice: 'Berdasarkan hasil tes, kamu sangat disarankan untuk masuk ke Level A1.1. Level ini akan membimbingmu dari abjad, sapaan dasar, angka, hingga pembentukan kalimat sederhana tanpa tekanan!'
+                        };
+                    } else if (a11 >= 4 && a12 <= 3) {
+                        return {
+                            level: 'A1.2',
+                            subtitle: 'Kamu sudah paham dasar sapaan dan angka, siap untuk memperdalam tata bahasa A1 lanjutan!',
+                            advice: 'Hasil tes menunjukkan kamu sudah menguasai fondasi awal A1.1. Kamu siap masuk ke Level A1.2 untuk mempelajari Akkusativ, kata kerja modal (können/müssen), kata kerja terpisah, dan percakapan harian.'
+                        };
+                    } else if (a12 >= 4 && a21 <= 3) {
+                        return {
+                            level: 'A2.1',
+                            subtitle: 'Penguasaan tingkat A1 kamu sangat solid! Waktunya naik tingkat ke jenjang A2.1.',
+                            advice: 'Hebat! Pemahaman A1 kamu sudah matang. Kamu direkomendasikan masuk ke Level A2.1 untuk menguasai kasus Dativ, kalimat masa lalu Perfekt, dan percakapan situasi sehari-hari yang lebih kompleks.'
+                        };
+                    } else {
+                        return {
+                            level: 'A2.2',
+                            subtitle: 'Kemampuan bahasa Jerman kamu sudah sangat baik! Siap menuntaskan jenjang A2.2.',
+                            advice: 'Luar biasa! Kamu berhasil menjawab soal-soal tingkat menengah dengan sangat baik. Kamu sangat cocok mengambil Level A2.2 untuk menguasai anak kalimat (Nebensätze), Wechselpräpositionen, dan percakapan fluida.'
+                        };
+                    }
+                },
+
+                startQuiz() {
+                    this.gameState = 'active';
+                    this.currentIndex = 0;
+                    this.selectedOption = null;
+                    this.totalScore = 0;
+                    this.tierScores = { 'A1.1': 0, 'A1.2': 0, 'A2.1': 0, 'A2.2': 0 };
+                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'Hören': 0 };
+                    this.isPlayingAudio = false;
+                    this.audioProgressPercent = 0;
+                    this.audioProgressText = '00:00 / 00:05';
+                    this.stopAudioTimer();
+                    this.resetWordBank();
+                },
+
+                resetQuiz() {
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                    this.stopAudioTimer();
+                    this.isPlayingAudio = false;
+                    this.audioProgressPercent = 0;
+                    this.audioProgressText = '00:00 / 00:05';
+                    this.gameState = 'intro';
+                    this.currentIndex = 0;
+                    this.selectedOption = null;
+                    this.totalScore = 0;
+                    this.tierScores = { 'A1.1': 0, 'A1.2': 0, 'A2.1': 0, 'A2.2': 0 };
+                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'Hören': 0 };
+                    this.resetWordBank();
+                },
+
+                getOptionClass(idx) {
+                    if (this.selectedOption === null) {
+                        return 'border-gray-200 bg-white text-navy hover:border-orange-500 hover:bg-orange-50/60 hover:shadow-xs active:scale-[0.99]';
+                    }
+                    if (idx === this.currentQuestion.correct) {
+                        return 'border-green-500 bg-green-50 text-green-900 shadow-sm';
+                    }
+                    if (this.selectedOption === idx) {
+                        return 'border-red-500 bg-red-50 text-red-900';
+                    }
+                    return 'border-gray-200 bg-gray-50 text-gray-400 opacity-60';
+                },
+
+                getOptionBadgeClass(idx) {
+                    if (this.selectedOption === null) {
+                        return 'border-gray-300 bg-gray-100 text-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500 group-hover:text-white';
+                    }
+                    if (idx === this.currentQuestion.correct) {
+                        return 'border-green-500 bg-green-500 text-white';
+                    }
+                    if (this.selectedOption === idx) {
+                        return 'border-red-500 bg-red-500 text-white';
+                    }
+                    return 'border-gray-200 bg-gray-100 text-gray-400';
+                },
+
+                generateWhatsAppLink() {
+                    const text = `Halo Aksaradeutsch! Saya baru saja menyelesaikan Placement Test di website.
+
+*Hasil Placement Test Saya:*
+- Total Skor: ${this.totalScore} / 20 (${Math.round((this.totalScore / 20) * 100)}%)
+
+*Rincian Sub-level:*
+  • A1.1: ${this.tierScores['A1.1']}/5
+  • A1.2: ${this.tierScores['A1.2']}/5
+  • A2.1: ${this.tierScores['A2.1']}/5
+  • A2.2: ${this.tierScores['A2.2']}/5
+
+*Rincian 3 Fertigkeiten:*
+  • 📖 Lesen: ${this.fertigkeitScores['Lesen']}/4
+  • ✍️ Schreiben: ${this.fertigkeitScores['Schreiben']}/12
+  • 🎧 Hören: ${this.fertigkeitScores['Hören']}/4
+
+*Rekomendasi Level:* Level ${this.recommendation.level}
+
+Saya mau tanya-tanya dan konsultasi lebih lanjut mengenai jadwal dan pendaftaran kelas Level ${this.recommendation.level}. Terima kasih!`;
+
+                    return `https://wa.me/6281959896825?text=${encodeURIComponent(text)}`;
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

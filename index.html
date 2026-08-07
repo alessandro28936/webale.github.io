@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -499,11 +499,11 @@
                 class="h-11 sm:h-14 md:h-[72px] w-auto max-w-[240px] sm:max-w-none object-contain">
         </a>
 
-        <div class="hidden lg:flex gap-10 font-semibold text-gray-500">
+        <div class="hidden lg:flex gap-8 font-semibold text-gray-500">
             <a href="#materi" data-pixel-event="Program Belajar" data-pixel-event-type="ViewContent"
                 class="hover:text-orange-500 transition">Program Belajar</a>
-            <a href="#materi" data-pixel-event="Materi" data-pixel-event-type="ViewContent"
-                class="hover:text-orange-500 transition">Materi</a>
+            <a href="placement-test" data-pixel-event="Placement Test Nav" data-pixel-event-type="ViewContent"
+                class="hover:text-orange-500 transition">Placement Test</a>
             <a href="#faq" class="hover:text-orange-500 transition">FAQ</a>
             <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
         </div>
@@ -536,8 +536,8 @@
             <div class="grid gap-2 font-bold text-navy">
                 <a @click="mobileMenuOpen = false" href="#materi"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Program Belajar</a>
-                <a @click="mobileMenuOpen = false" href="#materi"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Materi</a>
+                <a @click="mobileMenuOpen = false" href="placement-test"
+                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Placement Test</a>
                 <a @click="mobileMenuOpen = false" href="#faq"
                     class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">FAQ</a>
                 <a @click="mobileMenuOpen = false" href="tentang-kami"
@@ -1166,6 +1166,7 @@
                     </div>
                 </button>
             </div>
+
 
 
             <!-- MATERIAL CONTENT (appears after level is selected) -->
@@ -2497,7 +2498,8 @@
                     <h3 class="font-extrabold text-navy mb-5">Navigasi</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
                         <a href="#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-                        <a href="#materi" class="hover:text-orange-500 transition">Materi</a>
+                        <a href="placement-test"
+                            class="hover:text-orange-500 transition text-orange-600 font-bold">Placement Test</a>
                         <a href="#faq" class="hover:text-orange-500 transition">FAQ</a>
                         <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
                     </div>
@@ -2506,6 +2508,7 @@
                 <div>
                     <h3 class="font-extrabold text-navy mb-5">Bantuan</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
+                        <a href="placement-test" class="hover:text-orange-500 transition">Tes Penentuan Level</a>
                         <a href="#faq" class="hover:text-orange-500 transition">FAQ</a>
                         <a href="#feedback" class="hover:text-orange-500 transition">Feedback Learner</a>
                         <a href="#biaya" class="hover:text-orange-500 transition">Gabung Kelas</a>
