@@ -428,7 +428,7 @@
                         <!-- Check Answer Button -->
                         <div x-show="selectedOption === null" class="pt-1">
                             <button type="button" @click="checkWordBankAnswer()"
-                                :disabled="selectedWords.length !== currentQuestion.wordBank.length"
+                                :disabled="!currentQuestion.wordBank || selectedWords.length !== currentQuestion.wordBank.length"
                                 class="w-full btn-orange text-white py-3 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-sm shadow-md disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
                                 CEK JAWABAN
                             </button>
@@ -442,9 +442,11 @@
                         class="bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-3.5 sm:p-5 space-y-4 text-left shadow-xs">
                         <!-- Top Counter Indicator -->
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-extrabold text-slate-600">Hubungkan Pasangan Kata:</span>
-                            <span class="px-3 py-1 bg-orange-100 text-orange-700 font-extrabold text-xs rounded-full"
-                                x-text="Object.keys(connectedPairs).length + '/' + currentQuestion.matchingPairs.length + ' Verbunden'"></span>
+                            <span class="text-xs sm:text-sm font-extrabold text-teal-700">Jodohkan Pasangan Kata
+                                Berikut:</span>
+                            <span
+                                class="text-[11px] sm:text-xs font-bold text-teal-600 bg-teal-100 px-2.5 py-1 rounded-full"
+                                x-text="Object.keys(connectedPairs).length + '/' + (currentQuestion.matchingPairs ? currentQuestion.matchingPairs.length : 0) + ' Verbunden'"></span>
                         </div>
 
                         <!-- 2-Column Matching Grid -->
@@ -495,7 +497,7 @@
                             </button>
 
                             <button type="button" @click="checkMatchingAnswer()" x-show="selectedOption === null"
-                                :disabled="Object.keys(connectedPairs).length !== currentQuestion.matchingPairs.length"
+                                :disabled="!currentQuestion.matchingPairs || Object.keys(connectedPairs).length !== currentQuestion.matchingPairs.length"
                                 class="btn-orange text-white px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-md disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
                                 Cek Jawaban / Weiter →
                             </button>
