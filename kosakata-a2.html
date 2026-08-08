@@ -1,0 +1,1465 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Kumpulan 1000 Kosakata A2 (Kapitel 1 - 12) - Aksaradeutsch</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF6B35',
+                            'orange-hover': '#E85A2A',
+                            navy: '#101828',
+                            cream: '#FFFDF9',
+                            teal: '#0D9488'
+                        }
+                    },
+                    fontFamily: {
+                        nunito: ['Nunito', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFDF9;
+            color: #101828;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Print Stylesheet for PDF Export */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.5cm 1cm 2cm 1cm;
+            }
+
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 10pt;
+            }
+
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                page-break-inside: auto;
+            }
+
+            tr {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tbody {
+                display: table-row-group !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            .print-footer-watermark {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-family: 'Nunito', sans-serif;
+                font-size: 9pt;
+                font-weight: 800;
+                color: #94a3b8 !important;
+                letter-spacing: 0.15em;
+                border-top: 1px solid #e2e8f0;
+                padding-top: 4px;
+                background: #ffffff;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        .table-scroll-shell {
+            position: relative;
+        }
+
+        .table-scroll-shell::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 2.75rem;
+            pointer-events: none;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0));
+        }
+
+        @media (min-width: 640px) {
+            .table-scroll-shell::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900"
+    x-data="vocabApp()">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div
+        class="bg-gradient-to-r from-[#111827] via-[#24324a] to-[#8b6f2f] text-[#f7e7b0] text-xs sm:text-sm py-2 px-4 text-center font-inter font-semibold tracking-wide no-print shadow-sm">
+        <span>✨ Eksklusif Peserta Aksaradeutsch • Modul 1000 Kosakata Lengkap A2 (Kapitel 1 - 12)</span>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-white border-b border-orange-100/80 sticky top-0 z-40 shadow-sm backdrop-blur-md bg-white/90">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <img src="Icon png.png" alt="Aksaradeutsch Icon"
+                    class="w-9 h-9 sm:w-12 sm:h-12 object-contain rounded-xl shadow-sm flex-shrink-0">
+                <div class="min-w-0">
+                    <h1 class="text-xl sm:text-3xl font-black tracking-tight text-brand-navy leading-none truncate">
+                        aksaradeutsch
+                    </h1>
+                </div>
+            </div>
+
+            <!-- PDF PRINT BUTTON -->
+            <button @click="window.print()"
+                class="no-print flex-shrink-0 inline-flex items-center gap-1.5 bg-[#111827] hover:bg-[#24324a] text-[#f7e7b0] text-xs sm:text-sm font-semibold px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl transition-all shadow-md shadow-slate-300/60 hover:shadow-slate-400/70 hover:-translate-y-0.5 active:translate-y-0">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+                    </path>
+                </svg>
+                <span>Cetak / PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENT HERO SECTION -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+        <!-- HEADER TITLE & COPYRIGHT NOTICE -->
+        <div
+            class="mb-6 sm:mb-8 text-center sm:text-left bg-gradient-to-br from-orange-50/70 via-white to-amber-50/50 p-6 sm:p-8 rounded-3xl border border-orange-100 shadow-sm relative overflow-hidden">
+            <div
+                class="absolute -right-8 -bottom-8 w-40 h-40 bg-orange-200/30 rounded-full blur-2xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10">
+                <span
+                    class="inline-flex px-3.5 py-1 bg-orange-100 text-orange-800 font-inter font-bold text-xs rounded-full uppercase tracking-wider mb-3">
+                    Modul Belajar A2 (Netzwerk Neu A2)
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-brand-navy mb-2 tracking-tight">
+                    Kumpulan Kosakata A2 (Kapitel 1 – 12)
+                </h2>
+                <p class="text-sm sm:text-base text-gray-600 font-poppins max-w-3xl leading-relaxed">
+                    Daftar kosakata resmi bahasa Jerman level A2 (berdasarkan silabus <em>Netzwerk Neu A2</em>)
+                    terstruktur lengkap dengan terjemahan bahasa Indonesia, indikator kode warna artikel Grammatik
+                    (der/die/das), serta pengucapan audio.
+                </p>
+                <div
+                    class="mt-4 pt-4 border-t border-orange-100 flex flex-wrap items-center justify-between gap-2 text-xs font-inter text-gray-500">
+                    <span class="font-semibold text-brand-navy">© Aksaradeutsch. Dilarang memperjualbelikan tanpa
+                        izin.</span>
+                    <span class="text-orange-600 font-medium">Total Kosakata Tampil: <strong
+                            x-text="filteredVocab.length">0</strong> kata</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH & FILTER BAR (STICKY ON MOBILE) -->
+        <div class="no-print bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-sm mb-6 space-y-4">
+
+            <!-- SEARCH INPUT & VIEW TOGGLE -->
+            <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+                <!-- SEARCH BOX -->
+                <div
+                    class="relative w-full sm:w-96 rounded-xl bg-[#f8fafc] shadow-md shadow-slate-200/80">
+                    <div class="rounded-xl px-2.5 py-2">
+                        <label for="vocab-search"
+                            class="block mb-1.5 text-[11px] font-inter font-black uppercase tracking-wider text-[#8b6f2f]">
+                            Cari Kosakata
+                        </label>
+                        <div class="relative">
+                            <input id="vocab-search" type="text" x-model="searchQuery"
+                                placeholder="Ketik kata Jerman atau Indonesia..."
+                                class="w-full pl-10 pr-4 py-2.5 bg-[#f8fafc] border border-slate-200 rounded-xl text-sm font-medium text-brand-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#f7e7b0]/80 focus:border-[#8b6f2f] focus:bg-white transition-all">
+                            <span
+                                class="absolute left-3 top-1/2 -translate-y-1/2 inline-flex h-5 w-5 items-center justify-center rounded-md bg-[#111827] text-[#f7e7b0] shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW MODE TOGGLE -->
+                <div class="flex items-center gap-2 bg-gray-100 p-1 rounded-xl w-full sm:w-auto justify-center">
+                    <button @click="viewMode = 'table'"
+                        :class="viewMode === 'table' ? 'bg-white text-brand-navy shadow-sm' : 'text-gray-500 hover:text-gray-800'"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5">
+                        <span>📋 Tabel</span>
+                    </button>
+                    <button @click="viewMode = 'card'"
+                        :class="viewMode === 'card' ? 'bg-white text-brand-navy shadow-sm' : 'text-gray-500 hover:text-gray-800'"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5">
+                        <span>🗂️ Kartu</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KAPITEL SCROLLABLE PILLS -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-t border-gray-100 pt-3">
+                <button @click="selectedKapitel = 'all'"
+                    :class="selectedKapitel === 'all' ? 'bg-brand-navy text-white font-bold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                    class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all">
+                    Semua Kapitel
+                </button>
+                <template x-for="k in 12" :key="k">
+                    <button @click="selectedKapitel = k"
+                        :class="selectedKapitel === k ? 'bg-brand-orange text-white font-bold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                        class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all"
+                        x-text="'Kapitel ' + k">
+                    </button>
+                </template>
+            </div>
+
+            <!-- CATEGORY & ARTICLE FILTERS -->
+            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-3 text-xs">
+
+                <!-- TYPE FILTER -->
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-bold text-gray-400 uppercase tracking-wider mr-1">Kategori:</span>
+                    <button @click="selectedType = 'all'"
+                        :class="selectedType === 'all' ? 'bg-gray-800 text-white font-semibold' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+                        class="px-2.5 py-1 rounded-lg transition-all">Semua</button>
+                    <button @click="selectedType = 'nomen'"
+                        :class="selectedType === 'nomen' ? 'bg-blue-600 text-white font-semibold' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'"
+                        class="px-2.5 py-1 rounded-lg transition-all">Nomen (Kata Benda)</button>
+                    <button @click="selectedType = 'verben'"
+                        :class="selectedType === 'verben' ? 'bg-purple-600 text-white font-semibold' : 'bg-purple-50 text-purple-700 hover:bg-purple-100'"
+                        class="px-2.5 py-1 rounded-lg transition-all">Verben (Kata Kerja)</button>
+                    <button @click="selectedType = 'andere'"
+                        :class="selectedType === 'andere' ? 'bg-emerald-600 text-white font-semibold' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'"
+                        class="px-2.5 py-1 rounded-lg transition-all">Andere Wörter</button>
+                </div>
+
+                <!-- ARTICLE FILTER (FOR NOMEN) -->
+                <div class="flex items-center gap-1 bg-amber-50/60 p-1 rounded-lg border border-amber-100"
+                    x-show="selectedType === 'all' || selectedType === 'nomen'">
+                    <span class="font-bold text-amber-800 px-1 text-[11px]">Artikel:</span>
+                    <button @click="selectedArticle = 'all'"
+                        :class="selectedArticle === 'all' ? 'bg-amber-700 text-white font-bold' : 'text-amber-800 hover:bg-amber-100'"
+                        class="px-2 py-0.5 rounded text-[11px]">Semua</button>
+                    <button @click="selectedArticle = 'der'"
+                        :class="selectedArticle === 'der' ? 'bg-blue-600 text-white font-bold' : 'text-blue-700 hover:bg-blue-100'"
+                        class="px-2 py-0.5 rounded text-[11px]">der</button>
+                    <button @click="selectedArticle = 'die'"
+                        :class="selectedArticle === 'die' ? 'bg-rose-600 text-white font-bold' : 'text-rose-700 hover:bg-rose-100'"
+                        class="px-2 py-0.5 rounded text-[11px]">die</button>
+                    <button @click="selectedArticle = 'das'"
+                        :class="selectedArticle === 'das' ? 'bg-emerald-600 text-white font-bold' : 'text-emerald-700 hover:bg-emerald-100'"
+                        class="px-2 py-0.5 rounded text-[11px]">das</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE VIEW MODE -->
+        <div x-show="viewMode === 'table'"
+            class="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden mb-8">
+            <div
+                class="no-print flex items-center justify-between gap-3 bg-[#f8fafc] border-b border-gray-200 px-4 py-2.5 text-[11px] sm:hidden font-inter font-semibold text-slate-600">
+                <span>Geser tabel ke kanan untuk melihat arti dan audio.</span>
+                <span class="inline-flex items-center gap-1 text-[#8b6f2f] whitespace-nowrap">Geser -></span>
+            </div>
+            <div class="table-scroll-shell overflow-x-auto">
+                <table class="w-full min-w-[680px] text-left border-collapse">
+                    <thead>
+                        <tr
+                            class="bg-gray-50 border-b border-gray-200 text-xs font-inter font-bold text-gray-500 uppercase tracking-wider">
+                            <th class="py-3.5 px-3 sm:px-4 w-16 sm:w-20 text-center">Kapitel</th>
+                            <th class="py-3.5 px-3 sm:px-4 w-24 sm:w-28">Kategori</th>
+                            <th class="py-3.5 px-3 sm:px-4 min-w-[170px]">Bahasa Jerman (Deutsch)</th>
+                            <th class="py-3.5 px-3 sm:px-4 w-16 text-center no-print">Audio</th>
+                            <th class="py-3.5 px-3 sm:px-4 min-w-[220px]">Bahasa Indonesia</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-sm font-poppins">
+                        <template x-for="(item, index) in filteredVocab" :key="index">
+                            <tr class="hover:bg-orange-50/30 transition-colors">
+                                <td class="py-3 px-3 sm:px-4 text-center font-bold text-gray-400 text-xs" x-text="item.ch"></td>
+                                <td class="py-3 px-3 sm:px-4 font-inter text-xs">
+                                    <span x-show="item.type === 'nomen'"
+                                        class="inline-block px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider"
+                                        :class="{
+                                              'bg-blue-100 text-blue-700 border border-blue-200': item.art === 'der',
+                                              'bg-rose-100 text-rose-700 border border-rose-200': item.art === 'die',
+                                              'bg-emerald-100 text-emerald-700 border border-emerald-200': item.art === 'das',
+                                              'bg-slate-100 text-slate-700 border border-slate-200': !['der','die','das'].includes(item.art)
+                                          }" x-text="item.art ? item.art : 'nomen'">
+                                    </span>
+                                    <span x-show="item.type === 'verben'"
+                                        class="inline-block bg-purple-100 text-purple-700 border border-purple-200 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider">Verb</span>
+                                    <span x-show="item.type === 'andere'"
+                                        class="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider">Andere</span>
+                                </td>
+                                <td class="py-3 px-3 sm:px-4 font-semibold text-brand-navy" x-text="item.de"></td>
+                                <td class="py-3 px-3 sm:px-4 text-center no-print">
+                                    <button @click="speak(item.de)"
+                                        class="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-orange-100 rounded-lg transition-all"
+                                        title="Dengarkan pengucapan">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="py-3 px-3 sm:px-4 text-gray-600" x-text="item.id"></td>
+                            </tr>
+                        </template>
+                        <tr x-show="filteredVocab.length === 0">
+                            <td colspan="5" class="py-8 text-center text-gray-400 font-inter text-sm">
+                                Tidak ada kosakata yang cocok dengan pencarian / filter Anda.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CARD / FLASHCARD VIEW MODE -->
+        <div x-show="viewMode === 'card'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <template x-for="(item, index) in filteredVocab" :key="index">
+                <div
+                    class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-gray-400" x-text="'Kapitel ' + item.ch"></span>
+                            <span x-show="item.type === 'nomen'"
+                                class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider" :class="{
+                                      'bg-blue-100 text-blue-700': item.art === 'der',
+                                      'bg-rose-100 text-rose-700': item.art === 'die',
+                                      'bg-emerald-100 text-emerald-700': item.art === 'das',
+                                      'bg-slate-100 text-slate-700': !['der','die','das'].includes(item.art)
+                                  }" x-text="item.art ? item.art : 'Nomen'">
+                            </span>
+                            <span x-show="item.type === 'verben'"
+                                class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase">Verb</span>
+                            <span x-show="item.type === 'andere'"
+                                class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase">Andere</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-1 group-hover:text-brand-orange transition-colors"
+                            x-text="item.de"></h3>
+                        <p class="text-sm text-gray-600 font-poppins" x-text="item.id"></p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-end no-print">
+                        <button @click="speak(item.de)"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-brand-orange transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                </path>
+                            </svg>
+                            <span>Dengarkan</span>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+    </main>
+
+    <!-- PRINT FOOTER WATERMARK -->
+    <div class="print-only print-footer-watermark">
+        AKSARADEUTSCH
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 mt-auto py-6 no-print">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center font-inter text-xs text-gray-500">
+            <p class="font-semibold text-brand-navy mb-1">AKSARADEUTSCH — #TemanBelajarBahasaJermanmu</p>
+            <p>© 2026 Aksaradeutsch. Dibuat khusus untuk peserta kelas resmi.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DATA & LOGIC -->
+    <script>
+        function vocabApp() {
+            return {
+                searchQuery: '',
+                selectedKapitel: 'all',
+                selectedType: 'all',
+                selectedArticle: 'all',
+                viewMode: 'table',
+                vocabList: [
+                    { ch: 1, type: 'andere', de: 'also', id: 'jadi / oleh karena itu' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Ausbildung, -en', id: 'pelatihan vokasi' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Bankkauffrau, -en', id: 'pegawai bank (wanita)' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Bankkaufmann, -¨er', id: 'pegawai bank (pria)' },
+                    { ch: 1, type: 'andere', de: 'fließend', id: 'fasih / lancar' },
+                    { ch: 1, type: 'andere', de: 'geboren', id: 'lahir' },
+                    { ch: 1, type: 'andere', de: 'geschieden', id: 'bercerai' },
+                    { ch: 1, type: 'nomen', art: 'das', de: 'das Land, (Sg.)', id: 'pedesaan' },
+                    { ch: 1, type: 'verben', de: 'liegen', id: 'terbaring / terletak' },
+                    { ch: 1, type: 'nomen', art: 'das', de: 'das Pferd, -e', id: 'kuda' },
+                    { ch: 1, type: 'verben', de: 'reiten', id: 'menunggang kuda' },
+                    { ch: 1, type: 'verben', de: 'renovieren', id: 'merenovasi' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Rentner, -', id: 'pensiunan (pria)' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Rentnerin, -nen', id: 'pensiunan (wanita)' },
+                    { ch: 1, type: 'verben', de: 'sehen', id: 'melihat' },
+                    { ch: 1, type: 'nomen', art: 'das', de: 'das Stadtzentrum, Stadtzentren', id: 'pusat kota' },
+                    { ch: 1, type: 'verben', de: 'anmelden', id: 'mendaftar' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Arbeit, -en', id: 'pekerjaan' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Augenoptiker, -', id: 'optisian (pria)' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Augenoptikerin, -nen', id: 'optisian (wanita)' },
+                    { ch: 1, type: 'verben', de: 'beenden', id: 'mengakhiri / menyelesaikan' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Biologie, (Sg.)', id: 'biologi' },
+                    { ch: 1, type: 'verben', de: 'heiraten', id: 'menikah' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Hochzeit, -en', id: 'pesta pernikahan' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Mathematik, (Sg.)', id: 'matematika' },
+                    { ch: 1, type: 'verben', de: 'mieten', id: 'menyewa' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Note, -n', id: 'nilai' },
+                    { ch: 1, type: 'verben', de: 'organisieren', id: 'mengatur / mengorganisasi' },
+                    { ch: 1, type: 'andere', de: 'romantisch', id: 'romantis' },
+                    { ch: 1, type: 'andere', de: 'spannend', id: 'seru / mendebarkan' },
+                    { ch: 1, type: 'verben', de: 'teilnehmen', id: 'berpartisipasi' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Verein, -e', id: 'klub / asosiasi' },
+                    { ch: 1, type: 'verben', de: 'weitersuchen', id: 'melanjutkan pencarian' },
+                    { ch: 1, type: 'verben', de: 'zusammenleben', id: 'tinggal bersama' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Genitiv, -e', id: 'genitif' },
+                    { ch: 1, type: 'verben', de: 'abschließen', id: 'menyelesaikan (pendidikan)' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Grippe, -n', id: 'penyakit flu' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Überstunde, -n', id: 'jam lembur' },
+                    { ch: 1, type: 'andere', de: 'weil', id: 'karena' },
+                    { ch: 1, type: 'verben', de: 'begründen', id: 'memberikan alasan' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Hauptsatz, -¨e', id: 'klausa utama' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Nebensatz, -¨e', id: 'anak kalimat' },
+                    { ch: 1, type: 'verben', de: 'absagen', id: 'membatalkan' },
+                    { ch: 1, type: 'andere', de: 'einverstanden sein', id: 'setuju' },
+                    { ch: 1, type: 'verben', de: 'vorschlagen', id: 'mengusulkan' },
+                    { ch: 1, type: 'verben', de: 'zusagen', id: 'menerima / mengonfirmasi' },
+                    { ch: 1, type: 'verben', de: 'ändern', id: 'mengubah' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Flohmarkt, -¨e', id: 'pasar loak' },
+                    { ch: 1, type: 'andere', de: 'gemeinsam', id: 'bersama-sama' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Platz, -¨e', id: 'tempat / tempat duduk' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Angst, -¨e', id: 'rasa takut' },
+                    { ch: 1, type: 'verben', de: 'auswählen', id: 'memilih' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Eingang, -¨e', id: 'pintu masuk' },
+                    { ch: 1, type: 'verben', de: 'empfangen', id: 'menyambut / menerima' },
+                    { ch: 1, type: 'verben', de: 'fühlen', id: 'merasakan' },
+                    { ch: 1, type: 'nomen', art: 'das', de: 'das Handy, -s', id: 'handphone' },
+                    { ch: 1, type: 'verben', de: 'informieren (sich)', id: 'mencari informasi' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Reservierung, -en', id: 'reservasi' },
+                    { ch: 1, type: 'verben', de: 'rufen', id: 'memanggil / berteriak' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Sinn, -e', id: 'indera / makna' },
+                    { ch: 1, type: 'nomen', art: 'das', de: 'das WC, -s', id: 'toilet' },
+                    { ch: 1, type: 'verben', de: 'weiterhelfen', id: 'membantu lebih lanjut' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Zigarette, -n', id: 'rokok' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Aufenthalt, -e', id: 'masa tinggal' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Lernerfahrung, -en', id: 'pengalaman belajar' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Gegenstand, -¨e', id: 'benda / objek' },
+                    { ch: 1, type: 'verben', de: 'zuhören', id: 'mendengarkan' },
+                    { ch: 1, type: 'andere', de: 'bitter', id: 'pahit' },
+                    { ch: 1, type: 'andere', de: 'salzig', id: 'asin' },
+                    { ch: 1, type: 'andere', de: 'sauer', id: 'asam' },
+                    { ch: 1, type: 'andere', de: 'scharf', id: 'pedas' },
+                    { ch: 1, type: 'verben', de: 'folgen', id: 'mengikuti' },
+                    { ch: 1, type: 'andere', de: 'konjugiert', id: 'terkonjugasi' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Schulzeit, (Sg.)', id: 'masa sekolah' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Altenpfleger, -', id: 'perawat lansia (pria)' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Altenpflegerin, -nen', id: 'perawat lansia (wanita)' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Au-pair, -s', id: 'au pair' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Grafiker, -', id: 'desainer grafis (pria)' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Grafikerin, -nen', id: 'desainer grafis (wanita)' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Hotelkauffrau, -en', id: 'manajemen perhotelan (wanita)' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Hotelkaufmann, -¨er', id: 'manajemen perhotelan (pria)' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Informatik, (Sg.)', id: 'ilmu komputer / informatika' },
+                    { ch: 2, type: 'verben', de: 'jobben', id: 'bekerja sampingan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Krankenschwester, -n', id: 'perawat (wanita)' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Medizin, (Sg.)', id: 'kedokteran' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Messe, -n', id: 'pameran perdagangan' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Steckbrief, -e', id: 'profil singkat' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Werbeagentur, -en', id: 'agensi periklanan' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Abitur, (Sg.)', id: 'ujian kelulusan SMA Jerman' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Auszubildende, -n', id: 'pemagang' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Berufsschule, -n', id: 'sekolah vokasi' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Fach, -¨er', id: 'mata pelajaran' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Klasse, -n', id: 'kelas' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Lehre, -n', id: 'magang / pelatihan kerja' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Schüler, - / die Schülerin, -nen', id: 'siswa / siswi' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Vorlesung, -en', id: 'kuliah umum' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Zeugnis, -se', id: 'rapor / sertifikat nilai' },
+                    { ch: 2, type: 'verben', de: 'ausschlafen', id: 'tidur puas / tidur nyenyak' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Cafeteria, Cafeterien', id: 'kafetaria' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Direktor, -en / die Direktorin, -nen', id: 'kepala sekolah / direktur' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Erinnerung, -en', id: 'kenangan' },
+                    { ch: 2, type: 'andere', de: 'erwachsen', id: 'dewasa' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Ferien, (Pl.)', id: 'liburan sekolah' },
+                    { ch: 2, type: 'andere', de: 'furchtbar', id: 'mengerikan / sangat buruk' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Reisebüro, -s', id: 'agen perjalanan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Schulplattform, -en', id: 'platform sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Sommerferien, (Pl.)', id: 'libur musim panas' },
+                    { ch: 2, type: 'andere', de: 'streng', id: 'galak / disiplin / ketat' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Vokabeltest, -s', id: 'tes kosakata' },
+                    { ch: 2, type: 'andere', de: 'witzig', id: 'lucu / jenaka' },
+                    { ch: 2, type: 'andere', de: 'wütend', id: 'marah besar' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Schuluniform, -en', id: 'seragam sekolah' },
+                    { ch: 2, type: 'andere', de: 'überrascht', id: 'terkejut / kaget' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die AG, -s', id: 'ekstrakurikuler / kelompok kerja' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Beitrag, -¨e', id: 'postingan / artikel / iuran' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Klassenfahrt, -en', id: 'studi tur kelas' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Schulweg, -e', id: 'perjalanan ke sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Theatergruppe, -n', id: 'kelompok teater' },
+                    { ch: 2, type: 'verben', de: 'überraschen', id: 'mengejutkan' },
+                    { ch: 2, type: 'verben', de: 'betonen', id: 'menekan / menekankan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Behinderung, -en', id: 'disabilitas / hambatan' },
+                    { ch: 2, type: 'verben', de: 'besuchen', id: 'mengunjungi / menghadiri' },
+                    { ch: 2, type: 'andere', de: 'freiwillig', id: 'sukarela' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Gärtner, - / die Gärtnerin, -nen', id: 'tukang kebun' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Handwerk, -e', id: 'kerajinan tangan / pertukangan' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Jura, (Sg.)', id: 'ilmu hukum' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Rollstuhl, -¨e', id: 'kursi roda' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Schulabschluss, -¨e', id: 'kelulusan sekolah' },
+                    { ch: 2, type: 'andere', de: 'sozial', id: 'sosial' },
+                    { ch: 2, type: 'verben', de: 'ablehnen', id: 'menolak' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Meinung, -en', id: 'pendapat' },
+                    { ch: 2, type: 'verben', de: 'zustimmen', id: 'setuju' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Abschluss, -¨e', id: 'kelulusan / gelar' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Berufserfahrung, -en', id: 'pengalaman kerja' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Erfahrung, -en', id: 'pengalaman' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Erholung, (Sg.)', id: 'istirahat / pemulihan' },
+                    { ch: 2, type: 'andere', de: 'nützlich', id: 'berguna' },
+                    { ch: 2, type: 'andere', de: 'unabhängig', id: 'mandiri / independen' },
+                    { ch: 2, type: 'verben', de: 'verlieren', id: 'kehilangan / kalah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Weltreise, -n', id: 'keliling dunia' },
+                    { ch: 2, type: 'verben', de: 'üben', id: 'berlatih' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Bundesland, -¨er', id: 'negara bagian' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Fachoberschule, -n', id: 'sekolah kejuruan tingkat atas' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Gesamtschule, -n', id: 'sekolah komprehensif' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Grundschule, -n', id: 'sekolah dasar' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Gymnasium, Gymnasien', id: 'SMA akademis' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Hauptschule, -n', id: 'sekolah menengah dasar' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Realschule, -n', id: 'sekolah menengah kejuruan' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Schulsystem, -e', id: 'sistem sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Chemie, (Sg.)', id: 'kimia' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Geografie, (Sg.)', id: 'geografi' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Geschichte, (Sg.)', id: 'sejarah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Kunsterziehung, (Sg.)', id: 'pendidikan seni' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Latein, (Sg.)', id: 'bahasa latin' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Physik, (Sg.)', id: 'fisika' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Schulfach, -¨er', id: 'mata pelajaran sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Sozialkunde, (Sg.)', id: 'studi sosial / kewarganegaraan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Wirtschaft, (Sg.)', id: 'ekonomi' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Arzthelfer, - / die Arzthelferin, -nen', id: 'asisten dokter' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Arztpraxis, Arztpraxen', id: 'klinik / tempat praktik dokter' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Azubi, -s', id: 'pemagang' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Berufsleben, (Sg.)', id: 'dunia kerja' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Dauer, (Sg.)', id: 'durasi' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Vorbereitung, -en', id: 'persiapan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Gemeinsamkeit, -en', id: 'persamaan' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Unterschied, -e', id: 'perbedaan' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Klassenzimmer, -', id: 'ruang kelas' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Stundenplan, -¨e', id: 'jadwal pelajaran' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Unterrichtszeit, -en', id: 'jam pelajaran' },
+                    { ch: 3, type: 'verben', de: 'ausprobieren', id: 'mencoba' },
+                    { ch: 3, type: 'verben', de: 'chatten', id: 'obrolan / mengobrol' },
+                    { ch: 3, type: 'verben', de: 'checken', id: 'memeriksa' },
+                    { ch: 3, type: 'verben', de: 'downloaden', id: 'mengunduh' },
+                    { ch: 3, type: 'verben', de: 'herunterladen', id: 'mengunduh' },
+                    { ch: 3, type: 'verben', de: 'kopieren', id: 'menyalin' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Link, -s', id: 'tautan / link' },
+                    { ch: 3, type: 'verben', de: 'posten', id: 'mengunggah postingan' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Radio, -s', id: 'radio' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die VR-Brille, -n', id: 'kacamata VR' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Webseite, -n', id: 'situs web' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das E-Book, -s', id: 'buku elektronik' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Laptop, -s', id: 'laptop' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Smartphone, -s', id: 'smartphone' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Smartwatch, -es', id: 'jam tangan pintar' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Spielekonsole, -n', id: 'konsol game' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Bildschirm, -e', id: 'layar' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Kabel, -', id: 'kabel' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Lautsprecher, -', id: 'pengeras suara / speaker' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Maus, -¨e', id: 'tetikus / mouse' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Tablet, -s', id: 'tablet' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Tastatur, -en', id: 'papan ketik / keyboard' },
+                    { ch: 3, type: 'verben', de: 'anklicken', id: 'mengklik' },
+                    { ch: 3, type: 'verben', de: 'löschen', id: 'menghapus' },
+                    { ch: 3, type: 'verben', de: 'senden', id: 'mengirim' },
+                    { ch: 3, type: 'verben', de: 'weiterleiten', id: 'meneruskan pesan' },
+                    { ch: 3, type: 'verben', de: 'bloggen', id: 'menulis blog' },
+                    { ch: 3, type: 'verben', de: 'mailen', id: 'mengirim email' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Komparativ, -e', id: 'komparatif (tingkat lebih)' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der E-Book-Reader, -', id: 'alat pembaca e-book' },
+                    { ch: 3, type: 'verben', de: 'entwickeln', id: 'mengembangkan' },
+                    { ch: 3, type: 'verben', de: 'gründen', id: 'mendirikan' },
+                    { ch: 3, type: 'verben', de: 'programmieren', id: 'pemrograman / memprogram' },
+                    { ch: 3, type: 'andere', de: 'schwiereig', id: 'sulit' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Start-Up, -s', id: 'perusahaan rintisan (startup)' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Studierende, -n', id: 'mahasiswa' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Umfrage, -n', id: 'survei' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Superlativ, -e', id: 'superlatif (tingkat paling)' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Dings, -', id: 'benda / barang (sesuatu)' },
+                    { ch: 3, type: 'verben', de: 'gewinnen', id: 'menang' },
+                    { ch: 3, type: 'verben', de: 'tippen', id: 'mengetik' },
+                    { ch: 3, type: 'andere', de: 'blöd', id: 'konyol / bodoh' },
+                    { ch: 3, type: 'andere', de: 'dass', id: 'bahwa' },
+                    { ch: 3, type: 'andere', de: 'dumm', id: 'bodoh' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Enkel, - / die Enkelin, -nen', id: 'cucu' },
+                    { ch: 3, type: 'verben', de: 'hochladen', id: 'mengunggah' },
+                    { ch: 3, type: 'andere', de: 'kritisch', id: 'kritis' },
+                    { ch: 3, type: 'verben', de: 'mitteilen', id: 'memberitahukan' },
+                    { ch: 3, type: 'andere', de: 'peinlich', id: 'memalu / canggung' },
+                    { ch: 3, type: 'verben', de: 'sollen', id: 'seharusnya' },
+                    { ch: 3, type: 'verben', de: 'teilen', id: 'membagi / membagikan' },
+                    { ch: 3, type: 'andere', de: 'vorsichtig', id: 'hati-hati' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Detail, -s', id: 'detail / rincian' },
+                    { ch: 3, type: 'andere', de: 'mehrmals', id: 'berkali-kali' },
+                    { ch: 3, type: 'andere', de: 'privat', id: 'pribadi / privat' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Web-Adresse, -n', id: 'alamat web' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Blogbeitrag, -¨e', id: 'postingan blog' },
+                    { ch: 3, type: 'verben', de: 'flüstern', id: 'berbisik' },
+                    { ch: 3, type: 'andere', de: 'still', id: 'hening / tenang' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Actionfilm, -e', id: 'film aksi' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Fantasy-Film, -e', id: 'film fantasi' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Komödie, -n', id: 'film komedi' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Krimi, -s', id: 'film/novel kriminal' },
+                    { ch: 3, type: 'verben', de: 'lachen', id: 'tertawa' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Liebesfilm, -e', id: 'film romantis' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Thriller, -', id: 'film thriller / misteri' },
+                    { ch: 3, type: 'verben', de: 'weinen', id: 'menangis' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Autobiografie, -n', id: 'autobiografi' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Filmbeschreibung, -en', id: 'deskripsi film' },
+                    { ch: 3, type: 'andere', de: 'fröhlich', id: 'riang / gembira' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Humor, (Sg.)', id: 'humor' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Kindheit, (Sg.)', id: 'masa kanak-kanak' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Schicksal, -e', id: 'takdir / nasib' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Sorge, -n', id: 'kekhawatiran' },
+                    { ch: 3, type: 'verben', de: 'sterben', id: 'meninggal dunia' },
+                    { ch: 3, type: 'nomen', art: 'das', de: 'das Talent, -e', id: 'bakat' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Witz, -e', id: 'lelucon / humor' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Freundschaft, -en', id: 'persahabatan' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Hauptperson, -en', id: 'tokoh utama' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Kinobesuch, -e', id: 'kunjungan ke bioskop' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Filmmusik, (Sg.)', id: 'musik film / soundtrack' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Handlung, -en', id: 'alur cerita / plot' },
+                    { ch: 3, type: 'andere', de: 'logisch', id: 'logis / masuk akal' },
+                    { ch: 3, type: 'verben', de: 'kommentieren', id: 'mengomentari' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Trailer, -', id: 'cuplikan film' },
+                    { ch: 4, type: 'andere', de: 'aufgeregt', id: 'gugup / bersemangat' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Babykleidung, (Sg.)', id: 'pakaian bayi' },
+                    { ch: 4, type: 'verben', de: 'bestehen', id: 'lulus (ujian)' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Brautkleid, -er', id: 'gaun pengantin' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Führerschein, -e', id: 'SIM' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Führerscheinprüfung, -en', id: 'ujian SIM' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Gebäck, (Sg.)', id: 'kue / roti kering' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Geburt, -en', id: 'kelahiran' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Gefühl, -e', id: 'perasaan' },
+                    { ch: 4, type: 'verben', de: 'gratulieren', id: 'mengucapkan selamat' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Medaille, -n', id: 'medali' },
+                    { ch: 4, type: 'andere', de: 'nervös', id: 'gugup' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Ring, -e', id: 'cincin' },
+                    { ch: 4, type: 'verben', de: 'schmücken', id: 'menghias / megedekorasi' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Schulranzen, -', id: 'tas sekolah anak' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Schultag, -e', id: 'hari sekolah' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Schultüte, -n', id: 'kerucut hadiah sekolah' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Sieg, -e', id: 'kemenangan' },
+                    { ch: 4, type: 'andere', de: 'stolz', id: 'bangga' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Storch, -¨e', id: 'burung bangau' },
+                    { ch: 4, type: 'andere', de: 'unglücklich', id: 'tidak bahagia / malang' },
+                    { ch: 4, type: 'andere', de: 'genervt', id: 'kesal / jengkel' },
+                    { ch: 4, type: 'andere', de: 'traurig', id: 'sedih' },
+                    { ch: 4, type: 'verben', de: 'wegfahren', id: 'bepergian / berangkat' },
+                    { ch: 4, type: 'andere', de: 'wenn', id: 'jika / ketika' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Laune, (Sg.)', id: 'suasana hati / mood' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Absage, -n', id: 'penolakan' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Brautpaar, -e', id: 'pasangan pengantin' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Dankeskarte, -n', id: 'kartu ucapan terima kasih' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Glückwunschkarte, -n', id: 'kartu ucapan selamat' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Liebe, (Sg.)', id: 'cinta' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Zukunft, (Sg.)', id: 'masa depan' },
+                    { ch: 4, type: 'verben', de: 'bedanken (sich)', id: 'berterima kasih' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Club, -s', id: 'klub / diskotek' },
+                    { ch: 4, type: 'verben', de: 'ärgern (sich)', id: 'jengkel / marah' },
+                    { ch: 4, type: 'verben', de: 'entscheiden (sich)', id: 'memutuskan' },
+                    { ch: 4, type: 'verben', de: 'erinnern (sich)', id: 'mengingat' },
+                    { ch: 4, type: 'verben', de: 'hoffen', id: 'berharap' },
+                    { ch: 4, type: 'verben', de: 'unterhalten (sich)', id: 'berbincang-bincang' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Reflexivpronomen, -', id: 'kata ganti refleksif' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Ahnung, -en', id: 'gagasan / ide' },
+                    { ch: 4, type: 'verben', de: 'ausruhen (sich)', id: 'beristirahat' },
+                    { ch: 4, type: 'verben', de: 'langweilen (sich)', id: 'merasa bosan' },
+                    { ch: 4, type: 'verben', de: 'streiten (sich)', id: 'bertengkar' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Bedauern, (Sg.)', id: 'penyesalan' },
+                    { ch: 4, type: 'verben', de: 'beruhigen', id: 'menenangkan' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Freude, -n', id: 'kegembiraan' },
+                    { ch: 4, type: 'andere', de: 'riesig', id: 'sangat besar' },
+                    { ch: 4, type: 'andere', de: 'wahr', id: 'benar' },
+                    { ch: 4, type: 'verben', de: 'fallen', id: 'jatuh' },
+                    { ch: 4, type: 'andere', de: 'unangenehm', id: 'tidak menyenangkan / canggung' },
+                    { ch: 4, type: 'andere', de: 'ärgerlich', id: 'jengkel / mengesalkan' },
+                    { ch: 4, type: 'andere', de: 'emotional', id: 'emosional' },
+                    { ch: 4, type: 'andere', de: 'gestresst', id: 'stres' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Emotion, -en', id: 'emosi' },
+                    { ch: 4, type: 'verben', de: 'erkennen', id: 'mengenali' },
+                    { ch: 4, type: 'verben', de: 'bewundern', id: 'mengagumi' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Feuerwerk, -e', id: 'kembang api' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Nation, -en', id: 'bangsa / negara' },
+                    { ch: 4, type: 'verben', de: 'gestalten', id: 'merancang / mendesain' },
+                    { ch: 4, type: 'andere', de: 'kostenlos', id: 'gratis' },
+                    { ch: 4, type: 'verben', de: 'anbieten', id: 'menawarkan' },
+                    { ch: 4, type: 'andere', de: 'aufregend', id: 'seru / mendebarkan' },
+                    { ch: 4, type: 'andere', de: 'fremd', id: 'asing' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Frühjahr, -e', id: 'musim semi' },
+                    { ch: 4, type: 'verben', de: 'gewöhnen (sich)', id: 'terbiasa' },
+                    { ch: 4, type: 'andere', de: 'hilfsbereit', id: 'suka membantu' },
+                    { ch: 4, type: 'andere', de: 'sauer', id: 'kesal / marah' },
+                    { ch: 4, type: 'andere', de: 'schlimm', id: 'buruk / parah' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Tango, -s', id: 'tarian tango' },
+                    { ch: 4, type: 'verben', de: 'unterrichten', id: 'mengajar' },
+                    { ch: 4, type: 'nomen', art: 'der', de: 'der Verkehr, (Sg.)', id: 'lalu lintas' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Währung, -en', id: 'mata uang' },
+                    { ch: 4, type: 'verben', de: 'wohlfühlen (sich)', id: 'merasa nyaman' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Wohnheim, -e', id: 'asrama' },
+                    { ch: 4, type: 'nomen', art: 'das', de: 'das Gegenteil, -e', id: 'kebalikan / lawan kata' },
+                    { ch: 4, type: 'andere', de: 'unordentlich', id: 'berantakan' },
+                    { ch: 4, type: 'andere', de: 'unsympathisch', id: 'tidak menyenangkan' },
+                    { ch: 4, type: 'andere', de: 'unwichtig', id: 'tidak penting' },
+                    { ch: 4, type: 'andere', de: 'verspätet', id: 'terlambat' },
+                    { ch: 4, type: 'verben', de: 'austauschen', id: 'bertukar' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Amt, -¨er', id: 'kantor pemerintah / dinas' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Behörde, -n', id: 'instansi / otoritas' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Müllabfuhr, (Sg.)', id: 'pengangkatan sampah' },
+                    { ch: 5, type: 'andere', de: 'öffentlich', id: 'publik / umum' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Polizei, (Sg.)', id: 'kepolisian' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Straßenreinigung, (Sg.)', id: 'pembersihan jalan' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Verkehrsmittel, -', id: 'sarana transportasi' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Antrag, -¨e', id: 'formulir permohonan' },
+                    { ch: 5, type: 'verben', de: 'aufräumen', id: 'merapikan' },
+                    { ch: 5, type: 'verben', de: 'ausfüllen', id: 'mengisi formulir' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Beamte, -n / die Beamtin, -nen', id: 'pegawai negeri / pejabat' },
+                    { ch: 5, type: 'verben', de: 'bedienen', id: 'melayani' },
+                    { ch: 5, type: 'verben', de: 'beschützen', id: 'melindungi' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Dokument, -e', id: 'dokumen' },
+                    { ch: 5, type: 'verben', de: 'genehmigen', id: 'menyetujui / mengizinkan' },
+                    { ch: 5, type: 'verben', de: 'kümmern (sich)', id: 'merawat / mengurus' },
+                    { ch: 5, type: 'verben', de: 'leeren', id: 'mengosongkan' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Müll, (Sg.)', id: 'sampah' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Mülltonne, -n', id: 'tong sampah' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Operation, -en', id: 'operasi medis' },
+                    { ch: 5, type: 'verben', de: 'pflegen', id: 'merawat' },
+                    { ch: 5, type: 'verben', de: 'prüfen', id: 'memeriksa' },
+                    { ch: 5, type: 'verben', de: 'servieren', id: 'menyajikan' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Sicherheit, (Sg.)', id: 'keamanan' },
+                    { ch: 5, type: 'verben', de: 'transportieren', id: 'mengangkut' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Feuerwehr, (Sg.)', id: 'pemadam kebakaran' },
+                    { ch: 5, type: 'verben', de: 'ausgeben', id: 'mengeluarkan uang' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Aushilfe, -n', id: 'tenaga bantuan sementara' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Dom, -e', id: 'katedral' },
+                    { ch: 5, type: 'andere', de: 'dringend', id: 'mendesak' },
+                    { ch: 5, type: 'verben', de: 'erledigen', id: 'menyelesaikan tugas' },
+                    { ch: 5, type: 'verben', de: 'eröffnen', id: 'membuka' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Lohn, -¨e', id: 'upah / gaji' },
+                    { ch: 5, type: 'andere', de: 'modern', id: 'modern' },
+                    { ch: 5, type: 'nomen', de: 'vorstellungsgespräch, -e', id: 'wawancara kerja' },
+                    { ch: 5, type: 'verben', de: 'bewerben (sich)', id: 'melamar' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Kenntnis, -se', id: 'pengetahuan' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Stellenanzeige, -n', id: 'lowongan kerja' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Teilzeit, (Sg.)', id: 'paruh waktu' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Unterlagen, (Pl.)', id: 'dokumen-dokumen' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Bezahlung, -en', id: 'pembayaran' },
+                    { ch: 5, type: 'andere', de: 'spontan', id: 'spontan' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Gedanke, -n', id: 'pikiran / pemikiran' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Bescheid, -e', id: 'keputusan / kabar' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Delikatesse, -n', id: 'makanan lezat / deli' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Probetag, -e', id: 'hari uji coba kerja' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Wunder, -', id: 'keajaiban' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Zutat, -en', id: 'bahan makanan' },
+                    { ch: 5, type: 'verben', de: 'umsehen (sich)', id: 'melihat-lihat sekeliling' },
+                    { ch: 5, type: 'verben', de: 'abgeben', id: 'menyerahkan' },
+                    { ch: 5, type: 'verben', de: 'beantragen', id: 'mengajukan permohonan' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Betrag, -¨e', id: 'nominal uang' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Diebstahl, -¨e', id: 'pencurian' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Einbürgerung, -en', id: 'naturalisasi' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Geldbörse, -n', id: 'dompet' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Kredit, -e', id: 'kredit / pinjaman' },
+                    { ch: 5, type: 'verben', de: 'melden', id: 'melaporkan' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Personalausweis, -e', id: 'KTP' },
+                    { ch: 5, type: 'verben', de: 'verlängern', id: 'memperpanjang' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Bankkarte, -n', id: 'kartu bank' },
+                    { ch: 5, type: 'verben', de: 'abheben', id: 'menarik tunai' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Grenze, -n', id: 'perbatasan' },
+                    { ch: 5, type: 'andere', de: 'gültig', id: 'berlaku' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Visum, Visa', id: 'visa' },
+                    { ch: 5, type: 'verben', de: 'sperren', id: 'memblokir' },
+                    { ch: 5, type: 'verben', de: 'ausdrucken', id: 'mencetak (print)' },
+                    { ch: 5, type: 'verben', de: 'bitten', id: 'meminta' },
+                    { ch: 5, type: 'verben', de: 'funktionieren', id: 'berfungsi' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Gefallen, -', id: 'bantuan' },
+                    { ch: 5, type: 'verben', de: 'leihen', id: 'meminjam' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Stadtplan, -¨e', id: 'peta kota' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Angestellte, -n', id: 'karyawan' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Drama, Dramen', id: 'drama' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Entspannung, (Sg.)', id: 'relaksasi' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Gebäude, -', id: 'gedung' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Gesetz, -e', id: 'undang-undang / hukum' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Kaiser, - / die Kaiserin, -nen', id: 'kaisar' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Maler, - / die Malerin, -nen', id: 'pelukis' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Parlament, -e', id: 'parlemen' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Politiker, - / die Politikerin, -nen', id: 'politisi' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Verwaltung, (Sg.)', id: 'administrasi / pengelola' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Ärger, (Sg.)', id: 'kemarahan / kejengkelan' },
+                    { ch: 6, type: 'verben', de: 'beeilen (sich)', id: 'bergegas / bergegas cepat' },
+                    { ch: 6, type: 'verben', de: 'klappen', id: 'berjalan lancar / berhasil' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Rückfahrt, (Sg.)', id: 'perjalanan pulang' },
+                    { ch: 6, type: 'verben', de: 'beraten', id: 'menasihati / memberi saran' },
+                    { ch: 6, type: 'verben', de: 'einhalten', id: 'mematuhi / menepati' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Tätigkeit, -en', id: 'aktivitas / kegiatan kerja' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Vokabel, -n', id: 'kosakata' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Geschäftsreise, -n', id: 'perjalanan bisnis' },
+                    { ch: 6, type: 'verben', de: 'zurückkommen', id: 'kembali' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Hinfahrt, (Sg.)', id: 'perjalanan pergi' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Bahn, -en', id: 'kereta api' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Bahnhofshalle, -n', id: 'aula stasiun' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Durchsage, -n', id: 'pengumuman' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Fahrgast, -¨e', id: 'penumpang' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Fahrplan, -¨e', id: 'jadwal keberangkatan' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Schalter, -', id: 'loket' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Wagen, -', id: 'gerbong / mobil' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Zugverbindung, -en', id: 'koneksi kereta' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Fahrkartenschalter, -', id: 'loket tiket' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Gang, -¨e', id: 'lorong gerbong / gang' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Album, Alben', id: 'album' },
+                    { ch: 6, type: 'verben', de: 'erleben', id: 'mengalami' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Ermäßigung, -en', id: 'diskon / potongan harga' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Feiertag, -e', id: 'hari libur resmi' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Musiker, - / die Musikerin, -nen', id: 'musisi' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Sänger, - / die Sängerin, -nen', id: 'penyanyi' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Trainer, - / die Trainerin, -nen', id: 'pelatih' },
+                    { ch: 6, type: 'andere', de: 'preiswert', id: 'terjangkau / murah' },
+                    { ch: 6, type: 'verben', de: 'bereuen', id: 'menyesali' },
+                    { ch: 6, type: 'andere', de: 'beruflich', id: 'berkenaan dengan profesi' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Busfahrer, - / die Busfahrerin, -nen', id: 'sopir bus' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Chance, -n', id: 'kesempatan' },
+                    { ch: 6, type: 'andere', de: 'erfolgreich', id: 'sukses / berhasil' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Fernfahrer, -', id: 'sopir truk antar kota' },
+                    { ch: 6, type: 'andere', de: 'finanziell', id: 'secara keuangan' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Freiheit, (Sg.)', id: 'kebebasan' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Gehalt, -¨er', id: 'gaji' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Risiko, Risiken', id: 'risiko' },
+                    { ch: 6, type: 'andere', de: 'selbstständig', id: 'wiraswasta / mandiri' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Übersetzer, - / die Übersetzerin, -nen', id: 'penerjemah' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Umwelt, (Sg.)', id: 'lingkungan hidup' },
+                    { ch: 6, type: 'andere', de: 'schwanger', id: 'hamil' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Berufswunsch, -¨e', id: 'pekerjaan impian' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Tiertrainer, -', id: 'pelatih hewan' },
+                    { ch: 6, type: 'andere', de: 'hektisch', id: 'heboh / sibuk luar biasa' },
+                    { ch: 6, type: 'verben', de: 'konzentrieren (sich)', id: 'berkonsentrasi' },
+                    { ch: 6, type: 'verben', de: 'lächeln', id: 'tersenyum' },
+                    { ch: 6, type: 'verben', de: 'stören', id: 'mengganggu' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Anrufer, - / die Anruferin, -nen', id: 'penelepon' },
+                    { ch: 6, type: 'verben', de: 'ausrichten', id: 'menyampaikan pesan' },
+                    { ch: 6, type: 'verben', de: 'hinterlassen', id: 'meninggalkan pesan' },
+                    { ch: 6, type: 'verben', de: 'zurückrufen', id: 'menelepon kembali' },
+                    { ch: 6, type: 'verben', de: 'verändern', id: 'mengubah' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Arbeitsleben, (Sg.)', id: 'kehidupan kerja' },
+                    { ch: 6, type: 'andere', de: 'befristet', id: 'terbatas (kontrak)' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Betrieb, -e', id: 'perusahaan / tempat usaha' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Digitalisierung, (Sg.)', id: 'digitalisasi' },
+                    { ch: 6, type: 'andere', de: 'erreichbar', id: 'dapat dihubungi' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Fabrik, -en', id: 'pabrik' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Grundeinkommen, -', id: 'pendapatan dasar' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Hausarbeit, -en', id: 'pekerjaan rumah tangga' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Jahrhundert, -e', id: 'abad' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Kompetenz, -en', id: 'kompetensi' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Maschine, -n', id: 'mesin' },
+                    { ch: 6, type: 'andere', de: 'mobil', id: 'fleksibel / mobil' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Roboter, -', id: 'robot' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Videokonferenz, -en', id: 'konferensi video' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Wissen, (Sg.)', id: 'pengetahuan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Ampel, -n', id: 'lampu lalu lintas' },
+                    { ch: 7, type: 'verben', de: 'halten', id: 'berhenti' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Motor, -en', id: 'mesin kendaraan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Panne, -n', id: 'mogok / kerusakan mobil' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Parkplatz, -¨e', id: 'tempat parkir' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Reifen, -', id: 'ban kendaraan' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Stau, -s', id: 'kemacetan lalu lintas' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Navi, -s', id: 'GPS / navigasi' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Parkhaus, -¨er', id: 'gedung parkir' },
+                    { ch: 7, type: 'andere', de: 'flexibel', id: 'fleksibel' },
+                    { ch: 7, type: 'verben', de: 'tanken', id: 'mengisi bensin' },
+                    { ch: 7, type: 'verben', de: 'abfliegen', id: 'berangkat (pesawat)' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Abflug, -¨e', id: 'keberangkatan pesawat' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Benzin, (Sg.)', id: 'bensin' },
+                    { ch: 7, type: 'verben', de: 'bremsen', id: 'mengerem' },
+                    { ch: 7, type: 'verben', de: 'buchen', id: 'memesan' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Diesel, (Sg.)', id: 'bahan bakar diesel' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Garage, -n', id: 'garasi' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Kennzeichen, -', id: 'plat nomor kendaraan' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Kraftfahrzeug, -e', id: 'kendaraan bermotor' },
+                    { ch: 7, type: 'verben', de: 'landen', id: 'mendarat' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Monatskarte, -n', id: 'tiket bulanan' },
+                    { ch: 7, type: 'verben', de: 'parken', id: 'memarkir' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Tankstelle, -n', id: 'pom bensin' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Versicherung, -en', id: 'asuransi' },
+                    { ch: 7, type: 'andere', de: 'ewig', id: 'selamanya / sangat lama' },
+                    { ch: 7, type: 'andere', de: 'nervig', id: 'mengesalkan' },
+                    { ch: 7, type: 'andere', de: 'ungeduldig', id: 'tidak sabar' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Bordbistro, -s', id: 'bistro dalam kereta' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Kinderwagen, -', id: 'kereta bayi' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der E-Scooter, -', id: 'skuter listrik' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Fahrzeug, -e', id: 'kendaraan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die PIN, -s', id: 'PIN rahasia' },
+                    { ch: 7, type: 'verben', de: 'registrieren (sich)', id: 'mendaftar' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Tarif, -e', id: 'tarif' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Werbung, -en', id: 'iklan' },
+                    { ch: 7, type: 'verben', de: 'abstellen', id: 'memarkir / meletakkan' },
+                    { ch: 7, type: 'verben', de: 'erreichen', id: 'mencapai / menghubungi' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Fahrt, -en', id: 'perjalanan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Kaution, -en', id: 'uang jaminan deposit' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Kundenservice, -s', id: 'layanan pelanggan' },
+                    { ch: 7, type: 'andere', de: 'versichert', id: 'terasuransikan' },
+                    { ch: 7, type: 'verben', de: 'zusammenfassen', id: 'merangkum' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Kreuzung, -en', id: 'persimpangan jalan' },
+                    { ch: 7, type: 'verben', de: 'vorbeigehen', id: 'berjalan melewati' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Beschreibung, -en', id: 'deskripsi' },
+                    { ch: 7, type: 'verben', de: 'bestimmen', id: 'menentukan' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das E-Bike, -s', id: 'sepeda listrik' },
+                    { ch: 7, type: 'andere', de: 'elektrisch', id: 'listrik' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Großstadt, -¨e', id: 'kota besar' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Innenstadt, -¨e', id: 'pusat kota' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Kombination, -en', id: 'kombinasi' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Konsequenz, -en', id: 'konsekuensi' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Linie, -n', id: 'rute / jalur transportasi' },
+                    { ch: 7, type: 'verben', de: 'lösen', id: 'memecahkan / mencari solusi' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Luft, (Sg.)', id: 'udara' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Prozent, -e', id: 'persen' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Radfahrer, - / die Radfahrerin, -nen', id: 'pesepeda' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Radweg, -e', id: 'jalur khusus sepeda' },
+                    { ch: 7, type: 'verben', de: 'reduzieren', id: 'mengurangi' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Seilbahn, -en', id: 'kereta gantung' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Stadtbewohner, -', id: 'penduduk kota' },
+                    { ch: 7, type: 'andere', de: 'umweltfreundlich', id: 'ramah lingkungan' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Verkehrsproblem, -e', id: 'masalah lalu lintas' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Gewitter, -', id: 'badai petir' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Glatteis, (Sg.)', id: 'jalan licin beres' },
+                    { ch: 7, type: 'verben', de: 'pendeln', id: 'laju / pulang-pergi kerja' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Richtung, -en', id: 'arah' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Zugfahrt, -en', id: 'perjalanan kereta' },
+                    { ch: 7, type: 'verben', de: 'klatschen', id: 'bertepuk tangan' },
+                    { ch: 8, type: 'verben', de: 'abonnieren', id: 'berlangganan' },
+                    { ch: 8, type: 'verben', de: 'bearbeiten', id: 'mengedit / mengolah' },
+                    { ch: 8, type: 'verben', de: 'beschweren (sich)', id: 'mengeluh' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Disziplin, (Sg.)', id: 'disiplin' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Einführung, -en', id: 'pengantar / introduksi' },
+                    { ch: 8, type: 'andere', de: 'gebraucht', id: 'bekas / second' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Gitarre, -n', id: 'gitar' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Kanal, -¨e', id: 'saluran / channel' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Klavier, -e', id: 'pianis / piano' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Instrument, -e', id: 'instrumen musik' },
+                    { ch: 8, type: 'andere', de: 'pensioniert', id: 'pensiun' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Qualität, -en', id: 'kualitas' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Rente, -n', id: 'uang pensiun' },
+                    { ch: 8, type: 'verben', de: 'blicken', id: 'memahami / melihat' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Fahrstunde, -n', id: 'les mengemudi' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Forum, Foren', id: 'forum' },
+                    { ch: 8, type: 'andere', de: 'hart', id: 'keras / sulit' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Herz, -en', id: 'jantung / hati' },
+                    { ch: 8, type: 'andere', de: 'intelligent', id: 'cerdas' },
+                    { ch: 8, type: 'verben', de: 'kapieren', id: 'paham / ngerti' },
+                    { ch: 8, type: 'andere', de: 'klug', id: 'pandai / cerdik' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Magenschmerzen, (Pl.)', id: 'sakit perut' },
+                    { ch: 8, type: 'verben', de: 'rasen', id: 'melaju kencang' },
+                    { ch: 8, type: 'andere', de: 'realistisch', id: 'realistis' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Stipendium, Stipendien', id: 'beasiswa' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Stoff, -e', id: 'materi pelajaran / kain' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Zeitplan, -¨e', id: 'jadwal waktu' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Lernproblem, -e', id: 'masalah belajar' },
+                    { ch: 8, type: 'verben', de: 'verschieben', id: 'menunda' },
+                    { ch: 8, type: 'verben', de: 'durchatmen', id: 'menarik napas dalam' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Energie, -n', id: 'energi' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Lernhelfer, - / die Lernhelferin, -nen', id: 'tutor / pembimbing' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Mineralwasser, -', id: 'air mineral' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Nervosität, (Sg.)', id: 'gugup / cemas' },
+                    { ch: 8, type: 'andere', de: 'tief', id: 'dalam' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Trick, -s', id: 'trik / tips' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Wald, -¨er', id: 'hutan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Zitrone, -n', id: 'lemon' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Beratung, -en', id: 'konsultasi' },
+                    { ch: 8, type: 'verben', de: 'bieten', id: 'menawarkan' },
+                    { ch: 8, type: 'andere', de: 'erfahren', id: 'berpengalaman' },
+                    { ch: 8, type: 'andere', de: 'erforderlich', id: 'diperlukan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Förderung, -en', id: 'dukungan / dana bantuan' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Interesse, -n', id: 'minat' },
+                    { ch: 8, type: 'andere', de: 'mündlich', id: 'secara lisan' },
+                    { ch: 8, type: 'andere', de: 'neugierig', id: 'penasaran / ingin tahu' },
+                    { ch: 8, type: 'andere', de: 'schriftlich', id: 'secara tertulis' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Sekretariat, -e', id: 'sekretariat' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Sprechstunde, -n', id: 'jam konsultasi' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Workshop, -s', id: 'lokakarya / workshop' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Ratschlag, -¨e', id: 'nasihat' },
+                    { ch: 8, type: 'verben', de: 'einplanen', id: 'merencanakan ke jadwal' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Arbeitgeber, -', id: 'pemberi kerja / bos' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Auftrag, -¨e', id: 'pesanan / pesanan kerja' },
+                    { ch: 8, type: 'andere', de: 'ausländisch', id: 'asing' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Autor, -en / die Autorin, -nen', id: 'penulis' },
+                    { ch: 8, type: 'verben', de: 'begleiten', id: 'mendampingi' },
+                    { ch: 8, type: 'verben', de: 'dolmetschen', id: 'menerjemahkan lisan' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Feedback, -s', id: 'umpan balik' },
+                    { ch: 8, type: 'andere', de: 'freiberuflich', id: 'lepas / freelance' },
+                    { ch: 8, type: 'andere', de: 'gehörlos', id: 'tuli' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Kommunikation, (Sg.)', id: 'komunikasi' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Konferenz, -en', id: 'konferensi' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Prospekt, -e', id: 'brosur' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Vollzeit, (Sg.)', id: 'purna waktu' },
+                    { ch: 8, type: 'verben', de: 'übersetzen', id: 'menerjemahkan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Übersetzung, -en', id: 'terjemahan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Aktion, -en', id: 'aksi / kegiatan' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Babysitter, - / die Babysitterin, -nen', id: 'pengasuh bayi' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Bücherei, -en', id: 'perpustakaan' },
+                    { ch: 8, type: 'verben', de: 'existieren', id: 'ada / eksis' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Freiwillige, -n', id: 'sukarelawan' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Repair-Café, -s', id: 'repair café' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Reparatur, -en', id: 'perbaikan' },
+                    { ch: 8, type: 'verben', de: 'reparieren', id: 'memperbaiki' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Senior, -en / die Seniorin, -nen', id: 'lansia' },
+                    { ch: 8, type: 'verben', de: 'spülen', id: 'membilas / mencuci piring' },
+                    { ch: 8, type: 'verben', de: 'wegwerfen', id: 'membuang' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Werkzeug, -e', id: 'perkakas' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Einleitung, -en', id: 'pendahuluan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Gliederung, -en', id: 'kerangka / struktur' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Hauptteil, -e', id: 'bagian utama' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Inhalt, -e', id: 'isi / konten' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Zuhörer, - / die Zuhörerin, -nen', id: 'pendengar' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Fußballschuhe, (Pl.)', id: 'sepatu sepak bola' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Kajak, -s', id: 'kayak' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Matte, -n', id: 'matras' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Mountainbike, -s', id: 'sepeda gunung' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Paddel, -', id: 'dayung' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Schläger, -', id: 'pemukul / raket' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Skistock, -¨e', id: 'tongkat ski' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Sportart, -en', id: 'cabang olahraga' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Surfbrett, -er', id: 'papan selancar' },
+                    { ch: 9, type: 'verben', de: 'surfen', id: 'berselancar' },
+                    { ch: 9, type: 'verben', de: 'tauchen', id: 'menyelam' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Taucherbrille, -n', id: 'kacamata selam' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Volleyball, (Sg.)', id: 'bola voli' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Mannschaft, -en', id: 'tim / regu' },
+                    { ch: 9, type: 'verben', de: 'schießen', id: 'menembak / mencetak gol' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Tor, -e', id: 'gawang / gol' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Wettbewerb, -e', id: 'kompetisi' },
+                    { ch: 9, type: 'verben', de: 'entspannen', id: 'bersantai' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Erfolg, -e', id: 'keberhasilan / kesuksesan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Gesundheit, (Sg.)', id: 'kesehatan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Sendung, -en', id: 'siaran acara' },
+                    { ch: 9, type: 'verben', de: 'basteln', id: 'buat kerajinan tangan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Kette, -n', id: 'kalung' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Material, -ien', id: 'bahan / material' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Fanartikel, -', id: 'merchandise fans' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Sportverein, -e', id: 'klub olahraga' },
+                    { ch: 9, type: 'andere', de: 'genial', id: 'hebat / luar biasa' },
+                    { ch: 9, type: 'andere', de: 'großartig', id: 'fantastisch / hebat' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Hoffnung, -en', id: 'harapan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Katastrophe, -n', id: 'bencana / malapetaka' },
+                    { ch: 9, type: 'verben', de: 'ausfallen', id: 'batal / ditiadakan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Radtour, -en', id: 'tur bersepeda' },
+                    { ch: 9, type: 'verben', de: 'verlieren', id: 'kalah / kehilangan' },
+                    { ch: 9, type: 'verben', de: 'benehmen (sich)', id: 'berperilaku' },
+                    { ch: 9, type: 'andere', de: 'deshalb', id: 'oleh karena itu' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Fußballstar, -s', id: 'bintang sepak bola' },
+                    { ch: 9, type: 'andere', de: 'treu', id: 'setia' },
+                    { ch: 9, type: 'andere', de: 'trotzdem', id: 'meskipun begitu' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Vorbild, -er', id: 'panutan / teladan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Folge, -n', id: 'akibat / konsekuensi' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Cousin, -s / die Cousine, -n', id: 'sepupu' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Kondition, (Sg.)', id: 'stamina / kondisi fisik' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Hochseilgarten, -¨', id: 'wahana panjat tali tinggi' },
+                    { ch: 9, type: 'andere', de: 'übermorgen', id: 'lusa' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Anreise, -n', id: 'kedatangan / perjalanan sampai' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Bergstation, -en', id: 'stasiun puncak gunung' },
+                    { ch: 9, type: 'verben', de: 'bewachen', id: 'menjaga / mengawasi' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Eishöhle, -n', id: 'gua es' },
+                    { ch: 9, type: 'andere', de: 'entfernt', id: 'terpisah jarak / jauh' },
+                    { ch: 9, type: 'andere', de: 'faszinierend', id: 'memikat / menakjubkan' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Gasthaus, -¨er', id: 'penginapan / kedai' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Gebiet, -e', id: 'wilayah' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Grenzgebiet, -e', id: 'wilayah perbatasan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Höhle, -n', id: 'gua' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Kanton, -e', id: 'kanton (wilayah Swiss)' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Nationalpark, -s', id: 'taman nasional' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Nebel, -', id: 'kabut' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Staat, -en', id: 'negara' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Strecke, -n', id: 'rute / rintangan rute' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Tal, -¨er', id: 'lembah' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Temperatur, -en', id: 'suhu' },
+                    { ch: 9, type: 'andere', de: 'trocken', id: 'kering' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Umgebung, -en', id: 'lingkungan sekitar' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Wanderung, -en', id: 'pendakian / jalan alam' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Wanderweg, -e', id: 'jalur pendakian' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Einwohner, - / die Einwohnerin, -nen', id: 'penduduk' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Kitesurfen, (Sg.)', id: 'kitesurfing' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Surfschule, -n', id: 'sekolah selancar' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Bauernhof, -¨e', id: 'peternakan / rumah tani' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Breite, -n', id: 'lebar' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Ferienwohnung, -en', id: 'rumah liburan' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Fläche, -n', id: 'luas area' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Hausboot, -e', id: 'rumah perahu' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Höhe, -n', id: 'tinggi / ketinggian' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Kuh, -¨e', id: 'sapi' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Länge, -n', id: 'panjang' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Luxus, (Sg.)', id: 'kemewahan' },
+                    { ch: 10, type: 'andere', de: 'nass', id: 'basah' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Quadratmeter, -', id: 'meter persegi' },
+                    { ch: 10, type: 'verben', de: 'schaukeln', id: 'bergoyang / berguncang' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Stadtrand, -¨er', id: 'pinggiran kota' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Ufer, -', id: 'tepi sungai/danau' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Dach, -¨er', id: 'atap' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Keller, -', id: 'ruang bawah tanah' },
+                    { ch: 10, type: 'andere', de: 'einsam', id: 'kesepian / terpencil' },
+                    { ch: 10, type: 'verben', de: 'gießen', id: 'menyiram' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Lärm, (Sg.)', id: 'kebisingan' },
+                    { ch: 10, type: 'verben', de: 'bellen', id: 'menggonggong' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Päckchen, -', id: 'paket kecil' },
+                    { ch: 10, type: 'verben', de: 'stinken', id: 'bau busuk' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Aushang, -¨e', id: 'pengumuman tertempel' },
+                    { ch: 10, type: 'andere', de: 'schmutzig', id: 'kotor' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Torte, -n', id: 'kue tart' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Wein, -e', id: 'anggur / wine' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Blumentopf, -¨e', id: 'pot bunga' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Boden, -¨', id: 'lantai / tanah' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Gartenhaus, -¨er', id: 'rumah kebun' },
+                    { ch: 10, type: 'verben', de: 'hängen', id: 'menggantung' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Kerze, -n', id: 'lilin' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Kissen, -', id: 'bantal' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Poster, -', id: 'poster' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Roller, -', id: 'skuter' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Spielzeug, -e', id: 'mainan' },
+                    { ch: 10, type: 'verben', de: 'legen', id: 'meletakkan (posisi rebah)' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Dekoration, -en', id: 'dekorasi' },
+                    { ch: 10, type: 'verben', de: 'einziehen', id: 'pindah masuk' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Mieter, - / die Mieterin, -nen', id: 'penyewa' },
+                    { ch: 10, type: 'andere', de: 'möbliert', id: 'berperabot' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Nebenkosten, (Pl.)', id: 'biaya utilitas' },
+                    { ch: 10, type: 'verben', de: 'auskennen (sich)', id: 'paham / kenal medan' },
+                    { ch: 10, type: 'verben', de: 'auspacken', id: 'membuka kemasan / membongkar' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Briefkasten, -¨', id: 'kotak surat' },
+                    { ch: 10, type: 'andere', de: 'gespannt', id: 'penasaran / antusias' },
+                    { ch: 10, type: 'verben', de: 'kündigen', id: 'mengundurkan diri / memutus sewa' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Mitbewohner, - / die Mitbewohnerin, -nen', id: 'teman satu apartemen' },
+                    { ch: 10, type: 'verben', de: 'verirren (sich)', id: 'tersesat' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Zulassung, -en', id: 'izin / penerimaan' },
+                    { ch: 10, type: 'verben', de: 'gelten', id: 'berlaku' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Zeitraum, -¨e', id: 'jangka waktu' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Bär, -en', id: 'beruang' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Hase, -n', id: 'kelinci' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Katze, -n', id: 'kucing' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Kosename, -n', id: 'nama panggilan sayang' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Maus, -¨e', id: 'tikus' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Haustier, -e', id: 'hewan peliharaan' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Ratte, -n', id: 'tikus besar' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Futter, (Sg.)', id: 'pakan hewan' },
+                    { ch: 10, type: 'andere', de: 'modisch', id: 'modis / mengikuti tren' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Schwein, -e', id: 'babi' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Tierarzt, -¨e / die Tierärztin, -nen', id: 'dokter hewan' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Vermutung, -en', id: 'dugaan / prasangka' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Vogel, -¨', id: 'burung' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Bauer, -n / die Bäuerin, -nen', id: 'petani' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Besitzer, - / die Besitzerin, -nen', id: 'pemilik' },
+                    { ch: 10, type: 'andere', de: 'besorgt', id: 'khawatir' },
+                    { ch: 10, type: 'andere', de: 'dünn', id: 'tipis / kurus' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Schaf, -e', id: 'domba' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Zuhause, (Sg.)', id: 'rumah / kediaman' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Altbau, -ten', id: 'bangunan tua gaya klasik' },
+                    { ch: 10, type: 'andere', de: 'blitzschnell', id: 'secepat kilat' },
+                    { ch: 10, type: 'andere', de: 'dick', id: 'tebal / gemuk' },
+                    { ch: 10, type: 'verben', de: 'füttern', id: 'memberi makan hewan' },
+                    { ch: 10, type: 'nomen', art: 'das', de: 'das Stockwerk, -e', id: 'lantai / tingkat' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Wohnungstür, -en', id: 'pintu apartemen' },
+                    { ch: 11, type: 'verben', de: 'verbringen', id: 'menghabiskan waktu' },
+                    { ch: 11, type: 'verben', de: 'vergehen', id: 'berlalu (waktu)' },
+                    { ch: 11, type: 'verben', de: 'verreisen', id: 'bepergian jauh' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Alkohol, (Sg.)', id: 'alkohol' },
+                    { ch: 11, type: 'verben', de: 'backen', id: 'memanggang' },
+                    { ch: 11, type: 'verben', de: 'bauen', id: 'membangun' },
+                    { ch: 11, type: 'andere', de: 'betrunken', id: 'mabuk' },
+                    { ch: 11, type: 'verben', de: 'bluten', id: 'berdarah' },
+                    { ch: 11, type: 'verben', de: 'brechen', id: 'patah / memecahkan' },
+                    { ch: 11, type: 'verben', de: 'einrichten', id: 'menata perabot' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Hausfrau, -en / der Hausmann, -¨er', id: 'ibu / bapak rumah tangga' },
+                    { ch: 11, type: 'verben', de: 'sparen', id: 'menghemat / menabung' },
+                    { ch: 11, type: 'verben', de: 'verletzen', id: 'melukai' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Werktag, -e', id: 'hari kerja' },
+                    { ch: 11, type: 'verben', de: 'behalten', id: 'menyimpan / mempertahankan' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Ehe, -n', id: 'pernikahan' },
+                    { ch: 11, type: 'verben', de: 'entlassen', id: 'memecat / memberhentikan' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Export, -e', id: 'ekspor' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Frist, -en', id: 'tenggat waktu' },
+                    { ch: 11, type: 'verben', de: 'hereinkommen', id: 'masuk ke dalam' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Import, -e', id: 'impor' },
+                    { ch: 11, type: 'verben', de: 'klingeln', id: 'berdering' },
+                    { ch: 11, type: 'verben', de: 'schimpfen', id: 'dimarahi / memarahi' },
+                    { ch: 11, type: 'andere', de: 'ständig', id: 'terus-menerus' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Stichwort, -¨er', id: 'kata kunci' },
+                    { ch: 11, type: 'verben', de: 'ausschalten', id: 'mematikan' },
+                    { ch: 11, type: 'verben', de: 'dazuschreiben', id: 'menambahkan tulisan' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Mitleid, (Sg.)', id: 'rasa kasihan' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Apfelkuchen, -', id: 'kue apel' },
+                    { ch: 11, type: 'andere', de: 'altmodisch', id: 'kuno / jadul' },
+                    { ch: 11, type: 'verben', de: 'besitzen', id: 'memiliki' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Einkaufszentrum, -zentren', id: 'pusat perbelanjaan / mall' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Feuer, -', id: 'api' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Gas, -e', id: 'gas' },
+                    { ch: 11, type: 'verben', de: 'heizen', id: 'menyalakan pemanas' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Heizung, -en', id: 'mesin pemanas ruangan' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Hektik, (Sg.)', id: 'ketergesa-gesaan / kesibukan' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Helfer, - / die Helferin, -nen', id: 'penolong / asisten' },
+                    { ch: 11, type: 'andere', de: 'kühl', id: 'sejuk / dingin' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Kutsche, -n', id: 'kereta kuda' },
+                    { ch: 11, type: 'andere', de: 'niedrig', id: 'rendah' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Notfall, -¨e', id: 'keadaan darurat' },
+                    { ch: 11, type: 'verben', de: 'produzieren', id: 'memproduksi' },
+                    { ch: 11, type: 'andere', de: 'reich', id: 'kaya' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Strom, (Sg.)', id: 'listrik / arus' },
+                    { ch: 11, type: 'verben', de: 'träumen', id: 'bermimpi' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Unterkunft, -¨e', id: 'penginapan / tempat bernaung' },
+                    { ch: 11, type: 'verben', de: 'füllen', id: 'mengisi' },
+                    { ch: 11, type: 'verben', de: 'verzichten', id: 'melepas / merelakan' },
+                    { ch: 11, type: 'verben', de: 'besorgen', id: 'mengusahakan / mendapatkan' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Gold, (Sg.)', id: 'emas' },
+                    { ch: 11, type: 'verben', de: 'heilen', id: 'menyembuhkan' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Rat, (Sg.)', id: 'nasihat' },
+                    { ch: 11, type: 'nomen', art: 'das', de: 'das Sprichwort, -¨er', id: 'peribahasa' },
+                    { ch: 11, type: 'andere', de: 'effektiv', id: 'efektif' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Erklärung, -en', id: 'penjelasan' },
+                    { ch: 11, type: 'verben', de: 'äußern', id: 'menyatakan / mengungkapkan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der König, -e / die Königin, -nen', id: 'raja / ratu' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Unterhaltung, -en', id: 'hiburan / percakapan' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Bestseller-Liste, -n', id: 'daftar buku terlaris' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Gesellschaft, -en', id: 'masyarakat' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Gewalt, (Sg.)', id: 'kekerasan' },
+                    { ch: 12, type: 'andere', de: 'insbesondere', id: 'khususnya' },
+                    { ch: 12, type: 'andere', de: 'jährlich', id: 'tahunan / setiap tahun' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Kinderbuch, -¨er', id: 'buku anak-anak' },
+                    { ch: 12, type: 'andere', de: 'knapp', id: 'hampir / sedikit kurang' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Kriminalität, (Sg.)', id: 'kriminalitas' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Kulisse, -n', id: 'dekorasi panggung / latar' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Märchenschloss, -¨er', id: 'istana dongeng' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Realität, -en', id: 'realitas / kenyataan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Roman, -e', id: 'novel' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Schloss, -¨er', id: 'istana / kastil' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Synchronsprecher, -', id: 'pengisi suara (pria)' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Synchronsprecherin, -nen', id: 'pengisi suara (wanita)' },
+                    { ch: 12, type: 'andere', de: 'unendlich', id: 'tak terbatas' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Verfilmung, -en', id: 'adaptasi film' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Werk, -e', id: 'karya' },
+                    { ch: 12, type: 'andere', de: 'wild', id: 'liar' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Führung, -en', id: 'tur berpanduan' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Musikfestival, -s', id: 'festival musik' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Rockmusik, (Sg.)', id: 'musik rock' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die AGB, -s', id: 'syarat dan ketentuan umum' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Datenschutzbestimmung, -en', id: 'kebijakan privasi data' },
+                    { ch: 12, type: 'verben', de: 'erhalten', id: 'menerima' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Gebühr, -en', id: 'biaya' },
+                    { ch: 12, type: 'andere', de: 'inklusive', id: 'termasuk' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Kauf, -¨e', id: 'pembelian' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Mehrwertsteuer, (Sg.)', id: 'PPN (pajak pertambahan nilai)' },
+                    { ch: 12, type: 'andere', de: 'netto', id: 'bersih (netto)' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Reihe, -n', id: 'deretan / barisan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Stehplatz, -¨e', id: 'tempat berdiri' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Versand, (Sg.)', id: 'pengiriman' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Versandkosten, (Pl.)', id: 'biaya pengiriman' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Warenkorb, -¨e', id: 'keranjang belanja' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Zahlungsart, -en', id: 'metode pembayaran' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Zwischensumme, -n', id: 'subtotal' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Campingplatz, -¨e', id: 'area kemping' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Verpflegung, -en', id: 'katering / konsumsi' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Rucksack, -¨e', id: 'tas ransel' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Übernachtung, -en', id: 'menginap' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Rückfrage, -n', id: 'pertanyaan susulan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Hit, -s', id: 'lagu hit' },
+                    { ch: 12, type: 'andere', de: 'melodisch', id: 'melodis' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Musikstil, -e', id: 'gaya musik' },
+                    { ch: 12, type: 'andere', de: 'befreundet', id: 'berteman' },
+                    { ch: 12, type: 'verben', de: 'bestätigen', id: 'mengonfirmasi' },
+                    { ch: 12, type: 'andere', de: 'gelaunt', id: 'dalam kondisi suasana hati' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Hörer, - / die Hörerin, -nen', id: 'pendengar radio' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Kunstexperte, -n', id: 'pakar seni' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Nachrichtensprecher, -', id: 'pembaca berita' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Radiosprecher, -', id: 'pembawa acara radio' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Sammler, - / die Sammlerin, -nen', id: 'kolektor' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Schnäppchen, -', id: 'barang murah berkualiti / bargain' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Stille, (Sg.)', id: 'keheningan' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Stimme, -n', id: 'suara' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Stimmung, -en', id: 'suasana' },
+                    { ch: 12, type: 'verben', de: 'verschlafen', id: 'kesiangan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Wert, -e', id: 'nilai' },
+                    { ch: 12, type: 'andere', de: 'wertvoll', id: 'berharga' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Hauptrolle, -n', id: 'peran utama' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Prominente, -n', id: 'selebriti / tokoh terkenal' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Quiz, -ze', id: 'kuis' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Malerei, (Sg.)', id: 'seni lukis' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Audioguide, -s', id: 'panduan audio' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Bedeutung, -en', id: 'arti / makna' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Kunstgeschichte, (Sg.)', id: 'sejarah seni' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Tierbild, -er', id: 'gambar hewan' },
+                    { ch: 12, type: 'verben', de: 'abmalen', id: 'meniru lukisan / melukis' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Wildschwein, -e', id: 'babi hutan' },
+                    { ch: 12, type: 'andere', de: 'abstrakt', id: 'abstrak' },
+                    { ch: 12, type: 'andere', de: 'hübsch', id: 'cantik / elok' },
+                    { ch: 12, type: 'andere', de: 'uninteressant', id: 'tidak menarik' },
+                    { ch: 12, type: 'andere', de: 'verrückt', id: 'gila / unik' },
+                    { ch: 12, type: 'verben', de: 'deuten', id: 'menunjukkan / menafsirkan' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Titel, -', id: 'judul' },
+                    { ch: 12, type: 'verben', de: 'auffallen', id: 'mencolok / menarik perhatian' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Ausblick, -e', id: 'pemandangan' },
+                    { ch: 12, type: 'andere', de: 'dunkel- / hell-', id: 'gelap / terang' },
+                    { ch: 12, type: 'andere', de: 'anschließend', id: 'selanjutnya' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Zusage, -n', id: 'konfirmasi / penerimaan' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Beziehung, -en', id: 'hubungan' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Kumpel, -s', id: 'sahabat / teman dekat' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Vorschlag, -\u00a8e', id: 'usulan / saran' },
+                    { ch: 1, type: 'verben', de: 'sich verabreden', id: 'membuat janji bertemu' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Streit, (Sg.)', id: 'pertengkaran / percekcokan' },
+                    { ch: 1, type: 'nomen', art: 'die', de: 'die Versammlung, -en', id: 'pertemuan / himpunan' },
+                    { ch: 1, type: 'nomen', art: 'der', de: 'der Konflikt, -e', id: 'konflik / perselisihan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Ausbildungsm\u00f6glichkeit, -en', id: 'kesempatan pelatihan vokasi' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Schulabg\u00e4nger, -', id: 'lulusan sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Weiterbildung, -en', id: 'pendidikan lanjutan' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Studienplatz, -\u00a8e', id: 'kuota / tempat kuliah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Qualifikation, -en', id: 'kualifikasi' },
+                    { ch: 2, type: 'nomen', art: 'der', de: 'der Bildungsabschluss, -\u00a8e', id: 'ijazah / kualifikasi pendidikan' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Schulbildung, (Sg.)', id: 'pendidikan sekolah' },
+                    { ch: 2, type: 'nomen', art: 'die', de: 'die Schulordnung, -en', id: 'peraturan sekolah' },
+                    { ch: 2, type: 'nomen', art: 'das', de: 'das Informatikstudium, -studieng\u00e4nge', id: 'studi informatika' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Anhang, -\u00a8e', id: 'lampiran email / attachment' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die Sprachnachricht, -en', id: 'pesan suara / voice note' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Bildschirmschoner, -', id: 'screensaver / pemelihara layar' },
+                    { ch: 3, type: 'nomen', art: 'der', de: 'der Webbrowser, -', id: 'peramban web / browser' },
+                    { ch: 3, type: 'nomen', art: 'die', de: 'die E-Mail-Kommunikation, (Sg.)', id: 'komunikasi surel' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Freude, (Sg.)', id: 'kegembiraan / sukacita' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Trauer, (Sg.)', id: 'duka / kesedihan' },
+                    { ch: 4, type: 'andere', de: 'entt\u00e4uscht', id: 'kecewa' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Eifersucht, (Sg.)', id: 'rasa cemburu' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Begeisterung, (Sg.)', id: 'antusiasme / semangat' },
+                    { ch: 4, type: 'nomen', art: 'die', de: 'die Gef\u00fchlswelt, -en', id: 'dunia emosi / perasaan' },
+                    { ch: 5, type: 'nomen', art: 'der', de: 'der Geldautomat, -en', id: 'mesin ATM' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Geb\u00fchr, -en', id: 'biaya transaksi / administrasi' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Verwaltung, -en', id: 'administrasi / instansi' },
+                    { ch: 5, type: 'nomen', art: 'das', de: 'das Bargeld, (Sg.)', id: 'uang tunai' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Bankleitzahl, -en', id: 'kode kliring bank' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die \u00dcberweisung, -en', id: 'transfer uang' },
+                    { ch: 5, type: 'nomen', art: 'die', de: 'die Stadtverwaltung, -en', id: 'pemerintah daerah / dinas kota' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Gesch\u00e4ftsreise, -n', id: 'perjalanan bisnis' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Dienstplan, -\u00a8e', id: 'jadwal kerja / vardag' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Kundenservice, (Sg.)', id: 'layanan pelanggan / CS' },
+                    { ch: 6, type: 'nomen', art: 'das', de: 'das Gehalt, -\u00a8er', id: 'gaji' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Visitenkarte, -n', id: 'kartu nama' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Arbeitnehmer, -', id: 'pekerja / karyawan' },
+                    { ch: 6, type: 'nomen', art: 'die', de: 'die Dienstreise, -n', id: 'perjalanan dinas' },
+                    { ch: 6, type: 'nomen', art: 'der', de: 'der Besprechungsraum, -\u00a8e', id: 'ruang rapat / ruang diskusi' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der F\u00fchrerschein, -e', id: 'surat izin mengemudi (SIM)' },
+                    { ch: 7, type: 'nomen', art: 'das', de: 'das Navigationssystem, -e', id: 'sistem navigasi / GPS' },
+                    { ch: 7, type: 'nomen', art: 'der', de: 'der Zebrastreifen, -', id: 'zebra cross / penyeberangan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Umleitung, -en', id: 'rute pengalihan jalan' },
+                    { ch: 7, type: 'nomen', art: 'die', de: 'die Stra\u00dfenkarte, -n', id: 'peta jalan' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Lernmethode, -n', id: 'metode belajar' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Grammatikregel, -n', id: 'aturan tata bahasa' },
+                    { ch: 8, type: 'verben', de: 'auswendig lernen', id: 'menghafal luar kepala' },
+                    { ch: 8, type: 'nomen', art: 'die', de: 'die Lernkarte, -n', id: 'kartu belajar / flashcard' },
+                    { ch: 8, type: 'nomen', art: 'das', de: 'das Ged\u00e4chtnis, -se', id: 'daya ingat / memori' },
+                    { ch: 8, type: 'nomen', art: 'der', de: 'der Lernerfolg, -e', id: 'keberhasilan belajar' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Mannschaftssport, (Sg.)', id: 'olahraga beregu' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Fitnessstudio, -s', id: 'gym / pusat kebugaran' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Fitness, (Sg.)', id: 'kebugaran' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Sieger, -', id: 'pemenang / juara' },
+                    { ch: 9, type: 'nomen', art: 'das', de: 'das Spiel, -e', id: 'pertandingan / permainan' },
+                    { ch: 9, type: 'nomen', art: 'die', de: 'die Ausr\u00fcstung, -en', id: 'perlengkapan olahraga' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Pokal, -e', id: 'piala / trofi' },
+                    { ch: 9, type: 'nomen', art: 'der', de: 'der Schiedsrichter, -', id: 'wasit pertandingan' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die Hausordnung, -en', id: 'peraturan rumah / apartemen' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der M\u00fcll, (Sg.)', id: 'sampah' },
+                    { ch: 10, type: 'nomen', art: 'die', de: 'die M\u00fclltrennung, (Sg.)', id: 'pemilahan sampah' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der L\u00e4rm, (Sg.)', id: 'kebisingan' },
+                    { ch: 10, type: 'nomen', art: 'der', de: 'der Mietvertrag, -\u00a8e', id: 'kontrak sewa rumah' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die Vergangenheit, (Sg.)', id: 'masa lalu' },
+                    { ch: 11, type: 'andere', de: 'pl\u00f6tzlich', id: 'tiba-tiba' },
+                    { ch: 11, type: 'andere', de: 'damals', id: 'kala itu / zaman dulu' },
+                    { ch: 11, type: 'nomen', art: 'der', de: 'der Wandel, (Sg.)', id: 'perubahan / pergeseran' },
+                    { ch: 11, type: 'nomen', art: 'die', de: 'die \u00c4ra, \u00c4ren', id: 'era / zaman' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Vorf\u00fchrung, -en', id: 'pertunjukan' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Kinokarte, -n', id: 'tiket bioskop' },
+                    { ch: 12, type: 'nomen', art: 'das', de: 'das Theaterst\u00fcck, -e', id: 'pementasan teater' },
+                    { ch: 12, type: 'nomen', art: 'der', de: 'der Regisseur, -e', id: 'sutradara (pria)' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Regisseurin, -nen', id: 'sutradara (wanita)' },
+                    { ch: 12, type: 'nomen', art: 'die', de: 'die Leinwand, -\u00a8e', id: 'layar tancap / layar bioskop' }
+                ],
+                get filteredVocab() {
+                    return this.vocabList.filter(item => {
+                        const q = this.searchQuery.toLowerCase().trim();
+                        const matchesSearch = !q || item.de.toLowerCase().includes(q) || item.id.toLowerCase().includes(q);
+                        const matchesKapitel = this.selectedKapitel === 'all' || item.ch === Number(this.selectedKapitel);
+                        const matchesType = this.selectedType === 'all' || item.type === this.selectedType;
+                        const matchesArticle = this.selectedArticle === 'all' || (item.type === 'nomen' && item.art === this.selectedArticle);
+                        return matchesSearch && matchesKapitel && matchesType && matchesArticle;
+                    });
+                },
+                speak(text) {
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                        const utterance = new SpeechSynthesisUtterance(text);
+                        utterance.lang = 'de-DE';
+                        utterance.rate = 0.9;
+                        window.speechSynthesis.speak(utterance);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
