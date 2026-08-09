@@ -1422,6 +1422,60 @@ Saya mau tanya-tanya dan konsultasi lebih lanjut mengenai jadwal dan pendaftaran
             };
         }
     </script>
+    <!-- Clean Hash Navigation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Intercept same-page anchor link clicks
+            document.body.addEventListener('click', (e) => {
+                const anchor = e.target.closest('a');
+                if (!anchor) return;
+
+                const href = anchor.getAttribute('href');
+                if (!href || !href.includes('#')) return;
+
+                try {
+                    const url = new URL(anchor.href);
+                    const isSamePage = url.protocol === window.location.protocol &&
+                        url.host === window.location.host &&
+                        url.pathname === window.location.pathname;
+
+                    if (isSamePage && url.hash) {
+                        const target = document.querySelector(url.hash);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                } catch (err) {
+                    // Fallback
+                }
+            });
+
+            // 2. Clean URL hash on load
+            if (window.location.hash) {
+                const hash = window.location.hash;
+                // Clear hash from URL immediately
+                try {
+                    let cleanPath = window.location.pathname;
+                    if (window.location.protocol !== 'file:') {
+                        if (cleanPath.endsWith('/index.html') || cleanPath === '/index.html') {
+                            cleanPath = cleanPath.slice(0, -10);
+                        } else if (cleanPath.endsWith('.html')) {
+                            cleanPath = cleanPath.slice(0, -5);
+                        }
+                    }
+                    history.replaceState(null, document.title, cleanPath + window.location.search);
+                } catch (err) { }
+
+                const target = document.querySelector(hash);
+                if (target) {
+                    setTimeout(() => {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

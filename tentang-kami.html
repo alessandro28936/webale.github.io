@@ -597,7 +597,15 @@
                 const hash = window.location.hash;
                 // Clear hash from URL immediately
                 try {
-                    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+                    let cleanPath = window.location.pathname;
+                    if (window.location.protocol !== 'file:') {
+                        if (cleanPath.endsWith('/index.html') || cleanPath === '/index.html') {
+                            cleanPath = cleanPath.slice(0, -10);
+                        } else if (cleanPath.endsWith('.html')) {
+                            cleanPath = cleanPath.slice(0, -5);
+                        }
+                    }
+                    history.replaceState(null, document.title, cleanPath + window.location.search);
                 } catch (err) {}
                 
                 const target = document.querySelector(hash);
