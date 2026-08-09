@@ -238,7 +238,7 @@
             </h1>
 
             <p class="text-gray-500 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-medium pt-1">
-                Jawab <strong>20 soal</strong> dalam waktu sekitar <strong>5â€“8 menit</strong> untuk mengetahui level
+                Jawab <strong>20 soal</strong> dalam waktu sekitar <strong>5–8 menit</strong> untuk mengetahui level
                 bahasa Jerman yang paling sesuai dengan kemampuanmu.
             </p>
 
@@ -293,7 +293,7 @@
                             :class="{
                                 'bg-blue-100 text-blue-700': currentQuestion.skill === 'Lesen',
                                 'bg-purple-100 text-purple-700': currentQuestion.skill === 'Schreiben',
-                                'bg-amber-100 text-amber-700': currentQuestion.skill === 'HÃ¶ren'
+                                'bg-amber-100 text-amber-700': currentQuestion.skill === 'Hören'
                             }" x-text="currentQuestion.skill"></span>
                         <span class="text-[11px] sm:text-xs text-gray-400 font-semibold ml-0.5 sm:ml-1"
                             x-text="'Soal ' + (currentIndex + 1) + ' dari ' + questions.length"></span>
@@ -335,8 +335,8 @@
                     </div>
                 </template>
 
-                <!-- AUDIO PLAYER CARD FOR HÃ–REN -->
-                <template x-if="currentQuestion.skill === 'HÃ¶ren'">
+                <!-- AUDIO PLAYER CARD FOR HÖREN -->
+                <template x-if="currentQuestion.skill === 'Hören'">
                     <div
                         class="bg-slate-50 border border-slate-200/90 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-navy shadow-xs space-y-2">
                         <div class="flex items-center justify-between text-[11px] sm:text-xs font-extrabold">
@@ -399,7 +399,7 @@
                                 <button type="button" @click="resetWordBank()"
                                     :disabled="selectedOption !== null || selectedWords.length === 0"
                                     class="text-[11px] sm:text-xs font-bold text-red-500 hover:text-red-600 disabled:opacity-30 disabled:pointer-events-none flex items-center gap-1 cursor-pointer">
-                                    <span>âŒ« Reset / Hapus</span>
+                                    <span>⌫ Reset / Hapus</span>
                                 </button>
                             </div>
 
@@ -414,7 +414,7 @@
                                         :disabled="selectedOption !== null"
                                         class="bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg sm:rounded-xl font-extrabold text-xs sm:text-sm shadow-xs flex items-center gap-1.5 transition-all cursor-pointer">
                                         <span x-text="w"></span>
-                                        <span class="text-[10px] opacity-75">âœ•</span>
+                                        <span class="text-[10px] opacity-75">&times;</span>
                                     </button>
                                 </template>
                             </div>
@@ -475,7 +475,7 @@
                                         <span x-text="pair.de"></span>
                                         <template x-if="connectedPairs[pair.de]">
                                             <span
-                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">âœ…</span>
+                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">✓</span>
                                         </template>
                                     </button>
                                 </template>
@@ -493,7 +493,7 @@
                                         <span x-text="idText"></span>
                                         <template x-if="isRightOptionConnected(idText)">
                                             <span
-                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">âœ…</span>
+                                                class="text-xs font-extrabold text-teal-600 bg-teal-100 px-2 py-0.5 rounded-md">✓</span>
                                         </template>
                                     </button>
                                 </template>
@@ -505,13 +505,13 @@
                             <button type="button" @click="resetMatchingPairs()"
                                 :disabled="selectedOption !== null || Object.keys(connectedPairs).length === 0"
                                 class="px-4 py-2.5 bg-white border border-slate-300 text-slate-600 hover:text-red-500 hover:border-red-300 rounded-xl font-bold text-xs flex items-center gap-1.5 transition disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
-                                <span>ðŸ”„ ZurÃ¼cksetzen</span>
+                                <span>🔄 Zurücksetzen</span>
                             </button>
 
                             <button type="button" @click="checkMatchingAnswer()" x-show="selectedOption === null"
                                 :disabled="!currentQuestion.matchingPairs || Object.keys(connectedPairs).length !== currentQuestion.matchingPairs.length"
                                 class="btn-orange text-white px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-md disabled:opacity-40 disabled:pointer-events-none cursor-pointer">
-                                Cek Jawaban / Weiter â†’
+                                Cek Jawaban / Weiter &rarr;
                             </button>
                         </div>
                     </div>
@@ -535,11 +535,11 @@
                                 <div x-show="selectedOption !== null">
                                     <template x-if="idx === currentQuestion.correct">
                                         <span
-                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">âœ“</span>
+                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">✓</span>
                                     </template>
                                     <template x-if="selectedOption === idx && idx !== currentQuestion.correct">
                                         <span
-                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">âœ•</span>
+                                            class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] sm:text-xs font-black">✕</span>
                                     </template>
                                 </div>
                             </button>
@@ -563,7 +563,11 @@
                     <button type="button" @click="nextQuestion()"
                         class="w-full sm:w-auto btn-orange text-white px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-base inline-flex items-center justify-center gap-2 shadow-md cursor-pointer">
                         <span
-                            x-text="currentIndex < questions.length - 1 ? 'Soal Berikutnya â†’' : 'Lihat Hasil Einstufungstest'"></span>
+                            x-text="currentIndex < questions.length - 1 ? 'Soal Berikutnya' : 'Lihat Hasil Einstufungstest'"></span>
+                        <svg x-show="currentIndex < questions.length - 1" class="w-4 h-4 sm:w-5 sm:h-5" fill="none"
+                            stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -627,9 +631,9 @@
                         </div>
                         <div
                             class="bg-amber-50/80 p-2 sm:p-3 rounded-lg sm:rounded-xl border border-amber-200 text-center">
-                            <span class="block text-[10px] sm:text-xs font-bold text-amber-700">HÃ¶ren</span>
-                            <span class="block text-base sm:text-lg font-extrabold text-navy"
-                                x-text="fertigkeitScores['HÃ¶ren'] + '/4'"></span>
+                            <span class="block text-[10px] sm:text-xs font-bold text-amber-700">Hören</span>
+                            <span class="block text-sm sm:text-lg font-black text-amber-900"
+                                x-text="fertigkeitScores['Hören'] + '/4'"></span>
                         </div>
                     </div>
 
@@ -737,7 +741,7 @@
                 fertigkeitScores: {
                     'Lesen': 0,
                     'Schreiben': 0,
-                    'HÃ¶ren': 0
+                    'Hören': 0
                 },
                 totalScore: 0,
                 isPlayingAudio: false,
@@ -1031,7 +1035,7 @@
                     }
                 },
 
-                // 20 Curated Questions across 4 CEFR Tiers and 3 Fertigkeiten (Lesen, Schreiben, HÃ¶ren)
+                // 20 Curated Questions across 4 CEFR Tiers and 3 Fertigkeiten (Lesen, Schreiben, Hören)
                 questions: [
                     // --- TIER 1: A1.1 (Soal 1-5) ---
                     {
@@ -1045,7 +1049,7 @@
                     },
                     {
                         tier: 'A1.1',
-                        skill: 'HÃ¶ren',
+                        skill: 'Hören',
                         topic: 'Soal 2',
                         audioText: 'Einundzwanzig plus achtundsiebzig ist?',
                         prompt: 'Welche deutsche Zahl ist das richtige Ergebnis dieser Addition?',
@@ -1092,28 +1096,28 @@
                             <circle cx="95" cy="74" r="8" fill="#FF6B35"/>
                             <text x="95" y="77" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">3</text>
                         </svg>`,
-                        dialogue: 'â—‹ Entschuldigung, wo ist der Bahnhof?\nâ— Gehen Sie hier (1) _____ und dann (2) _____. Biegen Sie dann (3) _____ ab. Da ist der Bahnhof.\nâ—‹ Vielen Dank.\nâ— Bitte!',
-                        prompt: 'ErgÃ¤nzen Sie den Dialog zur Wegbeschreibung. Welche WÃ¶rter passen in der richtigen Reihenfolge fÃ¼r (1), (2) und (3)?',
+                        dialogue: '○ Entschuldigung, wo ist der Bahnhof?\n● Gehen Sie hier (1) _____ und dann (2) _____. Biegen Sie dann (3) _____ ab. Da ist der Bahnhof.\n○ Vielen Dank.\n● Bitte!',
+                        prompt: 'Ergänzen Sie den Dialog zur Wegbeschreibung. Welche Wörter passen in der richtigen Reihenfolge für (1), (2) und (3)?',
                         options: ['links / geradeaus / rechts', 'geradeaus / rechts / links', 'rechts / links / geradeaus', 'geradeaus / links / rechts'],
                         correct: 3,
                         explanation: 'Berdasarkan peta petunjuk arah (Wegbeschreibung): Pertama jalan lurus di sini (1: geradeaus), lalu belok kiri (2: links), dan belok kanan (3: rechts) menuju stasiun (Bahnhof).'
                     },
                     {
                         tier: 'A1.1',
-                        skill: 'HÃ¶ren',
+                        skill: 'Hören',
                         topic: 'Soal 4',
                         audioUrl: '45 Netzwerk neu A1.1 KB.mp3',
-                        prompt: 'Mario und Elena planen eine Grillparty. HÃ¶ren Sie das Audio. Was muss Mario im Supermarkt kaufen?',
-                        options: ['Tomaten, Eier, Ã–l, Gurken', 'Eier, Tomaten, KÃ¤se, die GetrÃ¤nke', 'Eier, Tomaten, Gurken', 'KÃ¤se, Ã–l und die GetrÃ¤nke'],
+                        prompt: 'Mario und Elena planen eine Grillparty. Hören Sie das Audio. Was muss Mario im Supermarkt kaufen?',
+                        options: ['Tomaten, Eier, Öl, Gurken', 'Eier, Tomaten, Käse, die Getränke', 'Eier, Tomaten, Gurken', 'Käse, Öl und die Getränke'],
                         correct: 3,
-                        explanation: 'Berdasarkan percakapan audio Netzwerk neu A1.1, barang yang harus dibeli Mario di supermarket untuk Grillparty adalah KÃ¤se (keju), Ã–l (minyak), dan die GetrÃ¤nke (minuman).'
+                        explanation: 'Berdasarkan percakapan audio Netzwerk neu A1.1, barang yang harus dibeli Mario di supermarket untuk Grillparty adalah Käse (keju), Öl (minyak), dan die Getränke (minuman).'
                     },
                     {
                         tier: 'A1.1',
                         skill: 'Schreiben',
                         topic: 'Soal 5',
-                        dialogue: 'Anna: Haben wir noch (1) _____ Tomaten im KÃ¼hlschrank?\nMaria: Nein, wir haben nur noch (2) _____ Gurke. Aber ich kaufe gleich (3) _____ Cola und (4) _____ Tomaten.',
-                        prompt: 'Nominativ oder Akkusativ? ErgÃ¤nzen Sie "ein" in der richtigen Form.',
+                        dialogue: 'Anna: Haben wir noch (1) _____ Tomaten im Kühlschrank?\nMaria: Nein, wir haben nur noch (2) _____ Gurke. Aber ich kaufe gleich (3) _____ Cola und (4) _____ Tomaten.',
+                        prompt: 'Nominativ oder Akkusativ? Ergänzen Sie "ein" in der richtigen Form.',
                         options: ['ein / einen / eine / ein', 'keine / eine / ein / keine', 'eine / einen / eine / eine', '- / eine / eine / -'],
                         correct: 3,
                         explanation: 'Kata "Tomaten" berbentuk jamak (Plural) sehingga tidak menggunakan artikel "ein" (-). Kata benda "Gurke" (die Gurke) dan "Cola" (die Cola) bergender feminim dan berposisi sebagai objek Akkusativ sehingga menggunakan artikel "eine".'
@@ -1133,11 +1137,11 @@
                         tier: 'A1.2',
                         skill: 'Lesen',
                         topic: 'Soal 7',
-                        dialogue: 'Mein Praktikum in KÃ¶ln\nEndlich bin ich in KÃ¶ln und mache hier ein Praktikum! Das Leben ist ganz anders als in Sevilla ... das Wetter auch!\n\nDie Firma ist klein, aber es ist immer viel los. Ich muss schon um halb acht da sein â€“ das ist nicht leicht fÃ¼r mich! Um zehn trinken meine Kollegen und ich zusammen Kaffee oder ich mache allein Pause. Das ist auch schÃ¶n!\n\nAm Vormittag haben wir oft Besprechungen. Die Besprechungen sind interessant und meistens auch lustig. Meine Chefin und meine Kollegen sind sehr nett und erklÃ¤ren viel, aber manchmal haben sie keine Zeit fÃ¼r meine Fragen. Ich muss oft fragen â€žWas bedeutet das?â€œ oder â€žWie mache ich das?â€œ.\n\nIch kann schon viel allein machen, aber leider noch nicht alles und ich mache auch Fehler.\n\nIch telefoniere mit Kunden oder arbeite am Computer. Die Computerarbeit finde ich nicht so toll, aber ich telefoniere gern.\n\nMeine Chefin nimmt mich auch zu Kunden mit. Das finde ich super und da lerne ich viel.\n\nAm Wochenende gehe ich zum Club EspaÃ±ol. Dort sprechen wir Deutsch und Spanisch. Die Leute sind supernett. Wir sehen zusammen Filme, singen Lieder oder kochen zusammen.\n\nIch mÃ¶chte noch ganz lang hier in KÃ¶ln bleiben!',
+                        dialogue: 'Mein Praktikum in Köln\nEndlich bin ich in Köln und mache hier ein Praktikum! Das Leben ist ganz anders als in Sevilla ... das Wetter auch!\n\nDie Firma ist klein, aber es ist immer viel los. Ich muss schon um halb acht da sein – das ist nicht leicht für mich! Um zehn trinken meine Kollegen und ich zusammen Kaffee oder ich mache allein Pause. Das ist auch schön!\n\nAm Vormittag haben wir oft Besprechungen. Die Besprechungen sind interessant und meistens auch lustig. Meine Chefin und meine Kollegen sind sehr nett und erklären viel, aber manchmal haben sie keine Zeit für meine Fragen. Ich muss oft fragen „Was bedeutet das?“ oder „Wie mache ich das?“.\n\nIch kann schon viel allein machen, aber leider noch nicht alles und ich mache auch Fehler.\n\nIch telefoniere mit Kunden oder arbeite am Computer. Die Computerarbeit finde ich nicht so toll, aber ich telefoniere gern.\n\nMeine Chefin nimmt mich auch zu Kunden mit. Das finde ich super und da lerne ich viel.\n\nAm Wochenende gehe ich zum Club Español. Dort sprechen wir Deutsch und Spanisch. Die Leute sind supernett. Wir sehen zusammen Filme, singen Lieder oder kochen zusammen.\n\nIch möchte noch ganz lang hier in Köln bleiben!',
                         prompt: 'Warum muss sie oft fragen?',
                         options: ['Weil sie ihre Kollegen nicht mag.', 'Weil sie vieles noch nicht versteht.', 'Weil niemand Deutsch spricht.', 'Sie ist sehr nett.'],
                         correct: 1,
-                        explanation: 'Berdasarkan teks cerita "Mein Praktikum in KÃ¶ln", ia sering bertanya ("Was bedeutet das?" / "Wie mache ich das?") karena masih ada hal yang belum dipahami dan belum bisa dikerjakan sendiri ("leider noch nicht alles").'
+                        explanation: 'Berdasarkan teks cerita "Mein Praktikum in Köln", ia sering bertanya ("Was bedeutet das?" / "Wie mache ich das?") karena masih ada hal yang belum dipahami dan belum bisa dikerjakan sendiri ("leider noch nicht alles").'
                     },
                     {
                         tier: 'A1.2',
@@ -1148,33 +1152,33 @@
                             'Ich muss dreimal am Tag diese Tabletten nehmen',
                             'Ich muss diese Tabletten dreimal am Tag nehmen'
                         ],
-                        prompt: 'Bringen Sie die WÃ¶rter in die richtige Reihenfolge (beim Arzt):',
+                        prompt: 'Bringen Sie die Wörter in die richtige Reihenfolge (beim Arzt):',
                         options: ['Ich nehmen dreimal am Tag diese Tabletten muss.', 'Dreimal am Tag ich muss diese Tabletten nehmen.', 'Ich muss nehmen dreimal am Tag diese Tabletten.', 'Ich muss dreimal am Tag diese Tabletten nehmen.'],
                         correct: 3,
-                        explanation: 'Struktur kalimat dengan kata kerja modal (mÃ¼ssen): Modalverb yang berkonjugasi (muss) berada di posisi kedua, sedangkan kata kerja utama berbentuk Infinitiv (nehmen) SELALU berada di paling akhir kalimat. Urutan "dreimal am Tag diese Tabletten" maupun "diese Tabletten dreimal am Tag" keduanya benar secara gramatikal.'
+                        explanation: 'Struktur kalimat dengan kata kerja modal (müssen): Modalverb yang berkonjugasi (muss) berada di posisi kedua, sedangkan kata kerja utama berbentuk Infinitiv (nehmen) SELALU berada di paling akhir kalimat. Urutan "dreimal am Tag diese Tabletten" maupun "diese Tabletten dreimal am Tag" keduanya benar secara gramatikal.'
                     },
                     {
                         tier: 'A1.2',
                         skill: 'Schreiben',
                         topic: 'Soal 9',
-                        prompt: 'Ordnen Sie die deutschen WÃ¶rter den passenden indonesischen Bedeutungen zu.',
+                        prompt: 'Ordnen Sie die deutschen Wörter den passenden indonesischen Bedeutungen zu.',
                         matchingPairs: [
                             { de: 'verdienen', id: 'Menghasilkan (gaji/uang)' },
                             { de: 'einladen', id: 'Mengundang' },
-                            { de: 'fleiÃŸig', id: 'Rajin / Tekun' },
+                            { de: 'fleißig', id: 'Rajin / Tekun' },
                             { de: 'besetzt', id: 'Terisi / Terpakai' },
                             { de: 'insgesamt', id: 'Total / Secara keseluruhan' }
                         ],
                         options: ['Semua 5 pasangan kata terhubung dengan tepat', 'Ada pasangan kata yang salah terhubung'],
                         correct: 0,
-                        explanation: 'Pasangan kosakata A1.2:\nâ€¢ verdienen = Menghasilkan (gaji/uang)\nâ€¢ einladen = Mengundang\nâ€¢ fleiÃŸig = Rajin / Tekun\nâ€¢ besetzt = Terisi / Terpakai\nâ€¢ insgesamt = Total / Secara keseluruhan'
+                        explanation: 'Pasangan kosakata A1.2:\n• verdienen = Menghasilkan (gaji/uang)\n• einladen = Mengundang\n• fleißig = Rajin / Tekun\n• besetzt = Terisi / Terpakai\n• insgesamt = Total / Secara keseluruhan'
                     },
                     {
                         tier: 'A1.2',
                         skill: 'Schreiben',
                         topic: 'Soal 10',
                         prompt: 'Ich _____ heute leider nicht kommen, _____ ich muss arbeiten.',
-                        options: ['kann / weil', 'kÃ¶nnen / dass', 'kann / denn', 'kÃ¶nnt / deshalb'],
+                        options: ['kann / weil', 'können / dass', 'kann / denn', 'könnt / deshalb'],
                         correct: 2,
                         explanation: 'Subjek "ich" menggunakan bentuk konjugasi Modalverb "kann". Konjungsi "denn" (karena) digunakan untuk menghubungkan dua Hauptsatz tanpa mengubah struktur urutan kata (subjek "ich" tetap langsung setelah "denn").'
                     },
@@ -1191,9 +1195,9 @@
                     },
                     {
                         tier: 'A2.1',
-                        skill: 'HÃ¶ren',
+                        skill: 'Hören',
                         topic: 'Soal 12',
-                        audioText: 'Gestern bin ich mit dem Bus nach Frankfurt gefahren und habe meine GroÃŸeltern besucht.',
+                        audioText: 'Gestern bin ich mit dem Bus nach Frankfurt gefahren und habe meine Großeltern besucht.',
                         prompt: 'Womit ist die Person nach Frankfurt gefahren?',
                         options: ['Mit dem Bus', 'Mit dem Zug', 'Mit dem Auto', 'Mit dem Fahrrad'],
                         correct: 0,
@@ -1203,8 +1207,8 @@
                         tier: 'A2.1',
                         skill: 'Schreiben',
                         topic: 'Soal 13',
-                        dialogue: 'ErgÃ¤nzen Sie die SÃ¤tze. Wo stehen die Verben?',
-                        prompt: 'Ich _____ nervÃ¶s, _____ ich eine PrÃ¼fung _____.',
+                        dialogue: 'Ergänzen Sie die Sätze. Wo stehen die Verben?',
+                        prompt: 'Ich _____ nervös, _____ ich eine Prüfung _____.',
                         options: ['bin / denn / habe', 'bin / dass / gehabt', 'bin / wenn / habe', 'bin / weil / ist'],
                         correct: 2,
                         explanation: 'Subjek "ich" menggunakan bentuk konjugasi "bin" (sein) dan "habe" (haben). Konjungsi subordinatif "wenn" (jika/apabila) memicu Nebensatz di mana kata kerja berkonjugasi (habe) SELALU berada di paling akhir kalimat.'
@@ -1238,22 +1242,22 @@
                             'Weil / muss',
                             'Obwohl / musste',
                             'Dass / mussten',
-                            'Wenn / mÃ¼sste'
+                            'Wenn / müsste'
                         ],
                         correct: 1,
-                        explanation: 'Kata hubung pertentangan "obwohl" (meskipun) memicu Nebensatz (verb "hatte" di paling akhir), dan subjek "er" membutuhkan kata kerja modal bentuk PrÃ¤teritum ("musste").'
+                        explanation: 'Kata hubung pertentangan "obwohl" (meskipun) memicu Nebensatz (verb "hatte" di paling akhir), dan subjek "er" membutuhkan kata kerja modal bentuk Präteritum ("musste").'
                     },
                     {
                         tier: 'A2.2',
-                        skill: 'HÃ¶ren',
+                        skill: 'Hören',
                         topic: 'Soal 17',
-                        audioText: 'Eigentlich wollte ich am Wochenende nach Berlin fahren, aber mein Zug hatte VerspÃ¤tung und der Flug war zu teuer. Deshalb bin ich zu Hause geblieben und habe den ganzen Tag Deutsch gelernt.',
+                        audioText: 'Eigentlich wollte ich am Wochenende nach Berlin fahren, aber mein Zug hatte Verspätung und der Flug war zu teuer. Deshalb bin ich zu Hause geblieben und habe den ganzen Tag Deutsch gelernt.',
                         prompt: 'Warum ist die Person am Wochenende zu Hause geblieben?',
                         options: [
                             'Weil sie lieber zu Hause in Berlin Deutsch lernen wollte.',
                             'Weil sie keinen Urlaub bekommen hat.',
-                            'Weil der Zug VerspÃ¤tung hatte und der Flug zu teuer war.',
-                            'Weil sie den Flug nach MÃ¼nchen verpasst hat.'
+                            'Weil der Zug Verspätung hatte und der Flug zu teuer war.',
+                            'Weil sie den Flug nach München verpasst hat.'
                         ],
                         correct: 2,
                         explanation: 'Audio menguji penalaran alasan: Orang tersebut batal pergi karena kereta terlambat dan tiket pesawat terlalu mahal, sehingga memutuskan tetap di rumah.'
@@ -1276,29 +1280,29 @@
                         tier: 'A2.2',
                         skill: 'Schreiben',
                         topic: 'Soal 19',
-                        prompt: 'Ich bin so mÃ¼de. Ich _____ jetzt am liebsten im Urlaub in Deutschland und _____ keinen Stress!',
+                        prompt: 'Ich bin so müde. Ich _____ jetzt am liebsten im Urlaub in Deutschland und _____ keinen Stress!',
                         options: [
-                            'wÃ¤re / hÃ¤tte',
+                            'wäre / hätte',
                             'bin / habe',
                             'war / hatte',
                             'werde / habe'
                         ],
                         correct: 0,
-                        explanation: 'Pengandaian/keinginan irreal (Konjunktiv II) untuk subjek "ich" menggunakan bentuk "wÃ¤re" (seandainya berada) dan "hÃ¤tte" (seandainya memiliki).'
+                        explanation: 'Pengandaian/keinginan irreal (Konjunktiv II) untuk subjek "ich" menggunakan bentuk "wäre" (seandainya berada) dan "hätte" (seandainya memiliki).'
                     },
                     {
                         tier: 'A2.2',
                         skill: 'Schreiben',
                         topic: 'Soal 20',
-                        prompt: 'Wir sprechen oft _____ den Deutschkurs und ich nehme regelmÃ¤ÃŸig _____ den Ãœbungen teil.',
+                        prompt: 'Wir sprechen oft _____ den Deutschkurs und ich nehme regelmäßig _____ den Übungen teil.',
                         options: [
                             'von / mit',
-                            'fÃ¼r / in',
-                            'Ã¼ber / an',
+                            'für / in',
+                            'über / an',
                             'auf / bei'
                         ],
                         correct: 2,
-                        explanation: 'Pasangan preposisi kata kerja A2.2 yang tepat: "sprechen Ã¼ber" (+ Akkusativ) = berbicara tentang, dan "teilnehmen an" (+ Dativ) = berpartisipasi dalam.'
+                        explanation: 'Pasangan preposisi kata kerja A2.2 yang tepat: "sprechen über" (+ Akkusativ) = berbicara tentang, dan "teilnehmen an" (+ Dativ) = berpartisipasi dalam.'
                     }
                 ],
 
@@ -1322,7 +1326,7 @@
                         return {
                             level: 'A1.2',
                             subtitle: 'Kamu sudah paham dasar sapaan dan angka, siap untuk memperdalam tata bahasa A1 lanjutan!',
-                            advice: 'Hasil tes menunjukkan kamu sudah menguasai fondasi awal A1.1. Kamu siap masuk ke Level A1.2 untuk mempelajari Akkusativ, kata kerja modal (kÃ¶nnen/mÃ¼ssen), kata kerja terpisah, dan percakapan harian.'
+                            advice: 'Hasil tes menunjukkan kamu sudah menguasai fondasi awal A1.1. Kamu siap masuk ke Level A1.2 untuk mempelajari Akkusativ, kata kerja modal (können/müssen), kata kerja terpisah, dan percakapan harian.'
                         };
                     } else if (a12 >= 4 && a21 <= 3) {
                         return {
@@ -1334,7 +1338,7 @@
                         return {
                             level: 'A2.2',
                             subtitle: 'Kemampuan bahasa Jerman kamu sudah sangat baik! Siap menuntaskan jenjang A2.2.',
-                            advice: 'Luar biasa! Kamu berhasil menjawab soal-soal tingkat menengah dengan sangat baik. Kamu sangat cocok mengambil Level A2.2 untuk menguasai anak kalimat (NebensÃ¤tze), WechselprÃ¤positionen, dan percakapan fluida.'
+                            advice: 'Luar biasa! Kamu berhasil menjawab soal-soal tingkat menengah dengan sangat baik. Kamu sangat cocok mengambil Level A2.2 untuk menguasai anak kalimat (Nebensätze), Wechselpräpositionen, dan percakapan fluida.'
                         };
                     }
                 },
@@ -1345,7 +1349,7 @@
                     this.selectedOption = null;
                     this.totalScore = 0;
                     this.tierScores = { 'A1.1': 0, 'A1.2': 0, 'A2.1': 0, 'A2.2': 0 };
-                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'HÃ¶ren': 0 };
+                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'Hören': 0 };
                     this.isPlayingAudio = false;
                     this.audioProgressPercent = 0;
                     this.audioProgressText = '00:00 / 00:05';
@@ -1366,7 +1370,7 @@
                     this.selectedOption = null;
                     this.totalScore = 0;
                     this.tierScores = { 'A1.1': 0, 'A1.2': 0, 'A2.1': 0, 'A2.2': 0 };
-                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'HÃ¶ren': 0 };
+                    this.fertigkeitScores = { 'Lesen': 0, 'Schreiben': 0, 'Hören': 0 };
                     this.resetWordBank();
                 },
 
@@ -1403,15 +1407,15 @@
 - Total Skor: ${this.totalScore} / 20 (${Math.round((this.totalScore / 20) * 100)}%)
 
 *Rincian Sub-level:*
-  â€¢ A1.1: ${this.tierScores['A1.1']}/5
-  â€¢ A1.2: ${this.tierScores['A1.2']}/5
-  â€¢ A2.1: ${this.tierScores['A2.1']}/5
-  â€¢ A2.2: ${this.tierScores['A2.2']}/5
+  • A1.1: ${this.tierScores['A1.1']}/5
+  • A1.2: ${this.tierScores['A1.2']}/5
+  • A2.1: ${this.tierScores['A2.1']}/5
+  • A2.2: ${this.tierScores['A2.2']}/5
 
 *Rincian 3 Fertigkeiten:*
-  â€¢ ðŸ“– Lesen: ${this.fertigkeitScores['Lesen']}/4
-  â€¢ âœï¸ Schreiben: ${this.fertigkeitScores['Schreiben']}/12
-  â€¢ ðŸŽ§ HÃ¶ren: ${this.fertigkeitScores['HÃ¶ren']}/4
+  • 📖 Lesen: ${this.fertigkeitScores['Lesen']}/4
+  • ✍️ Schreiben: ${this.fertigkeitScores['Schreiben']}/12
+  • 🎧 Hören: ${this.fertigkeitScores['Hören']}/4
 
 *Rekomendasi Level:* Level ${this.recommendation.level}
 
