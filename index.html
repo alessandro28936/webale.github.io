@@ -1,7 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
+    <script>
+        // Clean URL: redirect from .html or index.html to clean routes
+        if (window.location.protocol !== 'file:') {
+            const path = window.location.pathname;
+            if (path.endsWith('/index.html') || path === '/index.html') {
+                const cleanPath = path.slice(0, -10);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            } else if (path.endsWith('.html')) {
+                const cleanPath = path.slice(0, -5);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            }
+        }
+    </script>
     <!-- Meta Pixel Code -->
     <script>
         !function (f, b, e, v, n, t, s) {
@@ -2498,8 +2511,7 @@
                     <h3 class="font-extrabold text-navy mb-5">Navigasi</h3>
                     <div class="grid gap-3 text-gray-500 font-semibold">
                         <a href="#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-                        <a href="einstufungstest"
-                            class="hover:text-orange-500 transition">Einstufungstest</a>
+                        <a href="einstufungstest" class="hover:text-orange-500 transition">Einstufungstest</a>
                         <a href="#faq" class="hover:text-orange-500 transition">FAQ</a>
                         <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
                     </div>
