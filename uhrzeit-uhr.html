@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uhrzeit-Uhr - Aksaradeutsch.id Mini Game</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.4s ease-in-out; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-[#FFFDF9] to-[#F9FAFB]">
+
+    <div x-data="timeQuiz()" x-init="initGame()" class="w-full max-w-xl glass-card rounded-[32px] p-6 md:p-8 shadow-xl border border-gray-100 relative overflow-hidden">
+        <!-- Background decorative blobs -->
+        <div class="absolute w-48 h-48 bg-orange-100/40 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
+        <div class="absolute w-48 h-48 bg-blue-100/30 rounded-full blur-3xl -bottom-10 -right-10 pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <span class="inline-flex px-4 py-1.5 bg-orange-50 text-orange-600 font-bold text-xs rounded-full border border-orange-100 mb-3 tracking-wide uppercase">
+                    Level A1.2 • Waktu & Jam
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-navy leading-tight">
+                    Uhrzeit-Uhr (Tell the Time)
+                </h1>
+                <p class="text-gray-500 text-sm mt-1 max-w-sm mx-auto">
+                    Lihat jam analog di bawah, lalu pilih frase waktu bahasa Jerman yang tepat!
+                </p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="flex items-center justify-between bg-white/50 border border-gray-100 rounded-2xl p-4 mb-6 text-sm">
+                <div>
+                    <span class="text-gray-500 font-medium">Waktu:</span>
+                    <span class="font-extrabold text-navy font-mono" x-text="formatTime(seconds)">00:00</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Soal:</span>
+                    <span class="font-extrabold text-navy" x-text="`${currentIndex + 1}/${totalQuestions}`">1/5</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 font-medium">Skor:</span>
+                    <span class="font-extrabold text-green-600" x-text="score">0</span>
+                </div>
+            </div>
+
+            <!-- SVG Analog Clock Display -->
+            <div class="bg-white border border-gray-200 rounded-3xl p-6 mb-6 flex flex-col items-center justify-center shadow-sm">
+                <svg width="200" height="200" viewBox="0 0 200 200" class="filter drop-shadow-sm">
+                    <!-- Clock Outer Circle -->
+                    <circle cx="100" cy="100" r="95" stroke="#e2e8f0" stroke-width="6" fill="#fff" />
+                    <!-- Inner Circle Accent -->
+                    <circle cx="100" cy="100" r="88" stroke="#f8fafc" stroke-width="2" fill="none" />
+                    
+                    <!-- Clock ticks (Hour markers) -->
+                    <g stroke="#94a3b8" stroke-width="3" stroke-linecap="round">
+                        <line x1="100" y1="12" x2="100" y2="20" />
+                        <line x1="100" y1="180" x2="100" y2="188" />
+                        <line x1="12" y1="100" x2="20" y2="100" />
+                        <line x1="180" y1="100" x2="188" y2="100" />
+                    </g>
+                    
+                    <!-- Center Pin -->
+                    <circle cx="100" cy="100" r="5" fill="#101828" />
+
+                    <!-- Hour Hand (dynamic rotation based on time) -->
+                    <line x1="100" y1="100" x2="100" y2="52" 
+                          stroke="#101828" stroke-width="6" stroke-linecap="round" 
+                          :transform="`rotate(${hourRotation} 100 100)`" />
+
+                    <!-- Minute Hand (dynamic rotation based on time) -->
+                    <line x1="100" y1="100" x2="100" y2="30" 
+                          stroke="#ea580c" stroke-width="4" stroke-linecap="round" 
+                          :transform="`rotate(${minuteRotation} 100 100)`" />
+                          
+                    <!-- Center Pin Cover -->
+                    <circle cx="100" cy="100" r="3" fill="#fff" />
+                </svg>
+            </div>
+
+            <!-- Choice buttons (4 options) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <template x-for="option in currentOptions" :key="option">
+                    <button @click="guess(option)" :disabled="!gameStarted || feedback !== 'idle'"
+                            :class="{
+                                'border-gray-200 bg-white text-navy hover:border-orange-400 hover:text-orange-600': feedback === 'idle',
+                                'border-green-500 bg-green-50 text-green-700 animate-pop': feedback === 'correct' && option === currentItem.correctPhrase,
+                                'border-red-500 bg-red-50 text-red-700 animate-shake': feedback === 'wrong' && option === chosenOption,
+                                'border-green-500 bg-green-50 text-green-700': feedback === 'wrong' && option === currentItem.correctPhrase
+                            }"
+                            class="p-4 rounded-2xl border-2 font-bold text-sm sm:text-base text-center transition-all duration-300 shadow-sm active:scale-95 disabled:cursor-not-allowed">
+                        <span x-text="option"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100">
+                <span class="text-xs text-gray-400">Petunjuk: "halb" artinya setengah jam menuju jam berikutnya (halb 3 = 2:30).</span>
+                <button @click="resetGame()" :disabled="!gameStarted"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-gray-200 bg-white font-bold text-sm text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all disabled:opacity-50">
+                    Reset Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Start Screen Overlay -->
+        <div x-show="!gameStarted && !gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center mb-4 border border-orange-100 shadow-lg shadow-orange-100/50 animate-pulse">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-orange-50 text-orange-600 text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
+                Level A1.2
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Mulai Tebak Jam!</h2>
+            <p class="text-gray-500 text-sm max-w-sm mb-6 leading-relaxed">
+                Uji kemampuanmu membaca jam dalam bahasa Jerman informal/formal. Jawab 5 soal secepat mungkin!
+            </p>
+
+            <button @click="startGame()" 
+                    class="w-full max-w-xs py-3.5 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all text-lg group">
+                Mulai Bermain
+                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Success Modal Overlay -->
+        <div x-show="gameCompleted" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-30">
+            
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4 border border-green-100 shadow-lg shadow-green-100/50 animate-bounce">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <span class="inline-flex px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full mb-2">
+                Sehr Gut! (Sangat Baik!)
+            </span>
+            <h2 class="text-3xl font-extrabold text-navy mb-2">Uji Jam Selesai!</h2>
+            <p class="text-gray-500 text-sm max-w-md mb-6 leading-relaxed">
+                Kamu menjawab dengan benar <span class="font-extrabold text-green-600 text-lg" x-text="score"></span> dari <span class="font-extrabold text-navy">5</span> soal dalam waktu <span class="font-extrabold text-navy" x-text="formatTime(seconds)"></span>. Waktu belajar yang sangat produktif!
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-xs justify-center">
+                <button @click="startGame()" 
+                        class="w-full py-3 rounded-2xl border border-gray-200 bg-white font-bold text-gray-700 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
+                    Main Lagi
+                </button>
+                <a href="./#kelas-a1" 
+                   class="w-full py-3 rounded-2xl bg-[#FF6B35] hover:bg-[#E85A2A] text-white font-bold shadow-lg shadow-orange-200 text-center flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    Lihat Kelas A1
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 text-center">
+        <a href="./" class="text-sm font-semibold text-gray-500 hover:text-[#FF6B35] transition flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Kembali ke Beranda Aksaradeutsch
+        </a>
+    </div>
+
+    <script>
+        function timeQuiz() {
+            return {
+                timePool: [
+                    { hour: 2, minute: 30, correctPhrase: 'Es ist halb drei.' },
+                    { hour: 10, minute: 15, correctPhrase: 'Es ist Viertel nach zehn.' },
+                    { hour: 11, minute: 45, correctPhrase: 'Es ist Viertel vor zwölf.' },
+                    { hour: 8, minute: 5, correctPhrase: 'Es ist fünf nach acht.' },
+                    { hour: 5, minute: 55, correctPhrase: 'Es ist fünf vor sechs.' },
+                    { hour: 4, minute: 20, correctPhrase: 'Es ist zwanzig nach vier.' },
+                    { hour: 9, minute: 40, correctPhrase: 'Es ist zwanzig vor zehn.' },
+                    { hour: 12, minute: 0, correctPhrase: 'Es ist zwölf Uhr.' },
+                    { hour: 7, minute: 30, correctPhrase: 'Es ist halb acht.' },
+                    { hour: 1, minute: 15, correctPhrase: 'Es ist Viertel nach eins.' }
+                ],
+                
+                selectedItems: [],
+                currentIndex: 0,
+                currentItem: null,
+                currentOptions: [],
+                hourRotation: 0,
+                minuteRotation: 0,
+                score: 0,
+                seconds: 0,
+                timerInterval: null,
+                gameStarted: false,
+                gameCompleted: false,
+                feedback: 'idle',
+                chosenOption: null,
+                totalQuestions: 5,
+                
+                initGame() {
+                    this.prepareGame();
+                },
+                
+                prepareGame() {
+                    this.currentIndex = 0;
+                    this.score = 0;
+                    this.seconds = 0;
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.gameCompleted = false;
+                    
+                    // Select 5 random time questions
+                    let shuffled = [...this.timePool].sort(() => Math.random() - 0.5);
+                    this.selectedItems = shuffled.slice(0, this.totalQuestions);
+                    this.loadQuestion();
+                },
+                
+                loadQuestion() {
+                    this.feedback = 'idle';
+                    this.chosenOption = null;
+                    this.currentItem = this.selectedItems[this.currentIndex];
+                    
+                    // Calculate clock hand rotations
+                    // 1 hour = 30 degrees (360/12)
+                    // 1 minute = 6 degrees (360/60)
+                    // Hour rotation includes fractional hour: hours * 30 + minutes * 0.5
+                    this.minuteRotation = this.currentItem.minute * 6;
+                    this.hourRotation = (this.currentItem.hour % 12) * 30 + this.currentItem.minute * 0.5;
+                    
+                    // Generate 1 correct + 3 wrong options
+                    let distractors = this.timePool
+                        .filter(item => item.correctPhrase !== this.currentItem.correctPhrase)
+                        .map(item => item.correctPhrase);
+                    
+                    let shuffledDistractors = distractors.sort(() => Math.random() - 0.5).slice(0, 3);
+                    this.currentOptions = [...shuffledDistractors, this.currentItem.correctPhrase].sort(() => Math.random() - 0.5);
+                },
+                
+                startGame() {
+                    clearInterval(this.timerInterval);
+                    this.prepareGame();
+                    this.gameStarted = true;
+                    this.startTimer();
+                },
+                
+                resetGame() {
+                    clearInterval(this.timerInterval);
+                    this.gameStarted = false;
+                    this.gameCompleted = false;
+                    this.prepareGame();
+                },
+                
+                startTimer() {
+                    this.timerInterval = setInterval(() => {
+                        this.seconds++;
+                    }, 1000);
+                },
+                
+                formatTime(totalSeconds) {
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                },
+                
+                guess(chosen) {
+                    if (this.feedback !== 'idle' || !this.gameStarted) return;
+                    
+                    this.chosenOption = chosen;
+                    const isCorrect = chosen === this.currentItem.correctPhrase;
+                    
+                    if (isCorrect) {
+                        this.feedback = 'correct';
+                        this.score++;
+                    } else {
+                        this.feedback = 'wrong';
+                    }
+                    
+                    setTimeout(() => {
+                        this.nextQuestion();
+                    }, 1500);
+                },
+                
+                nextQuestion() {
+                    this.currentIndex++;
+                    if (this.currentIndex < this.totalQuestions) {
+                        this.loadQuestion();
+                    } else {
+                        clearInterval(this.timerInterval);
+                        this.gameCompleted = true;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+
