@@ -2108,7 +2108,7 @@
                                     </div>
 
                                     <!-- Benefit 6 -->
-                                    <div class="flex items-start gap-2.5 sm:col-span-2">
+                                    <div class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
@@ -2121,11 +2121,28 @@
                                             yang Ingin Persiapan Ausbildung, Au pair, atau Tinggal di Jerman.</span>
                                     </div>
 
-                                    <!-- Bonus Kosakata (Tetap Dipertahankan) -->
-                                    <div class="flex items-start gap-2.5 sm:col-span-2 pt-1">
+                                    <!-- Benefit Baru Khusus Duo-Klasse (Buku Cetak Netzwerk neu) -->
+                                    <div x-show="selectedClass === 'duo'" class="flex items-start gap-2.5">
                                         <span
-                                            class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                                            <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor"
+                                            class="w-5 h-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                            </svg>
+                                        </span>
+                                        <span class="text-gray-700 font-medium text-xs md:text-sm">
+                                            <strong class="text-red-500 font-extrabold">GRATIS</strong> Buku Cetak
+                                            Netzwerk neu <span
+                                                x-text="plan.level.startsWith('A1') ? 'A1' : 'A2'"></span>
+                                        </span>
+                                    </div>
+
+                                    <!-- Bonus Kosakata (Tetap Dipertahankan) -->
+                                    <div class="flex items-start gap-2.5">
+                                        <span
+                                            class="w-5 h-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V6a2 2 0 10-2 2h2zm-8 4h16M3 8h18v4H3V8zm2 4v9a2 2 0 002 2h10a2 2 0 002-2v-9H5z" />
