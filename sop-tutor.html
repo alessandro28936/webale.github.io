@@ -196,53 +196,16 @@
 
 <body class="bg-[#F9FAFB] text-navy">
     <!-- Navbar -->
-    <nav x-data="{ mobileMenuOpen: false }"
-        class="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-16 py-3 md:py-4 bg-white/80 backdrop-blur-md sticky top-0 z-50 relative">
+    <nav
+        class="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-16 py-3 md:py-4 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200/80">
         <a href="./" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
             <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo"
                 class="h-11 sm:h-14 md:h-[72px] w-auto max-w-[240px] sm:max-w-none object-contain">
         </a>
-
-        <div class="hidden lg:flex gap-10 font-semibold text-gray-500 items-center">
-            <a href="./#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-            <a href="einstufungstest" class="hover:text-orange-500 transition">Einstufungstest</a>
-            <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
-            <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
-        </div>
-
-        <div class="flex items-center gap-3 md:gap-5">
-            <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-                class="lg:hidden w-10 h-10 md:w-11 md:h-11 rounded-2xl bg-white text-navy flex items-center justify-center hover:bg-orange-50 transition"
-                aria-label="Buka menu">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 7h16M4 12h16M4 17h16">
-                    </path>
-                </svg>
-            </button>
-            <a href="https://wa.me/6281959896825" target="_blank" rel="noopener noreferrer"
-                class="btn-whatsapp flex items-center gap-2 px-3 sm:px-6 md:px-7 py-3 rounded-2xl font-bold shadow-lg shadow-gray-100 text-xs sm:text-base whitespace-nowrap hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#25D366] group-hover:scale-110 transition-transform duration-300"
-                    fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M20.52 3.48A11.78 11.78 0 0012.15 0C5.62 0 .31 5.31.31 11.84c0 2.09.55 4.13 1.59 5.93L.21 24l6.38-1.67a11.8 11.8 0 005.56 1.42h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.16-1.23-6.13-3.48-8.43zM12.16 21.75h-.01a9.82 9.82 0 01-5.01-1.37l-.36-.22-3.79.99 1.01-3.69-.24-.38a9.8 9.8 0 01-1.5-5.24C2.26 6.41 6.72 2 12.16 2c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 7.01c0 5.43-4.42 9.84-9.88 9.84zm5.4-7.36c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z">
-                    </path>
-                </svg>
-                Konsultasi Gratis
-            </a>
-        </div>
-
-        <div x-cloak x-show="mobileMenuOpen" x-transition @click.outside="mobileMenuOpen = false"
-            class="lg:hidden absolute left-5 right-5 top-full mt-3 bg-white border border-gray-300 rounded-[24px] shadow-xl p-4 z-50">
-            <div class="grid gap-2 font-bold text-navy">
-                <a @click="mobileMenuOpen = false" href="./#materi"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Program Belajar</a>
-                <a @click="mobileMenuOpen = false" href="einstufungstest"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Einstufungstest</a>
-                <a @click="mobileMenuOpen = false" href="./#faq"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">FAQ</a>
-                <a @click="mobileMenuOpen = false" href="tentang-kami"
-                    class="px-4 py-3 rounded-2xl hover:bg-orange-50 transition">Tentang Kami</a>
-            </div>
+        <div class="flex items-center gap-2">
+            <span class="px-3 py-1 bg-gray-100 text-gray-600 font-bold text-xs rounded-full uppercase tracking-wider">
+                Dokumen Resmi SOP Tutor
+            </span>
         </div>
     </nav>
 
@@ -257,7 +220,8 @@
                     SOP Tutor Aksaradeutsch
                 </h1>
                 <p class="mt-4 text-gray-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                    Standar Operasional Prosedur bagi seluruh Tutor Aksaradeutsch dalam menjalankan proses pembelajaran secara profesional, konsisten, dan terstruktur.
+                    Standar Operasional Prosedur bagi seluruh Tutor Aksaradeutsch dalam menjalankan proses pembelajaran
+                    secara profesional, konsisten, dan terstruktur.
                 </p>
             </div>
         </section>
@@ -273,29 +237,47 @@
                         <h4 class="font-extrabold text-navy mb-4 text-xs uppercase tracking-wider">Daftar Isi</h4>
                         <nav class="space-y-2 font-semibold text-xs md:text-sm text-gray-500">
                             <a href="#tujuan"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">A. Tujuan SOP</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">A.
+                                Tujuan SOP</a>
                             <a href="#tanggung-jawab"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">B. Tanggung Jawab Tutor</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">B.
+                                Tanggung Jawab Tutor</a>
                             <a href="#persiapan"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">C. Persiapan Sebelum Kelas</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">C.
+                                Persiapan Sebelum Kelas</a>
                             <a href="#saat-kelas"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">D. Saat Kelas Berlangsung</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">D.
+                                Saat Kelas Berlangsung</a>
                             <a href="#setelah-kelas"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">E. Setelah Kelas Selesai</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">E.
+                                Setelah Kelas Selesai</a>
                             <a href="#google-classroom"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">F. Google Classroom</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">F.
+                                Google Classroom</a>
                             <a href="#whatsapp-group"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">G. WhatsApp Group</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">G.
+                                WhatsApp Group</a>
                             <a href="#kendala-teknis"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">H. Kendala Teknis</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">H.
+                                Kendala Teknis</a>
                             <a href="#etika-mengajar"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">I. Etika Mengajar</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">I.
+                                Etika Mengajar</a>
                             <a href="#pantangan"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">J. Hal yang Dilarang</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">J.
+                                Hal yang Dilarang</a>
                             <a href="#prinsip-mengajar"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">K. Prinsip Mengajar</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">K.
+                                Prinsip Mengajar</a>
                             <a href="#checklist-tutor"
-                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">L. Checklist Tutor</a>
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">L.
+                                Checklist Tutor</a>
+                            <a href="#sanksi-pelanggaran"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">M.
+                                Sanksi & Pelanggaran</a>
+                            <a href="#pembayaran-honorarium"
+                                class="block hover:text-orange-500 transition py-1 border-l-2 border-transparent hover:border-orange-500 pl-3">N.
+                                Sistem Honorarium</a>
                         </nav>
                     </aside>
 
@@ -310,10 +292,13 @@
                                 A. Tujuan SOP
                             </h2>
                             <p class="leading-relaxed">
-                                SOP ini disusun sebagai panduan bagi seluruh Tutor Aksaradeutsch dalam menjalankan proses pembelajaran secara profesional, konsisten, dan sesuai dengan standar pembelajaran Aksaradeutsch.
+                                SOP ini disusun sebagai panduan bagi seluruh Tutor Aksaradeutsch dalam menjalankan
+                                proses pembelajaran secara profesional, konsisten, dan sesuai dengan standar
+                                pembelajaran Aksaradeutsch.
                             </p>
                             <p class="mt-2 leading-relaxed">
-                                Seluruh tutor diharapkan membaca, memahami, dan menerapkan SOP ini selama menjadi Tutor Aksaradeutsch.
+                                Seluruh tutor diharapkan membaca, memahami, dan menerapkan SOP ini selama menjadi Tutor
+                                Aksaradeutsch.
                             </p>
                         </div>
 
@@ -341,8 +326,10 @@
                             </h2>
                             <p class="mb-3 font-semibold text-navy">Tutor wajib:</p>
                             <ul class="list-disc pl-6 space-y-2 mb-6">
-                                <li>Mengunggah materi pembelajaran ke Google Classroom paling lambat <strong>15 menit</strong> sebelum kelas dimulai.</li>
-                                <li>Membuat Absensi Google Classroom paling lambat <strong>5 menit</strong> sebelum kelas dimulai.</li>
+                                <li>Mengunggah materi pembelajaran ke Google Classroom paling lambat <strong>15
+                                        menit</strong> sebelum kelas dimulai.</li>
+                                <li>Membuat Absensi Google Classroom paling lambat <strong>5 menit</strong> sebelum
+                                    kelas dimulai.</li>
                                 <li>Memastikan perangkat mengajar berfungsi dengan baik.</li>
                             </ul>
 
@@ -351,7 +338,8 @@
                                 <h3 class="font-extrabold text-navy text-sm md:text-base uppercase tracking-wide mb-3">
                                     Checklist Sebelum Kelas
                                 </h3>
-                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-700 font-medium list-disc pl-5">
+                                <ul
+                                    class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-700 font-medium list-disc pl-5">
                                     <li>Laptop/PC siap digunakan</li>
                                     <li>Kamera berfungsi</li>
                                     <li>Mikrofon berfungsi</li>
@@ -385,7 +373,6 @@
                                         <li>Memberikan kesempatan bertanya kepada peserta.</li>
                                         <li>Mengoreksi pengucapan peserta apabila terdapat kesalahan.</li>
                                         <li>Memberikan contoh tambahan apabila diperlukan.</li>
-                                        <li>Menyesuaikan tempo belajar sesuai kemampuan peserta.</li>
                                     </ul>
                                 </div>
 
@@ -405,7 +392,9 @@
                                 <div>
                                     <h3 class="font-bold text-navy text-base mb-2">3. Ketentuan Peserta:</h3>
                                     <p class="text-sm text-gray-700 leading-relaxed">
-                                        Peserta yang terlambat tetap diperbolehkan mengikuti kelas. Tidak ada kewajiban bagi peserta untuk menyalakan kamera. Namun tutor dapat mengajak peserta menyalakan kamera apabila dirasa diperlukan.
+                                        Peserta yang terlambat tetap diperbolehkan mengikuti kelas. Tidak ada kewajiban
+                                        bagi peserta untuk menyalakan kamera. Namun tutor dapat mengajak peserta
+                                        menyalakan kamera apabila dirasa diperlukan.
                                     </p>
                                 </div>
                             </div>
@@ -420,8 +409,12 @@
                             <p class="mb-3 font-semibold text-navy">Tutor wajib:</p>
                             <ul class="list-disc pl-6 space-y-2">
                                 <li>Memberikan Hausaufgabe (Latihan) melalui Google Classroom.</li>
-                                <li>Reminder ke peserta melalui Whatsapp Group bahwa Hausaufgabe sudah diberikan dan perlu dikerjakan.</li>
-                                <li>Mengoreksi Hausaufgabe peserta.</li>
+                                <li>Reminder ke peserta melalui Whatsapp Group bahwa Hausaufgabe sudah diberikan dan
+                                    perlu dikerjakan.</li>
+                                <li><strong>Mengoreksi dan memberikan umpan balik Hausaufgabe peserta paling lambat 1x24
+                                        jam sebelum kelas berikutnya dimulai, dengan ketentuan peserta telah
+                                        mengumpulkan tugas minimal 48 jam sebelum kelas (kecuali pada hari libur atau
+                                        tanggal merah).</strong></li>
                                 <li>Menjawab pertanyaan peserta yang berkaitan dengan materi pembelajaran.</li>
                             </ul>
                         </div>
@@ -488,35 +481,55 @@
                         <div id="kendala-teknis" class="scroll-mt-28">
                             <h2 class="text-xl md:text-2xl font-extrabold text-navy mb-4 flex items-center gap-3">
                                 <span class="w-2.5 h-6 bg-orange-500 rounded-full flex-shrink-0"></span>
-                                H. Penanganan Kendala Teknis
+                                H. Penanganan Kendala Teknis & Kehadiran
                             </h2>
 
                             <div class="space-y-4">
+                                <div class="border border-orange-200 bg-orange-50/40 rounded-2xl p-5">
+                                    <h3 class="font-bold text-navy text-base mb-2">Prosedur Izin Tidak Hadir (Sesuai PKS
+                                        Pasal 7):</h3>
+                                    <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1.5">
+                                        <li><strong>Izin Non-Darurat:</strong> Apabila Tutor berhalangan hadir pada
+                                            jadwal kelas yang sudah ditentukan, Tutor <strong>wajib menginformasikan
+                                                kepada Aksaradeutsch selambat-lambatnya 3 (tiga) hari sebelum jadwal
+                                                kelas berlangsung</strong>.</li>
+                                        <li><strong>Kondisi Darurat / Sakit:</strong> Dalam kondisi darurat atau sakit
+                                            yang tidak dapat diprediksi, Tutor wajib segera menghubungi Admin minimal 4
+                                            jam sebelum kelas dimulai.</li>
+                                    </ul>
+                                </div>
+
                                 <div class="border border-gray-200 rounded-2xl p-5">
-                                    <h3 class="font-bold text-navy text-base mb-2">Apabila internet tutor bermasalah sebelum kelas:</h3>
+                                    <h3 class="font-bold text-navy text-base mb-2">Apabila internet tutor bermasalah
+                                        sebelum kelas:</h3>
                                     <p class="text-sm text-gray-700 mb-2">Tutor wajib:</p>
                                     <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1">
                                         <li>Segera menghubungi Admin.</li>
                                         <li>Menggunakan jaringan cadangan apabila tersedia.</li>
                                     </ul>
-                                    <p class="mt-2 text-xs text-gray-500 italic">Admin akan menginformasikan kondisi tersebut kepada peserta.</p>
+                                    <p class="mt-2 text-xs text-gray-500 italic">Admin akan menginformasikan kondisi
+                                        tersebut kepada peserta.</p>
                                 </div>
 
                                 <div class="border border-gray-200 rounded-2xl p-5">
-                                    <h3 class="font-bold text-navy text-base mb-2">Apabila internet tutor terputus saat kelas berlangsung:</h3>
+                                    <h3 class="font-bold text-navy text-base mb-2">Apabila internet tutor terputus saat
+                                        kelas berlangsung:</h3>
                                     <p class="text-sm text-gray-700 mb-2">Tutor wajib:</p>
                                     <ol class="list-decimal pl-6 text-sm text-gray-700 space-y-1">
                                         <li>Mencoba reconnect ke Google Meet.</li>
                                         <li>Menghubungi Admin apabila kendala berlangsung lebih dari 5 menit.</li>
                                     </ol>
                                     <p class="mt-3 text-xs text-gray-500 italic border-t border-gray-200 pt-2">
-                                        Admin akan memberikan informasi kepada peserta dan meminta peserta tetap berada di ruang Google Meet.
+                                        Admin akan memberikan informasi kepada peserta dan meminta peserta tetap berada
+                                        di ruang Google Meet.
                                     </p>
                                 </div>
 
                                 <div class="border border-gray-200 rounded-2xl p-5">
-                                    <h3 class="font-bold text-navy text-base mb-2">Apabila tutor tidak dapat melanjutkan kelas:</h3>
-                                    <p class="text-sm text-gray-700">Admin akan menjadwalkan kelas pengganti dan menginformasikannya kepada seluruh peserta.</p>
+                                    <h3 class="font-bold text-navy text-base mb-2">Apabila tutor tidak dapat melanjutkan
+                                        kelas:</h3>
+                                    <p class="text-sm text-gray-700">Admin akan menjadwalkan kelas pengganti dan
+                                        menginformasikannya kepada seluruh peserta.</p>
                                 </div>
                             </div>
                         </div>
@@ -542,23 +555,39 @@
                         <div id="pantangan" class="scroll-mt-28">
                             <h2 class="text-xl md:text-2xl font-extrabold text-navy mb-4 flex items-center gap-3">
                                 <span class="w-2.5 h-6 bg-red-500 rounded-full flex-shrink-0"></span>
-                                J. Hal-hal yang Tidak Diperbolehkan
+                                J. Hal-hal yang Tidak Diperbolehkan & Larangan Privat Gelap
                             </h2>
 
-                            <div class="bg-gray-50 border border-gray-200 p-6 rounded-2xl">
-                                <p class="font-extrabold text-navy text-sm uppercase tracking-wide mb-3">
+                            <div class="bg-gray-50 border border-gray-200 p-6 rounded-2xl space-y-4">
+                                <p class="font-extrabold text-navy text-sm uppercase tracking-wide">
                                     Tutor Tidak Diperbolehkan:
                                 </p>
                                 <ul class="list-disc pl-6 space-y-2 text-sm md:text-base text-gray-700">
-                                    <li>Mengubah silabus tanpa persetujuan.</li>
-                                    <li>Memberikan informasi administrasi kepada peserta.</li>
-                                    <li>Menghubungi peserta secara pribadi tanpa kepentingan pembelajaran.</li>
-                                    <li>Meminta nomor pribadi peserta.</li>
-                                    <li>Mempromosikan lembaga atau kursus lain.</li>
-                                    <li>Menyebarkan materi Aksaradeutsch kepada pihak luar.</li>
-                                    <li>Menyebarkan rekaman kelas.</li>
-                                    <li>Membahas isu SARA, politik, atau topik yang tidak berkaitan dengan pembelajaran.</li>
+                                    <li>Mengubah silabus tanpa persetujuan manajemen Aksaradeutsch.</li>
+                                    <li>Memberikan informasi administrasi atau keuangan kepada peserta.</li>
+                                    <li>Menghubungi peserta secara pribadi tanpa kepentingan pembelajaran resmi.</li>
+                                    <li>Meminta nomor pribadi peserta untuk kepentingan pribadi.</li>
+                                    <li>Mempromosikan lembaga atau kursus lain kepada peserta Aksaradeutsch.</li>
+                                    <li><strong>Pembajakan Murid (Private Poaching):</strong> Menawarkan atau menerima
+                                        kelas privat kepada peserta aktif Aksaradeutsch di luar sistem Aksaradeutsch,
+                                        serta mengajak peserta berpindah lembaga (PKS Pasal 13).</li>
+                                    <li><strong>Pelanggaran HAKI & Kerahasiaan (NDA):</strong> Menyebarkan,
+                                        memperjualbelikan, atau menyerahkan materi, slide, soal, modul, maupun rekaman
+                                        Aksaradeutsch kepada pihak luar (PKS Pasal 11 & 12).</li>
+                                    <li>Membahas isu SARA, politik praktis, ucapan merendahkan, atau topik yang tidak
+                                        berkaitan dengan pembelajaran.</li>
                                 </ul>
+
+                                <!-- Warning Box Sanksi Poaching & HAKI -->
+                                <div
+                                    class="bg-red-50 border border-red-200 rounded-xl p-4 text-xs md:text-sm text-red-800 font-medium">
+                                    <strong>SANKSI KETAT PEMBAJAKAN MURID & HAKI:</strong><br>
+                                    Pelanggaran terhadap poin <em>Pembajakan Murid (Private Poaching)</em> dan
+                                    <em>Pelanggaran HAKI/NDA</em> berakibat pada <strong>Pemutusan Kerja Sama Sepihak
+                                        (PKS Pasal 20)</strong>, pembekuan/pemotongan honorarium 100%, serta kewajiban
+                                    pembayaran <strong>Denda Kompensasi sebesar Rp 10.000.000,- (Sepuluh Juta Rupiah)
+                                        per pelanggaran</strong> dan/atau proses hukum yang berlaku.
+                                </div>
                             </div>
                         </div>
 
@@ -571,10 +600,13 @@
                             <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8">
                                 <p class="text-base md:text-lg font-bold text-navy leading-relaxed mb-4">
                                     Aksaradeutsch percaya bahwa belajar bahasa Jerman harus: <br>
-                                    <span class="text-orange-600">Mudah dipahami, menyenangkan, interaktif, dan tidak membuat peserta takut untuk bertanya.</span>
+                                    <span class="text-orange-600">Mudah dipahami, menyenangkan, interaktif, dan tidak
+                                        membuat peserta takut untuk bertanya.</span>
                                 </p>
-                                <p class="text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
-                                    Tutor diharapkan menjadi fasilitator yang membantu peserta belajar secara bertahap dan percaya diri.
+                                <p
+                                    class="text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+                                    Tutor diharapkan menjadi fasilitator yang membantu peserta belajar secara bertahap
+                                    dan percaya diri.
                                 </p>
                             </div>
                         </div>
@@ -589,7 +621,8 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Ringkasan Sebelum Kelas -->
                                 <div class="border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
-                                    <h3 class="font-extrabold text-navy text-sm uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
+                                    <h3
+                                        class="font-extrabold text-navy text-sm uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
                                         Sebelum Kelas:
                                     </h3>
                                     <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
@@ -604,14 +637,131 @@
 
                                 <!-- Ringkasan Setelah Kelas -->
                                 <div class="border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
-                                    <h3 class="font-extrabold text-navy text-sm uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
+                                    <h3
+                                        class="font-extrabold text-navy text-sm uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
                                         Setelah Kelas:
                                     </h3>
                                     <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
                                         <li>Hausaufgabe diunggah</li>
                                         <li>Pertanyaan peserta dijawab</li>
-                                        <li>Hausaufgabe dikoreksi</li>
+                                        <li>Hausaufgabe dikoreksi (paling lambat 1x24 jam sebelum kelas berikutnya,
+                                            kecuali hari libur/tanggal merah)</li>
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section M -->
+                        <div id="sanksi-pelanggaran" class="scroll-mt-28">
+                            <h2 class="text-xl md:text-2xl font-extrabold text-navy mb-4 flex items-center gap-3">
+                                <span class="w-2.5 h-6 bg-red-600 rounded-full flex-shrink-0"></span>
+                                M. Sanksi & Tingkat Pelanggaran
+                            </h2>
+                            <p class="mb-4 text-sm md:text-base leading-relaxed">
+                                Untuk menjamin kualitas pembelajaran, kedisiplinan, dan integritas bisnis, Aksaradeutsch
+                                menerapkan sanksi bertingkat atas kelalaian maupun pelanggaran SOP:
+                            </p>
+
+                            <div class="space-y-4">
+                                <!-- Pelanggaran Ringan -->
+                                <div class="border border-yellow-200 bg-yellow-50/60 rounded-2xl p-5">
+                                    <h3 class="font-extrabold text-yellow-900 text-base mb-2 flex items-center gap-2">
+                                        <span>1. Pelanggaran Ringan (Teguran & Surat Peringatan 1 / SP1)</span>
+                                    </h3>
+                                    <ul class="list-disc pl-6 text-xs md:text-sm text-yellow-950 space-y-1.5">
+                                        <li>Terlambat mengunggah materi (&lt;15 menit) atau membuat absensi (&lt;5
+                                            menit) di
+                                            Google Classroom sebelum kelas dimulai.</li>
+                                        <li>Terlambat standby kurang dari 10 menit sebelum kelas dimulai.</li>
+                                        <li>Kamera/mikrofon mati saat mengajar tanpa alasan teknis yang dapat diterima.
+                                        </li>
+                                        <li>Terlambat mengoreksi dan memberikan umpan balik Hausaufgabe melebihi batas
+                                            1x24 jam sebelum kelas berikutnya. (Ketentuan ini hanya berlaku jika peserta
+                                            mengumpulkan tugas minimal 48 jam sebelum kelas &amp; tidak berlaku pada
+                                            hari
+                                            libur/tanggal merah).</li>
+                                        <li><strong>Sanksi:</strong> Pengingat dari Manajemen untuk keterlambatan tugas
+                                            ke 1–2, atau Surat Peringatan 1 (SP1) untuk keterlambatan tugas ke-3 &amp;
+                                            pelanggaran ringan lainnya.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Pelanggaran Sedang -->
+                                <div class="border border-orange-200 bg-orange-50/60 rounded-2xl p-5">
+                                    <h3 class="font-extrabold text-orange-900 text-base mb-2 flex items-center gap-2">
+                                        <span>2. Pelanggaran Sedang (Surat Peringatan 2 / Pemotongan Honor)</span>
+                                    </h3>
+                                    <ul class="list-disc pl-6 text-xs md:text-sm text-orange-950 space-y-1.5">
+                                        <li>Terlambat mengoreksi dan memberikan umpan balik Hausaufgabe lebih dari
+                                            3 kali dalam satu batch yang sama.</li>
+                                        <li>Terlambat masuk Google Meet lebih dari 10 menit tanpa konfirmasi awal.</li>
+                                        <li>Membatalkan atau mengubah jadwal kelas tanpa memenuhi prosedur izin H-3
+                                            (atau mendadak &lt;24 jam) tanpa alasan darurat/sakit yang dapat diterima.
+                                        </li>
+                                        <li><strong>Sanksi:</strong> Surat Peringatan 2 (SP2) + Pemotongan honorarium
+                                            10%–25% untuk sesi terkait.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Pelanggaran Berat -->
+                                <div class="border border-red-300 bg-red-50/70 rounded-2xl p-5">
+                                    <h3 class="font-extrabold text-red-900 text-base mb-2 flex items-center gap-2">
+                                        <span>3. Pelanggaran Berat (SP3 / PHK Sepihak & Denda)</span>
+                                    </h3>
+                                    <ul class="list-disc pl-6 text-xs md:text-sm text-red-950 space-y-1.5">
+                                        <li><strong>Pembajakan Murid (Private Poaching):</strong> Menawarkan atau
+                                            menerima kelas privat kepada peserta aktif Aksaradeutsch di luar sistem
+                                            resmi (PKS Pasal 13). (Sanksi: PHK Sepihak + Denda Kompensasi Rp
+                                            10.000.000,- per peserta).</li>
+                                        <li>Menyebarkan, menjual, atau menyerahkan materi, slide, modul, soal, atau
+                                            rekaman Aksaradeutsch kepada pihak luar (Pelanggaran HAKI & NDA PKS Pasal 11
+                                            & 12).</li>
+                                        <li>Tidak hadir mengajar (*ghosting*) tanpa kabar sama sekali pada jam kelas.
+                                        </li>
+                                        <li>Menyampaikan ucapan kasar, merendahkan, SARA, politik praktis, atau
+                                            pornografi kepada peserta.</li>
+                                        <li><strong>Sanksi:</strong> Pemutusan Kerja Sama Sepihak (PKS Pasal 20),
+                                            pembekuan/pemotongan honorarium 100%, serta tuntutan denda/hukum yang
+                                            berlaku.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section N -->
+                        <div id="pembayaran-honorarium" class="scroll-mt-28">
+                            <h2 class="text-xl md:text-2xl font-extrabold text-navy mb-4 flex items-center gap-3">
+                                <span class="w-2.5 h-6 bg-orange-500 rounded-full flex-shrink-0"></span>
+                                N. Honorarium & Sistem Pembayaran
+                            </h2>
+                            <div
+                                class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-4 text-sm text-gray-700">
+                                <p class="font-semibold text-navy">Sesuai ketentuan Pasal 9 Perjanjian Kerja Sama (PKS):
+                                </p>
+                                <ul class="list-disc pl-6 space-y-2">
+                                    <li><strong>Besaran Honorarium:</strong> Dibayarkan sesuai nominal netto yang
+                                        disepakati dalam Kontrak Perjanjian Kerja Sama.</li>
+                                    <li><strong>Sistem Pembayaran Reguler Class (PKS Pasal 9.3):</strong> Honorarium
+                                        untuk Reguler Class akan dibayarkan paling lambat <strong>3 (tiga) hari kalender
+                                            setelah seluruh pertemuan dalam 1 (satu) Batch Pembelajaran selesai
+                                            dilaksanakan</strong> (bukan dibayar per pertemuan).</li>
+                                    <li><strong>Sistem Pembayaran Trial Class (PKS Pasal 9.2):</strong> Honorarium Trial
+                                        Class dibayarkan paling lambat 3 (tiga) hari kalender setelah Trial Class
+                                        selesai dilaksanakan.</li>
+                                    <li><strong>Metode Pembayaran (PKS Pasal 9.4):</strong> Ditransfer ke rekening bank
+                                        terdaftar atas nama Tutor.</li>
+                                    <li><strong>Pembatalan / Kelas Pengganti (PKS Pasal 9.5 & 10):</strong> Apabila
+                                        terjadi kendala teknis/pemadaman listrik dan dilaksanakan kelas pengganti yang
+                                        disepakati, honorarium tetap dibayarkan penuh setelah kelas pengganti selesai.
+                                        Jika kelas dibatalkan total karena kesalahan/kelalaian tutor, tutor tidak berhak
+                                        menerima honorarium untuk sesi tersebut.</li>
+                                </ul>
+
+                                <div class="border-t border-gray-200 pt-4 mt-4 text-xs text-gray-500 italic">
+                                    <strong>Catatan Legal:</strong> SOP ini merupakan bagian operasional yang tidak
+                                    terpisahkan dari Perjanjian Kerja Sama (PKS) Part-Time Tutor Aksaradeutsch.
+                                    Pelanggaran terhadap SOP ini berkonsekuensi langsung pada sanksi operasional
+                                    dan/atau Pemutusan Kerja Sama sepihak sesuai Pasal 20 PKS.
                                 </div>
                             </div>
                         </div>
@@ -623,66 +773,20 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#F9FAFB] border-t border-gray-200">
-        <div class="container mx-auto px-6 md:px-16 py-12 md:py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div class="lg:col-span-2">
-                    <a href="./" class="inline-flex items-center mb-5" aria-label="Aksaradeutsch.com beranda">
-                        <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo" class="h-14 md:h-20 w-auto"
-                            loading="lazy" decoding="async">
-                    </a>
-                    <p class="text-gray-500 leading-[1.8] max-w-md">
-                        Platform belajar bahasa Jerman yang ramah untuk pemula. Simpel, santai, dan terstruktur dari
-                        nol.
-                    </p>
-                    <div class="mt-6 flex items-center gap-4">
-                        <a href="https://wa.me/6281959896825" target="_blank" rel="noopener noreferrer"
-                            class="hover:scale-110 transition-transform duration-300 inline-block"
-                            aria-label="WhatsApp Aksaradeutsch">
-                            <img src="icon-whatsapp.png" alt="WhatsApp Aksaradeutsch" class="w-8 h-8 object-contain">
-                        </a>
-                        <a href="https://www.instagram.com/aksaradeutsch/" target="_blank" rel="noopener noreferrer"
-                            class="hover:scale-110 transition-transform duration-300 inline-block"
-                            aria-label="Instagram Aksaradeutsch">
-                            <img src="icon-instagram.png" alt="Instagram Aksaradeutsch" class="w-8 h-8 object-contain">
-                        </a>
-                        <a href="https://www.threads.net/@aksaradeutsch" target="_blank" rel="noopener noreferrer"
-                            class="hover:scale-110 transition-transform duration-300 inline-block"
-                            aria-label="Threads Aksaradeutsch">
-                            <img src="icon-threads.png" alt="Threads Aksaradeutsch" class="w-8 h-8 object-contain">
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="font-extrabold text-navy mb-5">Navigasi</h3>
-                    <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="./#materi" class="hover:text-orange-500 transition">Program Belajar</a>
-                        <a href="einstufungstest" class="hover:text-orange-500 transition">Einstufungstest</a>
-                        <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
-                        <a href="tentang-kami" class="hover:text-orange-500 transition">Tentang Kami</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="font-extrabold text-navy mb-5">Bantuan</h3>
-                    <div class="grid gap-3 text-gray-500 font-semibold">
-                        <a href="./#faq" class="hover:text-orange-500 transition">FAQ</a>
-                    </div>
-                </div>
+    <footer class="bg-white border-t border-gray-200 py-8 md:py-10">
+        <div
+            class="container mx-auto px-6 md:px-16 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500">
+            <div class="flex items-center gap-3">
+                <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo" class="h-10 md:h-12 w-auto"
+                    loading="lazy" decoding="async">
+                <span
+                    class="hidden sm:inline border-l border-gray-300 pl-3 text-xs text-gray-400 font-semibold uppercase tracking-wider">
+                    Dokumen Operasional Tutor
+                </span>
             </div>
-
-            <div
-                class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 text-sm text-gray-500">
-                <p data-nosnippet class="text-right sm:text-left text-[11px] sm:text-sm">&copy; 2026 Aksaradeutsch.com.
-                    All rights reserved.</p>
-                <div
-                    class="flex flex-wrap justify-end gap-x-4 md:gap-x-6 font-semibold text-gray-400 text-[9px] sm:text-[10px] md:text-[11px]">
-                    <a href="privacy-policy" class="hover:text-orange-500 transition">Privacy Policy</a>
-                    <a href="syarat-ketentuan" class="hover:text-orange-500 transition">Website Terms</a>
-                    <a href="refund-policy" class="hover:text-orange-500 transition">Refund Policy</a>
-                </div>
-            </div>
+            <p data-nosnippet class="text-xs sm:text-sm text-gray-500 font-medium text-center sm:text-right">
+                &copy; 2026 Aksaradeutsch.com. All rights reserved.
+            </p>
         </div>
     </footer>
 
@@ -693,16 +797,16 @@
             document.body.addEventListener('click', (e) => {
                 const anchor = e.target.closest('a');
                 if (!anchor) return;
-                
+
                 const href = anchor.getAttribute('href');
                 if (!href || !href.includes('#')) return;
-                
+
                 try {
                     const url = new URL(anchor.href);
-                    const isSamePage = url.protocol === window.location.protocol && 
-                                       url.host === window.location.host && 
-                                       url.pathname === window.location.pathname;
-                    
+                    const isSamePage = url.protocol === window.location.protocol &&
+                        url.host === window.location.host &&
+                        url.pathname === window.location.pathname;
+
                     if (isSamePage && url.hash) {
                         const target = document.querySelector(url.hash);
                         if (target) {
@@ -721,8 +825,8 @@
                 // Clear hash from URL immediately
                 try {
                     history.replaceState(null, document.title, window.location.pathname + window.location.search);
-                } catch (err) {}
-                
+                } catch (err) { }
+
                 const target = document.querySelector(hash);
                 if (target) {
                     setTimeout(() => {
