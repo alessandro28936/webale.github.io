@@ -146,7 +146,9 @@
             user-select: none;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             -webkit-user-select: auto;
             -moz-user-select: auto;
             -ms-user-select: auto;
@@ -231,6 +233,7 @@
             body * {
                 visibility: hidden;
             }
+
             #print-shield-warning {
                 visibility: visible;
                 display: block !important;
@@ -275,13 +278,15 @@
                 <template x-if="currentUser">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <!-- Cloud Sync Status Indicator -->
-                        <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <div
+                            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
                             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                             <span x-text="syncStatusText">Tersinkronisasi</span>
                         </div>
 
                         <!-- Progress Badge -->
-                        <div class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white btn-orange px-3.5 py-2 rounded-xl shadow-sm">
+                        <div
+                            class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white btn-orange px-3.5 py-2 rounded-xl shadow-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4">
@@ -293,8 +298,10 @@
                         <!-- User Info & Logout Button -->
                         <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
                             <div class="hidden lg:block text-right">
-                                <span class="block text-xs font-bold text-navy truncate max-w-[130px]" x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
-                                <span class="block text-[10px] text-gray-500 truncate max-w-[130px]" x-text="currentUser.email"></span>
+                                <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                    x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                                <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                    x-text="currentUser.email"></span>
                             </div>
                             <button @click="logout()"
                                 class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
@@ -336,48 +343,35 @@
         <!-- STATE 1: AUTH LOADING SKELETON                                -->
         <!-- ============================================================= -->
         <div x-show="authLoading" class="py-20 text-center" x-cloak>
-            <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div
+                class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
             <p class="text-sm font-bold text-gray-600">Memeriksa status autentikasi peserta...</p>
         </div>
 
         <!-- ============================================================= -->
         <!-- STATE 2: AUTH GATE (LOCKED SCREEN FOR UNAUTHENTICATED USERS)  -->
         <!-- ============================================================= -->
-        <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-2xl mx-auto" x-cloak>
-            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
-                <!-- Header Badge -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider mb-6">
-                    Portal Pembelajaran Terproteksi Aksaradeutsch
-                </div>
-
+        <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-xl mx-auto" x-cloak>
+            <div
+                class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
                 <h1 class="text-2xl sm:text-3xl font-black text-navy mb-3">
                     Akses Modul Kelas A1.1: Pertemuan 1
                 </h1>
-                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto">
-                    Halaman ini dikhususkan bagi peserta terdaftar kelas A1.1 Aksaradeutsch. Silakan masuk dengan akun peserta Anda untuk mengakses seluruh materi, audio, dan latihan evaluasi.
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
+                    Halaman ini dikhususkan bagi peserta terdaftar kelas A1.1 Aksaradeutsch. Silakan masuk dengan akun
+                    peserta Anda untuk mengakses seluruh materi, audio, dan latihan evaluasi.
                 </p>
 
-                <!-- Auth Form Tabs -->
-                <div class="flex border-b border-gray-200 mb-6 max-w-md mx-auto">
-                    <button @click="authMode = 'login'; authError = ''"
-                        class="flex-1 py-3 text-xs sm:text-sm font-bold border-b-2 transition"
-                        :class="authMode === 'login' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-400 hover:text-gray-600'">
-                        Masuk Akun
-                    </button>
-                    <button @click="authMode = 'register'; authError = ''"
-                        class="flex-1 py-3 text-xs sm:text-sm font-bold border-b-2 transition"
-                        :class="authMode === 'register' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-400 hover:text-gray-600'">
-                        Daftar Akun Baru
-                    </button>
-                </div>
-
                 <!-- Error Notification -->
-                <div x-show="authError" class="mb-5 p-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold text-left" x-cloak>
+                <div x-show="authError"
+                    class="mb-5 p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold text-left"
+                    x-cloak>
                     <span x-text="authError"></span>
                 </div>
 
                 <!-- Form Login -->
-                <form x-show="authMode === 'login'" @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
+                <form @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
                     <div>
                         <label class="block text-xs font-bold text-navy mb-1">Email Peserta</label>
                         <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
@@ -395,52 +389,9 @@
                     </button>
                 </form>
 
-                <!-- Form Register -->
-                <form x-show="authMode === 'register'" @submit.prevent="handleRegister()" class="space-y-4 max-w-md mx-auto text-left" x-cloak>
-                    <div>
-                        <label class="block text-xs font-bold text-navy mb-1">Nama Lengkap</label>
-                        <input type="text" x-model="authForm.name" required placeholder="Nama Anda"
-                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-navy mb-1">Email</label>
-                        <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
-                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-navy mb-1">Kata Sandi (Minimal 6 Karakter)</label>
-                        <input type="password" x-model="authForm.password" required placeholder="••••••••" minlength="6"
-                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
-                    </div>
-                    <button type="submit" :disabled="authSubmitting"
-                        class="w-full py-3.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2">
-                        <span x-show="!authSubmitting">Daftar & Buka Akses</span>
-                        <span x-show="authSubmitting">Mendaftarkan...</span>
-                    </button>
-                </form>
-
-                <!-- Divider & Google Sign-In -->
-                <div class="my-6 flex items-center gap-3 max-w-md mx-auto">
-                    <div class="flex-grow h-px bg-gray-200"></div>
-                    <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Atau</span>
-                    <div class="flex-grow h-px bg-gray-200"></div>
-                </div>
-
-                <div class="max-w-md mx-auto">
-                    <button @click="handleGoogleLogin()" :disabled="authSubmitting"
-                        class="w-full py-3 rounded-2xl border border-gray-300 hover:border-gray-400 bg-white text-navy font-bold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2.5 transition">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                        </svg>
-                        <span>Masuk Menggunakan Akun Google</span>
-                    </button>
-                </div>
-
                 <div class="mt-8 pt-6 border-t border-gray-100 text-[11px] text-gray-500">
-                    Akses materi dilindungi hak cipta Aksaradeutsch. Dilarang menggandakan atau menyebarluaskan materi tanpa izin.
+                    Akses materi dilindungi hak cipta Aksaradeutsch. Dilarang menggandakan atau menyebarluaskan materi
+                    tanpa izin.
                 </div>
             </div>
         </div>
@@ -473,7 +424,8 @@
                             Begrüßung, Kennenlernen, Herkunft und Wohnort
                         </h1>
                         <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 font-normal">
-                            Salam, Perkenalan Diri, Menanyakan Kabar, Asal Negara atau Kota, Tempat Tinggal, dan Bahasa yang
+                            Salam, Perkenalan Diri, Menanyakan Kabar, Asal Negara atau Kota, Tempat Tinggal, dan Bahasa
+                            yang
                             Dikuasai.
                         </p>
 
@@ -481,7 +433,8 @@
                         <div class="flex flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm">
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
-                                <span class="text-gray-400 font-semibold">Standar:</span> <strong class="text-white">CEFR
+                                <span class="text-gray-400 font-semibold">Standar:</span> <strong
+                                    class="text-white">CEFR
                                     A1.1</strong>
                             </div>
                             <div
@@ -491,12 +444,14 @@
                             </div>
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
-                                <span class="text-gray-400 font-semibold">Audio:</span> <strong class="text-white">Native
+                                <span class="text-gray-400 font-semibold">Audio:</span> <strong
+                                    class="text-white">Native
                                     German Voice Engine</strong>
                             </div>
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
-                                <span class="text-gray-400 font-semibold">Latihan:</span> <strong class="text-white">8 Soal
+                                <span class="text-gray-400 font-semibold">Latihan:</span> <strong class="text-white">8
+                                    Soal
                                     Interaktif</strong>
                             </div>
                         </div>
@@ -508,7 +463,8 @@
                         <p
                             class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
                             Daftar Isi Materi
-                            <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">4
+                            <span
+                                class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">4
                                 Bagian</span>
                         </p>
                         <ul class="space-y-2 text-xs sm:text-sm font-medium">
@@ -562,11 +518,15 @@
                                 <span class="section-kicker-text">Lernziele</span>
                             </div>
                             <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
-                            <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah Anda menguasai materi:</p>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah Anda
+                                menguasai materi:</p>
                         </div>
-                        <div class="flex items-center gap-3 bg-orange-50 px-4 py-2.5 rounded-2xl border border-orange-100">
+                        <div
+                            class="flex items-center gap-3 bg-orange-50 px-4 py-2.5 rounded-2xl border border-orange-100">
                             <div class="text-right">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block">Progres Belajar</span>
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block">Progres
+                                    Belajar</span>
                                 <span class="text-sm font-extrabold text-navy"
                                     x-text="completedGoalsCount + ' dari 8 Terpenuhi'">0 dari 8 Terpenuhi</span>
                             </div>
@@ -602,7 +562,8 @@
                     </div>
                     <div>
                         <span class="text-xs font-bold tracking-wider uppercase text-orange-600">Bab 1 • Kosakata</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan Kunci (Wortschatz)
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan Kunci
+                            (Wortschatz)
                         </h2>
                     </div>
                 </div>
@@ -611,7 +572,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                     <!-- A. Salam Sapaan (Begrüßung) -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-bold text-navy">
@@ -626,10 +588,12 @@
                                     class="p-3.5 rounded-2xl bg-gray-50 hover:bg-orange-50/50 border border-gray-100 transition flex items-center justify-between">
                                     <div>
                                         <div class="flex items-center gap-2">
-                                            <strong class="text-sm sm:text-base font-bold text-navy">Guten Morgen!</strong>
+                                            <strong class="text-sm sm:text-base font-bold text-navy">Guten
+                                                Morgen!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Selamat pagi. <span
-                                                class="text-gray-400 text-xs">(Digunakan hingga sekitar pukul 10.00)</span>
+                                                class="text-gray-400 text-xs">(Digunakan hingga sekitar pukul
+                                                10.00)</span>
                                         </p>
                                     </div>
                                     <button @click="speak('Guten Morgen!', 'female')"
@@ -651,7 +615,8 @@
                                             <strong class="text-sm sm:text-base font-bold text-navy">Guten Tag!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Selamat siang. <span
-                                                class="text-gray-400 text-xs">(Bisa digunakan sepanjang hari, umumnya mulai
+                                                class="text-gray-400 text-xs">(Bisa digunakan sepanjang hari, umumnya
+                                                mulai
                                                 pukul 11.00 hingga 18.00)</span></p>
                                     </div>
                                     <button @click="speak('Guten Tag!', 'female')"
@@ -670,7 +635,8 @@
                                     class="p-3.5 rounded-2xl bg-gray-50 hover:bg-orange-50/50 border border-gray-100 transition flex items-center justify-between">
                                     <div>
                                         <div class="flex items-center gap-2">
-                                            <strong class="text-sm sm:text-base font-bold text-navy">Guten Abend!</strong>
+                                            <strong class="text-sm sm:text-base font-bold text-navy">Guten
+                                                Abend!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Selamat malam. <span
                                                 class="text-gray-400 text-xs">(Digunakan setelah pukul 18.00)</span></p>
@@ -694,7 +660,8 @@
                                             <strong class="text-sm sm:text-base font-bold text-navy">Hallo!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Halo. <span
-                                                class="text-gray-400 text-xs">(Digunakan untuk situasi informal)</span></p>
+                                                class="text-gray-400 text-xs">(Digunakan untuk situasi informal)</span>
+                                        </p>
                                     </div>
                                     <button @click="speak('Hallo!', 'female')"
                                         class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs font-semibold text-gray-700 hover:text-orange-600 hover:border-orange-300 shadow-sm transition">
@@ -711,7 +678,8 @@
                     </div>
 
                     <!-- B. Salam Perpisahan (Verabschiedung) -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-bold text-navy">
@@ -730,7 +698,8 @@
                                                 Wiedersehen!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Sampai jumpa lagi. <span
-                                                class="text-gray-400 text-xs">(Digunakan untuk situasi formal)</span></p>
+                                                class="text-gray-400 text-xs">(Digunakan untuk situasi formal)</span>
+                                        </p>
                                     </div>
                                     <button @click="speak('Auf Wiedersehen!', 'female')"
                                         class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs font-semibold text-gray-700 hover:text-orange-600 shadow-sm transition">
@@ -751,7 +720,8 @@
                                             <strong class="text-sm sm:text-base font-bold text-navy">Tschüs!</strong>
                                         </div>
                                         <p class="text-xs sm:text-sm text-gray-600 mt-0.5">Dadah. <span
-                                                class="text-gray-400 text-xs">(Digunakan untuk situasi informal)</span></p>
+                                                class="text-gray-400 text-xs">(Digunakan untuk situasi informal)</span>
+                                        </p>
                                     </div>
                                     <button @click="speak('Tschüs!', 'female')"
                                         class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs font-semibold text-gray-700 hover:text-orange-600 shadow-sm transition">
@@ -769,12 +739,14 @@
                                     <div
                                         class="p-3 rounded-2xl bg-gray-50 hover:bg-orange-50/50 border border-gray-100 transition flex items-center justify-between">
                                         <div>
-                                            <strong class="text-xs sm:text-sm font-bold text-navy block">Bis bald!</strong>
+                                            <strong class="text-xs sm:text-sm font-bold text-navy block">Bis
+                                                bald!</strong>
                                             <span class="text-[11px] text-gray-500">Sampai jumpa lagi segera.</span>
                                         </div>
                                         <button @click="speak('Bis bald!', 'male')"
                                             class="p-1.5 rounded-lg bg-white border text-gray-600 hover:text-orange-600">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                                 </path>
@@ -786,11 +758,13 @@
                                         <div>
                                             <strong class="text-xs sm:text-sm font-bold text-navy block">Gute
                                                 Nacht!</strong>
-                                            <span class="text-[11px] text-gray-500">Selamat tidur (sebelum tidur).</span>
+                                            <span class="text-[11px] text-gray-500">Selamat tidur (sebelum
+                                                tidur).</span>
                                         </div>
                                         <button @click="speak('Gute Nacht!', 'female')"
                                             class="p-1.5 rounded-lg bg-white border text-gray-600 hover:text-orange-600">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                                 </path>
@@ -812,8 +786,7 @@
                             <h3 class="text-lg font-bold text-navy">
                                 C. Kata Tanya (W-Fragen)
                             </h3>
-                            <span
-                                class="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full">Kata
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full">Kata
                                 Tanya</span>
                         </div>
                         <div class="space-y-2.5">
@@ -875,7 +848,8 @@
                     </div>
 
                     <!-- D. Kata Kerja & Pasangan Preposisi -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-bold text-navy">
@@ -963,7 +937,8 @@
                         2
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-orange-600">Bab 2 • Tata Bahasa</span>
+                        <span class="text-xs font-bold tracking-wider uppercase text-orange-600">Bab 2 • Tata
+                            Bahasa</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa Dasar (Grammatik)</h2>
                     </div>
                 </div>
@@ -1010,7 +985,8 @@
                             <h4 class="font-extrabold text-navy text-base mb-2">Formal (Sie)</h4>
                             <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4">
                                 Digunakan untuk orang yang baru dikenal, rekan kerja, atau atasan. Saat menggunakan
-                                <em>Sie</em>, gunakan sapaan <strong>Herr</strong> (Bapak) atau <strong>Frau</strong> (Ibu)
+                                <em>Sie</em>, gunakan sapaan <strong>Herr</strong> (Bapak) atau <strong>Frau</strong>
+                                (Ibu)
                                 diikuti nama belakang (<strong>Nachname</strong>).
                             </p>
                             <div class="bg-orange-50 p-3 rounded-xl text-xs text-orange-900 border border-orange-100">
@@ -1028,7 +1004,8 @@
                         </h3>
                         <p class="text-xs sm:text-sm text-gray-500 mt-1">
                             Bentuk kata kerja bahasa Jerman akan berubah mengikuti subjeknya
-                            (<strong>Personalpronomen</strong>). Berikut adalah perubahan untuk kata kerja <em>heißen</em>
+                            (<strong>Personalpronomen</strong>). Berikut adalah perubahan untuk kata kerja
+                            <em>heißen</em>
                             (bernama), <em>sein</em> (adalah), <em>wohnen</em> (tinggal), dan <em>kommen</em> (berasal).
                         </p>
                     </div>
@@ -1153,7 +1130,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                     <!-- C. Cara Memperkenalkan Diri dan Bertanya Nama -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <h3 class="text-base font-extrabold text-navy mb-3">
                                 C. Memperkenalkan Diri & Bertanya Nama
@@ -1170,7 +1148,8 @@
                                 <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
                                     <strong class="text-navy block font-bold mb-1">Menanyakan Nama:</strong>
                                     <ul class="space-y-1 text-gray-700">
-                                        <li>• <strong>Informal:</strong> <em>Wie heißt du?</em> atau <em>Wer bist du?</em>
+                                        <li>• <strong>Informal:</strong> <em>Wie heißt du?</em> atau <em>Wer bist
+                                                du?</em>
                                             (Siapa namamu?)</li>
                                         <li>• <strong>Formal:</strong> <em>Wie heißen Sie?</em> atau <em>Wie ist Ihr
                                                 Name?</em> (Siapa nama Anda?)</li>
@@ -1181,7 +1160,8 @@
                     </div>
 
                     <!-- D. Menanyakan Kabar (Wie geht's?) -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <h3 class="text-base font-extrabold text-navy mb-3">
                                 D. Menanyakan Kabar (Wie geht's?)
@@ -1189,7 +1169,8 @@
                             <div class="space-y-3 text-xs sm:text-sm">
                                 <div class="p-3 rounded-xl bg-blue-50/60 border border-blue-100">
                                     <span class="text-[10px] font-bold text-blue-700 uppercase block">Informal</span>
-                                    <p class="text-gray-700 mt-1"><strong>Tanya:</strong> <em>Wie geht's?</em> atau <em>Wie
+                                    <p class="text-gray-700 mt-1"><strong>Tanya:</strong> <em>Wie geht's?</em> atau
+                                        <em>Wie
                                             geht's dir?</em> (Apa kabar?)</p>
                                     <p class="text-gray-700 mt-1"><strong>Jawab:</strong> <em>Danke, sehr gut!</em> /
                                         <em>Danke, gut.</em> / <em>Auch gut, danke.</em>
@@ -1199,7 +1180,8 @@
                                     <span class="text-[10px] font-bold text-orange-700 uppercase block">Formal</span>
                                     <p class="text-gray-700 mt-1"><strong>Tanya:</strong> <em>Wie geht es Ihnen?</em>
                                         (Bagaimana kabar Anda?)</p>
-                                    <p class="text-gray-700 mt-1"><strong>Jawab:</strong> <em>Danke, gut. Und Ihnen?</em>
+                                    <p class="text-gray-700 mt-1"><strong>Jawab:</strong> <em>Danke, gut. Und
+                                            Ihnen?</em>
                                         (Baik, terima kasih. Dan bagaimana dengan Anda?)</p>
                                 </div>
                             </div>
@@ -1207,7 +1189,8 @@
                     </div>
 
                     <!-- E. Struktur Kalimat (Satzbau) -->
-                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
                             <h3 class="text-base font-extrabold text-navy mb-3">
                                 E. Struktur Kalimat (Satzbau)
@@ -1218,16 +1201,20 @@
                             <div class="space-y-2.5 text-xs">
                                 <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
                                     <strong class="text-navy block mb-0.5">Kalimat Tanya (W-Frage):</strong>
-                                    <p class="text-gray-600">Kata kerja selalu berada di posisi kedua, tepat setelah kata
+                                    <p class="text-gray-600">Kata kerja selalu berada di posisi kedua, tepat setelah
+                                        kata
                                         tanya.</p>
-                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Woher kommst du?</em> (Dari
+                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Woher kommst du?</em>
+                                        (Dari
                                         mana kamu berasal?)</p>
                                 </div>
                                 <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
                                     <strong class="text-navy block mb-0.5">Kalimat Berita (Aussagesatz):</strong>
-                                    <p class="text-gray-600">Kata kerja juga berada di posisi kedua, biasanya ditempatkan
+                                    <p class="text-gray-600">Kata kerja juga berada di posisi kedua, biasanya
+                                        ditempatkan
                                         setelah subjek.</p>
-                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Ich komme aus Frankfurt.</em>
+                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Ich komme aus
+                                            Frankfurt.</em>
                                         (Saya berasal dari Frankfurt.)</p>
                                 </div>
                             </div>
@@ -1244,13 +1231,16 @@
                         3
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-emerald-600">Bab 3 • Percakapan</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                        <span class="text-xs font-bold tracking-wider uppercase text-emerald-600">Bab 3 •
+                            Percakapan</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)
+                        </h2>
                     </div>
                 </div>
 
                 <!-- Dialog Container with Tab Switching -->
-                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm" x-data="{ activeDialog: 1 }">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm"
+                    x-data="{ activeDialog: 1 }">
 
                     <!-- Tab Buttons -->
                     <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-100 pb-4">
@@ -1280,7 +1270,8 @@
                     <div x-show="activeDialog === 1" class="space-y-4">
                         <div
                             class="bg-orange-50/50 p-4 rounded-2xl border border-orange-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                            <span class="text-xs sm:text-sm text-orange-900 font-semibold">Situasi: Percakapan santai antara
+                            <span class="text-xs sm:text-sm text-orange-900 font-semibold">Situasi: Percakapan santai
+                                antara
                                 Julia, Nina, dan Niklas.</span>
                             <div class="flex items-center gap-2">
                                 <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog1Lines)"
@@ -1333,7 +1324,8 @@
                     <div x-show="activeDialog === 2" class="space-y-4" x-cloak>
                         <div
                             class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                            <span class="text-xs sm:text-sm text-blue-900 font-semibold">Situasi: Percakapan formal antara
+                            <span class="text-xs sm:text-sm text-blue-900 font-semibold">Situasi: Percakapan formal
+                                antara
                                 Herr Hansen dan Frau Weber.</span>
                             <div class="flex items-center gap-2">
                                 <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog2Lines)"
@@ -1511,19 +1503,20 @@
                             <span class="text-xs font-bold uppercase tracking-wider text-orange-600">Latihan Mandiri
                                 A1.1</span>
                             <h3 class="text-lg sm:text-xl font-extrabold text-navy">Uji Pemahaman Pertemuan 1</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Lengkapi soal di bawah ini, lalu klik tombol "Periksa
+                            <p class="text-xs text-gray-500 mt-0.5">Lengkapi soal di bawah ini, lalu klik tombol
+                                "Periksa
                                 Jawaban".</p>
                         </div>
 
-                        <div class="flex items-center gap-3 bg-purple-50 border border-purple-100 px-4 py-2.5 rounded-2xl">
+                        <div
+                            class="flex items-center gap-3 bg-purple-50 border border-purple-100 px-4 py-2.5 rounded-2xl">
                             <div class="text-right">
                                 <span class="text-[11px] font-bold text-purple-700 uppercase block">Hasil Nilai</span>
                                 <span class="text-base font-black text-navy"
                                     x-text="quizScore !== null ? quizScore + '/8 Poin' : 'Belum Dinilai'">Belum
                                     Dinilai</span>
                             </div>
-                            <div
-                                class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition shadow-sm"
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition shadow-sm"
                                 :class="quizScore === null ? 'bg-purple-200 text-purple-700' : (quizScore === 8 ? 'bg-emerald-600 text-white' : 'bg-orange-500 text-white')"
                                 x-text="quizScore !== null ? quizScore : '—'">
                                 —
@@ -1789,7 +1782,8 @@
                                 class="px-4 py-3 rounded-2xl text-gray-500 hover:text-navy font-bold text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 transition">
                                 Reset Jawaban
                             </button>
-                            <span class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5">
+                            <span
+                                class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 Progres tersinkronisasi otomatis ke akun Anda
                             </span>
@@ -1804,7 +1798,8 @@
 
                     <!-- Toggleable Answer Key Card -->
                     <div x-show="showKey" x-collapse
-                        class="mt-6 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-navy" x-cloak>
+                        class="mt-6 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-navy"
+                        x-cloak>
                         <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -2185,7 +2180,7 @@
                     // 1. Simpan ke LocalStorage sebagai backup instan
                     try {
                         localStorage.setItem('aksara_a1_1_progress', JSON.stringify(payload));
-                    } catch (e) {}
+                    } catch (e) { }
 
                     // 2. Simpan ke Firestore jika user terautentikasi
                     if (this.currentUser && db) {
