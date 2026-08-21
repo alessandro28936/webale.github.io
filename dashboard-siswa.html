@@ -251,12 +251,14 @@
         <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-xl mx-auto" x-cloak>
             <div
                 class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
+
                 <h1 class="text-2xl sm:text-3xl font-black text-navy mb-3">
-                    Portal Siswa Kelas A1.1
+                    Selamat Datang di Ruang Belajarmu!
                 </h1>
                 <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
-                    Selamat datang di portal pembelajaran Aksaradeutsch. Silakan masuk menggunakan email dan kata sandi
-                    yang telah terdaftar untuk mengakses 12 modul pertemuan kelas.
+                    Yuk, masuk ke akunmu! Di sini kamu bisa akses semua materi belajar dan rangkuman kelas dari
+                    Pertemuan
+                    1 sampai 12. Kita belajar bareng pelan-pelan sampai kamu paham!
                 </p>
 
                 <!-- Error Notification -->
@@ -269,7 +271,7 @@
                 <!-- Form Login -->
                 <form @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
                     <div>
-                        <label class="block text-xs font-bold text-navy mb-1">Email Peserta</label>
+                        <label class="block text-xs font-bold text-navy mb-1">Email Kamu</label>
                         <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
                             class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
                     </div>
@@ -280,13 +282,19 @@
                     </div>
                     <button type="submit" :disabled="authSubmitting"
                         class="w-full py-3.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2">
-                        <span x-show="!authSubmitting">Masuk ke Dashboard Siswa</span>
-                        <span x-show="authSubmitting">Memproses...</span>
+                        <span x-show="!authSubmitting">Masuk & Mulai Belajar</span>
+                        <span x-show="authSubmitting">Menyiapkan materi kamu...</span>
                     </button>
                 </form>
 
-                <div class="mt-8 pt-6 border-t border-gray-100 text-[11px] text-gray-500">
-                    Akses materi dilindungi hak cipta Aksaradeutsch. Hubungi admin kelas jika Anda memerlukan bantuan akses.
+                <div class="mt-8 pt-6 border-t border-gray-100 text-xs text-gray-500 space-y-1.5">
+                    <p>
+                        Kendala saat masuk? Hubungi kami melalui <a href="https://wa.me/6281959896825" target="_blank"
+                            rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">WhatsApp</a>.
+                    </p>
+                    <p class="text-[11px] text-gray-400">
+                        Materi khusus peserta kelas A1.1 aksaradeutsch. Hak cipta dilindungi.
+                    </p>
                 </div>
             </div>
         </div>
@@ -305,34 +313,35 @@
 
                 <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                     <div class="max-w-2xl">
-                        <div
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
-                            <span>Level A1.1 • Modul Lengkap</span>
-                        </div>
                         <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
-                            Selamat Datang, <span class="text-orange-400"
-                                x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Peserta'"></span>
+                            Hallo, <span class="text-orange-400"
+                                x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Kamu'"></span>!
+                            Siap Belajar Hari Ini?
                         </h1>
                         <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6">
-                            Berikut adalah daftar modul materi pembelajaran untuk 12 pertemuan level A1.1 bahasa Jerman.
-                            Klik pada modul pertemuan yang tersedia untuk mulai belajar.
+                            Gak perlu takut salah atau merasa ketinggalan. Di sini semua materi disusun bertahap dari
+                            nol biar kamu bisa belajar dengan nyaman dan makin percaya diri ngomong bahasa Jerman.
                         </p>
 
-                        <!-- Highlights Stats Grid -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
-                                <span class="block text-[11px] text-gray-400 font-semibold">Total Modul</span>
-                                <strong class="text-base sm:text-lg font-black text-white">12 Pertemuan</strong>
+                        <!-- Highlights Stats Grid (3 Columns Balanced) -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Materi
+                                    Kelas</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-white">12 Modul</strong>
                             </div>
-                            <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
-                                <span class="block text-[11px] text-gray-400 font-semibold">Progres Anda</span>
-                                <strong class="text-base sm:text-lg font-black text-orange-400"
-                                    x-text="completedLessonsCount + ' / 12 Selesai'">1 / 12 Selesai</strong>
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Progres
+                                    Belajar</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-orange-400"
+                                    x-text="completedLessonsCount + '/12 Selesai'">1/12 Selesai</strong>
                             </div>
-                            <div
-                                class="col-span-2 sm:col-span-1 bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
-                                <span class="block text-[11px] text-gray-400 font-semibold">Skor Evaluasi P1</span>
-                                <strong class="text-base sm:text-lg font-black text-emerald-400"
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Latihan
+                                    P1</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-emerald-400"
                                     x-text="p1ScoreText">Belum Dinilai</strong>
                             </div>
                         </div>
@@ -341,8 +350,9 @@
                     <!-- Progress Ring / Card -->
                     <div
                         class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 w-full lg:w-80 flex-shrink-0">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Capaian Kelas A1.1</span>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Progress Belajar
+                            </span>
                             <span class="text-sm font-extrabold text-orange-400"
                                 x-text="Math.round((completedLessonsCount / 12) * 100) + '%'">8%</span>
                         </div>
@@ -351,7 +361,7 @@
                                 :style="`width: ${Math.max(5, (completedLessonsCount / 12) * 100)}%`"></div>
                         </div>
                         <p class="text-xs text-gray-300 leading-relaxed">
-                            Selesaikan setiap bab materi dan kerjakan soal latihan mandiri untuk memperkuat pemahaman Anda.
+                            Luangkan waktu sebentar setiap hari buat ngulang kosakata. Kamu pasti bisa!
                         </p>
                     </div>
                 </div>
@@ -361,21 +371,27 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h2 class="text-xl sm:text-2xl font-extrabold text-navy">
-                        Daftar Modul Pembelajaran (12 Pertemuan)
+                        Daftar Materi Pertemuan (1 – 12)
                     </h2>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih salah satu pertemuan di bawah ini untuk mengakses materi lengkap.</p>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih pertemuan yang mau kamu pelajari atau ulang
+                        hari ini:</p>
                 </div>
 
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                     <button @click="filter = 'all'"
                         :class="filter === 'all' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
                         class="px-4 py-2 rounded-xl text-xs font-bold transition">
-                        Semua (12)
+                        Semua Pertemuan (12)
                     </button>
-                    <button @click="filter = 'active'"
-                        :class="filter === 'active' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                    <button @click="filter = 'available'"
+                        :class="filter === 'available' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
                         class="px-4 py-2 rounded-xl text-xs font-bold transition">
                         Tersedia
+                    </button>
+                    <button @click="filter = 'completed'"
+                        :class="filter === 'completed' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Sudah Selesai
                     </button>
                 </div>
             </div>
@@ -393,17 +409,16 @@
                                 <img :src="lesson.image" :alt="lesson.title"
                                     class="w-full h-full object-cover object-center transition duration-300 hover:scale-105"
                                     onerror="this.src='Aksaradeutsch.jpg'">
-                                
+
                                 <!-- Status Badge Overlay -->
                                 <div class="absolute top-3 left-3">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs font-extrabold shadow-sm"
-                                        :class="lesson.statusClass"
-                                        x-text="lesson.statusText">
+                                    <span class="px-3 py-1 rounded-full text-xs font-extrabold shadow-sm"
+                                        :class="lesson.statusClass" x-text="lesson.statusText">
                                     </span>
                                 </div>
                                 <div class="absolute top-3 right-3">
-                                    <span class="px-2.5 py-1 rounded-xl bg-navy/80 backdrop-blur-sm text-white text-[11px] font-bold">
+                                    <span
+                                        class="px-2.5 py-1 rounded-xl bg-navy/80 backdrop-blur-sm text-white text-[11px] font-bold">
                                         Pertemuan <span x-text="lesson.number"></span>
                                     </span>
                                 </div>
@@ -424,7 +439,8 @@
                                 <!-- Key Topics Tags -->
                                 <div class="flex flex-wrap gap-1.5 mb-2">
                                     <template x-for="(tag, tagIdx) in lesson.tags" :key="tagIdx">
-                                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-gray-100 text-gray-700"
+                                        <span
+                                            class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-gray-100 text-gray-700"
                                             x-text="tag"></span>
                                     </template>
                                 </div>
@@ -469,7 +485,7 @@
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch" class="h-8 w-auto brightness-0 invert opacity-80">
+                <img src="logo-white.png" alt="Aksaradeutsch" class="h-8 sm:h-9 w-auto object-contain">
                 <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
             </div>
             <div class="flex gap-6">
@@ -659,8 +675,11 @@
                         };
                     });
 
-                    if (this.filter === 'active') {
+                    if (this.filter === 'available') {
                         return list.filter(l => l.isAvailable);
+                    }
+                    if (this.filter === 'completed') {
+                        return list.filter(l => l.id === 1 && this.p1Progress.quizScore !== null);
                     }
                     return list;
                 },
@@ -747,7 +766,7 @@
                                 const data = JSON.parse(saved);
                                 if (data.quizScore !== undefined) this.p1Progress.quizScore = data.quizScore;
                             }
-                        } catch (err) {}
+                        } catch (err) { }
                     }
                     this.syncStatusText = 'Tersinkronisasi';
                 }

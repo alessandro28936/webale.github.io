@@ -443,20 +443,13 @@
                         <div class="flex flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm">
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
-                                <span class="text-gray-400 font-semibold">Standar:</span> <strong
-                                    class="text-white">CEFR
-                                    A1.1</strong>
+                                <span class="text-gray-400 font-semibold">Modul:</span> <strong
+                                    class="text-white">Pertemuan 1</strong>
                             </div>
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
                                 <span class="text-gray-400 font-semibold">Estimasi:</span> <strong class="text-white">45
                                     Menit</strong>
-                            </div>
-                            <div
-                                class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
-                                <span class="text-gray-400 font-semibold">Audio:</span> <strong
-                                    class="text-white">Native
-                                    German Voice Engine</strong>
                             </div>
                             <div
                                 class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
@@ -489,7 +482,7 @@
                                 <a href="#kosakata"
                                     class="flex items-center gap-2 text-gray-300 hover:text-white transition py-1">
                                     <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-                                    1. Kosakata (Wortschatz)
+                                    1. Kosakata & Ungkapan (Wortschatz und Wendungen)
                                 </a>
                             </li>
                             <li>
@@ -522,25 +515,20 @@
             <section id="tujuan" class="mb-12 scroll-mt-24">
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm relative overflow-hidden">
                     <div
-                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
                         <div>
                             <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
                             <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah Anda
                                 menguasai materi:</p>
                         </div>
-                        <div
-                            class="flex items-center justify-between sm:justify-end gap-3 bg-orange-50/80 px-4 py-2.5 rounded-2xl border border-orange-100">
-                            <div class="text-left sm:text-right">
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-100 text-orange-700 text-xs font-bold shadow-sm">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                                 <span
-                                    class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block">Progres
-                                    Belajar</span>
-                                <span class="text-xs sm:text-sm font-extrabold text-navy"
-                                    x-text="completedGoalsCount + ' dari 8 Terpenuhi'">0 dari 8 Terpenuhi</span>
-                            </div>
-                            <div class="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0"
-                                x-text="Math.round((completedGoalsCount / 8) * 100) + '%'">
-                                0%
-                            </div>
+                                    x-text="completedGoalsCount + '/8 Tercapai (' + Math.round((completedGoalsCount / 8) * 100) + '%)'">0/8
+                                    Tercapai (0%)</span>
+                            </span>
                         </div>
                     </div>
 
@@ -560,7 +548,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 1: KOSAKATA DAN UNGKAPAN (WORTSCHATZ) -->
+            <!-- SECTION 1: KOSAKATA DAN UNGKAPAN (WORTSCHATZ UND WENDUNGEN) -->
             <section id="kosakata" class="mb-14 scroll-mt-24">
                 <div class="flex items-center gap-3 mb-6">
                     <div
@@ -568,7 +556,8 @@
                         1
                     </div>
                     <div>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan (Wortschatz)
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan (Wortschatz und
+                            Wendungen)
                         </h2>
                     </div>
                 </div>
@@ -852,7 +841,7 @@
                         <div>
                             <div class="mb-4">
                                 <h3 class="text-lg font-bold text-navy">
-                                    D. Kata Kerja dan Preposisi
+                                    D. Kata Kerja dan Preposisi (Verben und Präpositionen)
                                 </h3>
                             </div>
                             <div class="space-y-3">
@@ -1132,27 +1121,55 @@
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <h3 class="text-base font-extrabold text-navy mb-3">
+                            <h3 class="text-base font-extrabold text-navy mb-4">
                                 C. Memperkenalkan Diri & Bertanya Nama
                             </h3>
-                            <div class="space-y-3 text-xs sm:text-sm">
-                                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
-                                    <strong class="text-navy block font-bold mb-1">Menyebutkan Nama:</strong>
-                                    <ul class="space-y-1 text-gray-700">
-                                        <li>• <em>Ich heiße Nina.</em> (Nama saya Nina.)</li>
-                                        <li>• <em>Ich bin Nina.</em> (Saya Nina.)</li>
-                                        <li>• <em>Mein Name ist Nina Weber.</em> (Nama saya Nina Weber.)</li>
-                                    </ul>
+                            <div class="space-y-4 text-xs sm:text-sm">
+                                <!-- Sub-item 1: Menyebutkan Nama -->
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong
+                                        class="text-navy block font-extrabold text-xs uppercase tracking-wider text-orange-600 mb-2.5">Menyebutkan
+                                        Nama</strong>
+                                    <div class="space-y-2.5">
+                                        <div class="border-l-2 border-orange-500 pl-2.5">
+                                            <div class="font-bold text-navy text-xs sm:text-sm">Ich heiße Nina.</div>
+                                            <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Nama saya Nina.
+                                            </div>
+                                        </div>
+                                        <div class="border-l-2 border-orange-500 pl-2.5">
+                                            <div class="font-bold text-navy text-xs sm:text-sm">Ich bin Nina.</div>
+                                            <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Saya Nina.</div>
+                                        </div>
+                                        <div class="border-l-2 border-orange-500 pl-2.5">
+                                            <div class="font-bold text-navy text-xs sm:text-sm">Mein Name ist Nina
+                                                Weber.</div>
+                                            <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Nama saya Nina
+                                                Weber.</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
-                                    <strong class="text-navy block font-bold mb-1">Menanyakan Nama:</strong>
-                                    <ul class="space-y-1 text-gray-700">
-                                        <li>• <strong>Informal:</strong> <em>Wie heißt du?</em> atau <em>Wer bist
-                                                du?</em>
-                                            (Siapa namamu?)</li>
-                                        <li>• <strong>Formal:</strong> <em>Wie heißen Sie?</em> atau <em>Wie ist Ihr
-                                                Name?</em> (Siapa nama Anda?)</li>
-                                    </ul>
+
+                                <!-- Sub-item 2: Menanyakan Nama -->
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong
+                                        class="text-navy block font-extrabold text-xs uppercase tracking-wider text-orange-600 mb-2.5">Menanyakan
+                                        Nama</strong>
+                                    <div class="space-y-2.5">
+                                        <div class="border-l-2 border-blue-500 pl-2.5">
+                                            <div class="text-[10px] font-bold text-blue-700 uppercase">Informal</div>
+                                            <div class="font-bold text-navy text-xs sm:text-sm mt-0.5">Wie heißt du?
+                                                <span class="text-gray-400 font-normal">/</span> Wer bist du?</div>
+                                            <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Siapa namamu?
+                                            </div>
+                                        </div>
+                                        <div class="border-l-2 border-orange-500 pl-2.5">
+                                            <div class="text-[10px] font-bold text-orange-700 uppercase">Formal</div>
+                                            <div class="font-bold text-navy text-xs sm:text-sm mt-0.5">Wie heißen Sie?
+                                                <span class="text-gray-400 font-normal">/</span> Wie ist Ihr Name?</div>
+                                            <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Siapa nama Anda?
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1162,27 +1179,70 @@
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <h3 class="text-base font-extrabold text-navy mb-3">
+                            <h3 class="text-base font-extrabold text-navy mb-4">
                                 D. Menanyakan Kabar (Wie geht's?)
                             </h3>
-                            <div class="space-y-3 text-xs sm:text-sm">
-                                <div class="p-3 rounded-xl bg-blue-50/60 border border-blue-100">
-                                    <span class="text-[10px] font-bold text-blue-700 uppercase block">Informal</span>
-                                    <p class="text-gray-700 mt-1"><strong>Tanya:</strong> <em>Wie geht's?</em> atau
-                                        <em>Wie
-                                            geht's dir?</em> (Apa kabar?)
-                                    </p>
-                                    <p class="text-gray-700 mt-1"><strong>Jawab:</strong> <em>Danke, sehr gut!</em> /
-                                        <em>Danke, gut.</em> / <em>Auch gut, danke.</em>
-                                    </p>
+                            <div class="space-y-4 text-xs sm:text-sm">
+                                <!-- Informal Card -->
+                                <div class="p-3.5 rounded-2xl bg-blue-50/50 border border-blue-100">
+                                    <span
+                                        class="text-[10px] font-bold text-blue-700 uppercase tracking-wider block mb-2.5">Pola
+                                        Informal</span>
+
+                                    <div class="space-y-2.5">
+                                        <div class="flex items-start gap-2">
+                                            <span
+                                                class="px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 text-[10px] font-bold mt-0.5 flex-shrink-0">Tanya</span>
+                                            <div>
+                                                <div class="font-bold text-navy text-xs sm:text-sm">Wie geht's? <span
+                                                        class="text-gray-400 font-normal">/</span> Wie geht's dir?</div>
+                                                <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Apa kabar?
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-2 pt-1 border-t border-blue-100/60">
+                                            <span
+                                                class="px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 text-[10px] font-bold mt-0.5 flex-shrink-0">Jawab</span>
+                                            <div>
+                                                <div class="font-bold text-navy text-xs sm:text-sm">Danke, sehr gut!
+                                                    <span class="text-gray-400 font-normal">/</span> Danke, gut. <span
+                                                        class="text-gray-400 font-normal">/</span> Auch gut, danke.
+                                                </div>
+                                                <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Terima kasih,
+                                                    sangat baik! / Baik. / Baik juga, terima kasih.</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="p-3 rounded-xl bg-orange-50/60 border border-orange-100">
-                                    <span class="text-[10px] font-bold text-orange-700 uppercase block">Formal</span>
-                                    <p class="text-gray-700 mt-1"><strong>Tanya:</strong> <em>Wie geht es Ihnen?</em>
-                                        (Bagaimana kabar Anda?)</p>
-                                    <p class="text-gray-700 mt-1"><strong>Jawab:</strong> <em>Danke, gut. Und
-                                            Ihnen?</em>
-                                        (Baik, terima kasih. Dan bagaimana dengan Anda?)</p>
+
+                                <!-- Formal Card -->
+                                <div class="p-3.5 rounded-2xl bg-orange-50/50 border border-orange-100">
+                                    <span
+                                        class="text-[10px] font-bold text-orange-700 uppercase tracking-wider block mb-2.5">Pola
+                                        Formal</span>
+
+                                    <div class="space-y-2.5">
+                                        <div class="flex items-start gap-2">
+                                            <span
+                                                class="px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[10px] font-bold mt-0.5 flex-shrink-0">Tanya</span>
+                                            <div>
+                                                <div class="font-bold text-navy text-xs sm:text-sm">Wie geht es Ihnen?
+                                                </div>
+                                                <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Bagaimana
+                                                    kabar Anda?</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-2 pt-1 border-t border-orange-100/60">
+                                            <span
+                                                class="px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[10px] font-bold mt-0.5 flex-shrink-0">Jawab</span>
+                                            <div>
+                                                <div class="font-bold text-navy text-xs sm:text-sm">Danke, gut. Und
+                                                    Ihnen?</div>
+                                                <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5">Baik, terima
+                                                    kasih. Dan bagaimana dengan Anda?</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1192,30 +1252,34 @@
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <h3 class="text-base font-extrabold text-navy mb-3">
+                            <h3 class="text-base font-extrabold text-navy mb-2">
                                 E. Struktur Kalimat (Satzbau)
                             </h3>
-                            <p class="text-xs text-gray-600 mb-3">
-                                Dalam bahasa Jerman, letak kata kerja dalam kalimat memiliki aturan yang pasti.
+                            <p class="text-xs text-gray-500 mb-4 leading-relaxed">
+                                Dalam kalimat bahasa Jerman, letak kata kerja (verba) memiliki aturan posisi yang baku:
                             </p>
-                            <div class="space-y-2.5 text-xs">
-                                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
-                                    <strong class="text-navy block mb-0.5">Kalimat Tanya (W-Frage):</strong>
-                                    <p class="text-gray-600">Kata kerja selalu berada di posisi kedua, tepat setelah
-                                        kata
-                                        tanya.</p>
-                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Woher kommst du?</em>
-                                        (Dari
-                                        mana kamu berasal?)</p>
+                            <div class="space-y-3.5 text-xs sm:text-sm">
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong class="text-navy block font-bold text-xs mb-1">Kalimat Tanya
+                                        (W-Frage):</strong>
+                                    <p class="text-xs text-gray-600 mb-2">Kata kerja selalu berada di <strong>posisi
+                                            ke-2</strong>, tepat setelah kata tanya.</p>
+                                    <div class="p-2.5 rounded-xl bg-white border border-gray-200">
+                                        <div class="text-xs font-bold text-orange-600">Woher kommst du?</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Dari mana kamu berasal?</div>
+                                    </div>
                                 </div>
-                                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
-                                    <strong class="text-navy block mb-0.5">Kalimat Berita (Aussagesatz):</strong>
-                                    <p class="text-gray-600">Kata kerja juga berada di posisi kedua, biasanya
-                                        ditempatkan
-                                        setelah subjek.</p>
-                                    <p class="text-orange-700 font-semibold mt-1">Contoh: <em>Ich komme aus
-                                            Frankfurt.</em>
-                                        (Saya berasal dari Frankfurt.)</p>
+
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong class="text-navy block font-bold text-xs mb-1">Kalimat Pernyataan
+                                        (Aussagesatz):</strong>
+                                    <p class="text-xs text-gray-600 mb-2">Kata kerja juga berada di <strong>posisi
+                                            ke-2</strong>, biasanya ditempatkan setelah subjek.</p>
+                                    <div class="p-2.5 rounded-xl bg-white border border-gray-200">
+                                        <div class="text-xs font-bold text-orange-600">Ich komme aus Frankfurt.</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Saya berasal dari Frankfurt.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1496,31 +1560,24 @@
 
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-xl relative overflow-hidden">
 
-                    <!-- Quiz Header & Score Tracker -->
+                    <!-- Quiz Header & Score Tracker (Responsive Right-aligned on Tablet & Desktop) -->
                     <div
-                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-gray-100">
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-gray-100">
                         <div>
                             <span class="text-xs font-bold uppercase tracking-wider text-orange-600">Latihan Mandiri
                                 A1.1</span>
-                            <h3 class="text-lg sm:text-xl font-extrabold text-navy">Uji Pemahaman Pertemuan 1</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Lengkapi soal di bawah ini, lalu klik tombol
-                                "Periksa
+                            <h3 class="text-lg sm:text-xl font-extrabold text-navy mt-0.5">Uji Pemahaman Pertemuan 1
+                            </h3>
+                            <p class="text-xs text-gray-500 mt-1">Lengkapi soal di bawah ini, lalu klik tombol "Periksa
                                 Jawaban".</p>
                         </div>
-
-                        <div
-                            class="flex items-center gap-3 bg-purple-50 border border-purple-100 px-4 py-2.5 rounded-2xl">
-                            <div class="text-right">
-                                <span class="text-[11px] font-bold text-purple-700 uppercase block">Hasil Nilai</span>
-                                <span class="text-base font-black text-navy"
-                                    x-text="quizScore !== null ? quizScore + '/8 Poin' : 'Belum Dinilai'">Belum
-                                    Dinilai</span>
-                            </div>
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition shadow-sm"
-                                :class="quizScore === null ? 'bg-purple-200 text-purple-700' : (quizScore === 8 ? 'bg-emerald-600 text-white' : 'bg-orange-500 text-white')"
-                                x-text="quizScore !== null ? quizScore : '—'">
-                                —
-                            </div>
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition"
+                                :class="quizScore === null ? 'bg-purple-100 text-purple-700' : (quizScore === 8 ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800')"
+                                x-text="quizScore !== null ? 'Skor: ' + quizScore + '/8 Poin' : 'Belum Dinilai'">
+                                Belum Dinilai
+                            </span>
                         </div>
                     </div>
 
@@ -1850,7 +1907,7 @@
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch" class="h-8 w-auto brightness-0 invert opacity-80">
+                <img src="logo-white.png" alt="Aksaradeutsch" class="h-8 sm:h-9 w-auto object-contain">
                 <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
             </div>
             <div class="flex gap-6">
