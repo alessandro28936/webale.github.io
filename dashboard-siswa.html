@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <script>
+        // Clean URL: redirect from .html or index.html to clean routes
+        if (window.location.protocol !== 'file:') {
+            const path = window.location.pathname;
+            if (path.endsWith('/index.html') || path === '/index.html') {
+                const cleanPath = path.slice(0, -10);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            } else if (path.endsWith('.html')) {
+                const cleanPath = path.slice(0, -5);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Icon-AksaraDeutsch.png">
+    <link rel="apple-touch-icon" href="Icon-AksaraDeutsch.png">
+    <meta name="description"
+        content="Dashboard Siswa Aksaradeutsch - Akses modul materi pembelajaran level A1.1 ke-12 pertemuan.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dashboard Siswa: Kelas A1.1 - Aksaradeutsch.com</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                        'navy-dark': '#0B0F19',
+                        'primary-orange': '#FF6B35',
+                        'primary-hover': '#E85A2A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Firebase Configuration & Security -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Anti-Copy & Anti-Right Click Protection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #E85A2A;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -8px rgba(16, 24, 40, 0.08);
+        }
+
+        /* Print Shield */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 20pt;
+                color: #101828;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F9FAFB] text-navy min-h-screen flex flex-col" x-data="dashboardApp()" x-init="initDashboard()">
+
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Dashboard siswa dan materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Portal Siswa</span>
+                    <span class="ml-2 font-medium text-gray-600">Bahasa Jerman Level A1.1</span>
+                </div>
+            </div>
+
+            <!-- Header Profile & Actions -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- If Authenticated -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <div
+                            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span x-text="syncStatusText">Tersinkronisasi</span>
+                        </div>
+
+                        <!-- User Profile & Logout -->
+                        <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                            <div class="hidden lg:block text-right">
+                                <span class="block text-xs font-bold text-navy truncate max-w-[140px]"
+                                    x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                                <span class="block text-[10px] text-gray-500 truncate max-w-[140px]"
+                                    x-text="currentUser.email"></span>
+                            </div>
+                            <button @click="logout()"
+                                class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                                title="Keluar dari akun">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                    </path>
+                                </svg>
+                                <span class="hidden sm:inline">Keluar</span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+
+        <!-- ============================================================= -->
+        <!-- STATE 1: AUTH LOADING                                         -->
+        <!-- ============================================================= -->
+        <div x-show="authLoading" class="py-24 text-center" x-cloak>
+            <div
+                class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
+            <p class="text-sm font-bold text-gray-600">Memuat data dashboard peserta...</p>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 2: LOGIN GATE (IF NOT LOGGED IN)                        -->
+        <!-- ============================================================= -->
+        <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-xl mx-auto" x-cloak>
+            <div
+                class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
+                <h1 class="text-2xl sm:text-3xl font-black text-navy mb-3">
+                    Portal Siswa Kelas A1.1
+                </h1>
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
+                    Selamat datang di portal pembelajaran Aksaradeutsch. Silakan masuk menggunakan email dan kata sandi
+                    yang telah terdaftar untuk mengakses 12 modul pertemuan kelas.
+                </p>
+
+                <!-- Error Notification -->
+                <div x-show="authError"
+                    class="mb-5 p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold text-left"
+                    x-cloak>
+                    <span x-text="authError"></span>
+                </div>
+
+                <!-- Form Login -->
+                <form @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Email Peserta</label>
+                        <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Kata Sandi</label>
+                        <input type="password" x-model="authForm.password" required placeholder="••••••••"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <button type="submit" :disabled="authSubmitting"
+                        class="w-full py-3.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2">
+                        <span x-show="!authSubmitting">Masuk ke Dashboard Siswa</span>
+                        <span x-show="authSubmitting">Memproses...</span>
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 text-[11px] text-gray-500">
+                    Akses materi dilindungi hak cipta Aksaradeutsch. Hubungi admin kelas jika Anda memerlukan bantuan akses.
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 3: AUTHENTICATED DASHBOARD                              -->
+        <!-- ============================================================= -->
+        <div x-show="currentUser" x-cloak>
+
+            <!-- Welcome Hero & Overall Course Progress -->
+            <div
+                class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+                <div
+                    class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                    <div class="max-w-2xl">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
+                            <span>Level A1.1 • Modul Lengkap</span>
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+                            Selamat Datang, <span class="text-orange-400"
+                                x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Peserta'"></span>
+                        </h1>
+                        <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6">
+                            Berikut adalah daftar modul materi pembelajaran untuk 12 pertemuan level A1.1 bahasa Jerman.
+                            Klik pada modul pertemuan yang tersedia untuk mulai belajar.
+                        </p>
+
+                        <!-- Highlights Stats Grid -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                                <span class="block text-[11px] text-gray-400 font-semibold">Total Modul</span>
+                                <strong class="text-base sm:text-lg font-black text-white">12 Pertemuan</strong>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                                <span class="block text-[11px] text-gray-400 font-semibold">Progres Anda</span>
+                                <strong class="text-base sm:text-lg font-black text-orange-400"
+                                    x-text="completedLessonsCount + ' / 12 Selesai'">1 / 12 Selesai</strong>
+                            </div>
+                            <div
+                                class="col-span-2 sm:col-span-1 bg-white/10 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                                <span class="block text-[11px] text-gray-400 font-semibold">Skor Evaluasi P1</span>
+                                <strong class="text-base sm:text-lg font-black text-emerald-400"
+                                    x-text="p1ScoreText">Belum Dinilai</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Ring / Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 w-full lg:w-80 flex-shrink-0">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Capaian Kelas A1.1</span>
+                            <span class="text-sm font-extrabold text-orange-400"
+                                x-text="Math.round((completedLessonsCount / 12) * 100) + '%'">8%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-3 mb-4 overflow-hidden">
+                            <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-3 rounded-full transition-all duration-500"
+                                :style="`width: ${Math.max(5, (completedLessonsCount / 12) * 100)}%`"></div>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Selesaikan setiap bab materi dan kerjakan soal latihan mandiri untuk memperkuat pemahaman Anda.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs & Section Title -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-navy">
+                        Daftar Modul Pembelajaran (12 Pertemuan)
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih salah satu pertemuan di bawah ini untuk mengakses materi lengkap.</p>
+                </div>
+
+                <div class="flex gap-2">
+                    <button @click="filter = 'all'"
+                        :class="filter === 'all' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Semua (12)
+                    </button>
+                    <button @click="filter = 'active'"
+                        :class="filter === 'active' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Tersedia
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12 Lessons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                <!-- Loop Through 12 Meetings -->
+                <template x-for="lesson in filteredLessons" :key="lesson.id">
+                    <div
+                        class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between card-hover">
+                        <div>
+                            <!-- Thumbnail Cover -->
+                            <div class="relative w-full h-44 bg-gray-100 overflow-hidden border-b border-gray-100">
+                                <img :src="lesson.image" :alt="lesson.title"
+                                    class="w-full h-full object-cover object-center transition duration-300 hover:scale-105"
+                                    onerror="this.src='Aksaradeutsch.jpg'">
+                                
+                                <!-- Status Badge Overlay -->
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs font-extrabold shadow-sm"
+                                        :class="lesson.statusClass"
+                                        x-text="lesson.statusText">
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="px-2.5 py-1 rounded-xl bg-navy/80 backdrop-blur-sm text-white text-[11px] font-bold">
+                                        Pertemuan <span x-text="lesson.number"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="p-6">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block mb-1"
+                                    x-text="lesson.germanTheme">
+                                </span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mb-2 line-clamp-2"
+                                    x-text="lesson.title">
+                                </h3>
+                                <p class="text-xs text-gray-600 leading-relaxed line-clamp-3 mb-4"
+                                    x-text="lesson.description">
+                                </p>
+
+                                <!-- Key Topics Tags -->
+                                <div class="flex flex-wrap gap-1.5 mb-2">
+                                    <template x-for="(tag, tagIdx) in lesson.tags" :key="tagIdx">
+                                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-gray-100 text-gray-700"
+                                            x-text="tag"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer Action -->
+                        <div class="p-6 pt-0 border-t border-gray-50 mt-2">
+                            <template x-if="lesson.isAvailable">
+                                <a :href="lesson.link"
+                                    class="w-full py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                                    <span>Buka Materi Pembelajaran</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </template>
+                            <template x-if="!lesson.isAvailable">
+                                <button disabled
+                                    class="w-full py-3 rounded-2xl bg-gray-100 text-gray-400 font-bold text-xs sm:text-sm cursor-not-allowed flex items-center justify-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                    <span>Segera Hadir</span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-gray-400 py-10 border-t border-gray-800 text-xs mt-auto">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch" class="h-8 w-auto brightness-0 invert opacity-80">
+                <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="privacy-policy.html" class="hover:text-white transition">Kebijakan Privasi</a>
+                <a href="syarat-ketentuan.html" class="hover:text-white transition">Syarat & Ketentuan</a>
+                <a href="tentang-kami.html" class="hover:text-white transition">Tentang Kami</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function dashboardApp() {
+            return {
+                currentUser: null,
+                authLoading: true,
+                authSubmitting: false,
+                authError: '',
+                syncStatusText: 'Tersinkronisasi',
+                filter: 'all', // 'all' | 'active'
+
+                authForm: {
+                    email: '',
+                    password: ''
+                },
+
+                p1Progress: {
+                    quizScore: null,
+                    completedGoals: 0
+                },
+
+                // 12 Meetings Curriculum Data
+                lessons: [
+                    {
+                        id: 1,
+                        number: '1',
+                        germanTheme: 'Guten Tag!',
+                        title: 'Begrüßung, Kennenlernen, Herkunft und Wohnort',
+                        description: 'Menyapa, memperkenalkan diri, menanyakan kabar, asal negara, tempat tinggal, dan tata bahasa konjugasi dasar (heißen, sein, wohnen, kommen).',
+                        tags: ['Begrüßung', 'Personalpronomen', 'W-Fragen', 'Konjugation'],
+                        image: 'materi-1.png',
+                        link: 'materi-a1-1.html',
+                        isAvailable: true
+                    },
+                    {
+                        id: 2,
+                        number: '2',
+                        germanTheme: 'Freunde, Kollegen und ich',
+                        title: 'Alphabet, Zahlen, Berufe und Arbeitszeiten',
+                        description: 'Hobi, menyusun janji, profesi, jam kerja, pengenalan artikel (der, die, das), angka hingga di atas 20, dan kata kerja haben & sein.',
+                        tags: ['Alphabet', 'Zahlen 0-100', 'Artikel', 'Haben & Sein'],
+                        image: 'materi-2.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 3,
+                        number: '3',
+                        germanTheme: 'In Hamburg',
+                        title: 'Orte in der Stadt, Wegbeschreibung und Verkehr',
+                        description: 'Menanyakan lokasi di kota, petunjuk arah jalan, transportasi publik, artikel tak tentu (ein/eine), dan kalimat negasi (kein/keine).',
+                        tags: ['Wegbeschreibung', 'Negation', 'Imperativ', 'Stadt'],
+                        image: 'materi-3.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 4,
+                        number: '4',
+                        germanTheme: 'Guten Appetit!',
+                        title: 'Essen, Trinken, Einkaufen und Restaurant',
+                        description: 'Berbelanja bahan makanan, memesan makanan di restoran, tata bahasa kasus Akkusativ, serta kata kerja mögen dan möchten.',
+                        tags: ['Essen & Trinken', 'Akkusativ', 'Möchten', 'Preise'],
+                        image: 'materi-4.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 5,
+                        number: '5',
+                        germanTheme: 'Alltag und Familie',
+                        title: 'Tagesablauf, Uhrzeit, Familie und Termine',
+                        description: 'Aktivitas harian, jam/waktu, hubungan keluarga, kata kepemilikan (Possessivartikel), dan Modalverben (können, müssen, wollen).',
+                        tags: ['Uhrzeit', 'Familie', 'Possessivartikel', 'Modalverben'],
+                        image: 'materi-5.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 6,
+                        number: '6',
+                        germanTheme: 'Zeit mit Freunden',
+                        title: 'Freizeit, Verabredungen und Feste',
+                        description: 'Hobi waktu luang, perayaan ulang tahun, undangan, trennbare Verben (kata kerja pisah), dan bentuk lampau (Perfekt) dasar.',
+                        tags: ['Freizeit', 'Trennbare Verben', 'Perfekt', 'Einladungen'],
+                        image: 'materi-6.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 7,
+                        number: '7',
+                        germanTheme: 'Arbeitsalltag',
+                        title: 'Kommunikation am Arbeitsplatz und Medien',
+                        description: 'Komunikasi di lingkungan kerja, obrolan profesional dengan rekan kerja, dunia perbankan, dan kata depan penunjuk tempat.',
+                        tags: ['Arbeitsplatz', 'Small Talk', 'Präpositionen', 'Medien'],
+                        image: 'materi-7.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 8,
+                        number: '8',
+                        germanTheme: 'Fit und gesund',
+                        title: 'Körperteile, Gesundheit und Arztbesuch',
+                        description: 'Mengungkapkan kondisi kesehatan, konsultasi ke dokter, kosakata anggota tubuh, obat-obatan, dan kata kerja sollen/müssen.',
+                        tags: ['Gesundheit', 'Körper', 'Arzt', 'Imperativ'],
+                        image: 'materi-8.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 9,
+                        number: '9',
+                        germanTheme: 'Meine Wohnung',
+                        title: 'Wohnen, Möbel und Zimmer einrichten',
+                        description: 'Memahami iklan tempat tinggal, menata furnitur dan ruangan, serta tata bahasa Dativ (Wechselpräpositionen).',
+                        tags: ['Wohnung', 'Möbel', 'Wechselpräpositionen', 'Dativ'],
+                        image: 'materi-9.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 10,
+                        number: '10',
+                        germanTheme: 'Studium und Beruf',
+                        title: 'Universität, Bewerbung und Berufserfahrung',
+                        description: 'Aktivitas kampus/pekerjaan, informasi lowongan kerja, berkas lamaran (Bewerbung), dan tata bahasa masa lampau Perfekt (Partizip II).',
+                        tags: ['Bewerbung', 'Studium', 'Perfekt (Partizip II)', 'Beruf'],
+                        image: 'materi-10.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 11,
+                        number: '11',
+                        germanTheme: 'Die Jacke gefällt mir!',
+                        title: 'Kleidung, Farben und Einkaufen',
+                        description: 'Membeli pakaian di department store, menanyakan arah toko, Personalpronomen im Dativ, dan kata tunjuk dieser/welcher.',
+                        tags: ['Kleidung', 'Dativ Pronomen', 'Welcher/Dieser', 'Farben'],
+                        image: 'materi-11.png',
+                        link: '#',
+                        isAvailable: false
+                    },
+                    {
+                        id: 12,
+                        number: '12',
+                        germanTheme: 'Ab in den Urlaub!',
+                        title: 'Urlaub planen, Wetter und Reisebericht',
+                        description: 'Merencanakan liburan, petunjuk arah wisata, cuaca, menulis kartu pos, konjungsi penghubung (denn), dan evaluasi akhir A1.1.',
+                        tags: ['Urlaub', 'Wetter', 'Satzverbindung', 'Abschlusstest'],
+                        image: 'materi-12.png',
+                        link: '#',
+                        isAvailable: false
+                    }
+                ],
+
+                get filteredLessons() {
+                    let list = this.lessons.map(l => {
+                        let statusText = 'Segera Hadir';
+                        let statusClass = 'bg-gray-100 text-gray-600';
+
+                        if (l.id === 1) {
+                            if (this.p1Progress.quizScore !== null) {
+                                statusText = `Selesai • Nilai: ${this.p1Progress.quizScore}/8`;
+                                statusClass = 'bg-emerald-500 text-white';
+                            } else {
+                                statusText = 'Tersedia • Belum Selesai';
+                                statusClass = 'bg-orange-500 text-white';
+                            }
+                        }
+
+                        return {
+                            ...l,
+                            statusText,
+                            statusClass
+                        };
+                    });
+
+                    if (this.filter === 'active') {
+                        return list.filter(l => l.isAvailable);
+                    }
+                    return list;
+                },
+
+                get completedLessonsCount() {
+                    return this.p1Progress.quizScore !== null ? 1 : 0;
+                },
+
+                get p1ScoreText() {
+                    if (this.p1Progress.quizScore !== null) {
+                        return `${this.p1Progress.quizScore} / 8 Poin`;
+                    }
+                    return 'Belum Dinilai';
+                },
+
+                // Initialization
+                initDashboard() {
+                    if (auth) {
+                        auth.onAuthStateChanged(async (user) => {
+                            this.authLoading = false;
+                            if (user) {
+                                this.currentUser = user;
+                                await this.loadStudentProgress(user.uid);
+                            } else {
+                                this.currentUser = null;
+                            }
+                        });
+                    } else {
+                        this.authLoading = false;
+                    }
+                },
+
+                async handleLogin() {
+                    this.authSubmitting = true;
+                    this.authError = '';
+                    try {
+                        await auth.signInWithEmailAndPassword(this.authForm.email, this.authForm.password);
+                        this.authForm.password = '';
+                    } catch (error) {
+                        console.error('Login error:', error);
+                        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                            this.authError = 'Email atau kata sandi tidak sesuai. Silakan periksa kembali.';
+                        } else if (error.code === 'auth/invalid-email') {
+                            this.authError = 'Format alamat email tidak valid.';
+                        } else {
+                            this.authError = 'Gagal masuk: ' + (error.message || 'Terjadi kesalahan pada server.');
+                        }
+                    } finally {
+                        this.authSubmitting = false;
+                    }
+                },
+
+                async logout() {
+                    if (confirm('Apakah Anda yakin ingin keluar dari akun?')) {
+                        if (auth) {
+                            await auth.signOut();
+                        }
+                        this.currentUser = null;
+                    }
+                },
+
+                async loadStudentProgress(uid) {
+                    this.syncStatusText = 'Menyinkronkan...';
+                    try {
+                        if (db) {
+                            const docRef = db.collection('student_progress').doc(`${uid}_materi_a1_1`);
+                            const doc = await docRef.get();
+                            if (doc.exists) {
+                                const data = doc.data();
+                                if (data.quizScore !== undefined) {
+                                    this.p1Progress.quizScore = data.quizScore;
+                                }
+                                if (data.goals && Array.isArray(data.goals)) {
+                                    this.p1Progress.completedGoals = data.goals.filter(Boolean).length;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading Firestore progress in dashboard:', e);
+                        // Fallback to local storage
+                        try {
+                            const saved = localStorage.getItem('aksara_a1_1_progress');
+                            if (saved) {
+                                const data = JSON.parse(saved);
+                                if (data.quizScore !== undefined) this.p1Progress.quizScore = data.quizScore;
+                            }
+                        } catch (err) {}
+                    }
+                    this.syncStatusText = 'Tersinkronisasi';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
