@@ -268,7 +268,8 @@
                 <a href="dashboard-siswa.html"
                     class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-orange-50 text-gray-700 hover:text-orange-600 text-xs font-bold border border-gray-200 hover:border-orange-200 transition">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                     <span>Dashboard Siswa</span>
                 </a>
@@ -288,7 +289,8 @@
                             class="sm:hidden inline-flex items-center p-2 rounded-xl bg-gray-100 text-gray-700 text-xs font-bold border border-gray-200"
                             title="Kembali ke Dashboard">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                         </a>
                         <!-- Cloud Sync Status Indicator -->
@@ -428,19 +430,13 @@
 
                 <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <div class="max-w-3xl">
-                        <div
-                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
-                            <span class="w-2 h-2 rounded-full bg-orange-400"></span>
-                            Modul Pembelajaran A1.1 • Pertemuan 1
-                        </div>
                         <h1
                             class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
                             Begrüßung, Kennenlernen, Herkunft und Wohnort
                         </h1>
                         <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 font-normal">
                             Salam, Perkenalan Diri, Menanyakan Kabar, Asal Negara atau Kota, Tempat Tinggal, dan Bahasa
-                            yang
-                            Dikuasai.
+                            yang Dikuasai.
                         </p>
 
                         <!-- Meta Tags -->
@@ -528,23 +524,20 @@
                     <div
                         class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
                         <div>
-                            <div class="section-kicker mb-2">
-                                <span class="section-kicker-text">Lernziele</span>
-                            </div>
                             <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
                             <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah Anda
                                 menguasai materi:</p>
                         </div>
                         <div
-                            class="flex items-center gap-3 bg-orange-50 px-4 py-2.5 rounded-2xl border border-orange-100">
-                            <div class="text-right">
+                            class="flex items-center justify-between sm:justify-end gap-3 bg-orange-50/80 px-4 py-2.5 rounded-2xl border border-orange-100">
+                            <div class="text-left sm:text-right">
                                 <span
                                     class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block">Progres
                                     Belajar</span>
-                                <span class="text-sm font-extrabold text-navy"
+                                <span class="text-xs sm:text-sm font-extrabold text-navy"
                                     x-text="completedGoalsCount + ' dari 8 Terpenuhi'">0 dari 8 Terpenuhi</span>
                             </div>
-                            <div class="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold text-sm"
+                            <div class="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0"
                                 x-text="Math.round((completedGoalsCount / 8) * 100) + '%'">
                                 0%
                             </div>
@@ -567,7 +560,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 1: KOSAKATA DAN UNGKAPAN KUNCI (WORTSCHATZ) -->
+            <!-- SECTION 1: KOSAKATA DAN UNGKAPAN (WORTSCHATZ) -->
             <section id="kosakata" class="mb-14 scroll-mt-24">
                 <div class="flex items-center gap-3 mb-6">
                     <div
@@ -575,9 +568,7 @@
                         1
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-orange-600">Bab 1 • Kosakata</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan Kunci
-                            (Wortschatz)
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata dan Ungkapan (Wortschatz)
                         </h2>
                     </div>
                 </div>
@@ -589,12 +580,10 @@
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="mb-4">
                                 <h3 class="text-lg font-bold text-navy">
                                     A. Salam Sapaan (Begrüßung)
                                 </h3>
-                                <span
-                                    class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 rounded-full">Sapaan</span>
                             </div>
                             <div class="space-y-3">
                                 <!-- Card 1 -->
@@ -695,12 +684,10 @@
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="mb-4">
                                 <h3 class="text-lg font-bold text-navy">
                                     B. Salam Perpisahan (Verabschiedung)
                                 </h3>
-                                <span
-                                    class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Perpisahan</span>
                             </div>
                             <div class="space-y-3">
                                 <!-- Auf Wiedersehen -->
@@ -796,12 +783,10 @@
 
                     <!-- C. Kata Tanya (W-Fragen) -->
                     <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
+                        <div class="mb-4">
                             <h3 class="text-lg font-bold text-navy">
                                 C. Kata Tanya (W-Fragen)
                             </h3>
-                            <span class="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full">Kata
-                                Tanya</span>
                         </div>
                         <div class="space-y-2.5">
                             <div
@@ -861,29 +846,29 @@
                         </div>
                     </div>
 
-                    <!-- D. Kata Kerja & Pasangan Preposisi -->
+                    <!-- D. Kata Kerja & Pasangan Preposisi (Mobile-friendly Layout) -->
                     <div
                         class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="mb-4">
                                 <h3 class="text-lg font-bold text-navy">
                                     D. Kata Kerja dan Preposisi
                                 </h3>
-                                <span
-                                    class="text-xs font-semibold px-2.5 py-1 bg-purple-50 text-purple-700 rounded-full">Pola
-                                    Kalimat</span>
                             </div>
-                            <div class="space-y-3.5">
+                            <div class="space-y-3">
+                                <!-- Card 1: kommen aus -->
                                 <div
                                     class="p-4 rounded-2xl bg-gradient-to-r from-orange-50 to-amber-50/30 border border-orange-100">
-                                    <div class="flex items-center justify-between mb-1.5">
-                                        <strong class="text-sm font-bold text-navy flex items-center gap-2">
-                                            <span class="verb-tag">kommen aus ...</span>
-                                            <span>berasal dari ...</span>
-                                        </strong>
+                                    <div class="flex items-start justify-between gap-3 mb-1.5">
+                                        <div class="flex flex-wrap items-center gap-2">
+                                            <span class="verb-tag text-xs sm:text-sm">kommen aus ...</span>
+                                            <span class="text-xs sm:text-sm font-semibold text-navy">berasal dari
+                                                ...</span>
+                                        </div>
                                         <button @click="speak('kommen aus Deutschland, aus Frankfurt.', 'female')"
-                                            class="inline-flex items-center gap-1 px-2 py-1 bg-white rounded-lg border text-xs text-gray-700 hover:text-orange-600 shadow-sm">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            class="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 hover:text-orange-600 shadow-sm flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                                 </path>
@@ -891,21 +876,25 @@
                                             <span>Audio</span>
                                         </button>
                                     </div>
-                                    <p class="text-xs text-gray-600">Contoh: <em>aus Deutschland, aus Frankfurt</em></p>
+                                    <p class="text-xs text-gray-600 mt-1">Contoh: <em>aus Deutschland, aus
+                                            Frankfurt</em></p>
                                 </div>
 
+                                <!-- Card 2: wohnen in -->
                                 <div
                                     class="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50/30 border border-blue-100">
-                                    <div class="flex items-center justify-between mb-1.5">
-                                        <strong class="text-sm font-bold text-navy flex items-center gap-2">
+                                    <div class="flex items-start justify-between gap-3 mb-1.5">
+                                        <div class="flex flex-wrap items-center gap-2">
                                             <span
-                                                class="inline-block font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded border border-blue-200">wohnen
+                                                class="inline-block font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-xs sm:text-sm border border-blue-200">wohnen
                                                 in ...</span>
-                                            <span>tinggal di ...</span>
-                                        </strong>
+                                            <span class="text-xs sm:text-sm font-semibold text-navy">tinggal di
+                                                ...</span>
+                                        </div>
                                         <button @click="speak('wohnen in Zürich, in Frankfurt.', 'male')"
-                                            class="inline-flex items-center gap-1 px-2 py-1 bg-white rounded-lg border text-xs text-gray-700 hover:text-blue-600 shadow-sm">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            class="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 hover:text-blue-600 shadow-sm flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                                 </path>
@@ -913,21 +902,24 @@
                                             <span>Audio</span>
                                         </button>
                                     </div>
-                                    <p class="text-xs text-gray-600">Contoh: <em>in Zürich, in Frankfurt</em></p>
+                                    <p class="text-xs text-gray-600 mt-1">Contoh: <em>in Zürich, in Frankfurt</em></p>
                                 </div>
 
+                                <!-- Card 3: sprechen -->
                                 <div
                                     class="p-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50/30 border border-emerald-100">
-                                    <div class="flex items-center justify-between mb-1.5">
-                                        <strong class="text-sm font-bold text-navy flex items-center gap-2">
+                                    <div class="flex items-start justify-between gap-3 mb-1.5">
+                                        <div class="flex flex-wrap items-center gap-2">
                                             <span
-                                                class="inline-block font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200">sprechen
+                                                class="inline-block font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded text-xs sm:text-sm border border-emerald-200">sprechen
                                                 ...</span>
-                                            <span>berbicara ...</span>
-                                        </strong>
+                                            <span class="text-xs sm:text-sm font-semibold text-navy">berbicara
+                                                ...</span>
+                                        </div>
                                         <button @click="speak('sprechen Deutsch, Spanisch, Englisch.', 'female')"
-                                            class="inline-flex items-center gap-1 px-2 py-1 bg-white rounded-lg border text-xs text-gray-700 hover:text-emerald-600 shadow-sm">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            class="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 hover:text-emerald-600 shadow-sm flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                                 </path>
@@ -935,7 +927,8 @@
                                             <span>Audio</span>
                                         </button>
                                     </div>
-                                    <p class="text-xs text-gray-600">Contoh: <em>Deutsch, Spanisch, Englisch</em></p>
+                                    <p class="text-xs text-gray-600 mt-1">Contoh: <em>Deutsch, Spanisch, Englisch</em>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -951,28 +944,22 @@
                         2
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-orange-600">Bab 2 • Tata
-                            Bahasa</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa Dasar (Grammatik)</h2>
                     </div>
                 </div>
 
                 <!-- A. du vs Sie Card -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="mb-4">
                         <h3 class="text-lg sm:text-xl font-extrabold text-navy">
                             A. Membedakan <em>du</em> (kamu) dan <em>Sie</em> (Anda)
                         </h3>
-                        <span class="text-xs font-bold px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Fondasi
-                            Penting</span>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- du Box -->
                         <div
                             class="p-5 rounded-2xl bg-gradient-to-b from-blue-50/50 to-white border border-blue-100 relative">
-                            <span
-                                class="absolute top-4 right-4 text-xs font-extrabold px-3 py-1 bg-blue-100 text-blue-800 rounded-full">INFORMAL</span>
                             <div
                                 class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl font-black mb-3 shadow-md shadow-blue-500/20">
                                 du
@@ -990,8 +977,6 @@
                         <!-- Sie Box -->
                         <div
                             class="p-5 rounded-2xl bg-gradient-to-b from-orange-50/50 to-white border border-orange-100 relative">
-                            <span
-                                class="absolute top-4 right-4 text-xs font-extrabold px-3 py-1 bg-orange-100 text-orange-800 rounded-full">FORMAL</span>
                             <div
                                 class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center text-xl font-black mb-3 shadow-md shadow-orange-500/20">
                                 Sie
@@ -1246,8 +1231,6 @@
                         3
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-emerald-600">Bab 3 •
-                            Percakapan</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)
                         </h2>
                     </div>
@@ -1257,27 +1240,31 @@
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm"
                     x-data="{ activeDialog: 1 }">
 
-                    <!-- Tab Buttons -->
-                    <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-100 pb-4">
+                    <!-- Tab Buttons Grid (2x2 on Mobile, 4 Cols on Desktop) -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-6 border-b border-gray-100 pb-4">
                         <button @click="activeDialog = 1; stopPlayingDialog()"
-                            :class="activeDialog === 1 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
-                            class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition">
-                            Dialog 1: Perkenalan Informal
+                            :class="activeDialog === 1 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-2.5 sm:p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 1</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Perkenalan Informal</span>
                         </button>
                         <button @click="activeDialog = 2; stopPlayingDialog()"
-                            :class="activeDialog === 2 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
-                            class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition">
-                            Dialog 2: Perkenalan Formal
+                            :class="activeDialog === 2 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-2.5 sm:p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 2</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Perkenalan Formal</span>
                         </button>
                         <button @click="activeDialog = 3; stopPlayingDialog()"
-                            :class="activeDialog === 3 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
-                            class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition">
-                            Dialog 3: Menanyakan Asal dan Bahasa (Formal)
+                            :class="activeDialog === 3 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-2.5 sm:p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 3</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Asal & Bahasa</span>
                         </button>
                         <button @click="activeDialog = 4; stopPlayingDialog()"
-                            :class="activeDialog === 4 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
-                            class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition">
-                            Dialog 4: Menanyakan Asal & Tempat Tinggal (Informal)
+                            :class="activeDialog === 4 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-2.5 sm:p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 4</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Asal & Domisili</span>
                         </button>
                     </div>
 
@@ -1503,8 +1490,6 @@
                         4
                     </div>
                     <div>
-                        <span class="text-xs font-bold tracking-wider uppercase text-purple-600">Bab 4 • Latihan
-                            Mandiri</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Mandiri (Übungen)</h2>
                     </div>
                 </div>
@@ -1542,9 +1527,9 @@
                     <!-- Bagian A: 5 Soal (heiße, bist, heißen, bin, ist) -->
                     <div class="mb-8">
                         <div
-                            class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-700 mb-4">
-                            <span>Bagian A:</span> Lengkapi kalimat di bawah ini dengan kata yang tepat (heiße, bist,
-                            heißen, bin, ist):
+                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
+                            <strong class="text-orange-600 font-bold">Bagian A:</strong> Lengkapi kalimat di bawah ini
+                            dengan kata yang tepat <em>(heiße, bist, heißen, bin, ist)</em>:
                         </div>
 
                         <div class="space-y-4">
@@ -1678,9 +1663,9 @@
                     <!-- Bagian B: 3 Soal (kommt, komme, wohnt, wohne) -->
                     <div class="mb-8">
                         <div
-                            class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-700 mb-4">
-                            <span>Bagian B:</span> Lengkapi kalimat di bawah ini dengan konjugasi kata kerja yang tepat
-                            (kommt, komme, wohnt, wohne):
+                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
+                            <strong class="text-orange-600 font-bold">Bagian B:</strong> Lengkapi kalimat di bawah ini
+                            dengan konjugasi kata kerja yang tepat <em>(kommt, komme, wohnt, wohne)</em>:
                         </div>
 
                         <div class="space-y-4">
