@@ -1727,8 +1727,7 @@
                     <div class="mb-8">
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Bagian A:</strong> Lengkapi kalimat di bawah ini
-                            dengan kata yang tepat <em>(heiße, bist, heißen, bin, ist)</em>:
+                            <strong class="text-orange-600 font-bold">Teil A:</strong> Ergänzen Sie die Verben in der richtigen Form <em>(heiße, bist, heißen, bin, ist)</em>:
                         </div>
 
                         <div class="space-y-4">
@@ -1863,8 +1862,7 @@
                     <div class="mb-8">
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Bagian B:</strong> Lengkapi kalimat di bawah ini
-                            dengan konjugasi kata kerja yang tepat <em>(kommt, komme, wohnt, wohne)</em>:
+                            <strong class="text-orange-600 font-bold">Teil B:</strong> Was passt? Ergänzen Sie die Verben <em>(kommt, komme, wohnt, wohne)</em>:
                         </div>
 
                         <div class="space-y-4">
@@ -1896,7 +1894,7 @@
                                 <p x-show="showFeedback" class="text-xs mt-2 font-medium"
                                     :class="(answers.q6a === 'kommt' && answers.q6b === 'wohnt') ? 'text-emerald-600' : 'text-red-500'">
                                     <span
-                                        x-text="(answers.q6a === 'kommt' && answers.q6b === 'wohnt') ? 'Benar. Kunci jawaban:抢 komt, wohnt' : 'Kunci jawaban: kommt, wohnt'"></span>
+                                        x-text="(answers.q6a === 'kommt' && answers.q6b === 'wohnt') ? 'Benar. Kunci jawaban: kommt, wohnt' : 'Kunci jawaban: kommt, wohnt'"></span>
                                 </p>
                             </div>
 
@@ -2002,7 +2000,7 @@
                         <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Bagian A:</span>
+                                <span class="font-bold text-orange-600 block mb-1">Teil A (Verben konjugieren):</span>
                                 <ol class="list-decimal list-inside space-y-1 text-gray-700">
                                     <li><strong>bist</strong></li>
                                     <li><strong>heiße / bin</strong></li>
@@ -2012,7 +2010,7 @@
                                 </ol>
                             </div>
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Bagian B:</span>
+                                <span class="font-bold text-orange-600 block mb-1">Teil B (kommen / wohnen):</span>
                                 <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
                                     <li><strong>kommt, wohnt</strong></li>
                                     <li><strong>kommt, wohnt</strong></li>
@@ -2099,7 +2097,7 @@
                     { text: "Menanyakan dan menyebutkan negara atau kota asal.", checked: false },
                     { text: "Menanyakan dan menyebutkan tempat tinggal saat ini.", checked: false },
                     { text: "Menanyakan dan menyebutkan bahasa yang dikuasai.", checked: false },
-                    { text: "Memahami struktur dasar kalimat tanya dan kalimat berita.", checked: false },
+                    { text: "Memahami struktur dasar kalimat tanya dan kalimat pernyataan.", checked: false },
                 ],
 
                 get completedGoalsCount() {
@@ -2435,7 +2433,9 @@
                     }
 
                     window.speechSynthesis.cancel();
-                    const cleanText = text.replace(/[\(\)]/g, '').trim();
+                    let cleanText = text.replace(/[*_~`\(\)]/g, '').trim();
+                    cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
+                    cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
                     const utterance = new SpeechSynthesisUtterance(cleanText);
                     utterance.lang = 'de-DE';
 

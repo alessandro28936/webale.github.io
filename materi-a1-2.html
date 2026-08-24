@@ -1149,8 +1149,7 @@
                     <div class="mb-8">
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Bagian A:</strong> Lengkapi kalimat di bawah ini
-                            dengan konjugasi kata kerja yang tepat <em>(spreche, sprichst, spricht, lerne, lernt)</em>:
+                            <strong class="text-orange-600 font-bold">Teil A:</strong> Ergänzen Sie die passende Verbform von <em>sprechen</em> oder <em>lernen</em> (Lengkapi kalimat dengan konjugasi yang tepat):
                         </div>
 
                         <div class="space-y-4">
@@ -1266,8 +1265,7 @@
                     <div class="mb-8">
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Bagian B:</strong> Lengkapi kalimat dengan
-                            preposisi dan artikel yang tepat <em>(aus, aus der, aus den)</em>:
+                            <strong class="text-orange-600 font-bold">Teil B:</strong> Ergänzen Sie die passende Präposition oder den Artikel <em>(aus, aus der, aus den)</em>:
                         </div>
 
                         <div class="space-y-4">
@@ -1401,7 +1399,7 @@
                         <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Bagian A:</span>
+                                <span class="font-bold text-orange-600 block mb-1">Teil A (Konjugation):</span>
                                 <ol class="list-decimal list-inside space-y-1 text-gray-700">
                                     <li><strong>sprichst</strong></li>
                                     <li><strong>spreche</strong></li>
@@ -1410,7 +1408,7 @@
                                 </ol>
                             </div>
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Bagian B:</span>
+                                <span class="font-bold text-orange-600 block mb-1">Teil B (Präpositionen):</span>
                                 <ol start="5" class="list-decimal list-inside space-y-1 text-gray-700">
                                     <li><strong>aus</strong></li>
                                     <li><strong>aus der</strong></li>
@@ -1687,7 +1685,9 @@
                     }
                     window.speechSynthesis.cancel();
 
-                    const cleanText = text.replace(/[\(\)]/g, '').trim();
+                    let cleanText = text.replace(/[*_~`\(\)]/g, '').trim();
+                    cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
+                    cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
                     const utterance = new SpeechSynthesisUtterance(cleanText);
                     utterance.lang = 'de-DE';
 

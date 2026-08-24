@@ -44,6 +44,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        // Proteksi Anti-Copy, Anti-Cut, Anti-Selectstart & Anti-Right Click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            // Blokir Ctrl+C, Ctrl+A, Ctrl+X di luar elemen form
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            // Blokir Ctrl+P (Print), Ctrl+S (Save), Ctrl+U (Source), DevTools (F12, Ctrl+Shift+I/C/J)
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -52,6 +98,19 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
         }
 
         [x-cloak] {
@@ -103,40 +162,38 @@
         }
 
         @media print {
-            nav, footer, aside, .no-print {
-                display: none !important;
+            body * {
+                visibility: hidden;
             }
-            body {
-                background: white !important;
-            }
-            .print-full-width {
-                width: 100% !important;
-                max-width: 100% !important;
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 20pt;
+                color: #0B1528;
             }
         }
     </style>
 </head>
 
 <body class="bg-[#F9FAFB] text-navy antialiased" x-data="{ viewMode: 'cards' }">
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
     <!-- Navbar -->
     <nav class="flex items-center justify-between gap-4 px-4 sm:px-8 md:px-16 py-3 md:py-4 bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <a href="./" class="flex items-center flex-shrink-0" aria-label="Aksaradeutsch.com beranda">
             <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch.com Logo"
                 class="h-9 sm:h-12 md:h-[56px] w-auto max-w-[200px] sm:max-w-none object-contain">
         </a>
-
-        <div class="flex items-center gap-2 sm:gap-3">
-            <button onclick="window.print()" type="button"
-                class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-xs sm:text-sm font-bold text-gray-700 shadow-sm transition">
-                <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
-                    </path>
-                </svg>
-                <span class="hidden sm:inline">Cetak Dokumen</span>
-                <span class="sm:hidden">Cetak</span>
-            </button>
-        </div>
     </nav>
 
     <main>

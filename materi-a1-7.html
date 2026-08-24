@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 7: Guten Appetit! – Lebensmittel, Einkaufen und Akkusativ | Aksaradeutsch</title>
+    <meta name="description"
+        content="Materi Pertemuan 7 A1.1: Nama makanan dan minuman, toko pangan, kuantitas perbelanjaan, membaca harga, dan penerapan kasus Akkusativ.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js Collapse Plugin & Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Configuration & Content Protection -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Proteksi Anti-Copy, Anti-Cut, Anti-Selectstart & Anti-Right Click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        'primary-hover': '#E85924',
+                        navy: '#0B1528',
+                        'navy-light': '#16233B',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @media print {
+            body * {
+                display: none !important;
+            }
+
+            #print-shield-warning {
+                display: block !important;
+                padding: 40px;
+                text-align: center;
+                font-family: sans-serif;
+                color: #d9534f;
+            }
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-orange:hover {
+            background-color: #E85924;
+            transform: translateY(-1px);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col selection:bg-orange-500 selection:text-white"
+    x-data="lessonApp()" x-init="initApp()">
+
+    <!-- Print Shield Warning Element -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Sticky Reading Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="`width: ${readingProgress}%`"></div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-200/80 z-40 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Left Side Logo & Header Title -->
+            <div class="flex items-center gap-3">
+                <a href="dashboard-siswa.html" class="flex-shrink-0">
+                    <img src="Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 7</span>
+                    <span class="ml-2 font-medium text-gray-600">Guten Appetit! – Lebensmittel, Einkaufen und
+                        Akkusativ</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="dashboard-siswa.html"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard Siswa</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="dashboard-siswa.html"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Layout -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-grow w-full">
+
+        <!-- ============================================================= -->
+        <!-- HERO BANNER                                                   -->
+        <!-- ============================================================= -->
+        <div
+            class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <!-- Left Details -->
+                <div class="max-w-2xl">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                        Guten Appetit! – Lebensmittel, Einkaufen und Akkusativ
+                    </h1>
+                    <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
+                        Mempelajari nama-nama makanan dan minuman, satuan ukuran kuantitas, jenis-jenis toko pangan,
+                        cara membaca nominal harga, serta penerapan kasus <em>Akkusativ</em> pada objek kalimat.
+                    </p>
+
+                    <!-- Meta Tags -->
+                    <div class="flex flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Modul:</span>
+                            <strong class="text-white">Pertemuan 7</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Estimasi:</span>
+                            <strong class="text-white">45 Menit</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Latihan:</span>
+                            <strong class="text-white">8 Soal Interaktif</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Links Card (Daftar Isi Materi) -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                    <p
+                        class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                        Daftar Isi Materi
+                        <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">4
+                            Bagian</span>
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                        <li>
+                            <a href="#tujuan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Target Pembelajaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wortschatz"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                1. Kosakata (Wortschatz)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#grammatik"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                2. Tata Bahasa (Grammatik)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dialog"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                3. Contoh Percakapan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latihan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                4. Latihan Mandiri
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- TUJUAN PEMBELAJARAN (LERNZIELE)                               -->
+        <!-- ============================================================= -->
+        <section id="tujuan" class="mb-12 scroll-mt-24">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm relative overflow-hidden">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                        <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah kamu
+                            menguasai materi Pertemuan 7:</p>
+                    </div>
+                    <div class="flex-shrink-0 self-start sm:self-auto">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-100 text-orange-700 text-xs font-bold shadow-sm">
+                            <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                            <span
+                                x-text="completedGoalsCount + '/5 Tercapai (' + Math.round((completedGoalsCount / 5) * 100) + '%)'">0/5
+                                Tercapai (0%)</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <template x-for="(goal, idx) in goals" :key="idx">
+                        <label
+                            :class="goal.checked ? 'bg-orange-50/70 border-orange-200 text-navy font-semibold' : 'bg-gray-50 border-gray-200 text-gray-700'"
+                            class="flex items-start gap-3 p-3.5 rounded-2xl border transition cursor-pointer hover:border-orange-300">
+                            <input type="checkbox" x-model="goal.checked" @change="saveProgress()"
+                                class="mt-1 w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-gray-300">
+                            <span class="text-xs sm:text-sm font-medium"
+                                :class="goal.checked ? 'line-through text-gray-500' : ''" x-text="goal.text"></span>
+                        </label>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
+        <!-- ============================================================= -->
+        <section id="wortschatz" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    1
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Klik tombol audio untuk mendengarkan pelafalan dwisuara
+                        bahasa Jerman yang jernih.</p>
+                </div>
+            </div>
+
+            <!-- Sub-Bagian A: Makanan dan Minuman (Lebensmittel und Getränke) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">A. Makanan dan Minuman (Lebensmittel und Getränke)</h3>
+                        <p class="text-xs text-gray-500">Bahan makanan pokok, sayuran, buah-buahan, dan minuman harian.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-semibold">
+                        <span class="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-bold">der (Maskulin)</span>
+                        <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">das
+                            (Netral)</span>
+                        <span class="px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 font-bold">die
+                            (Feminin)</span>
+                    </div>
+                </div>
+
+                <!-- Grid Kartu Makanan (30 Kosakata) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    <template x-for="(item, idx) in foodItems" :key="idx">
+                        <div
+                            class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center gap-1.5 mb-1">
+                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                        :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
+                                        x-text="item.article"></span>
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                        x-text="item.word"></strong>
+                                </div>
+                                <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                            </div>
+                            <button @click="speak(item.fullWord, item.gender === 'fem' ? 'female' : 'male')"
+                                class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                title="Dengarkan Suara">
+                                <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Sub-Bagian B & C: Toko Pangan, Kuantitas & Perlengkapan Belanja -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Toko Pangan (Geschäfte) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                    <div class="mb-6 pb-4 border-b border-gray-100">
+                        <h3 class="text-lg font-bold text-navy">B. Toko Pangan (Geschäfte)</h3>
+                        <p class="text-xs text-gray-500">Tempat membeli berbagai kebutuhan makanan dan bahan pokok.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <template x-for="(shop, idx) in shopItems" :key="idx">
+                            <div
+                                class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-1.5 mb-1">
+                                        <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                            :class="shop.gender === 'fem' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'"
+                                            x-text="shop.article"></span>
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                            x-text="shop.word"></strong>
+                                    </div>
+                                    <p class="text-xs text-gray-500 truncate" x-text="shop.meaning"></p>
+                                </div>
+                                <button @click="speak(shop.fullWord, 'female')"
+                                    class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition"
+                                    title="Dengarkan Suara">
+                                    <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Kuantitas dan Perlengkapan Belanja (Mengen und Einkaufen) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                    <div class="mb-6 pb-4 border-b border-gray-100">
+                        <h3 class="text-lg font-bold text-navy">C. Kuantitas dan Perlengkapan Belanja</h3>
+                        <p class="text-xs text-gray-500">Satuan takaran kemasan dan perlengkapan berbelanja.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <template x-for="(qty, idx) in quantityItems" :key="idx">
+                            <div
+                                class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-1.5 mb-1">
+                                        <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                            :class="qty.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (qty.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
+                                            x-text="qty.article"></span>
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                            x-text="qty.word"></strong>
+                                    </div>
+                                    <p class="text-xs text-gray-500 truncate" x-text="qty.meaning"></p>
+                                </div>
+                                <button @click="speak(qty.fullWord, 'female')"
+                                    class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition"
+                                    title="Dengarkan Suara">
+                                    <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-Bagian D: Membaca Harga (Preise) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div
+                    class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">D. Membaca Nominal Harga (Preise)</h3>
+                        <p class="text-xs text-gray-500">Cara pengucapan harga dalam mata uang Euro dan Cent.</p>
+                    </div>
+                    <span
+                        class="px-3 py-1 rounded-xl bg-orange-100 text-orange-800 text-xs font-extrabold self-start sm:self-auto">
+                        Währung: Euro (€) & Cent
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                    <template x-for="(price, idx) in priceItems" :key="idx">
+                        <div
+                            class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition">
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="text-base font-extrabold text-orange-600" x-text="price.nominal"></span>
+                                <button @click="speak(price.germanText, 'female')"
+                                    class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition"
+                                    title="Dengarkan Pelafalan">
+                                    <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="text-xs font-bold text-navy" x-text="price.germanText"></div>
+                            <div class="text-[11px] text-gray-500 mt-1" x-text="price.note"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. TATA BAHASA (GRAMMATIK)                                    -->
+        <!-- ============================================================= -->
+        <section id="grammatik" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    2
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Konsep kasus Akkusativ, kata kerja transitif, dan
+                        struktur kalimat.</p>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Topik A: Kasus Akkusativ (Objek Langsung) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-navy mb-1">A. Kasus Akkusativ (Objek Langsung)</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                            Dalam tata bahasa Jerman, kata benda yang menjadi sasaran atau objek langsung dari tindakan
+                            subjek berada dalam kasus <strong class="text-orange-600 font-extrabold">Akkusativ</strong>.
+                        </p>
+                        <div
+                            class="p-4 rounded-2xl bg-orange-50/70 border border-orange-200 my-4 text-xs sm:text-sm text-navy">
+                            <strong class="font-extrabold block mb-1">Kaidah Akkusativ:</strong>
+                            Perubahan bentuk artikel pada kasus Akkusativ <strong>HANYA TERJADI pada kata benda Maskulin
+                                (der → den, ein → einen, kein → keinen)</strong>. Kata benda Netral, Feminin, dan Jamak
+                            bentuk artikelnya tetap sama seperti Nominativ.
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-2xl border border-gray-100">
+                        <table class="w-full text-xs sm:text-sm text-left border-collapse bg-white">
+                            <thead>
+                                <tr class="bg-orange-50/80 border-b border-orange-100 text-navy font-bold">
+                                    <th class="p-3.5 sm:p-4">Gender Kata Benda</th>
+                                    <th class="p-3.5 sm:p-4">Nominativ (Subjek)</th>
+                                    <th class="p-3.5 sm:p-4 text-orange-600">Akkusativ: Artikel Tentu</th>
+                                    <th class="p-3.5 sm:p-4 text-orange-600">Akkusativ: Artikel Tak Tentu</th>
+                                    <th class="p-3.5 sm:p-4 text-orange-600">Akkusativ: Negasi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-800">
+                                <tr>
+                                    <td class="p-3.5 sm:p-4 font-bold text-blue-700">Maskulin (der)</td>
+                                    <td class="p-3.5 sm:p-4 font-semibold">der Käse</td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-blue-700 bg-blue-50/40">den Käse</td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-blue-700 bg-blue-50/40">einen Käse</td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-blue-700 bg-blue-50/40">keinen Käse</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 sm:p-4 font-bold text-emerald-700">Netral (das)</td>
+                                    <td class="p-3.5 sm:p-4 font-semibold">das Brot</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-emerald-700">das Brot</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-emerald-700">ein Brot</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-emerald-700">kein Brot</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 sm:p-4 font-bold text-purple-700">Feminin (die)</td>
+                                    <td class="p-3.5 sm:p-4 font-semibold">die Gurke</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-purple-700">die Gurke</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-purple-700">eine Gurke</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-purple-700">keine Gurke</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 sm:p-4 font-bold text-amber-700">Jamak (Plural)</td>
+                                    <td class="p-3.5 sm:p-4 font-semibold">die Tomaten</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-amber-700">die Tomaten</td>
+                                    <td class="p-3.5 sm:p-4 text-gray-400 font-semibold">- Tomaten</td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-amber-700">keine Tomaten</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Topik B: Kata Kerja yang Membutuhkan Objek Akkusativ -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-navy mb-1">B. Kata Kerja yang Membutuhkan Objek Akkusativ</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                            Kata kerja berikut adalah kata kerja transitif yang sering digunakan dalam konteks makanan
+                            dan belanja:
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">kaufen (membeli)</strong>
+                            <p class="text-xs text-gray-600"><em>Ich kaufe <strong class="text-blue-700">den
+                                        Apfelsaft</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Saya membeli jus apel itu.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">brauchen (membutuhkan)</strong>
+                            <p class="text-xs text-gray-600"><em>Wir brauchen <strong class="text-blue-700">einen
+                                        Einkaufswagen</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Kami membutuhkan satu troli belanja.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">haben (memiliki)</strong>
+                            <p class="text-xs text-gray-600"><em>Er hat <strong class="text-blue-700">keinen
+                                        Käse</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Dia tidak punya keju.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">essen (memakan)</strong>
+                            <p class="text-xs text-gray-600"><em>Sie isst <strong class="text-blue-700">einen
+                                        Apfel</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Dia memakan sebutir apel.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">trinken (meminum)</strong>
+                            <p class="text-xs text-gray-600"><em>Ich trinke <strong class="text-blue-700">einen
+                                        Tee</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Saya meminum secangkir teh.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">nehmen (mengambil)</strong>
+                            <p class="text-xs text-gray-600"><em>Ich nehme <strong class="text-emerald-700">ein Stück
+                                        Kuchen</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Saya mengambil sepotong kue.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">kochen (memasak)</strong>
+                            <p class="text-xs text-gray-600"><em>Wir kochen <strong class="text-purple-700">eine
+                                        Suppe</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Kami memasak sup.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <strong class="text-navy text-sm block font-bold mb-1">suchen (mencari)</strong>
+                            <p class="text-xs text-gray-600"><em>Ich suche <strong class="text-blue-700">den
+                                        Reis</strong>.</em></p>
+                            <p class="text-[11px] text-gray-400 mt-1">Saya mencari beras itu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topik C: Struktur Posisi Kalimat dengan Objek Akkusativ -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-navy mb-1">C. Struktur Posisi Kalimat dengan Objek Akkusativ
+                        </h3>
+                        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                            Posisi kata kerja dalam kalimat pernyataan dan kalimat tanya:
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-xs font-bold text-orange-700 block mb-2">1. Kalimat Pernyataan (Aussagesatz):
+                                Kata Kerja di Posisi 2</span>
+                            <div class="overflow-x-auto rounded-2xl border border-gray-100">
+                                <table class="w-full text-xs sm:text-sm text-left border-collapse bg-white">
+                                    <thead>
+                                        <tr class="bg-orange-50/80 border-b border-orange-100 text-navy font-bold">
+                                            <th class="p-3 sm:p-3.5">Subjek (Posisi 1)</th>
+                                            <th class="p-3 sm:p-3.5 text-orange-600">Kata Kerja (Posisi 2)</th>
+                                            <th class="p-3 sm:p-3.5 text-blue-700">Objek Akkusativ</th>
+                                            <th class="p-3 sm:p-3.5">Keterangan Tambahan</th>
+                                            <th class="p-3 sm:p-3.5">Arti Kalimat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100 text-gray-800">
+                                        <tr>
+                                            <td class="p-3 sm:p-3.5 font-bold">Ich</td>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-orange-600">kaufe</td>
+                                            <td class="p-3 sm:p-3.5 font-bold text-blue-700">einen Salat</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-600">im Supermarkt.</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-500">Saya membeli selada di supermarket.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 sm:p-3.5 font-bold">Wir</td>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-orange-600">brauchen</td>
+                                            <td class="p-3 sm:p-3.5 font-bold text-emerald-700">kein Fleisch</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-600">für das Essen.</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-500">Kami tidak butuh daging untuk makanan
+                                                ini.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-xs font-bold text-blue-700 block mb-2">2. Kalimat Tanya Kata Tanya
+                                (W-Frage): Kata Tanya di Posisi 1, Kata Kerja di Posisi 2</span>
+                            <div class="overflow-x-auto rounded-2xl border border-gray-100">
+                                <table class="w-full text-xs sm:text-sm text-left border-collapse bg-white">
+                                    <thead>
+                                        <tr class="bg-blue-50/80 border-b border-blue-100 text-navy font-bold">
+                                            <th class="p-3 sm:p-3.5 text-blue-700">Kata Tanya (Posisi 1)</th>
+                                            <th class="p-3 sm:p-3.5 text-orange-600">Kata Kerja (Posisi 2)</th>
+                                            <th class="p-3 sm:p-3.5">Subjek</th>
+                                            <th class="p-3 sm:p-3.5">Objek / Keterangan</th>
+                                            <th class="p-3 sm:p-3.5">Arti Kalimat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100 text-gray-800">
+                                        <tr>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-blue-700">Was</td>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-orange-600">kaufst</td>
+                                            <td class="p-3 sm:p-3.5 font-bold">du</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-600">für das Frühstück?</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-500">Apa yang kamu beli untuk sarapan?
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-blue-700">Wo</td>
+                                            <td class="p-3 sm:p-3.5 font-extrabold text-orange-600">finden</td>
+                                            <td class="p-3 sm:p-3.5 font-bold">Sie</td>
+                                            <td class="p-3 sm:p-3.5 font-bold text-blue-700">den Reis?</td>
+                                            <td class="p-3 sm:p-3.5 text-gray-500">Di mana Anda menemukan beras itu?
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. CONTOH PERCAKAPAN (BEISPIELDIALOGE)                         -->
+        <!-- ============================================================= -->
+        <section id="dialog" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    3
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Dengarkan dialog mengenai rencana belanja dan interaksi
+                        dengan pelayan kasir.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Dialog 1: Belanja di Pasar dan Supermarket (Informal) -->
+                <div
+                    class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="min-w-0 flex-1">
+                                <span
+                                    class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog
+                                    1</span>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Belanja untuk Pesta Barbekyu
+                                </h3>
+                                <p class="text-xs text-gray-400">Mario (Pria) & Elena (Wanita)</p>
+                            </div>
+                            <button @click="playFullDialog(1)"
+                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="!(isPlayingFullDialog && activeDialogPlaying === 1)"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="isPlayingFullDialog && activeDialogPlaying === 1"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                                    </path>
+                                </svg>
+                                <span
+                                    x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Chat bubble list -->
+                        <div class="space-y-3.5 text-xs sm:text-sm">
+                            <template x-for="(line, idx) in dialog1Lines" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border"
+                                    :class="(isPlayingFullDialog && activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50 border-gray-100'">
+                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                        <span class="font-extrabold text-xs"
+                                            :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
+                                            title="Dengarkan Baris Ini">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="font-bold text-navy" x-text="line.text"></div>
+                                    <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2: Membeli Makanan di Meja Pelayanan dan Kasir (Formal) -->
+                <div
+                    class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="min-w-0 flex-1">
+                                <span
+                                    class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Dialog
+                                    2</span>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Pelayanan di Meja Kasir</h3>
+                                <p class="text-xs text-gray-400">Verkäufer (Pria) & Frau Berg (Wanita)</p>
+                            </div>
+                            <button @click="playFullDialog(2)"
+                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="!(isPlayingFullDialog && activeDialogPlaying === 2)"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="isPlayingFullDialog && activeDialogPlaying === 2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                                    </path>
+                                </svg>
+                                <span
+                                    x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Chat bubble list -->
+                        <div class="space-y-3.5 text-xs sm:text-sm">
+                            <template x-for="(line, idx) in dialog2Lines" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border"
+                                    :class="(isPlayingFullDialog && activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50 border-gray-100'">
+                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                        <span class="font-extrabold text-xs"
+                                            :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
+                                            title="Dengarkan Baris Ini">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="font-bold text-navy" x-text="line.text"></div>
+                                    <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. LATIHAN MANDIRI (ÜBUNGEN)                                  -->
+        <!-- ============================================================= -->
+        <section id="latihan" class="mb-16 scroll-mt-24">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-xs font-bold mb-2">
+                            <span>Latihan Mandiri Interaktif</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Pemahaman (Übungen)</h2>
+                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai artikel Akkusativ
+                            (einen/ein/eine/keinen/kein/keine) dan susunan kalimat.</p>
+                    </div>
+
+                    <!-- Live Score Badge -->
+                    <div x-show="quizScore !== null" class="flex items-center gap-3" x-cloak>
+                        <div class="px-4 py-2 rounded-2xl border text-center"
+                            :class="quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'">
+                            <span class="text-[11px] font-bold block">Skor Latihan</span>
+                            <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian A: Mengisi Kata Rumpang -->
+                <div class="mb-10">
+                    <div class="mb-4">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie:
+                            einen, ein, eine, keinen, kein atau keine im Akkusativ.</h3>
+                        <p class="text-xs text-gray-500">Lengkapilah kalimat berikut dengan artikel atau kata negasi
+                            Akkusativ yang tepat.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Soal 1 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
+                                1. Ich habe Hunger. Ich esse
+                                <input type="text" x-model="answers.q1" placeholder="..."
+                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                                Apfel.
+                            </div>
+                            <div class="text-xs text-gray-400"><em>(Petunjuk: der Apfel adalah kata benda maskulin)</em>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
+                                2. Brauchst du
+                                <input type="text" x-model="answers.q2" placeholder="..."
+                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                                Gurke für den Salat?
+                            </div>
+                            <div class="text-xs text-gray-400"><em>(Petunjuk: die Gurke adalah kata benda feminin)</em>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
+                                3. Zum Frühstück trinke ich
+                                <input type="text" x-model="answers.q3" placeholder="..."
+                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                                Glas Milch.
+                            </div>
+                            <div class="text-xs text-gray-400"><em>(Petunjuk: das Glas adalah kata benda netral)</em>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
+                                4. Wir haben
+                                <input type="text" x-model="answers.q4" placeholder="..."
+                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                                Käse mehr im Kühlschrank.
+                            </div>
+                            <div class="text-xs text-gray-400"><em>(Petunjuk: der Käse adalah kata benda maskulin yang
+                                    disangkal)</em></div>
+                        </div>
+
+                        <!-- Soal 5 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
+                                5. Herr Müller kauft
+                                <input type="text" x-model="answers.q5" placeholder="..."
+                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                                Brot in der Bäckerei.
+                            </div>
+                            <div class="text-xs text-gray-400"><em>(Petunjuk: das Brot adalah kata benda netral)</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian B: Menyusun Kalimat Acak -->
+                <div class="mb-8">
+                    <div class="mb-4">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die
+                            richtige Reihenfolge und schreiben Sie die Sätze.</h3>
+                        <p class="text-xs text-gray-500">Susunlah kata-kata acak berikut menjadi kalimat pernyataan atau
+                            tanya yang tepat.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Soal 6 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
+                                6. den Apfelsaft / ich / im Supermarkt / kaufe / .
+                            </div>
+                            <input type="text" x-model="answers.q6" placeholder="Ketik kalimat lengkap di sini..."
+                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                        </div>
+
+                        <!-- Soal 7 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
+                                7. brauchen / einen Einkaufswagen / Sie / ?
+                            </div>
+                            <input type="text" x-model="answers.q7" placeholder="Ketik kalimat lengkap di sini..."
+                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                        </div>
+
+                        <!-- Soal 8 -->
+                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
+                                8. isst / einen Kuchen / am Nachmittag / Maria / .
+                            </div>
+                            <input type="text" x-model="answers.q8" placeholder="Ketik kalimat lengkap di sini..."
+                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center gap-3 pt-6 border-t border-gray-100">
+                    <button @click="checkQuiz()"
+                        class="px-6 py-2.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span>Periksa Jawaban</span>
+                    </button>
+
+                    <button @click="resetQuiz()"
+                        class="px-4 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition">
+                        Reset
+                    </button>
+
+                    <button @click="showKey = !showKey"
+                        class="ml-auto px-4 py-2.5 rounded-2xl bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+                        <span
+                            x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban & Penjelasan'"></span>
+                    </button>
+                </div>
+
+                <!-- Dropdown Kunci Jawaban & Penjelasan -->
+                <div x-show="showKey" x-collapse class="mt-6 pt-6 border-t border-gray-100 text-xs sm:text-sm" x-cloak>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil A (Lücken ergänzen):</strong>
+                            <ol class="list-decimal list-inside space-y-1 text-gray-700">
+                                <li><strong>einen</strong> (<em>der Apfel</em> adalah maskulin, dalam kasus
+                                    <em>Akkusativ</em> artikel tak tentu berubah menjadi <em>einen</em>)</li>
+                                <li><strong>eine</strong> (<em>die Gurke</em> adalah feminin, artikel tak tentu dalam
+                                    kasus <em>Akkusativ</em> tetap <em>eine</em>)</li>
+                                <li><strong>ein</strong> (<em>das Glas</em> adalah netral, artikel tak tentu dalam kasus
+                                    <em>Akkusativ</em> tetap <em>ein</em>)</li>
+                                <li><strong>keinen</strong> (<em>der Käse</em> adalah maskulin, bentuk negasi dalam
+                                    kasus <em>Akkusativ</em> berubah menjadi <em>keinen</em>)</li>
+                                <li><strong>ein</strong> (<em>das Brot</em> adalah netral, artikel tak tentu dalam kasus
+                                    <em>Akkusativ</em> tetap <em>ein</em>)</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <strong class="text-blue-600 block mb-1">Teil B (Sätze bilden):</strong>
+                            <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
+                                <li><strong>Ich kaufe den Apfelsaft im Supermarkt.</strong> (Subjek <em>ich</em> di
+                                    Posisi 1, kata kerja <em>kaufe</em> di Posisi 2, diikuti objek <em>Akkusativ</em>)
+                                </li>
+                                <li><strong>Brauchen Sie einen Einkaufswagen?</strong> (Kalimat tanya Ya/Tidak diawali
+                                    oleh kata kerja di Posisi 1)</li>
+                                <li><strong>Maria isst am Nachmittag einen Kuchen.</strong> (Subjek di Posisi 1, kata
+                                    kerja di Posisi 2, keterangan waktu, dan objek <em>Akkusativ</em>)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+            <a href="materi-a1-6.html"
+                class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Pertemuan 6: Mobilität, Wegbeschreibung, Monate und Jahreszeiten</span>
+            </a>
+
+            <a href="materi-a1-8.html"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                <span>Pertemuan 8: Die Grillparty – Mahlzeiten</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-gray-400 py-10 border-t border-gray-800 text-xs mt-auto">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img src="logo-white.png" alt="Aksaradeutsch" class="h-8 sm:h-9 w-auto object-contain">
+                <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="privacy-policy.html" class="hover:text-white transition">Kebijakan Privasi</a>
+                <a href="syarat-ketentuan.html" class="hover:text-white transition">Syarat & Ketentuan</a>
+                <a href="tentang-kami.html" class="hover:text-white transition">Tentang Kami</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function lessonApp() {
+            return {
+                currentUser: null,
+                authLoading: true,
+                syncStatusText: 'Tersinkronisasi',
+                readingProgress: 0,
+
+                // Audio Voices
+                germanVoiceMale: null,
+                germanVoiceFemale: null,
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+
+                // Goals checklist
+                goals: [
+                    { text: 'Menyebutkan nama makanan, minuman, dan bahan masakan dalam bahasa Jerman.', checked: false },
+                    { text: 'Menggunakan kosakata toko pangan dan satuan ukuran kuantitas perbelanjaan.', checked: false },
+                    { text: 'Membaca dan menyebutkan nominal harga dalam mata uang Euro dan Cent.', checked: false },
+                    { text: 'Memahami konsep kasus Akkusativ dan perubahan bentuk pada artikel maskulin.', checked: false },
+                    { text: 'Menyusun kalimat belanja menggunakan kata kerja yang membutuhkan objek Akkusativ.', checked: false }
+                ],
+
+                get completedGoalsCount() {
+                    return this.goals.filter(g => g.checked).length;
+                },
+
+                // A. Makanan & Minuman (30 items)
+                foodItems: [
+                    // Maskulin (10)
+                    { article: 'der', word: 'Apfel', fullWord: 'der Apfel', meaning: 'apel', gender: 'masc' },
+                    { article: 'der', word: 'Käse', fullWord: 'der Käse', meaning: 'keju', gender: 'masc' },
+                    { article: 'der', word: 'Schinken', fullWord: 'der Schinken', meaning: 'daging asap', gender: 'masc' },
+                    { article: 'der', word: 'Salat', fullWord: 'der Salat', meaning: 'selada', gender: 'masc' },
+                    { article: 'der', word: 'Kuchen', fullWord: 'der Kuchen', meaning: 'kue', gender: 'masc' },
+                    { article: 'der', word: 'Tee', fullWord: 'der Tee', meaning: 'teh', gender: 'masc' },
+                    { article: 'der', word: 'Kaffee', fullWord: 'der Kaffee', meaning: 'kopi', gender: 'masc' },
+                    { article: 'der', word: 'Saft', fullWord: 'der Saft', meaning: 'jus', gender: 'masc' },
+                    { article: 'der', word: 'Zucker', fullWord: 'der Zucker', meaning: 'gula', gender: 'masc' },
+                    { article: 'der', word: 'Reis', fullWord: 'der Reis', meaning: 'beras / nasi', gender: 'masc' },
+                    // Netral (10)
+                    { article: 'das', word: 'Brot', fullWord: 'das Brot', meaning: 'roti tawar', gender: 'neut' },
+                    { article: 'das', word: 'Brötchen', fullWord: 'das Brötchen', meaning: 'roti bulat kecil', gender: 'neut' },
+                    { article: 'das', word: 'Ei', fullWord: 'das Ei', meaning: 'telur', gender: 'neut' },
+                    { article: 'das', word: 'Fleisch', fullWord: 'das Fleisch', meaning: 'daging', gender: 'neut' },
+                    { article: 'das', word: 'Gemüse', fullWord: 'das Gemüse', meaning: 'sayuran', gender: 'neut' },
+                    { article: 'das', word: 'Obst', fullWord: 'das Obst', meaning: 'buah-buahan', gender: 'neut' },
+                    { article: 'das', word: 'Wasser', fullWord: 'das Wasser', meaning: 'air mineral', gender: 'neut' },
+                    { article: 'das', word: 'Öl', fullWord: 'das Öl', meaning: 'minyak', gender: 'neut' },
+                    { article: 'das', word: 'Salz', fullWord: 'das Salz', meaning: 'garam', gender: 'neut' },
+                    { article: 'das', word: 'Müsli', fullWord: 'das Müsli', meaning: 'sereal muesli', gender: 'neut' },
+                    // Feminin (10)
+                    { article: 'die', word: 'Banane', fullWord: 'die Banane', meaning: 'pisang', gender: 'fem' },
+                    { article: 'die', word: 'Tomate', fullWord: 'die Tomate', meaning: 'tomat', gender: 'fem' },
+                    { article: 'die', word: 'Gurke', fullWord: 'die Gurke', meaning: 'timun', gender: 'fem' },
+                    { article: 'die', word: 'Kartoffel', fullWord: 'die Kartoffel', meaning: 'kentang', gender: 'fem' },
+                    { article: 'die', word: 'Milch', fullWord: 'die Milch', meaning: 'susu', gender: 'fem' },
+                    { article: 'die', word: 'Butter', fullWord: 'die Butter', meaning: 'mentega', gender: 'fem' },
+                    { article: 'die', word: 'Wurst', fullWord: 'die Wurst', meaning: 'sosis', gender: 'fem' },
+                    { article: 'die', word: 'Suppe', fullWord: 'die Suppe', meaning: 'sup', gender: 'fem' },
+                    { article: 'die', word: 'Schokolade', fullWord: 'die Schokolade', meaning: 'cokelat', gender: 'fem' },
+                    { article: 'die', word: 'Marmelade', fullWord: 'die Marmelade', meaning: 'selai', gender: 'fem' }
+                ],
+
+                // B. Toko Pangan (4 items)
+                shopItems: [
+                    { article: 'die', word: 'Bäckerei', fullWord: 'die Bäckerei', meaning: 'toko roti', gender: 'fem' },
+                    { article: 'die', word: 'Metzgerei', fullWord: 'die Metzgerei', meaning: 'toko daging', gender: 'fem' },
+                    { article: 'der', word: 'Supermarkt', fullWord: 'der Supermarkt', meaning: 'supermarket', gender: 'masc' },
+                    { article: 'der', word: 'Markt', fullWord: 'der Markt', meaning: 'pasar tradisional', gender: 'masc' }
+                ],
+
+                // C. Kuantitas & Perlengkapan Belanja (9 items)
+                quantityItems: [
+                    { article: 'das', word: 'Gramm', fullWord: 'das Gramm', meaning: 'gram (contoh: 150 Gramm Schinken)', gender: 'neut' },
+                    { article: 'das', word: 'Kilo / Kilogramm', fullWord: 'das Kilogramm', meaning: 'kilogram (contoh: ein Kilo Äpfel)', gender: 'neut' },
+                    { article: 'der', word: 'Liter', fullWord: 'der Liter', meaning: 'liter (contoh: ein Liter Milch)', gender: 'masc' },
+                    { article: 'das', word: 'Stück', fullWord: 'das Stück', meaning: 'potong (contoh: ein Stück Käse)', gender: 'neut' },
+                    { article: 'die', word: 'Packung', fullWord: 'die Packung', meaning: 'bungkus (contoh: eine Packung Tee)', gender: 'fem' },
+                    { article: 'die', word: 'Flasche', fullWord: 'die Flasche', meaning: 'botol (contoh: eine Flasche Wasser)', gender: 'fem' },
+                    { article: 'die', word: 'Tüte', fullWord: 'die Tüte', meaning: 'kantong belanja', gender: 'fem' },
+                    { article: 'der', word: 'Einkaufswagen', fullWord: 'der Einkaufswagen', meaning: 'troli belanja', gender: 'masc' },
+                    { article: 'der', word: 'Kassenzettel', fullWord: 'der Kassenzettel', meaning: 'struk pembayaran', gender: 'masc' }
+                ],
+
+                // D. Membaca Harga (4 items)
+                priceItems: [
+                    { nominal: '0,99 €', germanText: 'neunundneunzig Cent', note: 'Kurang dari 1 Euro dibaca nominal Cent' },
+                    { nominal: '1,09 €', germanText: 'ein Euro neun', note: 'Satu Euro diikuti sembilan Cent' },
+                    { nominal: '2,20 €', germanText: 'zwei Euro zwanzig', note: 'Dua Euro dua puluh Cent' },
+                    { nominal: '18,65 €', germanText: 'achtzehn Euro fünfundsechzig', note: 'Delapan belas Euro enam puluh lima' }
+                ],
+
+                // Dialog 1 Lines
+                dialog1Lines: [
+                    { speaker: 'Mario', gender: 'male', text: 'Wir machen heute Abend eine Grillparty. Was brauchen wir noch?', translation: 'Kita akan mengadakan pesta barbekyu malam ini. Apa lagi yang kita butuhkan?' },
+                    { speaker: 'Elena', gender: 'female', text: 'Moment, Salat haben wir schon. Wir brauchen noch Tomaten, Öl und eine Gurke.', translation: 'Sebentar, selada sudah ada. Kita masih membutuhkan tomat, minyak, dan satu buah timun.' },
+                    { speaker: 'Mario', gender: 'male', text: 'Haben wir Käse?', translation: 'Apakah kita punya keju?' },
+                    { speaker: 'Elena', gender: 'female', text: 'Nein, wir haben keinen Käse mehr. Kaufst du den Käse im Supermarkt?', translation: 'Tidak, kita tidak punya keju lagi. Apakah kamu membeli kejunya di supermarket?' },
+                    { speaker: 'Mario', gender: 'male', text: 'Ja, ich gehe in den Supermarkt und kaufe Käse, Öl und die Getränke.', translation: 'Ya, saya pergi ke supermarket dan membeli keju, minyak, serta minuman itu.' }
+                ],
+
+                // Dialog 2 Lines
+                dialog2Lines: [
+                    { speaker: 'Verkäufer', gender: 'male', text: 'Guten Tag! Wer kommt dran?', translation: 'Selamat siang! Siapa gilirannya?' },
+                    { speaker: 'Frau Berg', gender: 'female', text: 'Ich, bitte. Ich möchte ein Stück Emmentaler Käse und 200 Gramm Schinken.', translation: 'Saya. Saya ingin sepotong keju Emmental dan 200 gram daging asap.' },
+                    { speaker: 'Verkäufer', gender: 'male', text: 'Sonst noch etwas?', translation: 'Ada yang lain?' },
+                    { speaker: 'Frau Berg', gender: 'female', text: 'Haben Sie frische Brötchen?', translation: 'Apakah Anda punya roti bulat segar?' },
+                    { speaker: 'Verkäufer', gender: 'male', text: 'Nein, frische Brötchen finden Sie in der Bäckerei. Das macht zusammen 4,80 Euro. Brauchen Sie den Kassenzettel?', translation: 'Tidak, roti bulat segar dapat Anda temukan di toko roti. Total semuanya 4,80 Euro. Apakah Anda membutuhkan struk pembayaran itu?' },
+                    { speaker: 'Frau Berg', gender: 'female', text: 'Ja, bitte. Vielen Dank!', translation: 'Ya, tolong. Terima kasih banyak!' }
+                ],
+
+                // Quiz Answers & State
+                answers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+                quizScore: null,
+                showFeedback: false,
+                showKey: false,
+
+                // Helper Functions
+                getQuestionClass(num) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-100';
+                    let isCorrect = false;
+                    if (num === 1) isCorrect = this.answers.q1.trim().toLowerCase() === 'einen';
+                    if (num === 2) isCorrect = this.answers.q2.trim().toLowerCase() === 'eine';
+                    if (num === 3) isCorrect = this.answers.q3.trim().toLowerCase() === 'ein';
+                    if (num === 4) isCorrect = this.answers.q4.trim().toLowerCase() === 'keinen';
+                    if (num === 5) isCorrect = this.answers.q5.trim().toLowerCase() === 'ein';
+                    if (num === 6) isCorrect = this.normalizeSentence(this.answers.q6) === 'ichkaufedenapfelsaftimsupermarkt';
+                    if (num === 7) isCorrect = this.normalizeSentence(this.answers.q7) === 'brauchensieeineneinkaufswagen';
+                    if (num === 8) isCorrect = this.normalizeSentence(this.answers.q8) === 'mariaissestamnachmittageinenkuchen' || this.normalizeSentence(this.answers.q8) === 'mariaissamnachtmittageinenkuchen' || this.normalizeSentence(this.answers.q8) === 'amnachmittagisstmariaeinenkuchen';
+
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
+                },
+
+                normalizeSentence(str) {
+                    if (!str) return '';
+                    return str.toLowerCase().replace(/[^a-z0-9äöüß]/g, '');
+                },
+
+                checkQuiz() {
+                    let score = 0;
+                    if (this.answers.q1.trim().toLowerCase() === 'einen') score++;
+                    if (this.answers.q2.trim().toLowerCase() === 'eine') score++;
+                    if (this.answers.q3.trim().toLowerCase() === 'ein') score++;
+                    if (this.answers.q4.trim().toLowerCase() === 'keinen') score++;
+                    if (this.answers.q5.trim().toLowerCase() === 'ein') score++;
+                    if (this.normalizeSentence(this.answers.q6) === 'ichkaufedenapfelsaftimsupermarkt') score++;
+                    if (this.normalizeSentence(this.answers.q7) === 'brauchensieeineneinkaufswagen') score++;
+                    const n8 = this.normalizeSentence(this.answers.q8);
+                    if (n8 === 'mariaissestamnachmittageinenkuchen' || n8 === 'mariaissamnachtmittageinenkuchen' || n8 === 'mariaissestamnachtmittageinenkuchen' || n8 === 'amnachmittagisstmariaeinenkuchen' || n8 === 'mariaissestamnachmittageinenkuchen') {
+                        score++;
+                    } else if (n8.includes('maria') && n8.includes('isst') && n8.includes('amnachmittag') && n8.includes('einenkuchen')) {
+                        score++;
+                    }
+
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                // Audio Logic Web Speech API
+                initAudio() {
+                    if ('speechSynthesis' in window) {
+                        const loadVoices = () => {
+                            const voices = window.speechSynthesis.getVoices();
+                            const deVoices = voices.filter(v => v.lang && (v.lang.startsWith('de') || v.lang.includes('DE')));
+
+                            // 1. Dedicated Male Voice
+                            this.germanVoiceMale = deVoices.find(v =>
+                                /stefan|conrad|christoph|killian|hans|markus|male|mann|bernd|florian|klaus|jürgen|juergen|ralf|werner|oliver|michael|thorsten|martin/i.test(v.name)
+                            ) || null;
+
+                            // 2. Dedicated Female Voice
+                            this.germanVoiceFemale = deVoices.find(v =>
+                                /katja|amala|louisa|marlene|hedda|female|frau|vicki|petra|gudrun|gisela|claudia|maja|elke|sabine/i.test(v.name)
+                            ) || null;
+
+                            if (!this.germanVoiceFemale && deVoices.length > 0) {
+                                this.germanVoiceFemale = deVoices[0];
+                            }
+                            if (!this.germanVoiceMale && deVoices.length > 0) {
+                                this.germanVoiceMale = deVoices.find(v => v !== this.germanVoiceFemale) || deVoices[0];
+                            }
+                        };
+
+                        loadVoices();
+                        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                            window.speechSynthesis.onvoiceschanged = loadVoices;
+                        }
+                    }
+
+                    // Reading progress tracker
+                    window.addEventListener('scroll', () => {
+                        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                        if (totalHeight > 0) {
+                            this.readingProgress = Math.min(100, Math.max(0, Math.round((window.scrollY / totalHeight) * 100)));
+                        }
+                    });
+                },
+
+                speak(text, gender = 'female', onEndedCallback = null) {
+                    if (!('speechSynthesis' in window)) return;
+                    window.speechSynthesis.cancel();
+
+                    let cleanText = text.replace(/[*_~`]/g, '').trim();
+                    cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
+                    cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
+
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.lang = 'de-DE';
+
+                    if (gender === 'male') {
+                        if (this.germanVoiceMale) {
+                            utterance.voice = this.germanVoiceMale;
+                        }
+                        utterance.pitch = 0.78;
+                        utterance.rate = 0.88;
+                    } else {
+                        if (this.germanVoiceFemale) {
+                            utterance.voice = this.germanVoiceFemale;
+                        }
+                        utterance.pitch = 1.15;
+                        utterance.rate = 0.92;
+                    }
+
+                    if (onEndedCallback) {
+                        utterance.onend = onEndedCallback;
+                        utterance.onerror = onEndedCallback;
+                    }
+
+                    window.speechSynthesis.speak(utterance);
+                },
+
+                playFullDialog(dialogNum) {
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        window.speechSynthesis.cancel();
+                        this.isPlayingFullDialog = false;
+                        this.activeDialogPlaying = null;
+                        this.currentSpeakingIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isPlayingFullDialog = true;
+                    this.activeDialogPlaying = dialogNum;
+                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
+
+                    const playLine = (index) => {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = index;
+                        const line = lines[index];
+                        this.speak(line.text, line.gender, () => {
+                            setTimeout(() => {
+                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                                    playLine(index + 1);
+                                }
+                            }, 500);
+                        });
+                    };
+
+                    playLine(0);
+                },
+
+                // Initialization & Sync
+                initApp() {
+                    this.initAudio();
+                    this.loadLocalProgress();
+
+                    if (auth) {
+                        auth.onAuthStateChanged((user) => {
+                            this.currentUser = user;
+                            this.authLoading = false;
+                            if (user) {
+                                this.loadFirestoreProgress(user.uid);
+                            }
+                        });
+                    } else {
+                        this.authLoading = false;
+                    }
+                },
+
+                loadLocalProgress() {
+                    try {
+                        const saved = localStorage.getItem('aksaradeutsch_lesson_a1_7');
+                        if (saved) {
+                            const data = JSON.parse(saved);
+                            if (data.goals) this.goals = data.goals;
+                            if (data.answers) this.answers = data.answers;
+                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                            if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                        }
+                    } catch (e) {
+                        console.error('Error loading local progress:', e);
+                    }
+                },
+
+                saveProgress() {
+                    const dataToSave = {
+                        lessonId: 'lesson_a1_7',
+                        goals: this.goals,
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        showFeedback: this.showFeedback,
+                        lastUpdated: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('aksaradeutsch_lesson_a1_7', JSON.stringify(dataToSave));
+
+                    if (this.currentUser && db) {
+                        this.syncStatusText = 'Menyimpan...';
+                        db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a1_7')
+                            .set(dataToSave, { merge: true })
+                            .then(() => {
+                                this.syncStatusText = 'Tersinkronisasi';
+                            })
+                            .catch((err) => {
+                                console.error('Firestore save error:', err);
+                                this.syncStatusText = 'Offline';
+                            });
+                    }
+                },
+
+                loadFirestoreProgress(uid) {
+                    if (!db) return;
+                    db.collection('users').doc(uid).collection('progress').doc('lesson_a1_7')
+                        .get()
+                        .then((doc) => {
+                            if (doc.exists) {
+                                const data = doc.data();
+                                if (data.goals) this.goals = data.goals;
+                                if (data.answers) this.answers = data.answers;
+                                if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                                if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                                this.saveProgress();
+                            }
+                        })
+                        .catch((err) => {
+                            console.error('Firestore load error:', err);
+                        });
+                },
+
+                logout() {
+                    if (auth) {
+                        auth.signOut().then(() => {
+                            window.location.href = 'login.html';
+                        });
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
