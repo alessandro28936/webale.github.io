@@ -411,19 +411,24 @@
                 </div>
             </div>
 
-            <!-- Subtopik A: Kosakata Waktu Luang dan Perayaan -->
-            <div class="mb-10">
-                <div class="mb-4">
-                    <h3 class="text-base sm:text-lg font-bold text-navy">A. Waktu Luang dan Perayaan
-                        (Freizeitaktivitäten und Feste)</h3>
-                    <p class="text-xs text-gray-500">Kosakata seputar pesta, kegiatan luar ruangan, dan olahraga bersama
-                        teman.</p>
+            <!-- Sub-Bagian A: Waktu Luang dan Perayaan (Freizeitaktivitäten und Feste) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">A. Waktu Luang dan Perayaan (Freizeitaktivitäten und Feste)</h3>
+                        <p class="text-xs text-gray-500">Kosakata seputar pesta, kegiatan luar ruangan, dan olahraga bersama teman.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-semibold">
+                        <span class="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-bold">der (Maskulin)</span>
+                        <span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-bold">das (Netral)</span>
+                        <span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 font-bold">die (Feminin)</span>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                     <template x-for="(item, idx) in freizeitVocab" :key="idx">
                         <div
-                            class="p-4 rounded-2xl bg-white border border-gray-100 hover:border-orange-200 transition shadow-xs flex items-center justify-between gap-3">
+                            class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1 break-words">
                                 <div class="flex items-center gap-1.5 flex-wrap">
                                     <template x-if="item.article">
@@ -437,9 +442,9 @@
                             </div>
                             <button
                                 @click="speak(item.fullWord || item.word, item.gender === 'masc' ? 'male' : 'female')"
-                                class="p-2 rounded-xl bg-gray-50 hover:bg-orange-100 text-gray-500 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
                                 :title="'Dengarkan ' + (item.fullWord || item.word)">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
                                     </path>
@@ -450,73 +455,75 @@
                 </div>
             </div>
 
-            <!-- Subtopik B: Kata Kerja Terpisah Utama -->
-            <div class="mb-10">
-                <div class="mb-4">
-                    <h3 class="text-base sm:text-lg font-bold text-navy">B. Kata Kerja Terpisah Utama (Trennbare Verben)
-                    </h3>
-                    <p class="text-xs text-gray-500">Kata kerja dengan awalan yang terpisah dan diletakkan di akhir
-                        kalimat.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                    <template x-for="(item, idx) in trennbareVocab" :key="idx">
-                        <div
-                            class="p-4 rounded-2xl bg-white border border-gray-100 hover:border-orange-200 transition shadow-xs flex items-center justify-between gap-3">
-                            <div class="min-w-0 flex-1 break-words">
-                                <div class="flex items-center gap-1.5 flex-wrap">
-                                    <span
-                                        class="px-2 py-0.5 rounded-md bg-orange-100 text-orange-800 text-xs font-bold">Verb</span>
-                                    <strong class="text-xs sm:text-sm text-navy" x-text="item.word"></strong>
-                                </div>
-                                <div class="text-[11px] sm:text-xs text-gray-500 mt-1" x-text="item.translation"></div>
-                            </div>
-                            <button @click="speak(item.word, 'female')"
-                                class="p-2 rounded-xl bg-gray-50 hover:bg-orange-100 text-gray-500 hover:text-orange-600 shadow-xs transition flex-shrink-0"
-                                :title="'Dengarkan ' + item.word">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                    </path>
-                                </svg>
-                            </button>
+            <!-- Sub-Bagian B & C: Kata Kerja Terpisah & Angka Bertingkat -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Subtopik B: Kata Kerja Terpisah Utama -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">B. Kata Kerja Terpisah Utama (Trennbare Verben)</h3>
+                            <p class="text-xs text-gray-500">Kata kerja dengan awalan yang terpisah dan diletakkan di akhir kalimat.</p>
                         </div>
-                    </template>
-                </div>
-            </div>
 
-            <!-- Subtopik C: Angka Bertingkat untuk Tanggal -->
-            <div>
-                <div class="mb-4">
-                    <h3 class="text-base sm:text-lg font-bold text-navy">C. Angka Bertingkat untuk Tanggal
-                        (Ordnungszahlen mit "am...")</h3>
-                    <p class="text-xs text-gray-500">Pola penyebutan tanggal: angka 1–19 berakhiran <em>-ten</em>, dan
-                        20 ke atas berakhiran <em>-sten</em>.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                    <template x-for="(item, idx) in ordnungszahlenVocab" :key="idx">
-                        <div
-                            class="p-4 rounded-2xl bg-white border border-gray-100 hover:border-orange-200 transition shadow-xs flex items-center justify-between gap-3">
-                            <div class="min-w-0 flex-1 break-words">
-                                <div class="text-xs sm:text-sm font-extrabold text-navy">
-                                    <span x-text="item.shortForm"></span>
-                                    <span class="text-xs font-semibold text-orange-600"
-                                        x-text="`(${item.fullText})`"></span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in trennbareVocab" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1 break-words">
+                                        <div class="flex items-center gap-1.5 flex-wrap">
+                                            <span class="px-2 py-0.5 rounded-md bg-orange-100 text-orange-800 text-xs font-bold">Verb</span>
+                                            <strong class="text-xs sm:text-sm text-navy" x-text="item.word"></strong>
+                                        </div>
+                                        <div class="text-[11px] sm:text-xs text-gray-500 mt-1" x-text="item.translation"></div>
+                                    </div>
+                                    <button @click="speak(item.word, 'female')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        :title="'Dengarkan ' + item.word">
+                                        <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </div>
-                                <div class="text-[11px] sm:text-xs text-gray-500 mt-1" x-text="item.translation"></div>
-                            </div>
-                            <button @click="speak(item.fullText, 'male')"
-                                class="p-2 rounded-xl bg-gray-50 hover:bg-orange-100 text-gray-500 hover:text-orange-600 shadow-xs transition flex-shrink-0"
-                                :title="'Dengarkan ' + item.fullText">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                    </path>
-                                </svg>
-                            </button>
+                            </template>
                         </div>
-                    </template>
+                    </div>
+                </div>
+
+                <!-- Subtopik C: Angka Bertingkat untuk Tanggal -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">C. Angka Bertingkat (Ordnungszahlen mit "am...")</h3>
+                            <p class="text-xs text-gray-500">Pola penyebutan tanggal: angka 1–19 berakhiran <em>-ten</em>, dan 20 ke atas berakhiran <em>-sten</em>.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in ordnungszahlenVocab" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1 break-words">
+                                        <div class="text-xs sm:text-sm font-extrabold text-navy">
+                                            <span x-text="item.shortForm"></span>
+                                            <span class="text-xs font-semibold text-orange-600"
+                                                x-text="`(${item.fullText})`"></span>
+                                        </div>
+                                        <div class="text-[11px] sm:text-xs text-gray-500 mt-1" x-text="item.translation"></div>
+                                    </div>
+                                    <button @click="speak(item.fullText, 'male')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        :title="'Dengarkan ' + item.fullText">
+                                        <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
