@@ -1482,7 +1482,7 @@
                                 antara
                                 Julia, Nina, dan Niklas.</span>
                             <div class="flex items-center gap-2">
-                                <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog1Lines)"
+                                <button x-show="!isPlayingFullDialog" @click="playStudioDialog(1, dialog1Lines)"
                                     class="text-xs bg-white text-orange-600 font-bold px-3.5 py-2 rounded-xl border border-orange-200 shadow-sm hover:bg-orange-50 flex items-center gap-1.5 flex-shrink-0 transition">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1536,7 +1536,7 @@
                                 antara
                                 Herr Hansen dan Frau Weber.</span>
                             <div class="flex items-center gap-2">
-                                <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog2Lines)"
+                                <button x-show="!isPlayingFullDialog" @click="playStudioDialog(2, dialog2Lines)"
                                     class="text-xs bg-white text-blue-700 font-bold px-3.5 py-2 rounded-xl border border-blue-200 shadow-sm hover:bg-blue-50 flex items-center gap-1.5 flex-shrink-0 transition">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1588,7 +1588,7 @@
                             <span class="text-xs sm:text-sm text-emerald-900 font-semibold">Situasi: Tanya jawab formal
                                 mengenai negara asal, tempat tinggal, dan bahasa.</span>
                             <div class="flex items-center gap-2">
-                                <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog3Lines)"
+                                <button x-show="!isPlayingFullDialog" @click="playStudioDialog(3, dialog3Lines)"
                                     class="text-xs bg-white text-emerald-700 font-bold px-3.5 py-2 rounded-xl border border-emerald-200 shadow-sm hover:bg-emerald-50 flex items-center gap-1.5 flex-shrink-0 transition">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1640,7 +1640,7 @@
                             <span class="text-xs sm:text-sm text-purple-900 font-semibold">Situasi: Tanya jawab informal
                                 antara dua teman baru mengenai asal dan domisili.</span>
                             <div class="flex items-center gap-2">
-                                <button x-show="!isPlayingFullDialog" @click="playDialogSequential(dialog4Lines)"
+                                <button x-show="!isPlayingFullDialog" @click="playStudioDialog(4, dialog4Lines)"
                                     class="text-xs bg-white text-purple-700 font-bold px-3.5 py-2 rounded-xl border border-purple-200 shadow-sm hover:bg-purple-50 flex items-center gap-1.5 flex-shrink-0 transition">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2110,10 +2110,10 @@
                     { speaker: 'Nina', speakerClass: 'text-orange-600', text: 'Hallo Julia! Wie geht\'s?', gender: 'female' },
                     { speaker: 'Julia', speakerClass: 'text-blue-600', text: 'Danke, gut! Und dir?', gender: 'female' },
                     { speaker: 'Nina', speakerClass: 'text-orange-600', text: 'Auch gut, danke. Das ist Niklas.', gender: 'female' },
-                    { speaker: 'Julia', speakerClass: 'text-blue-600', text: 'Hallo Niklas, wer bist du?', gender: 'female' },
-                    { speaker: 'Niklas', speakerClass: 'text-emerald-700', text: 'Ich bin Niklas. Freut mich!', gender: 'male' },
-                    { speaker: 'Julia', speakerClass: 'text-blue-600', text: 'Tschüs! Bis bald!', gender: 'female' },
-                    { speaker: 'Niklas', speakerClass: 'text-emerald-700', text: 'Tschüs!', gender: 'male' }
+                    { speaker: 'Julia', speakerClass: 'text-blue-600', text: 'Hallo Niklas! Freut mich.', gender: 'female' },
+                    { speaker: 'Niklas', speakerClass: 'text-emerald-700', text: 'Hallo Julia! Freut mich auch.', gender: 'male' },
+                    { speaker: 'Julia', speakerClass: 'text-blue-600', text: 'Tschüss! Bis bald!', gender: 'female' },
+                    { speaker: 'Niklas', speakerClass: 'text-emerald-700', text: 'Tschüss!', gender: 'male' }
                 ],
 
                 dialog2Lines: [
@@ -2427,45 +2427,89 @@
                 hasDistinctMaleVoice: false,
 
                 speak(text, gender = 'female', onEndedCallback = null) {
-                    if (!('speechSynthesis' in window)) {
-                        alert('Browser Anda belum mendukung fitur audio suara.');
-                        if (onEndedCallback) onEndedCallback();
-                        return;
+                    if (this.currentAudioElement) {
+                        this.currentAudioElement.pause();
+                        this.currentAudioElement = null;
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
                     }
 
-                    window.speechSynthesis.cancel();
                     let cleanText = text.replace(/[*_~`\(\)]/g, '').trim();
                     cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
                     cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
-                    const utterance = new SpeechSynthesisUtterance(cleanText);
-                    utterance.lang = 'de-DE';
+                    // Normalisasi karakter Eszett (ß) agar pelafalan selalu tajam (scharfes s) dan tidak glitch
+                    cleanText = cleanText.replace(/ß/g, 'ss');
 
-                    if (gender === 'male') {
-                        if (this.germanVoiceMale) {
-                            utterance.voice = this.germanVoiceMale;
-                        }
-                        utterance.pitch = 0.98;
-                        utterance.rate = 0.95;
-                    } else {
-                        if (this.germanVoiceFemale) {
-                            utterance.voice = this.germanVoiceFemale;
-                        }
-                        utterance.pitch = 1.02;
-                        utterance.rate = 0.96;
-                    }
+                    // 1. Pemutaran Audio Stream Jernih & Alami Standar Hochdeutsch
+                    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=de&client=tw-ob&q=${encodeURIComponent(cleanText)}`;
+                    const audio = new Audio(ttsUrl);
+                    this.currentAudioElement = audio;
 
-                    utterance.onend = () => {
+                    audio.onended = () => {
+                        this.currentAudioElement = null;
                         if (onEndedCallback) onEndedCallback();
                     };
 
-                    utterance.onerror = () => {
-                        if (onEndedCallback) onEndedCallback();
+                    audio.onerror = () => {
+                        this.currentAudioElement = null;
+                        // 2. Fallback ke Web Speech API jika jaringan terkendala
+                        if ('speechSynthesis' in window) {
+                            try {
+                                window.speechSynthesis.resume();
+                                const utterance = new SpeechSynthesisUtterance(cleanText);
+                                utterance.lang = 'de-DE';
+                                utterance.pitch = gender === 'male' ? 0.98 : 1.02;
+                                utterance.rate = 0.90;
+                                if (gender === 'male' && this.germanVoiceMale) utterance.voice = this.germanVoiceMale;
+                                if (gender === 'female' && this.germanVoiceFemale) utterance.voice = this.germanVoiceFemale;
+                                utterance.onend = () => { if (onEndedCallback) onEndedCallback(); };
+                                utterance.onerror = () => { if (onEndedCallback) onEndedCallback(); };
+                                window.speechSynthesis.speak(utterance);
+                            } catch (e) {
+                                if (onEndedCallback) onEndedCallback();
+                            }
+                        } else {
+                            if (onEndedCallback) onEndedCallback();
+                        }
                     };
 
-                    window.speechSynthesis.speak(utterance);
+                    audio.play().catch(e => {
+                        audio.onerror();
+                    });
                 },
 
-                // Pemutaran Dialog Berurutan (Sequential Playback dengan jeda alami)
+                // Pemutaran Audio Studio Alami (Gemini 2.5 Flash Audio Engine & Fallback)
+                currentAudioElement: null,
+
+                playStudioDialog(dialogNumber, dialogLines) {
+                    this.stopPlayingDialog();
+                    this.isPlayingFullDialog = true;
+
+                    const audioSrc = `../audio/materi-1/dialog-${dialogNumber}-full.wav?v=${Date.now()}`;
+                    const audio = new Audio(audioSrc);
+                    this.currentAudioElement = audio;
+
+                    audio.play().then(() => {
+                        // Playing high-fidelity Gemini TTS audio
+                    }).catch(err => {
+                        console.warn('Fallback to sequential synth playback:', err);
+                        this.playDialogSequential(dialogLines);
+                    });
+
+                    audio.onended = () => {
+                        this.isPlayingFullDialog = false;
+                        this.currentSpeakingIndex = null;
+                        this.currentAudioElement = null;
+                    };
+
+                    audio.onerror = () => {
+                        this.currentAudioElement = null;
+                        this.playDialogSequential(dialogLines);
+                    };
+                },
+
+                // Pemutaran Dialog Berurutan (Sequential Synth Fallback)
                 playDialogSequential(dialogLines) {
                     this.isPlayingFullDialog = true;
                     let currentIndex = 0;
@@ -2497,6 +2541,11 @@
                 stopPlayingDialog() {
                     this.isPlayingFullDialog = false;
                     this.currentSpeakingIndex = null;
+                    if (this.currentAudioElement) {
+                        this.currentAudioElement.pause();
+                        this.currentAudioElement.currentTime = 0;
+                        this.currentAudioElement = null;
+                    }
                     if ('speechSynthesis' in window) {
                         window.speechSynthesis.cancel();
                     }
