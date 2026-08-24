@@ -1437,20 +1437,21 @@
                             const voices = window.speechSynthesis.getVoices();
                             const deVoices = voices.filter(v => v.lang && (v.lang.startsWith('de') || v.lang.includes('DE')));
                             
-                            this.germanVoiceMale = deVoices.find(v => 
-                                /stefan|conrad|christoph|killian|hans|markus|male|mann|bernd|florian|klaus|jürgen|juergen|ralf|werner|oliver|michael|thorsten|martin/i.test(v.name)
-                            ) || null;
+                            const findBestVoice = (preferredRegex) => {
+                                const naturalMatch = deVoices.find(v => preferredRegex.test(v.name) && /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (naturalMatch) return naturalMatch;
 
-                            this.germanVoiceFemale = deVoices.find(v => 
-                                /katja|amala|louisa|marlene|hedda|female|frau|vicki|petra|gudrun|gisela|claudia|maja|elke|sabine/i.test(v.name)
-                            ) || null;
+                                const nameMatch = deVoices.find(v => preferredRegex.test(v.name));
+                                if (nameMatch) return nameMatch;
 
-                            if (!this.germanVoiceFemale && deVoices.length > 0) {
-                                this.germanVoiceFemale = deVoices[0];
-                            }
-                            if (!this.germanVoiceMale && deVoices.length > 0) {
-                                this.germanVoiceMale = deVoices.find(v => v !== this.germanVoiceFemale) || deVoices[0];
-                            }
+                                const anyNatural = deVoices.find(v => /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (anyNatural) return anyNatural;
+
+                                return null;
+                            };
+
+                            this.germanVoiceMale = findBestVoice(/stefan|conrad|christoph|killian|markus|florian|hans|bernd|male|mann/i) || deVoices[0] || null;
+                            this.germanVoiceFemale = findBestVoice(/katja|amala|louisa|marlene|hedda|klarissa|vicki|petra|female|frau/i) || (deVoices.length > 1 ? deVoices[1] : deVoices[0]) || null;
                         };
                         loadVoices();
                         window.speechSynthesis.onvoiceschanged = loadVoices;
@@ -1475,13 +1476,13 @@
                     utter.lang = 'de-DE';
 
                     if (gender === 'male') {
-                        utter.pitch = 0.78;
-                        utter.rate = 0.88;
                         if (this.germanVoiceMale) utter.voice = this.germanVoiceMale;
+                        utter.pitch = 0.98;
+                        utter.rate = 0.95;
                     } else {
-                        utter.pitch = 1.15;
-                        utter.rate = 0.92;
                         if (this.germanVoiceFemale) utter.voice = this.germanVoiceFemale;
+                        utter.pitch = 1.02;
+                        utter.rate = 0.96;
                     }
 
                     if (onEndCallback) {

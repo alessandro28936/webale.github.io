@@ -1551,16 +1551,23 @@
                     if ('speechSynthesis' in window) {
                         const loadVoices = () => {
                             const voices = window.speechSynthesis.getVoices();
-                            const germanVoices = voices.filter(v => v.lang.startsWith('de'));
+                            const deVoices = voices.filter(v => v.lang && (v.lang.startsWith('de') || v.lang.includes('DE') || v.lang.includes('de_')));
 
-                            // Search for Natural German Voices
-                            this.germanVoiceMale = germanVoices.find(v =>
-                                /stefan|conrad|christoph|killian|hans|markus|male|mann|bernd|florian/i.test(v.name)
-                            ) || germanVoices[0] || null;
+                            const findBestVoice = (preferredRegex) => {
+                                const naturalMatch = deVoices.find(v => preferredRegex.test(v.name) && /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (naturalMatch) return naturalMatch;
 
-                            this.germanVoiceFemale = germanVoices.find(v =>
-                                /katja|amala|louisa|marlene|hedda|female|frau|vicki|petra/i.test(v.name)
-                            ) || (germanVoices.length > 1 ? germanVoices[1] : germanVoices[0]) || null;
+                                const nameMatch = deVoices.find(v => preferredRegex.test(v.name));
+                                if (nameMatch) return nameMatch;
+
+                                const anyNatural = deVoices.find(v => /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (anyNatural) return anyNatural;
+
+                                return null;
+                            };
+
+                            this.germanVoiceMale = findBestVoice(/stefan|conrad|christoph|killian|markus|florian|hans|bernd|male|mann/i) || deVoices[0] || null;
+                            this.germanVoiceFemale = findBestVoice(/katja|amala|louisa|marlene|hedda|klarissa|vicki|petra|female|frau/i) || (deVoices.length > 1 ? deVoices[1] : deVoices[0]) || null;
                         };
 
                         loadVoices();
@@ -1592,14 +1599,14 @@
                         if (this.germanVoiceMale) {
                             utterance.voice = this.germanVoiceMale;
                         }
-                        utterance.pitch = 0.78;
-                        utterance.rate = 0.88;
+                        utterance.pitch = 0.98;
+                        utterance.rate = 0.95;
                     } else {
                         if (this.germanVoiceFemale) {
                             utterance.voice = this.germanVoiceFemale;
                         }
-                        utterance.pitch = 1.15;
-                        utterance.rate = 0.92;
+                        utterance.pitch = 1.02;
+                        utterance.rate = 0.96;
                     }
 
                     utterance.onend = () => {
