@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -842,6 +842,9 @@
 
                 // Initialization
                 initDashboard() {
+                    // Muat progres lokal terlebih dahulu agar kartu langsung terisi instan
+                    this.loadLocalProgress();
+
                     if (auth) {
                         auth.onAuthStateChanged(async (user) => {
                             this.authLoading = false;
@@ -850,6 +853,7 @@
                                 await this.loadStudentProgress(user.uid);
                             } else {
                                 this.currentUser = null;
+                                this.loadLocalProgress();
                             }
                         });
                     } else {
@@ -885,132 +889,67 @@
                     }
                 },
 
+                loadLocalProgress() {
+                    try {
+                        // 1. Lesson 1
+                        const saved1 = localStorage.getItem('aksaradeutsch_lesson_a1_1') || localStorage.getItem('aksara_a1_1_progress') || localStorage.getItem('aksara_lesson_a1_1');
+                        if (saved1) {
+                            const d1 = JSON.parse(saved1);
+                            if (d1.quizScore !== undefined) this.p1Progress.quizScore = d1.quizScore;
+                        }
+
+                        // 2. Lesson 2-12
+                        for (let i = 2; i <= 12; i++) {
+                            const saved = localStorage.getItem(`aksaradeutsch_lesson_a1_${i}`) || localStorage.getItem(`aksara_lesson_a1_${i}`);
+                            if (saved) {
+                                const d = JSON.parse(saved);
+                                if (d.quizScore !== undefined && this[`p${i}Progress`]) {
+                                    this[`p${i}Progress`].quizScore = d.quizScore;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Error loading local progress:', err);
+                    }
+                },
+
                 async loadStudentProgress(uid) {
                     this.syncStatusText = 'Menyinkronkan...';
+                    // Load local backup first
+                    this.loadLocalProgress();
+
                     try {
                         if (db) {
-                            // User progress doc
+                            // 1. User progress document
                             const userProgDoc = await db.collection('user_progress').doc(uid).get();
                             if (userProgDoc.exists) {
                                 const prog = userProgDoc.data();
-                                if (prog.lesson_a1_1 && prog.lesson_a1_1.quizScore !== undefined) this.p1Progress.quizScore = prog.lesson_a1_1.quizScore;
-                                if (prog.lesson_a1_2 && prog.lesson_a1_2.quizScore !== undefined) this.p2Progress.quizScore = prog.lesson_a1_2.quizScore;
-                                if (prog.lesson_a1_3 && prog.lesson_a1_3.quizScore !== undefined) this.p3Progress.quizScore = prog.lesson_a1_3.quizScore;
-                                if (prog.lesson_a1_4 && prog.lesson_a1_4.quizScore !== undefined) this.p4Progress.quizScore = prog.lesson_a1_4.quizScore;
-                                if (prog.lesson_a1_5 && prog.lesson_a1_5.quizScore !== undefined) this.p5Progress.quizScore = prog.lesson_a1_5.quizScore;
-                                if (prog.lesson_a1_6 && prog.lesson_a1_6.quizScore !== undefined) this.p6Progress.quizScore = prog.lesson_a1_6.quizScore;
-                                if (prog.lesson_a1_7 && prog.lesson_a1_7.quizScore !== undefined) this.p7Progress.quizScore = prog.lesson_a1_7.quizScore;
-                                if (prog.lesson_a1_8 && prog.lesson_a1_8.quizScore !== undefined) this.p8Progress.quizScore = prog.lesson_a1_8.quizScore;
-                                if (prog.lesson_a1_9 && prog.lesson_a1_9.quizScore !== undefined) this.p9Progress.quizScore = prog.lesson_a1_9.quizScore;
-                                if (prog.lesson_a1_10 && prog.lesson_a1_10.quizScore !== undefined) this.p10Progress.quizScore = prog.lesson_a1_10.quizScore;
-                                if (prog.lesson_a1_11 && prog.lesson_a1_11.quizScore !== undefined) this.p11Progress.quizScore = prog.lesson_a1_11.quizScore;
-                                if (prog.lesson_a1_12 && prog.lesson_a1_12.quizScore !== undefined) this.p12Progress.quizScore = prog.lesson_a1_12.quizScore;
+                                for (let i = 1; i <= 12; i++) {
+                                    const key = `lesson_a1_${i}`;
+                                    if (prog[key] && prog[key].quizScore !== undefined && this[`p${i}Progress`]) {
+                                        this[`p${i}Progress`].quizScore = prog[key].quizScore;
+                                    }
+                                }
                             }
 
-                            // Subcollection progress check
-                            const doc1 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_1').get();
-                            if (doc1.exists && doc1.data().quizScore !== undefined) this.p1Progress.quizScore = doc1.data().quizScore;
+                            // 2. Subcollection progress check
+                            for (let i = 1; i <= 12; i++) {
+                                const docRef = await db.collection('users').doc(uid).collection('progress').doc(`lesson_a1_${i}`).get();
+                                if (docRef.exists && docRef.data().quizScore !== undefined && this[`p${i}Progress`]) {
+                                    this[`p${i}Progress`].quizScore = docRef.data().quizScore;
+                                }
+                            }
 
-                            const doc2 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_2').get();
-                            if (doc2.exists && doc2.data().quizScore !== undefined) this.p2Progress.quizScore = doc2.data().quizScore;
-
-                            const doc3 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_3').get();
-                            if (doc3.exists && doc3.data().quizScore !== undefined) this.p3Progress.quizScore = doc3.data().quizScore;
-
-                            const doc4 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_4').get();
-                            if (doc4.exists && doc4.data().quizScore !== undefined) this.p4Progress.quizScore = doc4.data().quizScore;
-
-                            const doc5 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_5').get();
-                            if (doc5.exists && doc5.data().quizScore !== undefined) this.p5Progress.quizScore = doc5.data().quizScore;
-
-                            const doc6 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_6').get();
-                            if (doc6.exists && doc6.data().quizScore !== undefined) this.p6Progress.quizScore = doc6.data().quizScore;
-
-                            const doc7 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_7').get();
-                            if (doc7.exists && doc7.data().quizScore !== undefined) this.p7Progress.quizScore = doc7.data().quizScore;
-
-                            const doc8 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_8').get();
-                            if (doc8.exists && doc8.data().quizScore !== undefined) this.p8Progress.quizScore = doc8.data().quizScore;
-
-                            const doc9 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_9').get();
-                            if (doc9.exists && doc9.data().quizScore !== undefined) this.p9Progress.quizScore = doc9.data().quizScore;
-
-                            const doc10 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_10').get();
-                            if (doc10.exists && doc10.data().quizScore !== undefined) this.p10Progress.quizScore = doc10.data().quizScore;
-
-                            const doc11 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_11').get();
-                            if (doc11.exists && doc11.data().quizScore !== undefined) this.p11Progress.quizScore = doc11.data().quizScore;
-
-                            const doc12 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_12').get();
-                            if (doc12.exists && doc12.data().quizScore !== undefined) this.p12Progress.quizScore = doc12.data().quizScore;
+                            // 3. Check legacy collection for Lesson 1
+                            const docLegacy1 = await db.collection('student_progress').doc(`${uid}_materi_a1_1`).get();
+                            if (docLegacy1.exists && docLegacy1.data().quizScore !== undefined) {
+                                this.p1Progress.quizScore = docLegacy1.data().quizScore;
+                            }
                         }
                     } catch (e) {
                         console.error('Error loading Firestore progress in dashboard:', e);
                     }
 
-                    // Local storage fallback
-                    try {
-                        const saved1 = localStorage.getItem('aksaradeutsch_lesson_a1_1') || localStorage.getItem('aksara_lesson_a1_1');
-                        if (saved1 && this.p1Progress.quizScore === null) {
-                            const d1 = JSON.parse(saved1);
-                            if (d1.quizScore !== undefined) this.p1Progress.quizScore = d1.quizScore;
-                        }
-                        const saved2 = localStorage.getItem('aksaradeutsch_lesson_a1_2') || localStorage.getItem('aksara_lesson_a1_2');
-                        if (saved2 && this.p2Progress.quizScore === null) {
-                            const d2 = JSON.parse(saved2);
-                            if (d2.quizScore !== undefined) this.p2Progress.quizScore = d2.quizScore;
-                        }
-                        const saved3 = localStorage.getItem('aksaradeutsch_lesson_a1_3') || localStorage.getItem('aksara_lesson_a1_3');
-                        if (saved3 && this.p3Progress.quizScore === null) {
-                            const d3 = JSON.parse(saved3);
-                            if (d3.quizScore !== undefined) this.p3Progress.quizScore = d3.quizScore;
-                        }
-                        const saved4 = localStorage.getItem('aksaradeutsch_lesson_a1_4') || localStorage.getItem('aksara_lesson_a1_4');
-                        if (saved4 && this.p4Progress.quizScore === null) {
-                            const d4 = JSON.parse(saved4);
-                            if (d4.quizScore !== undefined) this.p4Progress.quizScore = d4.quizScore;
-                        }
-                        const saved5 = localStorage.getItem('aksaradeutsch_lesson_a1_5') || localStorage.getItem('aksara_lesson_a1_5');
-                        if (saved5 && this.p5Progress.quizScore === null) {
-                            const d5 = JSON.parse(saved5);
-                            if (d5.quizScore !== undefined) this.p5Progress.quizScore = d5.quizScore;
-                        }
-                        const saved6 = localStorage.getItem('aksaradeutsch_lesson_a1_6') || localStorage.getItem('aksara_lesson_a1_6');
-                        if (saved6 && this.p6Progress.quizScore === null) {
-                            const d6 = JSON.parse(saved6);
-                            if (d6.quizScore !== undefined) this.p6Progress.quizScore = d6.quizScore;
-                        }
-                        const saved7 = localStorage.getItem('aksaradeutsch_lesson_a1_7') || localStorage.getItem('aksara_lesson_a1_7');
-                        if (saved7 && this.p7Progress.quizScore === null) {
-                            const d7 = JSON.parse(saved7);
-                            if (d7.quizScore !== undefined) this.p7Progress.quizScore = d7.quizScore;
-                        }
-                        const saved8 = localStorage.getItem('aksaradeutsch_lesson_a1_8') || localStorage.getItem('aksara_lesson_a1_8');
-                        if (saved8 && this.p8Progress.quizScore === null) {
-                            const d8 = JSON.parse(saved8);
-                            if (d8.quizScore !== undefined) this.p8Progress.quizScore = d8.quizScore;
-                        }
-                        const saved9 = localStorage.getItem('aksaradeutsch_lesson_a1_9') || localStorage.getItem('aksara_lesson_a1_9');
-                        if (saved9 && this.p9Progress.quizScore === null) {
-                            const d9 = JSON.parse(saved9);
-                            if (d9.quizScore !== undefined) this.p9Progress.quizScore = d9.quizScore;
-                        }
-                        const saved10 = localStorage.getItem('aksaradeutsch_lesson_a1_10') || localStorage.getItem('aksara_lesson_a1_10');
-                        if (saved10 && this.p10Progress.quizScore === null) {
-                            const d10 = JSON.parse(saved10);
-                            if (d10.quizScore !== undefined) this.p10Progress.quizScore = d10.quizScore;
-                        }
-                        const saved11 = localStorage.getItem('aksaradeutsch_lesson_a1_11') || localStorage.getItem('aksara_lesson_a1_11');
-                        if (saved11 && this.p11Progress.quizScore === null) {
-                            const d11 = JSON.parse(saved11);
-                            if (d11.quizScore !== undefined) this.p11Progress.quizScore = d11.quizScore;
-                        }
-                        const saved12 = localStorage.getItem('aksaradeutsch_lesson_a1_12') || localStorage.getItem('aksara_lesson_a1_12');
-                        if (saved12 && this.p12Progress.quizScore === null) {
-                            const d12 = JSON.parse(saved12);
-                            if (d12.quizScore !== undefined) this.p12Progress.quizScore = d12.quizScore;
-                        }
-                    } catch (err) { }
                     this.syncStatusText = 'Tersinkronisasi';
                 }
             }

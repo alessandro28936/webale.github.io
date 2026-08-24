@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -2293,30 +2293,49 @@
                     }
                 },
 
-                // Cloud & Local Data Synchronization (Solusi 1 & 3)
+                // Cloud & Local Data Synchronization
                 async loadProgressFromCloud(uid) {
                     this.syncStatusText = 'Menyinkronkan...';
                     try {
                         if (db) {
-                            const docRef = db.collection('student_progress').doc(`${uid}_materi_a1_1`);
-                            const doc = await docRef.get();
-                            if (doc.exists) {
-                                const data = doc.data();
-                                if (data.goals && Array.isArray(data.goals)) {
+                            let foundData = null;
+                            // 1. Check users/{uid}/progress/lesson_a1_1
+                            const doc1 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_1').get();
+                            if (doc1.exists) foundData = doc1.data();
+
+                            // 2. Check user_progress/{uid}
+                            if (!foundData) {
+                                const userProgDoc = await db.collection('user_progress').doc(uid).get();
+                                if (userProgDoc.exists && userProgDoc.data().lesson_a1_1) {
+                                    foundData = userProgDoc.data().lesson_a1_1;
+                                }
+                            }
+
+                            // 3. Check student_progress/{uid}_materi_a1_1
+                            if (!foundData) {
+                                const docLegacy = await db.collection('student_progress').doc(`${uid}_materi_a1_1`).get();
+                                if (docLegacy.exists) foundData = docLegacy.data();
+                            }
+
+                            if (foundData) {
+                                if (foundData.goals && Array.isArray(foundData.goals)) {
                                     this.goals.forEach((g, i) => {
-                                        if (data.goals[i] !== undefined) g.checked = data.goals[i];
+                                        if (foundData.goals[i] !== undefined) {
+                                            g.checked = typeof foundData.goals[i] === 'boolean' ? foundData.goals[i] : Boolean(foundData.goals[i].checked);
+                                        }
                                     });
                                 }
-                                if (data.answers) {
-                                    this.answers = { ...this.answers, ...data.answers };
+                                if (foundData.answers) {
+                                    this.answers = { ...this.answers, ...foundData.answers };
                                 }
-                                if (data.quizScore !== undefined) {
-                                    this.quizScore = data.quizScore;
+                                if (foundData.quizScore !== undefined) {
+                                    this.quizScore = foundData.quizScore;
                                 }
-                                if (data.showFeedback !== undefined) {
-                                    this.showFeedback = data.showFeedback;
+                                if (foundData.showFeedback !== undefined) {
+                                    this.showFeedback = foundData.showFeedback;
                                 }
                                 this.syncStatusText = 'Tersinkronisasi';
+                                this.saveProgress();
                                 return;
                             }
                         }
@@ -2331,12 +2350,14 @@
 
                 loadLocalProgress() {
                     try {
-                        const saved = localStorage.getItem('aksara_a1_1_progress');
+                        const saved = localStorage.getItem('aksaradeutsch_lesson_a1_1') || localStorage.getItem('aksara_a1_1_progress') || localStorage.getItem('aksara_lesson_a1_1');
                         if (saved) {
                             const data = JSON.parse(saved);
                             if (data.goals && Array.isArray(data.goals)) {
                                 this.goals.forEach((g, i) => {
-                                    if (data.goals[i] !== undefined) g.checked = data.goals[i];
+                                    if (data.goals[i] !== undefined) {
+                                        g.checked = typeof data.goals[i] === 'boolean' ? data.goals[i] : Boolean(data.goals[i].checked);
+                                    }
                                 });
                             }
                             if (data.answers) {
@@ -2359,11 +2380,12 @@
                     clearTimeout(this.saveTimeout);
                     this.saveTimeout = setTimeout(() => {
                         this.saveProgress();
-                    }, 500);
+                    }, 300);
                 },
 
                 async saveProgress() {
-                    const payload = {
+                    const dataToSave = {
+                        lessonId: 'lesson_a1_1',
                         goals: this.goals.map(g => g.checked),
                         answers: this.answers,
                         quizScore: this.quizScore,
@@ -2371,21 +2393,28 @@
                         lastUpdated: new Date().toISOString()
                     };
 
-                    // 1. Simpan ke LocalStorage sebagai backup instan
+                    // 1. Simpan ke LocalStorage ke semua format kunci
                     try {
-                        localStorage.setItem('aksara_a1_1_progress', JSON.stringify(payload));
+                        localStorage.setItem('aksaradeutsch_lesson_a1_1', JSON.stringify(dataToSave));
+                        localStorage.setItem('aksara_a1_1_progress', JSON.stringify(dataToSave));
                     } catch (e) { }
 
                     // 2. Simpan ke Firestore jika user terautentikasi
                     if (this.currentUser && db) {
                         this.syncStatusText = 'Menyimpan...';
                         try {
-                            payload.userId = this.currentUser.uid;
-                            payload.userEmail = this.currentUser.email || '';
-                            payload.userName = this.currentUser.displayName || '';
-                            payload.lessonId = 'materi_a1_1';
+                            dataToSave.userId = this.currentUser.uid;
+                            dataToSave.userEmail = this.currentUser.email || '';
+                            dataToSave.userName = this.currentUser.displayName || '';
 
-                            await db.collection('student_progress').doc(`${this.currentUser.uid}_materi_a1_1`).set(payload, { merge: true });
+                            // Endpoint standar utama: users/{uid}/progress/lesson_a1_1
+                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a1_1').set(dataToSave, { merge: true });
+
+                            // Endpoint backup: user_progress/{uid}
+                            await db.collection('user_progress').doc(this.currentUser.uid).set({
+                                lesson_a1_1: dataToSave
+                            }, { merge: true });
+
                             this.syncStatusText = 'Tersinkronisasi';
                         } catch (e) {
                             console.error('Firestore save error:', e);
