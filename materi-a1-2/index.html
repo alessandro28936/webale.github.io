@@ -1,0 +1,1888 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <script>
+        // Clean URL: redirect from .html or index.html to clean routes
+        if (window.location.protocol !== 'file:') {
+            const path = window.location.pathname;
+            if (path.endsWith('/index.html') || path === '/index.html') {
+                const cleanPath = path.slice(0, -10);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            } else if (path.endsWith('.html')) {
+                const cleanPath = path.slice(0, -5);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            }
+        }
+    </script>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '888734697029141');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=888734697029141&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLXDT6LB3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RPLXDT6LB3');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Icon-AksaraDeutsch.png">
+    <link rel="apple-touch-icon" href="Icon-AksaraDeutsch.png">
+    <meta name="description"
+        content="Portal Pembelajaran Level A1.1 Aksaradeutsch - Pertemuan 2: Zahlen 0–20, Alphabet, Länder und Sprachen.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Portal Kelas A1.1: Pertemuan 2 - Aksaradeutsch.com</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                        'navy-dark': '#0B0F19',
+                        'primary-orange': '#FF6B35',
+                        'primary-hover': '#E85A2A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Firebase Configuration & Content Protection -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Proteksi Anti-Copy, Anti-Right Click & Keyboard Shortcuts
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #E85A2A;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -8px rgba(16, 24, 40, 0.08);
+        }
+
+        /* Print Shield */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 20pt;
+                color: #101828;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F9FAFB] text-navy min-h-screen flex flex-col" x-data="materiApp()" x-init="initApp()">
+
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Reading Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="`width: ${scrollPercent}%`"></div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 2</span>
+                    <span class="ml-2 font-medium text-gray-600">Zahlen, Alphabet, Länder & Sprachen</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="../dashboard-siswa/"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard Siswa</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="../dashboard-siswa/"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+
+        <!-- ============================================================= -->
+        <!-- STATE 1: AUTH LOADING                                         -->
+        <!-- ============================================================= -->
+        <div x-show="authLoading" class="py-24 text-center" x-cloak>
+            <div
+                class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
+            <p class="text-sm font-bold text-gray-600">Menghubungkan ke server pembelajaran...</p>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 2: LOGIN REQUIRED GATE                                  -->
+        <!-- ============================================================= -->
+        <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-xl mx-auto" x-cloak>
+            <div
+                class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
+                <h2 class="text-2xl sm:text-3xl font-black text-navy mb-3">
+                    Selamat Datang di Ruang Belajarmu!
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
+                    Yuk masuk ke akunmu! Di sini kamu bisa akses materi Pertemuan 2 serta latihan interaktifnya. Kita
+                    belajar bareng pelan-pelan sampai paham yaa.
+                </p>
+
+                <!-- Error Alert -->
+                <div x-show="authError"
+                    class="mb-5 p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold text-left"
+                    x-cloak>
+                    <span x-text="authError"></span>
+                </div>
+
+                <!-- Form Login -->
+                <form @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Email Kamu</label>
+                        <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Kata Sandi</label>
+                        <input type="password" x-model="authForm.password" required placeholder="••••••••"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <button type="submit" :disabled="authSubmitting"
+                        class="w-full py-3.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2">
+                        <span x-show="!authSubmitting">Masuk & Buka Materi</span>
+                        <span x-show="authSubmitting">Menyiapkan materi kamu...</span>
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 text-xs text-gray-500 space-y-1.5">
+                    <p>
+                        Kendala saat masuk? Hubungi kami melalui <a href="https://wa.me/6281959896825" target="_blank"
+                            rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">WhatsApp</a>.
+                    </p>
+                    <p class="text-[11px] text-gray-400">
+                        Materi khusus peserta kelas A1.1 aksaradeutsch. Hak cipta dilindungi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 3: CONTENT SECTION (ACTIVE LEARNING)                   -->
+        <!-- ============================================================= -->
+        <div x-show="currentUser" x-cloak>
+
+            <!-- HERO HEADER -->
+            <header
+                class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+                <div
+                    class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    <div class="max-w-3xl">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                            Zahlen 0–20, Alphabet, Länder und Sprachen
+                        </h1>
+                        <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 font-normal">
+                            Angka 0–20, Pelafalan Alfabet & Mengeja Nama, Komunikasi Email & Telepon, Negara, Bahasa,
+                            serta Aturan Preposisi dan Konjugasi Kata Kerja.
+                        </p>
+
+                        <!-- Meta Tags -->
+                        <div class="flex flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                            <div
+                                class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                                <span class="text-gray-400 font-semibold">Modul:</span> <strong
+                                    class="text-white">Pertemuan 2</strong>
+                            </div>
+                            <div
+                                class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                                <span class="text-gray-400 font-semibold">Estimasi:</span> <strong
+                                    class="text-white">45 Menit</strong>
+                            </div>
+                            <div
+                                class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                                <span class="text-gray-400 font-semibold">Latihan:</span> <strong class="text-white">8
+                                    Soal Interaktif</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Quick Links Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                        <p
+                            class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                            Daftar Isi Materi
+                            <span
+                                class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">7
+                                Bagian</span>
+                        </p>
+                        <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                            <li>
+                                <a href="#tujuan"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    Target Pembelajaran
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#angka"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    1. Angka 0–20 (Zahlen)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#alfabet"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    2. Alfabet & Mengeja
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#komunikasi"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    3. Kontak & Klarifikasi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#negara"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    4. Negara & Bahasa
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tatabahasa"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    5. Tata Bahasa (Grammatik)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#dialog"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    6. Contoh Percakapan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#latihan"
+                                    class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                    7. Latihan Mandiri
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SECTION: TUJUAN PEMBELAJARAN (Interactive Checklist) -->
+            <section id="tujuan" class="mb-12 scroll-mt-24">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm relative overflow-hidden">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah kamu
+                                menguasai materi Pertemuan 2:</p>
+                        </div>
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-100 text-orange-700 text-xs font-bold shadow-sm">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                                <span
+                                    x-text="completedGoalsCount + '/6 Tercapai (' + Math.round((completedGoalsCount / 6) * 100) + '%)'">0/6
+                                    Tercapai (0%)</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Goals Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <template x-for="(goal, index) in goals" :key="index">
+                            <label
+                                :class="goal.checked ? 'bg-orange-50/70 border-orange-200 text-navy' : 'bg-gray-50 border-gray-200 text-gray-700'"
+                                class="flex items-start gap-3 p-3.5 rounded-2xl border transition-all cursor-pointer hover:border-orange-300">
+                                <input type="checkbox" x-model="goal.checked"
+                                    class="mt-1 w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-gray-300">
+                                <span class="text-xs sm:text-sm font-medium"
+                                    :class="goal.checked ? 'line-through text-gray-500' : ''" x-text="goal.text"></span>
+                            </label>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 1: ANGKA 0–20 (ZAHLEN 0–20) -->
+            <section id="angka" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-orange-500 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-orange-500/20">
+                        1
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Angka 0–20 (Zahlen 0–20)</h2>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-6">
+                    <p class="text-xs sm:text-sm text-gray-600 mb-6">
+                        Klik tombol audio pada setiap kartu angka untuk mendengarkan pelafalan standar bahasa Jerman:
+                    </p>
+
+                    <!-- Numbers 0-20 Grid (Clean 2 Cols Mobile, 3 Cols Tablet, 4-5 Cols Desktop) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
+                        <template x-for="item in numbersList" :key="item.num">
+                            <div
+                                class="p-3.5 rounded-2xl bg-gray-50 hover:bg-orange-50/50 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between">
+                                <div>
+                                    <span class="text-lg sm:text-xl font-black text-orange-600 block"
+                                        x-text="item.num"></span>
+                                    <strong class="text-sm font-bold text-navy" x-text="item.word"></strong>
+                                </div>
+                                <button @click="speak(item.word, 'female')"
+                                    class="w-8 h-8 rounded-xl bg-white border border-gray-200 text-gray-700 hover:text-orange-600 hover:border-orange-300 shadow-sm transition flex items-center justify-center flex-shrink-0"
+                                    :title="'Dengarkan angka ' + item.num">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Formation Notes Box -->
+                    <div class="p-5 rounded-2xl bg-amber-50/80 border border-amber-200/70 text-xs sm:text-sm">
+                        <div class="flex items-center gap-2 mb-2 text-amber-900 font-extrabold">
+                            <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Catatan Penting Pembentukan Angka 13–19:</span>
+                        </div>
+                        <ul class="space-y-1.5 text-gray-700 pl-6 list-disc">
+                            <li>
+                                Angka <strong>13 sampai 19</strong> dibentuk dengan rumus: <strong>satuan + zehn</strong> (contoh: <em>vier</em> + <em>zehn</em> = <strong>vierzehn</strong>).
+                            </li>
+                            <li>
+                                <strong class="text-orange-700">Pengecualian Ejaan Khusus:</strong>
+                                Pada angka <strong>16</strong> (<em>sechzehn</em>, huruf <strong>s</strong> pada <em>sechs</em> dihilangkan) dan angka <strong>17</strong> (<em>siebzehn</em>, suku kata <strong>en</strong> pada <em>sieben</em> dihilangkan).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ALFABET DAN MENGEJA (DAS ALPHABET UND BUCHSTABIEREN) -->
+            <section id="alfabet" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-blue-600/20">
+                        2
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Alfabet dan Mengeja (Das Alphabet und
+                            Buchstabieren)</h2>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-6">
+                    <p class="text-xs sm:text-sm text-gray-600 mb-6">
+                        Berikut adalah panduan pelafalan alfabet bahasa Jerman. Dengarkan bagaimana setiap huruf
+                        dibunyikan:
+                    </p>
+
+                    <!-- Alphabet Grid (A-Z) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-3 mb-8">
+                        <template x-for="item in alphabetList" :key="item.letter">
+                            <div
+                                class="p-3 rounded-2xl bg-gray-50 hover:bg-blue-50/50 border border-gray-100 hover:border-blue-200 transition text-center flex flex-col justify-between">
+                                <div>
+                                    <span class="text-xl font-black text-navy block mb-0.5"
+                                        x-text="item.letter"></span>
+                                    <span class="text-xs font-semibold text-blue-700" x-text="item.pronounce"></span>
+                                </div>
+                                <button @click="speak(item.speakText || item.letter, 'female')"
+                                    class="mt-2.5 py-1 px-2 rounded-xl bg-white border border-gray-200 text-[11px] font-bold text-gray-600 hover:text-blue-600 hover:border-blue-300 transition shadow-sm flex items-center justify-center gap-1 mx-auto w-full">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                    <span>Audio</span>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Special Characters Box (Umlaute & Eszett) -->
+                    <div class="border-t border-gray-100 pt-6">
+                        <h3 class="text-base font-extrabold text-navy mb-3">Huruf Khusus (Umlaute dan Eszett)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Ä -->
+                            <div class="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-2xl font-black text-orange-600">Ä / ä</span>
+                                    <button @click="speak('ä', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-orange-200 text-xs font-bold text-orange-700 shadow-sm hover:bg-orange-100 transition">Audio</button>
+                                </div>
+                                <p class="text-xs text-gray-700">
+                                    Dibaca seperti <strong>"e" terbuka</strong> (contoh: seperti pada kata bahasa
+                                    Indonesia "b<u>e</u>b<u>e</u>k").
+                                </p>
+                            </div>
+
+                            <!-- Ö -->
+                            <div class="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-2xl font-black text-orange-600">Ö / ö</span>
+                                    <button @click="speak('ö', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-orange-200 text-xs font-bold text-orange-700 shadow-sm hover:bg-orange-100 transition">Audio</button>
+                                </div>
+                                <p class="text-xs text-gray-700">
+                                    Dibaca dengan <strong>membulatkan bibir (seperti mengucap "o")</strong> namun
+                                    <strong>membunyikan huruf "e"</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Ü -->
+                            <div class="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-2xl font-black text-orange-600">Ü / ü</span>
+                                    <button @click="speak('ü', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-orange-200 text-xs font-bold text-orange-700 shadow-sm hover:bg-orange-100 transition">Audio</button>
+                                </div>
+                                <p class="text-xs text-gray-700">
+                                    Dibaca dengan <strong>membulatkan bibir (seperti mengucap "u")</strong> namun
+                                    <strong>membunyikan huruf "i"</strong>.
+                                </p>
+                            </div>
+
+                            <!-- ß -->
+                            <div class="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-2xl font-black text-orange-600">ß (Eszett)</span>
+                                    <button @click="speak('Eszett', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-orange-200 text-xs font-bold text-orange-700 shadow-sm hover:bg-orange-100 transition">Audio</button>
+                                </div>
+                                <p class="text-xs text-gray-700">
+                                    <em>(scharfes S)</em> Dibaca seperti <strong>bunyi desis "s" ganda (ss)</strong>
+                                    yang tajam.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: KOMUNIKASI: EMAIL, TELEPON & KLARIFIKASI -->
+            <section id="komunikasi" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-purple-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-purple-600/20">
+                        3
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Komunikasi: Email, Nomor Telepon, dan
+                            Klarifikasi</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- A. Simbol dalam Alamat Email -->
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-extrabold text-navy mb-4">A. Simbol Alamat Email</h3>
+                            <p class="text-xs text-gray-500 mb-4">Pelafalan simbol saat mendiktekan alamat email:</p>
+                            <div class="space-y-2.5 text-xs sm:text-sm">
+                                <div
+                                    class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+                                    <div>
+                                        <div class="font-bold text-navy">@ <span class="text-gray-400 font-normal">→</span> ät</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Simbol "at"</div>
+                                    </div>
+                                    <button @click="speak('ät', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-purple-600 shadow-sm">Audio</button>
+                                </div>
+                                <div
+                                    class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+                                    <div>
+                                        <div class="font-bold text-navy">. <span class="text-gray-400 font-normal">→</span> Punkt</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Tanda titik</div>
+                                    </div>
+                                    <button @click="speak('Punkt', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-purple-600 shadow-sm">Audio</button>
+                                </div>
+                                <div
+                                    class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+                                    <div>
+                                        <div class="font-bold text-navy">- <span class="text-gray-400 font-normal">→</span> minus</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Tanda strip / minus</div>
+                                    </div>
+                                    <button @click="speak('minus', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-purple-600 shadow-sm">Audio</button>
+                                </div>
+                                <div
+                                    class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+                                    <div>
+                                        <div class="font-bold text-navy">_ <span class="text-gray-400 font-normal">→</span> Unterstrich</div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5">Garis bawah (underscore)</div>
+                                    </div>
+                                    <button @click="speak('Unterstrich', 'female')"
+                                        class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-purple-600 shadow-sm">Audio</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- B. Menanyakan Nomor Kontak -->
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-extrabold text-navy mb-4">B. Menanyakan Kontak</h3>
+                            <div class="space-y-4 text-xs sm:text-sm">
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong
+                                        class="text-navy block font-extrabold text-xs uppercase tracking-wider text-purple-700 mb-2.5">Nomor
+                                        Telepon / HP</strong>
+                                    <div class="space-y-2">
+                                        <div class="border-l-2 border-purple-500 pl-2.5">
+                                            <div class="font-bold text-navy">Wie ist deine Telefonnummer?</div>
+                                            <div class="text-[11px] text-gray-500 mt-0.5">Berapa nomor teleponmu?
+                                                (Informal)</div>
+                                        </div>
+                                        <div class="border-l-2 border-purple-500 pl-2.5">
+                                            <div class="font-bold text-navy">Wie ist Ihre Handynummer?</div>
+                                            <div class="text-[11px] text-gray-500 mt-0.5">Berapa nomor HP Anda?
+                                                (Formal)</div>
+                                        </div>
+                                        <div class="border-l-2 border-emerald-500 pl-2.5 mt-2 pt-1">
+                                            <div class="font-bold text-navy">Meine Handynummer ist 0812...</div>
+                                            <div class="text-[11px] text-gray-500 mt-0.5">Dibaca angka per angka:
+                                                <em>null-acht-eins-zwei...</em></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <strong
+                                        class="text-navy block font-extrabold text-xs uppercase tracking-wider text-purple-700 mb-2.5">Alamat
+                                        Email</strong>
+                                    <div class="space-y-2">
+                                        <div class="border-l-2 border-blue-500 pl-2.5">
+                                            <div class="font-bold text-navy">Wie ist deine E-Mail-Adresse?</div>
+                                            <div class="text-[11px] text-gray-500 mt-0.5">Apa alamat emailmu? (Informal)
+                                            </div>
+                                        </div>
+                                        <div class="border-l-2 border-orange-500 pl-2.5">
+                                            <div class="font-bold text-navy">Wie ist Ihre E-Mail-Adresse?</div>
+                                            <div class="text-[11px] text-gray-500 mt-0.5">Apa alamat email Anda? (Formal)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C. Ungkapan Klarifikasi -->
+                    <div
+                        class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-extrabold text-navy mb-4">C. Ungkapan Klarifikasi</h3>
+                            <p class="text-xs text-gray-500 mb-4">Gunakan saat kamu belum memahami ucapan lawan bicara:
+                            </p>
+                            <div class="space-y-2.5 text-xs sm:text-sm">
+                                <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-bold text-navy">Wie bitte?</div>
+                                        <button @click="speak('Wie bitte?', 'female')"
+                                            class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-sm">Audio</button>
+                                    </div>
+                                    <div class="text-[11px] text-gray-500 mt-0.5">Bisa diulang? / Maaf?</div>
+                                </div>
+                                <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-bold text-navy">Kannst du das buchstabieren?</div>
+                                        <button @click="speak('Kannst du das buchstabieren?', 'female')"
+                                            class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-sm">Audio</button>
+                                    </div>
+                                    <div class="text-[11px] text-gray-500 mt-0.5">Bisakah kamu mengejanya?</div>
+                                </div>
+                                <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-bold text-navy">Entschuldigung, noch einmal bitte.</div>
+                                        <button @click="speak('Entschuldigung, noch einmal bitte.', 'female')"
+                                            class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-sm">Audio</button>
+                                    </div>
+                                    <div class="text-[11px] text-gray-500 mt-0.5">Maaf, tolong ulangi sekali lagi.</div>
+                                </div>
+                                <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-bold text-navy">Das verstehe ich nicht.</div>
+                                        <button @click="speak('Das verstehe ich nicht.', 'female')"
+                                            class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-sm">Audio</button>
+                                    </div>
+                                    <div class="text-[11px] text-gray-500 mt-0.5">Saya tidak mengerti hal itu.</div>
+                                </div>
+                                <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-bold text-navy">Bitte ein bisschen langsamer.</div>
+                                        <button @click="speak('Bitte ein bisschen langsamer.', 'female')"
+                                            class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-sm">Audio</button>
+                                    </div>
+                                    <div class="text-[11px] text-gray-500 mt-0.5">Tolong bicaranya sedikit lebih lambat.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: NEGARA DAN BAHASA (LÄNDER UND SPRACHEN) -->
+            <section id="negara" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-emerald-600/20">
+                        4
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Negara dan Bahasa (Länder und
+                            Sprachen)</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Table Countries & Languages (Spans 2 cols on lg) -->
+                    <div class="lg:col-span-2 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+                        <h3 class="text-base font-extrabold text-navy mb-4">Daftar Negara & Bahasa Resmi</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs sm:text-sm text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-gray-200 text-gray-500 uppercase text-[11px]">
+                                        <th class="py-3 px-3">Land (Negara)</th>
+                                        <th class="py-3 px-3">Sprache (Bahasa)</th>
+                                        <th class="py-3 px-3 text-right">Audio</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <template x-for="item in countryList" :key="item.country">
+                                        <tr class="hover:bg-gray-50/70 transition">
+                                            <td class="py-3 px-3">
+                                                <strong class="font-bold text-navy" x-text="item.country"></strong>
+                                                <span class="block text-gray-500 text-[11px]"
+                                                    x-text="item.meaning"></span>
+                                            </td>
+                                            <td class="py-3 px-3 text-emerald-800 font-semibold"
+                                                x-text="item.language"></td>
+                                            <td class="py-3 px-3 text-right">
+                                                <button @click="speak(item.country + ', ' + item.language, 'female')"
+                                                    class="p-1.5 rounded-lg bg-gray-100 hover:bg-emerald-50 text-gray-600 hover:text-emerald-700 transition"
+                                                    :title="'Dengarkan ' + item.country">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Aturan Preposisi Asal (Herkunft) Card -->
+                    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-extrabold text-navy mb-3">Aturan Preposisi Asal (Herkunft)</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                Saat menyatakan asal negara dengan kata kerja <strong>kommen</strong>, perhatikan apakah
+                                negara tersebut memakai artikel atau tidak:
+                            </p>
+
+                            <!-- Case 1: Tanpa Artikel -->
+                            <div class="mb-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 text-xs">
+                                <span class="font-bold text-navy block mb-1.5">1. Mayoritas Negara (Tanpa Artikel):</span>
+                                <p class="text-gray-600 mb-2">Cukup gunakan <strong>aus + Nama Negara</strong>:</p>
+                                <ul class="space-y-1 text-emerald-800 font-semibold">
+                                    <li>• <em>Ich komme aus Deutschland.</em></li>
+                                    <li>• <em>Ich komme aus Spanien.</em></li>
+                                    <li>• <em>Ich komme aus Indonesien.</em></li>
+                                </ul>
+                            </div>
+
+                            <!-- Case 2: Dengan Artikel -->
+                            <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs">
+                                <span class="font-bold text-amber-900 block mb-1.5">2. Negara Berartikel Khusus:</span>
+                                <p class="text-gray-700 mb-2">Bentuk preposisi dan artikelnya berubah menjadi:</p>
+                                <ul class="space-y-1 text-gray-800">
+                                    <li>• die Schweiz <span class="text-gray-400">→</span> <strong class="text-orange-700">aus der</strong> Schweiz</li>
+                                    <li>• die Türkei <span class="text-gray-400">→</span> <strong class="text-orange-700">aus der</strong> Türkei</li>
+                                    <li>• die Ukraine <span class="text-gray-400">→</span> <strong class="text-orange-700">aus der</strong> Ukraine</li>
+                                    <li>• die USA <em>(jamak)</em> <span class="text-gray-400">→</span> <strong class="text-orange-700">aus den</strong> USA</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: TATA BAHASA TAMBAHAN (GRAMMATIK) -->
+            <section id="tatabahasa" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-indigo-600/20">
+                        5
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-6">
+                    <h3 class="text-lg font-extrabold text-navy mb-2">
+                        Konjugasi Kata Kerja: <em>sprechen</em> (berbicara) & <em>lernen</em> (belajar)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mb-6">
+                        Perhatikan kata kerja <strong>sprechen</strong> yang mengalami perubahan vokal dari <strong>e</strong> menjadi <strong>i</strong> pada subjek <em>du</em> dan <em>er/sie</em>.
+                    </p>
+
+                    <!-- Verb Conjugation Table -->
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-xs sm:text-sm text-left border-collapse border border-gray-200 rounded-2xl overflow-hidden">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="p-3.5 font-bold text-navy">Personalpronomen (Subjek)</th>
+                                    <th class="p-3.5 font-bold text-navy">sprechen (berbicara)</th>
+                                    <th class="p-3.5 font-bold text-navy">lernen (belajar)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 bg-white">
+                                <tr>
+                                    <td class="p-3.5 font-bold text-navy">ich <span class="text-gray-400 font-normal text-xs">(saya)</span></td>
+                                    <td class="p-3.5 font-medium text-gray-800">sprech<strong class="text-orange-600 font-bold">e</strong></td>
+                                    <td class="p-3.5 font-medium text-gray-800">lern<strong class="text-orange-600 font-bold">e</strong></td>
+                                </tr>
+                                <tr class="bg-orange-50/40">
+                                    <td class="p-3.5 font-bold text-navy">du <span class="text-gray-400 font-normal text-xs">(kamu)</span></td>
+                                    <td class="p-3.5 font-medium text-gray-800">
+                                        <strong class="text-orange-600 font-bold">sprich</strong>st <span class="text-[10px] text-orange-600 font-bold bg-orange-100 px-1.5 py-0.5 rounded">e → i</span>
+                                    </td>
+                                    <td class="p-3.5 font-medium text-gray-800">lern<strong class="text-orange-600 font-bold">st</strong></td>
+                                </tr>
+                                <tr class="bg-orange-50/40">
+                                    <td class="p-3.5 font-bold text-navy">er / sie <span class="text-gray-400 font-normal text-xs">(dia l/p)</span></td>
+                                    <td class="p-3.5 font-medium text-gray-800">
+                                        <strong class="text-orange-600 font-bold">sprich</strong>t <span class="text-[10px] text-orange-600 font-bold bg-orange-100 px-1.5 py-0.5 rounded">e → i</span>
+                                    </td>
+                                    <td class="p-3.5 font-medium text-gray-800">lern<strong class="text-orange-600 font-bold">t</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-bold text-navy">Sie <span class="text-gray-400 font-normal text-xs">(Anda - Formal)</span></td>
+                                    <td class="p-3.5 font-medium text-gray-800">sprech<strong class="text-orange-600 font-bold">en</strong></td>
+                                    <td class="p-3.5 font-medium text-gray-800">lern<strong class="text-orange-600 font-bold">en</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500">
+                        *(Catatan: Kata "Anda" pada tabel merupakan terjemahan langsung dari kata ganti formal "Sie")*
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 6: CONTOH PERCAKAPAN (BEISPIELDIALOGE) -->
+            <section id="dialog" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-teal-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-teal-600/20">
+                        6
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm"
+                    x-data="{ activeDialog: 1 }">
+
+                    <!-- Tab Buttons (2 Cols Mobile, 2 Cols Desktop) -->
+                    <div class="grid grid-cols-2 gap-3 mb-6 border-b border-gray-100 pb-4">
+                        <button @click="activeDialog = 1; stopPlayingDialog()"
+                            :class="activeDialog === 1 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 1</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Menanyakan Kontak & Mengeja</span>
+                        </button>
+                        <button @click="activeDialog = 2; stopPlayingDialog()"
+                            :class="activeDialog === 2 ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500/30' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition flex flex-col items-center justify-center min-h-[56px]">
+                            <span>Dialog 2</span>
+                            <span class="text-[10px] sm:text-xs font-normal opacity-90">Asal, Tempat Tinggal & Bahasa</span>
+                        </button>
+                    </div>
+
+                    <!-- DIALOG 1: Menanyakan Kontak & Mengeja -->
+                    <div x-show="activeDialog === 1" class="space-y-4">
+                        <div class="flex items-center justify-between mb-4 bg-gray-50 p-4 rounded-2xl">
+                            <div>
+                                <span class="text-xs font-bold text-orange-600 uppercase tracking-wider block">Situasi Dialog 1</span>
+                                <p class="text-xs sm:text-sm text-navy font-semibold">Alexis dan Lukas bertukar alamat email dan nomor telepon.</p>
+                            </div>
+                            <button @click="playFullDialog(1)"
+                                class="px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow flex items-center gap-1.5 flex-shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog ? 'Memutar...' : 'Putar Dialog'">Putar Dialog</span>
+                            </button>
+                        </div>
+
+                        <!-- Lines Loop -->
+                        <div class="space-y-3">
+                            <template x-for="(line, idx) in dialog1Lines" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border flex items-start justify-between gap-3"
+                                    :class="currentSpeakingIndex === idx ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-400/20' : 'bg-gray-50/70 border-gray-100'">
+                                    <div>
+                                        <span class="text-xs font-extrabold block mb-0.5" :class="line.speakerClass"
+                                            x-text="line.speaker + ':'"></span>
+                                        <div class="text-xs sm:text-sm font-bold text-navy" x-text="line.text"></div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5" x-text="line.meaning"></div>
+                                    </div>
+                                    <button @click="speak(line.text, line.gender)"
+                                        class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-sm transition flex-shrink-0"
+                                        title="Dengarkan kalimat ini">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- DIALOG 2: Asal, Tempat Tinggal & Bahasa -->
+                    <div x-show="activeDialog === 2" class="space-y-4" x-cloak>
+                        <div class="flex items-center justify-between mb-4 bg-gray-50 p-4 rounded-2xl">
+                            <div>
+                                <span class="text-xs font-bold text-orange-600 uppercase tracking-wider block">Situasi Dialog 2</span>
+                                <p class="text-xs sm:text-sm text-navy font-semibold">Sarah dan Gabriel membicarakan negara asal, domisili, dan bahasa yang dikuasai.</p>
+                            </div>
+                            <button @click="playFullDialog(2)"
+                                class="px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow flex items-center gap-1.5 flex-shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog ? 'Memutar...' : 'Putar Dialog'">Putar Dialog</span>
+                            </button>
+                        </div>
+
+                        <!-- Lines Loop -->
+                        <div class="space-y-3">
+                            <template x-for="(line, idx) in dialog2Lines" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border flex items-start justify-between gap-3"
+                                    :class="currentSpeakingIndex === idx ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-400/20' : 'bg-gray-50/70 border-gray-100'">
+                                    <div>
+                                        <span class="text-xs font-extrabold block mb-0.5" :class="line.speakerClass"
+                                            x-text="line.speaker + ':'"></span>
+                                        <div class="text-xs sm:text-sm font-bold text-navy" x-text="line.text"></div>
+                                        <div class="text-[11px] text-gray-500 mt-0.5" x-text="line.meaning"></div>
+                                    </div>
+                                    <button @click="speak(line.text, line.gender)"
+                                        class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-sm transition flex-shrink-0"
+                                        title="Dengarkan kalimat ini">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: LATIHAN MANDIRI (ÜBUNGEN) -->
+            <section id="latihan" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 rounded-2xl bg-purple-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-purple-600/20">
+                        7
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Mandiri (Übungen)</h2>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-xl relative overflow-hidden">
+
+                    <!-- Quiz Header & Score Tracker -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-gray-100">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-orange-600">Latihan Mandiri A1.1</span>
+                            <h3 class="text-lg sm:text-xl font-extrabold text-navy mt-0.5">Uji Pemahaman Pertemuan 2</h3>
+                            <p class="text-xs text-gray-500 mt-1">Lengkapi soal di bawah ini, lalu klik tombol "Periksa Jawaban".</p>
+                        </div>
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition"
+                                :class="quizScore === null ? 'bg-purple-100 text-purple-700' : (quizScore === 8 ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800')"
+                                x-text="quizScore !== null ? 'Skor: ' + quizScore + '/8 Poin' : 'Belum Dinilai'">
+                                Belum Dinilai
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bagian A: 4 Soal Konjugasi Kata Kerja -->
+                    <div class="mb-8">
+                        <div
+                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
+                            <strong class="text-orange-600 font-bold">Teil A:</strong> Ergänzen Sie die passende Verbform von <em>sprechen</em> oder <em>lernen</em> (Lengkapi kalimat dengan konjugasi yang tepat):
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Q1 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        1. Welche Sprachen <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        du?
+                                    </div>
+                                    <select x-model="answers.q1"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih kata...</option>
+                                        <option value="spreche">spreche</option>
+                                        <option value="sprichst">sprichst</option>
+                                        <option value="spricht">spricht</option>
+                                        <option value="lerne">lerne</option>
+                                        <option value="lernt">lernt</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q1 === 'sprichst' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q1 === 'sprichst' ? 'Benar! (du sprichst)' : 'Kunci jawaban: sprichst'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        2. Ich <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Deutsch und Englisch.
+                                    </div>
+                                    <select x-model="answers.q2"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih kata...</option>
+                                        <option value="spreche">spreche</option>
+                                        <option value="sprichst">sprichst</option>
+                                        <option value="spricht">spricht</option>
+                                        <option value="lerne">lerne</option>
+                                        <option value="lernt">lernt</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q2 === 'spreche' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q2 === 'spreche' ? 'Benar! (ich spreche)' : 'Kunci jawaban: spreche'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        3. Gabriel <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Portugiesisch und er <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Deutsch.
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <select x-model="answers.q3a"
+                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                            <option value="">Kata 1...</option>
+                                            <option value="spreche">spreche</option>
+                                            <option value="spricht">spricht</option>
+                                        </select>
+                                        <select x-model="answers.q3b"
+                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                            <option value="">Kata 2...</option>
+                                            <option value="lernt">lernt</option>
+                                            <option value="lerne">lerne</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="(answers.q3a === 'spricht' && answers.q3b === 'lernt') ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="(answers.q3a === 'spricht' && answers.q3b === 'lernt') ? 'Benar! (spricht, lernt)' : 'Kunci jawaban: spricht, lernt'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q4 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        4. Olivia <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Spanisch.
+                                    </div>
+                                    <select x-model="answers.q4"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih kata...</option>
+                                        <option value="lerne">lerne</option>
+                                        <option value="lernt">lernt</option>
+                                        <option value="spreche">spreche</option>
+                                        <option value="spricht">spricht</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q4 === 'lernt' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q4 === 'lernt' ? 'Benar! (Olivia lernt)' : 'Kunci jawaban: lernt'"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bagian B: 4 Soal Preposisi & Artikel Asal -->
+                    <div class="mb-8">
+                        <div
+                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
+                            <strong class="text-orange-600 font-bold">Teil B:</strong> Ergänzen Sie die passende Präposition oder den Artikel <em>(aus, aus der, aus den)</em>:
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Q5 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        5. Boris Walder kommt <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Österreich.
+                                    </div>
+                                    <select x-model="answers.q5"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih jawaban...</option>
+                                        <option value="aus">aus</option>
+                                        <option value="aus der">aus der</option>
+                                        <option value="aus den">aus den</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q5 === 'aus' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q5 === 'aus' ? 'Benar! (aus Österreich)' : 'Kunci jawaban: aus'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q6 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        6. Alessia Conti kommt <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Schweiz.
+                                    </div>
+                                    <select x-model="answers.q6"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih jawaban...</option>
+                                        <option value="aus">aus</option>
+                                        <option value="aus der">aus der</option>
+                                        <option value="aus den">aus den</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q6 === 'aus der' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q6 === 'aus der' ? 'Benar! (aus der Schweiz)' : 'Kunci jawaban: aus der'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q7 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        7. Olivia Miller kommt <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        USA.
+                                    </div>
+                                    <select x-model="answers.q7"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih jawaban...</option>
+                                        <option value="aus">aus</option>
+                                        <option value="aus der">aus der</option>
+                                        <option value="aus den">aus den</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q7 === 'aus den' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q7 === 'aus den' ? 'Benar! (aus den USA)' : 'Kunci jawaban: aus den'"></span>
+                                </p>
+                            </div>
+
+                            <!-- Q8 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="text-xs sm:text-sm font-semibold text-navy">
+                                        8. Saki Tanaka kommt <span
+                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
+                                        Japan.
+                                    </div>
+                                    <select x-model="answers.q8"
+                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
+                                        <option value="">Pilih jawaban...</option>
+                                        <option value="aus">aus</option>
+                                        <option value="aus der">aus der</option>
+                                        <option value="aus den">aus den</option>
+                                    </select>
+                                </div>
+                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
+                                    :class="answers.q8 === 'aus' ? 'text-emerald-600' : 'text-red-500'">
+                                    <span
+                                        x-text="answers.q8 === 'aus' ? 'Benar! (aus Japan)' : 'Kunci jawaban: aus'"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-100">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button @click="checkQuiz()"
+                                class="px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center gap-2">
+                                <span>Periksa Jawaban</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </button>
+                            <button @click="resetQuiz()"
+                                class="px-4 py-3 rounded-2xl text-gray-500 hover:text-navy font-bold text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 transition">
+                                Reset Jawaban
+                            </button>
+                            <span
+                                class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Progres tersinkronisasi otomatis ke akun Anda
+                            </span>
+                        </div>
+
+                        <button @click="showKey = !showKey"
+                            class="text-xs font-bold text-orange-600 hover:text-orange-700 underline underline-offset-4 flex items-center gap-1">
+                            <span x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban Lengkap'">Lihat
+                                Kunci Jawaban Lengkap</span>
+                        </button>
+                    </div>
+
+                    <!-- Toggleable Answer Key Accordion -->
+                    <div x-show="showKey" x-collapse
+                        class="mt-6 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-navy"
+                        x-cloak>
+                        <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <span class="font-bold text-orange-600 block mb-1">Teil A (Konjugation):</span>
+                                <ol class="list-decimal list-inside space-y-1 text-gray-700">
+                                    <li><strong>sprichst</strong></li>
+                                    <li><strong>spreche</strong></li>
+                                    <li><strong>spricht, lernt</strong></li>
+                                    <li><strong>lernt</strong></li>
+                                </ol>
+                            </div>
+                            <div>
+                                <span class="font-bold text-orange-600 block mb-1">Teil B (Präpositionen):</span>
+                                <ol start="5" class="list-decimal list-inside space-y-1 text-gray-700">
+                                    <li><strong>aus</strong></li>
+                                    <li><strong>aus der</strong></li>
+                                    <li><strong>aus den</strong></li>
+                                    <li><strong>aus</strong></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+                <a href="../materi-a1-1/"
+                    class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span>Pertemuan 1: Begrüßung & Kennenlernen</span>
+                </a>
+
+                <a href="../materi-a1-3/"
+                    class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                    <span>Lanjut ke Pertemuan 3: Freunde & Hobbys</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy text-gray-400 py-10 border-t border-gray-800 text-xs">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img src="../logo-white.png" alt="Aksaradeutsch" class="h-8 sm:h-9 w-auto object-contain">
+                <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="../privacy-policy.html" class="hover:text-white transition">Kebijakan Privasi</a>
+                <a href="../syarat-ketentuan.html" class="hover:text-white transition">Syarat & Ketentuan</a>
+                <a href="../tentang-kami.html" class="hover:text-white transition">Tentang Kami</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic with Speech Synthesis & Firebase Cloud Sync -->
+    <script>
+        function materiApp() {
+            return {
+                scrollPercent: 0,
+                quizScore: null,
+                showFeedback: false,
+                showKey: false,
+                isPlayingFullDialog: false,
+                currentSpeakingIndex: null,
+                germanVoiceFemale: null,
+                germanVoiceMale: null,
+
+                // Firebase Auth & Cloud Sync States
+                currentUser: null,
+                authLoading: true,
+                authSubmitting: false,
+                authError: '',
+                syncStatusText: 'Tersinkronisasi',
+                authForm: {
+                    email: '',
+                    password: ''
+                },
+
+                // Target Capaian Pembelajaran Checklist (6 Goals)
+                goals: [
+                    { text: "Melafalkan angka 0 hingga 20 dalam bahasa Jerman.", checked: false },
+                    { text: "Mengeja kata atau nama menggunakan alfabet bahasa Jerman.", checked: false },
+                    { text: "Menyebutkan nomor telepon dan alamat email.", checked: false },
+                    { text: "Menggunakan ungkapan klarifikasi ketika belum memahami lawan bicara.", checked: false },
+                    { text: "Menyebutkan asal negara, bahasa yang dikuasai, serta bahasa yang sedang dipelajari.", checked: false },
+                    { text: "Memahami aturan preposisi asal untuk negara yang memiliki artikel gramatikal.", checked: false }
+                ],
+
+                get completedGoalsCount() {
+                    return this.goals.filter(g => g.checked).length;
+                },
+
+                // Numbers 0-20 List
+                numbersList: [
+                    { num: 0, word: 'null' },
+                    { num: 1, word: 'eins' },
+                    { num: 2, word: 'zwei' },
+                    { num: 3, word: 'drei' },
+                    { num: 4, word: 'vier' },
+                    { num: 5, word: 'fünf' },
+                    { num: 6, word: 'sechs' },
+                    { num: 7, word: 'sieben' },
+                    { num: 8, word: 'acht' },
+                    { num: 9, word: 'neun' },
+                    { num: 10, word: 'zehn' },
+                    { num: 11, word: 'elf' },
+                    { num: 12, word: 'zwölf' },
+                    { num: 13, word: 'dreizehn' },
+                    { num: 14, word: 'vierzehn' },
+                    { num: 15, word: 'fünfzehn' },
+                    { num: 16, word: 'sechzehn' },
+                    { num: 17, word: 'siebzehn' },
+                    { num: 18, word: 'achtzehn' },
+                    { num: 19, word: 'neunzehn' },
+                    { num: 20, word: 'zwanzig' }
+                ],
+
+                // Alphabet List (A-Z)
+                alphabetList: [
+                    { letter: 'A / a', pronounce: 'a', speakText: 'A' },
+                    { letter: 'B / b', pronounce: 'be', speakText: 'B' },
+                    { letter: 'C / c', pronounce: 'tse', speakText: 'C' },
+                    { letter: 'D / d', pronounce: 'de', speakText: 'D' },
+                    { letter: 'E / e', pronounce: 'e', speakText: 'E' },
+                    { letter: 'F / f', pronounce: 'ef', speakText: 'F' },
+                    { letter: 'G / g', pronounce: 'ge', speakText: 'G' },
+                    { letter: 'H / h', pronounce: 'ha', speakText: 'H' },
+                    { letter: 'I / i', pronounce: 'i', speakText: 'I' },
+                    { letter: 'J / j', pronounce: 'jot', speakText: 'J' },
+                    { letter: 'K / k', pronounce: 'ka', speakText: 'K' },
+                    { letter: 'L / l', pronounce: 'el', speakText: 'L' },
+                    { letter: 'M / m', pronounce: 'em', speakText: 'M' },
+                    { letter: 'N / n', pronounce: 'en', speakText: 'N' },
+                    { letter: 'O / o', pronounce: 'o', speakText: 'O' },
+                    { letter: 'P / p', pronounce: 'pe', speakText: 'P' },
+                    { letter: 'Q / q', pronounce: 'ku', speakText: 'Q' },
+                    { letter: 'R / r', pronounce: 'er', speakText: 'R' },
+                    { letter: 'S / s', pronounce: 'es', speakText: 'S' },
+                    { letter: 'T / t', pronounce: 'te', speakText: 'T' },
+                    { letter: 'U / u', pronounce: 'u', speakText: 'U' },
+                    { letter: 'V / v', pronounce: 'fau', speakText: 'V' },
+                    { letter: 'W / w', pronounce: 'we', speakText: 'W' },
+                    { letter: 'X / x', pronounce: 'iks', speakText: 'X' },
+                    { letter: 'Y / y', pronounce: 'üpsilon', speakText: 'Y' },
+                    { letter: 'Z / z', pronounce: 'tset', speakText: 'Z' }
+                ],
+
+                // Countries & Languages
+                countryList: [
+                    { country: 'Deutschland', meaning: 'Jerman', language: 'Deutsch' },
+                    { country: 'Österreich', meaning: 'Austria', language: 'Deutsch' },
+                    { country: 'die Schweiz', meaning: 'Swiss', language: 'Deutsch, Französisch, Italienisch, Rätoromanisch' },
+                    { country: 'Frankreich', meaning: 'Prancis', language: 'Französisch' },
+                    { country: 'Spanien', meaning: 'Spanyol', language: 'Spanisch' },
+                    { country: 'Italien', meaning: 'Italia', language: 'Italienisch' },
+                    { country: 'Polen', meaning: 'Polandia', language: 'Polnisch' },
+                    { country: 'Russland', meaning: 'Rusia', language: 'Russisch' },
+                    { country: 'die Türkei', meaning: 'Turki', language: 'Türkisch' },
+                    { country: 'Algerien', meaning: 'Aljazair', language: 'Arabisch, Französisch' },
+                    { country: 'Japan', meaning: 'Jepang', language: 'Japanisch' },
+                    { country: 'Brasilien', meaning: 'Brasil', language: 'Portugiesisch' },
+                    { country: 'die USA', meaning: 'Amerika Serikat', language: 'Englisch' },
+                    { country: 'Indonesien', meaning: 'Indonesia', language: 'Indonesisch' }
+                ],
+
+                // Dialog Data
+                dialog1Lines: [
+                    { speaker: 'Alexis', speakerClass: 'text-purple-700', text: 'Hallo, ich bin Alexis Barbos.', meaning: 'Halo, saya Alexis Barbos.', gender: 'female' },
+                    { speaker: 'Lukas', speakerClass: 'text-blue-600', text: 'Hallo Alexis! Wie ist deine E-Mail-Adresse?', meaning: 'Halo Alexis! Berapa alamat emailmu?', gender: 'male' },
+                    { speaker: 'Alexis', speakerClass: 'text-purple-700', text: 'alexis_barbos@quinnet.com.', meaning: 'alexis_barbos@quinnet.com.', gender: 'female' },
+                    { speaker: 'Lukas', speakerClass: 'text-blue-600', text: 'Wie bitte? Kannst du das buchstabieren?', meaning: 'Maaf bisa diulang? Bisakah kamu mengejanya?', gender: 'male' },
+                    { speaker: 'Alexis', speakerClass: 'text-purple-700', text: 'Ja, klar. a - l - e - x - i - s - Unterstrich - b - a - r - b - o - s - ät - q - u - i - n - n - e - t - Punkt - c - o - m.', meaning: 'Ya, tentu. a - l - e - x - i - s - garis bawah - b - a - r - b - o - s - ät - q - u - i - n - n - e - t - titik - c - o - m.', gender: 'female' },
+                    { speaker: 'Lukas', speakerClass: 'text-blue-600', text: 'Danke! Und wie ist deine Handynummer?', meaning: 'Terima kasih! Dan berapa nomor HP-mu?', gender: 'male' },
+                    { speaker: 'Alexis', speakerClass: 'text-purple-700', text: '0171 8264731 (null - eins - sieben - eins - acht - zwei - sechs - vier - sieben - drei - eins).', meaning: '0171 8264731 (nol - satu - tujuh - satu - delapan - dua - enam - empat - tujuh - tiga - satu).', gender: 'female' }
+                ],
+
+                dialog2Lines: [
+                    { speaker: 'Sarah', speakerClass: 'text-orange-600', text: 'Woher kommst du, Gabriel?', meaning: 'Dari mana asalmu, Gabriel?', gender: 'female' },
+                    { speaker: 'Gabriel', speakerClass: 'text-emerald-700', text: 'Ich komme aus Brasilien, aber ich wohne in Deutschland, in Köln.', meaning: 'Saya berasal dari Brasil, tapi saya tinggal di Jerman, di kota Köln.', gender: 'male' },
+                    { speaker: 'Sarah', speakerClass: 'text-orange-600', text: 'Welche Sprachen sprichst du?', meaning: 'Bahasa apa saja yang kamu kuasai?', gender: 'female' },
+                    { speaker: 'Gabriel', speakerClass: 'text-emerald-700', text: 'Ich spreche Portugiesisch, Englisch und Deutsch. Und du?', meaning: 'Saya berbicara bahasa Portugis, Inggris, dan Jerman. Dan kamu?', gender: 'male' },
+                    { speaker: 'Sarah', speakerClass: 'text-orange-600', text: 'Ich komme aus der Schweiz. Ich spreche Deutsch und Französisch, und jetzt lerne ich Spanisch.', meaning: 'Saya berasal dari Swiss. Saya berbicara bahasa Jerman dan Prancis, dan sekarang saya sedang belajar bahasa Spanyol.', gender: 'female' }
+                ],
+
+                // Quiz Answers State
+                answers: {
+                    q1: '',
+                    q2: '',
+                    q3a: '',
+                    q3b: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+
+                // Initialization
+                initApp() {
+                    window.addEventListener('scroll', () => {
+                        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        this.scrollPercent = height > 0 ? (winScroll / height) * 100 : 0;
+                    });
+
+                    this.loadSpeechVoices();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.onvoiceschanged = () => {
+                            this.loadSpeechVoices();
+                        };
+                    }
+
+                    this.initAuth();
+                },
+
+                // Speech Synthesis
+                hasDistinctMaleVoice: false,
+
+                loadSpeechVoices() {
+                    if (!('speechSynthesis' in window)) return;
+                    const voices = window.speechSynthesis.getVoices();
+                    const deVoices = voices.filter(v => v.lang && (v.lang.startsWith('de') || v.lang.includes('DE') || v.lang.includes('de_')));
+
+                    const findBestVoice = (preferredRegex) => {
+                        const naturalMatch = deVoices.find(v => preferredRegex.test(v.name) && /natural|neural|online|premium|enhanced/i.test(v.name));
+                        if (naturalMatch) return naturalMatch;
+
+                        const nameMatch = deVoices.find(v => preferredRegex.test(v.name));
+                        if (nameMatch) return nameMatch;
+
+                        const anyNatural = deVoices.find(v => /natural|neural|online|premium|enhanced/i.test(v.name));
+                        if (anyNatural) return anyNatural;
+
+                        return null;
+                    };
+
+                    this.germanVoiceMale = findBestVoice(/stefan|conrad|christoph|killian|markus|florian|hans|bernd|male|mann/i) || deVoices[0] || null;
+                    this.germanVoiceFemale = findBestVoice(/katja|amala|louisa|marlene|hedda|klarissa|vicki|petra|female|frau/i) || (deVoices.length > 1 ? deVoices[1] : deVoices[0]) || null;
+                },
+
+                speak(text, gender = 'female', onEndedCallback = null) {
+                    if (!('speechSynthesis' in window)) {
+                        if (onEndedCallback) onEndedCallback();
+                        return;
+                    }
+                    window.speechSynthesis.cancel();
+
+                    let cleanText = text.replace(/[*_~`\(\)]/g, '').trim();
+                    cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
+                    cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.lang = 'de-DE';
+
+                    if (gender === 'male') {
+                        if (this.germanVoiceMale) {
+                            utterance.voice = this.germanVoiceMale;
+                        }
+                        utterance.pitch = 0.98;
+                        utterance.rate = 0.95;
+                    } else {
+                        if (this.germanVoiceFemale) {
+                            utterance.voice = this.germanVoiceFemale;
+                        }
+                        utterance.pitch = 1.02;
+                        utterance.rate = 0.96;
+                    }
+
+                    utterance.onend = () => {
+                        if (onEndedCallback) onEndedCallback();
+                    };
+
+                    utterance.onerror = () => {
+                        if (onEndedCallback) onEndedCallback();
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                },
+
+                playFullDialog(dialogNum) {
+                    if (this.isPlayingFullDialog) {
+                        this.stopPlayingDialog();
+                        return;
+                    }
+
+                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
+                    this.isPlayingFullDialog = true;
+                    let currentIdx = 0;
+
+                    const playNextLine = () => {
+                        if (!this.isPlayingFullDialog || currentIdx >= lines.length) {
+                            this.stopPlayingDialog();
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = currentIdx;
+                        const line = lines[currentIdx];
+
+                        this.speak(line.text, line.gender, () => {
+                            currentIdx++;
+                            if (this.isPlayingFullDialog && currentIdx < lines.length) {
+                                setTimeout(playNextLine, 650); // Jeda percakapan alami
+                            } else {
+                                this.isPlayingFullDialog = false;
+                                this.currentSpeakingIndex = null;
+                            }
+                        });
+                    };
+
+                    playNextLine();
+                },
+
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.currentSpeakingIndex = null;
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
+
+                // Firebase Auth & Cloud Sync
+                initAuth() {
+                    if (!auth) {
+                        this.authLoading = false;
+                        this.loadLocalData();
+                        return;
+                    }
+
+                    auth.onAuthStateChanged(user => {
+                        this.currentUser = user;
+                        this.authLoading = false;
+                        if (user) {
+                            this.loadUserData(user.uid);
+                        } else {
+                            this.loadLocalData();
+                        }
+                    });
+                },
+
+                async handleLogin() {
+                    this.authError = '';
+                    this.authSubmitting = true;
+                    try {
+                        await auth.signInWithEmailAndPassword(this.authForm.email, this.authForm.password);
+                    } catch (err) {
+                        if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+                            this.authError = 'Email atau kata sandi tidak cocok. Silakan periksa kembali.';
+                        } else {
+                            this.authError = err.message || 'Terjadi kesalahan saat masuk.';
+                        }
+                    } finally {
+                        this.authSubmitting = false;
+                    }
+                },
+
+                async logout() {
+                    if (auth) {
+                        await auth.signOut();
+                    }
+                    this.currentUser = null;
+                },
+
+                async loadUserData(uid) {
+                    if (!db) {
+                        this.loadLocalData();
+                        return;
+                    }
+                    try {
+                        const doc = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_2').get();
+                        if (doc.exists) {
+                            const data = doc.data();
+                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                            if (data.answers) this.answers = { ...this.answers, ...data.answers };
+                            if (data.goals) {
+                                this.goals.forEach((g, i) => {
+                                    if (data.goals[i] !== undefined) g.checked = data.goals[i];
+                                });
+                            }
+                            this.showFeedback = this.quizScore !== null;
+                        } else {
+                            this.loadLocalData();
+                        }
+                    } catch (err) {
+                        this.loadLocalData();
+                    }
+                },
+
+                loadLocalData() {
+                    try {
+                        const saved = localStorage.getItem('aksaradeutsch_lesson_a1_2');
+                        if (saved) {
+                            const data = JSON.parse(saved);
+                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                            if (data.answers) this.answers = { ...this.answers, ...data.answers };
+                            if (data.goals) {
+                                this.goals.forEach((g, i) => {
+                                    if (data.goals[i] !== undefined) g.checked = data.goals[i];
+                                });
+                            }
+                            this.showFeedback = this.quizScore !== null;
+                        }
+                    } catch (e) {}
+                },
+
+                async saveProgress() {
+                    const dataToSave = {
+                        quizScore: this.quizScore,
+                        answers: this.answers,
+                        goals: this.goals.map(g => g.checked),
+                        updatedAt: firebase.firestore ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
+                    };
+
+                    localStorage.setItem('aksaradeutsch_lesson_a1_2', JSON.stringify(dataToSave));
+
+                    if (this.currentUser && db) {
+                        try {
+                            this.syncStatusText = 'Menyimpan...';
+                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a1_2').set(dataToSave, { merge: true });
+                            this.syncStatusText = 'Tersinkronisasi';
+                        } catch (err) {
+                            this.syncStatusText = 'Tersimpan lokal';
+                        }
+                    }
+                },
+
+                // Quiz Evaluation
+                checkQuiz() {
+                    let score = 0;
+                    if (this.answers.q1 === 'sprichst') score++;
+                    if (this.answers.q2 === 'spreche') score++;
+                    if (this.answers.q3a === 'spricht' && this.answers.q3b === 'lernt') score++;
+                    if (this.answers.q4 === 'lernt') score++;
+                    if (this.answers.q5 === 'aus') score++;
+                    if (this.answers.q6 === 'aus der') score++;
+                    if (this.answers.q7 === 'aus den') score++;
+                    if (this.answers.q8 === 'aus') score++;
+
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = {
+                        q1: '',
+                        q2: '',
+                        q3a: '',
+                        q3b: '',
+                        q4: '',
+                        q5: '',
+                        q6: '',
+                        q7: '',
+                        q8: ''
+                    };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-white border-gray-200';
+                    let isCorrect = false;
+                    switch (qNum) {
+                        case 1: isCorrect = (this.answers.q1 === 'sprichst'); break;
+                        case 2: isCorrect = (this.answers.q2 === 'spreche'); break;
+                        case 3: isCorrect = (this.answers.q3a === 'spricht' && this.answers.q3b === 'lernt'); break;
+                        case 4: isCorrect = (this.answers.q4 === 'lernt'); break;
+                        case 5: isCorrect = (this.answers.q5 === 'aus'); break;
+                        case 6: isCorrect = (this.answers.q6 === 'aus der'); break;
+                        case 7: isCorrect = (this.answers.q7 === 'aus den'); break;
+                        case 8: isCorrect = (this.answers.q8 === 'aus'); break;
+                    }
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
