@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <script>
+        // Clean URL: redirect from .html or index.html to clean routes
+        if (window.location.protocol !== 'file:') {
+            const path = window.location.pathname;
+            if (path.endsWith('/index.html') || path === '/index.html') {
+                const cleanPath = path.slice(0, -10);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            } else if (path.endsWith('.html')) {
+                const cleanPath = path.slice(0, -5);
+                window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../Icon-AksaraDeutsch.png">
+    <link rel="apple-touch-icon" href="../Icon-AksaraDeutsch.png">
+    <meta name="description"
+        content="Dashboard Siswa Aksaradeutsch - Akses modul materi pembelajaran level A2.1 ke-12 pertemuan.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dashboard Siswa: Kelas A2.1 - Aksaradeutsch.com</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#101828',
+                        'navy-dark': '#0B0F19',
+                        'primary-orange': '#FF6B35',
+                        'primary-hover': '#E85A2A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Firebase Configuration & Security -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Anti-Copy & Anti-Right Click Protection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F9FAFB;
+            color: #101828;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #E85A2A;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -8px rgba(16, 24, 40, 0.08);
+        }
+
+        /* Print Shield */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 20pt;
+                color: #101828;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F9FAFB] text-navy min-h-screen flex flex-col" x-data="dashboardApp()" x-init="initDashboard()">
+
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Dashboard siswa dan materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Portal Siswa</span>
+                    <span class="ml-2 font-medium text-gray-600">Bahasa Jerman Level A2.1</span>
+                </div>
+            </div>
+
+            <!-- Header Profile & Actions -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- If Authenticated -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <div
+                            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span x-text="syncStatusText">Tersinkronisasi</span>
+                        </div>
+
+                        <!-- User Profile & Logout -->
+                        <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                            <div class="hidden lg:block text-right">
+                                <span class="block text-xs font-bold text-navy truncate max-w-[140px]"
+                                    x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                                <span class="block text-[10px] text-gray-500 truncate max-w-[140px]"
+                                    x-text="currentUser.email"></span>
+                            </div>
+                            <button @click="logout()"
+                                class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                                title="Keluar dari akun">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                    </path>
+                                </svg>
+                                <span class="hidden sm:inline">Keluar</span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+
+        <!-- ============================================================= -->
+        <!-- STATE 1: AUTH LOADING                                         -->
+        <!-- ============================================================= -->
+        <div x-show="authLoading" class="py-24 text-center" x-cloak>
+            <div
+                class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
+            <p class="text-sm font-bold text-gray-600">Memuat data dashboard peserta Level A2.1...</p>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 2: LOGIN GATE (IF NOT LOGGED IN)                        -->
+        <!-- ============================================================= -->
+        <div x-show="!currentUser && !authLoading" class="py-6 sm:py-12 max-w-xl mx-auto" x-cloak>
+            <div
+                class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-xl text-center relative overflow-hidden">
+
+                <h1 class="text-2xl sm:text-3xl font-black text-navy mb-3">
+                    Selamat Datang di Portal Belajar A2.1!
+                </h1>
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
+                    Yuk, masuk ke akunmu! Di sini kamu bisa mengakses seluruh modul pembelajaran interaktif Level A2.1
+                    dari Pertemuan 1 sampai 12. Kita melangkah bersama untuk semakin percaya diri dan mahir berbahasa Jerman!
+                </p>
+
+                <!-- Error Notification -->
+                <div x-show="authError"
+                    class="mb-5 p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold text-left"
+                    x-cloak>
+                    <span x-text="authError"></span>
+                </div>
+
+                <!-- Form Login -->
+                <form @submit.prevent="handleLogin()" class="space-y-4 max-w-md mx-auto text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Email Kamu</label>
+                        <input type="email" x-model="authForm.email" required placeholder="nama@email.com"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-navy mb-1">Kata Sandi</label>
+                        <input type="password" x-model="authForm.password" required placeholder="••••••••"
+                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+                    </div>
+                    <button type="submit" :disabled="authSubmitting"
+                        class="w-full py-3.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2">
+                        <span x-show="!authSubmitting">Masuk & Mulai Belajar A2.1</span>
+                        <span x-show="authSubmitting">Menyiapkan materi kamu...</span>
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 text-xs text-gray-500 space-y-1.5">
+                    <p>
+                        Kendala saat masuk? Hubungi kami melalui <a href="https://wa.me/6281959896825" target="_blank"
+                            rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">WhatsApp</a>.
+                    </p>
+                    <p class="text-[11px] text-gray-400">
+                        Materi khusus peserta kelas A2.1 aksaradeutsch. Hak cipta dilindungi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- STATE 3: AUTHENTICATED DASHBOARD                              -->
+        <!-- ============================================================= -->
+        <div x-show="currentUser" x-cloak>
+
+            <!-- Welcome Hero & Overall Course Progress -->
+            <div
+                class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+                <div
+                    class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                    <div class="max-w-2xl">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+                            Hallo, <span class="text-orange-400"
+                                x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Kamu'"></span>!
+                            Siap Melangkah di Level A2.1?
+                        </h1>
+                        <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6">
+                            Selamat datang di jenjang A2.1! Di sini kamu akan memperluas kemampuan berkomunikasi, menguasai kalimat lampau Perfekt, mengekspresikan opini, hingga berinteraksi di dunia kerja dan kehidupan sehari-hari di Jerman.
+                        </p>
+
+                        <!-- Highlights Stats Grid (3 Columns Balanced) -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Materi
+                                    Kelas</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-white">12 Modul</strong>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Progres
+                                    Belajar</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-orange-400"
+                                    x-text="completedLessonsCount + '/12 Selesai'">1/12 Selesai</strong>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Latihan
+                                    P1</span>
+                                <strong class="text-xs sm:text-base md:text-lg font-black text-emerald-400"
+                                    x-text="p1ScoreText">Belum Dinilai</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Ring / Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 w-full lg:w-80 flex-shrink-0">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Progress Belajar Level A2.1</span>
+                            <span class="text-sm font-extrabold text-orange-400"
+                                x-text="Math.round((completedLessonsCount / 12) * 100) + '%'">8%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-3 mb-4 overflow-hidden">
+                            <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-3 rounded-full transition-all duration-500"
+                                :style="`width: ${Math.max(5, (completedLessonsCount / 12) * 100)}%`"></div>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Praktikkan materi dan percakapan secara konsisten agar pelafalan serta tata bahasa makin lancar!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs & Section Title -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-navy">
+                        Daftar Materi Pertemuan A2.1 (1 – 12)
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih modul pertemuan yang mau kamu pelajari atau ulang hari ini:</p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <button @click="filter = 'all'"
+                        :class="filter === 'all' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Semua Pertemuan (12)
+                    </button>
+                    <button @click="filter = 'available'"
+                        :class="filter === 'available' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Tersedia
+                    </button>
+                    <button @click="filter = 'completed'"
+                        :class="filter === 'completed' ? 'bg-navy text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Sudah Selesai
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12 Lessons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                <!-- Loop Through 12 Meetings -->
+                <template x-for="lesson in filteredLessons" :key="lesson.id">
+                    <div
+                        class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between card-hover">
+                        <div>
+                            <!-- Thumbnail Cover -->
+                            <div class="relative w-full h-44 bg-gray-100 overflow-hidden border-b border-gray-100">
+                                <img :src="lesson.image" :alt="lesson.title"
+                                    class="w-full h-full object-cover object-center transition duration-300 hover:scale-105"
+                                    onerror="this.src='../Aksaradeutsch.jpg'">
+
+                                <!-- Status Badge Overlay -->
+                                <div class="absolute top-3 left-3">
+                                    <span class="px-3 py-1 rounded-full text-xs font-extrabold shadow-sm"
+                                        :class="lesson.statusClass" x-text="lesson.statusText">
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span
+                                        class="px-2.5 py-1 rounded-xl bg-navy/80 backdrop-blur-sm text-white text-[11px] font-bold">
+                                        Pertemuan <span x-text="lesson.number"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="p-6">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-orange-600 block mb-1"
+                                    x-text="lesson.germanTheme">
+                                </span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mb-2 line-clamp-2"
+                                    x-text="lesson.title">
+                                </h3>
+                                <p class="text-xs text-gray-600 leading-relaxed line-clamp-3 mb-4"
+                                    x-text="lesson.description">
+                                </p>
+
+                                <!-- Key Topics Tags -->
+                                <div class="flex flex-wrap gap-1.5 mb-2">
+                                    <template x-for="(tag, tagIdx) in lesson.tags" :key="tagIdx">
+                                        <span
+                                            class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-gray-100 text-gray-700"
+                                            x-text="tag"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer Action -->
+                        <div class="p-6 pt-0 border-t border-gray-50 mt-2">
+                            <template x-if="lesson.isAvailable">
+                                <a :href="currentUser ? lesson.link : 'javascript:void(0)'"
+                                    @click="if(!currentUser) { handleLogin(); }"
+                                    class="w-full py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                                    <span x-text="currentUser ? 'Buka Materi Pembelajaran' : 'Masuk untuk Buka Materi'"></span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </template>
+                            <template x-if="!lesson.isAvailable">
+                                <button disabled
+                                    class="w-full py-3 rounded-2xl bg-gray-100 text-gray-400 font-bold text-xs sm:text-sm cursor-not-allowed flex items-center justify-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                    <span>Segera Hadir</span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-gray-400 py-10 border-t border-gray-800 text-xs mt-auto">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img src="../logo-white.png" alt="Aksaradeutsch" class="h-8 sm:h-9 w-auto object-contain">
+                <span>© 2026 Aksaradeutsch. Hak Cipta Dilindungi.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="../privacy-policy.html" class="hover:text-white transition">Kebijakan Privasi</a>
+                <a href="../syarat-ketentuan.html" class="hover:text-white transition">Syarat & Ketentuan</a>
+                <a href="../tentang-kami.html" class="hover:text-white transition">Tentang Kami</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function dashboardApp() {
+            return {
+                currentUser: null,
+                authLoading: true,
+                authSubmitting: false,
+                authError: '',
+                syncStatusText: 'Tersinkronisasi',
+                filter: 'all',
+
+                authForm: {
+                    email: '',
+                    password: ''
+                },
+
+                p1Progress: { quizScore: null, completedGoals: 0 },
+                p2Progress: { quizScore: null, completedGoals: 0 },
+                p3Progress: { quizScore: null, completedGoals: 0 },
+                p4Progress: { quizScore: null, completedGoals: 0 },
+                p5Progress: { quizScore: null, completedGoals: 0 },
+                p6Progress: { quizScore: null, completedGoals: 0 },
+                p7Progress: { quizScore: null, completedGoals: 0 },
+                p8Progress: { quizScore: null, completedGoals: 0 },
+                p9Progress: { quizScore: null, completedGoals: 0 },
+                p10Progress: { quizScore: null, completedGoals: 0 },
+                p11Progress: { quizScore: null, completedGoals: 0 },
+                p12Progress: { quizScore: null, completedGoals: 0 },
+
+                // 12 Meetings Curriculum Data for Level A2.1
+                lessons: [
+                    {
+                        id: 1,
+                        number: '1',
+                        germanTheme: 'Und was machst du?',
+                        title: 'Und was machst du? Und was hast du gemacht?',
+                        description: 'Menceritakan profil diri dan pengalaman masa lalu (Perfekt mit haben/sein), sistematika Partizip II, Genitiv bei Eigennamen, dan fonetik ch.',
+                        tags: ['Perfekt haben/sein', 'Partizip II', 'Genitiv Eigennamen', 'Aussprache ch'],
+                        image: '../materi-1.png',
+                        link: '../materi-a2-1/',
+                        isAvailable: true
+                    },
+                    {
+                        id: 2,
+                        number: '2',
+                        germanTheme: 'Wollt ihr kommen?',
+                        title: 'Wollt ihr kommen? und Essen ohne Licht',
+                        description: 'Mengundang, menerima dan menolak ajakan santun (Redemittel Verabredungen), anak kalimat alasan Nebensatz mit weil, dan situasi sosial restoran tanpa cahaya.',
+                        tags: ['Nebensatz mit weil', 'Verabredungen', 'Einladungen', 'Kurzformen'],
+                        image: '../materi-2.png',
+                        link: '../materi-a2-2/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 3,
+                        number: '3',
+                        germanTheme: 'Nach der Schulzeit',
+                        title: 'Nach der Schulzeit: Schule – eine schöne Zeit?',
+                        description: 'Menceritakan kenangan dan kewajiban masa sekolah, konjugasi kata kerja modal lampau Modalverben im Präteritum (musste, konnte, wollte, durfte, sollte), dan fonetik vokal e.',
+                        tags: ['Modalverben Präteritum', 'Schulzeit', 'Schulerinnerungen', 'Aussprache e'],
+                        image: '../materi-3.png',
+                        link: '../materi-a2-3/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 4,
+                        number: '4',
+                        germanTheme: 'Schulabschluss & Dativ',
+                        title: 'Nach dem Schulabschluss & Schultypen in Deutschland',
+                        description: 'Pilihan jalur pasca-sekolah (FSJ, Ausbildung, Studium), deklinasi artikel dan Possessivartikel dalam kasus Dativ, preposisi Dativ, dan sistem sekolah di Jerman.',
+                        tags: ['Deklination Dativ', 'Präpositionen mit Dativ', 'Schulsystem', 'FSJ & Ausbildung'],
+                        image: '../materi-4.png',
+                        link: '../materi-a2-4/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 5,
+                        number: '5',
+                        germanTheme: 'Immer online?',
+                        title: 'Immer online? Was ist besser? Das mache ich am liebsten',
+                        description: 'Dunia digital & penggunaan internet, tingkat perbandingan kata sifat Komparativ & Superlativ (gut/besser/am besten, viel/mehr/am meisten, gern/lieber/am liebsten), dan perbandingan Als/Wie.',
+                        tags: ['Komparativ & Superlativ', 'Vergleich mit als/wie', 'Digitale Medien', 'Internet'],
+                        image: '../materi-5.png',
+                        link: '../materi-a2-5/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 6,
+                        number: '6',
+                        germanTheme: 'Meine Meinung & Medien',
+                        title: 'Meine Meinung, Medien im Alltag, und Film ab!',
+                        description: 'Menyatakan opini & argumentasi dengan anak kalimat Nebensatz mit dass, konsumsi media cetak & digital, diskusi film dan sinopsis bioskop.',
+                        tags: ['Nebensatz mit dass', 'Meinungsäußerung', 'Medien im Alltag', 'Filme & Kino'],
+                        image: '../materi-6.png',
+                        link: '../materi-a2-6/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 7,
+                        number: '7',
+                        germanTheme: 'Gefühle & Eigenschaften',
+                        title: 'Gefühle und Eigenschaften, und Wenn ich glücklich bin...',
+                        description: 'Mengekspresikan suasana hati & emosi, anak kalimat kondisi/waktu Nebensatz mit wenn, serta kata sifat deskripsi kepribadian dan karakter manusia.',
+                        tags: ['Nebensatz mit wenn', 'Gefühle & Emotionen', 'Eigenschaften', 'Reaktionen'],
+                        image: '../materi-7.png',
+                        link: '../materi-a2-7/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 8,
+                        number: '8',
+                        germanTheme: 'Reflexive Verben & Feste',
+                        title: 'Gute Besserung!, Feiern und Geschenke, und Die Einladung',
+                        description: 'Kata kerja refleksif (sich freuen, sich fühlen, sich ärgern) pada kasus Akkusativ & Dativ, ungkapan simpati saat sakit, serta etika perayaan dan pemberian kado.',
+                        tags: ['Reflexive Verben', 'Körper & Gesundheit', 'Geschenke & Feste', 'Einladungen'],
+                        image: '../materi-8.png',
+                        link: '../materi-a2-8/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 9,
+                        number: '9',
+                        germanTheme: 'Leben in der Stadt',
+                        title: 'Leben in der Stadt, Wohnen und Nachbarn',
+                        description: 'Deskripsi lingkungan kota, deklinasi kata sifat setelah artikel tentu (Adjektivdeklination mit bestimmtem Artikel Nominativ & Akkusativ), dan hubungan bertetangga.',
+                        tags: ['Adjektivdeklination', 'Stadtleben', 'Wohnformen', 'Nachbarschaft'],
+                        image: '../materi-9.png',
+                        link: '../materi-a2-9/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 10,
+                        number: '10',
+                        germanTheme: 'Erledigungen & Ämter',
+                        title: 'Erledigungen in der Stadt, Auf dem Amt, und Unterwegs',
+                        description: 'Urusan administrasi perkotaan di kantor pemerintahan, bentuk permohonan sopan Höfliche Bitten mit Konjunktiv II (könnten/würden), dan preposisi tempat dua arah (Wechselpräpositionen).',
+                        tags: ['Konjunktiv II (Höflichkeit)', 'Wechselpräpositionen', 'Auf dem Amt', 'Formulare'],
+                        image: '../materi-10.png',
+                        link: '../materi-a2-10/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 11,
+                        number: '11',
+                        germanTheme: 'Arbeitswelten & Reise',
+                        title: 'Arbeitswelten, Berufsalltag, und Auf Geschäftsreise',
+                        description: 'Komunikasi di tempat kerja, email bisnis & telepon formal, preposisi waktu (über, von...an, zwischen), serta reservasi tiket hotel dan akomodasi perjalanan dinas.',
+                        tags: ['Berufsalltag', 'Geschäftsreise', 'Temporale Präpositionen', 'Telefonieren im Beruf'],
+                        image: '../materi-11.png',
+                        link: '../materi-a2-11/',
+                        isAvailable: false
+                    },
+                    {
+                        id: 12,
+                        number: '12',
+                        germanTheme: 'Traumberuf & Bewerbung',
+                        title: 'Mein Traumberuf, Bewerbung und Vorstellungsgespräch',
+                        description: 'Profesi impian, konjugasi kata kerja werden, menyusun surat lamaran kerja & CV (Bewerbungsschreiben & Lebenslauf), serta simulasi wawancara kerja (Vorstellungsgespräch).',
+                        tags: ['Verb werden', 'Bewerbung & Lebenslauf', 'Vorstellungsgespräch', 'Karriere'],
+                        image: '../materi-12.png',
+                        link: '../materi-a2-12/',
+                        isAvailable: false
+                    }
+                ],
+
+                get filteredLessons() {
+                    let list = this.lessons.map(l => {
+                        let statusText = 'Segera Hadir';
+                        let statusClass = 'bg-gray-100 text-gray-600';
+
+                        const prog = this[`p${l.id}Progress`];
+                        if (l.isAvailable) {
+                            if (prog && prog.quizScore !== null) {
+                                statusText = `Selesai • Nilai: ${prog.quizScore}/8`;
+                                statusClass = 'bg-emerald-500 text-white';
+                            } else {
+                                statusText = 'Tersedia • Belum Selesai';
+                                statusClass = 'bg-orange-500 text-white';
+                            }
+                        }
+
+                        return {
+                            ...l,
+                            statusText,
+                            statusClass
+                        };
+                    });
+
+                    if (this.filter === 'available') {
+                        return list.filter(l => l.isAvailable);
+                    }
+                    if (this.filter === 'completed') {
+                        return list.filter(l => {
+                            const prog = this[`p${l.id}Progress`];
+                            return prog && prog.quizScore !== null;
+                        });
+                    }
+                    return list;
+                },
+
+                get completedLessonsCount() {
+                    let count = 0;
+                    for (let i = 1; i <= 12; i++) {
+                        if (this[`p${i}Progress`] && this[`p${i}Progress`].quizScore !== null) {
+                            count++;
+                        }
+                    }
+                    return count;
+                },
+
+                get p1ScoreText() {
+                    if (this.p1Progress.quizScore !== null) {
+                        return `${this.p1Progress.quizScore} / 8 Poin`;
+                    }
+                    return 'Belum Dinilai';
+                },
+
+                resetAllProgress() {
+                    for (let i = 1; i <= 12; i++) {
+                        if (this[`p${i}Progress`]) {
+                            this[`p${i}Progress`].quizScore = null;
+                            this[`p${i}Progress`].completedGoals = 0;
+                        }
+                    }
+                },
+
+                // Initialization
+                initDashboard() {
+                    if (auth) {
+                        auth.onAuthStateChanged(async (user) => {
+                            this.authLoading = false;
+                            this.resetAllProgress();
+                            if (user) {
+                                this.currentUser = user;
+                                await this.loadStudentProgress(user.uid);
+                            } else {
+                                this.currentUser = null;
+                                this.loadLocalProgress('guest');
+                            }
+                        });
+                    } else {
+                        this.authLoading = false;
+                        this.loadLocalProgress('guest');
+                    }
+                },
+
+                async handleLogin() {
+                    this.authSubmitting = true;
+                    this.authError = '';
+                    try {
+                        await auth.signInWithEmailAndPassword(this.authForm.email, this.authForm.password);
+                        this.authForm.password = '';
+                    } catch (error) {
+                        console.error('Login error:', error);
+                        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                            this.authError = 'Email atau kata sandi tidak cocok. Silakan periksa kembali ya!';
+                        } else if (error.code === 'auth/too-many-requests') {
+                            this.authError = 'Terlalu banyak percobaan masuk yang gagal. Silakan tunggu beberapa saat lagi.';
+                        } else {
+                            this.authError = 'Gagal masuk: ' + error.message;
+                        }
+                    } finally {
+                        this.authSubmitting = false;
+                    }
+                },
+
+                logout() {
+                    if (auth) {
+                        auth.signOut().then(() => {
+                            this.currentUser = null;
+                            this.resetAllProgress();
+                        });
+                    }
+                },
+
+                loadLocalProgress(uid = 'guest') {
+                    try {
+                        for (let i = 1; i <= 12; i++) {
+                            const userKey = `aksaradeutsch_${uid}_lesson_a2_${i}`;
+                            const saved = localStorage.getItem(userKey);
+                            if (saved) {
+                                const d = JSON.parse(saved);
+                                if (d.quizScore !== undefined && this[`p${i}Progress`]) {
+                                    this[`p${i}Progress`].quizScore = d.quizScore;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Error loading local progress:', err);
+                    }
+                },
+
+                async loadStudentProgress(uid) {
+                    this.syncStatusText = 'Menyinkronkan...';
+                    // 1. Muat cache lokal terisolasi milik akun ini terlebih dahulu
+                    this.loadLocalProgress(uid);
+
+                    // 2. Tarik data murni dari database Firestore milik akun ini
+                    try {
+                        if (db) {
+                            // Cek dokumen aggregator: user_progress/{uid}
+                            const userProgDoc = await db.collection('user_progress').doc(uid).get();
+                            if (userProgDoc.exists) {
+                                const prog = userProgDoc.data();
+                                for (let i = 1; i <= 12; i++) {
+                                    const key = `lesson_a2_${i}`;
+                                    if (prog[key] && prog[key].quizScore !== undefined && this[`p${i}Progress`]) {
+                                        this[`p${i}Progress`].quizScore = prog[key].quizScore;
+                                    }
+                                }
+                            }
+
+                            // Cek subcollection: users/{uid}/progress/lesson_a2_X
+                            for (let i = 1; i <= 12; i++) {
+                                const docRef = await db.collection('users').doc(uid).collection('progress').doc(`lesson_a2_${i}`).get();
+                                if (docRef.exists && docRef.data().quizScore !== undefined && this[`p${i}Progress`]) {
+                                    this[`p${i}Progress`].quizScore = docRef.data().quizScore;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading Firestore progress in dashboard:', e);
+                    }
+
+                    this.syncStatusText = 'Tersinkronisasi';
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
