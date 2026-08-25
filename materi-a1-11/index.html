@@ -174,6 +174,14 @@
 <body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col" x-data="lessonApp()"
     x-init="initApp()">
 
+    <!-- Auth Guard Screen: Proteksi Penuh Konten Materi jika Belum Login -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0c1322] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
     <!-- Print Shield Warning Container -->
     <div id="print-shield-warning" style="display: none;">
         <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
@@ -1671,21 +1679,22 @@
 
                     if (!auth) {
                         this.authLoading = false;
-                        this.loadSavedProgress('guest');
+                        window.location.replace('../dashboard-siswa/');
                         return;
                     }
 
                     auth.onAuthStateChanged(user => {
-                        this.currentUser = user;
-                        this.authLoading = false;
-                        this.resetState();
                         if (user) {
+                            this.currentUser = user;
+                            this.authLoading = false;
                             this.userName = user.displayName || user.email.split('@')[0];
                             this.userInitial = this.userName.charAt(0).toUpperCase();
                             this.syncWithFirestore(user.uid);
                         } else {
-                            this.loadSavedProgress('guest');
-                            this.syncStatusText = 'Offline (Lokal)';
+                            this.currentUser = null;
+                            this.authLoading = false;
+                            this.resetState();
+                            window.location.replace('../dashboard-siswa/');
                         }
                     });
                 },
@@ -1801,10 +1810,12 @@
                         auth.signOut().then(() => {
                             this.currentUser = null;
                             this.resetState();
+                            window.location.replace('../dashboard-siswa/');
                         });
                     } else {
                         this.currentUser = null;
                         this.resetState();
+                        window.location.replace('../dashboard-siswa/');
                     }
                 }
             }

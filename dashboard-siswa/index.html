@@ -451,9 +451,10 @@
                         <!-- Card Footer Action -->
                         <div class="p-6 pt-0 border-t border-gray-50 mt-2">
                             <template x-if="lesson.isAvailable">
-                                <a :href="lesson.link"
-                                    class="w-full py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
-                                    <span>Buka Materi Pembelajaran</span>
+                                <a :href="currentUser ? lesson.link : 'javascript:void(0)'"
+                                    @click="if(!currentUser) { openAuthModal('login'); }"
+                                    class="w-full py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                                    <span x-text="currentUser ? 'Buka Materi Pembelajaran' : 'Masuk untuk Buka Materi'"></span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"></path>

@@ -251,6 +251,14 @@
 
 <body class="bg-[#F9FAFB] text-navy min-h-screen flex flex-col" x-data="materiApp()" x-init="initApp()">
 
+    <!-- Auth Guard Screen: Proteksi Penuh Konten Materi jika Belum Login -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0c1322] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
     <!-- Print Shield Warning (Hidden on Screen, Visible on Print) -->
     <div id="print-shield-warning" style="display: none;">
         <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
@@ -2164,19 +2172,20 @@
                     // Firebase Auth State Listener
                     if (auth) {
                         auth.onAuthStateChanged(async (user) => {
-                            this.authLoading = false;
-                            this.resetState(); // Bersihkan state agar tidak bocor antar akun
                             if (user) {
                                 this.currentUser = user;
+                                this.authLoading = false;
                                 await this.loadProgressFromCloud(user.uid);
                             } else {
                                 this.currentUser = null;
-                                this.loadLocalProgress('guest');
+                                this.authLoading = false;
+                                this.resetState();
+                                window.location.replace('../dashboard-siswa/');
                             }
                         });
                     } else {
                         this.authLoading = false;
-                        this.loadLocalProgress('guest');
+                        window.location.replace('../dashboard-siswa/');
                     }
 
                     // Watcher untuk auto-save ketika peserta mencentang checklist atau memilih jawaban
@@ -2241,6 +2250,7 @@
                     try {
                         await auth.signInWithEmailAndPassword(this.authForm.email, this.authForm.password);
                         this.authForm.password = '';
+                        window.location.replace('../dashboard-siswa/');
                     } catch (error) {
                         console.error('Login error:', error);
                         if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
@@ -2266,6 +2276,7 @@
                             });
                         }
                         this.authForm.password = '';
+                        window.location.replace('../dashboard-siswa/');
                     } catch (error) {
                         console.error('Register error:', error);
                         if (error.code === 'auth/email-already-in-use') {
@@ -2286,6 +2297,7 @@
                     try {
                         const provider = new firebase.auth.GoogleAuthProvider();
                         await auth.signInWithPopup(provider);
+                        window.location.replace('../dashboard-siswa/');
                     } catch (error) {
                         console.error('Google login error:', error);
                         if (error.code !== 'auth/popup-closed-by-user') {
@@ -2303,6 +2315,7 @@
                         }
                         this.currentUser = null;
                         this.resetState();
+                        window.location.replace('../dashboard-siswa/');
                     }
                 },
 
