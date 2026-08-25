@@ -1047,129 +1047,262 @@
                                 <input type="text" x-model="answers.q2_2" placeholder="haben..."
                                     class="w-28 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
                                 <span class="text-xs text-gray-500 italic">24 Stunden pro Woche Kurse.</span>
+                <!-- Soal Bagian A: Wortbildungs-Baukasten & Morphem-Puzzle (Model 9 - 4 Soal) -->
+                <div class="mb-10">
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil A: Wortbildungs-Baukasten &ndash; Bilden Sie die feminine Form oder die Pluralform.
+                        </h3>
+                        <p class="text-xs text-gray-500">Pilihlah bentuk pembentukan kata yang paling tepat (perubahan artikel, vokal Umlaut, atau akhiran <em>-in / -er / -s</em>).</p>
+                    </div>
+
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 1 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Feminine Form bilden:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Bentuk feminin dari <em>„der Lehrer“</em> adalah:
+                                </p>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="(answers.q2_1.trim().toLowerCase() === 'bin' && answers.q2_2.trim().toLowerCase() === 'habe') ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="(answers.q2_1.trim().toLowerCase() === 'bin' && answers.q2_2.trim().toLowerCase() === 'habe') ? '✓ Benar! (bin & habe)' : '✗ Jawaban benar: bin, habe'"></span>
-                                </div>
-                            </template>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> die Lehrerin
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> das Lehrerin
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Lehrerinnen
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Feminine Form mit Umlaut:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Bentuk feminin dari <em>„der Arzt“</em> adalah:
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> die Ärztin
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Arztin
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> das Ärztin
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 3 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">3</span>
-                                <span>Herr Höflinger ________ (sein) Taxifahrer.</span>
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Pluralform bilden:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Bentuk jamak (Plural) dari <em>„das Buch“</em> adalah:
+                                </p>
                             </div>
-                            <div class="flex flex-wrap items-center gap-2 mt-3">
-                                <span class="text-xs text-gray-500 italic">Herr Höflinger</span>
-                                <input type="text" x-model="answers.q3" placeholder="Ketik konjugasi..."
-                                    class="px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">Taxifahrer.</span>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> die Bücher
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Buche
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Büchern
+                                </button>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="answers.q3.trim().toLowerCase() === 'ist' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="answers.q3.trim().toLowerCase() === 'ist' ? '✓ Benar! (sein untuk er adalah ist)' : '✗ Jawaban benar: ist'"></span>
-                                </div>
-                            </template>
                         </div>
 
                         <!-- Soal 4 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">4</span>
-                                <span>Wir ________ (haben) am Wochenende frei.</span>
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Pluralform mit -s:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Bentuk jamak (Plural) dari <em>„das Restaurant“</em> adalah:
+                                </p>
                             </div>
-                            <div class="flex flex-wrap items-center gap-2 mt-3">
-                                <span class="text-xs text-gray-500 italic">Wir</span>
-                                <input type="text" x-model="answers.q4" placeholder="Ketik konjugasi..."
-                                    class="px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">am Wochenende frei.</span>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> die Restaurants
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Restaurante
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Restauranten
+                                </button>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="answers.q4.trim().toLowerCase() === 'haben' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="answers.q4.trim().toLowerCase() === 'haben' ? '✓ Benar! (haben untuk wir adalah haben)' : '✗ Jawaban benar: haben'"></span>
-                                </div>
-                            </template>
-                        </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">5</span>
-                                <span>________ (haben) ihr am Sonntag Zeit?</span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2 mt-3">
-                                <input type="text" x-model="answers.q5" placeholder="Ketik konjugasi..."
-                                    class="px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">ihr am Sonntag Zeit?</span>
-                            </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="answers.q5.trim().toLowerCase() === 'habt' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="answers.q5.trim().toLowerCase() === 'habt' ? '✓ Benar! (Habt ihr am Sonntag Zeit?)' : '✗ Jawaban benar: Habt'"></span>
-                                </div>
-                            </template>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bagian B: Bentuk Feminin & Jamak -->
+                <!-- Bagian B: Odd-One-Out & Kategorien-Ausschluss (Model 15 - 4 Soal) -->
                 <div class="mb-8">
-                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-1">
-                        Teil B: Bilden Sie die feminine Form oder die Pluralform
-                    </h3>
-                    <p class="text-xs text-gray-500 mb-6">Ubah profesi dan kata benda berikut ke bentuk feminin atau bentuk jamak (contoh: <em>die Lehrerin</em>):</p>
+                    <div class="mb-4">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil B: Odd-One-Out &ndash; Welches Wort passt nicht in die Reihe?
+                        </h3>
+                        <p class="text-xs text-gray-500">Temukan 1 kata asing yang tidak cocok dalam rumpun kategori semantik atau pola gramatikal di setiap kelompok kata.</p>
+                    </div>
 
                     <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Berufe vs. Arbeitsort:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Manakah kata yang tidak cocok dalam kelompok berikut?
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> der Arzt
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Lehrerin
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> das Büro
+                                </button>
+                                <button type="button" @click="answers.q5 = 'd'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'd' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>d)</strong> der Kellner
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- Soal 6 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">6</span>
-                                <span>Bentuk feminin dari <em>der Lehrer</em> adalah ________</span>
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Zahlenmuster (Zehner vs. Zehner-Reihe):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Manakah angka yang polanya berbeda dari deretan angka berikut?
+                                </p>
                             </div>
-                            <div class="mt-3">
-                                <input type="text" x-model="answers.q6" placeholder="Ketik bentuk feminin..."
-                                    class="w-full sm:w-80 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> dreißig (30)
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> vierzig (40)
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> fünfzehn (15)
+                                </button>
+                                <button type="button" @click="answers.q6 = 'd'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'd' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>d)</strong> sechzig (60)
+                                </button>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="normalizeWord(answers.q6) === 'dielehrerin' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="normalizeWord(answers.q6) === 'dielehrerin' ? '✓ Benar! (die Lehrerin)' : '✗ Jawaban benar: die Lehrerin'"></span>
-                                </div>
-                            </template>
                         </div>
 
                         <!-- Soal 7 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">7</span>
-                                <span>Bentuk jamak dari <em>das Buch</em> adalah ________</span>
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Arbeitsplatz vs. Person:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Manakah kata yang tidak sejenis dalam kelompok tempat kerja berikut?
+                                </p>
                             </div>
-                            <div class="mt-3">
-                                <input type="text" x-model="answers.q7" placeholder="Ketik bentuk jamak..."
-                                    class="w-full sm:w-80 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> das Krankenhaus
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Schule
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> das Restaurant
+                                </button>
+                                <button type="button" @click="answers.q7 = 'd'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'd' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>d)</strong> die Studentin
+                                </button>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="(normalizeWord(answers.q7) === 'diebucher' || normalizeWord(answers.q7) === 'diebuecher') ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="(normalizeWord(answers.q7) === 'diebucher' || normalizeWord(answers.q7) === 'diebuecher') ? '✓ Benar! (die Bücher)' : '✗ Jawaban benar: die Bücher'"></span>
-                                </div>
-                            </template>
                         </div>
 
                         <!-- Soal 8 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">8</span>
-                                <span>Bentuk jamak dari <em>das Restaurant</em> adalah ________</span>
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Grammatisches Geschlecht (Maskulin vs. Feminin):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Manakah profesi yang bergender maskulin di antara profesi feminin berikut?
+                                </p>
                             </div>
-                            <div class="mt-3">
-                                <input type="text" x-model="answers.q8" placeholder="Ketik bentuk jamak..."
-                                    class="w-full sm:w-80 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> die Ärztin
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> die Kellnerin
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Informatiker
+                                </button>
+                                <button type="button" @click="answers.q8 = 'd'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'd' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>d)</strong> die Köchin
+                                </button>
                             </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="normalizeWord(answers.q8) === 'dierestaurants' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="normalizeWord(answers.q8) === 'dierestaurants' ? '✓ Benar! (die Restaurants)' : '✗ Jawaban benar: die Restaurants'"></span>
-                                </div>
-                            </template>
                         </div>
                     </div>
                 </div>
@@ -1192,24 +1325,24 @@
 
                 <!-- Kunci Jawaban Dropdown -->
                 <div x-show="showKey" x-collapse class="mt-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm">
-                    <h4 class="font-extrabold text-navy uppercase tracking-wider mb-3">Kunci Jawaban Lengkap:</h4>
+                    <h4 class="font-extrabold text-navy uppercase tracking-wider mb-3">Kunci Jawaban Lengkap & Penjelasan:</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <strong class="text-orange-600 block mb-1">Teil A (haben / sein):</strong>
-                            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>bist</strong> (Subjek <em>du</em> pada <em>sein</em> menjadi <em>bist</em>)</li>
-                                <li><strong>bin, habe</strong> (Subjek <em>ich</em> pada <em>sein</em> &rarr; <em>bin</em> dan <em>haben</em> &rarr; <em>habe</em>)</li>
-                                <li><strong>ist</strong> (Subjek <em>Herr Höflinger / er</em> menjadi <em>ist</em>)</li>
-                                <li><strong>haben</strong> (Subjek <em>wir</em> menggunakan bentuk dasar <em>haben</em>)</li>
-                                <li><strong>Habt</strong> (Subjek <em>ihr</em> menggunakan bentuk konjugasi <em>habt</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil A (Wortbildungs-Baukasten):</strong>
+                            <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (die Lehrerin)</strong> &mdash; Profesi feminin standar dibentuk dengan artikel <em>die</em> dan akhiran <em>-in</em>.</li>
+                                <li><strong>a (die Ärztin)</strong> &mdash; Profesi <em>Arzt</em> mengalami perubahan vokal Umlaut <em>a &rarr; ä</em> menjadi <em>die Ärztin</em>.</li>
+                                <li><strong>a (die Bücher)</strong> &mdash; Bentuk jamak <em>das Buch</em> adalah <em>die Bücher</em> (akhiran <em>-er</em> & vokal Umlaut).</li>
+                                <li><strong>a (die Restaurants)</strong> &mdash; Kata serapan asing membentuk jamak dengan akhiran <em>-s</em>: <em>die Restaurants</em>.</li>
                             </ol>
                         </div>
                         <div>
-                            <strong class="text-blue-600 block mb-1">Teil B (Feminin & Plural):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>die Lehrerin</strong> (Penambahan akhiran <em>-in</em> dan artikel <em>die</em>)</li>
-                                <li><strong>die Bücher</strong> (Akhiran <em>-er</em>, vokal Umlaut <em>ü</em>, artikel <em>die</em>)</li>
-                                <li><strong>die Restaurants</strong> (Kata serapan mendapat akhiran <em>-s</em> dan artikel <em>die</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil B (Odd-One-Out):</strong>
+                            <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>c (das Büro)</strong> &mdash; <em>das Büro</em> adalah tempat kerja, sedangkan opsi lainnya adalah nama profesi.</li>
+                                <li><strong>c (fünfzehn)</strong> &mdash; <em>fünfzehn</em> (15) adalah bilangan belasan, sedangkan yang lain adalah bilangan puluhan (30, 40, 60).</li>
+                                <li><strong>d (die Studentin)</strong> &mdash; <em>die Studentin</em> adalah nama orang/profesi, sedangkan yang lain adalah tempat/bangunan.</li>
+                                <li><strong>c (der Informatiker)</strong> &mdash; <em>der Informatiker</em> bergender maskulin (artikel <em>der</em>), sedangkan opsi lainnya adalah profesi feminin (artikel <em>die</em>).</li>
                             </ol>
                         </div>
                     </div>
@@ -1383,8 +1516,7 @@
                 // Quiz Answers & State
                 answers: {
                     q1: '',
-                    q2_1: '',
-                    q2_2: '',
+                    q2: '',
                     q3: '',
                     q4: '',
                     q5: '',
@@ -1396,49 +1528,42 @@
                 showFeedback: false,
                 showKey: false,
 
-                normalizeWord(str) {
-                    return (str || '')
-                        .toLowerCase()
-                        .replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '')
-                        .replace(/\s+/g, '')
-                        .trim();
-                },
-
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1.trim().toLowerCase() === 'bist') score++;
-                    if (this.answers.q2_1.trim().toLowerCase() === 'bin' && this.answers.q2_2.trim().toLowerCase() === 'habe') score++;
-                    if (this.answers.q3.trim().toLowerCase() === 'ist') score++;
-                    if (this.answers.q4.trim().toLowerCase() === 'haben') score++;
-                    if (this.answers.q5.trim().toLowerCase() === 'habt') score++;
-
-                    if (this.normalizeWord(this.answers.q6) === 'dielehrerin') score++;
-                    if (this.normalizeWord(this.answers.q7) === 'diebucher' || this.normalizeWord(this.answers.q7) === 'diebuecher') score++;
-                    if (this.normalizeWord(this.answers.q8) === 'dierestaurants') score++;
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q3 === 'a') score++;
+                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q5 === 'c') score++;
+                    if (this.answers.q6 === 'c') score++;
+                    if (this.answers.q7 === 'd') score++;
+                    if (this.answers.q8 === 'c') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
+                    this.showKey = true;
                     this.saveProgress();
                 },
 
                 resetQuiz() {
-                    this.answers = { q1: '', q2_1: '', q2_2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
                     this.quizScore = null;
                     this.showFeedback = false;
+                    this.showKey = false;
                     this.saveProgress();
                 },
 
                 getQuestionClass(qNum) {
                     if (!this.showFeedback) return 'bg-gray-50/70 border-gray-200';
                     let isCorrect = false;
-                    if (qNum === 1) isCorrect = this.answers.q1.trim().toLowerCase() === 'bist';
-                    if (qNum === 2) isCorrect = (this.answers.q2_1.trim().toLowerCase() === 'bin' && this.answers.q2_2.trim().toLowerCase() === 'habe');
-                    if (qNum === 3) isCorrect = this.answers.q3.trim().toLowerCase() === 'ist';
-                    if (qNum === 4) isCorrect = this.answers.q4.trim().toLowerCase() === 'haben';
-                    if (qNum === 5) isCorrect = this.answers.q5.trim().toLowerCase() === 'habt';
-                    if (qNum === 6) isCorrect = this.normalizeWord(this.answers.q6) === 'dielehrerin';
-                    if (qNum === 7) isCorrect = (this.normalizeWord(this.answers.q7) === 'diebucher' || this.normalizeWord(this.answers.q7) === 'diebuecher');
-                    if (qNum === 8) isCorrect = this.normalizeWord(this.answers.q8) === 'dierestaurants';
+                    if (qNum === 1) isCorrect = (this.answers.q1 === 'a');
+                    if (qNum === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (qNum === 3) isCorrect = (this.answers.q3 === 'a');
+                    if (qNum === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (qNum === 5) isCorrect = (this.answers.q5 === 'c');
+                    if (qNum === 6) isCorrect = (this.answers.q6 === 'c');
+                    if (qNum === 7) isCorrect = (this.answers.q7 === 'd');
+                    if (qNum === 8) isCorrect = (this.answers.q8 === 'c');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },

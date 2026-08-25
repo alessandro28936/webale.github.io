@@ -1046,126 +1046,170 @@
                     </div>
                 </div>
 
-                <!-- Bagian A: Pilihan Dropdown Interaktif -->
+                <!-- Bagian A: Sortier-Challenge (Kategorienschleuder: haben oder sein?) -->
                 <div class="mb-10">
-                    <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie die Verben im Perfekt oder die richtige Genitivform.</h3>
-                        <p class="text-xs text-gray-500">Pilihlah bentuk kata kerja bantu / Partizip II atau bentuk Genitiv nama orang yang tepat melalui menu pilihan.</p>
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Sortieren Sie die Verben: Perfekt mit haben oder sein?</h3>
+                        <p class="text-xs text-gray-500">Kelompokkan 5 kata kerja di bawah ini ke dalam keranjang kata kerja bantu yang tepat (haben atau sein) dengan mengklik tombol pilihan pada masing-masing kartu.</p>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Soal 1 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>1. Julia</span>
-                                <select x-model="answers.q1_aux"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="hat">hat</option>
-                                    <option value="ist">ist</option>
-                                </select>
-                                <span>ihre Ausbildung zur Augenoptikerin erfolgreich</span>
-                                <select x-model="answers.q1_verb"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="beendet">beendet</option>
-                                    <option value="gebeendet">gebeendet</option>
-                                </select>
-                                <span>.</span>
+                    <!-- Grid Kartu Kata Kerja -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
+                        <!-- Verb 1: umziehen -->
+                        <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getSortQuestionClass('q1', 'sein')">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-navy">1. umziehen</span>
+                                <span class="text-[10px] text-gray-400 font-medium">nach Zürich</span>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: kata kerja berawalan tidak terpisah be- menggunakan Hilfsverb haben dan Partizip II tanpa ge-)</em></div>
+                            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+                                <button type="button" @click="setSortVerb('q1', 'haben')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q1 === 'haben' ? 'bg-blue-600 border-blue-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-blue-700'">
+                                    haben
+                                </button>
+                                <button type="button" @click="setSortVerb('q1', 'sein')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q1 === 'sein' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'">
+                                    sein
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Soal 2 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>2. Im letzten Herbst</span>
-                                <select x-model="answers.q2_aux"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="ist">ist</option>
-                                    <option value="hat">hat</option>
-                                </select>
-                                <span>Jonas nach Zürich</span>
-                                <select x-model="answers.q2_verb"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="umgezogen">umgezogen</option>
-                                    <option value="geumzieht">geumzieht</option>
-                                </select>
-                                <span>.</span>
+                        <!-- Verb 2: beenden -->
+                        <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getSortQuestionClass('q2', 'haben')">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-navy">2. beenden</span>
+                                <span class="text-[10px] text-gray-400 font-medium">die Ausbildung</span>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: kata kerja perpindahan tempat umziehen menggunakan Hilfsverb sein dan Partizip II terpisah)</em></div>
+                            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+                                <button type="button" @click="setSortVerb('q2', 'haben')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q2 === 'haben' ? 'bg-blue-600 border-blue-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-blue-700'">
+                                    haben
+                                </button>
+                                <button type="button" @click="setSortVerb('q2', 'sein')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q2 === 'sein' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'">
+                                    sein
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Soal 3 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>3. Die Hochzeit von Julias Schwester war wunderschön.</span>
-                                <select x-model="answers.q3"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="Julias">Julias</option>
-                                    <option value="Julia's">Julia's</option>
-                                    <option value="Julia">Julia</option>
-                                </select>
-                                <span>Schwester hat im August geheiratet.</span>
+                        <!-- Verb 3: passieren -->
+                        <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getSortQuestionClass('q3', 'sein')">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-navy">3. passieren</span>
+                                <span class="text-[10px] text-gray-400 font-medium">etwas Wichtiges</span>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: bentuk Genitiv nama orang reguler berakhiran -s tanpa tanda apostrof)</em></div>
+                            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+                                <button type="button" @click="setSortVerb('q3', 'haben')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q3 === 'haben' ? 'bg-blue-600 border-blue-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-blue-700'">
+                                    haben
+                                </button>
+                                <button type="button" @click="setSortVerb('q3', 'sein')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q3 === 'sein' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'">
+                                    sein
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Soal 4 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>4. Das ist die Freundin von Jonas.</span>
-                                <select x-model="answers.q4"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="Jonas'">Jonas'</option>
-                                    <option value="Jonass">Jonass</option>
-                                    <option value="Jonas's">Jonas's</option>
-                                </select>
-                                <span>Freundin studiert Mathematik.</span>
+                        <!-- Verb 4: renovieren -->
+                        <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getSortQuestionClass('q4', 'haben')">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-navy">4. renovieren</span>
+                                <span class="text-[10px] text-gray-400 font-medium">die Wohnung</span>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: bentuk Genitiv untuk nama berakhiran huruf desis -s menggunakan tanda apostrof)</em></div>
+                            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+                                <button type="button" @click="setSortVerb('q4', 'haben')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q4 === 'haben' ? 'bg-blue-600 border-blue-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-blue-700'">
+                                    haben
+                                </button>
+                                <button type="button" @click="setSortVerb('q4', 'sein')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q4 === 'sein' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'">
+                                    sein
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Soal 5 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>5. Wir</span>
-                                <select x-model="answers.q5_aux"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="sind">sind</option>
-                                    <option value="haben">haben</option>
-                                </select>
-                                <span>drei Wochen lang mit dem Auto durch Spanien</span>
-                                <select x-model="answers.q5_verb"
-                                    class="px-3 py-1.5 bg-white border border-gray-300 rounded-xl font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm shadow-xs cursor-pointer">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="gefahren">gefahren</option>
-                                    <option value="gefahrn">gefahrn</option>
-                                </select>
-                                <span>.</span>
+                        <!-- Verb 5: fliegen -->
+                        <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getSortQuestionClass('q5', 'sein')">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-navy">5. fliegen</span>
+                                <span class="text-[10px] text-gray-400 font-medium">nach Spanien</span>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: kata kerja perpindahan tempat fahren untuk subjek wir menggunakan Hilfsverb sein)</em></div>
+                            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+                                <button type="button" @click="setSortVerb('q5', 'haben')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q5 === 'haben' ? 'bg-blue-600 border-blue-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-blue-700'">
+                                    haben
+                                </button>
+                                <button type="button" @click="setSortVerb('q5', 'sein')"
+                                    class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition border"
+                                    :class="answers.q5 === 'sein' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'">
+                                    sein
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Sorting Buckets Display -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-gray-50/80 border border-gray-200">
+                        <!-- Bucket haben -->
+                        <div class="p-4 rounded-xl bg-white border border-blue-200 shadow-2xs">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold text-blue-700">Keranjang: Hilfsverb "haben"</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700" x-text="`${getBucketVerbs('haben').length} kata`"></span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 min-h-[32px] items-center">
+                                <template x-if="getBucketVerbs('haben').length === 0">
+                                    <span class="text-[11px] text-gray-400 italic">Belum ada kata yang dimasukkan...</span>
+                                </template>
+                                <template x-for="item in getBucketVerbs('haben')" :key="item.qKey">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 font-bold text-xs border border-blue-200">
+                                        <span x-text="item.label"></span>
+                                        <button @click="setSortVerb(item.qKey, '')" class="text-blue-400 hover:text-red-500">&times;</button>
+                                    </span>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Bucket sein -->
+                        <div class="p-4 rounded-xl bg-white border border-emerald-200 shadow-2xs">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold text-emerald-700">Keranjang: Hilfsverb "sein"</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700" x-text="`${getBucketVerbs('sein').length} kata`"></span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 min-h-[32px] items-center">
+                                <template x-if="getBucketVerbs('sein').length === 0">
+                                    <span class="text-[11px] text-gray-400 italic">Belum ada kata yang dimasukkan...</span>
+                                </template>
+                                <template x-for="item in getBucketVerbs('sein')" :key="item.qKey">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold text-xs border border-emerald-200">
+                                        <span x-text="item.label"></span>
+                                        <button @click="setSortVerb(item.qKey, '')" class="text-emerald-400 hover:text-red-500">&times;</button>
+                                    </span>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bagian B: Menyusun Kalimat Acak dengan Interactive Word Chips -->
+                <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (Menyusun Kalimat Lampau Perfekt) -->
                 <div class="mb-8">
                     <div class="mb-4">
                         <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
-                        <p class="text-xs text-gray-500">Susunlah kata-kata acak berikut menjadi kalimat Perfekt yang tepat dengan mengklik kartu kata secara berurutan.</p>
+                        <p class="text-xs text-gray-500">Susunlah kepingan kata acak berikut menjadi kalimat Perfekt yang tepat dengan mengklik kartu kata secara berurutan.</p>
                     </div>
 
                     <div class="space-y-6">
                         <!-- Soal 6 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
+                        <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(6)">
                             <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="text-xs font-bold text-navy mr-1">6. Pilihan Kata:</span>
+                                <span class="text-xs font-bold text-navy mr-1">6. Kepingan Kata:</span>
                                 <template x-for="chip in wordChips.q6" :key="chip.id">
                                     <button type="button" @click="toggleChip('q6', chip)" :disabled="chip.used"
                                         class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
@@ -1178,10 +1222,9 @@
                             </div>
 
                             <!-- Sentence Display Container -->
-                            <div
-                                class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                            <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
                                 <template x-if="selectedChips.q6.length === 0">
-                                    <span class="text-gray-400 text-xs italic">Klik kartu kata di atas untuk menyusun kalimat...</span>
+                                    <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
                                 </template>
                                 <template x-for="(sel, sIdx) in selectedChips.q6" :key="sIdx">
                                     <span @click="removeSelectedChip('q6', sIdx)"
@@ -1195,9 +1238,9 @@
                         </div>
 
                         <!-- Soal 7 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
+                        <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(7)">
                             <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="text-xs font-bold text-navy mr-1">7. Pilihan Kata:</span>
+                                <span class="text-xs font-bold text-navy mr-1">7. Kepingan Kata:</span>
                                 <template x-for="chip in wordChips.q7" :key="chip.id">
                                     <button type="button" @click="toggleChip('q7', chip)" :disabled="chip.used"
                                         class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
@@ -1210,10 +1253,9 @@
                             </div>
 
                             <!-- Sentence Display Container -->
-                            <div
-                                class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                            <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
                                 <template x-if="selectedChips.q7.length === 0">
-                                    <span class="text-gray-400 text-xs italic">Klik kartu kata di atas untuk menyusun kalimat...</span>
+                                    <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
                                 </template>
                                 <template x-for="(sel, sIdx) in selectedChips.q7" :key="sIdx">
                                     <span @click="removeSelectedChip('q7', sIdx)"
@@ -1227,9 +1269,9 @@
                         </div>
 
                         <!-- Soal 8 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
+                        <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(8)">
                             <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="text-xs font-bold text-navy mr-1">8. Pilihan Kata:</span>
+                                <span class="text-xs font-bold text-navy mr-1">8. Kepingan Kata:</span>
                                 <template x-for="chip in wordChips.q8" :key="chip.id">
                                     <button type="button" @click="toggleChip('q8', chip)" :disabled="chip.used"
                                         class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
@@ -1242,10 +1284,9 @@
                             </div>
 
                             <!-- Sentence Display Container -->
-                            <div
-                                class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                            <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
                                 <template x-if="selectedChips.q8.length === 0">
-                                    <span class="text-gray-400 text-xs italic">Klik kartu kata di atas untuk menyusun kalimat...</span>
+                                    <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
                                 </template>
                                 <template x-for="(sel, sIdx) in selectedChips.q8" :key="sIdx">
                                     <span @click="removeSelectedChip('q8', sIdx)"
@@ -1289,17 +1330,17 @@
                         Jawaban & Penjelasan Lengkap</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <strong class="text-orange-600 block mb-1">Teil A (Perfekt & Genitiv):</strong>
+                            <strong class="text-orange-600 block mb-1">Teil A (Sortier-Challenge: haben oder sein?):</strong>
                             <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                <li><strong>hat ... beendet</strong> (Kata kerja <em>beenden</em> adalah kata kerja transitif berawalan tetap <em>be-</em>, sehingga membentuk <em>Partizip II</em> tanpa <em>ge-</em> [<em>beendet</em>] dan menggunakan kata kerja bantu <em>hat</em>)</li>
-                                <li><strong>ist ... umgezogen</strong> (Kata kerja <em>umziehen</em> menyatakan perpindahan lokasi, sehingga menggunakan kata kerja bantu <em>ist</em>, serta merupakan kata kerja terpisah tidak beraturan dengan <em>Partizip II</em> <em>umgezogen</em>)</li>
-                                <li><strong>Julias</strong> (Nama berakhiran vokal/konsonan standar mendapat tambahan akhiran <em>-s</em> langsung tanpa tanda apostrof untuk menyatakan kepemilikan)</li>
-                                <li><strong>Jonas'</strong> (Nama yang berakhiran huruf desis <em>-s</em> hanya mendapat tambahan tanda apostrof di akhir kata tanpa huruf <em>-s</em> tambahan)</li>
-                                <li><strong>sind ... gefahren</strong> (Kata kerja <em>fahren</em> menyatakan pergerakan arah/tempat sehingga memerlukan kata kerja bantu <em>sein</em> [<em>sind</em> untuk subjek <em>wir</em>] dan bentuk <em>Partizip II</em> <em>gefahren</em>)</li>
+                                <li><strong>umziehen &rarr; sein</strong> (Kata kerja perpindahan lokasi / arah tempat tinggal menggunakan kata kerja bantu <em>sein</em>: <em>ist umgezogen</em>)</li>
+                                <li><strong>beenden &rarr; haben</strong> (Kata kerja transitif yang memiliki objek akusatif menggunakan kata kerja bantu <em>haben</em>: <em>hat beendet</em>)</li>
+                                <li><strong>passieren &rarr; sein</strong> (Kata kerja perubahan kondisi dan peristiwa yang terjadi secara tiba-tiba menggunakan kata kerja bantu <em>sein</em>: <em>ist passiert</em>)</li>
+                                <li><strong>renovieren &rarr; haben</strong> (Kata kerja aktivitas/tindakan merenovasi hunian menggunakan kata kerja bantu <em>haben</em>: <em>haben renoviert</em>)</li>
+                                <li><strong>fliegen &rarr; sein</strong> (Kata kerja pergerakan perpindahan tempat/jarak menggunakan pesawat memerlukan kata kerja bantu <em>sein</em>: <em>ist geflogen</em>)</li>
                             </ol>
                         </div>
                         <div>
-                            <strong class="text-blue-600 block mb-1">Teil B (Satzstellung):</strong>
+                            <strong class="text-blue-600 block mb-1">Teil B (Satzklammer-Architekt):</strong>
                             <ol start="6" class="list-decimal list-inside space-y-1.5 text-gray-700">
                                 <li><strong>Jonas hat im Herbst sein Biologiestudium begonnen.</strong> atau <strong>Im Herbst hat Jonas sein Biologiestudium begonnen.</strong> (Kata kerja bantu <em>hat</em> menempati Posisi 2, sedangkan <em>Partizip II</em> <em>begonnen</em> diletakkan di akhir kalimat)</li>
                                 <li><strong>Julia ist mit einer Freundin nach Spanien geflogen.</strong> atau <strong>Mit einer Freundin ist Julia nach Spanien geflogen.</strong> (Kata kerja bantu <em>ist</em> berada di Posisi 2 dan <em>Partizip II</em> <em>geflogen</em> berada di posisi paling akhir)</li>
@@ -1472,20 +1513,17 @@
 
                 // Exercises State
                 answers: {
-                    q1_aux: '',
-                    q1_verb: '',
-                    q2_aux: '',
-                    q2_verb: '',
+                    q1: '',
+                    q2: '',
                     q3: '',
                     q4: '',
-                    q5_aux: '',
-                    q5_verb: '',
+                    q5: '',
                     q6: '',
                     q7: '',
                     q8: ''
                 },
 
-                // Word Chips for Teil B
+                // Word Chips for Teil B (Satzklammer-Architekt)
                 wordChips: {
                     q6: [
                         { id: 1, text: 'Jonas', used: false },
@@ -1520,6 +1558,57 @@
                 quizScore: null,
                 showFeedback: false,
                 showKey: false,
+
+                // Sortier-Challenge Helper Methods
+                setSortVerb(qKey, val) {
+                    this.answers[qKey] = val;
+                    this.saveProgress();
+                },
+
+                getBucketVerbs(bucketType) {
+                    const verbLabels = {
+                        q1: 'umziehen',
+                        q2: 'beenden',
+                        q3: 'passieren',
+                        q4: 'renovieren',
+                        q5: 'fliegen'
+                    };
+                    const list = [];
+                    ['q1', 'q2', 'q3', 'q4', 'q5'].forEach(k => {
+                        if (this.answers[k] === bucketType) {
+                            list.push({ qKey: k, label: verbLabels[k] });
+                        }
+                    });
+                    return list;
+                },
+
+                getSortQuestionClass(qKey, correctVal) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const isCorrect = (this.answers[qKey] === correctVal);
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                getSentenceQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    let isCorrect = false;
+                    if (qNum === 6) {
+                        const a = (this.answers.q6 || '').trim().replace(/\s+/g, ' ');
+                        isCorrect = (a === 'Jonas hat im Herbst sein Biologiestudium begonnen.' || a === 'Im Herbst hat Jonas sein Biologiestudium begonnen.');
+                    }
+                    if (qNum === 7) {
+                        const a = (this.answers.q7 || '').trim().replace(/\s+/g, ' ');
+                        isCorrect = (a === 'Julia ist mit einer Freundin nach Spanien geflogen.' || a === 'Mit einer Freundin ist Julia nach Spanien geflogen.');
+                    }
+                    if (qNum === 8) {
+                        const a = (this.answers.q8 || '').trim().replace(/\s+/g, ' ');
+                        isCorrect = (a === 'Die Freunde haben die Wohnung im Zentrum zusammen renoviert.' || a === 'Zusammen haben die Freunde die Wohnung im Zentrum renoviert.' || a === 'Die Freunde haben zusammen die Wohnung im Zentrum renoviert.');
+                    }
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
 
                 // Chip Actions
                 toggleChip(qKey, chip) {
@@ -1556,31 +1645,22 @@
                 // Check Answers
                 checkQuiz() {
                     let score = 0;
+                    if (this.answers.q1 === 'sein') score++;
+                    if (this.answers.q2 === 'haben') score++;
+                    if (this.answers.q3 === 'sein') score++;
+                    if (this.answers.q4 === 'haben') score++;
+                    if (this.answers.q5 === 'sein') score++;
 
-                    // Q1: hat ... beendet
-                    if (this.answers.q1_aux === 'hat' && this.answers.q1_verb === 'beendet') score++;
-                    // Q2: ist ... umgezogen
-                    if (this.answers.q2_aux === 'ist' && this.answers.q2_verb === 'umgezogen') score++;
-                    // Q3: Julias
-                    if (this.answers.q3 === 'Julias') score++;
-                    // Q4: Jonas'
-                    if (this.answers.q4 === "Jonas'") score++;
-                    // Q5: sind ... gefahren
-                    if (this.answers.q5_aux === 'sind' && this.answers.q5_verb === 'gefahren') score++;
-
-                    // Q6: Jonas hat im Herbst sein Biologiestudium begonnen. OR Im Herbst hat Jonas sein Biologiestudium begonnen.
                     const a6 = (this.answers.q6 || '').trim().replace(/\s+/g, ' ');
                     if (a6 === 'Jonas hat im Herbst sein Biologiestudium begonnen.' || a6 === 'Im Herbst hat Jonas sein Biologiestudium begonnen.') {
                         score++;
                     }
 
-                    // Q7: Julia ist mit einer Freundin nach Spanien geflogen. OR Mit einer Freundin ist Julia nach Spanien geflogen.
                     const a7 = (this.answers.q7 || '').trim().replace(/\s+/g, ' ');
                     if (a7 === 'Julia ist mit einer Freundin nach Spanien geflogen.' || a7 === 'Mit einer Freundin ist Julia nach Spanien geflogen.') {
                         score++;
                     }
 
-                    // Q8: Die Freunde haben die Wohnung im Zentrum zusammen renoviert. OR Zusammen haben die Freunde die Wohnung im Zentrum renoviert.
                     const a8 = (this.answers.q8 || '').trim().replace(/\s+/g, ' ');
                     if (a8 === 'Die Freunde haben die Wohnung im Zentrum zusammen renoviert.' || a8 === 'Zusammen haben die Freunde die Wohnung im Zentrum renoviert.' || a8 === 'Die Freunde haben zusammen die Wohnung im Zentrum renoviert.') {
                         score++;
@@ -1592,38 +1672,9 @@
                     this.saveProgress();
                 },
 
-                getQuestionClass(qNum) {
-                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
-                    let isCorrect = false;
-
-                    if (qNum === 1) isCorrect = (this.answers.q1_aux === 'hat' && this.answers.q1_verb === 'beendet');
-                    if (qNum === 2) isCorrect = (this.answers.q2_aux === 'ist' && this.answers.q2_verb === 'umgezogen');
-                    if (qNum === 3) isCorrect = (this.answers.q3 === 'Julias');
-                    if (qNum === 4) isCorrect = (this.answers.q4 === "Jonas'");
-                    if (qNum === 5) isCorrect = (this.answers.q5_aux === 'sind' && this.answers.q5_verb === 'gefahren');
-
-                    if (qNum === 6) {
-                        const a = (this.answers.q6 || '').trim().replace(/\s+/g, ' ');
-                        isCorrect = (a === 'Jonas hat im Herbst sein Biologiestudium begonnen.' || a === 'Im Herbst hat Jonas sein Biologiestudium begonnen.');
-                    }
-                    if (qNum === 7) {
-                        const a = (this.answers.q7 || '').trim().replace(/\s+/g, ' ');
-                        isCorrect = (a === 'Julia ist mit einer Freundin nach Spanien geflogen.' || a === 'Mit einer Freundin ist Julia nach Spanien geflogen.');
-                    }
-                    if (qNum === 8) {
-                        const a = (this.answers.q8 || '').trim().replace(/\s+/g, ' ');
-                        isCorrect = (a === 'Die Freunde haben die Wohnung im Zentrum zusammen renoviert.' || a === 'Zusammen haben die Freunde die Wohnung im Zentrum renoviert.' || a === 'Die Freunde haben zusammen die Wohnung im Zentrum renoviert.');
-                    }
-
-                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20' : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
-                },
-
                 resetQuiz() {
                     this.answers = {
-                        q1_aux: '', q1_verb: '',
-                        q2_aux: '', q2_verb: '',
-                        q3: '', q4: '',
-                        q5_aux: '', q5_verb: '',
+                        q1: '', q2: '', q3: '', q4: '', q5: '',
                         q6: '', q7: '', q8: ''
                     };
                     this.clearQuestionChips('q6');

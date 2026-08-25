@@ -854,106 +854,242 @@
                             <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Bagian A: Mengisi Kata Kerja yang Tepat -->
+                                <!-- Soal Bagian A: Fehlerkorrektur (Model 1 - 4 Soal) -->
                 <div class="mb-10">
-                    <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie die Verben möchten oder mögen in der richtigen Form.</h3>
-                        <p class="text-xs text-gray-500">Lengkapilah kalimat rumpang berikut dengan konjugasi kata kerja yang tepat.</p>
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil A: Fehlerkorrektur &ndash; Finde die richtige Korrektur
+                        </h3>
+                        <p class="text-xs text-gray-500">Analisis kesalahan konjugasi kata kerja <em>mögen / möchten / essen</em> pada kalimat berikut, lalu pilihlah kalimat perbaikan yang benar.</p>
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-4 text-xs sm:text-sm">
                         <!-- Soal 1 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                1.
-                                <input type="text" x-model="answers.q1" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                du noch etwas Suppe?
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Satz mit Fehler:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    „Ich magst keinen Fisch.“
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Konjugasi kata kerja möchten untuk subjek du)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Ich mag keinen Fisch.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Ich magst kein Fisch.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Ich mögen keinen Fisch.
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 2 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                2. Ich
-                                <input type="text" x-model="answers.q2" placeholder="..."
-                                    class="w-24 sm:w-28 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                keinen Fisch.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Satz mit Fehler:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    „Möchte du noch einen Kuchen?“
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Konjugasi kata kerja mögen untuk subjek ich)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Möchtest du noch einen Kuchen?
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Möchtet du noch ein Kuchen?
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Du möchtest noch Kuchen.
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 3 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                3. Was
-                                <input type="text" x-model="answers.q3" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                ihr zum Frühstück trinken?
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Satz mit Fehler:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    „Er esst morgens ein Müsli.“
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Konjugasi kata kerja möchten untuk subjek ihr)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Er isst morgens ein Müsli.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Er essen morgens ein Müsli.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Er eßt morgens Müsli.
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 4 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                4. Ben und Lars
-                                <input type="text" x-model="answers.q4" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Obst sehr gern.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Satz mit Fehler:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    „Wir möchtet Kaffee trinken.“
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Konjugasi kata kerja mögen untuk subjek jamak sie)</em></div>
-                        </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                5. Herr Schmidt
-                                <input type="text" x-model="answers.q5" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                einen Kaffee bitte.
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Wir möchten Kaffee trinken.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Wir mag Kaffee trinken.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Wir möchtet trinken Kaffee.
+                                </button>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Konjugasi kata kerja möchten untuk subjek tunggal er)</em></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bagian B: Menyusun Kalimat Acak -->
+                <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (Model 3 - 4 Soal) -->
                 <div class="mb-8">
                     <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
-                        <p class="text-xs text-gray-500">Susunlah kata-kata acak berikut menjadi kalimat pernyataan atau tanya yang tepat.</p>
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.
+                        </h3>
+                        <p class="text-xs text-gray-500">Klik kepingan kata di bawah ini secara berurutan untuk menyusun kalimat makanan dan minuman yang gramatikal.</p>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Soal 6 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                6. morgens / Lina / ein Müsli / isst / .
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getSentenceQuestionClass(5)">
+                            <div class="text-xs font-bold text-orange-600 mb-2">5. Aussage (Frühstücksgewohnheit):</div>
+                            <div class="min-h-[48px] p-3 bg-white border border-gray-200 rounded-xl mb-3 flex flex-wrap items-center gap-1.5">
+                                <template x-if="selectedChips.q5.length === 0">
+                                    <span class="text-xs text-gray-400 italic">Klik kata di bawah untuk menyusun kalimat...</span>
+                                </template>
+                                <template x-for="(chip, idx) in selectedChips.q5" :key="idx">
+                                    <button type="button" @click="removeSelectedChip('q5', idx)"
+                                        class="px-3 py-1.5 bg-orange-500 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm hover:bg-orange-600 transition">
+                                        <span x-text="chip.text"></span>
+                                        <span class="text-[10px] opacity-75">&times;</span>
+                                    </button>
+                                </template>
                             </div>
-                            <input type="text" x-model="answers.q6" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <template x-for="chip in wordChips.q5" :key="chip.id">
+                                    <button type="button" @click="toggleChip('q5', chip)" :disabled="chip.used"
+                                        class="px-3 py-1.5 rounded-lg border font-medium text-xs transition"
+                                        :class="chip.used ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' : 'bg-gray-50 hover:bg-orange-50 text-navy border-gray-200 hover:border-orange-300'">
+                                        <span x-text="chip.text"></span>
+                                    </button>
+                                </template>
+                                <button type="button" @click="clearQuestionChips('q5')" class="ml-auto text-xs text-gray-400 hover:text-red-500 underline font-medium">Hapus</button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getSentenceQuestionClass(6)">
+                            <div class="text-xs font-bold text-orange-600 mb-2">6. Ja/Nein-Frage (Kuchenangebot):</div>
+                            <div class="min-h-[48px] p-3 bg-white border border-gray-200 rounded-xl mb-3 flex flex-wrap items-center gap-1.5">
+                                <template x-if="selectedChips.q6.length === 0">
+                                    <span class="text-xs text-gray-400 italic">Klik kata di bawah untuk menyusun kalimat...</span>
+                                </template>
+                                <template x-for="(chip, idx) in selectedChips.q6" :key="idx">
+                                    <button type="button" @click="removeSelectedChip('q6', idx)"
+                                        class="px-3 py-1.5 bg-orange-500 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm hover:bg-orange-600 transition">
+                                        <span x-text="chip.text"></span>
+                                        <span class="text-[10px] opacity-75">&times;</span>
+                                    </button>
+                                </template>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <template x-for="chip in wordChips.q6" :key="chip.id">
+                                    <button type="button" @click="toggleChip('q6', chip)" :disabled="chip.used"
+                                        class="px-3 py-1.5 rounded-lg border font-medium text-xs transition"
+                                        :class="chip.used ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' : 'bg-gray-50 hover:bg-orange-50 text-navy border-gray-200 hover:border-orange-300'">
+                                        <span x-text="chip.text"></span>
+                                    </button>
+                                </template>
+                                <button type="button" @click="clearQuestionChips('q6')" class="ml-auto text-xs text-gray-400 hover:text-red-500 underline font-medium">Hapus</button>
+                            </div>
                         </div>
 
                         <!-- Soal 7 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                7. ihr / noch einen Kuchen / möchtet / ?
+                        <div class="p-5 rounded-2xl border transition" :class="getSentenceQuestionClass(7)">
+                            <div class="text-xs font-bold text-orange-600 mb-2">7. Aussage (Abneigung ausdrücken):</div>
+                            <div class="min-h-[48px] p-3 bg-white border border-gray-200 rounded-xl mb-3 flex flex-wrap items-center gap-1.5">
+                                <template x-if="selectedChips.q7.length === 0">
+                                    <span class="text-xs text-gray-400 italic">Klik kata di bawah untuk menyusun kalimat...</span>
+                                </template>
+                                <template x-for="(chip, idx) in selectedChips.q7" :key="idx">
+                                    <button type="button" @click="removeSelectedChip('q7', idx)"
+                                        class="px-3 py-1.5 bg-orange-500 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm hover:bg-orange-600 transition">
+                                        <span x-text="chip.text"></span>
+                                        <span class="text-[10px] opacity-75">&times;</span>
+                                    </button>
+                                </template>
                             </div>
-                            <input type="text" x-model="answers.q7" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <template x-for="chip in wordChips.q7" :key="chip.id">
+                                    <button type="button" @click="toggleChip('q7', chip)" :disabled="chip.used"
+                                        class="px-3 py-1.5 rounded-lg border font-medium text-xs transition"
+                                        :class="chip.used ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' : 'bg-gray-50 hover:bg-orange-50 text-navy border-gray-200 hover:border-orange-300'">
+                                        <span x-text="chip.text"></span>
+                                    </button>
+                                </template>
+                                <button type="button" @click="clearQuestionChips('q7')" class="ml-auto text-xs text-gray-400 hover:text-red-500 underline font-medium">Hapus</button>
+                            </div>
                         </div>
 
                         <!-- Soal 8 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                8. keinen Tee / mein Vater / mag / .
+                        <div class="p-5 rounded-2xl border transition" :class="getSentenceQuestionClass(8)">
+                            <div class="text-xs font-bold text-orange-600 mb-2">8. W-Frage (Essenswunsch):</div>
+                            <div class="min-h-[48px] p-3 bg-white border border-gray-200 rounded-xl mb-3 flex flex-wrap items-center gap-1.5">
+                                <template x-if="selectedChips.q8.length === 0">
+                                    <span class="text-xs text-gray-400 italic">Klik kata di bawah untuk menyusun kalimat...</span>
+                                </template>
+                                <template x-for="(chip, idx) in selectedChips.q8" :key="idx">
+                                    <button type="button" @click="removeSelectedChip('q8', idx)"
+                                        class="px-3 py-1.5 bg-orange-500 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm hover:bg-orange-600 transition">
+                                        <span x-text="chip.text"></span>
+                                        <span class="text-[10px] opacity-75">&times;</span>
+                                    </button>
+                                </template>
                             </div>
-                            <input type="text" x-model="answers.q8" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <template x-for="chip in wordChips.q8" :key="chip.id">
+                                    <button type="button" @click="toggleChip('q8', chip)" :disabled="chip.used"
+                                        class="px-3 py-1.5 rounded-lg border font-medium text-xs transition"
+                                        :class="chip.used ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' : 'bg-gray-50 hover:bg-orange-50 text-navy border-gray-200 hover:border-orange-300'">
+                                        <span x-text="chip.text"></span>
+                                    </button>
+                                </template>
+                                <button type="button" @click="clearQuestionChips('q8')" class="ml-auto text-xs text-gray-400 hover:text-red-500 underline font-medium">Hapus</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -965,12 +1101,12 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <span>Periksa Jawaban</span>
+                        <span>Periksa Semua Jawaban</span>
                     </button>
 
                     <button @click="resetQuiz()"
                         class="px-4 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition">
-                        Reset
+                        Reset Jawaban
                     </button>
 
                     <button @click="showKey = !showKey"
@@ -983,21 +1119,21 @@
                 <div x-show="showKey" x-collapse class="mt-6 pt-6 border-t border-gray-100 text-xs sm:text-sm" x-cloak>
                     <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
                         <div>
-                            <strong class="text-orange-600 block mb-1">Teil A (Lücken ergänzen):</strong>
-                            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>Möchtest</strong> (Subjek <em>du</em> pada kata kerja <em>möchten</em> mendapat akhiran <em>-est</em>)</li>
-                                <li><strong>mag</strong> (Bentuk kata kerja <em>mögen</em> untuk subjek <em>ich</em> berubah vokal menjadi <em>mag</em>)</li>
-                                <li><strong>möchtet</strong> (Subjek <em>ihr</em> pada kata kerja <em>möchten</em> dikonjugasikan menjadi <em>möchtet</em>)</li>
-                                <li><strong>mögen</strong> (Subjek jamak <em>Ben und Lars</em> setara dengan <em>sie</em> bentuk jamak, menggunakan kata kerja dasar <em>mögen</em>)</li>
-                                <li><strong>möchte</strong> (Subjek orang ketiga tunggal <em>Herr Schmidt</em> setara dengan <em>er</em>, sehingga bentuknya menjadi <em>möchte</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil A (Fehlerkorrektur):</strong>
+                            <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (Ich mag keinen Fisch.)</strong> &mdash; Bentuk konjugasi kata kerja <em>mögen</em> untuk subjek <em>ich</em> adalah <em>mag</em>.</li>
+                                <li><strong>a (Möchtest du noch einen Kuchen?)</strong> &mdash; Bentuk konjugasi kata kerja <em>möchten</em> untuk subjek <em>du</em> adalah <em>möchtest</em>.</li>
+                                <li><strong>a (Er isst morgens ein Müsli.)</strong> &mdash; Kata kerja <em>essen</em> mengalami perubahan vokal (<em>e &rarr; i</em>) pada orang ketiga tunggal (<em>er isst</em>).</li>
+                                <li><strong>a (Wir möchten Kaffee trinken.)</strong> &mdash; Bentuk kata kerja <em>möchten</em> untuk subjek jamak <em>wir</em> adalah <em>möchten</em>.</li>
                             </ol>
                         </div>
                         <div>
-                            <strong class="text-blue-600 block mb-1">Teil B (Sätze bilden):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>Morgens isst Lina ein Müsli.</strong> atau <strong>Lina isst morgens ein Müsli.</strong> (Kata kerja <em>isst</em> tetap berada di Posisi 2)</li>
-                                <li><strong>Möchtet ihr noch einen Kuchen?</strong> (Kalimat tanya Ya/Tidak diawali dengan kata kerja di Posisi 1)</li>
-                                <li><strong>Mein Vater mag keinen Tee.</strong> (Subjek di Posisi 1, kata kerja <em>mag</em> di Posisi 2, diikuti objek <em>keinen Tee</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel):</strong>
+                            <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>Morgens isst Lina ein Müsli.</strong> &mdash; Keterangan waktu di Posisi 1, kata kerja <em>isst</em> di Posisi 2, subjek <em>Lina</em> di Posisi 3.</li>
+                                <li><strong>Möchtet ihr noch einen Kuchen?</strong> &mdash; Kalimat tanya Ya/Tidak diawali kata kerja modal <em>Möchtet</em> di Posisi 1.</li>
+                                <li><strong>Mein Vater mag keinen Tee.</strong> &mdash; Subjek di Posisi 1, kata kerja <em>mag</em> di Posisi 2, objek Akkusativ di Posisi 3.</li>
+                                <li><strong>Was möchtest du heute essen?</strong> &mdash; Kata tanya W-Frage di Posisi 1, kata kerja bantu di Posisi 2, kata kerja dasar <em>essen</em> di akhir kalimat.</li>
                             </ol>
                         </div>
                     </div>
@@ -1154,63 +1290,114 @@
                 showFeedback: false,
                 showKey: false,
 
-                // Helper Functions
-                getQuestionClass(num) {
-                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-100';
-                    let isCorrect = false;
-                    if (num === 1) isCorrect = this.answers.q1.trim().toLowerCase() === 'möchtest' || this.answers.q1.trim().toLowerCase() === 'moechtest';
-                    if (num === 2) isCorrect = this.answers.q2.trim().toLowerCase() === 'mag';
-                    if (num === 3) isCorrect = this.answers.q3.trim().toLowerCase() === 'möchtet' || this.answers.q3.trim().toLowerCase() === 'moechtet';
-                    if (num === 4) isCorrect = this.answers.q4.trim().toLowerCase() === 'mögen' || this.answers.q4.trim().toLowerCase() === 'moegen';
-                    if (num === 5) isCorrect = this.answers.q5.trim().toLowerCase() === 'möchte' || this.answers.q5.trim().toLowerCase() === 'moechte';
-                    if (num === 6) {
-                        const n6 = this.normalizeSentence(this.answers.q6);
-                        isCorrect = n6 === 'morgensisstlinaeinmuesli' || n6 === 'morgensisstlinaeinmüsli' || n6 === 'linaisstmorgenseinmuesli' || n6 === 'linaisstmorgenseinmüsli';
+                // Satzbauspiel Word Chips Data
+                wordChips: {
+                    q5: [
+                        { id: 1, text: 'isst', used: false },
+                        { id: 2, text: 'Morgens', used: false },
+                        { id: 3, text: 'ein Müsli.', used: false },
+                        { id: 4, text: 'Lina', used: false }
+                    ],
+                    q6: [
+                        { id: 1, text: 'ihr', used: false },
+                        { id: 2, text: 'noch einen Kuchen?', used: false },
+                        { id: 3, text: 'Möchtet', used: false }
+                    ],
+                    q7: [
+                        { id: 1, text: 'keinen Tee.', used: false },
+                        { id: 2, text: 'Mein Vater', used: false },
+                        { id: 3, text: 'mag', used: false }
+                    ],
+                    q8: [
+                        { id: 1, text: 'heute essen?', used: false },
+                        { id: 2, text: 'Was', used: false },
+                        { id: 3, text: 'du', used: false },
+                        { id: 4, text: 'möchtest', used: false }
+                    ]
+                },
+
+                selectedChips: {
+                    q5: [],
+                    q6: [],
+                    q7: [],
+                    q8: []
+                },
+
+                toggleChip(qKey, chip) {
+                    if (chip.used) return;
+                    chip.used = true;
+                    this.selectedChips[qKey].push({ id: chip.id, text: chip.text });
+                    this.answers[qKey] = this.selectedChips[qKey].map(c => c.text).join(' ');
+                    this.saveProgress();
+                },
+
+                removeSelectedChip(qKey, index) {
+                    const removed = this.selectedChips[qKey].splice(index, 1)[0];
+                    if (removed) {
+                        const originalChip = this.wordChips[qKey].find(c => c.id === removed.id);
+                        if (originalChip) originalChip.used = false;
                     }
-                    if (num === 7) isCorrect = this.normalizeSentence(this.answers.q7) === 'moechtetihrnocheinenkuchen' || this.normalizeSentence(this.answers.q7) === 'möchtetihrnocheinenkuchen';
-                    if (num === 8) isCorrect = this.normalizeSentence(this.answers.q8) === 'meinvatermagkeinentee';
+                    this.answers[qKey] = this.selectedChips[qKey].map(c => c.text).join(' ');
+                    this.saveProgress();
+                },
+
+                clearQuestionChips(qKey) {
+                    this.selectedChips[qKey] = [];
+                    this.wordChips[qKey].forEach(c => c.used = false);
+                    this.answers[qKey] = '';
+                    this.saveProgress();
+                },
+
+                getSentenceQuestionClass(num) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const key = 'q' + num;
+                    const ans = (this.answers[key] || '').trim();
+                    let isCorrect = false;
+
+                    if (num === 5) isCorrect = (ans === 'Morgens isst Lina ein Müsli.' || ans === 'Lina isst morgens ein Müsli.');
+                    if (num === 6) isCorrect = (ans === 'Möchtet ihr noch einen Kuchen?');
+                    if (num === 7) isCorrect = (ans === 'Mein Vater mag keinen Tee.');
+                    if (num === 8) isCorrect = (ans === 'Was möchtest du heute essen?');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 },
 
-                normalizeSentence(str) {
-                    if (!str) return '';
-                    return str.toLowerCase().replace(/[^a-z0-9äöüß]/g, '');
+                // Helper Functions
+                getQuestionClass(num) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    let isCorrect = false;
+                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 3) isCorrect = (this.answers.q3 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    const a1 = this.answers.q1.trim().toLowerCase();
-                    if (a1 === 'möchtest' || a1 === 'moechtest') score++;
-
-                    const a2 = this.answers.q2.trim().toLowerCase();
-                    if (a2 === 'mag') score++;
-
-                    const a3 = this.answers.q3.trim().toLowerCase();
-                    if (a3 === 'möchtet' || a3 === 'moechtet') score++;
-
-                    const a4 = this.answers.q4.trim().toLowerCase();
-                    if (a4 === 'mögen' || a4 === 'moegen') score++;
-
-                    const a5 = this.answers.q5.trim().toLowerCase();
-                    if (a5 === 'möchte' || a5 === 'moechte') score++;
-
-                    const n6 = this.normalizeSentence(this.answers.q6);
-                    if (n6 === 'morgensisstlinaeinmuesli' || n6 === 'morgensisstlinaeinmüsli' || n6 === 'linaisstmorgenseinmuesli' || n6 === 'linaisstmorgenseinmüsli') score++;
-
-                    const n7 = this.normalizeSentence(this.answers.q7);
-                    if (n7 === 'moechtetihrnocheinenkuchen' || n7 === 'möchtetihrnocheinenkuchen') score++;
-
-                    const n8 = this.normalizeSentence(this.answers.q8);
-                    if (n8 === 'meinvatermagkeinentee') score++;
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q3 === 'a') score++;
+                    if (this.answers.q4 === 'a') score++;
+                    const a5 = (this.answers.q5 || '').trim();
+                    if (a5 === 'Morgens isst Lina ein Müsli.' || a5 === 'Lina isst morgens ein Müsli.') score++;
+                    if ((this.answers.q6 || '').trim() === 'Möchtet ihr noch einen Kuchen?') score++;
+                    if ((this.answers.q7 || '').trim() === 'Mein Vater mag keinen Tee.') score++;
+                    if ((this.answers.q8 || '').trim() === 'Was möchtest du heute essen?') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
+                    this.showKey = true;
                     this.saveProgress();
                 },
 
                 resetQuiz() {
                     this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    ['q5', 'q6', 'q7', 'q8'].forEach(qKey => {
+                        this.selectedChips[qKey] = [];
+                        this.wordChips[qKey].forEach(c => c.used = false);
+                    });
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;

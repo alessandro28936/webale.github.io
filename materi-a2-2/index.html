@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 2: Verabredungen und Begründungen – Nebensätze mit weil - Aksaradeutsch</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0B1528',
+                            light: '#162138',
+                            dark: '#060B14'
+                        },
+                        orange: {
+                            DEFAULT: '#FF6B35',
+                            hover: '#FA5A1E',
+                            light: '#FFF4EF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Inline Firebase Configuration & Security Protection -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Anti-Copy, Anti-Cut, Anti-Select & Anti-Right Click Protection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #F8FAFC;
+            color: #0B1528;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #FA5A1E;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 18pt;
+                color: #0B1528;
+                font-family: sans-serif;
+            }
+        }
+    </style>
+</head>
+
+<body x-data="lessonApp()" x-init="initApp()" class="min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900">
+
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Auth Guard Screen Overlay -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0B1528] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="'width: ' + readingProgress + '%'"></div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 2 (A2.1)</span>
+                    <span class="ml-2 font-medium text-gray-600">Verabredungen und Begründungen – Nebensätze mit weil</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="../dashboard-a2-1/"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard A2.1</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="../dashboard-a2-1/"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- ============================================================= -->
+        <!-- HERO BANNER                                                   -->
+        <!-- ============================================================= -->
+        <div
+            class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <!-- Left Details -->
+                <div class="max-w-2xl">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                        Verabredungen und Begründungen – Nebensätze mit weil
+                    </h1>
+                    <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
+                        Mempelajari cara membuat janji temu, menerima atau menolak ajakan secara santun, serta menyatakan alasan menggunakan anak kalimat <em>Nebensatz mit weil</em> dengan kaidah kata kerja di akhir kalimat. Selain itu, mengenali bentuk penyingkatan pesan singkat informal (<em>Kurzformen in Nachrichten</em>) dan pengalaman bersantap di restoran tanpa cahaya (<em>Essen ohne Licht</em>).
+                    </p>
+
+                    <!-- Meta Tags -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs">
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Modul:</span>
+                            <strong class="text-white">Pertemuan 2 (A2.1)</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Estimasi:</span>
+                            <strong class="text-white">60 Menit</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Latihan:</span>
+                            <strong class="text-white">8 Soal Interaktif</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Links Card (Daftar Isi Materi) -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                    <p
+                        class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                        Daftar Isi Materi
+                        <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">5
+                            Bagian</span>
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                        <li>
+                            <a href="#tujuan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Target Pembelajaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wortschatz"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                1. Kosakata (Wortschatz)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#grammatik"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                2. Tata Bahasa (Grammatik)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dialog"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                3. Contoh Percakapan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#lesetext"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                4. Teks Bacaan (Lesetext)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latihan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                5. Latihan Pemahaman
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- TARGET PEMBELAJARAN (LERNZIELE)                              -->
+        <!-- ============================================================= -->
+        <section id="tujuan" class="mb-14 scroll-mt-24">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                        <p class="text-xs sm:text-sm text-gray-500 mt-1">Ceklis kompetensi yang berhasil kamu kuasai pada materi ini.</p>
+                    </div>
+                    <div class="flex items-center gap-2 self-start sm:self-auto bg-orange-50 border border-orange-200 px-3.5 py-1.5 rounded-2xl">
+                        <span class="text-xs font-bold text-orange-700" x-text="`${completedGoalsCount} dari 5 Selesai`"></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <template x-for="(goal, idx) in learningGoals" :key="idx">
+                        <div @click="toggleGoal(idx)"
+                            class="p-4 rounded-2xl border transition cursor-pointer flex items-start gap-3.5 select-none"
+                            :class="goal.completed ? 'bg-orange-50/60 border-orange-200 text-navy' : 'bg-gray-50/70 border-gray-100 hover:border-gray-200 text-gray-700'">
+                            <div class="w-5 h-5 rounded-lg border mt-0.5 flex items-center justify-center flex-shrink-0 transition"
+                                :class="goal.completed ? 'bg-orange-500 border-orange-500 text-white' : 'border-gray-300 bg-white'">
+                                <svg x-show="goal.completed" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold leading-relaxed" x-text="goal.text"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
+        <!-- ============================================================= -->
+        <section id="wortschatz" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    1
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Dengarkan pelafalan kosakata dan frasa komunikasi janji temu penutur asli.</p>
+                </div>
+            </div>
+
+            <!-- Grid 2 Box Putih: Sub-topik A & Sub-topik B -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Subtopik A: Janji Temu dan Undangan -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-navy">A. Janji Temu & Undangan (Verabredungen und Einladungen)</h3>
+                                <p class="text-xs text-gray-500">Kosakata membuat, menerima, atau menolak ajakan pertemuan.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in vocabAppointments" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-1.5 mb-1">
+                                            <template x-if="item.article">
+                                                <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                                    :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
+                                                    x-text="item.article"></span>
+                                            </template>
+                                            <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                                x-text="item.word"></strong>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                    </div>
+                                    <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        title="Dengarkan Suara">
+                                        <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtopik B: Restoran dan Pengalaman Sensorik -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-navy">B. Restoran & Panca Indra (Restaurant und Sinne)</h3>
+                                <p class="text-xs text-gray-500">Kosakata pengalaman bersantap di restoran gelap.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in vocabRestaurant" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-1.5 mb-1">
+                                            <template x-if="item.article">
+                                                <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                                    :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
+                                                    x-text="item.article"></span>
+                                            </template>
+                                            <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                                x-text="item.word"></strong>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                    </div>
+                                    <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        title="Dengarkan Suara">
+                                        <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Ungkapan Komunikasi Janji Temu (Redemittel für Verabredungen) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">C. Ungkapan Komunikasi Janji Temu (Redemittel für Verabredungen)</h3>
+                    <p class="text-xs text-gray-500">Frasa standar untuk mengusulkan kegiatan, menerima ajakan, menolak santun, dan menanyakan rincian.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Kolom 1: Mengusulkan -->
+                    <div class="p-4 rounded-2xl bg-orange-50/50 border border-orange-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[11px] font-extrabold text-orange-700 uppercase tracking-wider block mb-2">1. Etwas vorschlagen</span>
+                            <div class="space-y-3">
+                                <template x-for="(r, idx) in redemittelVorschlag" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-orange-100/80 shadow-2xs">
+                                        <div class="flex items-start justify-between gap-1.5">
+                                            <strong class="text-xs text-navy font-bold" x-text="r.de"></strong>
+                                            <button @click="speak(r.de, 'female')" class="text-orange-500 hover:text-orange-700 p-0.5 flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-[11px] text-gray-500 mt-0.5" x-text="r.id"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 2: Menerima -->
+                    <div class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-2">2. Zusagen</span>
+                            <div class="space-y-3">
+                                <template x-for="(r, idx) in redemittelZusage" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-emerald-100/80 shadow-2xs">
+                                        <div class="flex items-start justify-between gap-1.5">
+                                            <strong class="text-xs text-navy font-bold" x-text="r.de"></strong>
+                                            <button @click="speak(r.de, 'male')" class="text-emerald-600 hover:text-emerald-800 p-0.5 flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-[11px] text-gray-500 mt-0.5" x-text="r.id"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 3: Menolak & Beralasan -->
+                    <div class="p-4 rounded-2xl bg-red-50/50 border border-red-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[11px] font-extrabold text-red-700 uppercase tracking-wider block mb-2">3. Absagen & Begründen</span>
+                            <div class="space-y-3">
+                                <template x-for="(r, idx) in redemittelAbsage" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-red-100/80 shadow-2xs">
+                                        <div class="flex items-start justify-between gap-1.5">
+                                            <strong class="text-xs text-navy font-bold" x-text="r.de"></strong>
+                                            <button @click="speak(r.de, 'female')" class="text-red-500 hover:text-red-700 p-0.5 flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-[11px] text-gray-500 mt-0.5" x-text="r.id"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 4: Menanyakan Rincian -->
+                    <div class="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[11px] font-extrabold text-blue-700 uppercase tracking-wider block mb-2">4. Nachfragen</span>
+                            <div class="space-y-3">
+                                <template x-for="(r, idx) in redemittelNachfragen" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-blue-100/80 shadow-2xs">
+                                        <div class="flex items-start justify-between gap-1.5">
+                                            <strong class="text-xs text-navy font-bold" x-text="r.de"></strong>
+                                            <button @click="speak(r.de, 'male')" class="text-blue-600 hover:text-blue-800 p-0.5 flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-[11px] text-gray-500 mt-0.5" x-text="r.id"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. TATA BAHASA (GRAMMATIK)                                    -->
+        <!-- ============================================================= -->
+        <section id="grammatik" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    2
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Struktur anak kalimat sebab (Nebensatz mit weil), tanya jawab Warum-Weil, dan penyingkatan pesan.</p>
+                </div>
+            </div>
+
+            <!-- Topik A: Struktur Anak Kalimat dengan "weil" -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy mb-1">A. Struktur Anak Kalimat dengan "weil" (Nebensatz mit weil)</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        Konjungsi <strong>weil</strong> (karena) menghubungkan induk kalimat (<em>Hauptsatz</em>) dengan anak kalimat penjelas alasan (<em>Nebensatz</em>).
+                    </p>
+                </div>
+
+                <!-- 4 Aturan Utama -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">1. Posisi Hauptsatz</span>
+                        <p class="text-xs text-gray-600">Induk kalimat mempertahankan kata kerja pada <strong>Posisi 2</strong>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">2. Wajib Tanda Koma</span>
+                        <p class="text-xs text-gray-600">Antara induk dan anak kalimat <strong>wajib dipisahkan tanda koma (,)</strong>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">3. Konjugiertes Verb di Akhir</span>
+                        <p class="text-xs text-gray-600">Kata kerja terkonjugasi pada klausa <em>weil</em> <strong>wajib berada di posisi paling akhir</strong>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">4. Modalverb / Perfekt</span>
+                        <p class="text-xs text-gray-600">Kata kerja bantu (<em>muss/kann/hat/ist</em>) berada paling akhir setelah kata kerja utama.</p>
+                    </div>
+                </div>
+
+                <!-- Tabel Struktur Posisi Kalimat -->
+                <div class="overflow-x-auto rounded-2xl border border-gray-200 mb-6">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-orange-50/80 text-orange-950 font-extrabold border-b border-orange-100">
+                            <tr>
+                                <th class="p-3.5 sm:p-4">Induk Kalimat (Hauptsatz)</th>
+                                <th class="p-3.5 sm:p-4 text-center">,</th>
+                                <th class="p-3.5 sm:p-4 text-orange-600">Konjunktion</th>
+                                <th class="p-3.5 sm:p-4">Subjekt</th>
+                                <th class="p-3.5 sm:p-4">Keterangan / Objek</th>
+                                <th class="p-3.5 sm:p-4 text-emerald-700">Verb am Satzende</th>
+                                <th class="p-3.5 sm:p-4 text-center">Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 bg-white font-medium">
+                            <template x-for="(row, idx) in weilTableRows" :key="idx">
+                                <tr class="hover:bg-gray-50/80 transition">
+                                    <td class="p-3.5 sm:p-4 font-bold text-navy" x-text="row.hs"></td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-orange-600 text-center">,</td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-orange-600" x-text="row.conj"></td>
+                                    <td class="p-3.5 sm:p-4 font-bold text-navy" x-text="row.subj"></td>
+                                    <td class="p-3.5 sm:p-4 text-gray-700" x-text="row.middle"></td>
+                                    <td class="p-3.5 sm:p-4 font-extrabold text-emerald-700" x-text="row.verb"></td>
+                                    <td class="p-3.5 sm:p-4 text-center">
+                                        <button @click="speak(row.full, 'female')"
+                                            class="p-1.5 rounded-lg bg-gray-100 hover:bg-orange-100 text-orange-600 transition"
+                                            title="Dengarkan Contoh">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Grid 2 Box Putih: Subtopik B & Subtopik C -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Topik B: Tanya Jawab Warum - Weil -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-4 pb-3 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy mb-1">B. Kalimat Tanya & Jawaban Singkat ("Warum...?" – "Weil...")</h3>
+                            <p class="text-xs text-gray-500">Menanyakan alasan dengan Warum dan menjawab langsung dengan klausa Weil.</p>
+                        </div>
+
+                        <div class="space-y-3.5">
+                            <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-orange-600">Frage 1:</span>
+                                    <button @click="speak('Warum isst du heute nichts?', 'male')" class="text-gray-400 hover:text-orange-600 p-0.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                    </button>
+                                </div>
+                                <p class="text-xs sm:text-sm font-bold text-navy">Warum isst du heute nichts?</p>
+                                <p class="text-[11px] text-gray-500 mb-2">Mengapa kamu tidak makan apa-apa hari ini?</p>
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-200">
+                                    <div class="flex items-center justify-between">
+                                        <strong class="text-xs font-bold text-emerald-800">Weil ich keinen Hunger habe.</strong>
+                                        <button @click="speak('Weil ich keinen Hunger habe.', 'female')" class="text-emerald-600 hover:text-emerald-800 p-0.5">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-[11px] text-gray-500 mt-0.5">Karena saya tidak merasa lapar.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-orange-600">Frage 2:</span>
+                                    <button @click="speak('Warum kommst du erst um acht Uhr?', 'male')" class="text-gray-400 hover:text-orange-600 p-0.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                    </button>
+                                </div>
+                                <p class="text-xs sm:text-sm font-bold text-navy">Warum kommst du erst um acht Uhr?</p>
+                                <p class="text-[11px] text-gray-500 mb-2">Mengapa kamu baru datang pada pukul delapan?</p>
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-200">
+                                    <div class="flex items-center justify-between">
+                                        <strong class="text-xs font-bold text-emerald-800">Weil ich noch lange im Büro bleiben muss.</strong>
+                                        <button @click="speak('Weil ich noch lange im Büro bleiben muss.', 'female')" class="text-emerald-600 hover:text-emerald-800 p-0.5">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-[11px] text-gray-500 mt-0.5">Karena saya masih harus tinggal lama di kantor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topik C: Bentuk Penyingkatan Pesan Singkat (Kurzformen in Nachrichten) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-4 pb-3 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy mb-1">C. Bentuk Penyingkatan Pesan Singkat (Kurzformen in Nachrichten)</h3>
+                            <p class="text-xs text-gray-500">Penghilangan subjek <em>ich</em> atau kata ganti <em>das/es</em> dalam obrolan informal.</p>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                            <table class="w-full text-left text-xs sm:text-sm">
+                                <thead class="bg-orange-50/80 text-orange-950 font-extrabold border-b border-orange-100">
+                                    <tr>
+                                        <th class="p-3">Bentuk Lengkap</th>
+                                        <th class="p-3 text-orange-600">Bentuk Singkatan</th>
+                                        <th class="p-3">Arti Bahasa Indonesia</th>
+                                        <th class="p-3 text-center">Audio</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 bg-white font-medium">
+                                    <template x-for="(kf, idx) in kurzformenList" :key="idx">
+                                        <tr class="hover:bg-gray-50/80 transition">
+                                            <td class="p-3 text-gray-500 line-through text-xs" x-text="kf.full"></td>
+                                            <td class="p-3 font-extrabold text-orange-600 text-xs sm:text-sm" x-text="kf.short"></td>
+                                            <td class="p-3 text-gray-700 text-xs" x-text="kf.meaning"></td>
+                                            <td class="p-3 text-center">
+                                                <button @click="speak(kf.short, 'female')" class="p-1 rounded-lg bg-gray-100 hover:bg-orange-100 text-orange-600 transition" title="Dengarkan Singkatan">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. CONTOH PERCAKAPAN (BEISPIELDIALOGE)                        -->
+        <!-- ============================================================= -->
+        <section id="dialog" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    3
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Praktik dialog interaktif merencanakan makan malam dan reservasi restoran gelap.</p>
+                </div>
+            </div>
+
+            <!-- Grid 2 Percakapan -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dialog 1: Merencanakan Makan Malam (Informal) -->
+                <div
+                    class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="min-w-0 flex-1">
+                                <span
+                                    class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog
+                                    1</span>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Acara Makan Malam</h3>
+                                <p class="text-xs text-gray-400">Ben (Pria) & Lea (Wanita)</p>
+                            </div>
+                            <button @click="playFullDialog(1)"
+                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="!(isPlayingFullDialog && activeDialogPlaying === 1)"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="isPlayingFullDialog && activeDialogPlaying === 1"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                                    </path>
+                                </svg>
+                                <span
+                                    x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Chat bubble list -->
+                        <div class="space-y-3.5 text-xs sm:text-sm">
+                            <template x-for="(line, idx) in dialog1" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border"
+                                    :class="(isPlayingFullDialog && activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50 border-gray-100'">
+                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                        <span class="font-extrabold text-xs"
+                                            :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
+                                            title="Dengarkan Baris Ini">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="font-bold text-navy" x-text="line.text"></div>
+                                    <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2: Reservasi Restoran Tanpa Cahaya (Formal) -->
+                <div
+                    class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="min-w-0 flex-1">
+                                <span
+                                    class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Dialog
+                                    2</span>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Reservasi Restoran Gelap</h3>
+                                <p class="text-xs text-gray-400">Herr Berger (Pria) & Frau Sommer (Wanita)</p>
+                            </div>
+                            <button @click="playFullDialog(2)"
+                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="!(isPlayingFullDialog && activeDialogPlaying === 2)"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        x-show="isPlayingFullDialog && activeDialogPlaying === 2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                                    </path>
+                                </svg>
+                                <span
+                                    x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Chat bubble list -->
+                        <div class="space-y-3.5 text-xs sm:text-sm">
+                            <template x-for="(line, idx) in dialog2" :key="idx">
+                                <div class="p-3.5 rounded-2xl transition border"
+                                    :class="(isPlayingFullDialog && activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50 border-gray-100'">
+                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                        <span class="font-extrabold text-xs"
+                                            :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
+                                            title="Dengarkan Baris Ini">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="font-bold text-navy" x-text="line.text"></div>
+                                    <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. TEKS BACAAN (LESETEXT)                                     -->
+        <!-- ============================================================= -->
+        <section id="lesetext" class="mb-14 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    4
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Teks Bacaan (Lesetext)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Membaca dan mendengarkan informasi konsep restoran gelap tanpa cahaya.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+                    <div class="min-w-0 flex-1">
+                        <h3 class="text-lg font-bold text-navy">Essen ohne Licht – Ein besonderes Erlebnis für die Sinne</h3>
+                        <p class="text-xs text-gray-400">Pengalaman bersantap unik dan sensitivitas panca indra di restoran "Lichtlos".</p>
+                    </div>
+                    <button @click="speakLesetext()"
+                        class="whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Putar Teks Bacaan</span>
+                    </button>
+                </div>
+
+                <!-- Teks Bahasa Jerman -->
+                <div class="space-y-4 text-xs sm:text-sm text-gray-800 leading-relaxed font-normal bg-gray-50/80 p-5 rounded-2xl border border-gray-100 mb-6">
+                    <p>
+                        Das Restaurant „Lichtlos“ bietet ein außergewöhnliches kulinarisches Konzept. Die Gäste lernen dort eine völlig andere Welt kennen. Im Speisesaal gibt es absolut kein Licht. Man kann weder die Speisen noch die Nachbarn sehen, aber dafür werden die anderen Sinne viel aktiver: Das Hören, das Schmecken, das Riechen und das Fühlen werden im Dunkeln besonders intensiv.
+                    </p>
+                    <p>
+                        Der Ablauf ist genau organisiert. Die Gäste kommen zuerst an die Rezeption. Dort wählen sie ihr Menü aus der Speisekarte aus und bezahlen nach dem Essen auch ihre Rechnung. Alle Handys, Uhren und Kameras müssen ausgeschaltet bleiben, weil Licht im Speiseraum verboten ist. Kellnerinnen und Kellner holen die Gäste am Eingang ab und führen sie sicher an ihren Tisch. Viele dieser Servicekräfte sind sehbehindert oder blind, weshalb sie sich in der Dunkelheit perfekt orientieren können.
+                    </p>
+                </div>
+
+                <!-- Terjemahan Bahasa Indonesia -->
+                <div class="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/70 text-xs sm:text-sm text-gray-700 leading-relaxed space-y-3">
+                    <div class="font-bold text-amber-950 text-xs uppercase tracking-wider mb-2">Terjemahan Teks Bacaan:</div>
+                    <p>
+                        Restoran "Lichtlos" menawarkan sebuah konsep kuliner yang luar biasa. Para tamu mengenal sebuah dunia yang benar-benar berbeda di sana. Di ruang makan sama sekali tidak ada cahaya. Orang tidak dapat melihat makanan maupun orang di sebelahnya, tetapi sebagai gantinya panca indra yang lain menjadi jauh lebih aktif: Pendengaran, pengecapan, penciuman, dan perabaan menjadi sangat peka di dalam kegelapan.
+                    </p>
+                    <p>
+                        Rangkaian acaranya diatur secara saksama. Para tamu pertama-tama tiba di meja penerima tamu. Di sana mereka memilih menu dari buku menu dan membayar nota tagihan mereka setelah makan. Semua ponsel, jam tangan, dan kamera harus tetap dimatikan karena cahaya terlarang di ruang makan. Para pelayan menjemput para tamu di pintu masuk dan memandu mereka dengan aman ke meja mereka. Banyak dari petugas pelayanan ini memiliki gangguan penglihatan atau tunanetra, sehingga mereka dapat mengarahkan diri secara sempurna di dalam kegelapan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. LATIHAN PEMAHAMAN (ÜBUNGEN)                                -->
+        <!-- ============================================================= -->
+        <section id="latihan" class="mb-16 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+                    5
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Pemahaman (Übungen)</h2>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                    <div>
+                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai koreksi kesalahan kalimat weil (Fehlerkorrektur) dan analisis respons situasi percakapan (Situationsreaktion).</p>
+                    </div>
+
+                    <!-- Live Score Badge -->
+                    <div x-show="quizScore !== null" class="flex items-center gap-3" x-cloak>
+                        <div class="px-4 py-2 rounded-2xl border text-center"
+                            :class="quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'">
+                            <span class="text-[11px] font-bold block">Skor Latihan</span>
+                            <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian A: Fehlerkorrektur (Finde den Fehler im weil-Satz) -->
+                <div class="mb-10">
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: In jedem Satz gibt es einen Grammatikfehler. Finden und korrigieren Sie den Fehler.</h3>
+                        <p class="text-xs text-gray-500">Analisis kalimat di bawah ini dan pilihlah bentuk klausa weil yang paling tepat secara tata bahasa untuk memperbaiki kalimat tersebut.</p>
+                    </div>
+
+                    <div class="space-y-5">
+                        <!-- Soal 1 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-bold text-orange-600">1. Satz mit Fehler:</span>
+                            </div>
+                            <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mb-3 text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                Ben kocht Spezialitäten aus dem Allgäu, weil er möchte seine Freunde einladen.
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> ... weil er seine Freunde einladen möchte.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> ... weil seine Freunde er einladen möchte.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> ... weil er möchte einladen seine Freunde.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-bold text-orange-600">2. Satz mit Fehler:</span>
+                            </div>
+                            <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mb-3 text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                Lea kann heute leider nicht vorbeikommen, weil ihr Vater ist krank.
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> ... weil krank ihr Vater ist.
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> ... weil ihr Vater krank ist.
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> ... weil ist ihr Vater krank.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-bold text-orange-600">3. Satz mit Fehler:</span>
+                            </div>
+                            <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mb-3 text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                Marvin kommt etwas später zur Party, weil er heute im Büro Überstunden machen müsst.
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> ... weil er heute im Büro Überstunden machen muss.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> ... weil er heute im Büro muss Überstunden machen.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> ... weil er heute im Büro Überstunden müsst machen.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-bold text-orange-600">4. Satz mit Fehler:</span>
+                            </div>
+                            <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mb-3 text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                Warum isst du im Restaurant nichts? – Weil ich habe schon zu Hause eine Suppe gegessen.
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> – Weil ich schon zu Hause habe eine Suppe gegessen.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> – Weil ich habe gegessen schon zu Hause eine Suppe.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> – Weil ich schon zu Hause eine Suppe gegessen habe.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-bold text-orange-600">5. Satz mit Fehler:</span>
+                            </div>
+                            <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mb-3 text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                Im Restaurant „Lichtlos“ sind Handys verboten, weil die Gäste absolute Dunkelheit brauchen für das Erlebnis.
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> ... weil die Gäste für das Erlebnis absolute Dunkelheit brauchen.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> ... weil brauchen die Gäste absolute Dunkelheit für das Erlebnis.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> ... weil die Gäste absolute Dunkelheit für das Erlebnis brauchen nicht.
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian B: Situationsreaktion & Pragmatik -->
+                <div class="mb-8">
+                    <div class="mb-4">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Welche Reaktion passt am besten zur Situation? Wählen Sie die richtige Antwort: a, b oder c.</h3>
+                        <p class="text-xs text-gray-500">Pilihlah respons komunikasi percakapan yang paling tepat dan sopan sesuai konteks situasi.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Situation:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                    Felix fragt: <em>„Wollen wir am Samstag zusammen auf den Flohmarkt gehen?“</em><br>
+                                    Lea muss für ihre Prüfung lernen und sagt höflich ab:
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Einverstanden, weil du mich zum Flohmarkt einlädst.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Ich möchte gern, aber ich kann leider nicht, weil ich für die Prüfung lernen muss.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Mach ich, weil ich keine Lust auf den Flohmarkt habe.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 7 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Situation:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                    Ben fragt: <em>„Kannst du zum Abendessen etwas zu trinken mitbringen?“</em><br>
+                                    Felix sagt begeistert zu:
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Oh ja, gern. Ich kaufe noch Apfelsaft und Mineralwasser.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Alles da, ich bringe deshalb keine Getränke mit.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Schade, weil die Party heute Abend um acht anfängt.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 8 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Situation:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy leading-relaxed">
+                                    Ein Gast fragt an der Rezeption: <em>„Warum müssen wir unsere Kameras und Uhren draußen lassen?“</em><br>
+                                    Der Mitarbeiter erklärt die Regel:
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Weil wir an der Rezeption mit Karte bezahlen können.
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Weil jedes Licht im Speiseraum streng verboten ist.
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Weil ist das Essen im Dunkeln besonders intensiv.
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center gap-3 pt-6 border-t border-gray-100">
+                    <button @click="checkQuiz()"
+                        class="px-6 py-2.5 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span>Periksa Jawaban</span>
+                    </button>
+
+                    <button @click="resetQuiz()"
+                        class="px-4 py-2.5 rounded-2xl bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs sm:text-sm transition">
+                        Reset
+                    </button>
+
+                    <button @click="showKey = !showKey"
+                        class="ml-auto px-4 py-2.5 rounded-2xl bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+                        <span x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban & Penjelasan'"></span>
+                    </button>
+                </div>
+
+                <!-- Answer Key Accordion -->
+                <div x-show="showKey"
+                    class="mt-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm space-y-4" x-cloak>
+                    <h4 class="font-extrabold text-navy text-sm sm:text-base border-b border-gray-200 pb-2">Kunci
+                        Jawaban & Penjelasan Lengkap</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil A (Fehlerkorrektur):</strong>
+                            <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (... weil er seine Freunde einladen möchte.)</strong> &mdash; Pada anak kalimat yang diawali dengan konjungsi <em>weil</em>, kata kerja modal terkonjugasi (<em>möchte</em>) wajib bergeser ke posisi paling akhir, tepat setelah kata kerja bentuk dasar (<em>einladen</em>).</li>
+                                <li><strong>b (... weil ihr Vater krank ist.)</strong> &mdash; Kata kerja <em>ist</em> tidak boleh berada di posisi kedua setelah subjek di dalam anak kalimat <em>weil</em>, melainkan harus diletakkan di posisi paling akhir kalimat.</li>
+                                <li><strong>a (... weil er heute im Büro Überstunden machen muss.)</strong> &mdash; Bentuk konjugasi kata kerja modal <em>müssen</em> untuk subjek orang ketiga tunggal <em>er</em> adalah <em>muss</em> (bukan <em>müsst</em>, karena <em>müsst</em> untuk subjek <em>ihr</em>).</li>
+                                <li><strong>c (– Weil ich schon zu Hause eine Suppe gegessen habe.)</strong> &mdash; Pada kalimat bentuk lampau (<em>Perfekt</em>) di dalam klausa <em>weil</em>, kata kerja bantu (<em>habe</em>) harus ditempatkan di posisi paling akhir setelah bentuk <em>Partizip II</em> (<em>gegessen</em>).</li>
+                                <li><strong>a (... weil die Gäste für das Erlebnis absolute Dunkelheit brauchen.)</strong> &mdash; Seluruh objek dan keterangan harus ditulis mendahului kata kerja utama terkonjugasi (<em>brauchen</em>), sehingga kata <em>brauchen</em> berada di posisi paling akhir.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <strong class="text-blue-600 block mb-1">Teil B (Situationsreaktion & Pragmatik):</strong>
+                            <ol start="6" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>b (Ich möchte gern, aber ich kann leider nicht, weil ich für die Prüfung lernen muss.)</strong> &mdash; Pilihan b merupakan ungkapan penolakan santun (<em>Absage mit Begründung</em>) dengan struktur tata bahasa anak kalimat <em>weil</em> yang benar.</li>
+                                <li><strong>a (Oh ja, gern. Ich kaufe noch Apfelsaft und Mineralwasser.)</strong> &mdash; Pilihan a adalah bentuk persetujuan ajakan (<em>Zusage</em>) yang logis untuk menawarkan bantuan membawa minuman.</li>
+                                <li><strong>b (Weil jedes Licht im Speiseraum streng verboten ist.)</strong> &mdash; Pilihan b memberikan alasan yang logis sesuai aturan restoran gelap dan menggunakan struktur klausa <em>weil</em> yang benar dengan kata kerja <em>ist</em> di akhir kalimat.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- BOTTOM NAVIGATION                                            -->
+        <!-- ============================================================= -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200">
+            <a href="../dashboard-a2-1/"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-gray-700 font-bold text-xs sm:text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali ke Dashboard A2.1
+            </a>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <a href="../materi-a2-1/"
+                    class="px-5 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+                    &larr; Pertemuan 1
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 mt-16 text-center text-xs text-gray-400">
+        <p>&copy; 2026 Aksaradeutsch. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p class="mt-1">Materi pembelajaran bahasa Jerman standar Goethe-Institut & CEFR.</p>
+    </footer>
+
+    <!-- ALPINE.JS APPLICATION LOGIC -->
+    <script>
+        function lessonApp() {
+            return {
+                // Auth & State
+                currentUser: null,
+                authLoading: true,
+                userName: '',
+                userInitial: 'S',
+                syncStatusText: 'Tersinkronisasi',
+                readingProgress: 0,
+
+                // Dialog State
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+
+                // Audio Voices
+                voices: [],
+                maleVoice: null,
+                femaleVoice: null,
+
+                // Learning Goals (5 Capaian)
+                learningGoals: [
+                    { text: 'Membuat usulan janji temu, menerima tawaran, dan menolak ajakan secara santun.', completed: false },
+                    { text: 'Menyatakan alasan atau penyebab menggunakan anak kalimat Nebensatz mit weil.', completed: false },
+                    { text: 'Menjawab pertanyaan Warum secara tepat menggunakan klausa weil dengan posisi kata kerja di akhir kalimat.', completed: false },
+                    { text: 'Mengidentifikasi dan menggunakan bentuk penyingkatan informal dalam pesan singkat (Kurzformen in Nachrichten).', completed: false },
+                    { text: 'Memahami informasi tekstual mengenai tata cara kunjungan dan reservasi di restoran khusus (Essen ohne Licht).', completed: false }
+                ],
+
+                get completedGoalsCount() {
+                    return this.learningGoals.filter(g => g.completed).length;
+                },
+
+                toggleGoal(index) {
+                    if (this.learningGoals[index]) {
+                        this.learningGoals[index].completed = !this.learningGoals[index].completed;
+                        this.saveProgress();
+                    }
+                },
+
+                // ==========================================
+                // VOCABULARY DATA
+                // ==========================================
+                // A. Janji Temu dan Undangan
+                vocabAppointments: [
+                    { article: 'die', gender: 'fem', word: 'Einladung, -en', fullWord: 'die Einladung', meaning: 'undangan' },
+                    { article: 'die', gender: 'fem', word: 'Verabredung, -en', fullWord: 'die Verabredung', meaning: 'janji bertemu' },
+                    { article: 'die', gender: 'fem', word: 'Überstunde, -n', fullWord: 'die Überstunde', meaning: 'kerja lembur' },
+                    { article: 'die', gender: 'fem', word: 'Grippe, -n', fullWord: 'die Grippe', meaning: 'penyakit flu' },
+                    { article: 'die', gender: 'fem', word: 'Spezialität, -en', fullWord: 'die Spezialität', meaning: 'makanan khas daerah' },
+                    { article: 'der', gender: 'masc', word: 'Flohmarkt, Flohmärkte', fullWord: 'der Flohmarkt', meaning: 'pasar barang bekas' },
+                    { article: '', gender: 'verb', word: 'einladen', fullWord: 'einladen', meaning: 'mengundang' },
+                    { article: '', gender: 'verb', word: 'mitbringen', fullWord: 'mitbringen', meaning: 'membawa serta' },
+                    { article: '', gender: 'verb', word: 'vorbeikommen', fullWord: 'vorbeikommen', meaning: 'mampir berkunjung' },
+                    { article: '', gender: 'verb', word: 'absagen', fullWord: 'absagen', meaning: 'membatalkan janji' },
+                    { article: '', gender: 'verb', word: 'zusagen', fullWord: 'zusagen', meaning: 'menyetujui janji' },
+                    { article: '', gender: 'phrase', word: 'Lust haben', fullWord: 'Lust haben', meaning: 'berminat' },
+                    { article: '', gender: 'phrase', word: 'Zeit haben', fullWord: 'Zeit haben', meaning: 'memiliki waktu luang' }
+                ],
+
+                // B. Restoran dan Pengalaman Sensorik
+                vocabRestaurant: [
+                    { article: 'der', gender: 'masc', word: 'Eingang, Eingänge', fullWord: 'der Eingang', meaning: 'pintu masuk' },
+                    { article: 'die', gender: 'fem', word: 'Rezeption, -en', fullWord: 'die Rezeption', meaning: 'meja penerima tamu' },
+                    { article: 'die', gender: 'fem', word: 'Speisekarte, -n', fullWord: 'die Speisekarte', meaning: 'buku menu' },
+                    { article: 'die', gender: 'fem', word: 'Rechnung, -en', fullWord: 'die Rechnung', meaning: 'nota tagihan' },
+                    { article: 'der', gender: 'masc', word: 'Sinn, -e', fullWord: 'der Sinn', meaning: 'panca indra' },
+                    { article: 'das', gender: 'neut', word: 'Dunkle', fullWord: 'das Dunkle', meaning: 'kegelapan' },
+                    { article: 'das', gender: 'neut', word: 'Erlebnis, -se', fullWord: 'das Erlebnis', meaning: 'pengalaman' },
+                    { article: '', gender: 'verb', word: 'empfangen', fullWord: 'empfangen', meaning: 'menyambut kedatangan' },
+                    { article: '', gender: 'verb', word: 'auswählen', fullWord: 'auswählen', meaning: 'memilih' },
+                    { article: '', gender: 'verb', word: 'reservieren', fullWord: 'reservieren', meaning: 'memesan tempat' },
+                    { article: '', gender: 'adj', word: 'verboten', fullWord: 'verboten', meaning: 'terlarang' },
+                    { article: '', gender: 'adj', word: 'dunkel', fullWord: 'dunkel', meaning: 'gelap' }
+                ],
+
+                // C. Redemittel
+                redemittelVorschlag: [
+                    { de: 'Gehen wir zusammen ins Kino?', id: 'Apakah kita pergi ke bioskop bersama?' },
+                    { de: 'Hast du am Samstag Zeit?', id: 'Apakah kamu punya waktu luang hari Sabtu?' },
+                    { de: 'Ich koche heute Abend. Kommst du mit?', id: 'Saya memasak malam ini. Ikut datang?' },
+                    { de: 'Hast du auch Lust?', id: 'Apakah kamu juga berminat?' }
+                ],
+                redemittelZusage: [
+                    { de: 'Das ist eine gute Idee.', id: 'Itu ide yang bagus.' },
+                    { de: 'Oh ja, gern.', id: 'Ya, dengan senang hati.' },
+                    { de: 'Einverstanden.', id: 'Setuju.' }
+                ],
+                redemittelAbsage: [
+                    { de: 'Ich möchte gern, aber ich kann leider nicht.', id: 'Saya ingin sekali, tapi sayangnya tidak bisa.' },
+                    { de: 'Schade, da geht es leider nicht.', id: 'Sayang sekali, waktu itu tidak memungkinkan.' },
+                    { de: 'Da kann ich nicht, weil ich arbeiten muss.', id: 'Waktu itu saya tidak bisa karena harus bekerja.' }
+                ],
+                redemittelNachfragen: [
+                    { de: 'Wann geht es los?', id: 'Kapan acaranya dimulai?' },
+                    { de: 'Geht es auch ein bisschen später?', id: 'Apakah bisa sedikit lebih lambat?' },
+                    { de: 'Kann ich etwas mitbringen?', id: 'Bisakah saya membawa sesuatu?' }
+                ],
+
+                // Weil Table Rows
+                weilTableRows: [
+                    { hs: 'Lea kann nicht kommen', conj: 'weil', subj: 'sie', middle: 'ihren kranken Vater', verb: 'besucht.', full: 'Lea kann nicht kommen, weil sie ihren kranken Vater besucht.' },
+                    { hs: 'Marvin kommt später', conj: 'weil', subj: 'er', middle: 'heute Überstunden machen', verb: 'muss.', full: 'Marvin kommt später, weil er heute Überstunden machen muss.' },
+                    { hs: 'Felix kommt sehr gern', conj: 'weil', subj: 'er', middle: 'Ben lange nicht', verb: 'gesehen hat.', full: 'Felix kommt sehr gern, weil er Ben lange nicht gesehen hat.' },
+                    { hs: 'Ben lädt seine Freunde ein', conj: 'weil', subj: 'er', middle: 'wieder aus dem Urlaub zurück', verb: 'ist.', full: 'Ben lädt seine Freunde ein, weil er wieder aus dem Urlaub zurück ist.' },
+                    { hs: 'Ich trinke keinen Kaffee', conj: 'weil', subj: 'ich', middle: 'abends nicht schlafen', verb: 'kann.', full: 'Ich trinke keinen Kaffee, weil ich abends nicht schlafen kann.' }
+                ],
+
+                // Kurzformen
+                kurzformenList: [
+                    { full: 'Das mache ich.', short: 'Mach ich.', meaning: 'Akan kulakukan.' },
+                    { full: 'Ich komme gern.', short: 'Komme gern.', meaning: 'Dengan senang hati datang.' },
+                    { full: 'Es ist alles da.', short: 'Alles da.', meaning: 'Semuanya sudah tersedia.' },
+                    { full: 'Ich habe dich lang nicht gesehen.', short: 'Lang nicht gesehen.', meaning: 'Sudah lama tidak bertemu.' },
+                    { full: 'Ich besuche meinen Vater.', short: 'Besuche meinen Vater.', meaning: 'Mengunjungi ayahku.' }
+                ],
+
+                // Dialogs
+                dialog1: [
+                    { speaker: 'Ben (Pria)', text: 'Hallo Lea! Ich bin wieder aus Oberstdorf zurück. Hast du morgen Abend Zeit? Ich koche Spezialitäten aus dem Allgäu.', translation: 'Halo Lea! Aku sudah kembali dari Oberstdorf. Apakah kamu ada waktu besok malam? Aku memasak makanan khas dari daerah Allgäu.', gender: 'male' },
+                    { speaker: 'Lea (Wanita)', text: 'Hallo Ben! Danke für die Einladung. Ich möchte gern kommen, aber ich kann leider nicht.', translation: 'Halo Ben! Terima kasih atas undangannya. Aku ingin sekali datang, tetapi sayangnya aku tidak bisa.', gender: 'female' },
+                    { speaker: 'Ben (Pria)', text: 'Oh, das ist aber schade. Warum hast du denn keine Zeit?', translation: 'Oh, sayang sekali. Mengapa kamu tidak punya waktu?', gender: 'male' },
+                    { speaker: 'Lea (Wanita)', text: 'Da kann ich nicht, weil mein Vater krank ist und ich ihn besuchen muss. Er hat die Grippe.', translation: 'Waktu itu aku tidak bisa karena ayahku sedang sakit dan aku harus mengunjunginya. Beliau menderita flu.', gender: 'female' },
+                    { speaker: 'Ben (Pria)', text: 'Gute Besserung für deinen Vater! Dann treffen wir uns nächste Woche, weil wir uns schon so lange nicht gesehen haben.', translation: 'Semoga lekas sembuh untuk ayahmu! Kalau begitu kita bertemu minggu depan, karena kita sudah sangat lama tidak bertemu.', gender: 'male' },
+                    { speaker: 'Lea (Wanita)', text: 'Abgemacht! Mach ich gerne.', translation: 'Sepakat! Dengan senang hati.', gender: 'female' }
+                ],
+
+                dialog2: [
+                    { speaker: 'Herr Berger (Pria)', text: 'Restaurant „Lichtlos“, guten Tag. Mein Name ist Berger. Was kann ich für Sie tun?', translation: 'Restoran "Lichtlos", selamat siang. Nama saya Berger. Ada yang bisa saya bantu?', gender: 'male' },
+                    { speaker: 'Frau Sommer (Wanita)', text: 'Guten Tag, mein Name ist Sommer. Ich möchte einen Tisch für zwei Personen reservieren, weil mein Mann am Freitag Geburtstag hat.', translation: 'Selamat siang, nama saya Sommer. Saya ingin memesan meja untuk dua orang karena suami saya berulang tahun pada hari Jumat.', gender: 'female' },
+                    { speaker: 'Herr Berger (Pria)', text: 'Sehr gern, Frau Sommer. Wir empfangen Sie am Eingang im Hellen, aber im Speisesaal ist es absolut dunkel.', translation: 'Dengan senang hati, Ibu Sommer. Kami menyambut Anda di pintu masuk dalam ruangan terang, tetapi di ruang makan keadaannya benar-benar gelap.', gender: 'male' },
+                    { speaker: 'Frau Sommer (Wanita)', text: 'Wie wählen wir das Essen aus?', translation: 'Bagaimana kami memilih makanannya?', gender: 'female' },
+                    { speaker: 'Herr Berger (Pria)', text: 'Sie bestellen an der Rezeption aus der Speisekarte, bevor Sie in den Raum gehen, weil man drinnen nichts sehen kann.', translation: 'Anda memesan di meja penerima tamu dari buku menu sebelum Anda masuk ke ruangan, karena di dalam orang tidak dapat melihat apa pun.', gender: 'male' },
+                    { speaker: 'Frau Sommer (Wanita)', text: 'Verstehe. Darf man das Handy mitnehmen?', translation: 'Saya mengerti. Apakah ponsel boleh dibawa masuk?', gender: 'female' },
+                    { speaker: 'Herr Berger (Pria)', text: 'Sie müssen Handys ausschalten, weil jedes Licht bei uns streng verboten ist.', translation: 'Anda harus mematikan ponsel karena cahaya apa pun dilarang keras di tempat kami.', gender: 'male' },
+                    { speaker: 'Frau Sommer (Wanita)', text: 'Alles klar. Vielen Dank für die Auskunft!', translation: 'Baiklah. Terima kasih banyak atas informasinya!', gender: 'female' }
+                ],
+
+                // Exercises State
+                answers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+
+                quizScore: null,
+                showFeedback: false,
+                showKey: false,
+
+                checkQuiz() {
+                    let score = 0;
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'b') score++;
+                    if (this.answers.q3 === 'a') score++;
+                    if (this.answers.q4 === 'c') score++;
+                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q6 === 'b') score++;
+                    if (this.answers.q7 === 'a') score++;
+                    if (this.answers.q8 === 'b') score++;
+
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.showKey = true;
+                    this.saveProgress();
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    let isCorrect = false;
+
+                    if (qNum === 1) isCorrect = (this.answers.q1 === 'a');
+                    if (qNum === 2) isCorrect = (this.answers.q2 === 'b');
+                    if (qNum === 3) isCorrect = (this.answers.q3 === 'a');
+                    if (qNum === 4) isCorrect = (this.answers.q4 === 'c');
+                    if (qNum === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (qNum === 6) isCorrect = (this.answers.q6 === 'b');
+                    if (qNum === 7) isCorrect = (this.answers.q7 === 'a');
+                    if (qNum === 8) isCorrect = (this.answers.q8 === 'b');
+
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                resetQuiz() {
+                    this.answers = {
+                        q1: '', q2: '', q3: '', q4: '', q5: '',
+                        q6: '', q7: '', q8: ''
+                    };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                // Audio System
+                initAudio() {
+                    if ('speechSynthesis' in window) {
+                        const updateVoices = () => {
+                            this.voices = window.speechSynthesis.getVoices();
+                            const deVoices = this.voices.filter(v => v.lang.startsWith('de'));
+                            this.maleVoice = deVoices.find(v => (v.name.includes('Stefan') || v.name.includes('Conrad') || v.name.includes('Killian') || v.name.includes('Markus') || v.name.includes('Florian') || v.name.includes('Male')) && (v.name.includes('Natural') || v.name.includes('Neural') || v.name.includes('Online')))
+                                || deVoices.find(v => v.name.includes('Stefan') || v.name.includes('Male'))
+                                || deVoices[0];
+
+                            this.femaleVoice = deVoices.find(v => (v.name.includes('Katja') || v.name.includes('Louisa') || v.name.includes('Amala') || v.name.includes('Marlene') || v.name.includes('Female')) && (v.name.includes('Natural') || v.name.includes('Neural') || v.name.includes('Online')))
+                                || deVoices.find(v => v.name.includes('Katja') || v.name.includes('Female') || v.name.includes('Hedda'))
+                                || deVoices[1] || deVoices[0];
+                        };
+
+                        updateVoices();
+                        window.speechSynthesis.onvoiceschanged = updateVoices;
+                    }
+                },
+
+                speak(text, gender = 'female', onEndedCallback = null) {
+                    if (!('speechSynthesis' in window)) return;
+                    window.speechSynthesis.cancel();
+
+                    let cleanText = text.replace(/[*_~`]/g, '').trim();
+                    cleanText = cleanText.replace(/(\d+),(\d{1,2})\s*(?:Euro|€)/gi, '$1 Euro $2');
+                    cleanText = cleanText.replace(/(\d+),(\d{2})\b/g, '$1 Euro $2');
+                    cleanText = cleanText.replace(/ß/g, 'ss');
+
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.lang = 'de-DE';
+
+                    if (gender === 'male') {
+                        utterance.pitch = 0.98;
+                        utterance.rate = 0.95;
+                        if (this.maleVoice) utterance.voice = this.maleVoice;
+                    } else {
+                        utterance.pitch = 1.02;
+                        utterance.rate = 0.97;
+                        if (this.femaleVoice) utterance.voice = this.femaleVoice;
+                    }
+
+                    if (onEndedCallback) {
+                        utterance.onend = onEndedCallback;
+                        utterance.onerror = onEndedCallback;
+                    }
+
+                    window.speechSynthesis.speak(utterance);
+                },
+
+                speakLesetext() {
+                    const text = "Das Restaurant „Lichtlos“ bietet ein außergewöhnliches kulinarisches Konzept. Die Gäste lernen dort eine völlig andere Welt kennen. Im Speisesaal gibt es absolut kein Licht. Man kann weder die Speisen noch die Nachbarn sehen, aber dafür werden die anderen Sinne viel aktiver: Das Hören, das Schmecken, das Riechen und das Fühlen werden im Dunkeln besonders intensiv. Der Ablauf ist genau organisiert. Die Gäste kommen zuerst an die Rezeption. Dort wählen sie ihr Menü aus der Speisekarte aus und bezahlen nach dem Essen auch ihre Rechnung. Alle Handys, Uhren und Kameras müssen ausgeschaltet bleiben, weil Licht im Speiseraum verboten ist. Kellnerinnen und Kellner holen die Gäste am Eingang ab und führen sie sicher an ihren Tisch. Viele dieser Servicekräfte sind sehbehindert oder blind, weshalb sie sich in der Dunkelheit perfekt orientieren können.";
+                    this.speak(text, 'female');
+                },
+
+                playFullDialog(dialogNum) {
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        window.speechSynthesis.cancel();
+                        this.isPlayingFullDialog = false;
+                        this.activeDialogPlaying = null;
+                        this.currentSpeakingIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isPlayingFullDialog = true;
+                    this.activeDialogPlaying = dialogNum;
+                    this.currentSpeakingIndex = 0;
+
+                    const list = dialogNum === 1 ? this.dialog1 : this.dialog2;
+
+                    const playLine = (index) => {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= list.length) {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = index;
+                        const item = list[index];
+                        this.speak(item.text, item.gender, () => {
+                            setTimeout(() => {
+                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                                    playLine(index + 1);
+                                }
+                            }, 500);
+                        });
+                    };
+
+                    playLine(0);
+                },
+
+                // Progress Storage & Sync
+                initApp() {
+                    this.initAudio();
+
+                    window.addEventListener('scroll', () => {
+                        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        this.readingProgress = height > 0 ? Math.min(100, Math.max(0, (winScroll / height) * 100)) : 0;
+                    });
+
+                    if (!auth) {
+                        this.authLoading = false;
+                        window.location.replace('../dashboard-a2-1/');
+                        return;
+                    }
+
+                    auth.onAuthStateChanged(user => {
+                        if (user) {
+                            this.currentUser = user;
+                            this.authLoading = false;
+                            this.userName = user.displayName || user.email.split('@')[0];
+                            this.userInitial = this.userName.charAt(0).toUpperCase();
+                            this.syncWithFirestore(user.uid);
+                        } else {
+                            this.currentUser = null;
+                            this.authLoading = false;
+                            this.resetState();
+                            window.location.replace('../dashboard-a2-1/');
+                        }
+                    });
+                },
+
+                resetState() {
+                    this.learningGoals.forEach(g => g.completed = false);
+                    this.resetQuiz();
+                },
+
+                loadSavedProgress(uid = 'guest') {
+                    try {
+                        const userKey = `aksaradeutsch_${uid}_lesson_a2_2`;
+                        const local = localStorage.getItem(userKey);
+                        if (local) {
+                            const parsed = JSON.parse(local);
+                            if (parsed.goals) {
+                                parsed.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = g;
+                                });
+                            }
+                            if (parsed.answers) {
+                                this.answers = { ...this.answers, ...parsed.answers };
+                            }
+                            if (parsed.quizScore !== undefined && parsed.quizScore !== null) {
+                                this.quizScore = parsed.quizScore;
+                                this.showFeedback = true;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading local storage:', e);
+                    }
+                },
+
+                async syncWithFirestore(uid) {
+                    this.loadSavedProgress(uid);
+                    if (!db) return;
+
+                    try {
+                        let remoteData = null;
+                        const docRef = db.collection('users').doc(uid).collection('progress').doc('lesson_a2_2');
+                        const docSnap = await docRef.get();
+
+                        if (docSnap.exists) {
+                            remoteData = docSnap.data();
+                        } else {
+                            const userProgSnap = await db.collection('user_progress').doc(uid).get();
+                            if (userProgSnap.exists && userProgSnap.data().lesson_a2_2) {
+                                remoteData = userProgSnap.data().lesson_a2_2;
+                            }
+                        }
+
+                        if (remoteData) {
+                            if (remoteData.goals) {
+                                remoteData.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
+                                });
+                            }
+                            if (remoteData.answers) {
+                                this.answers = { ...this.answers, ...remoteData.answers };
+                            }
+                            if (remoteData.quizScore !== undefined && remoteData.quizScore !== null) {
+                                this.quizScore = remoteData.quizScore;
+                                this.showFeedback = true;
+                            }
+                            this.saveProgressToLocal(uid);
+                        }
+                    } catch (e) {
+                        console.error('Firestore sync error:', e);
+                    }
+                },
+
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    const data = {
+                        goals: this.learningGoals.map(g => g.completed),
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        updatedAt: new Date().toISOString()
+                    };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_2`, JSON.stringify(data));
+                    } catch (e) {}
+                    return data;
+                },
+
+                async saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    const dataToSave = this.saveProgressToLocal(uid);
+
+                    if (this.currentUser && db) {
+                        try {
+                            this.syncStatusText = 'Menyimpan...';
+                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_2').set(dataToSave, { merge: true });
+                            await db.collection('user_progress').doc(this.currentUser.uid).set({
+                                lesson_a2_2: dataToSave
+                            }, { merge: true });
+                            this.syncStatusText = 'Tersinkronisasi';
+                        } catch (err) {
+                            this.syncStatusText = 'Tersimpan lokal';
+                        }
+                    }
+                },
+
+                async logout() {
+                    if (auth) {
+                        await auth.signOut();
+                    }
+                    this.currentUser = null;
+                    this.resetState();
+                    window.location.replace('../dashboard-a2-1/');
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

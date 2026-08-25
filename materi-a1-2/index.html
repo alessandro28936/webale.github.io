@@ -1152,220 +1152,230 @@
                         </div>
                     </div>
 
-                    <!-- Bagian A: 4 Soal Konjugasi Kata Kerja -->
-                    <div class="mb-8">
-                        <div
-                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Teil A:</strong> Ergänzen Sie die passende Verbform von <em>sprechen</em> oder <em>lernen</em> (Lengkapi kalimat dengan konjugasi yang tepat):
+                    <!-- Bagian A: Sortier-Challenge / Kategorienschleuder (Model 6 - 5 Soal) -->
+                    <div class="mb-10">
+                        <div class="mb-5">
+                            <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Kategorienschleuder &ndash; Ordnen Sie die Wörter der richtigen Kategorie zu.</h3>
+                            <p class="text-xs text-gray-500">Tentukan kategori yang tepat untuk setiap kata di bawah ini (apakah termasuk <em>Land / Negara</em>, <em>Sprache / Bahasa</em>, atau <em>Zahl / Angka</em>).</p>
                         </div>
 
-                        <div class="space-y-4">
-                            <!-- Q1 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        1. Welche Sprachen <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        du?
-                                    </div>
-                                    <select x-model="answers.q1"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="spreche">spreche</option>
-                                        <option value="sprichst">sprichst</option>
-                                        <option value="spricht">spricht</option>
-                                        <option value="lerne">lerne</option>
-                                        <option value="lernt">lernt</option>
-                                    </select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Item 1: dreizehn -->
+                            <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getQuestionClass(1)">
+                                <div class="mb-3">
+                                    <span class="text-[11px] font-bold text-orange-600 block mb-0.5">1. Wort:</span>
+                                    <strong class="text-base text-navy font-extrabold">dreizehn</strong>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q1 === 'sprichst' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q1 === 'sprichst' ? 'Benar! (du sprichst)' : 'Kunci jawaban: sprichst'"></span>
-                                </p>
+                                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                                    <button type="button" @click="answers.q1 = 'Land'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q1 === 'Land' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Land
+                                    </button>
+                                    <button type="button" @click="answers.q1 = 'Sprache'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q1 === 'Sprache' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Sprache
+                                    </button>
+                                    <button type="button" @click="answers.q1 = 'Zahl'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q1 === 'Zahl' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Zahl
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q2 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        2. Ich <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Deutsch und Englisch.
-                                    </div>
-                                    <select x-model="answers.q2"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="spreche">spreche</option>
-                                        <option value="sprichst">sprichst</option>
-                                        <option value="spricht">spricht</option>
-                                        <option value="lerne">lerne</option>
-                                        <option value="lernt">lernt</option>
-                                    </select>
+                            <!-- Item 2: Spanisch -->
+                            <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getQuestionClass(2)">
+                                <div class="mb-3">
+                                    <span class="text-[11px] font-bold text-orange-600 block mb-0.5">2. Wort:</span>
+                                    <strong class="text-base text-navy font-extrabold">Spanisch</strong>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q2 === 'spreche' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q2 === 'spreche' ? 'Benar! (ich spreche)' : 'Kunci jawaban: spreche'"></span>
-                                </p>
+                                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                                    <button type="button" @click="answers.q2 = 'Land'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q2 === 'Land' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Land
+                                    </button>
+                                    <button type="button" @click="answers.q2 = 'Sprache'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q2 === 'Sprache' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Sprache
+                                    </button>
+                                    <button type="button" @click="answers.q2 = 'Zahl'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q2 === 'Zahl' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Zahl
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q3 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        3. Gabriel <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Portugiesisch und er <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Deutsch.
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <select x-model="answers.q3a"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 1...</option>
-                                            <option value="spreche">spreche</option>
-                                            <option value="spricht">spricht</option>
-                                        </select>
-                                        <select x-model="answers.q3b"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 2...</option>
-                                            <option value="lernt">lernt</option>
-                                            <option value="lerne">lerne</option>
-                                        </select>
-                                    </div>
+                            <!-- Item 3: Österreich -->
+                            <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getQuestionClass(3)">
+                                <div class="mb-3">
+                                    <span class="text-[11px] font-bold text-orange-600 block mb-0.5">3. Wort:</span>
+                                    <strong class="text-base text-navy font-extrabold">Österreich</strong>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q3a === 'spricht' && answers.q3b === 'lernt') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q3a === 'spricht' && answers.q3b === 'lernt') ? 'Benar! (spricht, lernt)' : 'Kunci jawaban: spricht, lernt'"></span>
-                                </p>
+                                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                                    <button type="button" @click="answers.q3 = 'Land'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q3 === 'Land' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Land
+                                    </button>
+                                    <button type="button" @click="answers.q3 = 'Sprache'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q3 === 'Sprache' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Sprache
+                                    </button>
+                                    <button type="button" @click="answers.q3 = 'Zahl'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q3 === 'Zahl' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Zahl
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q4 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        4. Olivia <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Spanisch.
-                                    </div>
-                                    <select x-model="answers.q4"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="lerne">lerne</option>
-                                        <option value="lernt">lernt</option>
-                                        <option value="spreche">spreche</option>
-                                        <option value="spricht">spricht</option>
-                                    </select>
+                            <!-- Item 4: achtzehn -->
+                            <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getQuestionClass(4)">
+                                <div class="mb-3">
+                                    <span class="text-[11px] font-bold text-orange-600 block mb-0.5">4. Wort:</span>
+                                    <strong class="text-base text-navy font-extrabold">achtzehn</strong>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q4 === 'lernt' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q4 === 'lernt' ? 'Benar! (Olivia lernt)' : 'Kunci jawaban: lernt'"></span>
-                                </p>
+                                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                                    <button type="button" @click="answers.q4 = 'Land'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q4 === 'Land' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Land
+                                    </button>
+                                    <button type="button" @click="answers.q4 = 'Sprache'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q4 === 'Sprache' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Sprache
+                                    </button>
+                                    <button type="button" @click="answers.q4 = 'Zahl'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q4 === 'Zahl' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Zahl
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Item 5: die Schweiz -->
+                            <div class="p-4 rounded-2xl border transition flex flex-col justify-between" :class="getQuestionClass(5)">
+                                <div class="mb-3">
+                                    <span class="text-[11px] font-bold text-orange-600 block mb-0.5">5. Wort:</span>
+                                    <strong class="text-base text-navy font-extrabold">die Schweiz</strong>
+                                </div>
+                                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                                    <button type="button" @click="answers.q5 = 'Land'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q5 === 'Land' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Land
+                                    </button>
+                                    <button type="button" @click="answers.q5 = 'Sprache'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q5 === 'Sprache' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Sprache
+                                    </button>
+                                    <button type="button" @click="answers.q5 = 'Zahl'; saveProgress();"
+                                        class="py-2 px-1 rounded-xl border text-center font-semibold transition"
+                                        :class="answers.q5 === 'Zahl' ? 'bg-orange-500 border-orange-500 text-white font-bold' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-white'">
+                                        Zahl
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Bagian B: 4 Soal Preposisi & Artikel Asal -->
+                    <!-- Bagian B: Situationsreaktion & Pragmatik (Model 2 - 3 Soal) -->
                     <div class="mb-8">
-                        <div
-                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Teil B:</strong> Ergänzen Sie die passende Präposition oder den Artikel <em>(aus, aus der, aus den)</em>:
+                        <div class="mb-4">
+                            <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Was passt in der Situation? Wählen Sie die richtige Reaktion.</h3>
+                            <p class="text-xs text-gray-500">Pilihlah respons komunikasi yang paling tepat untuk situasi percakapan berikut.</p>
                         </div>
 
                         <div class="space-y-4">
-                            <!-- Q5 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        5. Boris Walder kommt <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Österreich.
-                                    </div>
-                                    <select x-model="answers.q5"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih jawaban...</option>
-                                        <option value="aus">aus</option>
-                                        <option value="aus der">aus der</option>
-                                        <option value="aus den">aus den</option>
-                                    </select>
+                            <!-- Soal 6 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">6. Situation: Unklare E-Mail-Adresse am Telefon</span>
+                                    <p class="text-xs sm:text-sm font-semibold text-gray-700">
+                                        Lawan bicara menyebutkan alamat email dengan cepat dan tidak jelas. Apa yang sebaiknya Anda katakan untuk meminta lawan bicara mengeja?
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q5 === 'aus' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q5 === 'aus' ? 'Benar! (aus Österreich)' : 'Kunci jawaban: aus'"></span>
-                                </p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> Wie bitte? Kannst du das bitte buchstabieren?
+                                    </button>
+                                    <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Ich komme aus Brasilien.
+                                    </button>
+                                    <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Guten Morgen, Frau Weber!
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q6 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        6. Alessia Conti kommt <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Schweiz.
-                                    </div>
-                                    <select x-model="answers.q6"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih jawaban...</option>
-                                        <option value="aus">aus</option>
-                                        <option value="aus der">aus der</option>
-                                        <option value="aus den">aus den</option>
-                                    </select>
+                            <!-- Soal 7 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">7. Situation: Nach der Handynummer fragen</span>
+                                    <p class="text-xs sm:text-sm font-semibold text-gray-700">
+                                        Lukas bertanya kepada Alexis: <em>„Und wie ist deine Handynummer?“</em><br>
+                                        Bagaimana jawaban yang tepat?
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q6 === 'aus der' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q6 === 'aus der' ? 'Benar! (aus der Schweiz)' : 'Kunci jawaban: aus der'"></span>
-                                </p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> alexis_barbos@quinnet.com
+                                    </button>
+                                    <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> 0171 8264731 (null - eins - sieben - eins...).
+                                    </button>
+                                    <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Ich lerne Deutsch in Köln.
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q7 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        7. Olivia Miller kommt <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        USA.
-                                    </div>
-                                    <select x-model="answers.q7"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih jawaban...</option>
-                                        <option value="aus">aus</option>
-                                        <option value="aus der">aus der</option>
-                                        <option value="aus den">aus den</option>
-                                    </select>
+                            <!-- Soal 8 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">8. Situation: Sprachkenntnisse im Sprachkurs</span>
+                                    <p class="text-xs sm:text-sm font-semibold text-gray-700">
+                                        Di hari pertama kursus, teman sekelas bertanya: <em>„Welche Sprachen sprichst du?“</em><br>
+                                        Bagaimana jawaban yang tepat?
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q7 === 'aus den' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q7 === 'aus den' ? 'Benar! (aus den USA)' : 'Kunci jawaban: aus den'"></span>
-                                </p>
-                            </div>
-
-                            <!-- Q8 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        8. Saki Tanaka kommt <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Japan.
-                                    </div>
-                                    <select x-model="answers.q8"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih jawaban...</option>
-                                        <option value="aus">aus</option>
-                                        <option value="aus der">aus der</option>
-                                        <option value="aus den">aus den</option>
-                                    </select>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> Ich spreche Deutsch, Englisch und jetzt lerne ich Spanisch.
+                                    </button>
+                                    <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Ich komme aus der Schweiz.
+                                    </button>
+                                    <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Mein Name ist Gabriel.
+                                    </button>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q8 === 'aus' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q8 === 'aus' ? 'Benar! (aus Japan)' : 'Kunci jawaban: aus'"></span>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -1388,7 +1398,7 @@
                             <span
                                 class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                Progres tersinkronisasi otomatis ke akun Anda
+                                Progres tersinkronisasi otomatis
                             </span>
                         </div>
 
@@ -1403,24 +1413,24 @@
                     <div x-show="showKey" x-collapse
                         class="mt-6 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-navy"
                         x-cloak>
-                        <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
+                        <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban & Penjelasan:</strong>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Teil A (Konjugation):</span>
-                                <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                    <li><strong>sprichst</strong></li>
-                                    <li><strong>spreche</strong></li>
-                                    <li><strong>spricht, lernt</strong></li>
-                                    <li><strong>lernt</strong></li>
+                                <span class="font-bold text-orange-600 block mb-1">Teil A (Kategorienschleuder):</span>
+                                <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                    <li><strong>Zahl (dreizehn)</strong> &mdash; Angka 13.</li>
+                                    <li><strong>Sprache (Spanisch)</strong> &mdash; Bahasa Spanyol.</li>
+                                    <li><strong>Land (Österreich)</strong> &mdash; Negara Austria.</li>
+                                    <li><strong>Zahl (achtzehn)</strong> &mdash; Angka 18.</li>
+                                    <li><strong>Land (die Schweiz)</strong> &mdash; Negara Swiss (berartikel feminin <em>die</em>).</li>
                                 </ol>
                             </div>
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Teil B (Präpositionen):</span>
-                                <ol start="5" class="list-decimal list-inside space-y-1 text-gray-700">
-                                    <li><strong>aus</strong></li>
-                                    <li><strong>aus der</strong></li>
-                                    <li><strong>aus den</strong></li>
-                                    <li><strong>aus</strong></li>
+                                <span class="font-bold text-orange-600 block mb-1">Teil B (Situationsreaktion):</span>
+                                <ol start="6" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                    <li><strong>a (Wie bitte? Kannst du das bitte buchstabieren?)</strong> &mdash; Ungkapan klarifikasi untuk meminta mengeja.</li>
+                                    <li><strong>b (0171 8264731)</strong> &mdash; Menyebutkan nomor ponsel digit per digit.</li>
+                                    <li><strong>a (Ich spreche Deutsch, Englisch und...)</strong> &mdash; Menyebutkan bahasa yang dikuasai & dipelajari.</li>
                                 </ol>
                             </div>
                         </div>
@@ -1601,8 +1611,7 @@
                 answers: {
                     q1: '',
                     q2: '',
-                    q3a: '',
-                    q3b: '',
+                    q3: '',
                     q4: '',
                     q5: '',
                     q6: '',
@@ -1871,17 +1880,18 @@
                 // Quiz Evaluation
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'sprichst') score++;
-                    if (this.answers.q2 === 'spreche') score++;
-                    if (this.answers.q3a === 'spricht' && this.answers.q3b === 'lernt') score++;
-                    if (this.answers.q4 === 'lernt') score++;
-                    if (this.answers.q5 === 'aus') score++;
-                    if (this.answers.q6 === 'aus der') score++;
-                    if (this.answers.q7 === 'aus den') score++;
-                    if (this.answers.q8 === 'aus') score++;
+                    if (this.answers.q1 === 'Zahl') score++;
+                    if (this.answers.q2 === 'Sprache') score++;
+                    if (this.answers.q3 === 'Land') score++;
+                    if (this.answers.q4 === 'Zahl') score++;
+                    if (this.answers.q5 === 'Land') score++;
+                    if (this.answers.q6 === 'a') score++;
+                    if (this.answers.q7 === 'b') score++;
+                    if (this.answers.q8 === 'a') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
+                    this.showKey = true;
                     this.saveProgress();
                 },
 
@@ -1889,8 +1899,7 @@
                     this.answers = {
                         q1: '',
                         q2: '',
-                        q3a: '',
-                        q3b: '',
+                        q3: '',
                         q4: '',
                         q5: '',
                         q6: '',
@@ -1904,17 +1913,17 @@
                 },
 
                 getQuestionClass(qNum) {
-                    if (!this.showFeedback) return 'bg-white border-gray-200';
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
                     switch (qNum) {
-                        case 1: isCorrect = (this.answers.q1 === 'sprichst'); break;
-                        case 2: isCorrect = (this.answers.q2 === 'spreche'); break;
-                        case 3: isCorrect = (this.answers.q3a === 'spricht' && this.answers.q3b === 'lernt'); break;
-                        case 4: isCorrect = (this.answers.q4 === 'lernt'); break;
-                        case 5: isCorrect = (this.answers.q5 === 'aus'); break;
-                        case 6: isCorrect = (this.answers.q6 === 'aus der'); break;
-                        case 7: isCorrect = (this.answers.q7 === 'aus den'); break;
-                        case 8: isCorrect = (this.answers.q8 === 'aus'); break;
+                        case 1: isCorrect = (this.answers.q1 === 'Zahl'); break;
+                        case 2: isCorrect = (this.answers.q2 === 'Sprache'); break;
+                        case 3: isCorrect = (this.answers.q3 === 'Land'); break;
+                        case 4: isCorrect = (this.answers.q4 === 'Zahl'); break;
+                        case 5: isCorrect = (this.answers.q5 === 'Land'); break;
+                        case 6: isCorrect = (this.answers.q6 === 'a'); break;
+                        case 7: isCorrect = (this.answers.q7 === 'b'); break;
+                        case 8: isCorrect = (this.answers.q8 === 'a'); break;
                     }
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 }

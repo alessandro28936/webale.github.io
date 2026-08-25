@@ -970,113 +970,242 @@
                     </div>
                 </div>
 
-                <!-- Bagian A: Mengisi Kata Rumpang -->
+                <!-- Soal Bagian A: Situationsreaktion & Pragmatik (Model 2 - 4 Soal) -->
                 <div class="mb-10">
-                    <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie:
-                            einen, ein, eine, keinen, kein atau keine im Akkusativ.</h3>
-                        <p class="text-xs text-gray-500">Lengkapilah kalimat berikut dengan artikel atau kata negasi
-                            Akkusativ yang tepat.</p>
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil A: Situationsreaktion &ndash; Was sagt man beim Einkaufen?
+                        </h3>
+                        <p class="text-xs text-gray-500">Pilihlah respons percakapan yang paling tepat dan sopan sesuai dengan situasi belanja bahan pangan berikut.</p>
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-4 text-xs sm:text-sm">
                         <!-- Soal 1 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                1. Ich habe Hunger. Ich esse
-                                <input type="text" x-model="answers.q1" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Apfel.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Situation beim Bäcker:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Der Verkäufer fragt: <em>„Wer kommt dran?“</em> &ndash; Was antworten Sie?
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: der Apfel adalah kata benda maskulin)</em>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Ich, bitte. Ich möchte ein Kilo Brot und vier Brötchen.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Das Rathaus ist 100 Jahre alt.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Ich fahre am Montag nach Berlin.
+                                </button>
                             </div>
                         </div>
 
                         <!-- Soal 2 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                2. Brauchst du
-                                <input type="text" x-model="answers.q2" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Gurke für den Salat?
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Situation an der Kasse:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Die Kassiererin fragt: <em>„Brauchen Sie den Kassenzettel?“</em> &ndash; Was antworten Sie?
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: die Gurke adalah kata benda feminin)</em>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Ja, bitte. Vielen Dank!
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Nein, ich trinke lieber Tee.
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Es schneit oft im Winter.
+                                </button>
                             </div>
                         </div>
 
                         <!-- Soal 3 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                3. Zum Frühstück trinke ich
-                                <input type="text" x-model="answers.q3" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Glas Milch.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Nach dem Preis fragen:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Sie fragen auf dem Markt: <em>„Wie viel kostet der Käse?“</em> &ndash; Welche Antwort passt?
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: das Glas adalah kata benda netral)</em>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> 200 Gramm kosten 2 Euro 80.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Der Käse kommt aus Brasilien.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Ich wohne in München.
+                                </button>
                             </div>
                         </div>
 
                         <!-- Soal 4 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                4. Wir haben
-                                <input type="text" x-model="answers.q4" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Käse mehr im Kühlschrank.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Einkaufsliste planen:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Ihr Freund fragt: <em>„Was brauchen wir noch für den Salat?“</em> &ndash; Was sagen Sie?
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: der Käse adalah kata benda maskulin yang
-                                    disangkal)</em></div>
-                        </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                5. Herr Müller kauft
-                                <input type="text" x-model="answers.q5" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Brot in der Bäckerei.
-                            </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: das Brot adalah kata benda netral)</em>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Wir brauchen noch Tomaten, Gurken und Öl.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Wir gehen um 8 Uhr ins Bett.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Das ist kein Museum.
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bagian B: Menyusun Kalimat Acak -->
+                <!-- Bagian B: Kasus-Transformator Akkusativ (Model 12 - 4 Soal) -->
                 <div class="mb-8">
                     <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die
-                            richtige Reihenfolge und schreiben Sie die Sätze.</h3>
-                        <p class="text-xs text-gray-500">Susunlah kata-kata acak berikut menjadi kalimat pernyataan atau
-                            tanya yang tepat.</p>
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil B: Kasus-Transformator &ndash; Ergänzen Sie die passende Akkusativform.
+                        </h3>
+                        <p class="text-xs text-gray-500">Pilihlah bentuk artikel Akkusativ (<em>den / einen / keinen / ein / eine</em>) yang tepat untuk melengkapi kalimat objek di bawah ini.</p>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Soal 6 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                6. den Apfelsaft / ich / im Supermarkt / kaufe / .
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Bestimmter Artikel im Akkusativ (der Schinken):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Mario kauft ________ Schinken an der Fleischtheke.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q6" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> den
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> dem
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Neutrum im Akkusativ (das Glas Wasser):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Ich habe Durst. Ich trinke ________ Glas Wasser.“</em>
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> ein
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> einen
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> eine
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 7 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                7. brauchen / einen Einkaufswagen / Sie / ?
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Maskulin Negation im Akkusativ (der Käse):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Haben wir noch Käse? &ndash; Nein, wir haben ________ Käse mehr.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q7" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> keinen
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> kein
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> keine
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 8 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                8. isst / einen Kuchen / am Nachmittag / Maria / .
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Maskulin unbestimmter Artikel (der Apfel):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Zum Frühstück isst sie ________ frischen Apfel.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q8" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> einen
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> ein
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> eine
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1089,12 +1218,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
-                        <span>Periksa Jawaban</span>
+                        <span>Periksa Semua Jawaban</span>
                     </button>
 
                     <button @click="resetQuiz()"
                         class="px-4 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition">
-                        Reset
+                        Reset Jawaban
                     </button>
 
                     <button @click="showKey = !showKey"
@@ -1108,30 +1237,21 @@
                 <div x-show="showKey" x-collapse class="mt-6 pt-6 border-t border-gray-100 text-xs sm:text-sm" x-cloak>
                     <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
                         <div>
-                            <strong class="text-orange-600 block mb-1">Teil A (Lücken ergänzen):</strong>
-                            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>einen</strong> (<em>der Apfel</em> adalah maskulin, dalam kasus
-                                    <em>Akkusativ</em> artikel tak tentu berubah menjadi <em>einen</em>)</li>
-                                <li><strong>eine</strong> (<em>die Gurke</em> adalah feminin, artikel tak tentu dalam
-                                    kasus <em>Akkusativ</em> tetap <em>eine</em>)</li>
-                                <li><strong>ein</strong> (<em>das Glas</em> adalah netral, artikel tak tentu dalam kasus
-                                    <em>Akkusativ</em> tetap <em>ein</em>)</li>
-                                <li><strong>keinen</strong> (<em>der Käse</em> adalah maskulin, bentuk negasi dalam
-                                    kasus <em>Akkusativ</em> berubah menjadi <em>keinen</em>)</li>
-                                <li><strong>ein</strong> (<em>das Brot</em> adalah netral, artikel tak tentu dalam kasus
-                                    <em>Akkusativ</em> tetap <em>ein</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil A (Situationsreaktion):</strong>
+                            <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (Ich, bitte. Ich möchte...)</strong> &mdash; Respons sopan pelanggan saat giliran dilayani oleh pelayan toko roti.</li>
+                                <li><strong>a (Ja, bitte. Vielen Dank!)</strong> &mdash; Menerima tawaran struk belanja di kasir.</li>
+                                <li><strong>a (200 Gramm kosten 2 Euro 80.)</strong> &mdash; Informasi harga dan takaran timbangan keju.</li>
+                                <li><strong>a (Wir brauchen noch Tomaten, Gurken...)</strong> &mdash; Menyebutkan bahan-bahan yang masih kurang untuk membuat selada.</li>
                             </ol>
                         </div>
                         <div>
-                            <strong class="text-blue-600 block mb-1">Teil B (Sätze bilden):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>Ich kaufe den Apfelsaft im Supermarkt.</strong> (Subjek <em>ich</em> di
-                                    Posisi 1, kata kerja <em>kaufe</em> di Posisi 2, diikuti objek <em>Akkusativ</em>)
-                                </li>
-                                <li><strong>Brauchen Sie einen Einkaufswagen?</strong> (Kalimat tanya Ya/Tidak diawali
-                                    oleh kata kerja di Posisi 1)</li>
-                                <li><strong>Maria isst am Nachmittag einen Kuchen.</strong> (Subjek di Posisi 1, kata
-                                    kerja di Posisi 2, keterangan waktu, dan objek <em>Akkusativ</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil B (Kasus-Transformator Akkusativ):</strong>
+                            <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (den)</strong> &mdash; <em>der Schinken</em> berubah menjadi <em>den Schinken</em> pada posisi objek langsung (Akkusativ).</li>
+                                <li><strong>a (ein)</strong> &mdash; <em>das Glas</em> adalah netral, artikel tak tentu dalam kasus Akkusativ tetap <em>ein</em>.</li>
+                                <li><strong>a (keinen)</strong> &mdash; <em>der Käse</em> adalah maskulin, bentuk negasi Akkusativ berubah menjadi <em>keinen</em>.</li>
+                                <li><strong>a (einen)</strong> &mdash; <em>der Apfel</em> adalah maskulin, artikel tak tentu Akkusativ berubah menjadi <em>einen</em>.</li>
                             </ol>
                         </div>
                     </div>
@@ -1308,43 +1428,34 @@
 
                 // Helper Functions
                 getQuestionClass(num) {
-                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-100';
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = this.answers.q1.trim().toLowerCase() === 'einen';
-                    if (num === 2) isCorrect = this.answers.q2.trim().toLowerCase() === 'eine';
-                    if (num === 3) isCorrect = this.answers.q3.trim().toLowerCase() === 'ein';
-                    if (num === 4) isCorrect = this.answers.q4.trim().toLowerCase() === 'keinen';
-                    if (num === 5) isCorrect = this.answers.q5.trim().toLowerCase() === 'ein';
-                    if (num === 6) isCorrect = this.normalizeSentence(this.answers.q6) === 'ichkaufedenapfelsaftimsupermarkt';
-                    if (num === 7) isCorrect = this.normalizeSentence(this.answers.q7) === 'brauchensieeineneinkaufswagen';
-                    if (num === 8) isCorrect = this.normalizeSentence(this.answers.q8) === 'mariaissestamnachmittageinenkuchen' || this.normalizeSentence(this.answers.q8) === 'mariaissamnachtmittageinenkuchen' || this.normalizeSentence(this.answers.q8) === 'amnachmittagisstmariaeinenkuchen';
+                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 3) isCorrect = (this.answers.q3 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (num === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (num === 6) isCorrect = (this.answers.q6 === 'a');
+                    if (num === 7) isCorrect = (this.answers.q7 === 'a');
+                    if (num === 8) isCorrect = (this.answers.q8 === 'a');
 
-                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
-                },
-
-                normalizeSentence(str) {
-                    if (!str) return '';
-                    return str.toLowerCase().replace(/[^a-z0-9äöüß]/g, '');
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1.trim().toLowerCase() === 'einen') score++;
-                    if (this.answers.q2.trim().toLowerCase() === 'eine') score++;
-                    if (this.answers.q3.trim().toLowerCase() === 'ein') score++;
-                    if (this.answers.q4.trim().toLowerCase() === 'keinen') score++;
-                    if (this.answers.q5.trim().toLowerCase() === 'ein') score++;
-                    if (this.normalizeSentence(this.answers.q6) === 'ichkaufedenapfelsaftimsupermarkt') score++;
-                    if (this.normalizeSentence(this.answers.q7) === 'brauchensieeineneinkaufswagen') score++;
-                    const n8 = this.normalizeSentence(this.answers.q8);
-                    if (n8 === 'mariaissestamnachmittageinenkuchen' || n8 === 'mariaissamnachtmittageinenkuchen' || n8 === 'mariaissestamnachtmittageinenkuchen' || n8 === 'amnachmittagisstmariaeinenkuchen' || n8 === 'mariaissestamnachmittageinenkuchen') {
-                        score++;
-                    } else if (n8.includes('maria') && n8.includes('isst') && n8.includes('amnachmittag') && n8.includes('einenkuchen')) {
-                        score++;
-                    }
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q3 === 'a') score++;
+                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q6 === 'a') score++;
+                    if (this.answers.q7 === 'a') score++;
+                    if (this.answers.q8 === 'a') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
+                    this.showKey = true;
                     this.saveProgress();
                 },
 

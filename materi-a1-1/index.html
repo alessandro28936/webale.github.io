@@ -1729,243 +1729,258 @@
                         </div>
                     </div>
 
-                    <!-- Bagian A: 5 Soal (heiße, bist, heißen, bin, ist) -->
-                    <div class="mb-8">
-                        <div
-                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Teil A:</strong> Ergänzen Sie die Verben in der richtigen Form <em>(heiße, bist, heißen, bin, ist)</em>:
+                    <!-- Bagian A: Dialog-Rekonstruktion (Model 10 - 4 Soal) -->
+                    <div class="mb-10">
+                        <div class="mb-5">
+                            <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Rekonstruieren Sie die Dialoge. Wählen Sie die passende Reaktion.</h3>
+                            <p class="text-xs text-gray-500">Pilihlah kalimat respons yang paling tepat dan logis untuk melengkapi percakapan perkenalan di bawah ini.</p>
                         </div>
 
                         <div class="space-y-4">
-                            <!-- Q1 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        1. Hallo, wer <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        du?
-                                    </div>
-                                    <select x-model="answers.q1"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="bist">bist</option>
-                                        <option value="heiße">heiße</option>
-                                        <option value="heißen">heißen</option>
-                                        <option value="bin">bin</option>
-                                        <option value="ist">ist</option>
-                                    </select>
+                            <!-- Soal 1 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">1. Dialog im Café (Informal):</span>
+                                    <p class="text-xs sm:text-sm font-bold text-navy">
+                                        Julia: <em>„Hallo! Wie heißt du?“</em><br>
+                                        Jan: <em>„___________“</em>
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q1 === 'bist' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q1 === 'bist' ? 'Benar. Kunci jawaban: bist' : 'Kunci jawaban: bist'"></span>
-                                </p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q1 = 'a'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> Ich heiße Jan.
+                                    </button>
+                                    <button type="button" @click="answers.q1 = 'b'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Aus Frankfurt.
+                                    </button>
+                                    <button type="button" @click="answers.q1 = 'c'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Danke, gut!
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q2 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        2. Ich <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Nina Weber.
-                                    </div>
-                                    <select x-model="answers.q2"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="heiße">heiße</option>
-                                        <option value="bin">bin</option>
-                                        <option value="bist">bist</option>
-                                        <option value="heißen">heißen</option>
-                                        <option value="ist">ist</option>
-                                    </select>
+                            <!-- Soal 2 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">2. Höfliche Begrüßung (Formal):</span>
+                                    <p class="text-xs sm:text-sm font-bold text-navy">
+                                        Herr Hansen: <em>„Guten Morgen, Frau Weber! Wie geht es Ihnen?“</em><br>
+                                        Frau Weber: <em>„___________“</em>
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q2 === 'heiße' || answers.q2 === 'bin') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q2 === 'heiße' || answers.q2 === 'bin') ? 'Benar. Kunci jawaban: heiße / bin' : 'Kunci jawaban: heiße / bin'"></span>
-                                </p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q2 = 'a'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> Ich wohne in Frankfurt.
+                                    </button>
+                                    <button type="button" @click="answers.q2 = 'b'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Danke, gut. Und Ihnen?
+                                    </button>
+                                    <button type="button" @click="answers.q2 = 'c'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Tschüss, bis bald!
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q3 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        3. Wie <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Sie?
-                                    </div>
-                                    <select x-model="answers.q3"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="heiße">heiße</option>
-                                        <option value="heißen">heißen</option>
-                                        <option value="bist">bist</option>
-                                        <option value="bin">bin</option>
-                                        <option value="ist">ist</option>
-                                    </select>
+                            <!-- Soal 3 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">3. Nach der Herkunft fragen:</span>
+                                    <p class="text-xs sm:text-sm font-bold text-navy">
+                                        A: <em>„Woher kommen Sie, Frau Lang?“</em><br>
+                                        Frau Lang: <em>„___________“</em>
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q3 === 'heißen' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q3 === 'heißen' ? 'Benar. Kunci jawaban: heißen' : 'Kunci jawaban: heißen'"></span>
-                                </p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q3 = 'a'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> In Frankfurt.
+                                    </button>
+                                    <button type="button" @click="answers.q3 = 'b'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Mein Name ist Oliver.
+                                    </button>
+                                    <button type="button" @click="answers.q3 = 'c'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Ich komme aus Deutschland.
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Q4 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        4. Mein Name <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Oliver.
-                                    </div>
-                                    <select x-model="answers.q4"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="bin">bin</option>
-                                        <option value="ist">ist</option>
-                                        <option value="bist">bist</option>
-                                        <option value="heiße">heiße</option>
-                                        <option value="heißen">heißen</option>
-                                    </select>
+                            <!-- Soal 4 -->
+                            <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                                <div class="mb-3">
+                                    <span class="text-xs font-bold text-orange-600 block mb-1">4. Verabschiedung unter Freunden:</span>
+                                    <p class="text-xs sm:text-sm font-bold text-navy">
+                                        Julia: <em>„Tschüss! Bis bald!“</em><br>
+                                        Niklas: <em>„___________“</em>
+                                    </p>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="answers.q4 === 'ist' ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="answers.q4 === 'ist' ? 'Benar. Kunci jawaban: ist' : 'Kunci jawaban: ist'"></span>
-                                </p>
-                            </div>
-
-                            <!-- Q5 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        5. Ich <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        Markus.
-                                    </div>
-                                    <select x-model="answers.q5"
-                                        class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                        <option value="">Pilih kata...</option>
-                                        <option value="bin">bin</option>
-                                        <option value="heiße">heiße</option>
-                                        <option value="bist">bist</option>
-                                        <option value="ist">ist</option>
-                                        <option value="heißen">heißen</option>
-                                    </select>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <button type="button" @click="answers.q4 = 'a'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>a)</strong> Tschüss!
+                                    </button>
+                                    <button type="button" @click="answers.q4 = 'b'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>b)</strong> Guten Morgen!
+                                    </button>
+                                    <button type="button" @click="answers.q4 = 'c'; saveProgressDebounced();"
+                                        class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                        :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                        <strong>c)</strong> Ich spreche Deutsch.
+                                    </button>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q5 === 'bin' || answers.q5 === 'heiße') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q5 === 'bin' || answers.q5 === 'heiße') ? 'Benar. Kunci jawaban: heiße / bin' : 'Kunci jawaban: heiße / bin'"></span>
-                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Bagian B: 3 Soal (kommt, komme, wohnt, wohne) -->
+                    <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (Model 3 - 4 Soal) -->
                     <div class="mb-8">
-                        <div
-                            class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm font-medium text-navy mb-4">
-                            <strong class="text-orange-600 font-bold">Teil B:</strong> Was passt? Ergänzen Sie die Verben <em>(kommt, komme, wohnt, wohne)</em>:
+                        <div class="mb-4">
+                            <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
+                            <p class="text-xs text-gray-500">Susunlah kepingan kata acak berikut menjadi kalimat pernyataan atau kalimat tanya yang tepat dengan mengklik kartu kata secara berurutan.</p>
                         </div>
 
-                        <div class="space-y-4">
-                            <!-- Q6 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        6. Das ist Frau Lang. Sie <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        aus Deutschland. Sie <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        in Frankfurt.
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <select x-model="answers.q6a"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 1...</option>
-                                            <option value="kommt">kommt</option>
-                                            <option value="komme">komme</option>
-                                        </select>
-                                        <select x-model="answers.q6b"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 2...</option>
-                                            <option value="wohnt">wohnt</option>
-                                            <option value="wohne">wohne</option>
-                                        </select>
-                                    </div>
+                        <div class="space-y-6">
+                            <!-- Soal 5 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(5)">
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-navy mr-1">5. Kepingan Kata:</span>
+                                    <template x-for="chip in wordChips.q5" :key="chip.id">
+                                        <button type="button" @click="toggleChip('q5', chip)" :disabled="chip.used"
+                                            class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
+                                            :class="chip.used ? 'bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed line-through' : 'bg-white hover:bg-orange-50 border-gray-200 text-navy hover:border-orange-300 cursor-pointer'">
+                                            <span x-text="chip.text"></span>
+                                        </button>
+                                    </template>
+                                    <button type="button" @click="clearQuestionChips('q5')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-red-500 ml-auto transition">Hapus</button>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q6a === 'kommt' && answers.q6b === 'wohnt') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q6a === 'kommt' && answers.q6b === 'wohnt') ? 'Benar. Kunci jawaban: kommt, wohnt' : 'Kunci jawaban: kommt, wohnt'"></span>
-                                </p>
+
+                                <!-- Sentence Display Container -->
+                                <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                                    <template x-if="selectedChips.q5.length === 0">
+                                        <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
+                                    </template>
+                                    <template x-for="(sel, sIdx) in selectedChips.q5" :key="sIdx">
+                                        <span @click="removeSelectedChip('q5', sIdx)"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-orange-200 text-navy rounded-lg font-bold text-xs shadow-xs cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition"
+                                            title="Klik untuk menghapus kata ini">
+                                            <span x-text="sel.text"></span>
+                                            <span class="text-[10px] text-gray-400 hover:text-red-500">&times;</span>
+                                        </span>
+                                    </template>
+                                </div>
                             </div>
 
-                            <!-- Q7 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        7. Jan <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        aus Frankfurt. Er <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        in Zürich.
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <select x-model="answers.q7a"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 1...</option>
-                                            <option value="kommt">kommt</option>
-                                            <option value="komme">komme</option>
-                                        </select>
-                                        <select x-model="answers.q7b"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 2...</option>
-                                            <option value="wohnt">wohnt</option>
-                                            <option value="wohne">wohne</option>
-                                        </select>
-                                    </div>
+                            <!-- Soal 6 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(6)">
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-navy mr-1">6. Kepingan Kata:</span>
+                                    <template x-for="chip in wordChips.q6" :key="chip.id">
+                                        <button type="button" @click="toggleChip('q6', chip)" :disabled="chip.used"
+                                            class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
+                                            :class="chip.used ? 'bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed line-through' : 'bg-white hover:bg-orange-50 border-gray-200 text-navy hover:border-orange-300 cursor-pointer'">
+                                            <span x-text="chip.text"></span>
+                                        </button>
+                                    </template>
+                                    <button type="button" @click="clearQuestionChips('q6')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-red-500 ml-auto transition">Hapus</button>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q7a === 'kommt' && answers.q7b === 'wohnt') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q7a === 'kommt' && answers.q7b === 'wohnt') ? 'Benar. Kunci jawaban: kommt, wohnt' : 'Kunci jawaban: kommt, wohnt'"></span>
-                                </p>
+
+                                <!-- Sentence Display Container -->
+                                <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                                    <template x-if="selectedChips.q6.length === 0">
+                                        <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
+                                    </template>
+                                    <template x-for="(sel, sIdx) in selectedChips.q6" :key="sIdx">
+                                        <span @click="removeSelectedChip('q6', sIdx)"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-orange-200 text-navy rounded-lg font-bold text-xs shadow-xs cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition"
+                                            title="Klik untuk menghapus kata ini">
+                                            <span x-text="sel.text"></span>
+                                            <span class="text-[10px] text-gray-400 hover:text-red-500">&times;</span>
+                                        </span>
+                                    </template>
+                                </div>
                             </div>
 
-                            <!-- Q8 -->
-                            <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <div class="text-xs sm:text-sm font-semibold text-navy">
-                                        8. Ich <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        aus Indonesien. Ich <span
-                                            class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded font-bold">________</span>
-                                        in Jakarta.
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <select x-model="answers.q8a"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 1...</option>
-                                            <option value="komme">komme</option>
-                                            <option value="kommt">kommt</option>
-                                        </select>
-                                        <select x-model="answers.q8b"
-                                            class="text-xs sm:text-sm font-medium border border-gray-300 rounded-xl px-2.5 py-2 bg-white focus:outline-none focus:border-orange-500">
-                                            <option value="">Kata 2...</option>
-                                            <option value="wohne">wohne</option>
-                                            <option value="wohnt">wohnt</option>
-                                        </select>
-                                    </div>
+                            <!-- Soal 7 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(7)">
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-navy mr-1">7. Kepingan Kata:</span>
+                                    <template x-for="chip in wordChips.q7" :key="chip.id">
+                                        <button type="button" @click="toggleChip('q7', chip)" :disabled="chip.used"
+                                            class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
+                                            :class="chip.used ? 'bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed line-through' : 'bg-white hover:bg-orange-50 border-gray-200 text-navy hover:border-orange-300 cursor-pointer'">
+                                            <span x-text="chip.text"></span>
+                                        </button>
+                                    </template>
+                                    <button type="button" @click="clearQuestionChips('q7')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-red-500 ml-auto transition">Hapus</button>
                                 </div>
-                                <p x-show="showFeedback" class="text-xs mt-2 font-medium"
-                                    :class="(answers.q8a === 'komme' && answers.q8b === 'wohne') ? 'text-emerald-600' : 'text-red-500'">
-                                    <span
-                                        x-text="(answers.q8a === 'komme' && answers.q8b === 'wohne') ? 'Benar. Kunci jawaban: komme, wohne' : 'Kunci jawaban: komme, wohne'"></span>
-                                </p>
+
+                                <!-- Sentence Display Container -->
+                                <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                                    <template x-if="selectedChips.q7.length === 0">
+                                        <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
+                                    </template>
+                                    <template x-for="(sel, sIdx) in selectedChips.q7" :key="sIdx">
+                                        <span @click="removeSelectedChip('q7', sIdx)"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-orange-200 text-navy rounded-lg font-bold text-xs shadow-xs cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition"
+                                            title="Klik untuk menghapus kata ini">
+                                            <span x-text="sel.text"></span>
+                                            <span class="text-[10px] text-gray-400 hover:text-red-500">&times;</span>
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Soal 8 -->
+                            <div class="p-4 rounded-2xl border transition" :class="getSentenceQuestionClass(8)">
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-navy mr-1">8. Kepingan Kata:</span>
+                                    <template x-for="chip in wordChips.q8" :key="chip.id">
+                                        <button type="button" @click="toggleChip('q8', chip)" :disabled="chip.used"
+                                            class="px-3 py-1.5 rounded-xl text-xs font-bold border transition shadow-xs flex items-center gap-1"
+                                            :class="chip.used ? 'bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed line-through' : 'bg-white hover:bg-orange-50 border-gray-200 text-navy hover:border-orange-300 cursor-pointer'">
+                                            <span x-text="chip.text"></span>
+                                        </button>
+                                    </template>
+                                    <button type="button" @click="clearQuestionChips('q8')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-red-500 ml-auto transition">Hapus</button>
+                                </div>
+
+                                <!-- Sentence Display Container -->
+                                <div class="min-h-[46px] p-2.5 bg-gray-50/80 border border-gray-200 rounded-xl flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+                                    <template x-if="selectedChips.q8.length === 0">
+                                        <span class="text-gray-400 text-xs italic">Klik kepingan kata di atas untuk menyusun kalimat...</span>
+                                    </template>
+                                    <template x-for="(sel, sIdx) in selectedChips.q8" :key="sIdx">
+                                        <span @click="removeSelectedChip('q8', sIdx)"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-orange-200 text-navy rounded-lg font-bold text-xs shadow-xs cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition"
+                                            title="Klik untuk menghapus kata ini">
+                                            <span x-text="sel.text"></span>
+                                            <span class="text-[10px] text-gray-400 hover:text-red-500">&times;</span>
+                                        </span>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1988,7 +2003,7 @@
                             <span
                                 class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                Progres tersinkronisasi otomatis ke akun Anda
+                                Progres tersinkronisasi otomatis
                             </span>
                         </div>
 
@@ -2003,24 +2018,24 @@
                     <div x-show="showKey" x-collapse
                         class="mt-6 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-navy"
                         x-cloak>
-                        <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban:</strong>
+                        <strong class="font-extrabold text-navy text-sm block mb-3">Kunci Jawaban & Penjelasan:</strong>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Teil A (Verben konjugieren):</span>
-                                <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                    <li><strong>bist</strong></li>
-                                    <li><strong>heiße / bin</strong></li>
-                                    <li><strong>heißen</strong></li>
-                                    <li><strong>ist</strong></li>
-                                    <li><strong>heiße / bin</strong></li>
+                                <span class="font-bold text-orange-600 block mb-1">Teil A (Dialog-Rekonstruktion):</span>
+                                <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                    <li><strong>a (Ich heiße Jan.)</strong> &mdash; Pertanyaan <em>Wie heißt du?</em> dijawab dengan menyebutkan nama: <em>Ich heiße Jan.</em></li>
+                                    <li><strong>b (Danke, gut. Und Ihnen?)</strong> &mdash; Bentuk sapaan formal <em>Wie geht es Ihnen?</em> dibalas dengan ucapan terima kasih dan menanyakan kembali: <em>Danke, gut. Und Ihnen?</em></li>
+                                    <li><strong>c (Ich komme aus Deutschland.)</strong> &mdash; Pertanyaan <em>Woher kommen Sie?</em> menanyakan negara asal menggunakan preposisi <em>aus</em>: <em>Ich komme aus Deutschland.</em></li>
+                                    <li><strong>a (Tschüss!)</strong> &mdash; Salam perpisahan informal <em>Tschüss! Bis bald!</em> dibalas dengan <em>Tschüss!</em></li>
                                 </ol>
                             </div>
                             <div>
-                                <span class="font-bold text-orange-600 block mb-1">Teil B (kommen / wohnen):</span>
-                                <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
-                                    <li><strong>kommt, wohnt</strong></li>
-                                    <li><strong>kommt, wohnt</strong></li>
-                                    <li><strong>komme, wohne</strong></li>
+                                <span class="font-bold text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax):</span>
+                                <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                    <li><strong>Ich heiße Nina Weber.</strong> &mdash; Posisi 1: Subjek (<em>Ich</em>) &rarr; Posisi 2: Kata Kerja (<em>heiße</em>) &rarr; Nama.</li>
+                                    <li><strong>Wie heißen Sie?</strong> &mdash; Posisi 1: Kata Tanya W (<em>Wie</em>) &rarr; Posisi 2: Kata Kerja (<em>heißen</em>) &rarr; Subjek (<em>Sie?</em>).</li>
+                                    <li><strong>Jan kommt aus Frankfurt.</strong> &mdash; Posisi 1: Subjek (<em>Jan</em>) &rarr; Posisi 2: Kata Kerja (<em>kommt</em>) &rarr; Asal (<em>aus Frankfurt.</em>).</li>
+                                    <li><strong>Frau Lang wohnt in Deutschland.</strong> &mdash; Posisi 1: Subjek (<em>Frau Lang</em>) &rarr; Posisi 2: Kata Kerja (<em>wohnt</em>) &rarr; Tempat (<em>in Deutschland.</em>).</li>
                                 </ol>
                             </div>
                         </div>
@@ -2157,12 +2172,125 @@
                     q3: '',
                     q4: '',
                     q5: '',
-                    q6a: '',
-                    q6b: '',
-                    q7a: '',
-                    q7b: '',
-                    q8a: '',
-                    q8b: ''
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+
+                // Satzbauspiel Word Chips Data
+                wordChips: {
+                    q5: [
+                        { id: 1, text: 'Nina', used: false },
+                        { id: 2, text: 'Ich', used: false },
+                        { id: 3, text: 'heiße', used: false },
+                        { id: 4, text: 'Weber.', used: false }
+                    ],
+                    q6: [
+                        { id: 1, text: 'Sie?', used: false },
+                        { id: 2, text: 'Wie', used: false },
+                        { id: 3, text: 'heißen', used: false }
+                    ],
+                    q7: [
+                        { id: 1, text: 'aus', used: false },
+                        { id: 2, text: 'kommt', used: false },
+                        { id: 3, text: 'Frankfurt.', used: false },
+                        { id: 4, text: 'Jan', used: false }
+                    ],
+                    q8: [
+                        { id: 1, text: 'in', used: false },
+                        { id: 2, text: 'Frau Lang', used: false },
+                        { id: 3, text: 'wohnt', used: false },
+                        { id: 4, text: 'Deutschland.', used: false }
+                    ]
+                },
+
+                selectedChips: {
+                    q5: [],
+                    q6: [],
+                    q7: [],
+                    q8: []
+                },
+
+                toggleChip(qKey, chip) {
+                    if (chip.used) return;
+                    chip.used = true;
+                    this.selectedChips[qKey].push({ id: chip.id, text: chip.text });
+                    this.answers[qKey] = this.selectedChips[qKey].map(c => c.text).join(' ');
+                    this.saveProgressDebounced();
+                },
+
+                removeSelectedChip(qKey, index) {
+                    const removed = this.selectedChips[qKey].splice(index, 1)[0];
+                    if (removed) {
+                        const originalChip = this.wordChips[qKey].find(c => c.id === removed.id);
+                        if (originalChip) originalChip.used = false;
+                    }
+                    this.answers[qKey] = this.selectedChips[qKey].map(c => c.text).join(' ');
+                    this.saveProgressDebounced();
+                },
+
+                clearQuestionChips(qKey) {
+                    this.selectedChips[qKey] = [];
+                    this.wordChips[qKey].forEach(c => c.used = false);
+                    this.answers[qKey] = '';
+                    this.saveProgressDebounced();
+                },
+
+                getSentenceQuestionClass(num) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const key = 'q' + num;
+                    const ans = (this.answers[key] || '').trim();
+                    let isCorrect = false;
+
+                    if (num === 5) isCorrect = (ans === 'Ich heiße Nina Weber.');
+                    if (num === 6) isCorrect = (ans === 'Wie heißen Sie?');
+                    if (num === 7) isCorrect = (ans === 'Jan kommt aus Frankfurt.');
+                    if (num === 8) isCorrect = (ans === 'Frau Lang wohnt in Deutschland.');
+
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
+                },
+
+                // Evaluasi Kuis 8 Soal
+                checkQuiz() {
+                    let score = 0;
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'b') score++;
+                    if (this.answers.q3 === 'c') score++;
+                    if (this.answers.q4 === 'a') score++;
+                    if ((this.answers.q5 || '').trim() === 'Ich heiße Nina Weber.') score++;
+                    if ((this.answers.q6 || '').trim() === 'Wie heißen Sie?') score++;
+                    if ((this.answers.q7 || '').trim() === 'Jan kommt aus Frankfurt.') score++;
+                    if ((this.answers.q8 || '').trim() === 'Frau Lang wohnt in Deutschland.') score++;
+
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.showKey = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    ['q5', 'q6', 'q7', 'q8'].forEach(qKey => {
+                        this.selectedChips[qKey] = [];
+                        this.wordChips[qKey].forEach(c => c.used = false);
+                    });
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                getQuestionClass(num) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+
+                    const correctAnswers = {
+                        1: this.answers.q1 === 'a',
+                        2: this.answers.q2 === 'b',
+                        3: this.answers.q3 === 'c',
+                        4: this.answers.q4 === 'a'
+                    };
+
+                    return correctAnswers[num] ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 },
 
                 // Inisialisasi Aplikasi (Firebase Auth Listener & Audio Engine)
@@ -2529,53 +2657,6 @@
                     if ('speechSynthesis' in window) {
                         window.speechSynthesis.cancel();
                     }
-                },
-
-                // Evaluasi Kuis 8 Soal
-                checkQuiz() {
-                    let score = 0;
-                    if (this.answers.q1 === 'bist') score++;
-                    if (this.answers.q2 === 'heiße' || this.answers.q2 === 'bin') score++;
-                    if (this.answers.q3 === 'heißen') score++;
-                    if (this.answers.q4 === 'ist') score++;
-                    if (this.answers.q5 === 'bin' || this.answers.q5 === 'heiße') score++;
-                    if (this.answers.q6a === 'kommt' && this.answers.q6b === 'wohnt') score++;
-                    if (this.answers.q7a === 'kommt' && this.answers.q7b === 'wohnt') score++;
-                    if (this.answers.q8a === 'komme' && this.answers.q8b === 'wohne') score++;
-
-                    this.quizScore = score;
-                    this.showFeedback = true;
-                    this.saveProgress();
-
-                    if (score === 8) {
-                        alert('Ausgezeichnet! Anda telah menjawab seluruh 8 soal dengan benar.');
-                    } else {
-                        alert(`Hasil Nilai: Anda memperoleh ${score} dari 8 poin. Silakan periksa kunci jawaban yang ditampilkan.`);
-                    }
-                },
-
-                resetQuiz() {
-                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6a: '', q6b: '', q7a: '', q7b: '', q8a: '', q8b: '' };
-                    this.quizScore = null;
-                    this.showFeedback = false;
-                    this.saveProgress();
-                },
-
-                getQuestionClass(num) {
-                    if (!this.showFeedback) return 'bg-gray-50 border-gray-200';
-
-                    const correctAnswers = {
-                        1: this.answers.q1 === 'bist',
-                        2: this.answers.q2 === 'heiße' || this.answers.q2 === 'bin',
-                        3: this.answers.q3 === 'heißen',
-                        4: this.answers.q4 === 'ist',
-                        5: this.answers.q5 === 'bin' || this.answers.q5 === 'heiße',
-                        6: this.answers.q6a === 'kommt' && this.answers.q6b === 'wohnt',
-                        7: this.answers.q7a === 'kommt' && this.answers.q7b === 'wohnt',
-                        8: this.answers.q8a === 'komme' && this.answers.q8b === 'wohne'
-                    };
-
-                    return correctAnswers[num] ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 }
             }
         }

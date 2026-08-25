@@ -875,104 +875,242 @@
                     </div>
                 </div>
 
-                <!-- Bagian A: Mengisi Kata Rumpang -->
+                <!-- Soal Bagian A: Chronologische Timeline & Sequenzierung (Model 8 - 4 Soal) -->
                 <div class="mb-10">
-                    <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie: kein, keine oder die Präposition im.</h3>
-                        <p class="text-xs text-gray-500">Lengkapilah kalimat berikut dengan kata negasi atau preposisi yang tepat.</p>
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil A: Chronologische Timeline &ndash; Was kommt als Nächstes?
+                        </h3>
+                        <p class="text-xs text-gray-500">Pilihlah kelanjutan alur waktu kronologis, urutan bulan, musim, atau tahapan arah yang paling tepat.</p>
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-4 text-xs sm:text-sm">
                         <!-- Soal 1 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                1. Ist das ein Bus? – Nein, das ist
-                                <input type="text" x-model="answers.q1" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Bus, das ist eine U-Bahn.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Monatsfolge:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>Januar &rarr; Februar &rarr; März &rarr; ________?</em>
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: der Bus adalah kata benda maskulin)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> April
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Mai
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Juni
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 2 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(2)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                2. Wir reisen
-                                <input type="text" x-model="answers.q2" placeholder="..."
-                                    class="w-24 sm:w-28 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Juli nach Deutschland.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Jahreszeiten-Reihenfolge:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>Frühling &rarr; Sommer &rarr; ________?</em>
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Preposisi waktu untuk nama bulan)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> der Herbst
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> der Winter
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Montag
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 3 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(3)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                3. Ich habe
-                                <input type="text" x-model="answers.q3" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Auto, deshalb gehe ich zu Fuß.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Wegbeschreibung (Navigations-Schritt):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Gehen Sie zuerst 200 Meter geradeaus, dann biegen Sie an der Ampel ________.“</em>
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: das Auto adalah kata benda netral)</em></div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> nach rechts ab
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> der Bahnhof ist
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> kein Auto
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 4 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(4)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                4. Es schneit oft
-                                <input type="text" x-model="answers.q4" placeholder="..."
-                                    class="w-24 sm:w-28 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Winter.
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Jahreszeit & Monat:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Manakah bulan yang berada pada musim dingin (<em>im Winter</em>) di Jerman?
+                                </p>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: Preposisi waktu untuk nama musim)</em></div>
-                        </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2">
-                                5. Das sind
-                                <input type="text" x-model="answers.q5" placeholder="..."
-                                    class="w-28 sm:w-32 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                Fahrkarten, das sind Rechnungen.
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> der Januar
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> der August
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> der Juli
+                                </button>
                             </div>
-                            <div class="text-xs text-gray-400"><em>(Petunjuk: die Fahrkarten adalah bentuk jamak / Plural)</em></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bagian B: Menyusun Kalimat Acak -->
+                <!-- Bagian B: Kategorienschleuder & Sortier-Challenge (Model 6 - 4 Soal) -->
                 <div class="mb-8">
                     <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
-                        <p class="text-xs text-gray-500">Susunlah kata-kata acak berikut menjadi kalimat perintah atau kalimat tanya yang tepat.</p>
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            Teil B: Kategorienschleuder &ndash; Wählen Sie die passende Präposition.
+                        </h3>
+                        <p class="text-xs text-gray-500">Pilihlah preposisi sarana transportasi atau preposisi waktu (<em>mit dem / zu / im / am</em>) yang paling tepat untuk melengkapi kalimat.</p>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Soal 6 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(6)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                6. geradeaus / Sie / bitte / gehen / !
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Verkehrsmittel (Zug):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Ich fahre jeden Tag ________ Zug zur Arbeit.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q6" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> mit dem
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> zu dem
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> im
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Zeitangabe (Monat):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Mein Urlaub beginnt ________ August.“</em>
+                                </p>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> im
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> am
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> um
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 7 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(7)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                7. der Bahnhof / ist / Entschuldigung / wo / ?
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Zeitangabe (Wochentag):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Der Deutschkurs ist ________ Montag.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q7" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> am
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> im
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> um
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Soal 8 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(8)">
-                            <div class="text-xs sm:text-sm font-bold text-navy mb-1.5">
-                                8. an der Ampel / fahren / nach links / Sie / !
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Feste Redewendung (Fuß):</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    <em>„Ich habe kein Fahrrad, deshalb gehe ich ________ Fuß.“</em>
+                                </p>
                             </div>
-                            <input type="text" x-model="answers.q8" placeholder="Ketik kalimat lengkap di sini..."
-                                class="w-full px-3.5 py-2 bg-white border border-gray-300 rounded-xl font-medium text-navy focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> zu
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> mit dem
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-medium transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> in
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -984,12 +1122,12 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <span>Periksa Jawaban</span>
+                        <span>Periksa Semua Jawaban</span>
                     </button>
 
                     <button @click="resetQuiz()"
                         class="px-4 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition">
-                        Reset
+                        Reset Jawaban
                     </button>
 
                     <button @click="showKey = !showKey"
@@ -1002,21 +1140,21 @@
                 <div x-show="showKey" x-collapse class="mt-6 pt-6 border-t border-gray-100 text-xs sm:text-sm" x-cloak>
                     <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
                         <div>
-                            <strong class="text-orange-600 block mb-1">Teil A (Lücken ergänzen):</strong>
-                            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>kein</strong> (<em>der Bus</em> adalah maskulin, bentuk negasinya adalah <em>kein</em>)</li>
-                                <li><strong>im</strong> (Preposisi waktu untuk nama bulan selalu <em>im</em>)</li>
-                                <li><strong>kein</strong> (<em>das Auto</em> adalah netral, bentuk negasinya adalah <em>kein</em>)</li>
-                                <li><strong>im</strong> (Preposisi waktu untuk nama musim selalu <em>im</em>)</li>
-                                <li><strong>keine</strong> (<em>die Fahrkarten</em> adalah jamak / plural, bentuk negasinya adalah <em>keine</em>)</li>
+                            <strong class="text-orange-600 block mb-1">Teil A (Chronologische Timeline):</strong>
+                            <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (April)</strong> &mdash; Urutan bulan: Januari &rarr; Februari &rarr; Maret &rarr; <em>April</em>.</li>
+                                <li><strong>a (der Herbst)</strong> &mdash; Urutan musim: Musim Semi (<em>Frühling</em>) &rarr; Musim Panas (<em>Sommer</em>) &rarr; Musim Gugur (<em>Herbst</em>).</li>
+                                <li><strong>a (nach rechts ab)</strong> &mdash; Lanjutan navigasi arah: <em>„...biegen Sie nach rechts ab“</em> (belok ke kanan).</li>
+                                <li><strong>a (der Januar)</strong> &mdash; Bulan Januari berada pada musim dingin (<em>im Winter</em>: Desember, Januari, Februari).</li>
                             </ol>
                         </div>
                         <div>
-                            <strong class="text-blue-600 block mb-1">Teil B (Sätze bilden):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-1 text-gray-700">
-                                <li><strong>Gehen Sie bitte geradeaus!</strong> (Kalimat perintah formal: Kata kerja di Posisi 1, subjek <em>Sie</em> di Posisi 2)</li>
-                                <li><strong>Entschuldigung, wo ist der Bahnhof?</strong> (Kata tanya di Posisi 1, kata kerja <em>ist</em> di Posisi 2)</li>
-                                <li><strong>Fahren Sie an der Ampel nach links!</strong> (Kata kerja <em>Fahren</em> di Posisi 1, subjek <em>Sie</em> di Posisi 2)</li>
+                            <strong class="text-orange-600 block mb-1">Teil B (Kategorienschleuder):</strong>
+                            <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
+                                <li><strong>a (mit dem)</strong> &mdash; Sarana transportasi maskulin (<em>der Zug</em>) menggunakan <em>mit dem Zug</em>.</li>
+                                <li><strong>a (im)</strong> &mdash; Preposisi waktu untuk nama bulan selalu menggunakan <em>im</em> (<em>im August</em>).</li>
+                                <li><strong>a (am)</strong> &mdash; Preposisi waktu untuk nama hari selalu menggunakan <em>am</em> (<em>am Montag</em>).</li>
+                                <li><strong>a (zu)</strong> &mdash; Ungkapan tetap untuk berjalan kaki adalah <em>zu Fuß gehen</em>.</li>
                             </ol>
                         </div>
                     </div>
@@ -1175,38 +1313,34 @@
 
                 // Helper Functions
                 getQuestionClass(num) {
-                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-100';
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = this.answers.q1.trim().toLowerCase() === 'kein';
-                    if (num === 2) isCorrect = this.answers.q2.trim().toLowerCase() === 'im';
-                    if (num === 3) isCorrect = this.answers.q3.trim().toLowerCase() === 'kein';
-                    if (num === 4) isCorrect = this.answers.q4.trim().toLowerCase() === 'im';
-                    if (num === 5) isCorrect = this.answers.q5.trim().toLowerCase() === 'keine';
-                    if (num === 6) isCorrect = this.normalizeSentence(this.answers.q6) === 'gehensiebittegeradeaus';
-                    if (num === 7) isCorrect = this.normalizeSentence(this.answers.q7) === 'entschuldigungwoistderbahnhof';
-                    if (num === 8) isCorrect = this.normalizeSentence(this.answers.q8) === 'fahrensieanderampelnachlinks';
+                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 3) isCorrect = (this.answers.q3 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (num === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (num === 6) isCorrect = (this.answers.q6 === 'a');
+                    if (num === 7) isCorrect = (this.answers.q7 === 'a');
+                    if (num === 8) isCorrect = (this.answers.q8 === 'a');
 
-                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
-                },
-
-                normalizeSentence(str) {
-                    if (!str) return '';
-                    return str.toLowerCase().replace(/[^a-z0-9äöüß]/g, '');
+                    return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1.trim().toLowerCase() === 'kein') score++;
-                    if (this.answers.q2.trim().toLowerCase() === 'im') score++;
-                    if (this.answers.q3.trim().toLowerCase() === 'kein') score++;
-                    if (this.answers.q4.trim().toLowerCase() === 'im') score++;
-                    if (this.answers.q5.trim().toLowerCase() === 'keine') score++;
-                    if (this.normalizeSentence(this.answers.q6) === 'gehensiebittegeradeaus') score++;
-                    if (this.normalizeSentence(this.answers.q7) === 'entschuldigungwoistderbahnhof') score++;
-                    if (this.normalizeSentence(this.answers.q8) === 'fahrensieanderampelnachlinks') score++;
+                    if (this.answers.q1 === 'a') score++;
+                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q3 === 'a') score++;
+                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q6 === 'a') score++;
+                    if (this.answers.q7 === 'a') score++;
+                    if (this.answers.q8 === 'a') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
+                    this.showKey = true;
                     this.saveProgress();
                 },
 
