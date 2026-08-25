@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -1451,27 +1451,43 @@
                     playLine(0);
                 },
 
+                resetState() {
+                    if (this.goals && Array.isArray(this.goals)) {
+                        this.goals.forEach(g => {
+                            if (typeof g === 'object') g.completed = false;
+                        });
+                    }
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                },
+
                 // Initialization & Sync
                 initApp() {
                     this.initAudio();
-                    this.loadLocalProgress();
 
                     if (auth) {
                         auth.onAuthStateChanged((user) => {
                             this.currentUser = user;
                             this.authLoading = false;
+                            this.resetState();
                             if (user) {
                                 this.loadFirestoreProgress(user.uid);
+                            } else {
+                                this.loadLocalProgress('guest');
                             }
                         });
                     } else {
                         this.authLoading = false;
+                        this.loadLocalProgress('guest');
                     }
                 },
 
-                loadLocalProgress() {
+                loadLocalProgress(uid = 'guest') {
                     try {
-                        const saved = localStorage.getItem('aksaradeutsch_lesson_a1_7');
+                        const userKey = `aksaradeutsch_${uid}_lesson_a1_7`;
+                        const saved = localStorage.getItem(userKey);
                         if (saved) {
                             const data = JSON.parse(saved);
                             if (data.goals) this.goals = data.goals;
@@ -1484,7 +1500,7 @@
                     }
                 },
 
-                saveProgress() {
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
                     const dataToSave = {
                         lessonId: 'lesson_a1_7',
                         goals: this.goals,
@@ -1493,14 +1509,24 @@
                         showFeedback: this.showFeedback,
                         lastUpdated: new Date().toISOString()
                     };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a1_7`, JSON.stringify(dataToSave));
+                    } catch (e) {}
+                    return dataToSave;
+                },
 
-                    localStorage.setItem('aksaradeutsch_lesson_a1_7', JSON.stringify(dataToSave));
+                saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    const dataToSave = this.saveProgressToLocal(uid);
 
                     if (this.currentUser && db) {
                         this.syncStatusText = 'Menyimpan...';
                         db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a1_7')
                             .set(dataToSave, { merge: true })
                             .then(() => {
+                                db.collection('user_progress').doc(this.currentUser.uid).set({
+                                    lesson_a1_7: dataToSave
+                                }, { merge: true });
                                 this.syncStatusText = 'Tersinkronisasi';
                             })
                             .catch((err) => {
@@ -1511,6 +1537,7 @@
                 },
 
                 loadFirestoreProgress(uid) {
+                    this.loadLocalProgress(uid);
                     if (!db) return;
                     db.collection('users').doc(uid).collection('progress').doc('lesson_a1_7')
                         .get()
@@ -1521,7 +1548,7 @@
                                 if (data.answers) this.answers = data.answers;
                                 if (data.quizScore !== undefined) this.quizScore = data.quizScore;
                                 if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
-                                this.saveProgress();
+                                this.saveProgressToLocal(uid);
                             }
                         })
                         .catch((err) => {
@@ -1532,8 +1559,12 @@
                 logout() {
                     if (auth) {
                         auth.signOut().then(() => {
-                            window.location.href = 'login.html';
+                            this.currentUser = null;
+                            this.resetState();
                         });
+                    } else {
+                        this.currentUser = null;
+                        this.resetState();
                     }
                 }
             }

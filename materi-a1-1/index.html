@@ -2165,17 +2165,18 @@
                     if (auth) {
                         auth.onAuthStateChanged(async (user) => {
                             this.authLoading = false;
+                            this.resetState(); // Bersihkan state agar tidak bocor antar akun
                             if (user) {
                                 this.currentUser = user;
                                 await this.loadProgressFromCloud(user.uid);
                             } else {
                                 this.currentUser = null;
+                                this.loadLocalProgress('guest');
                             }
                         });
                     } else {
                         this.authLoading = false;
-                        // Fallback ke localStorage jika offline
-                        this.loadLocalProgress();
+                        this.loadLocalProgress('guest');
                     }
 
                     // Watcher untuk auto-save ketika peserta mencentang checklist atau memilih jawaban
@@ -2220,6 +2221,17 @@
                         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                         this.scrollPercent = height > 0 ? (winScroll / height) * 100 : 0;
                     });
+                },
+
+                resetState() {
+                    if (this.goals && Array.isArray(this.goals)) {
+                        this.goals.forEach(g => g.checked = false);
+                    }
+                    if (this.answers) {
+                        Object.keys(this.answers).forEach(k => this.answers[k] = '');
+                    }
+                    this.quizScore = null;
+                    this.showFeedback = false;
                 },
 
                 // Auth Operations
@@ -2290,31 +2302,28 @@
                             await auth.signOut();
                         }
                         this.currentUser = null;
+                        this.resetState();
                     }
                 },
 
                 // Cloud & Local Data Synchronization
                 async loadProgressFromCloud(uid) {
                     this.syncStatusText = 'Menyinkronkan...';
+                    // 1. Muat cache lokal terisolasi milik akun ini terlebih dahulu
+                    this.loadLocalProgress(uid);
+
+                    // 2. Tarik data murni milik akun ini dari Firestore
                     try {
                         if (db) {
                             let foundData = null;
-                            // 1. Check users/{uid}/progress/lesson_a1_1
                             const doc1 = await db.collection('users').doc(uid).collection('progress').doc('lesson_a1_1').get();
                             if (doc1.exists) foundData = doc1.data();
 
-                            // 2. Check user_progress/{uid}
                             if (!foundData) {
                                 const userProgDoc = await db.collection('user_progress').doc(uid).get();
                                 if (userProgDoc.exists && userProgDoc.data().lesson_a1_1) {
                                     foundData = userProgDoc.data().lesson_a1_1;
                                 }
-                            }
-
-                            // 3. Check student_progress/{uid}_materi_a1_1
-                            if (!foundData) {
-                                const docLegacy = await db.collection('student_progress').doc(`${uid}_materi_a1_1`).get();
-                                if (docLegacy.exists) foundData = docLegacy.data();
                             }
 
                             if (foundData) {
@@ -2334,23 +2343,20 @@
                                 if (foundData.showFeedback !== undefined) {
                                     this.showFeedback = foundData.showFeedback;
                                 }
-                                this.syncStatusText = 'Tersinkronisasi';
-                                this.saveProgress();
-                                return;
+                                this.saveProgressToLocal(uid);
                             }
                         }
                     } catch (e) {
-                        console.error('Firestore load error, falling back to local storage:', e);
+                        console.error('Firestore load error:', e);
                     }
 
-                    // Fallback to local storage
-                    this.loadLocalProgress();
                     this.syncStatusText = 'Tersinkronisasi';
                 },
 
-                loadLocalProgress() {
+                loadLocalProgress(uid = 'guest') {
                     try {
-                        const saved = localStorage.getItem('aksaradeutsch_lesson_a1_1') || localStorage.getItem('aksara_a1_1_progress') || localStorage.getItem('aksara_lesson_a1_1');
+                        const userKey = `aksaradeutsch_${uid}_lesson_a1_1`;
+                        const saved = localStorage.getItem(userKey);
                         if (saved) {
                             const data = JSON.parse(saved);
                             if (data.goals && Array.isArray(data.goals)) {
@@ -2383,7 +2389,7 @@
                     }, 300);
                 },
 
-                async saveProgress() {
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
                     const dataToSave = {
                         lessonId: 'lesson_a1_1',
                         goals: this.goals.map(g => g.checked),
@@ -2392,14 +2398,17 @@
                         showFeedback: this.showFeedback,
                         lastUpdated: new Date().toISOString()
                     };
-
-                    // 1. Simpan ke LocalStorage ke semua format kunci
                     try {
-                        localStorage.setItem('aksaradeutsch_lesson_a1_1', JSON.stringify(dataToSave));
-                        localStorage.setItem('aksara_a1_1_progress', JSON.stringify(dataToSave));
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a1_1`, JSON.stringify(dataToSave));
                     } catch (e) { }
+                    return dataToSave;
+                },
 
-                    // 2. Simpan ke Firestore jika user terautentikasi
+                async saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    const dataToSave = this.saveProgressToLocal(uid);
+
+                    // Simpan ke Firestore jika user terautentikasi
                     if (this.currentUser && db) {
                         this.syncStatusText = 'Menyimpan...';
                         try {

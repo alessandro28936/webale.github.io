@@ -326,7 +326,8 @@
                         <!-- Highlights Stats Grid (3 Columns Balanced) -->
                         <div class="grid grid-cols-3 gap-2 sm:gap-3">
                             <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-2xl border border-white/10">
-                                <span class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Materi
+                                <span
+                                    class="block text-[10px] sm:text-[11px] text-gray-400 font-semibold truncate">Materi
                                     Kelas</span>
                                 <strong class="text-xs sm:text-base md:text-lg font-black text-white">12 Modul</strong>
                             </div>
@@ -840,24 +841,32 @@
                     return 'Belum Dinilai';
                 },
 
+                resetAllProgress() {
+                    for (let i = 1; i <= 12; i++) {
+                        if (this[`p${i}Progress`]) {
+                            this[`p${i}Progress`].quizScore = null;
+                            this[`p${i}Progress`].completedGoals = 0;
+                        }
+                    }
+                },
+
                 // Initialization
                 initDashboard() {
-                    // Muat progres lokal terlebih dahulu agar kartu langsung terisi instan
-                    this.loadLocalProgress();
-
                     if (auth) {
                         auth.onAuthStateChanged(async (user) => {
                             this.authLoading = false;
+                            this.resetAllProgress(); // Bersihkan state agar tidak bocor antar akun
                             if (user) {
                                 this.currentUser = user;
                                 await this.loadStudentProgress(user.uid);
                             } else {
                                 this.currentUser = null;
-                                this.loadLocalProgress();
+                                this.loadLocalProgress('guest');
                             }
                         });
                     } else {
                         this.authLoading = false;
+                        this.loadLocalProgress('guest');
                     }
                 },
 
@@ -885,22 +894,16 @@
                     if (auth) {
                         auth.signOut().then(() => {
                             this.currentUser = null;
+                            this.resetAllProgress();
                         });
                     }
                 },
 
-                loadLocalProgress() {
+                loadLocalProgress(uid = 'guest') {
                     try {
-                        // 1. Lesson 1
-                        const saved1 = localStorage.getItem('aksaradeutsch_lesson_a1_1') || localStorage.getItem('aksara_a1_1_progress') || localStorage.getItem('aksara_lesson_a1_1');
-                        if (saved1) {
-                            const d1 = JSON.parse(saved1);
-                            if (d1.quizScore !== undefined) this.p1Progress.quizScore = d1.quizScore;
-                        }
-
-                        // 2. Lesson 2-12
-                        for (let i = 2; i <= 12; i++) {
-                            const saved = localStorage.getItem(`aksaradeutsch_lesson_a1_${i}`) || localStorage.getItem(`aksara_lesson_a1_${i}`);
+                        for (let i = 1; i <= 12; i++) {
+                            const userKey = `aksaradeutsch_${uid}_lesson_a1_${i}`;
+                            const saved = localStorage.getItem(userKey);
                             if (saved) {
                                 const d = JSON.parse(saved);
                                 if (d.quizScore !== undefined && this[`p${i}Progress`]) {
@@ -915,12 +918,13 @@
 
                 async loadStudentProgress(uid) {
                     this.syncStatusText = 'Menyinkronkan...';
-                    // Load local backup first
-                    this.loadLocalProgress();
+                    // 1. Muat cache lokal terisolasi milik akun ini terlebih dahulu
+                    this.loadLocalProgress(uid);
 
+                    // 2. Tarik data murni dari database Firestore milik akun ini
                     try {
                         if (db) {
-                            // 1. User progress document
+                            // Cek dokumen aggregator: user_progress/{uid}
                             const userProgDoc = await db.collection('user_progress').doc(uid).get();
                             if (userProgDoc.exists) {
                                 const prog = userProgDoc.data();
@@ -932,18 +936,12 @@
                                 }
                             }
 
-                            // 2. Subcollection progress check
+                            // Cek subcollection: users/{uid}/progress/lesson_a1_X
                             for (let i = 1; i <= 12; i++) {
                                 const docRef = await db.collection('users').doc(uid).collection('progress').doc(`lesson_a1_${i}`).get();
                                 if (docRef.exists && docRef.data().quizScore !== undefined && this[`p${i}Progress`]) {
                                     this[`p${i}Progress`].quizScore = docRef.data().quizScore;
                                 }
-                            }
-
-                            // 3. Check legacy collection for Lesson 1
-                            const docLegacy1 = await db.collection('student_progress').doc(`${uid}_materi_a1_1`).get();
-                            if (docLegacy1.exists && docLegacy1.data().quizScore !== undefined) {
-                                this.p1Progress.quizScore = docLegacy1.data().quizScore;
                             }
                         }
                     } catch (e) {

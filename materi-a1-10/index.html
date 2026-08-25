@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -1721,10 +1721,22 @@
                     playLine(0);
                 },
 
+                resetState() {
+                    if (this.learningGoals && Array.isArray(this.learningGoals)) {
+                        this.learningGoals.forEach(g => g.completed = false);
+                    }
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.clearQuestionChips('q6');
+                    this.clearQuestionChips('q7');
+                    this.clearQuestionChips('q8');
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                },
+
                 // Progress Storage & Sync
                 initApp() {
                     this.initAudio();
-                    this.loadSavedProgress();
 
                     window.addEventListener('scroll', () => {
                         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1735,19 +1747,22 @@
                     auth.onAuthStateChanged(user => {
                         this.currentUser = user;
                         this.authLoading = false;
+                        this.resetState();
                         if (user) {
                             this.userName = user.displayName || user.email.split('@')[0];
                             this.userInitial = this.userName.charAt(0).toUpperCase();
-                            this.syncWithFirestore();
+                            this.syncWithFirestore(user.uid);
                         } else {
+                            this.loadSavedProgress('guest');
                             this.syncStatusText = 'Offline (Lokal)';
                         }
                     });
                 },
 
-                loadSavedProgress() {
+                loadSavedProgress(uid = 'guest') {
                     try {
-                        const local = localStorage.getItem('aksaradeutsch_lesson_a1_10') || localStorage.getItem('aksara_lesson_a1_10');
+                        const userKey = `aksaradeutsch_${uid}_lesson_a1_10`;
+                        const local = localStorage.getItem(userKey);
                         if (local) {
                             const parsed = JSON.parse(local);
                             if (parsed.goals) {
@@ -1785,19 +1800,30 @@
                     });
                 },
 
-                saveProgress() {
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
                     const data = {
+                        lessonId: 'lesson_a1_10',
                         goals: this.learningGoals.map(g => g.completed),
                         answers: this.answers,
                         quizScore: this.quizScore,
                         updatedAt: new Date().toISOString()
                     };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a1_10`, JSON.stringify(data));
+                    } catch (e) {}
+                    return data;
+                },
 
-                    localStorage.setItem('aksaradeutsch_lesson_a1_10', JSON.stringify(data));
+                saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    const data = this.saveProgressToLocal(uid);
 
                     if (this.currentUser && db) {
                         db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a1_10').set(data, { merge: true })
                             .then(() => {
+                                db.collection('user_progress').doc(this.currentUser.uid).set({
+                                    lesson_a1_10: data
+                                }, { merge: true });
                                 this.syncStatusText = 'Tersinkronisasi';
                             })
                             .catch(err => {
@@ -1807,7 +1833,8 @@
                     }
                 },
 
-                syncWithFirestore() {
+                syncWithFirestore(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    this.loadSavedProgress(uid);
                     if (!this.currentUser || !db) return;
                     this.syncStatusText = 'Tersinkronisasi';
 
@@ -1828,7 +1855,7 @@
                                     this.quizScore = data.quizScore;
                                     this.showFeedback = true;
                                 }
-                                localStorage.setItem('aksaradeutsch_lesson_a1_10', JSON.stringify(data));
+                                this.saveProgressToLocal(uid);
                             }
                             this.syncStatusText = 'Tersinkronisasi';
                         })
@@ -1842,10 +1869,11 @@
                     if (auth) {
                         auth.signOut().then(() => {
                             this.currentUser = null;
-                            window.location.reload();
+                            this.resetState();
                         });
                     } else {
                         this.currentUser = null;
+                        this.resetState();
                     }
                 }
             }
