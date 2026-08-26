@@ -840,21 +840,22 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <!-- Section Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
                     <div>
                         <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai konjugasi möchten dan mögen serta variasi susunan kalimat.</p>
                     </div>
 
                     <!-- Live Score Badge -->
-                    <div x-show="quizScore !== null" class="flex items-center gap-3" x-cloak>
-                        <div class="px-4 py-2 rounded-2xl border text-center"
-                            :class="quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'">
-                            <span class="text-[11px] font-bold block">Skor Latihan</span>
-                            <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
-                        </div>
+                    <div class="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-2xl border border-orange-200">
+                        <span class="text-xs font-bold text-orange-800">Skor Kamu:</span>
+                        <span class="text-base font-extrabold text-orange-600"
+                            x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'"></span>
                     </div>
-                                <!-- Soal Bagian A: Fehlerkorrektur (Model 1 - 4 Soal) -->
+                </div>
+
+                <!-- Soal Bagian A: Fehlerkorrektur (Model 1 - 4 Soal) -->
                 <div class="mb-10">
                     <div class="mb-5">
                         <h3 class="text-base sm:text-lg font-extrabold text-navy">

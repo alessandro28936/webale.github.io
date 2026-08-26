@@ -799,14 +799,21 @@
                     </div>
 
                     <!-- Email Mockup Card -->
-                    <div class="p-6 rounded-3xl bg-gray-50 border border-gray-200 space-y-4">
-                        <div
-                            class="border-b border-gray-200 pb-3 flex items-center justify-between text-xs text-gray-500">
-                            <span>Kepada: <strong>freunde@aksaradeutsch.de</strong></span>
-                            <span>Subjek: <strong>Einladung zu meiner Geburtstagsparty!</strong></span>
+                    <div class="rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-200 overflow-hidden shadow-xs">
+                        <!-- Email Header Bar -->
+                        <div class="bg-slate-100/90 border-b border-slate-200 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 text-xs">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-slate-500 font-semibold flex-shrink-0">Kepada (An):</span>
+                                <span class="font-bold text-navy bg-white px-2.5 py-1 rounded-lg border border-slate-200 truncate">freunde@aksaradeutsch.de</span>
+                            </div>
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-slate-500 font-semibold flex-shrink-0">Subjek (Betreff):</span>
+                                <span class="font-bold text-navy bg-white px-2.5 py-1 rounded-lg border border-slate-200 break-words">Einladung zu meiner Geburtstagsparty!</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-3 text-xs sm:text-sm text-gray-800 leading-relaxed">
+                        <!-- Email Body Content -->
+                        <div class="p-5 sm:p-6 space-y-3.5 text-xs sm:text-sm text-gray-800 leading-relaxed bg-white">
                             <div class="font-bold text-orange-600">
                                 Liebe Freunde, / Hallo zusammen,
                             </div>
@@ -818,7 +825,7 @@
                                 Bringt bitte gute Laune und etwas zu essen mit. Könnt ihr kommen? Gebt mir bitte bis
                                 Mittwoch Bescheid.
                             </p>
-                            <div class="pt-2 font-bold text-navy">
+                            <div class="pt-2 font-bold text-navy border-t border-slate-100">
                                 Herzliche Grüße / Viele Grüße<br>
                                 <span class="font-normal text-gray-600">Sofia</span>
                             </div>
@@ -981,42 +988,19 @@
             </div>
 
             <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
-                <div
-                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
                     <div>
-                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai kata kerja terpisah
-                            (trennbare Verben) dan penulisan tanggal bertingkat.</p>
+                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai kata kerja terpisah (trennbare Verben) dan penanggalan perayaan.</p>
                     </div>
 
                     <!-- Live Score Badge -->
-                    <div x-show="quizScore !== null" class="flex items-center gap-3" x-cloak>
-                        <div class="px-4 py-2 rounded-2xl border text-center"
-                            :class="quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'">
-                            <span class="text-[11px] font-bold block">Skor Latihan</span>
-                            <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
-                        </div>
+                    <div class="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-2xl border border-orange-200">
+                        <span class="text-xs font-bold text-orange-800">Skor Kamu:</span>
+                        <span class="text-base font-extrabold text-orange-600"
+                            x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'"></span>
                     </div>
                 </div>
 
-                <!-- Bagian A: Mengisi Kata Rumpang -->
-                <div class="mb-10">
-                    <div class="mb-4">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Ergänzen Sie die Lücken mit der
-                            richtigen Form des Verbs oder der Ordnungszahl.</h3>
-                        <p class="text-xs text-gray-500">Lengkapilah kalimat rumpang berikut dengan konjugasi kata kerja
-                            terpisah atau angka bertingkat yang tepat.</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <!-- Soal 1 -->
-                        <div class="p-4 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div
-                                class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-2 flex items-center flex-wrap gap-2">
-                                <span>1. Marc und Anne</span>
-                                <input type="text" x-model="answers.q1a" placeholder="Verb..."
-                                    class="w-24 sm:w-28 px-3 py-1 bg-white border border-gray-300 rounded-xl text-center font-bold text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs sm:text-sm">
-                                <span>alle Freunde zur Geburtstagsparty</span>
-                                <input type="text" x-model="answers.q1b" placeholder="Präfix..."
                 <!-- Soal Bagian A: Odd-One-Out & Kategorien-Ausschluss (Model 15 - 4 Soal) -->
                 <div class="mb-10">
                     <div class="mb-5">

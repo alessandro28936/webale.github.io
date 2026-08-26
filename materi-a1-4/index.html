@@ -989,64 +989,17 @@
             <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
                     <div>
-                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai kata kerja sein/haben, profesi feminin, dan bentuk jamak.</p>
+                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai pembentukan kata (feminin/jamak) dan kelompok kosakata.</p>
                     </div>
 
                     <!-- Live Score Badge -->
-                    <div class="flex items-center gap-3">
-                        <template x-if="quizScore !== null">
-                            <div class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-extrabold flex items-center gap-2 border"
-                                :class="quizScore >= 6 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'">
-                                <span x-text="'Skor: ' + quizScore + ' / 8 Benar'"></span>
-                            </div>
-                        </template>
-                        <button @click="resetQuiz()" class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold transition">
-                            Reset Jawaban
-                        </button>
+                    <div class="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-2xl border border-orange-200">
+                        <span class="text-xs font-bold text-orange-800">Skor Kamu:</span>
+                        <span class="text-base font-extrabold text-orange-600"
+                            x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'"></span>
                     </div>
                 </div>
 
-                <!-- Bagian A: Konjugasi haben / sein -->
-                <div class="mb-10">
-                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-1">
-                        Teil A: Ergänzen Sie die passende Form von <em>haben</em> oder <em>sein</em>
-                    </h3>
-                    <p class="text-xs text-gray-500 mb-6">Lengkapi kalimat dengan konjugasi yang tepat dari kata kerja <em>haben</em> atau <em>sein</em>:</p>
-
-                    <div class="space-y-4 text-xs sm:text-sm">
-                        <!-- Soal 1 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">1</span>
-                                <span>Was ________ (sein) du von Beruf?</span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2 mt-3">
-                                <span class="text-xs text-gray-500 italic">Was</span>
-                                <input type="text" x-model="answers.q1" placeholder="Ketik konjugasi..."
-                                    class="px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">du von Beruf?</span>
-                            </div>
-                            <template x-if="showFeedback">
-                                <div class="mt-2 text-xs font-bold" :class="answers.q1.trim().toLowerCase() === 'bist' ? 'text-emerald-700' : 'text-red-600'">
-                                    <span x-text="answers.q1.trim().toLowerCase() === 'bist' ? '✓ Benar! (sein untuk du adalah bist)' : '✗ Jawaban benar: bist'"></span>
-                                </div>
-                            </template>
-                        </div>
-
-                        <!-- Soal 2 -->
-                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
-                            <div class="flex items-center gap-2 mb-2 font-bold text-navy">
-                                <span class="w-6 h-6 rounded-full bg-navy/10 text-navy flex items-center justify-center text-xs">2</span>
-                                <span>Ich ________ (sein) Studentin und ich ________ (haben) 24 Stunden pro Woche Kurse.</span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2 mt-3">
-                                <span class="text-xs text-gray-500 italic">Ich</span>
-                                <input type="text" x-model="answers.q2_1" placeholder="sein..."
-                                    class="w-28 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">Studentin und ich</span>
-                                <input type="text" x-model="answers.q2_2" placeholder="haben..."
-                                    class="w-28 px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-white">
-                                <span class="text-xs text-gray-500 italic">24 Stunden pro Woche Kurse.</span>
                 <!-- Soal Bagian A: Wortbildungs-Baukasten & Morphem-Puzzle (Model 9 - 4 Soal) -->
                 <div class="mb-10">
                     <div class="mb-5">

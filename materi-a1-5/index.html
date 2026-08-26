@@ -921,22 +921,13 @@
                     </div>
 
                     <!-- Live Score Badge -->
-                    <div class="flex items-center gap-3">
-                        <template x-if="quizScore !== null">
-                            <div class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-extrabold flex items-center gap-2 border"
-                                :class="quizScore >= 6 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'">
-                                <span x-text="'Skor: ' + quizScore + ' / 8 Benar'"></span>
-                            </div>
-                        </template>
-                        <button @click="resetQuiz()" class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold transition">
-                            Reset Jawaban
-                        </button>
+                    <div class="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-2xl border border-orange-200">
+                        <span class="text-xs font-bold text-orange-800">Skor Kamu:</span>
+                        <span class="text-base font-extrabold text-orange-600"
+                            x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'"></span>
                     </div>
                 </div>
 
-                <!-- Bagian A: Artikel & Negasi -->
-                <div class="mb-10">
-                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-1">
                 <!-- Soal Bagian A: Fehlerkorrektur (Model 1 - 4 Soal) -->
                 <div class="mb-10">
                     <div class="mb-5">
