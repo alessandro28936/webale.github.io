@@ -442,7 +442,7 @@
                                     <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                         x-text="item.word"></strong>
                                 </div>
-                                <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                             </div>
                             <button @click="speak(item.fullWord, item.gender === 'fem' ? 'female' : 'male')"
                                 class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -479,7 +479,7 @@
                                         <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                             x-text="shop.word"></strong>
                                     </div>
-                                    <p class="text-xs text-gray-500 truncate" x-text="shop.meaning"></p>
+                                    <p class="text-xs text-gray-500 leading-snug" x-text="shop.meaning"></p>
                                 </div>
                                 <button @click="speak(shop.fullWord, 'female')"
                                     class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition"
@@ -515,7 +515,7 @@
                                         <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                             x-text="qty.word"></strong>
                                     </div>
-                                    <p class="text-xs text-gray-500 truncate" x-text="qty.meaning"></p>
+                                    <p class="text-xs text-gray-500 leading-snug" x-text="qty.meaning"></p>
                                 </div>
                                 <button @click="speak(qty.fullWord, 'female')"
                                     class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition"

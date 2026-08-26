@@ -454,7 +454,7 @@
                                     <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                         x-text="item.word"></strong>
                                 </div>
-                                <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                             </div>
                             <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                 class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -496,7 +496,7 @@
                                             <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                                 x-text="item.word"></strong>
                                         </div>
-                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -537,7 +537,7 @@
                                             <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                                 x-text="item.word"></strong>
                                         </div>
-                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -570,7 +570,7 @@
                             <div class="min-w-0 flex-1">
                                 <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
                                     x-text="item.word"></strong>
-                                <span class="text-[11px] text-gray-500 truncate block" x-text="item.meaning"></span>
+                                <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
                             </div>
                             <button @click="speak(item.word, 'female')"
                                 class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -616,7 +616,7 @@
                     <!-- 2 Kolom: haben vs sein -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         <div class="p-5 rounded-2xl bg-orange-50/70 border border-orange-200">
-                            <span class="px-2.5 py-1 rounded-md bg-orange-200 text-orange-950 text-xs font-extrabold uppercase">1. Penggunaan Hilfsverb "sein"</span>
+                            <span class="px-2.5 py-1 rounded-md bg-orange-200 text-orange-950 text-xs font-extrabold">1. Penggunaan Hilfsverb "sein"</span>
                             <ul class="space-y-2 text-xs sm:text-sm text-gray-800 mt-3 list-disc list-inside">
                                 <li><strong>Perpindahan tempat/arah:</strong> <em>fahren, fliegen, gehen, kommen, reisen, umziehen, ziehen</em>.</li>
                                 <li><strong>Perubahan kondisi/keadaan:</strong> <em>passieren, aufwachen, einschlafen, geboren werden</em>.</li>
@@ -625,7 +625,7 @@
                         </div>
 
                         <div class="p-5 rounded-2xl bg-blue-50/70 border border-blue-200">
-                            <span class="px-2.5 py-1 rounded-md bg-blue-200 text-blue-950 text-xs font-extrabold uppercase">2. Penggunaan Hilfsverb "haben"</span>
+                            <span class="px-2.5 py-1 rounded-md bg-blue-200 text-blue-950 text-xs font-extrabold">2. Penggunaan Hilfsverb "haben"</span>
                             <ul class="space-y-2 text-xs sm:text-sm text-gray-800 mt-3 list-disc list-inside">
                                 <li><strong>Sebagian besar kata kerja bahasa Jerman:</strong> kata kerja transitif yang memerlukan objek langsung (Akkusativ), kata kerja aktivitas menetap, dan kata kerja refleksif.</li>
                                 <li><strong>Contoh:</strong> <em>lernen, arbeiten, kochen, suchen, finden, mieten, heiraten, machen, beenden</em>.</li>

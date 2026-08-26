@@ -445,7 +445,7 @@
                                             <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                                 x-text="item.word"></strong>
                                         </div>
-                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -487,7 +487,7 @@
                                             <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
                                                 x-text="item.word"></strong>
                                         </div>
-                                        <p class="text-xs text-gray-500 truncate" x-text="item.meaning"></p>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -517,7 +517,7 @@
                     <!-- Kolom 1: Mengusulkan -->
                     <div class="p-4 rounded-2xl bg-orange-50/50 border border-orange-100 flex flex-col justify-between">
                         <div>
-                            <span class="text-[11px] font-extrabold text-orange-700 uppercase tracking-wider block mb-2">1. Etwas vorschlagen</span>
+                            <span class="text-[11px] font-extrabold text-orange-700 tracking-wider block mb-2">1. Etwas vorschlagen</span>
                             <div class="space-y-3">
                                 <template x-for="(r, idx) in redemittelVorschlag" :key="idx">
                                     <div class="p-2.5 rounded-xl bg-white border border-orange-100/80 shadow-2xs">
@@ -537,7 +537,7 @@
                     <!-- Kolom 2: Menerima -->
                     <div class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex flex-col justify-between">
                         <div>
-                            <span class="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-2">2. Zusagen</span>
+                            <span class="text-[11px] font-extrabold text-emerald-700 tracking-wider block mb-2">2. Zusagen</span>
                             <div class="space-y-3">
                                 <template x-for="(r, idx) in redemittelZusage" :key="idx">
                                     <div class="p-2.5 rounded-xl bg-white border border-emerald-100/80 shadow-2xs">
@@ -577,7 +577,7 @@
                     <!-- Kolom 4: Menanyakan Rincian -->
                     <div class="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 flex flex-col justify-between">
                         <div>
-                            <span class="text-[11px] font-extrabold text-blue-700 uppercase tracking-wider block mb-2">4. Nachfragen</span>
+                            <span class="text-[11px] font-extrabold text-blue-700 tracking-wider block mb-2">4. Nachfragen</span>
                             <div class="space-y-3">
                                 <template x-for="(r, idx) in redemittelNachfragen" :key="idx">
                                     <div class="p-2.5 rounded-xl bg-white border border-blue-100/80 shadow-2xs">
