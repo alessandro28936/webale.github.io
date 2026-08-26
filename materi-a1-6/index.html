@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -755,14 +755,14 @@
                 <!-- Dialog 1: Menanyakan Arah di Jalan (Formal) -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                             <div class="min-w-0 flex-1">
                                 <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog 1</span>
                                 <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Menanyakan Arah di Jalan</h3>
                                 <p class="text-xs text-gray-400">Herr Wagner (Pria) & Frau Müller (Wanita)</p>
                             </div>
                             <button @click="playFullDialog(1)"
-                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                class="w-full sm:w-auto justify-center whitespace-nowrap flex-shrink-0 px-3.5 py-2.5 sm:py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
                                 :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -801,14 +801,14 @@
                 <!-- Dialog 2: Membicarakan Transportasi dan Rencana Perjalanan (Informal) -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                             <div class="min-w-0 flex-1">
                                 <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Dialog 2</span>
                                 <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Rencana Perjalanan & Transportasi</h3>
                                 <p class="text-xs text-gray-400">Jonas (Pria) & Sarah (Wanita)</p>
                             </div>
                             <button @click="playFullDialog(2)"
-                                class="whitespace-nowrap flex-shrink-0 px-3.5 py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
+                                class="w-full sm:w-auto justify-center whitespace-nowrap flex-shrink-0 px-3.5 py-2.5 sm:py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
                                 :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1585,3 +1585,4 @@
 </body>
 
 </html>
+

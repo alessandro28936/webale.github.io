@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -834,7 +834,7 @@
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
                         <!-- Dialog Header with 1-Line Full Audio Playback Button -->
-                        <div class="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
                             <div class="min-w-0 flex-1">
                                 <span
                                     class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog
@@ -843,7 +843,7 @@
                                 <p class="text-xs text-gray-400">Kellner (Pria), Jan (Pria) & Leela (Wanita)</p>
                             </div>
                             <button @click="playFullDialog(1)"
-                                class="px-3.5 py-2 rounded-2xl border transition shadow-xs flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
+                                class="w-full sm:w-auto justify-center px-3.5 py-2.5 sm:py-2 rounded-2xl border transition shadow-xs flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
                                 :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 text-white border-red-500 animate-pulse' : 'bg-orange-50 hover:bg-orange-100 text-orange-700 border-orange-200'">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -886,7 +886,7 @@
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
                         <!-- Dialog Header with 1-Line Full Audio Playback Button -->
-                        <div class="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
                             <div class="min-w-0 flex-1">
                                 <span
                                     class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Dialog
@@ -895,7 +895,7 @@
                                 <p class="text-xs text-gray-400">Caro (Wanita) & Leela (Wanita)</p>
                             </div>
                             <button @click="playFullDialog(2)"
-                                class="px-3.5 py-2 rounded-2xl border transition shadow-xs flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
+                                class="w-full sm:w-auto justify-center px-3.5 py-2.5 sm:py-2 rounded-2xl border transition shadow-xs flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
                                 :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 text-white border-red-500 animate-pulse' : 'bg-orange-50 hover:bg-orange-100 text-orange-700 border-orange-200'">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1735,3 +1735,4 @@
 </body>
 
 </html>
+
