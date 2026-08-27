@@ -957,11 +957,14 @@
                     </div>
 
                     <!-- Live Score Badge -->
-                    <div x-show="quizScore !== null" class="flex items-center gap-3" x-cloak>
-                        <div class="px-4 py-2 rounded-2xl border text-center"
-                            :class="quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'">
-                            <span class="text-[11px] font-bold block">Skor Latihan</span>
-                            <span class="text-xl font-extrabold" x-text="`${quizScore} / 8`"></span>
+                    <div class="flex-shrink-0 self-start sm:self-auto">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                            :class="quizScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                            <span class="text-xs font-bold"
+                                :class="quizScore === null ? 'text-orange-900/80' : (quizScore >= 6 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Latihan:</span>
+                            <span class="text-sm sm:text-base font-extrabold"
+                                :class="quizScore === null ? 'text-orange-600' : (quizScore >= 6 ? 'text-emerald-700' : 'text-amber-700')"
+                                x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'">- / 8</span>
                         </div>
                     </div>
                 </div>
@@ -1710,6 +1713,7 @@
 </body>
 
 </html>
+
 
 
 

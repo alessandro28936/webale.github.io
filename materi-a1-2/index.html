@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -1125,20 +1125,21 @@
 
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-xl relative overflow-hidden">
 
-                    <!-- Quiz Header & Score Tracker -->
-                    <div
-                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-gray-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
                         <div>
-                            <h3 class="text-lg sm:text-xl font-extrabold text-navy mt-0.5">Uji Pemahaman Pertemuan 2</h3>
-                            <p class="text-xs text-gray-500 mt-1">Lengkapi soal di bawah ini, lalu klik tombol "Periksa Jawaban".</p>
+                            <p class="text-xs sm:text-sm text-gray-500">Lengkapi soal di bawah ini untuk menguji pemahaman angka 0-20, alfabet, negara, dan bahasa.</p>
                         </div>
+
+                        <!-- Live Score Badge -->
                         <div class="flex-shrink-0 self-start sm:self-auto">
-                            <span
-                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition"
-                                :class="quizScore === null ? 'bg-purple-100 text-purple-700' : (quizScore === 8 ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800')"
-                                x-text="quizScore !== null ? 'Skor: ' + quizScore + '/8 Poin' : 'Belum Dinilai'">
-                                Belum Dinilai
-                            </span>
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                                :class="quizScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                                <span class="text-xs font-bold"
+                                    :class="quizScore === null ? 'text-orange-900/80' : (quizScore >= 6 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Latihan:</span>
+                                <span class="text-sm sm:text-base font-extrabold"
+                                    :class="quizScore === null ? 'text-orange-600' : (quizScore >= 6 ? 'text-emerald-700' : 'text-amber-700')"
+                                    x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'">- / 8</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1927,6 +1928,7 @@
 </body>
 
 </html>
+
 
 
 
