@@ -1729,7 +1729,7 @@
                 deadline: 0,
                 now: Date.now(),
                 init() {
-                    this.deadline = new Date('2026-08-05T23:59:59+07:00').getTime();
+                    this.deadline = new Date('2026-09-09T23:59:59+07:00').getTime();
                     setInterval(() => { this.now = Date.now() }, 1000);
                 },
                 selectPlan(detail) {
@@ -1777,7 +1777,7 @@
                     {
                         level: 'A1.1',
                         label: 'Level Pemula',
-                        startDate: '31 Agustus 2026',
+                        startDate: '30 September 2026',
                         desc: 'Mulai dari alfabet, sapaan, perkenalan diri, keluarga, dan rutinitas sederhana.',
                         materi: 'Materi Bahasa Jerman A1.1 yang Disusun untuk Pemula',
                         bonus: 'Bonus 500+ Kosakata Bahasa Jerman yang Wajib Dikuasai Pemula',
@@ -1786,7 +1786,7 @@
                     {
                         level: 'A1.2',
                         label: 'Lanjutan A1',
-                        startDate: '1 September 2026',
+                        startDate: '29 September 2026',
                         desc: 'Sudah punya basic bahasa Jerman? Yuk, lanjutkan perjalanan belajar bahasa Jermanmu ke tahap berikutnya!',
                         materi: 'Materi Bahasa Jerman A1.2 untuk Kamu yang Sudah Paham Dasar A1.1',
                         bonus: 'Bonus 500+ Kosakata Bahasa Jerman Lanjutan A1.1',
@@ -1795,7 +1795,7 @@
                     {
                         level: 'A2.1',
                         label: 'Lanjutan A2',
-                        startDate: '31 Agustus 2026',
+                        startDate: '30 September 2026',
                         desc: 'Lanjutkan dari dasar A1 menuju percakapan dan struktur kalimat yang lebih bervariasi.',
                         materi: 'Materi Bahasa Jerman A2.1 yang Disusun Bertahap seperti Struktur A1',
                         bonus: 'Bonus 500+ Kosakata Bahasa Jerman Lanjutan A2.1',
@@ -1804,7 +1804,7 @@
                     {
                         level: 'A2.2',
                         label: 'Penguatan A2',
-                        startDate: '1 September 2026',
+                        startDate: '29 September 2026',
                         desc: 'Perkuat kemampuan A2 dengan latihan komunikasi, kosakata lanjutan, dan persiapan praktik lebih matang.',
                         materi: 'Materi Bahasa Jerman A2.2 dengan Alur Belajar Terstruktur seperti A1',
                         bonus: 'Bonus 500+ Kosakata Bahasa Jerman Lanjutan A2.2',
@@ -2032,7 +2032,7 @@
                                     class="inline-flex items-center gap-2 py-2 px-3.5 rounded-xl bg-gray-50 border border-gray-200/80 text-xs md:text-sm mb-6">
                                     <span class="font-bold text-gray-600">Mulai Kelas:</span>
                                     <span class="font-extrabold text-navy"
-                                        x-text="plan.startDate || '31 Agustus 2026'"></span>
+                                        x-text="plan.startDate || '30 September 2026'"></span>
                                 </div>
 
                                 <!-- BENEFIT GRID (2 Kolom Ringkas) -->
@@ -2047,53 +2047,12 @@
                                                     d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </span>
-                                        <span class="text-gray-700 font-medium text-xs md:text-sm">12x Kelas Online
-                                            Interaktif via Google Meet Bersama Tutor.</span>
+                                        <span class="text-gray-700 font-medium text-xs md:text-sm">
+                                            <span x-text="['A1.2', 'A2.2'].includes(plan.level) ? '13x Kelas Online Interaktif (Termasuk 1x Simulasi Ujian Akhir)' : '12x Kelas Online Interaktif'"></span> via Google Meet Bersama Tutor.
+                                        </span>
                                     </div>
 
                                     <!-- Benefit 2 -->
-                                    <div class="flex items-start gap-2.5">
-                                        <span
-                                            class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Akses Rekaman Kelas
-                                            &amp; Materi yang Bisa Dipelajari Kapan Saja.</span>
-                                    </div>
-
-                                    <!-- Benefit 3 (Khusus Duo-Klasse) -->
-                                    <div x-show="selectedClass === 'duo'" class="flex items-start gap-2.5">
-                                        <span
-                                            class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Perhatian Tutor yang
-                                            Lebih Optimal.</span>
-                                    </div>
-
-                                    <!-- Benefit 4 -->
-                                    <div class="flex items-start gap-2.5">
-                                        <span
-                                            class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Grup Belajar
-                                            Eksklusif untuk Diskusi &amp; Tanya Jawab Bareng Tutor.</span>
-                                    </div>
-
-                                    <!-- Benefit 5 -->
                                     <div class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
@@ -2107,7 +2066,7 @@
                                             Praktis di Setiap Pertemuan agar Lebih Cepat Paham.</span>
                                     </div>
 
-                                    <!-- Benefit 6 -->
+                                    <!-- Benefit 3 -->
                                     <div class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
@@ -2117,11 +2076,39 @@
                                                     d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </span>
-                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Cocok untuk Pemula
-                                            yang Ingin Persiapan Ausbildung, Au pair, atau Tinggal di Jerman.</span>
+                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Grup Belajar
+                                            untuk Diskusi &amp; Konsultasi Materi Bareng Tutor.</span>
                                     </div>
 
-                                    <!-- Benefit Baru Khusus Duo-Klasse (Buku Cetak Netzwerk neu) -->
+                                    <!-- Benefit 4 -->
+                                    <div class="flex items-start gap-2.5">
+                                        <span
+                                            class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Akses Rekaman Kelas
+                                            yang Bisa Dipelajari Ulang.</span>
+                                    </div>
+
+                                    <!-- Benefit 5 (Khusus Duo-Klasse) -->
+                                    <div x-show="selectedClass === 'duo'" class="flex items-start gap-2.5">
+                                        <span
+                                            class="w-5 h-5 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="text-gray-700 font-medium text-xs md:text-sm">Perhatian Tutor yang
+                                            Lebih Optimal.</span>
+                                    </div>
+
+                                    <!-- Benefit 6 (Khusus Duo-Klasse) -->
                                     <div x-show="selectedClass === 'duo'" class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
@@ -2132,24 +2119,38 @@
                                             </svg>
                                         </span>
                                         <span class="text-gray-700 font-medium text-xs md:text-sm">
-                                            <strong class="text-red-500 font-extrabold">GRATIS</strong> Buku Cetak
-                                            Netzwerk neu <span
-                                                x-text="plan.level.startsWith('A1') ? 'A1' : 'A2'"></span>
+                                            <strong class="text-red-500 font-extrabold">GRATIS</strong> Buku Cetak Netzwerk neu <span x-text="plan.level.startsWith('A1') ? 'A1' : 'A2'"></span>
                                         </span>
                                     </div>
 
-                                    <!-- Bonus Kosakata (Tetap Dipertahankan) -->
+                                    <!-- Benefit 7 (Highlighted) -->
+                                    <div class="flex items-start gap-2.5">
+                                        <span
+                                            class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                        </span>
+                                        <span class="text-blue-950 font-medium text-xs md:text-sm">
+                                            <strong class="text-blue-600 font-extrabold">Modul Belajar Eksklusif</strong> (Platform Belajar Digital Khusus dengan Penjelasan Materi dan Latihan Soal) yang Bisa di Akses Kapan Saja.
+                                        </span>
+                                    </div>
+
+                                    <!-- Benefit 8 (Highlighted) -->
                                     <div class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                                 viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V6a2 2 0 10-2 2h2zm-8 4h16M3 8h18v4H3V8zm2 4v9a2 2 0 002 2h10a2 2 0 002-2v-9H5z" />
                                             </svg>
                                         </span>
-                                        <span class="text-gray-800 font-semibold text-xs md:text-sm block"
-                                            x-text="plan.bonus"></span>
+                                        <span class="text-amber-950 font-medium text-xs md:text-sm">
+                                            <strong class="text-amber-600 font-extrabold">BONUS</strong> Kamus Pintar 500+ kosakata bahasa Jerman.
+                                        </span>
                                     </div>
                                 </div>
 
