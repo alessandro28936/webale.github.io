@@ -333,8 +333,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.625rem 1.25rem;
-            margin-bottom: 1.5rem;
+            padding: 0.375rem 0.875rem;
+            margin-bottom: 1rem;
             border: 1px solid #ffedd5;
             border-radius: 9999px;
             background: #fff7ed;
@@ -345,7 +345,7 @@
             font-size: 0.75rem;
             line-height: 1rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
@@ -561,27 +561,13 @@
 
     <!-- Hero Section -->
     <main id="home"
-        class="container mx-auto px-5 sm:px-8 lg:px-10 xl:px-16 py-6 sm:py-8 md:py-12 lg:py-16 flex flex-col lg:flex-row items-center gap-5 sm:gap-6 lg:gap-8 xl:gap-12 overflow-hidden">
+        class="container mx-auto px-5 sm:px-8 lg:px-10 xl:px-16 pt-6 sm:pt-8 md:pt-10 lg:pt-6 xl:pt-8 pb-6 sm:pb-8 md:pb-10 lg:pb-8 xl:pb-10 flex flex-col lg:flex-row items-center gap-5 sm:gap-6 lg:gap-8 xl:gap-12 overflow-hidden">
 
         <!-- Kolom Teks (Kiri) -->
         <div
-            class="w-full lg:w-[54%] xl:w-[46%] space-y-4 sm:space-y-5 md:space-y-7 z-10 order-1 text-center lg:text-left">
-            <div
-                class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 bg-orange-50 border border-orange-100 rounded-full mx-auto lg:mx-0">
-                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z">
-                    </path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 14l6.16-3.42A12.08 12.08 0 0118 13.5C18 16.54 15.31 19 12 19s-6-2.46-6-5.5c0-.99-.06-1.96-.16-2.92L12 14z">
-                    </path>
-                </svg>
-                <span class="text-orange-600 font-bold text-[11px] sm:text-sm tracking-wide">Belajar Bahasa Jerman dari
-                    Nol</span>
-            </div>
-
+            class="w-full lg:w-[54%] xl:w-[46%] space-y-4 sm:space-y-5 md:space-y-6 z-10 order-1 text-center lg:text-left lg:-mt-10 xl:-mt-14">
             <h1
-                class="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[44px] xl:text-[64px] font-extrabold text-navy leading-[1.1]">
+                class="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[44px] xl:text-[64px] font-extrabold text-navy leading-[1.12] tracking-tight">
                 Mulai belajar <br>
                 bahasa Jerman <br>
                 <span class="whitespace-nowrap">dengan cara yang</span> <br>
@@ -589,13 +575,13 @@
             </h1>
 
             <p
-                class="text-gray-500 text-xs sm:text-base md:text-lg lg:text-base xl:text-xl leading-[1.8] max-w-xl mx-auto lg:mx-0">
+                class="text-gray-500 text-sm sm:text-base md:text-lg lg:text-base xl:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Untuk kamu yang belum pernah belajar sama sekali atau masih bingung mulai dari mana, kita belajar
                 pelan-pelan, step by step, <span class="whitespace-nowrap">sampai kamu paham.</span>
             </p>
 
             <div
-                class="flex flex-row items-center gap-2 sm:gap-4 pt-1.5 sm:pt-2 md:pt-4 max-w-xl mx-auto lg:mx-0 justify-center lg:justify-start">
+                class="flex flex-row items-center gap-2.5 sm:gap-4 pt-1 sm:pt-2 md:pt-3 max-w-xl mx-auto lg:mx-0 justify-center lg:justify-start">
 
                 <a href="https://wa.me/6281959896825?text=Halo%20Aksaradeutsch!%20Saya%20mau%20belajar%20bahasa%20Jerman.%20Kelas%20mana%20ya%20yang%20paling%20cocok%20buat%20saya%3F%20Mohon%20infokan%20detail%20kelasnya.%20Danke!"
                     target="_blank" rel="noopener noreferrer" data-pixel-event="Mulai Belajar Sekarang"
@@ -624,7 +610,7 @@
 
         <!-- Kolom Gambar (Kanan) -->
         <div
-            class="flex w-full lg:w-[46%] xl:w-[54%] order-2 justify-center lg:justify-end relative mt-5 sm:mt-6 lg:mt-0 lg:pl-8 xl:pl-0">
+            class="flex w-full lg:w-[46%] xl:w-[54%] order-2 justify-center lg:justify-end relative mt-5 sm:mt-6 lg:mt-0 lg:pl-8 xl:pl-0 lg:-mt-4 xl:-mt-8">
             <div
                 class="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[440px] lg:h-[440px] xl:w-[580px] xl:h-[580px] 2xl:w-[680px] 2xl:h-[680px] bg-blue-100/40 rounded-full blur-3xl -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             </div>
@@ -640,13 +626,18 @@
     </main>
 
     <!-- Section 1: Kenapa Aksaradeutsch.com -->
-    <section id="tentang" class="pt-8 pb-3 md:pt-12 md:pb-6 lg:pt-12 lg:pb-0 bg-white">
+    <section id="tentang" class="pt-6 pb-3 md:pt-8 md:pb-6 lg:pt-8 lg:pb-0 bg-white">
         <div class="container mx-auto px-6 md:px-16">
             <div class="flex flex-col lg:flex-row gap-3 md:gap-8 lg:gap-12 items-center">
                 <!-- Sisi Kiri: Teks & Gambar Karakter -->
                 <div class="lg:w-1/3 text-center lg:text-left">
                     <div class="section-heading-wrap lg-left lg-narrow is-compact">
                         <div class="section-kicker">
+                            <svg class="w-4 h-4 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                             <span class="section-kicker-text">Kenapa Aksaradeutsch?</span>
                         </div>
                         <h2 class="section-title">
@@ -780,7 +771,12 @@
         <div class="container mx-auto px-6 md:px-16">
             <div class="section-heading-wrap is-compact">
                 <div class="section-kicker">
-                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    <svg class="w-4 h-4 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                        </path>
+                    </svg>
                     <span class="section-kicker-text">Cerita Sobat Deutschies</span>
                 </div>
                 <h2 class="section-title">
@@ -857,6 +853,15 @@
             selectedMainLevel: null,
             currentTab: null,
             showGameIframe: false,
+            deadline: 0,
+            now: Date.now(),
+            init() {
+                this.deadline = new Date('2026-09-09T23:59:59+07:00').getTime();
+                setInterval(() => { this.now = Date.now() }, 1000);
+            },
+            get earlyBirdActive() {
+                return this.now < this.deadline;
+            },
             selectMainLevel(level) {
                 if (this.selectedMainLevel === level) {
                     // Toggle off — klik level yang sama = tutup
@@ -1119,65 +1124,158 @@
                         class="inline-block transition-colors duration-300">Ingin Kamu Pelajari</span>
                 </h2>
                 <p class="section-subtitle">
-                    Mulai dari sini — pilih level yang sesuai untukmu.
+                    Mulai dari sini, pilih level yang sesuai untukmu.
                 </p>
             </div>
 
-            <!-- LEVEL CARDS (Prominent Selection) — outside section-heading-wrap to allow full container width -->
+            <!-- LEVEL CARDS (Modern Dashboard UI + Pricing & Badges) -->
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-7 mt-4 sm:mt-6 mb-6 sm:mb-8 max-w-4xl mx-auto">
+                class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-4 sm:mt-6 mb-6 sm:mb-8 max-w-4xl mx-auto">
                 <!-- Card A1 (Pemula — Warm Sunset Orange) -->
-                <button type="button" @click="selectMainLevel('A1')"
+                <div @click="selectMainLevel('A1')"
                     :class="selectedMainLevel === 'A1'
-                        ? 'border-orange-500 bg-gradient-to-br from-orange-100/70 via-amber-50/50 to-orange-50/40 shadow-[0_0_20px_rgba(249,115,22,0.35)] scale-[1.01]'
-                        : 'border-gray-300 bg-gradient-to-br from-orange-50/40 via-amber-50/20 to-white shadow-[0_0_12px_rgba(249,115,22,0.06)] hover:border-orange-400 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)] hover:-translate-y-1'"
-                    class="w-full p-5 sm:p-7 md:p-9 rounded-[24px] md:rounded-[28px] border text-left transition-all duration-300 group cursor-pointer relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-[50px] bg-orange-200/20 pointer-events-none transition-opacity"
-                        :class="selectedMainLevel === 'A1' ? 'opacity-30' : 'opacity-0 group-hover:opacity-20'"></div>
-                    <div class="relative z-10 flex flex-col h-full">
-                        <span
-                            class="font-extrabold text-orange-500 text-xs sm:text-sm tracking-wide mb-1 block">Pemula</span>
-                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy leading-tight">Level A1
-                        </h3>
-                        <p
-                            class="text-xs sm:text-sm md:text-base text-gray-600 mt-1.5 sm:mt-2 leading-relaxed flex-1 font-medium">
-                            Baru mulai
-                            belajar bahasa Jerman? Belajar step by step dari nol untuk pemula di sini.</p>
-                        <div class="mt-4 sm:mt-5 flex items-center">
-                            <span
-                                :class="selectedMainLevel === 'A1' ? 'bg-orange-600 text-white shadow-md' : 'bg-orange-500 text-white group-hover:bg-orange-600 shadow-xs'"
-                                class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300 inline-flex items-center gap-1.5"
-                                x-text="selectedMainLevel === 'A1' ? '✓ Dipilih — klik lagi untuk tutup' : 'Pilih Level Ini →'"></span>
+                        ? 'border-orange-500 ring-2 ring-orange-400/40 shadow-[0_10px_30px_rgba(249,115,22,0.22)] scale-[1.01]'
+                        : 'border-gray-200 shadow-[0_4px_20px_rgba(249,115,22,0.08)] hover:border-orange-300 hover:shadow-[0_10px_28px_rgba(249,115,22,0.18)] hover:-translate-y-1'"
+                    class="bg-white rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer group text-left">
+                    <div>
+                        <!-- Thumbnail Cover (Compact on Mobile) -->
+                        <div
+                            class="relative w-full h-32 sm:h-44 md:h-52 bg-gray-100 overflow-hidden border-b border-gray-100">
+                            <img src="materi-7.png" alt="Level A1"
+                                class="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
+                                onerror="this.src='Aksaradeutsch.jpg'">
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-4 sm:p-6">
+                            <!-- Small Pill Badges -->
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2 sm:mb-3">
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-600 border border-orange-200/70">Pemula</span>
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60">Online</span>
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60">1
+                                    Bulan</span>
+                            </div>
+
+                            <h3 class="text-lg sm:text-2xl font-extrabold text-navy leading-snug mb-1 sm:mb-1.5">
+                                Level A1
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3 sm:mb-4">
+                                Baru mulai belajar bahasa Jerman? Belajar step by step dari nol untuk pemula di sini.
+                            </p>
+
+                            <!-- Price Block -->
+                            <div class="pt-2.5 sm:pt-3.5 border-t border-gray-100">
+                                <span class="text-[10px] sm:text-[11px] text-gray-400 font-bold block mb-0.5">Mulai
+                                    dari:</span>
+                                <template x-if="earlyBirdActive">
+                                    <div>
+                                        <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5">
+                                            <span
+                                                class="text-xs sm:text-sm text-gray-400 line-through font-semibold">Rp469.000</span>
+                                            <span
+                                                class="text-[9px] sm:text-xs font-black text-red-500 bg-red-50 px-1.5 sm:px-2 py-0.5 rounded-md uppercase tracking-wider">Promo
+                                                Early Bird</span>
+                                        </div>
+                                        <div class="text-xl sm:text-3xl font-black text-navy tracking-tight">
+                                            Rp439.000
+                                        </div>
+                                    </div>
+                                </template>
+                                <template x-if="!earlyBirdActive">
+                                    <div class="text-xl sm:text-3xl font-black text-navy tracking-tight">
+                                        Rp469.000
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
-                </button>
+
+                    <!-- Card Action Button -->
+                    <div class="p-4 sm:p-6 pt-0">
+                        <button type="button" @click.stop="selectMainLevel('A1')"
+                            :class="selectedMainLevel === 'A1' ? 'bg-orange-600 text-white shadow-md' : 'btn-orange text-white shadow-sm hover:shadow-md'"
+                            class="w-full py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]">
+                            <span
+                                x-text="selectedMainLevel === 'A1' ? '✓ Dipilih — klik lagi untuk tutup' : 'Pilih Level Ini →'"></span>
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Card A2 (Lanjutan — Fresh Emerald Teal) -->
-                <button type="button" @click="selectMainLevel('A2')"
+                <div @click="selectMainLevel('A2')"
                     :class="selectedMainLevel === 'A2'
-                        ? 'border-teal-500 bg-gradient-to-br from-teal-100/70 via-emerald-50/50 to-teal-50/40 shadow-[0_0_20px_rgba(13,148,136,0.35)] scale-[1.01]'
-                        : 'border-gray-300 bg-gradient-to-br from-teal-50/40 via-emerald-50/20 to-white shadow-[0_0_12px_rgba(13,148,136,0.06)] hover:border-teal-500 hover:shadow-[0_0_15px_rgba(13,148,136,0.2)] hover:-translate-y-1'"
-                    class="w-full p-5 sm:p-7 md:p-9 rounded-[24px] md:rounded-[28px] border text-left transition-all duration-300 group cursor-pointer relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-[50px] bg-teal-200/20 pointer-events-none transition-opacity"
-                        :class="selectedMainLevel === 'A2' ? 'opacity-30' : 'opacity-0 group-hover:opacity-20'"></div>
-                    <div class="relative z-10 flex flex-col h-full">
-                        <span
-                            class="font-extrabold text-teal-600 text-xs sm:text-sm tracking-wide mb-1 block">Lanjutan</span>
-                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy leading-tight">Level A2
-                        </h3>
-                        <p
-                            class="text-xs sm:text-sm md:text-base text-gray-600 mt-1.5 sm:mt-2 leading-relaxed flex-1 font-medium">
-                            Untuk kamu
-                            yang sudah menguasai tingkat dasar A1 dan ingin naik tingkat ke jenjang belajar yang lebih
-                            serius.</p>
-                        <div class="mt-4 sm:mt-5 flex items-center">
-                            <span
-                                :class="selectedMainLevel === 'A2' ? 'bg-teal-700 text-white shadow-md' : 'bg-teal-600 text-white group-hover:bg-teal-700 shadow-xs'"
-                                class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300 inline-flex items-center gap-1.5"
-                                x-text="selectedMainLevel === 'A2' ? '✓ Dipilih — klik lagi untuk tutup' : 'Pilih Level Ini →'"></span>
+                        ? 'border-teal-500 ring-2 ring-teal-400/40 shadow-[0_10px_30px_rgba(13,148,136,0.22)] scale-[1.01]'
+                        : 'border-gray-200 shadow-[0_4px_20px_rgba(13,148,136,0.08)] hover:border-teal-300 hover:shadow-[0_10px_28px_rgba(13,148,136,0.18)] hover:-translate-y-1'"
+                    class="bg-white rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer group text-left">
+                    <div>
+                        <!-- Thumbnail Cover (Compact on Mobile) -->
+                        <div
+                            class="relative w-full h-32 sm:h-44 md:h-52 bg-gray-100 overflow-hidden border-b border-gray-100">
+                            <img src="materi-10.png" alt="Level A2"
+                                class="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
+                                onerror="this.src='Aksaradeutsch.jpg'">
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-4 sm:p-6">
+                            <!-- Small Pill Badges -->
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2 sm:mb-3">
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200/70">Lanjutan</span>
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60">Online</span>
+                                <span
+                                    class="text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60">1
+                                    Bulan</span>
+                            </div>
+
+                            <h3 class="text-lg sm:text-2xl font-extrabold text-navy leading-snug mb-1 sm:mb-1.5">
+                                Level A2
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3 sm:mb-4">
+                                Untuk kamu yang sudah menguasai tingkat dasar A1 dan ingin naik tingkat ke jenjang belajar yang lebih serius.
+                            </p>
+
+                            <!-- Price Block -->
+                            <div class="pt-2.5 sm:pt-3.5 border-t border-gray-100">
+                                <span class="text-[10px] sm:text-[11px] text-gray-400 font-bold block mb-0.5">Mulai
+                                    dari:</span>
+                                <template x-if="earlyBirdActive">
+                                    <div>
+                                        <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5">
+                                            <span
+                                                class="text-xs sm:text-sm text-gray-400 line-through font-semibold">Rp469.000</span>
+                                            <span
+                                                class="text-[9px] sm:text-xs font-black text-red-500 bg-red-50 px-1.5 sm:px-2 py-0.5 rounded-md uppercase tracking-wider">Promo
+                                                Early Bird</span>
+                                        </div>
+                                        <div class="text-xl sm:text-3xl font-black text-navy tracking-tight">
+                                            Rp439.000
+                                        </div>
+                                    </div>
+                                </template>
+                                <template x-if="!earlyBirdActive">
+                                    <div class="text-xl sm:text-3xl font-black text-navy tracking-tight">
+                                        Rp469.000
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
-                </button>
+
+                    <!-- Card Action Button -->
+                    <div class="p-4 sm:p-6 pt-0">
+                        <button type="button" @click.stop="selectMainLevel('A2')"
+                            :class="selectedMainLevel === 'A2' ? 'bg-teal-800 text-white shadow-md' : 'bg-teal-600 hover:bg-teal-700 text-white shadow-sm hover:shadow-md'"
+                            class="w-full py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]">
+                            <span
+                                x-text="selectedMainLevel === 'A2' ? '✓ Dipilih — klik lagi untuk tutup' : 'Pilih Level Ini →'"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
 
@@ -1876,8 +1974,13 @@
         <div class="container mx-auto px-6 md:px-16">
             <div class="section-heading-wrap">
                 <div class="section-kicker">
-                    <span class="font-extrabold text-xs text-orange-500 select-none">Rp</span>
-                    <span class="section-kicker-text">Biaya</span>
+                    <svg class="w-4 h-4 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                    <span class="section-kicker-text">Pilihan Kelas & Biaya</span>
                 </div>
                 <h2 class="section-title !text-[22px] sm:!text-[2.25rem] md:!text-[3rem]">
                     Belajar Bahasa Jerman dari Nol, Tanpa Bikin <span class="whitespace-nowrap">Kantong Jebol</span>
@@ -2048,7 +2151,9 @@
                                             </svg>
                                         </span>
                                         <span class="text-gray-700 font-medium text-xs md:text-sm">
-                                            <span x-text="['A1.2', 'A2.2'].includes(plan.level) ? '13x Kelas Online Interaktif (Termasuk 1x Simulasi Ujian Akhir)' : '12x Kelas Online Interaktif'"></span> via Google Meet Bersama Tutor.
+                                            <span
+                                                x-text="['A1.2', 'A2.2'].includes(plan.level) ? '13x Kelas Online Interaktif (Termasuk 1x Simulasi Ujian Akhir)' : '12x Kelas Online Interaktif'"></span>
+                                            via Google Meet Bersama Tutor.
                                         </span>
                                     </div>
 
@@ -2119,7 +2224,9 @@
                                             </svg>
                                         </span>
                                         <span class="text-gray-700 font-medium text-xs md:text-sm">
-                                            <strong class="text-red-500 font-extrabold">GRATIS</strong> Buku Cetak Netzwerk neu <span x-text="plan.level.startsWith('A1') ? 'A1' : 'A2'"></span>
+                                            <strong class="text-red-500 font-extrabold">GRATIS</strong> Buku Cetak
+                                            Netzwerk neu <span
+                                                x-text="plan.level.startsWith('A1') ? 'A1' : 'A2'"></span>
                                         </span>
                                     </div>
 
@@ -2127,14 +2234,16 @@
                                     <div class="flex items-start gap-2.5">
                                         <span
                                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2"
-                                                viewBox="0 0 24 24">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                stroke-width="2.2" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                             </svg>
                                         </span>
                                         <span class="text-blue-950 font-medium text-xs md:text-sm">
-                                            <strong class="text-blue-600 font-extrabold">Modul Belajar Eksklusif</strong> (Platform Belajar Digital Khusus dengan Penjelasan Materi dan Latihan Soal) yang Bisa di Akses Kapan Saja.
+                                            <strong class="text-blue-600 font-extrabold">Modul Belajar
+                                                Eksklusif</strong> (Platform Belajar Digital Khusus dengan Penjelasan
+                                            Materi dan Latihan Soal) yang Bisa di Akses Kapan Saja.
                                         </span>
                                     </div>
 
@@ -2149,7 +2258,8 @@
                                             </svg>
                                         </span>
                                         <span class="text-amber-950 font-medium text-xs md:text-sm">
-                                            <strong class="text-amber-600 font-extrabold">BONUS</strong> Kamus Pintar 500+ kosakata bahasa Jerman.
+                                            <strong class="text-amber-600 font-extrabold">BONUS</strong> Kamus Pintar
+                                            500+ kosakata bahasa Jerman.
                                         </span>
                                     </div>
                                 </div>
@@ -2303,15 +2413,15 @@
             {
                 id: 2,
                 q: 'Kalau saya sibuk, masih bisa ikut?',
-                sub: 'Masih bisa. Kamu juga akan dapat rekaman kelas, jadi bisa belajar ulang kapan saja sesuai waktu luang kamu.',
-                a: 'Rekaman membantu kamu mengulang materi tanpa merasa tertinggal.',
+                sub: 'Tentu saja masih bisa. Kamu akan mendapatkan akses rekaman kelas di setiap sesi dan akses ke Modul Belajar Eksklusif di platform digital yang bisa kamu pelajari kapan saja secara fleksibel.',
+                a: 'Jika berhalangan hadir saat sesi live, kamu tetap bisa mengejar materi melalui rekaman video, berlatih soal secara mandiri di platform, dan bertanya langsung kepada tutor di grup diskusi.',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6v6l4 2m5-2a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>`
             },
             {
                 id: 3,
                 q: 'Apakah ada batas usia untuk ikut kelas?',
-                sub: 'Tidak ada batas usia. Siapa saja yang ingin mulai belajar bahasa Jerman boleh bergabung.',
-                a: 'Materi pembelajaran disusun khusus untuk pemula dengan cara belajar yang lebih santai, step-by-step, dan mudah dipahami, sehingga tetap nyaman diikuti meskipun belum pernah belajar bahasa Jerman sebelumnya.',
+                sub: 'Program belajar di Aksaradeutsch terbuka untuk peserta berusia minimal 16 tahun (mulai dari jenjang SMA/sederajat, mahasiswa, hingga dewasa/profesional).',
+                a: 'Batasan usia minimal 16 tahun ini dirancang agar ritme belajar, diskusi interaktif, serta materi praktis (seperti persiapan studi, Ausbildung, karier, maupun Au Pair di Jerman) dapat berlangsung secara optimal, efektif, dan saling mendukung.',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'></path></svg>`
             },
             {
@@ -2324,22 +2434,22 @@
             {
                 id: 5,
                 q: 'Takut nggak bisa ngikutin, gimana?',
-                sub: 'Tenang, kamu nggak sendirian. Ada sesi diskusi dan kamu bisa tanya kalau ada yang belum paham.',
-                a: 'Kamu juga bisa mengulang materi dan rekaman kelas.',
+                sub: 'Tenang, kelas dibatasi dalam kelompok kecil (maksimal 12 orang di Intensiv-Klasse dan maksimal 2 orang di Duo-Klasse) sehingga tutor dapat membimbing setiap peserta secara bertahap dan perhatian lebih optimal.',
+                a: 'Materi dipelajari step-by-step dari nol dengan latihan praktis di setiap sesi. Kamu juga didukung oleh grup diskusi aktif bareng tutor, Modul Belajar Eksklusif, dan rekaman kelas yang selalu bisa diputar ulang.',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m7-4a4 4 0 10-8 0 4 4 0 008 0zm6 0a3 3 0 11-6 0 3 3 0 016 0z'></path></svg>`
             },
             {
                 id: 6,
                 q: 'Belajarnya online atau offline?',
-                sub: 'Semua kelas dilakukan secara online via Google Meet, jadi kamu bisa ikut dari mana saja.',
-                a: 'Kamu cukup menyiapkan device, koneksi internet, dan waktu belajar.',
+                sub: 'Seluruh sesi kelas tatap muka dilakukan secara online interaktif via Google Meet, didukung platform Modul Belajar Digital interaktif yang bisa diakses dari mana saja.',
+                a: 'Kamu cukup menyiapkan perangkat (laptop, tablet, atau smartphone), koneksi internet, dan komitmen waktu belajar yang nyaman dari rumah.',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9.75 17L9 21l3-1.5L15 21l-.75-4M5 8h14M7 4h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z'></path></svg>`
             },
             {
                 id: 7,
                 q: 'Apa saja yang akan saya dapat?',
-                sub: 'Kelas live interaktif, rekaman kelas, materi belajar, latihan, dan group diskusi.',
-                a: 'Semua dibuat supaya kamu bisa belajar ulang dan tetap punya tempat bertanya.',
+                sub: 'Kamu akan mendapatkan fasilitas belajar lengkap: 12x–13x sesi kelas live interaktif, akses Modul Belajar Eksklusif (Platform Digital), BONUS Kamus Pintar 500+ kosakata, rekaman kelas, latihan tugas praktis, serta grup diskusi bareng tutor.',
+                a: 'Seluruh benefit dirancang agar proses belajarmu terarah dan menyenangkan. Khusus pendaftar Duo-Klasse, kamu juga akan mendapatkan GRATIS Buku Cetak Netzwerk neu fisik yang dikirim langsung ke alamatmu serta pendampingan tutor yang jauh lebih optimal (maksimal 2 peserta).',
                 icon: `<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7m16 0H4m16 0l-2-5H6l-2 5m8-5v14'></path></svg>`
             },
             {
@@ -2371,8 +2481,12 @@
 
             <div class="section-heading-wrap">
                 <div class="section-kicker">
-                    <span
-                        class="w-7 h-7 rounded-full bg-orange-500 text-white flex items-center justify-center font-extrabold text-sm">?</span>
+                    <svg class="w-4 h-4 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
                     <span class="section-kicker-text">FAQ</span>
                 </div>
                 <h2 class="section-title">
