@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 8: Die Geburtstagsparty und Reflexive Verben - Aksaradeutsch</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0B1528',
+                            light: '#162138',
+                            dark: '#060B14'
+                        },
+                        orange: {
+                            DEFAULT: '#FF6B35',
+                            hover: '#FA5A1E',
+                            light: '#FFF0EB'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Inline Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+    </script>
+
+    <!-- Content Protection & Anti-Copy Script -->
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @media print {
+            body * {
+                display: none !important;
+            }
+
+            #print-shield-warning {
+                display: block !important;
+                padding: 40px;
+                text-align: center;
+                font-size: 18px;
+                color: #B91C1C;
+            }
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.2s ease;
+        }
+
+        .btn-orange:hover {
+            background-color: #FA5A1E;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col selection:bg-orange-500 selection:text-white"
+    x-data="lessonApp()" x-init="initApp()">
+
+    <!-- Auth Guard Screen: Proteksi Penuh Konten Materi jika Belum Login -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0c1322] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya
+            dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
+    <!-- Print Shield Warning Element -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="'width: ' + readingProgress + '%'"></div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 8 (A2.1)</span>
+                    <span class="ml-2 font-medium text-gray-600">Die Geburtstagsparty und Reflexive Verben</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="../dashboard-a2-1/"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard A2.1</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="../dashboard-a2-1/"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- ============================================================= -->
+        <!-- HERO BANNER                                                   -->
+        <!-- ============================================================= -->
+        <div
+            class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <!-- Left Details -->
+                <div class="max-w-2xl">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                        Die Geburtstagsparty und Reflexive Verben
+                    </h1>
+                    <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
+                        Mempelajari perencanaan pesta ulang tahun (<em>die Geburtstagsparty</em>), penggunaan kata kerja refleksif (<em>Reflexive Verben</em>), pengungkapan emosi dan situasi sosial, serta wawasan festival <em>Kieler Woche</em> dan adaptasi hidup di luar negeri.
+                    </p>
+
+                    <!-- Meta Tags -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs">
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Modul:</span>
+                            <strong class="text-white">Pertemuan 8 (A2.1)</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Estimasi:</span>
+                            <strong class="text-white">60 Menit</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Latihan:</span>
+                            <strong class="text-white">8 Soal Interaktif</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Links Card (Daftar Isi Materi) -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                    <p
+                        class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                        Daftar Isi Materi
+                        <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">6 Bagian</span>
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                        <li>
+                            <a href="#tujuan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                1. Tujuan Pembelajaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wortschatz"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                2. Kosakata (Wortschatz)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#grammatik"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                3. Tata Bahasa (Grammatik)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dialoge"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                4. Contoh Percakapan (Beispieldialoge)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#lesetext"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                5. Teks Bacaan (Lesetext)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latihan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                6. Latihan Pemahaman
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- 1. TUJUAN PEMBELAJARAN                                        -->
+        <!-- ============================================================= -->
+        <section id="tujuan" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    1
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Target kompetensi komunikatif dan gramatikal modul Pertemuan 8.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <template x-for="(goal, idx) in learningGoals" :key="idx">
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl border transition-all"
+                            :class="goal.completed ? 'bg-orange-50/60 border-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                            <input type="checkbox" :id="'goal-' + idx" x-model="goal.completed"
+                                @change="saveProgress()"
+                                class="mt-1 w-4 h-4 text-orange-600 rounded border-gray-300 focus:ring-orange-500 cursor-pointer">
+                            <label :for="'goal-' + idx" class="text-xs sm:text-sm cursor-pointer select-none leading-relaxed"
+                                :class="goal.completed ? 'text-orange-950 font-semibold line-through decoration-orange-400' : 'text-gray-700'"
+                                x-html="goal.text">
+                            </label>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. KOSAKATA (WORTSCHATZ)                                      -->
+        <!-- ============================================================= -->
+        <section id="wortschatz" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    2
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Kosakata pesta ulang tahun, festival maritim, adaptasi budaya, dan ungkapan emosi.</p>
+                </div>
+            </div>
+
+            <!-- Subtopik A: Pesta dan Perayaan Ulang Tahun -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <span>A. Pesta dan Perayaan Ulang Tahun (Party und Geburtstag)</span>
+                    <span class="text-xs text-gray-400 font-normal">Klik audio untuk pelafalan</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <template x-for="(item, idx) in vocabParty" :key="idx">
+                        <div class="p-3 rounded-xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="item.de"></strong>
+                                <span class="text-[11px] sm:text-xs text-gray-500" x-text="item.id"></span>
+                            </div>
+                            <button @click="speak(item.de, 'male')"
+                                class="p-2 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Subtopik B: Festival dan Pengalaman Hidup -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <span>B. Festival dan Pengalaman Hidup (Festveranstaltungen und Leben im Ausland)</span>
+                    <span class="text-xs text-gray-400 font-normal">Kieler Woche & Adaptasi Budaya</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <template x-for="(item, idx) in vocabFestival" :key="idx">
+                        <div class="p-3 rounded-xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="item.de"></strong>
+                                <span class="text-[11px] sm:text-xs text-gray-500" x-text="item.id"></span>
+                            </div>
+                            <button @click="speak(item.de, 'female')"
+                                class="p-2 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Kata Sifat Suasana Hati dan Emosi -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100">
+                    C. Kata Sifat Suasana Hati dan Emosi (Gefühle und Emotionen)
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <template x-for="(adj, idx) in vocabEmotions" :key="idx">
+                        <div class="p-3 rounded-xl bg-gradient-to-r from-orange-50/30 to-amber-50/30 border border-orange-100 hover:border-orange-300 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="adj.de"></strong>
+                                <span class="text-[11px] sm:text-xs text-gray-500" x-text="adj.id"></span>
+                            </div>
+                            <button @click="speak(adj.de, 'male')"
+                                class="p-2 rounded-lg bg-white shadow-xs text-orange-600 hover:bg-orange-50 transition flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Subtopik D: Ungkapan Komunikasi (Redemittel) -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-6 pb-2 border-b border-gray-100">
+                    D. Ungkapan Komunikasi (Redemittel)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 1. Freude ausdrücken -->
+                    <div class="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-100">
+                        <h4 class="text-sm sm:text-base font-extrabold text-emerald-950 mb-3 flex items-center justify-between">
+                            <span>1. Rasa Senang & Antusias (Freude ausdrücken)</span>
+                        </h4>
+                        <div class="space-y-2.5">
+                            <template x-for="(phrase, idx) in phrasesFreude" :key="idx">
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-100 shadow-xs flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                        <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                    </div>
+                                    <button @click="speak(phrase.de, 'female')"
+                                        class="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- 2. Bedauern ausdrücken -->
+                    <div class="p-5 rounded-2xl bg-amber-50/50 border border-amber-100">
+                        <h4 class="text-sm sm:text-base font-extrabold text-amber-950 mb-3 flex items-center justify-between">
+                            <span>2. Penyesalan & Empati (Bedauern ausdrücken)</span>
+                        </h4>
+                        <div class="space-y-2.5">
+                            <template x-for="(phrase, idx) in phrasesBedauern" :key="idx">
+                                <div class="p-2.5 rounded-xl bg-white border border-amber-100 shadow-xs flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                        <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                    </div>
+                                    <button @click="speak(phrase.de, 'male')"
+                                        class="p-1.5 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-100 transition flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- 3. Beruhigen -->
+                    <div class="p-5 rounded-2xl bg-blue-50/50 border border-blue-100">
+                        <h4 class="text-sm sm:text-base font-extrabold text-blue-950 mb-3 flex items-center justify-between">
+                            <span>3. Menenangkan Lawan Bicara (Beruhigen)</span>
+                        </h4>
+                        <div class="space-y-2.5">
+                            <template x-for="(phrase, idx) in phrasesBeruhigen" :key="idx">
+                                <div class="p-2.5 rounded-xl bg-white border border-blue-100 shadow-xs flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                        <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                    </div>
+                                    <button @click="speak(phrase.de, 'female')"
+                                        class="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- 4. Wie unangenehm! / Peinlich -->
+                    <div class="p-5 rounded-2xl bg-purple-50/50 border border-purple-100">
+                        <h4 class="text-sm sm:text-base font-extrabold text-purple-950 mb-3 flex items-center justify-between">
+                            <span>4. Situasi Memalukan / Canggung (Peinlich / Unangenehm)</span>
+                        </h4>
+                        <div class="space-y-2.5">
+                            <template x-for="(phrase, idx) in phrasesPeinlich" :key="idx">
+                                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                        <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                    </div>
+                                    <button @click="speak(phrase.de, 'male')"
+                                        class="p-1.5 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 transition flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. TATA BAHASA (GRAMMATIK)                                    -->
+        <!-- ============================================================= -->
+        <section id="grammatik" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    3
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Konsep kata kerja refleksif kasus Akkusativ, pola susunan kata (Satzstellung), verba dengan preposisi khusus, dan intonasi emosional.</p>
+                </div>
+            </div>
+
+            <!-- Subtopik A: Kata Kerja Refleksif Kasus Akkusativ -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100">
+                    A. Kata Kerja Refleksif Kasus Akkusativ (Reflexive Verben im Akkusativ)
+                </h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+                    Kata kerja refleksif (<em>Reflexive Verben</em>) adalah kata kerja yang tindakannya merujuk kembali kepada subjek pelaku itu sendiri. Kata kerja jenis ini selalu didampingi oleh kata ganti refleksif (<strong>Reflexivpronomen</strong>). Pada level A2, sebagian besar kata kerja refleksif menggunakan kata ganti refleksif dalam <strong>kasus Akkusativ</strong>.
+                </p>
+
+                <!-- Tabel Konjugasi Kata Kerja Refleksif -->
+                <div class="overflow-x-auto rounded-2xl border border-gray-200 mb-6">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-navy text-white font-bold">
+                            <tr>
+                                <th class="p-3 sm:p-4">Subjek</th>
+                                <th class="p-3 sm:p-4 text-orange-300">Reflexivpronomen</th>
+                                <th class="p-3 sm:p-4">sich erinnern (mengingat)</th>
+                                <th class="p-3 sm:p-4">sich freuen (bergembira)</th>
+                                <th class="p-3 sm:p-4">sich ärgern (kesal/jengkel)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 font-medium text-gray-700 bg-white">
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">ich</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">mich</td>
+                                <td class="p-3 sm:p-4">ich erinnere <strong class="text-orange-600">mich</strong></td>
+                                <td class="p-3 sm:p-4">ich freue <strong class="text-orange-600">mich</strong></td>
+                                <td class="p-3 sm:p-4">ich ärgere <strong class="text-orange-600">mich</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">du</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">dich</td>
+                                <td class="p-3 sm:p-4">du erinnerst <strong class="text-orange-600">dich</strong></td>
+                                <td class="p-3 sm:p-4">du freust <strong class="text-orange-600">dich</strong></td>
+                                <td class="p-3 sm:p-4">du ärgerst <strong class="text-orange-600">dich</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">er / es / sie</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">sich</td>
+                                <td class="p-3 sm:p-4">er/es/sie erinnert <strong class="text-orange-600">sich</strong></td>
+                                <td class="p-3 sm:p-4">er/es/sie freut <strong class="text-orange-600">sich</strong></td>
+                                <td class="p-3 sm:p-4">er/es/sie ärgert <strong class="text-orange-600">sich</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">wir</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">uns</td>
+                                <td class="p-3 sm:p-4">wir erinnern <strong class="text-orange-600">uns</strong></td>
+                                <td class="p-3 sm:p-4">wir freuen <strong class="text-orange-600">uns</strong></td>
+                                <td class="p-3 sm:p-4">wir ärgern <strong class="text-orange-600">uns</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">ihr</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">euch</td>
+                                <td class="p-3 sm:p-4">ihr erinnert <strong class="text-orange-600">euch</strong></td>
+                                <td class="p-3 sm:p-4">ihr freut <strong class="text-orange-600">euch</strong></td>
+                                <td class="p-3 sm:p-4">ihr ärgert <strong class="text-orange-600">euch</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 sm:p-4 font-bold text-navy">sie / Sie</td>
+                                <td class="p-3 sm:p-4 font-extrabold text-orange-600 bg-orange-50/50">sich</td>
+                                <td class="p-3 sm:p-4">sie/Sie erinnern <strong class="text-orange-600">sich</strong></td>
+                                <td class="p-3 sm:p-4">sie/Sie freuen <strong class="text-orange-600">sich</strong></td>
+                                <td class="p-3 sm:p-4">sie/Sie ärgern <strong class="text-orange-600">sich</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Info Box -->
+                <div class="p-4 rounded-xl bg-orange-50/80 border border-orange-200 text-xs sm:text-sm text-orange-950">
+                    <strong>Catatan Penting:</strong> Bentuk kata ganti refleksif orang ke-3 (tunggal maupun jamak) serta bentuk formal (<em>er, es, sie, sie Plural, Sie</em>) selalu seragam menggunakan <strong>sich</strong>.
+                </div>
+            </div>
+
+            <!-- Subtopik B: Posisi Kata Ganti Refleksif dalam Kalimat -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100">
+                    B. Posisi Kata Ganti Refleksif dalam Kalimat (Satzstellung der Reflexivpronomen)
+                </h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+                    Penempatan <em>Reflexivpronomen</em> dalam struktur kalimat bahasa Jerman memiliki kaidah posisi yang pasti:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 1. Aussagesatz -->
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-200">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-navy mb-2">1. Kalimat Pernyataan (Aussagesatz)</h4>
+                        <p class="text-xs text-gray-600 mb-3">Subjek di Posisi 1, verba terkonjugasi di Posisi 2, dan <em>Reflexivpronomen</em> di <strong>Posisi 3</strong>.</p>
+                        <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm text-navy">
+                            Tim <span class="text-orange-600 font-bold">entscheidet sich</span> für eine Party zu Hause.
+                        </div>
+                        <span class="text-[11px] text-gray-500 block mt-1.5">Tim memutuskan untuk mengadakan pesta di rumah.</span>
+                    </div>
+
+                    <!-- 2. Ja/Nein-Frage -->
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-200">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-navy mb-2">2. Kalimat Tanya Ya/Tidak (Ja/Nein-Frage)</h4>
+                        <p class="text-xs text-gray-600 mb-3">Verba terkonjugasi di Posisi 1, subjek di Posisi 2, dan <em>Reflexivpronomen</em> di <strong>Posisi 3</strong>.</p>
+                        <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm text-navy">
+                            <span class="text-orange-600 font-bold">Treffen</span> wir <span class="text-orange-600 font-bold">uns</span> heute Abend im Park?
+                        </div>
+                        <span class="text-[11px] text-gray-500 block mt-1.5">Apakah kita bertemu malam ini di taman?</span>
+                    </div>
+
+                    <!-- 3. W-Frage -->
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-200">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-navy mb-2">3. Kalimat Tanya dengan Kata Tanya (W-Frage)</h4>
+                        <p class="text-xs text-gray-600 mb-3">W-Wort di Posisi 1, verba di Posisi 2, subjek di Posisi 3, dan <em>Reflexivpronomen</em> di <strong>Posisi 4</strong>.</p>
+                        <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm text-navy">
+                            Wann <span class="text-orange-600 font-bold">ruhst</span> du <span class="text-orange-600 font-bold">dich</span> nach der Arbeit aus?
+                        </div>
+                        <span class="text-[11px] text-gray-500 block mt-1.5">Kapan kamu beristirahat setelah bekerja?</span>
+                    </div>
+
+                    <!-- 4. Nebensatz -->
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-200">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-navy mb-2">4. Anak Kalimat (Nebensatz mit weil / wenn / dass)</h4>
+                        <p class="text-xs text-gray-600 mb-3">Konjungsi di awal anak kalimat, diikuti subjek, lalu <em>Reflexivpronomen</em>, dan verba di <strong>akhir kalimat</strong>.</p>
+                        <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm text-navy">
+                            ... wenn wir <span class="text-orange-600 font-bold">uns</span> laut <span class="text-orange-600 font-bold">unterhalten</span>.
+                        </div>
+                        <span class="text-[11px] text-gray-500 block mt-1.5">... ketika kami mengobrol dengan suara keras.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Kata Kerja Refleksif dan Preposisi Pasangannya -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100">
+                    C. Daftar Kata Kerja Refleksif Penting dan Preposisi Pasangannya (Verben mit Präpositionen)
+                </h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+                    Banyak kata kerja refleksif dalam bahasa Jerman berpasangan secara permanen dengan preposisi tertentu untuk melengkapi maknanya:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich freuen auf (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Menantikan dengan gembira peristiwa yang akan datang (masa depan).</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Ich freue mich <strong class="text-orange-600 font-bold">auf die Party</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich freuen über (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Merasa senang atas peristiwa yang sedang atau sudah terjadi (kini / lampau).</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Wir freuen uns <strong class="text-orange-600 font-bold">über die Geschenke</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich erinnern an (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Mengingat kembali peristiwa masa lalu (memori).</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Ich erinnere mich gern <strong class="text-orange-600 font-bold">an letztes Jahr</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich ärgern über (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Merasa kesal atau jengkel terhadap sesuatu atau seseorang.</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Er ärgert sich <strong class="text-orange-600 font-bold">über den Lärm</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich verabreden mit (+ Dativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Membuat janji temu bersama seseorang.</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Wir verabreden uns <strong class="text-orange-600 font-bold">mit Freunden</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich unterhalten mit (+ Dativ) / über (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Mengobrol bersama seseorang tentang suatu hal.</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Sie unterhalten sich <strong class="text-orange-600 font-bold">über den Urlaub</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich entschuldigen bei (+ Dativ) / für (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Meminta maaf kepada seseorang atas suatu kesalahan.</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Ich entschuldige mich <strong class="text-orange-600 font-bold">für die Verspätung</strong>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-white hover:border-orange-200 transition">
+                        <h4 class="text-xs sm:text-sm text-navy font-extrabold mb-1">sich bedanken bei (+ Dativ) / für (+ Akkusativ)</h4>
+                        <p class="text-xs text-gray-500 mb-2">Mengucapkan terima kasih kepada seseorang atas bantuan atau hadiah.</p>
+                        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs sm:text-sm text-navy">
+                            Er bedankt sich <strong class="text-orange-600 font-bold">für die Einladung</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik D: Fonetik dan Pelafalan: Intonasi Emosional -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100">
+                    D. Fonetik dan Pelafalan: Intonasi Emosional (Aussprache: Emotionales Sprechen)
+                </h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+                    Dalam komunikasi lisan bahasa Jerman, melodi ujaran (<em>Sprechmelodie</em>) dan dinamika intonasi mencerminkan emosi pembicara secara langsung:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- 1. Fröhlich -->
+                    <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <strong class="text-xs sm:text-sm font-extrabold text-emerald-950">1. Fröhlich (Ceria / Bersemangat)</strong>
+                                <button @click="speak('Wie toll! Super! Das gibt es doch nicht!', 'female')"
+                                    class="p-1.5 rounded-lg bg-white text-emerald-700 shadow-xs hover:bg-emerald-100 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Nada suara bergerak naik-turun secara dinamis dan berenergi tinggi.</p>
+                        </div>
+                        <div class="text-xs font-semibold text-emerald-900 bg-white p-2 rounded-lg border border-emerald-100">
+                            „Wie toll! Super! Das gibt's doch nicht!“
+                        </div>
+                    </div>
+
+                    <!-- 2. Traurig -->
+                    <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <strong class="text-xs sm:text-sm font-extrabold text-amber-950">2. Traurig (Sedih / Empatis)</strong>
+                                <button @click="speak('Das tut mir wirklich leid. Wie schade.', 'male')"
+                                    class="p-1.5 rounded-lg bg-white text-amber-700 shadow-xs hover:bg-amber-100 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Nada suara merendah, tempo melambat, artikulasi lembut.</p>
+                        </div>
+                        <div class="text-xs font-semibold text-amber-900 bg-white p-2 rounded-lg border border-amber-100">
+                            „Das tut mir wirklich leid. Wie schade.“
+                        </div>
+                    </div>
+
+                    <!-- 3. Gestresst / Aufgeregt -->
+                    <div class="p-4 rounded-xl bg-blue-50/60 border border-blue-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <strong class="text-xs sm:text-sm font-extrabold text-blue-950">3. Gestresst / Aufgeregt (Gugup / Cepat)</strong>
+                                <button @click="speak('Keine Zeit, ich muss mich beeilen!', 'female')"
+                                    class="p-1.5 rounded-lg bg-white text-blue-700 shadow-xs hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Tempo berbicara cepat, jeda antarkata pendek, aksen tegas.</p>
+                        </div>
+                        <div class="text-xs font-semibold text-blue-900 bg-white p-2 rounded-lg border border-blue-100">
+                            „Keine Zeit, ich muss mich beeilen!“
+                        </div>
+                    </div>
+
+                    <!-- 4. Ärgerlich -->
+                    <div class="p-4 rounded-xl bg-red-50/60 border border-red-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <strong class="text-xs sm:text-sm font-extrabold text-red-950">4. Ärgerlich (Kesal / Marah)</strong>
+                                <button @click="speak('Na und? Das darf doch nicht wahr sein!', 'male')"
+                                    class="p-1.5 rounded-lg bg-white text-red-700 shadow-xs hover:bg-red-100 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Tekanan suara berat dan nada datar yang menurun tajam di akhir kalimat.</p>
+                        </div>
+                        <div class="text-xs font-semibold text-red-900 bg-white p-2 rounded-lg border border-red-100">
+                            „Na und? Das darf doch nicht wahr sein!“
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. CONTOH PERCAKAPAN (BEISPIELDIALOGE)                        -->
+        <!-- ============================================================= -->
+        <section id="dialoge" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    4
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Praktik percakapan merencanakan pesta ulang tahun dan mengatasi insiden canggung secara santun.</p>
+                </div>
+            </div>
+
+            <!-- Dialog 1 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-navy">
+                            A. Merencanakan Pesta dan Masalah Suara (Die Geburtstagsparty planen)
+                        </h3>
+                        <p class="text-xs text-gray-500">Percakapan antara Tim (Pria) dan Alia (Wanita).</p>
+                    </div>
+
+                    <!-- Full Dialog Player Button -->
+                    <button @click="playFullDialog(1)"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <template x-for="(line, idx) in dialog1Lines" :key="idx">
+                        <div class="p-4 rounded-2xl transition-all duration-200 border"
+                            :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Tim' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
+                                        :class="line.speaker === 'Tim' ? 'bg-navy' : 'bg-orange-500'"
+                                        x-text="line.speaker.charAt(0)"></span>
+                                    <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
+                                </div>
+                                <button @click="speak(line.de, line.gender)"
+                                    class="p-1.5 rounded-lg text-gray-400 hover:text-orange-600 hover:bg-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
+                            <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Dialog 2 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-navy">
+                            B. Insiden Canggung di Tengah Acara Pesta (Ein Missgeschick auf der Feier)
+                        </h3>
+                        <p class="text-xs text-gray-500">Percakapan antara Florian (Pria) dan Sarah (Wanita).</p>
+                    </div>
+
+                    <!-- Full Dialog Player Button -->
+                    <button @click="playFullDialog(2)"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <template x-for="(line, idx) in dialog2Lines" :key="idx">
+                        <div class="p-4 rounded-2xl transition-all duration-200 border"
+                            :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Florian' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
+                                        :class="line.speaker === 'Florian' ? 'bg-navy' : 'bg-orange-500'"
+                                        x-text="line.speaker.charAt(0)"></span>
+                                    <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
+                                </div>
+                                <button @click="speak(line.de, line.gender)"
+                                    class="p-1.5 rounded-lg text-gray-400 hover:text-orange-600 hover:bg-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
+                            <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. TEKS BACAAN (LESETEXT)                                      -->
+        <!-- ============================================================= -->
+        <section id="lesetext" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    5
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Teks Bacaan (Lesetext)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Membaca teks deskriptif mengenai festival maritim Kieler Woche dan artikel pengalaman adaptasi hidup di luar negeri.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-8">
+                <!-- Lesetext Audio Reader Controls -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-orange-50/60 border border-orange-200">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong class="text-xs sm:text-sm text-navy block font-extrabold">Audio Reader Teks Bacaan</strong>
+                            <span class="text-[11px] text-gray-500">Dengarkan narasi bahasa Jerman penutur asli paragraf demi paragraf</span>
+                        </div>
+                    </div>
+
+                    <button @click="toggleReadLesetext()"
+                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        </svg>
+                        <span x-text="isReadingLesetext ? 'Hentikan Audio' : 'Dengarkan Seluruh Teks'"></span>
+                    </button>
+                </div>
+
+                <!-- Text 1: Die Kieler Woche -->
+                <div class="space-y-4">
+                    <h3 class="text-base sm:text-lg font-extrabold text-navy border-b border-gray-100 pb-2">
+                        A. Ein Fest im Norden: Die Kieler Woche
+                    </h3>
+                    <div class="space-y-3 text-xs sm:text-sm text-gray-700 leading-relaxed">
+                        <div class="p-4 rounded-xl transition-all border"
+                            :class="currentLesetextIndex === 0 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <p>
+                                Jedes Jahr im Juni findet in Norddeutschland die weltbekannte <strong>Kieler Woche</strong> statt. Rund drei Millionen Besucher aus aller Welt reisen nach Kiel, um dieses einzigartige maritime Großereignis zu erleben.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-xl transition-all border"
+                            :class="currentLesetextIndex === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <p>
+                                Die Kieler Woche ist die größte Segelsport-Veranstaltung der Welt. Mehr als 4.000 Seglerinnen und Segler aus über 70 Nationen nehmen an den spektakulären Segelregatten auf der Ostsee teil. Tausende Zuschauer bewundern vom Ufer aus die historischen Traditionssegelschiffe und modernen Boote.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-xl transition-all border"
+                            :class="currentLesetextIndex === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <p>
+                                Neben dem Sport ist die Kieler Woche ein riesiges Sommerfest für Erwachsene und Kinder. Auf zahlreichen Bühnen finden über 400 Live-Konzerte statt, und überall in der Stadt kann man kulinarische Spezialitäten aus vielen Ländern probieren. Das Fest endet traditionell am Sonntagabend mit einem riesigen Feuerwerk über der Kieler Förde. Viele Besucher freuen sich schon während der Abreise auf das nächste Jahr.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text 2: Zwei Erfahrungsberichte aus dem Ausland -->
+                <div class="space-y-4 pt-4 border-t border-gray-100">
+                    <h3 class="text-base sm:text-lg font-extrabold text-navy border-b border-gray-100 pb-2">
+                        B. Hier fühle ich mich wohl: Zwei Erfahrungsberichte aus dem Ausland
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Paula -->
+                        <div class="p-4 rounded-2xl border transition-all"
+                            :class="currentLesetextIndex === 3 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 rounded-full bg-navy text-white flex items-center justify-center font-bold text-xs">P</div>
+                                <div>
+                                    <strong class="text-xs sm:text-sm text-navy block font-extrabold">Paula (29 Jahre)</strong>
+                                    <span class="text-[11px] text-gray-500">In Buenos Aires, Argentinien</span>
+                                </div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                „Ich wollte schon lange ins Ausland gehen und lebe jetzt seit zwei Monaten in Buenos Aires. Ich arbeite an einer Sprachschule und unterrichte Deutsch. Die Arbeit macht mir großen Spaß. Manchmal vermisse ich meine Familie in Deutschland, besonders wenn jemand Geburtstag feiert und ich nicht dabei sein kann. Aber ich habe hier schnell neue Freunde gefunden. Wenn wir uns verabreden, kommt meistens niemand pünktlich, alle treffen sich ziemlich spät am Abend. Am Anfang habe ich mich darüber geärgert, aber inzwischen habe ich mich an die Kultur gewöhnt und fühle mich sehr wohl.“
+                            </p>
+                        </div>
+
+                        <!-- Chandan -->
+                        <div class="p-4 rounded-2xl border transition-all"
+                            :class="currentLesetextIndex === 4 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs">C</div>
+                                <div>
+                                    <strong class="text-xs sm:text-sm text-navy block font-extrabold">Chandan (25 Jahre)</strong>
+                                    <span class="text-[11px] text-gray-500">In Kiel, Deutschland</span>
+                                </div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                „Ich komme aus Indien und studiere seit dem Frühjahr an der Universität in Kiel. Am Anfang habe ich mich etwas fremd gefühlt, aber die Menschen hier sind unglaublich freundlich und hilfsbereit. Die Mitarbeiter an der Uni haben mir bei der Anmeldung im Wohnheim sehr geholfen. Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit. Das finde ich praktisch und unkompliziert. Inzwischen habe ich viele Kontakte geknüpft und fühle mich in Norddeutschland wie zu Hause.“
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terjemahan Accordion -->
+                <div class="pt-4 border-t border-gray-100">
+                    <button @click="showTranslation = !showTranslation"
+                        class="w-full py-3 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-between">
+                        <span>Lihat Terjemahan Bahasa Indonesia</span>
+                        <svg class="w-4 h-4 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="showTranslation" x-cloak class="mt-4 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-gray-700 space-y-4">
+                        <div>
+                            <strong class="text-navy block mb-1">Teks 1: Festival di Wilayah Utara: Pekan Kiel (Kieler Woche)</strong>
+                            <p class="mb-2">
+                                Setiap tahun pada bulan Juni, perhelatan terkenal dunia <strong>Kieler Woche</strong> diselenggarakan di Jerman Utara. Sekitar tiga juta pengunjung dari berbagai penjuru dunia melakukan perjalanan ke kota Kiel untuk merasakan kemeriahan acara maritim akbar yang unik ini.
+                            </p>
+                            <p class="mb-2">
+                                Kieler Woche merupakan ajang olahraga layar terbesar di dunia. Lebih dari 4.000 atlet layar dari 70 negara lebih berpartisipasi dalam regata perlombaan perahu layar yang spektakuler di Laut Baltik. Ribuan penonton mengagumi kapal-kapal layar tradisional bersejarah dan perahu-perahu modern dari tepi dermaga.
+                            </p>
+                            <p>
+                                Di samping olahraga, Kieler Woche merupakan sebuah pesta musim panas raksasa untuk kalangan dewasa maupun anak-anak. Di berbagai panggung pertunjukan terselenggara lebih dari 400 konser musik langsung, dan di seluruh penjuru kota orang dapat mencicipi hidangan khas kuliner dari berbagai negara. Perayaan ini secara tradisional ditutup pada Minggu malam dengan atraksi kembang api akbar di atas Teluk Kiel. Banyak pengunjung sudah menantikan perayaan tahun berikutnya saat perjalanan pulang.
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-200">
+                            <strong class="text-navy block mb-1">Teks 2: Di Sini Saya Merasa Nyaman: Dua Laporan Pengalaman dari Luar Negeri</strong>
+                            <p class="mb-2">
+                                <strong>Paula (29 tahun, di Argentina):</strong> „Saya sudah lama ingin tinggal di luar negeri dan sekarang menetap selama dua bulan di Buenos Aires. Saya bekerja di sebuah sekolah bahasa dan mengajar bahasa Jerman. Pekerjaan ini memberi saya banyak kegembiraan. Terkadang saya merindukan keluarga saya di Jerman, terutama saat seseorang merayakan ulang tahun dan saya tidak dapat hadir bersama mereka. Namun saya cepat menemukan teman-teman baru di sini. Saat kami membuat janji bertemu, biasanya hampir tidak ada orang yang datang tepat waktu, semua berkumpul larut malam. Pada awalnya saya merasa kesal dengan hal tersebut, tetapi sekarang saya telah terbiasa dengan kebiasaan budayanya dan merasa sangat nyaman.“
+                            </p>
+                            <p>
+                                <strong>Chandan (25 tahun, di Jerman):</strong> „Saya berasal dari India dan berkuliah sejak musim semi di Universitas Kiel. Pada awalnya saya sempat merasa asing, tetapi orang-orang di sini luar biasa ramah dan gemar menolong. Para petugas di universitas sangat membantu saya saat pendaftaran di asrama. Ketika teman-teman saya menyelenggarakan pesta, setiap tamu membawa makanan atau minuman sendiri. Saya menganggap hal tersebut sangat praktis dan menyenangkan. Saat ini saya sudah menjalin banyak pertemanan dan merasa sangat betah di Jerman Utara layaknya di rumah sendiri.“
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 6. LATIHAN PEMAHAMAN (ÜBUNGEN)                                 -->
+        <!-- ============================================================= -->
+        <section id="latihan" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    6
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Pemahaman (Übungen)</h2>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-xl">
+                <!-- Header Latihan & Live Score Badge Baku -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                    <div>
+                        <p class="text-xs sm:text-sm text-gray-500">Ujilah penguasaan kata kerja refleksif kasus Akkusativ dan penyusunan struktur kalimat.</p>
+                    </div>
+
+                    <!-- Live Score Badge (Responsif & Seragam) -->
+                    <div class="flex-shrink-0 self-start sm:self-auto">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                            :class="quizScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                            <span class="text-xs font-bold"
+                                :class="quizScore === null ? 'text-orange-900/80' : (quizScore >= 6 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Latihan:</span>
+                            <span class="text-sm sm:text-base font-extrabold"
+                                :class="quizScore === null ? 'text-orange-600' : (quizScore >= 6 ? 'text-emerald-700' : 'text-amber-700')"
+                                x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'">- / 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEIL A: Pilihan Kata Ganti Refleksif -->
+                <div class="mb-10">
+                    <h3 class="text-base sm:text-lg font-bold text-navy mb-4">
+                        Teil A: Was passt? Ergänzen Sie das passende Reflexivpronomen (mich, dich, sich, uns, euch).
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Soal 1 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Vorfreude auf die Party:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Ich freue _____ sehr auf deine Geburtstagsparty am Samstag.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> mich
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> dich
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> sich
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Ärger über den Nachbarn:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Warum ärgerst du _____ über den Nachbarn?
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> sich
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> dich
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> euch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Unterhaltung der Gäste:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Die Gäste unterhalten _____ im Wohnzimmer über ihre Reisen.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> uns
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> euch
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> sich
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Verabredung vor dem Restaurant:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Wir treffen _____ morgen um 18 Uhr vor dem Restaurant.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> uns
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> mich
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> sich
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Entscheidung für das Geschenk:</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Habt ihr _____ schon für ein Geschenk entschieden?
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> sich
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> euch
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> dich
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEIL B: Menyusun Kalimat Acak (Satzbauspiel & Syntax-Puzzle) -->
+                <div class="mb-8">
+                    <h3 class="text-base sm:text-lg font-bold text-navy mb-4">
+                        Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Erinnerung an die Feier:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ erinnert / an die Feier / gern / Tim / sich / vom letzten Jahr / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Tim erinnert sich gern an die Feier vom letzten Jahr.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Tim erinnert an die Feier sich gern vom letzten Jahr.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Tim sich erinnert gern an die Feier vom letzten Jahr.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 7 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Wohlfühlen im Wohnheim:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ im Wohnheim / Chandan / fühlt / sehr wohl / sich / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Chandan fühlt sich im Wohnheim sehr wohl.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Chandan sich fühlt im Wohnheim sehr wohl.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Chandan fühlt im Wohnheim sich sehr wohl.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 8 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Verabredung im Park (W-Frage):</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ du / dich / mit deinen Freunden / triffst / wann / im Park / ? ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Wann triffst du dich mit deinen Freunden im Park?
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Wann du triffst dich mit deinen Freunden im Park?
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Wann triffst dich du mit deinen Freunden im Park?
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons: Periksa, Reset, & Kunci Jawaban -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-6 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                        <button @click="checkQuiz()"
+                            class="w-full sm:w-auto justify-center px-6 py-3 sm:py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Periksa Semua Jawaban</span>
+                        </button>
+
+                        <button @click="resetQuiz()"
+                            class="w-full sm:w-auto justify-center px-4 py-3 sm:py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5 flex-shrink-0">
+                            <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <span>Reset Jawaban</span>
+                        </button>
+                    </div>
+
+                    <div class="w-full sm:w-auto">
+                        <button @click="showKey = !showKey"
+                            class="w-full sm:w-auto justify-center px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-[0.98] text-blue-700 font-bold text-xs sm:text-sm transition flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <span x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban & Penjelasan'"></span>
+                            <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200 flex-shrink-0" :class="showKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Answer Key Accordion (Bilingual & Clean Typography) -->
+                <div x-show="showKey" x-cloak class="mt-6 p-6 rounded-2xl bg-gray-50 border border-gray-200">
+                    <h4 class="font-extrabold text-navy text-sm sm:text-base border-b border-gray-200 pb-2 mb-3">
+                        Kunci Jawaban & Penjelasan Lengkap
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-xs sm:text-sm">
+                        <!-- Kolom Teil A -->
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil A (Reflexivpronomen):</strong>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (mich)</strong>: Subjek kalimat adalah <em>ich</em> (orang pertama tunggal), sehingga kata kerja refleksif <em>sich freuen</em> berpasangan dengan kata ganti refleksif <em>mich</em>.</li>
+                                <li><strong>b (dich)</strong>: Subjek kalimat adalah <em>du</em> (orang kedua tunggal), sehingga kata kerja refleksif <em>sich ärgern</em> menuntut kata ganti refleksif <em>dich</em>.</li>
+                                <li><strong>c (sich)</strong>: Subjek kalimat adalah <em>die Gäste</em> (orang ketiga jamak / <em>sie Plural</em>), sehingga kata kerja <em>sich unterhalten</em> menggunakan kata ganti refleksif <em>sich</em>.</li>
+                                <li><strong>a (uns)</strong>: Subjek kalimat adalah <em>wir</em> (orang pertama jamak), sehingga kata kerja <em>sich treffen</em> menggunakan kata ganti refleksif <em>uns</em>.</li>
+                                <li><strong>b (euch)</strong>: Subjek kalimat tanya adalah <em>ihr</em> (orang kedua jamak), sehingga bentuk <em>Reflexivpronomen</em> yang tepat untuk kata kerja <em>sich entscheiden</em> adalah <em>euch</em>.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Kolom Teil B -->
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
+                            <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (Tim erinnert sich gern an die Feier vom letzten Jahr.)</strong>: Subjek <em>Tim</em> berada di Posisi 1, kata kerja terkonjugasi <em>erinnert</em> di Posisi 2, diikuti langsung oleh <em>Reflexivpronomen</em> <em>sich</em> di Posisi 3, kata keterangan <em>gern</em>, dan pelengkap preposisi <em>an die Feier vom letzten Jahr</em>.</li>
+                                <li><strong>a (Chandan fühlt sich im Wohnheim sehr wohl.)</strong>: Kata kerja <em>fühlt</em> menempati Posisi 2 kalimat pernyataan, didampingi kata ganti refleksif <em>sich</em> di Posisi 3, keterangan tempat <em>im Wohnheim</em>, serta kata sifat <em>sehr wohl</em>.</li>
+                                <li><strong>a (Wann triffst du dich mit deinen Freunden im Park?)</strong>: Dalam kalimat tanya dengan kata tanya (<em>W-Frage</em>), kata tanya <em>Wann</em> menempati Posisi 1, kata kerja <em>triffst</em> di Posisi 2, subjek <em>du</em> di Posisi 3, disusul kata ganti refleksif <em>dich</em> di Posisi 4 dan pelengkap keterangan penyerta.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- BOTTOM NAVIGATION                                            -->
+        <!-- ============================================================= -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+            <a href="../materi-a2-7/"
+                class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Pertemuan 7: Lebensereignisse & Gefühle</span>
+            </a>
+
+            <a href="../materi-a2-9/"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                <span>Lanjut ke Pertemuan 9: Leben in der Stadt</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Standard Navy Footer -->
+    <footer class="bg-navy text-white py-10 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+            <div class="flex items-center gap-2">
+                <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch" class="h-6 w-auto brightness-200">
+                <span>&copy; 2026 Aksaradeutsch. Hak Cipta Dilindungi Undang-Undang.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="../dashboard-a2-1/" class="hover:text-orange-400 transition">Dashboard A2.1</a>
+                <a href="../syarat-ketentuan.html" class="hover:text-orange-400 transition">Syarat & Ketentuan</a>
+                <a href="../privacy-policy.html" class="hover:text-orange-400 transition">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function lessonApp() {
+            return {
+                // Auth & Sync State
+                currentUser: null,
+                authLoading: true,
+                userName: '',
+                userInitial: 'S',
+                syncStatusText: 'Tersinkronisasi',
+                readingProgress: 0,
+                showTranslation: false,
+                showKey: false,
+                showFeedback: false,
+                quizScore: null,
+
+                // Audio Voices
+                voices: [],
+                maleVoice: null,
+                femaleVoice: null,
+
+                // Dialog Player State
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+
+                // Lesetext Reader State
+                isReadingLesetext: false,
+                currentLesetextIndex: null,
+
+                // Learning Goals Data
+                learningGoals: [
+                    { text: 'Menceritakan kebiasaan merayakan pesta ulang tahun dan festival sosial (<em>über Geburtstage und Feste sprechen</em>).', completed: false },
+                    { text: 'Menguasai konsep, konjugasi, dan penggunaan kata kerja refleksif dengan kasus Akkusativ (<em>Reflexive Verben im Akkusativ</em>).', completed: false },
+                    { text: 'Menerapkan kata kerja refleksif yang berpasangan dengan preposisi khusus (<em>sich freuen auf/über, sich erinnern an, sich ärgern über</em>).', completed: false },
+                    { text: 'Mengekspresikan perasaan gembira, penyesalan, rasa canggung, serta menenangkan lawan bicara (<em>Redemittel: Freude, Bedauern, Beruhigen</em>).', completed: false },
+                    { text: 'Melatih pelafalan ujaran dengan intonasi emosional yang tepat sesuai konteks suasana hati (<em>Emotionales Sprechen: fröhlich, traurig, gestresst, ärgerlich</em>).', completed: false },
+                    { text: 'Memahami teks deskriptif festival maritim <em>Kieler Woche</em> dan artikel adaptasi di luar negeri (<em>Leben im Ausland</em>).', completed: false }
+                ],
+
+                // Vocab Data
+                vocabParty: [
+                    { de: 'die Geburtstagsparty, -s', id: 'pesta ulang tahun' },
+                    { de: 'die Feier, -n / das Fest, -e', id: 'perayaan / pesta' },
+                    { de: 'der Gast, Gäste', id: 'tamu / undangan' },
+                    { de: 'das Geschenk, -e', id: 'hadiah / kado' },
+                    { de: 'der Nachbar, -n / die Nachbarin, -nen', id: 'tetangga pria / wanita' },
+                    { de: 'die Einladung, -en', id: 'undangan' },
+                    { de: 'der Teppich, -e', id: 'karpet / permadani' },
+                    { de: 'das Glas, Gläser', id: 'gelas kaca' },
+                    { de: 'die Musik (Singular)', id: 'musik' },
+                    { de: 'die Laune, -n', id: 'suasana hati / mood' },
+                    { de: 'Essen bestellen', id: 'memesan makanan' },
+                    { de: 'tanzen', id: 'menari / berdansa' },
+                    { de: 'etwas mitbringen', id: 'membawa serta sesuatu' },
+                    { de: 'zu spät sein', id: 'terlambat datang' },
+                    { de: 'auf den Teppich fallen', id: 'jatuh ke atas karpet' },
+                    { de: 'sauber machen', id: 'membersihkan' }
+                ],
+
+                vocabFestival: [
+                    { de: 'die Kieler Woche', id: 'pekan festival maritim di Kiel' },
+                    { de: 'die Segelregatta, -s', id: 'lomba balap perahu layar' },
+                    { de: 'das Segelschiff, -e', id: 'kapal layar' },
+                    { de: 'das Feuerwerk, -e', id: 'kembang api' },
+                    { de: 'die Attraktion, -en', id: 'atraksi / wahana hiburan' },
+                    { de: 'die Spezialität, -en', id: 'makanan khas daerah' },
+                    { de: 'das Ausland (Singular)', id: 'luar negeri' },
+                    { de: 'das Wohnheim, -e', id: 'asrama mahasiswa' },
+                    { de: 'die Währung, -en', id: 'mata uang' },
+                    { de: 'die Anmeldung, -en', id: 'registrasi / pendaftaran' },
+                    { de: 'bewundern', id: 'mengagumi' },
+                    { de: 'stattfinden', id: 'terselenggara / berlangsung' },
+                    { de: 'teilnehmen (an + Dativ)', id: 'berpartisipasi / ikut serta' },
+                    { de: 'sich gewöhnen (an + Akkusativ)', id: 'membiasakan diri terhadap sesuatu' },
+                    { de: 'sich fühlen', id: 'merasa / merasakan kondisi diri' },
+                    { de: 'kostenlos', id: 'gratis / tanpa biaya' }
+                ],
+
+                vocabEmotions: [
+                    { de: 'fröhlich', id: 'ceria / gembira' },
+                    { de: 'traurig', id: 'sedih' },
+                    { de: 'gestresst', id: 'tertekan / stres' },
+                    { de: 'ärgerlich', id: 'menjengkelkan / kesal' },
+                    { de: 'peinlich', id: 'memalukan / membuat canggung' },
+                    { de: 'unangenehm', id: 'tidak menyenangkan / risih' },
+                    { de: 'aufgeregt', id: 'tegang / bersemangat' },
+                    { de: 'hilfsbereit', id: 'suka menolong / ramah' },
+                    { de: 'pünktlich', id: 'tepat waktu' }
+                ],
+
+                phrasesFreude: [
+                    { de: "Das gibt's doch nicht!", id: 'Luar biasa! / Tidak disangka!' },
+                    { de: 'Ich freue mich auch! / riesig!', id: 'Saya juga senang! / sangat gembira!' },
+                    { de: 'Das ist ja toll! / Super!', id: 'Itu hebat sekali! / Luar biasa!' },
+                    { de: 'So ein Glück!', id: 'Sungguh beruntung!' },
+                    { de: 'Wie schön!', id: 'Betapa indahnya!' }
+                ],
+
+                phrasesBedauern: [
+                    { de: 'Schade! / Wie schade!', id: 'Sayang sekali!' },
+                    { de: 'Das tut mir wirklich leid.', id: 'Saya sungguh merasa sangat menyesal.' },
+                    { de: 'Entschuldige, das darf doch nicht wahr sein!', id: 'Maafkan saya, ini sungguh tidak boleh terjadi!' },
+                    { de: 'So ein Pech!', id: 'Sial sekali! / Sayang sekali!' }
+                ],
+
+                phrasesBeruhigen: [
+                    { de: 'Das macht doch nichts.', id: 'Itu sama sekali tidak apa-apa.' },
+                    { de: 'Keine Sorge. Es geht schon wieder.', id: 'Jangan khawatir. Semuanya sudah baik-baik saja.' },
+                    { de: 'Hauptsache, wir feiern jetzt.', id: 'Yang paling penting kita merayakannya sekarang.' },
+                    { de: 'Es ist alles okay.', id: 'Semuanya baik-baik saja.' }
+                ],
+
+                phrasesPeinlich: [
+                    { de: 'Oh, ist das peinlich!', id: 'Oh, betapa memalukannya ini!' },
+                    { de: 'Das ist mir so unangenehm!', id: 'Hal ini membuat saya merasa sangat canggung!' }
+                ],
+
+                // Dialog 1 Data
+                dialog1Lines: [
+                    { speaker: 'Tim', gender: 'male', de: 'Hallo Alia! Hast du kurz Zeit? Ich möchte dich wegen meiner Geburtstagsparty am Samstag fragen.', id: 'Halo Alia! Apakah kamu ada waktu sebentar? Saya ingin menanyakan kepadamu perihal pesta ulang tahun saya hari Sabtu.' },
+                    { speaker: 'Alia', gender: 'female', de: 'Hallo Tim! Natürlich. Hast du dich schon entschieden, wo du feierst?', id: 'Halo Tim! Tentu saja. Apakah kamu sudah memutuskan di mana kamu akan merayakannya?' },
+                    { speaker: 'Tim', gender: 'male', de: 'Ich feiere zu Hause. Ich erinnere mich so gern an unsere Feier vor einem Jahr. Aber es gibt ein kleines Problem: Mein Nachbar ärgert sich immer sofort, wenn wir abends zu laut sind.', id: 'Saya merayakannya di rumah. Saya sangat senang mengingat pesta kita setahun yang lalu. Tetapi ada sedikit masalah: Tetangga saya selalu langsung kesal ketika kami terlalu bising pada malam hari.' },
+                    { speaker: 'Alia', gender: 'female', de: 'Das kenne ich. Du könntest dich vorher bei ihm entschuldigen und ihm ein Stück Kuchen vorbeibringen. Wenn die Gäste sich im Wohnzimmer unterhalten und die Musik nicht zu laut ist, macht das sicher nichts.', id: 'Saya familier dengan hal itu. Kamu bisa meminta izin dan pengertian kepadanya terlebih dahulu serta membawakannya sepotong kue. Jika para tamu mengobrol di ruang tamu dan musiknya tidak terlalu keras, tentu tidak akan ada masalah.' },
+                    { speaker: 'Tim', gender: 'male', de: 'Das ist eine super Idee! Treffen wir uns morgen zum Einkaufen? Ich möchte Getränke und Snacks besorgen.', id: 'Itu ide yang sangat hebat! Apakah kita bertemu besok untuk berbelanja? Saya ingin menyiapkan minuman dan camilan.' },
+                    { speaker: 'Alia', gender: 'female', de: 'Sehr gern, Tim! Ich freue mich schon riesig auf deine Party!', id: 'Dengan senang hati, Tim! Saya sudah sangat tidak sabar menantikan pestamu!' }
+                ],
+
+                // Dialog 2 Data
+                dialog2Lines: [
+                    { speaker: 'Florian', gender: 'male', de: 'Hallo Sarah, herzlichen Glückwunsch zum Geburtstag! Hier ist ein kleines Geschenk für dich.', id: 'Halo Sarah, selamat ulang tahun! Ini ada kado kecil untukmu.' },
+                    { speaker: 'Sarah', gender: 'female', de: 'Oh Florian, vielen Dank! Ich freue mich sehr, dass du gekommen bist. Komm doch rein!', id: 'Oh Florian, terima kasih banyak! Saya sangat senang kamu sudah datang. Silakan masuk!' },
+                    { speaker: 'Florian', gender: 'male', de: 'Oh nein! Pass auf! ... Ach du meine Güte! Jetzt ist mir mein Saftglas aus der Hand gerutscht und auf deinen neuen Teppich gefallen!', id: 'Oh tidak! Awas! ... Ya ampun! Sekarang gelas jus saya tergelincir dari tangan dan jatuh ke atas karpet barumu!' },
+                    { speaker: 'Sarah', gender: 'female', de: 'Keine Sorge, Florian! Das macht doch überhaupt nichts.', id: 'Jangan khawatir, Florian! Itu sama sekali tidak apa-apa.' },
+                    { speaker: 'Florian', gender: 'male', de: 'Oh, ist das peinlich! Das ist mir so schrecklich unangenehm. Ich hole sofort ein Tuch und mache alles sauber.', id: 'Oh, betapa memalukannya! Hal ini membuat saya merasa sangat tidak enak. Saya segera mengambil kain lap dan membersihkan semuanya.' },
+                    { speaker: 'Sarah', gender: 'female', de: 'Es ist wirklich alles okay, Florian. Hauptsache, das Glas ist nicht zerbrochen und wir feiern jetzt zusammen.', id: 'Semuanya sungguh baik-baik saja, Florian. Yang paling penting adalah gelasnya tidak pecah dan kita merayakannya bersama sekarang.' }
+                ],
+
+                // Lesetext Paragraphs for Reader
+                lesetextParagraphs: [
+                    'Jedes Jahr im Juni findet in Norddeutschland die weltbekannte Kieler Woche statt. Rund drei Millionen Besucher aus aller Welt reisen nach Kiel, um dieses einzigartige maritime Großereignis zu erleben.',
+                    'Die Kieler Woche ist die größte Segelsport-Veranstaltung der Welt. Mehr als 4000 Seglerinnen und Segler aus über 70 Nationen nehmen an den spektakulären Segelregatten auf der Ostsee teil. Tausende Zuschauer bewundern vom Ufer aus die historischen Traditionssegelschiffe und modernen Boote.',
+                    'Neben dem Sport ist die Kieler Woche ein riesiges Sommerfest für Erwachsene und Kinder. Auf zahlreichen Bühnen finden über 400 Live-Konzerte statt, und überall in der Stadt kann man kulinarische Spezialitäten aus vielen Ländern probieren. Das Fest endet traditionell am Sonntagabend mit einem riesigen Feuerwerk über der Kieler Förde. Viele Besucher freuen sich schon während der Abreise auf das nächste Jahr.',
+                    'Paula berichtet: Ich wollte schon lange ins Ausland gehen und lebe jetzt seit zwei Monaten in Buenos Aires. Ich arbeite an einer Sprachschule und unterrichte Deutsch. Die Arbeit macht mir großen Spaß. Manchmal vermisse ich meine Familie in Deutschland, besonders wenn jemand Geburtstag feiert und ich nicht dabei sein kann. Aber ich habe hier schnell neue Freunde gefunden. Wenn wir uns verabreden, kommt meistens niemand pünktlich, alle treffen sich ziemlich spät am Abend. Am Anfang habe ich mich darüber geärgert, aber inzwischen habe ich mich an die Kultur gewöhnt und fühle mich sehr wohl.',
+                    'Chandan berichtet: Ich komme aus Indien und studiere seit dem Frühjahr an der Universität in Kiel. Am Anfang habe ich mich etwas fremd gefühlt, aber die Menschen hier sind unglaublich freundlich und hilfsbereit. Die Mitarbeiter an der Uni haben mir bei der Anmeldung im Wohnheim sehr geholfen. Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit. Das finde ich praktisch und unkompliziert. Inzwischen habe ich viele Kontakte geknüpft und fühle mich in Norddeutschland wie zu Hause.'
+                ],
+
+                // Quiz State
+                answers: {
+                    q1: null,
+                    q2: null,
+                    q3: null,
+                    q4: null,
+                    q5: null,
+                    q6: null,
+                    q7: null,
+                    q8: null
+                },
+
+                correctAnswers: {
+                    q1: 'a',
+                    q2: 'b',
+                    q3: 'c',
+                    q4: 'a',
+                    q5: 'b',
+                    q6: 'a',
+                    q7: 'a',
+                    q8: 'a'
+                },
+
+                // Audio Speech Synthesis Method
+                speak(text, gender = 'female') {
+                    if (!('speechSynthesis' in window)) return;
+                    window.speechSynthesis.cancel();
+                    const utter = new SpeechSynthesisUtterance(text);
+                    utter.lang = 'de-DE';
+                    utter.rate = 0.92;
+
+                    if (gender === 'male' && this.maleVoice) {
+                        utter.voice = this.maleVoice;
+                    } else if (this.femaleVoice) {
+                        utter.voice = this.femaleVoice;
+                    }
+                    window.speechSynthesis.speak(utter);
+                },
+
+                initVoices() {
+                    if (!('speechSynthesis' in window)) return;
+                    const updateVoices = () => {
+                        this.voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('de'));
+                        if (this.voices.length > 0) {
+                            this.femaleVoice = this.voices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('hedda') || v.name.toLowerCase().includes('katja') || v.name.toLowerCase().includes('marlene')) || this.voices[0];
+                            this.maleVoice = this.voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('stefan') || v.name.toLowerCase().includes('hans')) || this.voices[1] || this.voices[0];
+                        }
+                    };
+                    updateVoices();
+                    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                        window.speechSynthesis.onvoiceschanged = updateVoices;
+                    }
+                },
+
+                playFullDialog(dialogNum) {
+                    if (!('speechSynthesis' in window)) return;
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        window.speechSynthesis.cancel();
+                        this.isPlayingFullDialog = false;
+                        this.activeDialogPlaying = null;
+                        this.currentSpeakingIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isPlayingFullDialog = true;
+                    this.activeDialogPlaying = dialogNum;
+                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
+
+                    const speakNextLine = (index) => {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = index;
+                        const line = lines[index];
+                        const utter = new SpeechSynthesisUtterance(line.de);
+                        utter.lang = 'de-DE';
+                        utter.rate = 0.92;
+
+                        if (line.gender === 'male' && this.maleVoice) {
+                            utter.voice = this.maleVoice;
+                        } else if (this.femaleVoice) {
+                            utter.voice = this.femaleVoice;
+                        }
+
+                        utter.onend = () => {
+                            setTimeout(() => {
+                                speakNextLine(index + 1);
+                            }, 500);
+                        };
+
+                        utter.onerror = () => {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                        };
+
+                        window.speechSynthesis.speak(utter);
+                    };
+
+                    speakNextLine(0);
+                },
+
+                toggleReadLesetext() {
+                    if (!('speechSynthesis' in window)) return;
+                    if (this.isReadingLesetext) {
+                        window.speechSynthesis.cancel();
+                        this.isReadingLesetext = false;
+                        this.currentLesetextIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isReadingLesetext = true;
+                    this.currentLesetextIndex = 0;
+
+                    const speakNextParagraph = (index) => {
+                        if (!this.isReadingLesetext || index >= this.lesetextParagraphs.length) {
+                            this.isReadingLesetext = false;
+                            this.currentLesetextIndex = null;
+                            return;
+                        }
+
+                        this.currentLesetextIndex = index;
+                        const text = this.lesetextParagraphs[index];
+                        const utter = new SpeechSynthesisUtterance(text);
+                        utter.lang = 'de-DE';
+                        utter.rate = 0.9;
+                        const gender = (index % 2 === 0) ? 'female' : 'male';
+                        if (gender === 'male' && this.maleVoice) {
+                            utter.voice = this.maleVoice;
+                        } else if (this.femaleVoice) {
+                            utter.voice = this.femaleVoice;
+                        }
+
+                        utter.onend = () => {
+                            setTimeout(() => {
+                                speakNextParagraph(index + 1);
+                            }, 700);
+                        };
+
+                        utter.onerror = () => {
+                            this.isReadingLesetext = false;
+                            this.currentLesetextIndex = null;
+                        };
+
+                        window.speechSynthesis.speak(utter);
+                    };
+
+                    speakNextParagraph(0);
+                },
+
+                initApp() {
+                    this.initVoices();
+                    this.loadSavedProgress('guest');
+
+                    // Reading Progress Listener
+                    window.addEventListener('scroll', () => {
+                        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        if (height > 0) {
+                            this.readingProgress = Math.min(100, Math.round((winScroll / height) * 100));
+                        }
+                    });
+
+                    if (auth) {
+                        auth.onAuthStateChanged((user) => {
+                            if (user) {
+                                this.currentUser = user;
+                                this.userName = user.displayName || user.email.split('@')[0];
+                                this.userInitial = this.userName.charAt(0).toUpperCase();
+                                this.syncWithFirestore(user.uid);
+                            } else {
+                                this.currentUser = null;
+                                this.userName = '';
+                                this.userInitial = 'S';
+                            }
+                            this.authLoading = false;
+                        });
+                    } else {
+                        this.authLoading = false;
+                    }
+                },
+
+                loadSavedProgress(uid) {
+                    try {
+                        const local = localStorage.getItem(`aksaradeutsch_${uid}_lesson_a2_8`);
+                        if (local) {
+                            const data = JSON.parse(local);
+                            if (data.goals) {
+                                data.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
+                                });
+                            }
+                            if (data.answers) {
+                                this.answers = { ...this.answers, ...data.answers };
+                            }
+                            if (data.quizScore !== undefined && data.quizScore !== null) {
+                                this.quizScore = data.quizScore;
+                                this.showFeedback = true;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading local storage:', e);
+                    }
+                },
+
+                async syncWithFirestore(uid) {
+                    this.loadSavedProgress(uid);
+                    if (!db) return;
+
+                    try {
+                        let remoteData = null;
+                        const docRef = db.collection('users').doc(uid).collection('progress').doc('lesson_a2_8');
+                        const docSnap = await docRef.get();
+
+                        if (docSnap.exists) {
+                            remoteData = docSnap.data();
+                        } else {
+                            const userProgSnap = await db.collection('user_progress').doc(uid).get();
+                            if (userProgSnap.exists && userProgSnap.data().lesson_a2_8) {
+                                remoteData = userProgSnap.data().lesson_a2_8;
+                            }
+                        }
+
+                        if (remoteData) {
+                            if (remoteData.goals) {
+                                remoteData.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
+                                });
+                            }
+                            if (remoteData.answers) {
+                                this.answers = { ...this.answers, ...remoteData.answers };
+                            }
+                            if (remoteData.quizScore !== undefined && remoteData.quizScore !== null) {
+                                this.quizScore = remoteData.quizScore;
+                                this.showFeedback = true;
+                            }
+                            this.saveProgressToLocal(uid);
+                        }
+                    } catch (e) {
+                        console.error('Firestore sync error:', e);
+                    }
+                },
+
+                saveProgressToLocal(uid = 'guest') {
+                    try {
+                        const data = {
+                            goals: this.learningGoals.map(g => g.completed),
+                            answers: this.answers,
+                            quizScore: this.quizScore,
+                            updatedAt: new Date().toISOString()
+                        };
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_8`, JSON.stringify(data));
+                    } catch (e) {
+                        console.error('Error saving local storage:', e);
+                    }
+                },
+
+                async saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    this.saveProgressToLocal(uid);
+
+                    if (this.currentUser && db) {
+                        try {
+                            const payload = {
+                                goals: this.learningGoals.map(g => g.completed),
+                                answers: this.answers,
+                                quizScore: this.quizScore,
+                                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                            };
+                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_8').set(payload, { merge: true });
+                            await db.collection('user_progress').doc(this.currentUser.uid).set({
+                                lesson_a2_8: payload
+                            }, { merge: true });
+                        } catch (e) {
+                            console.error('Error saving Firestore:', e);
+                        }
+                    }
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const userAns = this.answers['q' + qNum];
+                    const corrAns = this.correctAnswers['q' + qNum];
+                    if (userAns === corrAns) {
+                        return 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-300';
+                    } else {
+                        return 'bg-red-50/60 border-red-300 ring-1 ring-red-300';
+                    }
+                },
+
+                checkQuiz() {
+                    let score = 0;
+                    for (let i = 1; i <= 8; i++) {
+                        if (this.answers['q' + i] === this.correctAnswers['q' + i]) {
+                            score++;
+                        }
+                    }
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = {
+                        q1: null,
+                        q2: null,
+                        q3: null,
+                        q4: null,
+                        q5: null,
+                        q6: null,
+                        q7: null,
+                        q8: null
+                    };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                logout() {
+                    if (auth) {
+                        auth.signOut().then(() => {
+                            window.location.href = '../login.html';
+                        }).catch(e => {
+                            console.error('Logout error:', e);
+                            window.location.href = '../login.html';
+                        });
+                    } else {
+                        window.location.href = '../login.html';
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

@@ -257,7 +257,8 @@
                 </h1>
                 <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">
                     Yuk, masuk ke akunmu! Di sini kamu bisa mengakses seluruh modul pembelajaran interaktif Level A2.1
-                    dari Pertemuan 1 sampai 12. Kita melangkah bersama untuk semakin percaya diri dan mahir berbahasa Jerman!
+                    dari Pertemuan 1 sampai 12. Kita melangkah bersama untuk semakin percaya diri dan mahir berbahasa
+                    Jerman!
                 </p>
 
                 <!-- Error Notification -->
@@ -318,7 +319,9 @@
                             Siap Melangkah di Level A2.1?
                         </h1>
                         <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6">
-                            Selamat datang di jenjang A2.1! Di sini kamu akan memperluas kemampuan berkomunikasi, menguasai kalimat lampau Perfekt, mengekspresikan opini, hingga berinteraksi di dunia kerja dan kehidupan sehari-hari di Jerman.
+                            Selamat datang di jenjang A2.1! Di sini kamu akan memperluas kemampuan berkomunikasi,
+                            menguasai kalimat lampau Perfekt, mengekspresikan opini, hingga berinteraksi di dunia kerja
+                            dan kehidupan sehari-hari di Jerman.
                         </p>
 
                         <!-- Highlights Stats Grid (3 Columns Balanced) -->
@@ -350,7 +353,8 @@
                     <div
                         class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 w-full lg:w-80 flex-shrink-0">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Progress Belajar Level A2.1</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Progress Belajar
+                                Level A2.1</span>
                             <span class="text-sm font-extrabold text-orange-400"
                                 x-text="Math.round((completedLessonsCount / 12) * 100) + '%'">8%</span>
                         </div>
@@ -359,7 +363,8 @@
                                 :style="`width: ${Math.max(5, (completedLessonsCount / 12) * 100)}%`"></div>
                         </div>
                         <p class="text-xs text-gray-300 leading-relaxed">
-                            Praktikkan materi dan percakapan secara konsisten agar pelafalan serta tata bahasa makin lancar!
+                            Praktikkan materi dan percakapan secara konsisten agar pelafalan serta tata bahasa makin
+                            lancar!
                         </p>
                     </div>
                 </div>
@@ -371,7 +376,8 @@
                     <h2 class="text-xl sm:text-2xl font-extrabold text-navy">
                         Daftar Materi Pertemuan A2.1 (1 – 12)
                     </h2>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih modul pertemuan yang mau kamu pelajari atau ulang hari ini:</p>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Pilih modul pertemuan yang mau kamu pelajari atau
+                        ulang hari ini:</p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
@@ -450,7 +456,8 @@
                                 <a :href="currentUser ? lesson.link : 'javascript:void(0)'"
                                     @click="if(!currentUser) { handleLogin(); }"
                                     class="w-full py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2 cursor-pointer">
-                                    <span x-text="currentUser ? 'Buka Materi Pembelajaran' : 'Masuk untuk Buka Materi'"></span>
+                                    <span
+                                        x-text="currentUser ? 'Buka Materi Pembelajaran' : 'Masuk untuk Buka Materi'"></span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -532,7 +539,7 @@
                         title: 'Über Vergangenes berichten – Profil und Perfekt',
                         description: 'Menceritakan profil diri dan pengalaman masa lalu (Perfekt mit haben/sein), sistematika Partizip II, Genitiv bei Eigennamen, dan fonetik ch.',
                         tags: ['Perfekt haben/sein', 'Partizip II', 'Genitiv Eigennamen', 'Aussprache ch'],
-                        image: '../materi-1.png',
+                        image: '../materi-a2-1.png',
                         link: '../materi-a2-1/',
                         isAvailable: true
                     },
@@ -545,15 +552,15 @@
                         tags: ['Nebensatz mit weil', 'Verabredungen', 'Einladungen', 'Kurzformen'],
                         image: '../materi-2.png',
                         link: '../materi-a2-2/',
-                        isAvailable: true
+                        isAvailable: false
                     },
                     {
                         id: 3,
                         number: '3',
                         germanTheme: 'Nach der Schulzeit',
-                        title: 'Nach der Schulzeit: Schule – eine schöne Zeit?',
-                        description: 'Menceritakan kenangan dan kewajiban masa sekolah, konjugasi kata kerja modal lampau Modalverben im Präteritum (musste, konnte, wollte, durfte, sollte), dan fonetik vokal e.',
-                        tags: ['Modalverben Präteritum', 'Schulzeit', 'Schulerinnerungen', 'Aussprache e'],
+                        title: 'Schule – eine schöne Zeit? Modalverben im Präteritum',
+                        description: 'Menceritakan kenangan dan rutinitas sekolah, konjugasi kata kerja modal lampau Modalverben im Präteritum (musste, konnte, wollte, durfte, sollte), ungkapan terkejut, ulasan komentar, dan fonetik vokal e.',
+                        tags: ['Modalverben Präteritum', 'Schulzeit', 'Überrascht sein', 'Aussprache e'],
                         image: '../materi-3.png',
                         link: '../materi-a2-3/',
                         isAvailable: false
@@ -562,8 +569,8 @@
                         id: 4,
                         number: '4',
                         germanTheme: 'Schulabschluss & Dativ',
-                        title: 'Nach dem Schulabschluss & Schultypen in Deutschland',
-                        description: 'Pilihan jalur pasca-sekolah (FSJ, Ausbildung, Studium), deklinasi artikel dan Possessivartikel dalam kasus Dativ, preposisi Dativ, dan sistem sekolah di Jerman.',
+                        title: 'Nach dem Schulabschluss und Schultypen in Deutschland',
+                        description: 'Pilihan jalur pasca-kelulusan (FSJ, Ausbildung, Studium), deklinasi artikel dan Possessivartikel dalam kasus Dativ, preposisi Dativ (seit, nach, bei, mit, zu/an), dan sistem sekolah di Jerman.',
                         tags: ['Deklination Dativ', 'Präpositionen mit Dativ', 'Schulsystem', 'FSJ & Ausbildung'],
                         image: '../materi-4.png',
                         link: '../materi-a2-4/',
@@ -573,9 +580,9 @@
                         id: 5,
                         number: '5',
                         germanTheme: 'Immer online?',
-                        title: 'Immer online? Was ist besser? Das mache ich am liebsten',
-                        description: 'Dunia digital & penggunaan internet, tingkat perbandingan kata sifat Komparativ & Superlativ (gut/besser/am besten, viel/mehr/am meisten, gern/lieber/am liebsten), dan perbandingan Als/Wie.',
-                        tags: ['Komparativ & Superlativ', 'Vergleich mit als/wie', 'Digitale Medien', 'Internet'],
+                        title: 'Digitale Medien und Vergleiche: Komparativ und Superlativ',
+                        description: 'Perangkat digital & aktivitas daring, tingkat perbandingan kata sifat Komparativ (als/wie) & Superlativ (am ...-sten), bentuk tak beraturan (besser, lieber, mehr), dan mengulur waktu saat berpikir.',
+                        tags: ['Komparativ & Superlativ', 'Vergleich mit als/wie', 'Digitale Medien', 'Zeit gewinnen'],
                         image: '../materi-5.png',
                         link: '../materi-a2-5/',
                         isAvailable: false
@@ -583,10 +590,10 @@
                     {
                         id: 6,
                         number: '6',
-                        germanTheme: 'Meine Meinung & Medien',
-                        title: 'Meine Meinung, Medien im Alltag, und Film ab!',
-                        description: 'Menyatakan opini & argumentasi dengan anak kalimat Nebensatz mit dass, konsumsi media cetak & digital, diskusi film dan sinopsis bioskop.',
-                        tags: ['Nebensatz mit dass', 'Meinungsäußerung', 'Medien im Alltag', 'Filme & Kino'],
+                        germanTheme: 'Soziale Medien & Film',
+                        title: 'Soziale Medien und Film: Nebensätze mit dass',
+                        description: 'Mengemukakan opini dengan anak kalimat Nebensatz mit dass, kosakata media sosial & berbagi foto (Foto-Sharing), ragam genre film di bioskop, serta fonetik konsonan b dan w.',
+                        tags: ['Nebensatz mit dass', 'Meinungsäußerung', 'Soziale Medien', 'Film und Kino'],
                         image: '../materi-6.png',
                         link: '../materi-a2-6/',
                         isAvailable: false
@@ -594,10 +601,10 @@
                     {
                         id: 7,
                         number: '7',
-                        germanTheme: 'Gefühle & Eigenschaften',
-                        title: 'Gefühle und Eigenschaften, und Wenn ich glücklich bin...',
-                        description: 'Mengekspresikan suasana hati & emosi, anak kalimat kondisi/waktu Nebensatz mit wenn, serta kata sifat deskripsi kepribadian dan karakter manusia.',
-                        tags: ['Nebensatz mit wenn', 'Gefühle & Emotionen', 'Eigenschaften', 'Reaktionen'],
+                        germanTheme: 'Lebensereignisse & Gefühle',
+                        title: 'Lebensereignisse und Gefühle: Nebensätze mit wenn',
+                        description: 'Mendeskripsikan peristiwa penting kehidupan, mengekspresikan suasana hati & emosi, anak kalimat kondisional & temporal Nebensatz mit wenn, serta kartu ucapan & perayaan.',
+                        tags: ['Nebensatz mit wenn', 'Lebensereignisse', 'Gefühle & Emotionen', 'Karten & Grüße'],
                         image: '../materi-7.png',
                         link: '../materi-a2-7/',
                         isAvailable: false
@@ -607,8 +614,8 @@
                         number: '8',
                         germanTheme: 'Reflexive Verben & Feste',
                         title: 'Gute Besserung!, Feiern und Geschenke, und Die Einladung',
-                        description: 'Kata kerja refleksif (sich freuen, sich fühlen, sich ärgern) pada kasus Akkusativ & Dativ, ungkapan simpati saat sakit, serta etika perayaan dan pemberian kado.',
-                        tags: ['Reflexive Verben', 'Körper & Gesundheit', 'Geschenke & Feste', 'Einladungen'],
+                        description: 'Kata kerja refleksif (sich freuen, sich fühlen, sich bedanken) dengan Akkusativ/Dativ, ungkapan simpati saat sakit, tradisi perayaan & hadiah di Jerman, serta etika undangan.',
+                        tags: ['Reflexive Verben', 'Körper & Gesundheit', 'Geschenke & Feste', 'Einladungen & Redemittel'],
                         image: '../materi-8.png',
                         link: '../materi-a2-8/',
                         isAvailable: false

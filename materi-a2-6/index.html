@@ -1,0 +1,1981 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 6: Soziale Medien und Film: Nebensätze mit dass - Aksaradeutsch</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0B1528',
+                            light: '#162138',
+                            dark: '#060B14'
+                        },
+                        orange: {
+                            DEFAULT: '#FF6B35',
+                            hover: '#FA5A1E',
+                            light: '#FFF0EB'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Inline Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+    </script>
+
+    <!-- Content Protection & Anti-Copy Script -->
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @media print {
+            body * {
+                display: none !important;
+            }
+
+            #print-shield-warning {
+                display: block !important;
+                padding: 40px;
+                text-align: center;
+                font-size: 18px;
+                color: #B91C1C;
+            }
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.2s ease;
+        }
+
+        .btn-orange:hover {
+            background-color: #FA5A1E;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col selection:bg-orange-500 selection:text-white"
+    x-data="lessonApp()" x-init="initApp()">
+
+    <!-- Auth Guard Screen: Proteksi Penuh Konten Materi jika Belum Login -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0c1322] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya
+            dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
+    <!-- Print Shield Warning Element -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="'width: ' + readingProgress + '%'"></div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 6 (A2.1)</span>
+                    <span class="ml-2 font-medium text-gray-600">Soziale Medien und Film: Nebensätze mit dass</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="../dashboard-a2-1/"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard A2.1</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="../dashboard-a2-1/"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- ============================================================= -->
+        <!-- HERO BANNER                                                   -->
+        <!-- ============================================================= -->
+        <div
+            class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <!-- Left Details -->
+                <div class="max-w-2xl">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                        Soziale Medien und Film: Nebensätze mit dass
+                    </h1>
+                    <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
+                        Mempelajari cara mengemukakan opini, pemikiran, dan perasaan seputar media sosial serta dunia perfilman menggunakan anak kalimat penjelas <em>Nebensatz mit dass</em>. Selain itu, memperkaya kosakata tentang aktivitas berbagi foto secara daring (<em>Foto-Sharing</em>), ragam genre film di bioskop (<em>Filmgenres</em>), serta melatih ketepatan pelafalan dalam membedakan bunyi konsonan <strong>b</strong> dan <strong>w</strong>.
+                    </p>
+
+                    <!-- Meta Tags -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs">
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Modul:</span>
+                            <strong class="text-white">Pertemuan 6 (A2.1)</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Estimasi:</span>
+                            <strong class="text-white">60 Menit</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Latihan:</span>
+                            <strong class="text-white">8 Soal Interaktif</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Links Card (Daftar Isi Materi) -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                    <p
+                        class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                        Daftar Isi Materi
+                        <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">5 Bagian</span>
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                        <li>
+                            <a href="#tujuan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Tujuan Pembelajaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wortschatz"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                1. Kosakata (Wortschatz)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#grammatik"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                2. Tata Bahasa (Grammatik)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dialoge"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                3. Contoh Percakapan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#lesetext"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                4. Teks Bacaan (Lesetext)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latihan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                5. Latihan Pemahaman
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- TARGET PEMBELAJARAN (LERNZIELE)                              -->
+        <!-- ============================================================= -->
+        <section id="tujuan" class="mb-14 scroll-mt-24">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                        <p class="text-xs sm:text-sm text-gray-500">Centang target kompetensi yang telah kamu pahami setelah mempelajari modul ini.</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <span class="text-xs font-extrabold px-3 py-1.5 rounded-full bg-orange-50 text-orange-600 border border-orange-200"
+                            x-text="`${completedGoalsCount} dari 6 Target Selesai`">
+                            0 dari 6 Target Selesai
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Goals Checklist Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <template x-for="(goal, idx) in learningGoals" :key="idx">
+                        <div @click="toggleGoal(idx)"
+                            class="p-4 rounded-2xl border transition-all cursor-pointer flex items-start gap-3.5 group select-none"
+                            :class="goal.completed ? 'bg-emerald-50/60 border-emerald-200 text-emerald-950' : 'bg-gray-50/70 border-gray-100 hover:border-orange-200 text-gray-700'">
+                            <div class="w-6 h-6 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 transition"
+                                :class="goal.completed ? 'bg-emerald-500 text-white shadow-xs' : 'bg-white border border-gray-300 text-transparent group-hover:border-orange-400'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs sm:text-sm leading-relaxed" :class="goal.completed ? 'font-semibold text-emerald-900' : 'font-medium'"
+                                x-text="goal.text"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
+        <!-- ============================================================= -->
+        <section id="wortschatz" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    1
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Istilah media sosial, aktivitas berbagi foto, ragam genre film bioskop, dan ungkapan mengemukakan opini.</p>
+                </div>
+            </div>
+
+            <!-- Subtopik A: Media Sosial dan Berbagi Foto -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">A. Media Sosial dan Berbagi Foto (Soziale Medien und Foto-Sharing)</h3>
+                    <p class="text-xs text-gray-500">Kosakata perangkat pintar, interaksi internet, privasi, serta kelebihan dan kekurangannya.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    <template x-for="(item, idx) in vocabSocialMedia" :key="idx">
+                        <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                                    <template x-if="item.gender === 'masc'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-blue-100 text-blue-800">der</span>
+                                    </template>
+                                    <template x-if="item.gender === 'fem'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-red-100 text-red-800">die</span>
+                                    </template>
+                                    <template x-if="item.gender === 'neut'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800">das</span>
+                                    </template>
+                                    <template x-if="item.gender === 'verb'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-purple-100 text-purple-800">Verb</span>
+                                    </template>
+                                    <template x-if="item.gender === 'adj'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800">Adjektiv</span>
+                                    </template>
+                                    <template x-if="item.gender === 'phrase'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-gray-200 text-gray-800">Nomen</span>
+                                    </template>
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
+                                </div>
+                                <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                            </div>
+                            <button @click="speak(item.speakWord || item.word, 'female')"
+                                class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                :title="'Dengarkan pelafalan ' + item.word">
+                                <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Subtopik B: Perfilman dan Bioskop -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">B. Perfilman dan Bioskop (Film und Kino)</h3>
+                    <p class="text-xs text-gray-500">Kosakata genre film, pemeran, alur cerita, resensi film, dan kata sifat penjelas suasana tontonan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    <template x-for="(item, idx) in vocabCinema" :key="idx">
+                        <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                                    <template x-if="item.gender === 'masc'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-blue-100 text-blue-800">der</span>
+                                    </template>
+                                    <template x-if="item.gender === 'fem'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-red-100 text-red-800">die</span>
+                                    </template>
+                                    <template x-if="item.gender === 'neut'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800">das</span>
+                                    </template>
+                                    <template x-if="item.gender === 'adj'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800">Adjektiv</span>
+                                    </template>
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
+                                </div>
+                                <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                            </div>
+                            <button @click="speak(item.speakWord || item.word, 'male')"
+                                class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                :title="'Dengarkan pelafalan ' + item.word">
+                                <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Ungkapan Menyatakan Pendapat -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">C. Ungkapan Menyatakan Pendapat (Redemittel: Meinung äußern)</h3>
+                    <p class="text-xs text-gray-500">Frasa standar untuk mengemukakan opini, perasaan, penilaian kritis, dan mendiskusikan film di bioskop.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Kolom 1: Opini dengan dass -->
+                    <div class="bg-orange-50/50 rounded-2xl p-5 border border-orange-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-extrabold text-navy text-sm mb-3 pb-2 border-b border-orange-200">
+                                1. Opini Utama (Meinung mit dass)
+                            </h4>
+                            <div class="space-y-2.5">
+                                <template x-for="(phrase, idx) in phrasesOpinion" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-orange-100 shadow-xs flex items-center justify-between gap-2">
+                                        <div class="min-w-0 flex-1">
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                            <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                        </div>
+                                        <button @click="speak(phrase.de, 'female')"
+                                            class="p-1.5 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 2: Penilaian & Evaluasi -->
+                    <div class="bg-blue-50/50 rounded-2xl p-5 border border-blue-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-extrabold text-navy text-sm mb-3 pb-2 border-b border-blue-200">
+                                2. Penilaian & Evaluasi
+                            </h4>
+                            <div class="space-y-2.5">
+                                <template x-for="(phrase, idx) in phrasesEvaluation" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-blue-100 shadow-xs flex items-center justify-between gap-2">
+                                        <div class="min-w-0 flex-1">
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                            <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                        </div>
+                                        <button @click="speak(phrase.de, 'male')"
+                                            class="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 3: Perasaan & Minat -->
+                    <div class="bg-emerald-50/50 rounded-2xl p-5 border border-emerald-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-extrabold text-navy text-sm mb-3 pb-2 border-b border-emerald-200">
+                                3. Perasaan & Minat
+                            </h4>
+                            <div class="space-y-2.5">
+                                <template x-for="(phrase, idx) in phrasesFeelings" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-emerald-100 shadow-xs flex items-center justify-between gap-2">
+                                        <div class="min-w-0 flex-1">
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                            <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                        </div>
+                                        <button @click="speak(phrase.de, 'female')"
+                                            class="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 4: Membahas Film & Bioskop -->
+                    <div class="bg-purple-50/50 rounded-2xl p-5 border border-purple-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-extrabold text-navy text-sm mb-3 pb-2 border-b border-purple-200">
+                                4. Diskusi Film (Über Filme)
+                            </h4>
+                            <div class="space-y-2.5">
+                                <template x-for="(phrase, idx) in phrasesFilmDiscuss" :key="idx">
+                                    <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs flex items-center justify-between gap-2">
+                                        <div class="min-w-0 flex-1">
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                            <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                        </div>
+                                        <button @click="speak(phrase.de, 'male')"
+                                            class="p-1.5 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 transition flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. TATA BAHASA (GRAMMATIK)                                    -->
+        <!-- ============================================================= -->
+        <section id="grammatik" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    2
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Struktur anak kalimat dengan konjungsi bahwa (dass), klasifikasi verba pengantar, dan fonetik konsonan b dan w.</p>
+                </div>
+            </div>
+
+            <!-- Subtopik A: Struktur Anak Kalimat dengan "dass" -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">A. Struktur Anak Kalimat dengan "dass" (Nebensatz mit dass)</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        Konjungsi subordinatif <strong>dass</strong> (bahwa) digunakan untuk menghubungkan induk kalimat (<em>Hauptsatz</em>) dengan anak kalimat penjelas (<em>Nebensatz / Objektsatz</em>). Anak kalimat ini berfungsi menerangkan isi pernyataan, pikiran, keyakinan, atau perasaan dari induk kalimat.
+                    </p>
+                </div>
+
+                <!-- 4 Kaidah Emas Satzbau dass -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-8">
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">1. Posisi Hauptsatz</span>
+                        <p class="text-xs text-gray-600">Induk kalimat mempertahankan susunan baku dengan kata kerja pada <strong>Posisi 2</strong>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">2. Wajib Tanda Koma</span>
+                        <p class="text-xs text-gray-600">Tanda koma <strong>(,)</strong> wajib disisipkan tepat sebelum konjungsi <em>dass</em>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">3. Konjugiertes Verb di Akhir</span>
+                        <p class="text-xs text-gray-600">Kata kerja terkonjugasi pada klausa <em>dass</em> <strong>wajib berada di posisi paling akhir</strong>.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50/80 border border-gray-100">
+                        <span class="text-xs font-extrabold text-orange-600 block mb-1">4. Modalverb / Perfekt</span>
+                        <p class="text-xs text-gray-600">Kata kerja bantu (<em>hat/ist/kann/muss/soll</em>) berada di urutan paling belakang setelah kata kerja utama.</p>
+                    </div>
+                </div>
+
+                <!-- Tabel Struktur Posisi Kalimat -->
+                <div class="overflow-x-auto rounded-2xl border border-gray-200 mb-6">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-navy text-white font-extrabold border-b border-gray-800">
+                            <tr>
+                                <th class="p-3.5 sm:p-4">Induk Kalimat (Hauptsatz)</th>
+                                <th class="p-3.5 sm:p-4 text-center">,</th>
+                                <th class="p-3.5 sm:p-4 text-orange-400">Konjunktion</th>
+                                <th class="p-3.5 sm:p-4">Subjekt</th>
+                                <th class="p-3.5 sm:p-4">Objekt / Angaben</th>
+                                <th class="p-3.5 sm:p-4 text-orange-400">Kata Kerja (Posisi Akhir)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 font-medium text-gray-700 bg-white">
+                            <tr class="hover:bg-orange-50/40 transition">
+                                <td class="p-3.5 sm:p-4 font-bold text-navy">Ich finde es gut</td>
+                                <td class="p-3.5 sm:p-4 text-center font-bold">,</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600">dass</td>
+                                <td class="p-3.5 sm:p-4 font-bold">man</td>
+                                <td class="p-3.5 sm:p-4">immer Kontakt mit Freunden</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600 bg-orange-50/50">hat.</td>
+                            </tr>
+                            <tr class="hover:bg-orange-50/40 transition">
+                                <td class="p-3.5 sm:p-4 font-bold text-navy">Meinen Freunden hat gefallen</td>
+                                <td class="p-3.5 sm:p-4 text-center font-bold">,</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600">dass</td>
+                                <td class="p-3.5 sm:p-4 font-bold">ich</td>
+                                <td class="p-3.5 sm:p-4">Fotos vom Konzert</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600 bg-orange-50/50">gepostet habe.</td>
+                            </tr>
+                            <tr class="hover:bg-orange-50/40 transition">
+                                <td class="p-3.5 sm:p-4 font-bold text-navy">Nadica weiß</td>
+                                <td class="p-3.5 sm:p-4 text-center font-bold">,</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600">dass</td>
+                                <td class="p-3.5 sm:p-4 font-bold">ihr Kollege</td>
+                                <td class="p-3.5 sm:p-4">krank</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600 bg-orange-50/50">war.</td>
+                            </tr>
+                            <tr class="hover:bg-orange-50/40 transition">
+                                <td class="p-3.5 sm:p-4 font-bold text-navy">Ferdinand denkt</td>
+                                <td class="p-3.5 sm:p-4 text-center font-bold">,</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600">dass</td>
+                                <td class="p-3.5 sm:p-4 font-bold">die Leute</td>
+                                <td class="p-3.5 sm:p-4">vorsichtiger</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600 bg-orange-50/50">sein sollen.</td>
+                            </tr>
+                            <tr class="hover:bg-orange-50/40 transition">
+                                <td class="p-3.5 sm:p-4 font-bold text-navy">Wir hoffen</td>
+                                <td class="p-3.5 sm:p-4 text-center font-bold">,</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600">dass</td>
+                                <td class="p-3.5 sm:p-4 font-bold">der Film</td>
+                                <td class="p-3.5 sm:p-4">heute im Kino</td>
+                                <td class="p-3.5 sm:p-4 font-bold text-orange-600 bg-orange-50/50">läuft.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Subtopik B: Kombinasi Kata Kerja Opini dan Perasaan dengan dass -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">B. Kombinasi Kata Kerja Opini dan Perasaan dengan "dass" (Verben + dass-Satz)</h3>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Anak kalimat <em>dass</em> umumnya diawali oleh tiga kelompok kata kerja pengantar utama di dalam kalimat induk:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Kartu 1: Verba Pernyataan & Informasi -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-900 text-xs font-extrabold block mb-2">1. Aussage- &amp; Berichtsverben</span>
+                            <p class="text-xs text-gray-500 mb-3">sagen, erzählen, berichten, schreiben</p>
+                            <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm space-y-1">
+                                <p class="text-navy font-bold">Carla sagt, dass ihr Smartphone sehr praktisch ist.</p>
+                                <p class="text-gray-500 text-xs">Carla mengatakan bahwa ponsel pintarnya sangat praktis.</p>
+                            </div>
+                        </div>
+                        <button @click="speak('Carla sagt, dass ihr Smartphone sehr praktisch ist.', 'female')"
+                            class="mt-4 w-full py-2 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-orange-600 hover:border-orange-300 transition flex items-center justify-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                            <span>Dengarkan Contoh</span>
+                        </button>
+                    </div>
+
+                    <!-- Kartu 2: Verba Opini & Keyakinan -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-950 text-xs font-extrabold block mb-2">2. Meinungs- &amp; Wissensverben</span>
+                            <p class="text-xs text-gray-500 mb-3">meinen, denken, glauben, finden, wissen</p>
+                            <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm space-y-1">
+                                <p class="text-navy font-bold">Ich glaube, dass viele Leute zu viel Privates im Internet zeigen.</p>
+                                <p class="text-gray-500 text-xs">Saya meyakini bahwa banyak orang menunjukkan terlalu banyak hal pribadi di internet.</p>
+                            </div>
+                        </div>
+                        <button @click="speak('Ich glaube, dass viele Leute zu viel Privates im Internet zeigen.', 'male')"
+                            class="mt-4 w-full py-2 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-orange-600 hover:border-orange-300 transition flex items-center justify-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                            <span>Dengarkan Contoh</span>
+                        </button>
+                    </div>
+
+                    <!-- Kartu 3: Ungkapan Perasaan & Evaluasi -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-950 text-xs font-extrabold block mb-2">3. Gefühls- &amp; Bewertungsdrücke</span>
+                            <p class="text-xs text-gray-500 mb-3">es freut mich, es gefällt mir, es ist wichtig / toll / schade</p>
+                            <div class="p-3 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm space-y-1">
+                                <p class="text-navy font-bold">Es ist wichtig, dass man Fotos vor dem Posten genau auswählt.</p>
+                                <p class="text-gray-500 text-xs">Penting bahwa orang memilih foto secara saksama sebelum mengunggahnya.</p>
+                            </div>
+                        </div>
+                        <button @click="speak('Es ist wichtig, dass man Fotos vor dem Posten genau auswählt.', 'female')"
+                            class="mt-4 w-full py-2 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:text-orange-600 hover:border-orange-300 transition flex items-center justify-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                            <span>Dengarkan Contoh</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Fonetik dan Pelafalan: Pembedaan Konsonan "b" dan "w" -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">C. Fonetik dan Pelafalan: Pembedaan Konsonan "b" dan "w" (Aussprache: Konsonanten b und w)</h3>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Dalam bahasa Jerman, pembedaan artikulasi antara huruf <strong>b</strong> dan <strong>w</strong> sangat krusial agar makna kata tidak tertukar saat berkomunikasi:
+                    </p>
+                </div>
+
+                <!-- Penjelasan 2 Posisi Artikulasi -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="p-5 rounded-2xl bg-blue-50/70 border border-blue-200">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-7 h-7 rounded-xl bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center">b</span>
+                            <h4 class="text-sm font-extrabold text-navy">Konsonan "b" [b] &bull; Bunyi Bilabial</h4>
+                        </div>
+                        <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                            Kedua bibir atas dan bawah <strong>merapat rapat menutup aliran udara</strong>, kemudian melepaskan letupan udara secara bersuara.
+                        </p>
+                        <div class="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-gray-800 space-y-1">
+                            <p>Contoh: <em>das Buch, bezahlen, der Blogbeitrag, bekommen, besser, die Bibliothek</em>.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center">w</span>
+                            <h4 class="text-sm font-extrabold text-navy">Konsonan "w" [v] &bull; Bunyi Labiodental</h4>
+                        </div>
+                        <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                            Gigi seri atas <strong>menyentuh lembut bibir bawah</strong> saat udara mengalir keluar secara bergeser bersuara (serupa dengan bunyi 'v').
+                        </p>
+                        <div class="p-3 rounded-xl bg-white border border-emerald-100 text-xs font-semibold text-gray-800 space-y-1">
+                            <p>Contoh: <em>wann, wie, wichtig, die Welt, wissen, das Wochenende, wahrscheinlich</em>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pasangan Kontras Minimal (Minimalpaare) -->
+                <div>
+                    <h4 class="text-xs font-extrabold text-gray-400 tracking-wider mb-3">PASANGAN KONTRAS MINIMAL (MINIMALPAARE):</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                        <template x-for="(pair, idx) in minimalPairs" :key="idx">
+                            <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs font-extrabold text-blue-700 block" x-text="pair.wordB"></span>
+                                    <span class="text-xs font-extrabold text-emerald-700 block" x-text="pair.wordW"></span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <button @click="speak(pair.wordB, 'male')" class="p-1.5 rounded-lg bg-blue-100 text-blue-800 hover:bg-blue-200 transition" :title="'Dengarkan ' + pair.wordB">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                    </button>
+                                    <button @click="speak(pair.wordW, 'female')" class="p-1.5 rounded-lg bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition" :title="'Dengarkan ' + pair.wordW">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. CONTOH PERCAKAPAN (BEISPIELDIALOGE)                        -->
+        <!-- ============================================================= -->
+        <section id="dialoge" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    3
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Percakapan otentik seputar berbagi foto media sosial dan memilih film bioskop bersama teman.</p>
+                </div>
+            </div>
+
+            <!-- Dialog 1: Berdiskusi tentang Berbagi Foto di Media Sosial -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">Dialog 1: Berdiskusi tentang Berbagi Foto di Media Sosial (Fotos in sozialen Netzwerken)</h3>
+                        <p class="text-xs text-gray-500">Percakapan antara Konstantin dan Nadica mengenai kebiasaan mengunggah foto konser di Instagram.</p>
+                    </div>
+                    <button @click="playFullDialog(1)"
+                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 1) ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <template x-for="(line, idx) in dialog1" :key="idx">
+                        <div class="p-4 rounded-2xl border transition"
+                            :class="(activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-start gap-3 min-w-0 flex-1">
+                                    <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
+                                        :class="line.speaker === 'Konstantin' ? 'bg-blue-600 text-white' : 'bg-rose-500 text-white'"
+                                        x-text="line.speaker === 'Konstantin' ? 'K' : 'N'">
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
+                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
+                                        </div>
+                                        <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
+                                        <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
+                                    </div>
+                                </div>
+                                <button @click="speak(line.de, line.gender)"
+                                    class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-2xs transition flex-shrink-0">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Dialog 2: Membicarakan Rekomendasi Film di Bioskop -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">Dialog 2: Membicarakan Rekomendasi Film di Bioskop (Ein Abend im Kino)</h3>
+                        <p class="text-xs text-gray-500">Percakapan antara Markus dan Julia dalam memilih antara genre kriminal, komedi, dan film biografi.</p>
+                    </div>
+                    <button @click="playFullDialog(2)"
+                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 2) ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <template x-for="(line, idx) in dialog2" :key="idx">
+                        <div class="p-4 rounded-2xl border transition"
+                            :class="(activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-start gap-3 min-w-0 flex-1">
+                                    <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
+                                        :class="line.speaker === 'Markus' ? 'bg-blue-600 text-white' : 'bg-rose-500 text-white'"
+                                        x-text="line.speaker === 'Markus' ? 'M' : 'J'">
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
+                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
+                                        </div>
+                                        <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
+                                        <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
+                                    </div>
+                                </div>
+                                <button @click="speak(line.de, line.gender)"
+                                    class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-2xs transition flex-shrink-0">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. TEKS BACAAN (LESETEXT)                                     -->
+        <!-- ============================================================= -->
+        <section id="lesetext" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    4
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Teks Bacaan (Lesetext)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Kompilasi opini dari 4 partisipan forum daring mengenai budaya berbagi foto dan video di internet.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <!-- Header with Title & Read Audio Button -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Immer und überall: Meinungen zum Teilen von Fotos im Netz</h3>
+                        <p class="text-xs text-gray-500">Empat warganet menyampaikan argumen mereka seputar privasi, pertemanan, dan etika foto anak di media sosial.</p>
+                    </div>
+                    <button @click="toggleReadLesetext()"
+                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                            </path>
+                        </svg>
+                        <span x-text="isReadingLesetext ? 'Hentikan Audio Narasi' : 'Dengarkan Seluruh Teks'"></span>
+                    </button>
+                </div>
+
+                <!-- 4 Persona Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- 1. Carla Riemer -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-orange-600 text-white font-extrabold text-xs flex items-center justify-center">CR</div>
+                                    <div>
+                                        <strong class="text-sm font-extrabold text-navy block">Carla Riemer</strong>
+                                        <span class="text-[10px] text-gray-400">Kritik terhadap oversharing</span>
+                                    </div>
+                                </div>
+                                <button @click="speak(lesetextParagraphs[0], 'female')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                                „Also, ich finde mein Smartphone natürlich sehr praktisch. Aber ich finde es echt blöd, dass manche Leute jede kleine Aktivität im Internet mitteilen müssen. Was soll das? Es interessiert mich nicht, dass eine Bekannte gerade ein Käsebrot in den Bergen isst. Ich möchte viel lieber, dass Freunde mich persönlich anrufen und mir von ihrem Leben erzählen. Es nervt einfach, dass manche Leute Fotos ständig an alle Kontakte schicken, nur um zu zeigen, dass sie super aktiv sind.“
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Konstantin Bührer -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center">KB</div>
+                                    <div>
+                                        <strong class="text-sm font-extrabold text-navy block">Konstantin Bührer</strong>
+                                        <span class="text-[10px] text-gray-400">Positif terhadap berbagi momen</span>
+                                    </div>
+                                </div>
+                                <button @click="speak(lesetextParagraphs[1], 'male')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                                „Ich finde es sehr gut, dass man durch soziale Netzwerke immer in Kontakt mit seinen Freunden bleibt. Gestern war ich zum Beispiel auf einem fantastischen Musikkonzert. Meinen Freunden hat sehr gefallen, dass ich sofort Fotos und kurze Videos vom Konzert gepostet habe. Ich habe viele Likes und nette Kommentare bekommen. Ich mag es einfach, dass ich schöne Momente direkt teilen kann.“
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nadica Horvat -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center">NH</div>
+                                    <div>
+                                        <strong class="text-sm font-extrabold text-navy block">Nadica Horvat</strong>
+                                        <span class="text-[10px] text-gray-400">Peringatan etika tempat kerja</span>
+                                    </div>
+                                </div>
+                                <button @click="speak(lesetextParagraphs[2], 'female')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                                „Ich finde es toll, dass man Familie und Bekannte schnell informieren kann. Aber ich bin der Meinung, dass das Handy nicht immer an sein muss. Man muss nicht jede Party im Netz posten. Das kann sehr peinlich werden! Ein Kollege von mir hat sich krankgemeldet und am selben Abend Partyfotos gepostet. Er hatte vergessen, dass seine Kolleginnen und seine Chefin die Fotos sehen können. Jetzt sucht er einen neuen Arbeitsplatz.“
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 4. Ferdinand Weisensee -->
+                    <div class="p-5 rounded-2xl bg-gray-50/80 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold text-xs flex items-center justify-center">FW</div>
+                                    <div>
+                                        <strong class="text-sm font-extrabold text-navy block">Ferdinand Weisensee</strong>
+                                        <span class="text-[10px] text-gray-400">Privasi anak di internet</span>
+                                    </div>
+                                </div>
+                                <button @click="speak(lesetextParagraphs[3], 'male')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                                „Ich sehe das Ganze ziemlich kritisch. Es ist zwar schön, dass die Oma jeden Tag ein Foto von ihrem Enkelkind sehen kann. Aber ich finde es gar nicht gut, dass viele Eltern Fotos von ihren kleinen Kindern veröffentlichen. Die Kinder können schließlich nicht selbst entscheiden, dass sie das nicht wollen. Ich denke, dass die Leute im Internet viel vorsichtiger mit privaten Daten sein müssen.“
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Terjemahan Bahasa Indonesia -->
+                <div class="pt-4 border-t border-gray-100">
+                    <button @click="showTranslation = !showTranslation"
+                        class="w-full py-3 px-5 rounded-2xl bg-gray-50 hover:bg-orange-50/60 border border-gray-200 text-navy font-bold text-xs sm:text-sm transition flex items-center justify-between">
+                        <span x-text="showTranslation ? 'Sembunyikan Terjemahan Bahasa Indonesia' : 'Lihat Terjemahan Lengkap Bahasa Indonesia'"></span>
+                        <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="showTranslation" class="mt-4 p-5 rounded-2xl bg-gray-50/90 border border-gray-200 text-xs sm:text-sm space-y-4 text-gray-700" x-cloak>
+                        <div>
+                            <strong class="text-navy block mb-1">Carla Riemer:</strong>
+                            <p class="leading-relaxed">„Bagi saya, tentu saja saya menganggap ponsel pintar saya sangat praktis. Namun saya merasa sangat konyol bahwa beberapa orang harus memberitahukan setiap aktivitas kecil di internet. Untuk apa sebenarnya hal itu? Saya tidak tertarik mengetahui bahwa seorang kenalan sedang memakan roti keju di pegunungan. Saya jauh lebih ingin teman-teman menelepon saya secara pribadi dan menceritakan kehidupan mereka kepada saya. Sungguh menjengkelkan bahwa sebagian orang selalu mengirimkan foto ke semua kontak hanya untuk menunjukkan bahwa mereka sangat aktif.“</p>
+                        </div>
+                        <div>
+                            <strong class="text-navy block mb-1">Konstantin Bührer:</strong>
+                            <p class="leading-relaxed">„Saya menilai sangat baik bahwa orang bisa selalu terhubung dengan teman-temannya melalui media sosial. Kemarin misalnya saya menghadiri sebuah konser musik yang luar biasa. Teman-teman saya sangat senang bahwa saya langsung mengunggah foto dan video pendek dari konser tersebut. Saya mendapatkan banyak likes dan komentar yang ramah. Saya menyukai kenyataan bahwa saya dapat membagikan momen-momen indah secara langsung.“</p>
+                        </div>
+                        <div>
+                            <strong class="text-navy block mb-1">Nadica Horvat:</strong>
+                            <p class="leading-relaxed">„Saya merasa luar biasa bahwa orang dapat memberi kabar kepada keluarga dan kenalan dengan cepat. Namun saya berpendapat bahwa ponsel tidak harus selalu menyala. Orang tidak perlu memposting setiap acara pesta di internet. Hal tersebut bisa menjadi sangat memalukan! Seorang rekan kerja saya mengajukan izin sakit dan pada malam yang sama mengunggah foto-foto pesta. Dia lupa bahwa rekan-rekan kerja dan bos wanitanya dapat melihat foto tersebut. Sekarang dia harus mencari tempat kerja baru.“</p>
+                        </div>
+                        <div>
+                            <strong class="text-navy block mb-1">Ferdinand Weisensee:</strong>
+                            <p class="leading-relaxed">„Saya memandang hal ini secara cukup kritis. Memang menyenangkan bahwa seorang nenek dapat melihat foto cucunya setiap hari. Tetapi saya sama sekali tidak menganggap baik bahwa banyak orang tua memublikasikan foto anak-anak kecil mereka. Bagaimanapun juga anak-anak belum dapat memutuskan sendiri bahwa mereka tidak menginginkan hal itu. Saya berpikir bahwa orang-orang harus jauh lebih berhati-hati dengan data pribadi di internet.“</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. LATIHAN PEMAHAMAN (ÜBUNGEN)                                -->
+        <!-- ============================================================= -->
+        <section id="latihan" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    5
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Pemahaman (Übungen)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Uji kemampuan penguasaan klausa penjelas dass dan susunan kalimat acak standar CEFR Level A2.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <!-- Header with Description & Live Score Badge -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                    <div>
+                        <p class="text-xs sm:text-sm text-gray-500">Pilihlah kalimat yang paling tepat sesuai dengan aturan gramatika anak kalimat subordinatif dass.</p>
+                    </div>
+
+                    <!-- Live Score Badge (Responsif & Seragam) -->
+                    <div class="flex-shrink-0 self-start sm:self-auto">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                            :class="quizScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                            <span class="text-xs font-bold"
+                                :class="quizScore === null ? 'text-orange-900/80' : (quizScore >= 6 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Latihan:</span>
+                            <span class="text-sm sm:text-base font-extrabold"
+                                :class="quizScore === null ? 'text-orange-600' : (quizScore >= 6 ? 'text-emerald-700' : 'text-amber-700')"
+                                x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'">- / 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEIL A: Was passt? Verbinden Sie die Sätze mit der Konjunktion dass (Soal 1 - 5) -->
+                <div class="mb-10">
+                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-4">
+                        Teil A: Was passt? Verbinden Sie die Sätze mit der Konjunktion dass.
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Soal 1 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Carla findet es blöd. Manche Leute teilen jede Aktivität im Internet mit.</span>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Carla findet es blöd, dass mitteilen manche Leute jede Aktivität im Internet.
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Carla findet es blöd, dass manche Leute im Internet jede Aktivität teilen mit.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Konstantin freut sich sehr. Seine Freunde haben die Fotos vom Konzert gelikt.</span>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Konstantin freut sich sehr, dass haben seine Freunde die Fotos vom Konzert gelikt.
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Konstantin freut sich sehr, seine Freunde haben dass die Fotos vom Konzert gelikt.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Nadica berichtet. Ein Kollege hat durch ein Foto seinen Job verloren.</span>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Nadica berichtet, dass ein Kollege durch ein Foto seinen Job verloren hat.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Nadica berichtet, dass ein Kollege hat durch ein Foto seinen Job verloren.
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Nadica berichtet, dass seinen Job ein Kollege verloren durch ein Foto hat.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Ferdinand ist der Meinung. Eltern sollen keine Fotos von ihren kleinen Kindern veröffentlichen.</span>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Ferdinand ist der Meinung, dass sollen Eltern keine Fotos von ihren kleinen Kindern veröffentlichen.
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern sollen veröffentlichen.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Markus weiß genau. Der neue Film beginnt heute um zwanzig Uhr im Kino.</span>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Markus weiß genau, dass beginnt der neue Film heute um zwanzig Uhr im Kino.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Markus weiß genau, dass der neue Film heute im Kino um zwanzig Uhr ist beginnen.
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEIL B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze (Soal 6 - 8) -->
+                <div class="mb-10">
+                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-4">
+                        Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Film und Handlung:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ der Film / ist / finde / sehr spannend / ich / , / dass / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Ich finde, dass der Film sehr spannend ist.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Ich finde, dass ist der Film sehr spannend.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Der Film ist, dass ich finde sehr spannend.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 7 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Likes und Reaktion:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ Konstantin / bekommen hat / , / dass / viele Likes / gefällt es / er / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Konstantin gefällt es, dass er viele Likes bekommen hat.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Konstantin gefällt es, dass er hat viele Likes bekommen.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Dass er viele Likes bekommen hat Konstantin gefällt es.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 8 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Frage nach der Vorsicht:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ vorsichtiger sein / müssen / die Leute / , / dass / denkst / im Internet / du / ? ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Denkst du, dass die Leute im Internet vorsichtiger sein müssen?
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Denkst du, dass müssen die Leute im Internet vorsichtiger sein?
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Denkst du dass, im Internet die Leute vorsichtiger sein müssen?
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons: Periksa, Reset, & Kunci Jawaban -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-6 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                        <button @click="checkQuiz()"
+                            class="w-full sm:w-auto justify-center px-6 py-3 sm:py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Periksa Semua Jawaban</span>
+                        </button>
+
+                        <button @click="resetQuiz()"
+                            class="w-full sm:w-auto justify-center px-4 py-3 sm:py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5 flex-shrink-0">
+                            <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <span>Reset Jawaban</span>
+                        </button>
+                    </div>
+
+                    <div class="w-full sm:w-auto">
+                        <button @click="showKey = !showKey"
+                            class="w-full sm:w-auto justify-center px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-[0.98] text-blue-700 font-bold text-xs sm:text-sm transition flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <span x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban & Penjelasan'"></span>
+                            <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200 flex-shrink-0" :class="showKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Answer Key Accordion -->
+                <div x-show="showKey"
+                    class="mt-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm space-y-4" x-cloak>
+                    <h4 class="font-extrabold text-navy text-sm sm:text-base border-b border-gray-200 pb-2 mb-3">Kunci Jawaban & Penjelasan Lengkap</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil A (Satzverbindung mit dass):</strong>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.)</strong>: Induk kalimat dipisahkan tanda koma, konjungsi <em>dass</em> diletakkan di awal anak kalimat, dan kata kerja terpisah yang mengalami konjugasi (<em>mitteilen</em>) bergeser secara utuh ke posisi paling akhir kalimat.</li>
+                                <li><strong>a (Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.)</strong>: Kata kerja bantu terkonjugasi <em>haben</em> diletakkan di posisi paling akhir anak kalimat setelah bentuk Partizip II <em>gelikt</em>.</li>
+                                <li><strong>a (Nadica berichtet, dass ein Kollege durch ein Foto seinen Job verloren hat.)</strong>: Konjungsi <em>dass</em> mengawali anak kalimat dan kata kerja bantu terkonjugasi <em>hat</em> menempati posisi paling belakang setelah partisip <em>verloren</em>.</li>
+                                <li><strong>a (Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.)</strong>: Kata kerja modal terkonjugasi <em>sollen</em> ditempatkan di posisi paling akhir anak kalimat setelah kata kerja utama dalam bentuk infinitif <em>veröffentlichen</em>.</li>
+                                <li><strong>a (Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.)</strong>: Kata kerja utama yang mengalami konjugasi <em>beginnt</em> bergeser ke posisi paling akhir anak kalimat setelah seluruh keterangan waktu dan tempat.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
+                            <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (Ich finde, dass der Film sehr spannend ist.)</strong>: Kata kerja induk kalimat <em>finde</em> menempati Posisi 2, diikuti tanda koma dan klausa <em>dass</em> dengan kata kerja kopula <em>ist</em> di posisi paling akhir.</li>
+                                <li><strong>a (Konstantin gefällt es, dass er viele Likes bekommen hat.)</strong>: Klausa induk memuat kata kerja <em>gefällt</em>, diikuti tanda koma dan anak kalimat <em>dass</em> dengan kata kerja bantu <em>hat</em> di akhir kalimat setelah objek dan Partizip II <em>bekommen</em>.</li>
+                                <li><strong>a (Denkst du, dass die Leute im Internet vorsichtiger sein müssen?)</strong>: Dalam kalimat tanya Ya/Tidak (<em>Ja/Nein-Frage</em>), kata kerja induk kalimat <em>denkst</em> berada di Posisi 1, diikuti subjek <em>du</em>, tanda koma, serta anak kalimat <em>dass</em> dengan Modalverb <em>müssen</em> di urutan paling belakang setelah infinitif kopula <em>sein</em>.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- BOTTOM NAVIGATION                                            -->
+        <!-- ============================================================= -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+            <a href="../materi-a2-5/"
+                class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Pertemuan 5: Digitale Medien & Vergleiche</span>
+            </a>
+
+            <a href="../materi-a2-7/"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                <span>Lanjut ke Pertemuan 7: Lebensereignisse & Gefühle</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 mt-16 text-center text-xs text-gray-400">
+        <p>&copy; 2026 Aksaradeutsch. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p class="mt-1">Materi pembelajaran bahasa Jerman standar Goethe-Institut & CEFR.</p>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function lessonApp() {
+            return {
+                // Auth & Sync State
+                currentUser: null,
+                authLoading: true,
+                userName: '',
+                userInitial: 'S',
+                syncStatusText: 'Tersinkronisasi',
+                readingProgress: 0,
+                showTranslation: false,
+                showKey: false,
+                showFeedback: false,
+                quizScore: null,
+
+                // Audio Voices
+                voices: [],
+                maleVoice: null,
+                femaleVoice: null,
+
+                // Dialog Player State
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+
+                // Lesetext Reader State
+                isReadingLesetext: false,
+                currentLesetextIndex: null,
+
+                // Learning Goals (6 Target)
+                learningGoals: [
+                    { text: 'Mengemukakan opini, argumen, dan penilaian seputar media sosial menggunakan anak kalimat Nebensatz mit dass.', completed: false },
+                    { text: 'Menguasai kaidah pembentukan klausa subordinatif dass dengan posisi kata kerja terkonjugasi di akhir kalimat.', completed: false },
+                    { text: 'Memadukan kata kerja opini dan ekspresi perasaan (sagen, finden, meinen, denken, wissen, es freut mich, es gefällt mir) dengan klausa dass.', completed: false },
+                    { text: 'Mengidentifikasi dan menggunakan kosakata seputar aktivitas internet, berbagi foto, serta ragam genre film bioskop.', completed: false },
+                    { text: 'Membedakan artikulasi pelafalan bunyi konsonan bilabial [b] dan konsonan labiodental [v] (huruf w) secara akurat.', completed: false },
+                    { text: 'Memahami teks ulasan, komentar forum, dan sinopsis film sederhana dalam bahasa Jerman.', completed: false }
+                ],
+
+                get completedGoalsCount() {
+                    return this.learningGoals.filter(g => g.completed).length;
+                },
+
+                toggleGoal(index) {
+                    if (this.learningGoals[index]) {
+                        this.learningGoals[index].completed = !this.learningGoals[index].completed;
+                        this.saveProgress();
+                    }
+                },
+
+                // A. Media Sosial dan Berbagi Foto
+                vocabSocialMedia: [
+                    { gender: 'neut', word: 'das Foto, -s', speakWord: 'das Foto', meaning: 'foto / potret' },
+                    { gender: 'neut', word: 'das Video, -s', speakWord: 'das Video', meaning: 'video / rekaman' },
+                    { gender: 'neut', word: 'das Smartphone, -s', speakWord: 'das Smartphone', meaning: 'ponsel pintar' },
+                    { gender: 'fem', word: 'die Aktivität, -en', speakWord: 'die Aktivität', meaning: 'aktivitas / kegiatan' },
+                    { gender: 'fem', word: 'die Nachricht, -en', speakWord: 'die Nachricht', meaning: 'pesan / berita' },
+                    { gender: 'masc', word: 'der Kommentar, -e', speakWord: 'der Kommentar', meaning: 'komentar / ulasan' },
+                    { gender: 'masc', word: 'der Kontakt, -e', speakWord: 'der Kontakt', meaning: 'kontak / hubungan' },
+                    { gender: 'neut', word: 'das Like, -s', speakWord: 'das Like', meaning: 'tanda suka pada media sosial' },
+                    { gender: 'fem', word: 'die Privatsphäre (Sg.)', speakWord: 'die Privatsphäre', meaning: 'ranah pribadi / privasi' },
+                    { gender: 'masc', word: 'der Vorteil, -e', speakWord: 'der Vorteil', meaning: 'kelebihan / keuntungan' },
+                    { gender: 'masc', word: 'der Nachteil, -e', speakWord: 'der Nachteil', meaning: 'kekurangan / kerugian' },
+                    { gender: 'phrase', word: 'die reale Welt', speakWord: 'die reale Welt', meaning: 'dunia nyata' },
+                    { gender: 'verb', word: 'posten / hochladen', speakWord: 'posten, hochladen', meaning: 'mengunggah postingan' },
+                    { gender: 'verb', word: 'teilen', speakWord: 'teilen', meaning: 'membagikan konten (share)' },
+                    { gender: 'verb', word: 'liken', speakWord: 'liken', meaning: 'memberikan tanda suka (like)' },
+                    { gender: 'verb', word: 'mitteilen', speakWord: 'mitteilen', meaning: 'mengabarkan / memberitahukan' },
+                    { gender: 'verb', word: 'informieren', speakWord: 'informieren', meaning: 'menginformasikan' },
+                    { gender: 'verb', word: 'nerven', speakWord: 'nerven', meaning: 'menjengkelkan / mengganggu' },
+                    { gender: 'adj', word: 'peinlich', speakWord: 'peinlich', meaning: 'memalukan / canggung' },
+                    { gender: 'adj', word: 'vorsichtig', speakWord: 'vorsichtig', meaning: 'berhati-hati / waspada' }
+                ],
+
+                // B. Perfilman dan Bioskop
+                vocabCinema: [
+                    { gender: 'masc', word: 'der Film, -e', speakWord: 'der Film', meaning: 'film / sinema' },
+                    { gender: 'neut', word: 'das Kino, -s', speakWord: 'das Kino', meaning: 'bioskop' },
+                    { gender: 'fem', word: 'die Komödie, -n', speakWord: 'die Komödie', meaning: 'film komedi' },
+                    { gender: 'masc', word: 'der Thriller, -', speakWord: 'der Thriller', meaning: 'film cerita seru / menegangkan' },
+                    { gender: 'masc', word: 'der Liebesfilm, -e', speakWord: 'der Liebesfilm', meaning: 'film romantis / percintaan' },
+                    { gender: 'masc', word: 'der Krimi, -s', speakWord: 'der Krimi', meaning: 'film detektif / kriminalitas' },
+                    { gender: 'masc', word: 'der Fantasy-Film, -e', speakWord: 'der Fantasyfilm', meaning: 'film fantasi' },
+                    { gender: 'masc', word: 'der Actionfilm, -e', speakWord: 'der Actionfilm', meaning: 'film laga / aksi' },
+                    { gender: 'masc', word: 'der Dokumentarfilm, -e', speakWord: 'der Dokumentarfilm', meaning: 'film dokumenter' },
+                    { gender: 'fem', word: 'die Autobiografie, -n', speakWord: 'die Autobiografie', meaning: 'karya autobiografi' },
+                    { gender: 'fem', word: 'die Schauspielerin, -nen', speakWord: 'die Schauspielerin', meaning: 'aktris pemeran wanita' },
+                    { gender: 'masc', word: 'der Schauspieler, -', speakWord: 'der Schauspieler', meaning: 'aktor pemeran pria' },
+                    { gender: 'fem', word: 'die Handlung, -en', speakWord: 'die Handlung', meaning: 'alur cerita / jalan cerita' },
+                    { gender: 'fem', word: 'die Filmkritik, -en', speakWord: 'die Filmkritik', meaning: 'ulasan / resensi film' },
+                    { gender: 'fem', word: 'die Regie (Sg.)', speakWord: 'die Regie', meaning: 'penyutradaraan' },
+                    { gender: 'adj', word: 'spannend', speakWord: 'spannend', meaning: 'menegangkan / seru' },
+                    { gender: 'adj', word: 'lustig', speakWord: 'lustig', meaning: 'lucu / jenaka' },
+                    { gender: 'adj', word: 'traurig', speakWord: 'traurig', meaning: 'sedih / mengharukan' }
+                ],
+
+                // C. Redemittel
+                phrasesOpinion: [
+                    { de: 'Ich finde, dass...', id: 'Menurut saya bahwa...' },
+                    { de: 'Ich denke, dass...', id: 'Saya berpikir bahwa...' },
+                    { de: 'Ich glaube, dass...', id: 'Saya meyakini bahwa...' },
+                    { de: 'Ich meine, dass...', id: 'Saya berpendapat bahwa...' },
+                    { de: 'Ich bin der Meinung, dass...', id: 'Saya memiliki opini bahwa...' }
+                ],
+
+                phrasesEvaluation: [
+                    { de: 'Ich finde es gut / schlecht, dass...', id: 'Menurut saya baik / buruk bahwa...' },
+                    { de: 'Es ist wichtig, dass...', id: 'Sangat penting bahwa...' },
+                    { de: 'Es ist toll / schade, dass...', id: 'Hebat / sayang sekali bahwa...' },
+                    { de: 'Es ist blöd / peinlich, dass...', id: 'Konyol / memalukan bahwa...' }
+                ],
+
+                phrasesFeelings: [
+                    { de: 'Ich mag es, dass...', id: 'Saya menyukai bahwa...' },
+                    { de: 'Ich mag es nicht, dass...', id: 'Saya tidak suka bahwa...' },
+                    { de: 'Ich freue mich darüber, dass...', id: 'Saya merasa senang bahwa...' },
+                    { de: 'Es gefällt mir, dass...', id: 'Saya menyukai hal bahwa...' }
+                ],
+
+                phrasesFilmDiscuss: [
+                    { de: 'Welchen Film möchtest du sehen?', id: 'Film mana yang ingin kamu tonton?' },
+                    { de: 'Worum geht es in dem Film?', id: 'Tentang apa alur ceritanya?' },
+                    { de: 'Die Handlung ist sehr spannend.', id: 'Alur ceritanya sangat menegangkan.' },
+                    { de: 'Ich finde, dass die Schauspieler sehr gut spielen.', id: 'Menurut saya para aktor berakting sangat bagus.' }
+                ],
+
+                // Minimalpaare b vs w
+                minimalPairs: [
+                    { wordB: 'balder', wordW: 'walder' },
+                    { wordB: 'beiser', wordW: 'weiser' },
+                    { wordB: 'busch', wordW: 'wusch' },
+                    { wordB: 'bock', wordW: 'wock' },
+                    { wordB: 'besser', wordW: 'Wasser' },
+                    { wordB: 'Bild', wordW: 'wild' },
+                    { wordB: 'Bein', wordW: 'Wein' },
+                    { wordB: 'bieten', wordW: 'wüten' }
+                ],
+
+                // Dialog 1
+                dialog1: [
+                    { speaker: 'Konstantin', gender: 'male', de: 'Hallo Nadica! Hast du mein neues Foto vom Konzert gestern Abend auf Instagram gesehen?', id: 'Halo Nadica! Apakah kamu sudah melihat foto baru saya dari konser kemarin malam di Instagram?' },
+                    { speaker: 'Nadica', gender: 'female', de: 'Hallo Konstantin! Ja, das Foto habe ich gesehen. Es ist toll, dass du so viel Spaß auf dem Konzert hattest.', id: 'Halo Konstantin! Ya, saya sudah melihat fotonya. Hebat sekali bahwa kamu bersenang-senang di konser tersebut.' },
+                    { speaker: 'Konstantin', gender: 'male', de: 'Ich finde es super, dass man Erlebnisse sofort mit Freunden teilen kann. Ich habe schon über fünfzig Likes bekommen!', id: 'Menurut saya sangat luar biasa bahwa orang bisa langsung membagikan pengalaman bersama teman-teman. Saya sudah mendapatkan lebih dari lima puluh likes!' },
+                    { speaker: 'Nadica', gender: 'female', de: 'Das verstehe ich. Aber ich denke, dass man im Internet trotzdem vorsichtig sein muss. Manche Kollegen posten jedes Foto von Partys und vergessen, dass auch der Chef die Bilder sehen kann.', id: 'Saya paham hal itu. Namun saya berpikir bahwa orang tetap harus berhati-hati di internet. Beberapa rekan kerja memposting setiap foto pesta dan lupa bahwa atasan juga bisa melihat gambar-gambar tersebut.' },
+                    { speaker: 'Konstantin', gender: 'male', de: 'Da hast du vollkommen recht. Ich bin der Meinung, dass private Arbeitsdinge nicht ins Internet gehören.', id: 'Kamu benar sekali di bagian itu. Saya berpendapat bahwa urusan pribadi kantor tidak sepatutnya masuk ke internet.' }
+                ],
+
+                // Dialog 2
+                dialog2: [
+                    { speaker: 'Markus', gender: 'male', de: 'Julia, hast du Lust, heute Abend ins Kino zu gehen? Es laufen viele interessante Filme.', id: 'Julia, apakah kamu berminat pergi ke bioskop malam ini? Ada banyak film menarik yang sedang tayang.' },
+                    { speaker: 'Julia', gender: 'female', de: 'Gerne! Welchen Film möchtest du sehen?', id: 'Dengan senang hati! Film mana yang ingin kamu tonton?' },
+                    { speaker: 'Markus', gender: 'male', de: 'Ich möchte den neuen Krimi sehen. Die Kritiker schreiben, dass die Handlung unglaublich spannend ist.', id: 'Saya ingin menonton film detektif yang baru. Para kritikus menulis bahwa jalan ceritanya luar biasa menegangkan.' },
+                    { speaker: 'Julia', gender: 'female', de: 'Krimis mag ich eigentlich nicht so gern. Ich finde, dass Liebesfilme und Komödien viel unterhaltsamer sind.', id: 'Sebenarnya saya tidak terlalu menyukai film kriminal. Menurut saya film romantis dan komedi jauh lebih menghibur.' },
+                    { speaker: 'Markus', gender: 'male', de: 'Wie wäre es mit der Dokumentarbiografie „Der Junge muss an die frische Luft“? Mein Bruder sagt, dass dieser Film lustig und gleichzeitig sehr berührend ist.', id: 'Bagaimana kalau film biografi dokumenter "Der Junge muss an die frische Luft"? Saudara laki-laki saya mengatakan bahwa film ini lucu dan sekaligus sangat mengharukan.' },
+                    { speaker: 'Julia', gender: 'female', de: 'Einverstanden! Ich freue mich schon darauf, dass wir diesen Film zusammen anschauen.', id: 'Setuju! Saya sudah tidak sabar bahwa kita menonton film ini bersama.' }
+                ],
+
+                // Lesetext Paragraphs
+                lesetextParagraphs: [
+                    "Carla Riemer: Also, ich finde mein Smartphone natürlich sehr praktisch. Aber ich finde es echt blöd, dass manche Leute jede kleine Aktivität im Internet mitteilen müssen. Was soll das? Es interessiert mich nicht, dass eine Bekannte gerade ein Käsebrot in den Bergen isst. Ich möchte viel lieber, dass Freunde mich persönlich anrufen und mir von ihrem Leben erzählen. Es nervt einfach, dass manche Leute Fotos ständig an alle Kontakte schicken, nur um zu zeigen, dass sie super aktiv sind.",
+                    "Konstantin Bührer: Ich finde es sehr gut, dass man durch soziale Netzwerke immer in Kontakt mit seinen Freunden bleibt. Gestern war ich zum Beispiel auf einem fantastischen Musikkonzert. Meinen Freunden hat sehr gefallen, dass ich sofort Fotos und kurze Videos vom Konzert gepostet habe. Ich habe viele Likes und nette Kommentare bekommen. Ich mag es einfach, dass ich schöne Momente direkt teilen kann.",
+                    "Nadica Horvat: Ich finde es toll, dass man Familie und Bekannte schnell informieren kann. Aber ich bin der Meinung, dass das Handy nicht immer an sein muss. Man muss nicht jede Party im Netz posten. Das kann sehr peinlich werden! Ein Kollege von mir hat sich krankgemeldet und am selben Abend Partyfotos gepostet. Er hatte vergessen, dass seine Kolleginnen und seine Chefin die Fotos sehen können. Jetzt sucht er einen neuen Arbeitsplatz.",
+                    "Ferdinand Weisensee: Ich sehe das Ganze ziemlich kritisch. Es ist zwar schön, dass die Oma jeden Tag ein Foto von ihrem糾kind sehen kann. Aber ich finde es gar nicht gut, dass viele Eltern Fotos von ihren kleinen Kindern veröffentlichen. Die Kinder können schließlich nicht selbst entscheiden, dass sie das nicht wollen. Ich denke, dass die Leute im Internet viel vorsichtiger mit privaten Daten sein müssen."
+                ],
+
+                // Answers & Quiz
+                answers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+
+                correctAnswers: {
+                    q1: 'a',
+                    q2: 'a',
+                    q3: 'a',
+                    q4: 'a',
+                    q5: 'a',
+                    q6: 'a',
+                    q7: 'a',
+                    q8: 'a'
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/70 border-gray-200';
+                    const qKey = 'q' + qNum;
+                    const isCorrect = (this.answers[qKey] === this.correctAnswers[qKey]);
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                checkQuiz() {
+                    let score = 0;
+                    for (let i = 1; i <= 8; i++) {
+                        const key = 'q' + i;
+                        if (this.answers[key] === this.correctAnswers[key]) {
+                            score++;
+                        }
+                    }
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = {
+                        q1: '',
+                        q2: '',
+                        q3: '',
+                        q4: '',
+                        q5: '',
+                        q6: '',
+                        q7: '',
+                        q8: ''
+                    };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                // Audio Voices Management
+                initVoices() {
+                    if ('speechSynthesis' in window) {
+                        const load = () => {
+                            this.voices = window.speechSynthesis.getVoices();
+                            const deVoices = this.voices.filter(v => v.lang.startsWith('de'));
+                            if (deVoices.length > 0) {
+                                this.femaleVoice = deVoices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('hedda') || v.name.toLowerCase().includes('katja') || v.name.toLowerCase().includes('marlene')) || deVoices[0];
+                                this.maleVoice = deVoices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('stefan') || v.name.toLowerCase().includes('bernd') || v.name.toLowerCase().includes('hans')) || deVoices[deVoices.length - 1];
+                            }
+                        };
+                        load();
+                        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                            window.speechSynthesis.onvoiceschanged = load;
+                        }
+                    }
+                },
+
+                speak(text, gender = 'female') {
+                    if (!('speechSynthesis' in window)) {
+                        alert('Browser Anda belum mendukung fitur Web Speech Audio.');
+                        return;
+                    }
+                    window.speechSynthesis.cancel();
+                    const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
+                    const utter = new SpeechSynthesisUtterance(cleanText);
+                    utter.lang = 'de-DE';
+                    utter.rate = 0.9;
+                    if (gender === 'male' && this.maleVoice) {
+                        utter.voice = this.maleVoice;
+                        utter.pitch = 0.95;
+                    } else if (this.femaleVoice) {
+                        utter.voice = this.femaleVoice;
+                        utter.pitch = 1.05;
+                    }
+                    window.speechSynthesis.speak(utter);
+                },
+
+                playFullDialog(dialogNum) {
+                    if (!('speechSynthesis' in window)) return;
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        window.speechSynthesis.cancel();
+                        this.isPlayingFullDialog = false;
+                        this.activeDialogPlaying = null;
+                        this.currentSpeakingIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isPlayingFullDialog = true;
+                    this.activeDialogPlaying = dialogNum;
+                    this.currentSpeakingIndex = 0;
+
+                    const dialogData = (dialogNum === 1) ? this.dialog1 : this.dialog2;
+
+                    const speakNextLine = (index) => {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= dialogData.length) {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = index;
+                        const line = dialogData[index];
+                        const cleanText = line.de.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
+                        const utter = new SpeechSynthesisUtterance(cleanText);
+                        utter.lang = 'de-DE';
+                        utter.rate = 0.88;
+
+                        if (line.gender === 'male' && this.maleVoice) {
+                            utter.voice = this.maleVoice;
+                            utter.pitch = 0.95;
+                        } else if (this.femaleVoice) {
+                            utter.voice = this.femaleVoice;
+                            utter.pitch = 1.05;
+                        }
+
+                        utter.onend = () => {
+                            setTimeout(() => {
+                                speakNextLine(index + 1);
+                            }, 600);
+                        };
+
+                        utter.onerror = () => {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                        };
+
+                        window.speechSynthesis.speak(utter);
+                    };
+
+                    speakNextLine(0);
+                },
+
+                toggleReadLesetext() {
+                    if (!('speechSynthesis' in window)) return;
+                    if (this.isReadingLesetext) {
+                        window.speechSynthesis.cancel();
+                        this.isReadingLesetext = false;
+                        this.currentLesetextIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isReadingLesetext = true;
+                    this.currentLesetextIndex = 0;
+
+                    const speakNextParagraph = (index) => {
+                        if (!this.isReadingLesetext || index >= this.lesetextParagraphs.length) {
+                            this.isReadingLesetext = false;
+                            this.currentLesetextIndex = null;
+                            return;
+                        }
+
+                        this.currentLesetextIndex = index;
+                        const text = this.lesetextParagraphs[index];
+                        const utter = new SpeechSynthesisUtterance(text);
+                        utter.lang = 'de-DE';
+                        utter.rate = 0.9;
+                        const gender = (index % 2 === 0) ? 'female' : 'male';
+                        if (gender === 'male' && this.maleVoice) {
+                            utter.voice = this.maleVoice;
+                        } else if (this.femaleVoice) {
+                            utter.voice = this.femaleVoice;
+                        }
+
+                        utter.onend = () => {
+                            setTimeout(() => {
+                                speakNextParagraph(index + 1);
+                            }, 700);
+                        };
+
+                        utter.onerror = () => {
+                            this.isReadingLesetext = false;
+                            this.currentLesetextIndex = null;
+                        };
+
+                        window.speechSynthesis.speak(utter);
+                    };
+
+                    speakNextParagraph(0);
+                },
+
+                initApp() {
+                    this.initVoices();
+                    this.loadSavedProgress('guest');
+
+                    // Reading Progress Listener
+                    window.addEventListener('scroll', () => {
+                        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        if (height > 0) {
+                            this.readingProgress = Math.min(100, Math.round((winScroll / height) * 100));
+                        }
+                    });
+
+                    if (auth) {
+                        auth.onAuthStateChanged((user) => {
+                            if (user) {
+                                this.currentUser = user;
+                                this.userName = user.displayName || user.email.split('@')[0];
+                                this.userInitial = this.userName.charAt(0).toUpperCase();
+                                this.syncWithFirestore(user.uid);
+                            } else {
+                                this.currentUser = null;
+                                this.userName = '';
+                                this.userInitial = 'S';
+                            }
+                            this.authLoading = false;
+                        });
+                    } else {
+                        this.authLoading = false;
+                    }
+                },
+
+                loadSavedProgress(uid) {
+                    try {
+                        const local = localStorage.getItem(`aksaradeutsch_${uid}_lesson_a2_6`);
+                        if (local) {
+                            const data = JSON.parse(local);
+                            if (data.goals) {
+                                data.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
+                                });
+                            }
+                            if (data.answers) {
+                                this.answers = { ...this.answers, ...data.answers };
+                            }
+                            if (data.quizScore !== undefined && data.quizScore !== null) {
+                                this.quizScore = data.quizScore;
+                                this.showFeedback = true;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading local storage:', e);
+                    }
+                },
+
+                async syncWithFirestore(uid) {
+                    this.loadSavedProgress(uid);
+                    if (!db) return;
+
+                    try {
+                        let remoteData = null;
+                        const docRef = db.collection('users').doc(uid).collection('progress').doc('lesson_a2_6');
+                        const docSnap = await docRef.get();
+
+                        if (docSnap.exists) {
+                            remoteData = docSnap.data();
+                        } else {
+                            const userProgSnap = await db.collection('user_progress').doc(uid).get();
+                            if (userProgSnap.exists && userProgSnap.data().lesson_a2_6) {
+                                remoteData = userProgSnap.data().lesson_a2_6;
+                            }
+                        }
+
+                        if (remoteData) {
+                            if (remoteData.goals) {
+                                remoteData.goals.forEach((g, i) => {
+                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
+                                });
+                            }
+                            if (remoteData.answers) {
+                                this.answers = { ...this.answers, ...remoteData.answers };
+                            }
+                            if (remoteData.quizScore !== undefined && remoteData.quizScore !== null) {
+                                this.quizScore = remoteData.quizScore;
+                                this.showFeedback = true;
+                            }
+                            this.saveProgressToLocal(uid);
+                        }
+                    } catch (e) {
+                        console.error('Firestore sync error:', e);
+                    }
+                },
+
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    const data = {
+                        goals: this.learningGoals.map(g => g.completed),
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        updatedAt: new Date().toISOString()
+                    };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_6`, JSON.stringify(data));
+                    } catch (e) {}
+                    return data;
+                },
+
+                async saveProgress() {
+                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
+                    const dataToSave = this.saveProgressToLocal(uid);
+
+                    if (this.currentUser && db) {
+                        try {
+                            this.syncStatusText = 'Menyimpan...';
+                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_6').set(dataToSave, { merge: true });
+                            await db.collection('user_progress').doc(this.currentUser.uid).set({
+                                lesson_a2_6: dataToSave
+                            }, { merge: true });
+                            this.syncStatusText = 'Tersinkronisasi';
+                        } catch (err) {
+                            this.syncStatusText = 'Tersimpan lokal';
+                        }
+                    }
+                },
+
+                async logout() {
+                    if (auth) {
+                        await auth.signOut();
+                    }
+                    this.currentUser = null;
+                    window.location.replace('../dashboard-a2-1/');
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
+

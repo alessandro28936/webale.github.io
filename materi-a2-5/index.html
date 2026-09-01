@@ -1,0 +1,1778 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 5: Digitale Medien und Vergleiche: Komparativ und Superlativ - Aksaradeutsch</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0B1528',
+                            light: '#162138',
+                            dark: '#060B14'
+                        },
+                        orange: {
+                            DEFAULT: '#FF6B35',
+                            hover: '#FA5A1E',
+                            light: '#FFF4EF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Inline Firebase Configuration & Security Protection -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoFwPyYREd42enZrzJ_NZe85koDbU7VOk",
+            authDomain: "materi-pembelajaran-be300.firebaseapp.com",
+            projectId: "materi-pembelajaran-be300",
+            storageBucket: "materi-pembelajaran-be300.firebasestorage.app",
+            messagingSenderId: "984261323262",
+            appId: "1:984261323262:web:024df4e674e47c20d1b8af",
+            measurementId: "G-2R3WT3SGND"
+        };
+
+        let auth = null;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                db.enablePersistence().catch((err) => {
+                    console.log("Firebase persistence:", err.code);
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+
+        // Anti-Copy, Anti-Cut, Anti-Select & Anti-Right Click Protection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            if (!isInput && e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' || e.key === 'x' || e.key === 'X')) {
+                e.preventDefault();
+                return false;
+            }
+            if (
+                (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #F8FAFC;
+            color: #0B1528;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        .btn-orange {
+            background-color: #FF6B35;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-orange:hover {
+            background-color: #FA5A1E;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-shield-warning {
+                visibility: visible;
+                display: block !important;
+                position: fixed;
+                top: 30%;
+                left: 10%;
+                right: 10%;
+                text-align: center;
+                font-size: 18pt;
+                color: #0B1528;
+                font-family: sans-serif;
+            }
+        }
+    </style>
+</head>
+
+<body x-data="lessonApp()" x-init="initApp()" class="min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900">
+
+    <!-- Print Shield Warning -->
+    <div id="print-shield-warning" style="display: none;">
+        <strong>Dokumen Dilindungi Hak Cipta Aksaradeutsch.</strong><br>
+        Materi pembelajaran ini hanya dapat diakses melalui portal resmi Aksaradeutsch.com.
+    </div>
+
+    <!-- Auth Guard Screen Overlay -->
+    <div x-show="authLoading || !currentUser" x-cloak
+        class="fixed inset-0 z-[9999] bg-[#0B1528] flex flex-col items-center justify-center text-white text-center p-6 select-none">
+        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-gray-200 tracking-wide">Memeriksa Hak Akses Materi...</p>
+        <p class="text-xs text-gray-400 mt-1 max-w-sm">Halaman materi pembelajaran Aksaradeutsch dilindungi dan hanya dapat diakses oleh siswa terdaftar.</p>
+    </div>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-150"
+            :style="'width: ' + readingProgress + '%'"></div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="./" class="flex items-center" aria-label="Aksaradeutsch.com Beranda">
+                    <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch Logo"
+                        class="h-10 sm:h-12 w-auto object-contain">
+                </a>
+                <div
+                    class="hidden sm:flex items-center pl-3 border-l border-gray-200 text-xs font-semibold text-gray-500">
+                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 font-bold rounded-md">Pertemuan 5 (A2.1)</span>
+                    <span class="ml-2 font-medium text-gray-600">Digitale Medien und Vergleiche: Komparativ und Superlativ</span>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Return to Student Dashboard Button -->
+                <a href="../dashboard-a2-1/"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition"
+                    title="Kembali ke Dashboard Siswa">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="hidden sm:inline">Dashboard A2.1</span>
+                </a>
+
+                <!-- Sync Status Indicator -->
+                <template x-if="currentUser">
+                    <div
+                        class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span x-text="syncStatusText">Tersinkronisasi</span>
+                    </div>
+                </template>
+
+                <!-- Profile & Logout / Login Button -->
+                <template x-if="currentUser">
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+                        <div class="hidden lg:block text-right">
+                            <span class="block text-xs font-bold text-navy truncate max-w-[130px]"
+                                x-text="currentUser.displayName || currentUser.email.split('@')[0]">Peserta</span>
+                            <span class="block text-[10px] text-gray-500 truncate max-w-[130px]"
+                                x-text="currentUser.email"></span>
+                        </div>
+                        <button @click="logout()"
+                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 text-xs font-bold border border-gray-200 hover:border-red-200 transition"
+                            title="Keluar dari sesi">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                            <span class="hidden sm:inline">Keluar</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template x-if="!currentUser && !authLoading">
+                    <a href="../dashboard-a2-1/"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white font-bold text-xs btn-orange shadow-sm">
+                        <span>Masuk Akun</span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- ============================================================= -->
+        <!-- HERO BANNER                                                   -->
+        <!-- ============================================================= -->
+        <div
+            class="relative rounded-3xl bg-gradient-to-br from-navy via-[#162138] to-navy text-white p-6 sm:p-10 mb-10 overflow-hidden shadow-xl border border-gray-800">
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <!-- Left Details -->
+                <div class="max-w-2xl">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                        Digitale Medien und Vergleiche: Komparativ und Superlativ
+                    </h1>
+                    <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
+                        Mempelajari kosakata gawai dan aktivitas media digital modern, menguasai tingkat perbandingan lebih (<em>Komparativ</em>) dengan partikel <em>als</em> dan kesetaraan <em>(genau) so ... wie</em>, menyatakan keunggulan maksimal dengan tingkat paling (<em>Superlativ: am ...-sten</em>), serta strategi percakapan mengulur waktu berpikir saat berbicara spontan (<em>Beim Sprechen Zeit gewinnen</em>).
+                    </p>
+
+                    <!-- Meta Tags -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs">
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Modul:</span>
+                            <strong class="text-white">Pertemuan 5 (A2.1)</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Estimasi:</span>
+                            <strong class="text-white">60 Menit</strong>
+                        </div>
+                        <div
+                            class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 text-gray-200">
+                            <span class="text-gray-400 font-semibold">Latihan:</span>
+                            <strong class="text-white">8 Soal Interaktif</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Links Card (Daftar Isi Materi) -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 w-full md:w-72 flex-shrink-0">
+                    <p
+                        class="text-xs uppercase font-bold tracking-wider text-orange-300 mb-3 flex items-center justify-between">
+                        Daftar Isi Materi
+                        <span class="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded font-semibold">5 Bagian</span>
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm font-medium">
+                        <li>
+                            <a href="#tujuan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Target Pembelajaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wortschatz"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                1. Kosakata (Wortschatz)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#grammatik"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                2. Tata Bahasa (Grammatik)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dialog"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                3. Contoh Percakapan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#lesetext"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                4. Teks Bacaan (Lesetext)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latihan"
+                                class="flex items-center gap-2 text-gray-300 hover:text-white transition py-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                5. Latihan Pemahaman
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- TARGET PEMBELAJARAN (LERNZIELE)                              -->
+        <!-- ============================================================= -->
+        <section id="tujuan" class="mb-14 scroll-mt-24">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-navy">Tujuan Pembelajaran</h2>
+                        <p class="text-xs sm:text-sm text-gray-500 mt-1">Tandai capaian di bawah ini setelah kamu menguasai materi Pertemuan 5 Level A2.1:</p>
+                    </div>
+                    <div class="flex items-center gap-2 self-start sm:self-auto bg-orange-50 border border-orange-200 px-3.5 py-1.5 rounded-2xl">
+                        <span class="text-xs font-bold text-orange-700" x-text="`${completedGoalsCount} dari 6 Selesai`"></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <template x-for="(goal, idx) in learningGoals" :key="idx">
+                        <div @click="toggleGoal(idx)"
+                            class="p-4 rounded-2xl border transition cursor-pointer flex items-start gap-3.5 select-none"
+                            :class="goal.completed ? 'bg-orange-50/60 border-orange-200 text-navy' : 'bg-gray-50/70 border-gray-100 hover:border-gray-200 text-gray-700'">
+                            <div class="w-5 h-5 rounded-lg border mt-0.5 flex items-center justify-center flex-shrink-0 transition"
+                                :class="goal.completed ? 'bg-orange-500 border-orange-500 text-white' : 'border-gray-300 bg-white'">
+                                <svg x-show="goal.completed" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold leading-relaxed" x-text="goal.text"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
+        <!-- ============================================================= -->
+        <section id="wortschatz" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    1
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Dengarkan audio pelafalan perangkat digital, aktivitas internet, kata sifat pembanding, dan frasa komunikasi.</p>
+                </div>
+            </div>
+
+            <!-- Grid 2 Box: Sub-topik A & Sub-topik B -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Subtopik A: Perangkat dan Media Digital -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-navy">A. Perangkat dan Media Digital (Digitale Medien und Geräte)</h3>
+                                <p class="text-xs text-gray-500">Kosakata gawai elektronik, komputer, dan perangkat display visual.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in vocabDevices" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                                            <template x-if="item.article">
+                                                <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
+                                                    :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
+                                                    x-text="item.article"></span>
+                                            </template>
+                                            <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
+                                                x-text="item.word"></strong>
+                                        </div>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                    </div>
+                                    <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        title="Dengarkan Audio">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtopik B: Aktivitas Daring dan Istilah Internet -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-navy">B. Aktivitas Daring dan Istilah Internet (Online-Aktivitäten)</h3>
+                                <p class="text-xs text-gray-500">Kosakata tindakan sehari-hari di media digital dan kata serapan internet.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="(item, idx) in vocabActivities" :key="idx">
+                                <div
+                                    class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight mb-1"
+                                            x-text="item.word"></strong>
+                                        <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                    </div>
+                                    <button @click="speak(item.fullWord || item.word, 'female')"
+                                        class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
+                                        title="Dengarkan Audio">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik C & D: Keterangan Frekuensi & Ungkapan Komunikasi (Redemittel) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Subtopik C: Keterangan Frekuensi dan Perbandingan -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">C. Frekuensi dan Sifat (Häufigkeit & Adjektive)</h3>
+                            <p class="text-xs text-gray-500">Kata keterangan intensitas dan kata sifat dasar perbandingan.</p>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <template x-for="(item, idx) in vocabFrequency" :key="idx">
+                                <div class="p-2.5 rounded-xl bg-gray-50/80 border border-gray-100 flex items-center justify-between gap-2">
+                                    <div class="min-w-0 flex-1">
+                                        <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="item.word"></strong>
+                                        <span class="text-[11px] text-gray-500" x-text="item.meaning"></span>
+                                    </div>
+                                    <button @click="speak(item.word, 'male')"
+                                        class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 transition flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtopik D: Ungkapan Komunikasi (Redemittel) 2 Kolom -->
+                <div class="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">D. Ungkapan Komunikasi (Redemittel)</h3>
+                            <p class="text-xs text-gray-500">Frasa lisan membuat perbandingan, menyatakan preferensi, dan mengulur waktu saat berpikir spontan.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Kolom 1: Vergleiche anstellen & Vorlieben -->
+                            <div class="p-4 rounded-2xl bg-orange-50/50 border border-orange-100/80">
+                                <h4 class="font-extrabold text-navy text-xs sm:text-sm mb-3 pb-2 border-b border-orange-200/60">
+                                    1. Membuat Perbandingan & Preferensi
+                                </h4>
+                                <div class="space-y-2">
+                                    <template x-for="(phrase, idx) in phrasesCompare" :key="idx">
+                                        <div class="p-2.5 rounded-xl bg-white border border-orange-100 shadow-xs flex items-center justify-between gap-2">
+                                            <div class="min-w-0 flex-1">
+                                                <strong class="text-xs text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                                <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                            </div>
+                                            <button @click="speak(phrase.de, 'female')"
+                                                class="p-1 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Kolom 2: Beim Sprechen Zeit gewinnen -->
+                            <div class="p-4 rounded-2xl bg-blue-50/50 border border-blue-100/80">
+                                <h4 class="font-extrabold text-navy text-xs sm:text-sm mb-3 pb-2 border-b border-blue-200/60">
+                                    2. Mengulur Waktu Berpikir (Zeit gewinnen)
+                                </h4>
+                                <div class="space-y-2">
+                                    <template x-for="(phrase, idx) in phrasesTime" :key="idx">
+                                        <div class="p-2.5 rounded-xl bg-white border border-blue-100 shadow-xs flex items-center justify-between gap-2">
+                                            <div class="min-w-0 flex-1">
+                                                <strong class="text-xs text-navy block font-extrabold" x-text="phrase.de"></strong>
+                                                <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
+                                            </div>
+                                            <button @click="speak(phrase.de, 'male')"
+                                                class="p-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. TATA BAHASA (GRAMMATIK)                                    -->
+        <!-- ============================================================= -->
+        <section id="grammatik" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    2
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Tata Bahasa (Grammatik)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Aturan pembentukan Komparativ, Superlativ, partikel perbandingan als & wie, serta bentuk tak beraturan.</p>
+                </div>
+            </div>
+
+            <!-- Visualisasi Tingkat Perbandingan (SVG + Tailwind Infografis) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">Tiga Tingkat Perbandingan Kata Sifat (Steigerungsstufen)</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Struktur perbandingan bahasa Jerman terdiri dari bentuk dasar (Positiv), tingkat lebih (Komparativ), dan tingkat paling (Superlativ).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <!-- Tingkat 1: Positiv -->
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-800 text-[10px] font-extrabold block mb-2">Tingkat 1: Positiv (Dasar / Setara)</span>
+                            <h4 class="text-base font-extrabold text-navy mb-1">(genau) so ... wie</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">Menyatakan kesetaraan sifat tanpa mengubah kata sifat dasar.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-gray-200 text-xs font-semibold text-gray-800">
+                            „Das Tablet ist <strong>so teuer wie</strong> das Handy.“
+                        </div>
+                    </div>
+
+                    <!-- Tingkat 2: Komparativ -->
+                    <div class="p-5 rounded-2xl bg-orange-50 border border-orange-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-orange-500 text-white text-[10px] font-extrabold block mb-2">Tingkat 2: Komparativ (Lebih)</span>
+                            <h4 class="text-base font-extrabold text-navy mb-1">Kata Sifat + -er + als</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">Menyatakan perbedaan tingkat keunggulan antara 2 hal.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-orange-200 text-xs font-semibold text-orange-950">
+                            „Das Tablet ist <strong>praktischer als</strong> der Laptop.“
+                        </div>
+                    </div>
+
+                    <!-- Tingkat 3: Superlativ -->
+                    <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-extrabold block mb-2">Tingkat 3: Superlativ (Paling)</span>
+                            <h4 class="text-base font-extrabold text-navy mb-1">am + Kata Sifat + -(e)sten</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">Menyatakan derajat tertinggi mutlak di antara seluruh pembanding.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950">
+                            „Das Modell ist zurzeit <strong>am günstigsten</strong>.“
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik A & B: Aturan Komparativ & Superlativ Detail -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Subtopik A: Tingkat Perbandingan Lebih (Komparativ) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">A. Kaidah Pembentukan Komparativ</h3>
+                            <p class="text-xs text-gray-500">Pola reguler, perubahan vokal Umlaut, dan peleburan akhiran -el/-er.</p>
+                        </div>
+
+                        <div class="space-y-3.5 text-xs sm:text-sm text-gray-700">
+                            <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <strong class="text-navy block font-bold mb-1">1. Pola Reguler (+ -er):</strong>
+                                <p class="text-xs text-gray-600"><em>billig → billiger, klein → kleiner, leicht → leichter, praktisch → praktischer</em>.</p>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <strong class="text-navy block font-bold mb-1">2. Perubahan Vokal Umlaut (a, o, u → ä, ö, ü):</strong>
+                                <p class="text-xs text-gray-600">Kata sifat 1 suku kata: <em>alt → älter, groß → größer, kurz → kürzer</em>.</p>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <strong class="text-navy block font-bold mb-1">3. Pelepasan Huruf -e pada Akhiran -el / -er:</strong>
+                                <p class="text-xs text-gray-600"><em>teuer → teurer, dunkel → dunkler</em>.</p>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-orange-50/60 border border-orange-200">
+                                <strong class="text-orange-950 block font-bold mb-1">4. Partikel Pembanding (als vs. wie):</strong>
+                                <p class="text-xs text-gray-700 leading-relaxed">
+                                    • <strong>als</strong> (Berbeda): <em>Das Tablet ist <strong>leichter als</strong> der Laptop.</em><br>
+                                    • <strong>wie</strong> (Setara): <em>Das Tablet ist <strong>genauso praktisch wie</strong> der Computer.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtopik B: Tingkat Perbandingan Paling (Superlativ) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-navy">B. Kaidah Pembentukan Superlativ</h3>
+                            <p class="text-xs text-gray-500">Pola predikatif/adverbial am ...-sten dan penambahan sisipan -e-.</p>
+                        </div>
+
+                        <div class="space-y-3.5 text-xs sm:text-sm text-gray-700">
+                            <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <strong class="text-navy block font-bold mb-1">1. Pola Reguler (am + Kata Sifat + -sten):</strong>
+                                <p class="text-xs text-gray-600"><em>schön → am schönsten, billig → am billigsten, klein → am kleinsten</em>.</p>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+                                <strong class="text-navy block font-bold mb-1">2. Sisipan Huruf -e- (am + ...-esten):</strong>
+                                <p class="text-xs text-gray-600">Setelah konsonan <em>-d, -t, -s, -ß, -z, -x</em>: <em>alt → am ältesten, kurz → am kürzesten, interessant → am interessantesten, schwierig → am schwierigsten</em>.</p>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-200">
+                                <strong class="text-emerald-950 block font-bold mb-1">3. Penerapan dalam Kalimat:</strong>
+                                <p class="text-xs text-gray-700 leading-relaxed">
+                                    • <em>Gloria findet das Projekt <strong>am wichtigsten</strong>.</em><br>
+                                    • <em>Welcher Laptop ist <strong>am günstigsten</strong>?</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtopik C: Bentuk Perbandingan Tidak Beraturan (Unregelmäßige Formen) -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-navy">C. Bentuk Perbandingan Tidak Beraturan (Unregelmäßige Formen)</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Kata sifat dan keterangan khusus berikut wajib dihafalkan karena memiliki pola peningkatan tersendiri:</p>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                    <table class="w-full text-xs sm:text-sm text-left border-collapse bg-white">
+                        <thead>
+                            <tr class="bg-gray-50 text-navy font-extrabold border-b border-gray-200">
+                                <th class="p-3.5">Bentuk Dasar (Positiv)</th>
+                                <th class="p-3.5 text-orange-600">Bentuk Lebih (Komparativ)</th>
+                                <th class="p-3.5 text-emerald-600">Bentuk Paling (Superlativ)</th>
+                                <th class="p-3.5 text-gray-700">Arti</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50/60 transition">
+                                <td class="p-3.5 font-extrabold text-navy">gut</td>
+                                <td class="p-3.5 font-bold text-orange-600">besser</td>
+                                <td class="p-3.5 font-extrabold text-emerald-600">am besten</td>
+                                <td class="p-3.5 text-gray-600">baik / bagus → lebih baik → paling baik</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/60 transition bg-gray-50/30">
+                                <td class="p-3.5 font-extrabold text-navy">gern</td>
+                                <td class="p-3.5 font-bold text-orange-600">lieber</td>
+                                <td class="p-3.5 font-extrabold text-emerald-600">am liebsten</td>
+                                <td class="p-3.5 text-gray-600">suka / gemar → lebih suka → paling suka</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/60 transition">
+                                <td class="p-3.5 font-extrabold text-navy">viel</td>
+                                <td class="p-3.5 font-bold text-orange-600">mehr</td>
+                                <td class="p-3.5 font-extrabold text-emerald-600">am meisten</td>
+                                <td class="p-3.5 text-gray-600">banyak → lebih banyak → paling banyak</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/60 transition bg-gray-50/30">
+                                <td class="p-3.5 font-extrabold text-navy">nah</td>
+                                <td class="p-3.5 font-bold text-orange-600">näher</td>
+                                <td class="p-3.5 font-extrabold text-emerald-600">am nächsten</td>
+                                <td class="p-3.5 text-gray-600">dekat → lebih dekat → paling dekat</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/60 transition">
+                                <td class="p-3.5 font-extrabold text-navy">hoch</td>
+                                <td class="p-3.5 font-bold text-orange-600">höher</td>
+                                <td class="p-3.5 font-extrabold text-emerald-600">am höchsten</td>
+                                <td class="p-3.5 text-gray-600">tinggi → lebih tinggi → paling tinggi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. CONTOH PERCAKAPAN (BEISPIELDIALOGE)                        -->
+        <!-- ============================================================= -->
+        <section id="dialog" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    3
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Contoh Percakapan (Beispieldialoge)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Praktikkan perbandingan gawai elektronik dan diskusi preferensi kegiatan bersama audio penutur asli.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dialog 1 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-gray-100">
+                            <div>
+                                <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold tracking-wider">Dialog 1</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Memilih Perangkat Kuliah (Tablet oder Laptop?)</h3>
+                                <p class="text-xs text-gray-500">Percakapan Florian dan Nadine membandingkan bobot, layar, dan harga gawai.</p>
+                            </div>
+                            <button @click="playFullDialog(1)"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 1 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Balon Dialog 1 -->
+                        <div class="space-y-4">
+                            <template x-for="(line, idx) in dialog1Lines" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Florian' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 transition shadow-2xs">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-gray-100">
+                            <div>
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold tracking-wider">Dialog 2</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Minat dan Aktivitas Favorit (Vorlieben)</h3>
+                                <p class="text-xs text-gray-500">Percakapan Lukas dan Gloria mengenai mata kuliah favorit dan waktu luang di alam terbuka.</p>
+                            </div>
+                            <button @click="playFullDialog(2)"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-blue-600 text-white hover:bg-blue-700'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 2 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Balon Dialog 2 -->
+                        <div class="space-y-4">
+                            <template x-for="(line, idx) in dialog2Lines" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Lukas' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                        <button @click="speak(line.text, line.gender)"
+                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-blue-600 transition shadow-2xs">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. TEKS BACAAN (LESETEXT)                                     -->
+        <!-- ============================================================= -->
+        <section id="lesetext" class="mb-14 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    4
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Teks Bacaan (Lesetext)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Bacalah ulasan profil Gloria Rubens (Mahasiswi Informatika) dan Lars Brinkhoff (Fotografer) mengenai motivasi dan preferensi harian mereka.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-100 shadow-sm">
+                <!-- Header Bacaan -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-100">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-navy">Porträts aus Studium und Beruf: Meine Vorlieben im Alltag</h3>
+                        <p class="text-xs text-gray-500 mt-1">Zwei Personen berichten über ihren Alltag, ihre Motivation und ihre persönlichen Vorlieben.</p>
+                    </div>
+                    <button @click="readFullText()"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition self-start sm:self-auto flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                :d="isReadingText ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                            </path>
+                        </svg>
+                        <span x-text="isReadingText ? 'Hentikan Narasi' : 'Dengarkan Seluruh Teks'"></span>
+                    </button>
+                </div>
+
+                <!-- 2 Kontributor Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Kontributor 1: Gloria Rubens -->
+                    <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100 transition hover:border-orange-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-orange-200/60">
+                                <div>
+                                    <strong class="text-sm font-extrabold text-navy block">Gloria Rubens</strong>
+                                    <span class="text-[11px] text-orange-700 font-semibold">Informatik-Studentin • App-Entwicklung</span>
+                                </div>
+                                <button @click="speak('Ich studiere seit drei Jahren an der Universität. Meine Informatik-Professorin finde ich am interessantesten, weil es bei ihr nie langweilig ist. Wir machen jetzt zum Beispiel ein großes Projekt: Wir entwickeln eine App für Studierende zum Thema Günstig leben. Zuerst haben wir eine Umfrage gemacht, jetzt programmieren wir die App. Später möchte ich mit zwei Freunden ein Start-up gründen. Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen, denn das finde ich am wichtigsten. In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur und treffe Menschen. Das ist für mich am schönsten und so bekomme ich auch wieder neue Ideen für Projekte.', 'female')"
+                                    class="p-1.5 rounded-xl bg-white text-orange-600 border border-orange-200 shadow-2xs hover:bg-orange-50 transition">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium">
+                                „Ich studiere seit drei Jahren an der Universität. Meine Informatik-Professorin finde ich am interessantesten, weil es bei ihr nie langweilig ist. Wir machen jetzt zum Beispiel ein großes Projekt: Wir entwickeln eine App für Studierende zum Thema ‚Günstig leben‘. Zuerst haben wir eine Umfrage gemacht, jetzt programmieren wir die App. Später möchte ich mit zwei Freunden ein Start-up gründen. Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen, denn das finde ich am wichtigsten. In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur und treffe Menschen. Das ist für mich am schönsten und so bekomme ich auch wieder neue Ideen für Projekte.“
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Kontributor 2: Lars Brinkhoff -->
+                    <div class="p-6 rounded-2xl bg-blue-50/50 border border-blue-100 transition hover:border-blue-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-blue-200/60">
+                                <div>
+                                    <strong class="text-sm font-extrabold text-navy block">Lars Brinkhoff</strong>
+                                    <span class="text-[11px] text-blue-700 font-semibold">Fotograf • Tierfotografie & Studio</span>
+                                </div>
+                                <button @click="speak('Ich wollte unbedingt Fotograf werden, weil ich Fotos liebe und schon als Kind gern fotografiert habe. Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule. Am Anfang hat mir die Ausbildung nicht so gut gefallen, weil ich vieles noch nicht konnte. Jetzt habe ich schon lange ein eigenes Studio und mache am liebsten Fotos von Tieren. Für so ein Foto brauche ich viel Vorbereitung und natürlich auch nach dem Shooting viel Zeit am Computer. Das dauert manchmal lang, aber ich mache das total gern. Meine Fotos sollen perfekt sein und die Menschen glücklich machen, dann bin ich selbst am glücklichsten!', 'male')"
+                                    class="p-1.5 rounded-xl bg-white text-blue-600 border border-blue-200 shadow-2xs hover:bg-blue-50 transition">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium">
+                                „Ich wollte unbedingt Fotograf werden, weil ich Fotos liebe und schon als Kind gern fotografiert habe. Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule. Am Anfang hat mir die Ausbildung nicht so gut gefallen, weil ich vieles noch nicht konnte. Jetzt habe ich schon lange ein eigenes Studio und mache am liebsten Fotos von Tieren. Für so ein Foto brauche ich viel Vorbereitung und natürlich auch nach dem Shooting viel Zeit am Computer. Das dauert manchmal lang, aber ich mache das total gern. Meine Fotos sollen perfekt sein und die Menschen glücklich machen, dann bin ich selbst am glücklichsten!“
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terjemahan Teks Accordion -->
+                <div class="mt-4">
+                    <button @click="showTranslation = !showTranslation"
+                        class="w-full flex items-center justify-between p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-900 font-bold text-xs sm:text-sm hover:bg-amber-100/70 transition">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                </path>
+                            </svg>
+                            <span>Terjemahan Teks Bacaan (Bahasa Indonesia)</span>
+                        </span>
+                        <svg class="w-4 h-4 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="showTranslation" x-collapse
+                        class="mt-3 p-5 sm:p-6 rounded-2xl bg-amber-50/40 border border-amber-200/60 text-xs sm:text-sm text-gray-700 space-y-4"
+                        x-cloak>
+                        <p><strong>Profil dari Dunia Kuliah dan Profesi: Preferensi Saya dalam Keseharian</strong></p>
+                        <p class="text-xs text-gray-600">Dua orang menceritakan keseharian, motivasi, dan preferensi pribadi mereka:</p>
+                        <div class="space-y-3 pt-2 border-t border-amber-200/60">
+                            <p><strong>Gloria Rubens (Mahasiswi Informatika):</strong> „Saya sudah kuliah selama tiga tahun di universitas. Profesor dosen informatika saya adalah yang menurut saya paling menarik, karena bersama beliau suasana tidak pernah membosankan. Sekarang kami sedang membuat sebuah proyek besar misalnya: Kami mengembangkan sebuah aplikasi untuk kalangan mahasiswa bertema 'Hidup Hemat'. Pertama-tama kami membuat survei, sekarang kami memprogram aplikasinya. Nanti saya ingin mendirikan perusahaan rintisan bersama dua orang teman. Kami ingin mengembangkan aplikasi berisi tips praktis untuk kehidupan sehari-hari dan dengan demikian membantu sesama, karena hal itulah yang saya anggap paling penting. Di waktu luang saya lebih sedikit menghabiskan waktu secara daring dibandingkan teman-teman saya. Saya paling suka berada di luar di alam terbuka dan bertemu banyak orang. Hal itu adalah yang paling menyenangkan bagi saya dan dengan cara itulah saya mendapatkan kembali ide-ide baru untuk proyek.“</p>
+                            <p><strong>Lars Brinkhoff (Fotografer):</strong> „Saya sangat ingin menjadi fotografer, karena saya menyukai foto dan sejak masih kecil sudah gemar memotret. Setelah lulus sekolah saya menempuh pendidikan vokasi profesi fotografer, hal itu jauh lebih seru dibandingkan masa sekolah. Pada awalnya saya tidak terlalu menyukai pendidikan vokasi tersebut karena banyak hal yang belum saya kuasai. Sekarang saya sudah lama memiliki studio sendiri dan paling suka memotret binatang. Untuk foto seperti itu saya memerlukan banyak persiapan dan tentu saja setelah sesi pemotretan memerlukan banyak waktu di depan komputer. Proses tersebut terkadang memakan waktu lama, tetapi saya sangat suka melakukannya. Foto-foto saya harus sempurna dan membuat orang lain bahagia, maka saat itulah saya sendiri merasa paling bahagia!“</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. LATIHAN PEMAHAMAN (ÜBUNGEN)                                 -->
+        <!-- ============================================================= -->
+        <section id="latihan" class="mb-16 scroll-mt-24">
+            <div class="flex items-start sm:items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                    5
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Latihan Pemahaman (Übungen)</h2>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
+                <!-- Section Header & Live Score Badge -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+                    <div>
+                        <p class="text-xs sm:text-sm text-gray-500">Uji pemahamanmu mengenai Komparativ (als/wie) dan Superlativ (am ...-sten) standar CEFR A2.</p>
+                    </div>
+
+                    <!-- Live Score Badge -->
+                    <div class="flex-shrink-0 self-start sm:self-auto">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                            :class="quizScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (quizScore >= 6 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                            <span class="text-xs font-bold"
+                                :class="quizScore === null ? 'text-orange-900/80' : (quizScore >= 6 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Latihan:</span>
+                            <span class="text-sm sm:text-base font-extrabold"
+                                :class="quizScore === null ? 'text-orange-600' : (quizScore >= 6 ? 'text-emerald-700' : 'text-amber-700')"
+                                x-text="quizScore !== null ? `${quizScore} / 8` : '- / 8'">- / 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian A: Komparativ & Superlativ (4 Soal: Nomor 1 s.d. 4) -->
+                <div class="mb-10">
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil A: Was passt? Ergänzen Sie die Adjektive im Komparativ oder Superlativ.</h3>
+                    </div>
+
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 1 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Gerätevergleich im Gewicht:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    Ein Tablet ist viel _____ als ein Desktop-Computer.
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q1 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> leichter
+                                </button>
+                                <button type="button" @click="answers.q1 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> leichtesten
+                                </button>
+                                <button type="button" @click="answers.q1 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> am leichtesten
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Schreibgeschwindigkeit:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    Auf dem Laptop kann man Texte _____ tippen als auf dem Smartphone.
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q2 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> schneller
+                                </button>
+                                <button type="button" @click="answers.q2 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> schnellsten
+                                </button>
+                                <button type="button" @click="answers.q2 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> so schnell
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Dozenten-Bewertung:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    Welche Lehrkraft findest du an der Universität _____?
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q3 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> am interessantesten
+                                </button>
+                                <button type="button" @click="answers.q3 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> interessanter
+                                </button>
+                                <button type="button" @click="answers.q3 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q3 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> am interessantsten
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Fotovorlieben:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    Lars fotografiert Tiere _____ als Autos.
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q4 = 'a'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> lieber
+                                </button>
+                                <button type="button" @click="answers.q4 = 'b'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> gern
+                                </button>
+                                <button type="button" @click="answers.q4 = 'c'; saveProgress();"
+                                    class="p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q4 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> am liebsten
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (4 Soal: Nomor 5 s.d. 8) -->
+                <div class="mb-10">
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und wählen Sie den korrekten Satz.</h3>
+                    </div>
+
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Wichtigste Aktivität:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ in der Freizeit / für Gloria / am wichtigsten / das Naturerlebnis / ist / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Für Gloria ist das Naturerlebnis in der Freizeit am wichtigsten.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Für Gloria das Naturerlebnis ist am wichtigsten in der Freizeit.
+                                </button>
+                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Am wichtigsten für Gloria das Naturerlebnis in der Freizeit ist.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 6 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Gerätevergleich:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ praktischer / das Tablet / der Laptop / ist / als / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Das Tablet ist praktischer als der Laptop.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Das Tablet praktischer ist als der Laptop.
+                                </button>
+                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Als der Laptop das Tablet ist praktischer.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 7 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Preisvergleich:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ genauso teuer / die Smartwatch / das Smartphone / ist / wie / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Die Smartwatch ist genauso teuer wie das Smartphone.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Die Smartwatch genauso teuer ist wie das Smartphone.
+                                </button>
+                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Wie das Smartphone die Smartwatch ist genauso teuer.
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 8 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Lernintensität am Wochenende:</span>
+                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
+                                    [ lernt / am Wochenende / am meisten / von allen Schülern / Eric / . ]
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>a)</strong> Eric lernt am Wochenende am meisten von allen Schülern.
+                                </button>
+                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>b)</strong> Eric am meisten lernt am Wochenende von allen Schülern.
+                                </button>
+                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
+                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
+                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
+                                    <strong>c)</strong> Von allen Schülern Eric lernt am meisten am Wochenende.
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons: Periksa, Reset, & Kunci Jawaban -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-6 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                        <button @click="checkQuiz()"
+                            class="w-full sm:w-auto justify-center px-6 py-3 sm:py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Periksa Semua Jawaban</span>
+                        </button>
+
+                        <button @click="resetQuiz()"
+                            class="w-full sm:w-auto justify-center px-4 py-3 sm:py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5 flex-shrink-0">
+                            <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <span>Reset Jawaban</span>
+                        </button>
+                    </div>
+
+                    <div class="w-full sm:w-auto">
+                        <button @click="showKey = !showKey"
+                            class="w-full sm:w-auto justify-center px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-[0.98] text-blue-700 font-bold text-xs sm:text-sm transition flex items-center gap-2 flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <span x-text="showKey ? 'Sembunyikan Kunci Jawaban' : 'Lihat Kunci Jawaban & Penjelasan'"></span>
+                            <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200 flex-shrink-0" :class="showKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Answer Key Accordion -->
+                <div x-show="showKey"
+                    class="mt-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm space-y-4" x-cloak>
+                    <h4 class="font-extrabold text-navy text-sm sm:text-base border-b border-gray-200 pb-2 mb-3">Kunci Jawaban & Penjelasan Lengkap</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil A (Komparativ & Superlativ):</strong>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (leichter)</strong>: Kata sifat dasar <em>leicht</em> dibentuk menjadi tingkat perbandingan <em>Komparativ</em> dengan menambahkan akhiran <em>-er</em> menjadi <em>leichter</em>, diikuti partikel pembanding <em>als</em>.</li>
+                                <li><strong>a (schneller)</strong>: Kata sifat <em>schnell</em> memperoleh akhiran perbandingan <em>-er</em> menjadi <em>schneller</em> untuk membandingkan kecepatan mengetik antarperangkat.</li>
+                                <li><strong>a (am interessantesten)</strong>: Kata sifat <em>interessant</em> berakhiran huruf <em>t</em>, sehingga pembentukan tingkat <em>Superlativ</em> predikatif membutuhkan sisipan huruf <em>e</em> sebelum akhiran <em>-sten</em> menjadi <em>am interessantesten</em>.</li>
+                                <li><strong>a (lieber)</strong>: Kata keterangan <em>gern</em> memiliki bentuk perbandingan tidak beraturan (<em>unregelmäßig</em>), sehingga bentuk <em>Komparativ</em> yang tepat adalah <em>lieber</em>.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
+                            <ol start="5" class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>a (Für Gloria ist das Naturerlebnis in der Freizeit am wichtigsten.)</strong>: Kata kerja kopula <em>ist</em> berada di Posisi 2 kalimat pernyataan, dan bentuk <em>Superlativ</em> dari <em>wichtig</em> adalah <em>am wichtigsten</em> yang diletakkan di bagian akhir predikat.</li>
+                                <li><strong>a (Das Tablet ist praktischer als der Laptop.)</strong>: Kata kerja kopula <em>ist</em> menempati Posisi 2 kalimat pernyataan, diikuti kata sifat perbandingan bentuk Komparativ <em>praktischer</em> dan partikel pembanding <em>als</em>.</li>
+                                <li><strong>a (Die Smartwatch ist genauso teuer wie das Smartphone.)</strong>: Untuk menyatakan perbandingan yang setara nilainya, gunakan struktur <em>genau so / genauso + kata sifat bentuk dasar (teuer) + wie</em>.</li>
+                                <li><strong>a (Eric lernt am Wochenende am meisten von allen Schülern.)</strong>: Kata kerja terkonjugasi <em>lernt</em> berada di Posisi 2, dan bentuk <em>Superlativ</em> tidak beraturan dari <em>viel</em> adalah <em>am meisten</em> yang diletakkan di bagian predikat kalimat.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- BOTTOM NAVIGATION                                            -->
+        <!-- ============================================================= -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+            <a href="../materi-a2-4/"
+                class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Pertemuan 4: Schulabschluss & Dativ</span>
+            </a>
+
+            <a href="../materi-a2-6/"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                <span>Lanjut ke Pertemuan 6: Soziale Medien & Film</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-10 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+            <div class="flex items-center gap-2">
+                <img src="../Logo-Aksaradeutsch.png" alt="Aksaradeutsch" class="h-6 w-auto brightness-200">
+                <span>&copy; 2026 Aksaradeutsch. Hak Cipta Dilindungi Undang-Undang.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="../dashboard-a2-1/" class="hover:text-orange-400 transition">Dashboard A2.1</a>
+                <a href="../syarat-ketentuan.html" class="hover:text-orange-400 transition">Syarat & Ketentuan</a>
+                <a href="../privacy-policy.html" class="hover:text-orange-400 transition">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function lessonApp() {
+            return {
+                // Auth & Sync State
+                currentUser: null,
+                authLoading: true,
+                syncStatusText: 'Tersinkronisasi',
+                readingProgress: 0,
+                showTranslation: false,
+                showKey: false,
+                showFeedback: false,
+                quizScore: null,
+
+                // Audio State
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+                isReadingText: false,
+                germanVoiceMale: null,
+                germanVoiceFemale: null,
+
+                // Learning Goals Checklist
+                learningGoals: [
+                    { text: 'Mendiskusikan kebiasaan penggunaan gawai, media digital, dan frekuensi aktivitas daring.', completed: false },
+                    { text: 'Menguasai pembentukan serta penggunaan kata sifat/keterangan tingkat perbandingan lebih (Komparativ).', completed: false },
+                    { text: 'Menerapkan partikel perbandingan als (berbeda) dan (genau) so ... wie (kesetaraan).', completed: false },
+                    { text: 'Menguasai pembentukan tingkat perbandingan paling (Superlativ: am ...-sten) beserta bentuk tak beraturan.', completed: false },
+                    { text: 'Menggunakan ungkapan percakapan untuk mengulur waktu saat berpikir spontan (Beim Sprechen Zeit gewinnen).', completed: false },
+                    { text: 'Memahami teks deskriptif mengenai preferensi studi, profesi, dan aktivitas waktu luang.', completed: false }
+                ],
+
+                get completedGoalsCount() {
+                    return this.learningGoals.filter(g => g.completed).length;
+                },
+
+                toggleGoal(idx) {
+                    this.learningGoals[idx].completed = !this.learningGoals[idx].completed;
+                    this.saveProgress();
+                },
+
+                // Vocabularies: Subtopic A (Digitale Medien und Geräte)
+                vocabDevices: [
+                    { article: 'der', word: 'Computer, -', fullWord: 'der Computer', meaning: 'komputer', gender: 'masc' },
+                    { article: 'der', word: 'Laptop, -s', fullWord: 'der Laptop', meaning: 'laptop / komputer jinjing', gender: 'masc' },
+                    { article: 'das', word: 'Tablet, -s', fullWord: 'das Tablet', meaning: 'tablet', gender: 'neut' },
+                    { article: 'das', word: 'Smartphone, -s / das Handy, -s', fullWord: 'das Smartphone', meaning: 'ponsel pintar / handphone', gender: 'neut' },
+                    { article: 'die', word: 'Smartwatch, -es', fullWord: 'die Smartwatch', meaning: 'jam tangan pintar', gender: 'fem' },
+                    { article: 'der', word: 'Fernseher, -', fullWord: 'der Fernseher', meaning: 'televisi', gender: 'masc' },
+                    { article: 'das', word: 'Radio, -s', fullWord: 'das Radio', meaning: 'radio', gender: 'neut' },
+                    { article: 'die', word: 'Spielekonsole, -n', fullWord: 'die Spielekonsole', meaning: 'konsol permainan game', gender: 'fem' },
+                    { article: 'die', word: 'VR-Brille, -n', fullWord: 'die VR-Brille', meaning: 'kacamata virtual reality', gender: 'fem' },
+                    { article: 'das', word: 'E-Book, -s', fullWord: 'das E-Book', meaning: 'buku elektronik', gender: 'neut' },
+                    { article: 'der', word: 'E-Book-Reader, -', fullWord: 'der E-Book-Reader', meaning: 'perangkat pembaca buku digital', gender: 'masc' },
+                    { article: 'die', word: 'Zeitung, -en', fullWord: 'die Zeitung', meaning: 'koran / surat kabar', gender: 'fem' },
+                    { article: 'die', word: 'Zeitschrift, -en', fullWord: 'die Zeitschrift', meaning: 'majalah', gender: 'fem' },
+                    { article: 'der', word: 'Bildschirm, -e', fullWord: 'der Bildschirm', meaning: 'layar monitor / display', gender: 'masc' }
+                ],
+
+                // Vocabularies: Subtopic B (Online-Aktivitäten)
+                vocabActivities: [
+                    { word: 'E-Mails checken', meaning: 'memeriksa surat elektronik' },
+                    { word: 'Nachrichten schicken', meaning: 'mengirim pesan' },
+                    { word: 'chatten', meaning: 'mengobrol secara daring' },
+                    { word: 'posten', meaning: 'mengunggah postingan medsos' },
+                    { word: 'bloggen', meaning: 'menulis artikel blog' },
+                    { word: 'downloaden / herunterladen', meaning: 'mengunduh file atau aplikasi' },
+                    { word: 'mailen', meaning: 'mengirim dokumen via email' },
+                    { word: 'einen Link kopieren', meaning: 'menyalin tautan link' },
+                    { word: 'Informationen recherchieren', meaning: 'mencari informasi di internet' },
+                    { word: 'online / offline sein', meaning: 'terhubung / tidak terhubung internet' },
+                    { word: 'ausprobieren', meaning: 'mencoba / menguji coba' },
+                    { word: 'bezahlen', meaning: 'membayar' },
+                    { word: 'eine App entwickeln', meaning: 'mengembangkan aplikasi' },
+                    { word: 'ein Start-up gründen', meaning: 'mendirikan perusahaan rintisan' }
+                ],
+
+                // Vocabularies: Subtopic C (Häufigkeit & Adjektive)
+                vocabFrequency: [
+                    { word: 'oft', meaning: 'sering' },
+                    { word: 'manchmal', meaning: 'kadang-kadang' },
+                    { word: 'selten', meaning: 'jarang' },
+                    { word: 'nie', meaning: 'tidak pernah' },
+                    { word: 'billig / teuer', meaning: 'murah / mahal' },
+                    { word: 'leicht / schwer', meaning: 'ringan (mudah) / berat (sulit)' },
+                    { word: 'groß / klein', meaning: 'besar / kecil' },
+                    { word: 'praktisch', meaning: 'praktis / fungsional' },
+                    { word: 'spannend', meaning: 'menarik / seru' },
+                    { word: 'wichtig', meaning: 'penting' }
+                ],
+
+                // Redemittel Phrases
+                phrasesCompare: [
+                    { de: 'Das Tablet ist viel leichter als der Laptop.', id: 'Tablet jauh lebih ringan daripada laptop.' },
+                    { de: 'Der Bildschirm vom Laptop ist größer.', id: 'Layar dari laptop lebih besar.' },
+                    { de: 'Die Smartwatch ist genauso teuer wie das Smartphone.', id: 'Jam tangan pintar sama mahalnya dengan ponsel pintar.' },
+                    { de: 'Was machst du am liebsten?', id: 'Apa yang paling kamu sukai lakukan?' },
+                    { de: 'Am liebsten bin ich draußen in der Natur.', id: 'Hal yang paling saya sukai adalah berada di alam terbuka.' },
+                    { de: 'Das finde ich am wichtigsten.', id: 'Hal itu yang saya anggap paling penting.' }
+                ],
+
+                phrasesTime: [
+                    { de: 'Wie sagt man gleich?', id: 'Bagaimana ya menyebutnya?' },
+                    { de: 'Warte mal! / Warten Sie mal!', id: 'Tunggu sebentar!' },
+                    { de: 'Ähm ...', id: 'Ehm ...' },
+                    { de: 'Ein, ein ... Dings. Wie heißt das?', id: 'Sebuah, sebuah ... benda itu. Apa ya namanya?' }
+                ],
+
+                // Dialog 1 Lines
+                dialog1Lines: [
+                    { speaker: 'Florian', gender: 'male', text: 'Sag mal, Nadine, was benutzt du eigentlich für die Universität? Ich möchte mir ein neues Gerät kaufen.', trans: 'Katakan, Nadine, apa yang sebenarnya kamu gunakan untuk keperluan kuliah? Saya ingin membeli sebuah perangkat baru.' },
+                    { speaker: 'Nadine', gender: 'female', text: 'Ich habe ein Tablet und einen Laptop. Kauf doch lieber ein Tablet! Das ist viel leichter als ein Laptop und unterwegs absolut praktisch.', trans: 'Saya memiliki sebuah tablet dan sebuah laptop. Belilah tablet saja! Perangkat itu jauh lebih ringan daripada laptop dan sangat praktis saat bepergian.' },
+                    { speaker: 'Florian', gender: 'male', text: 'Findest du? Aber auf dem Laptop kann man doch besser lange Texte schreiben und der Bildschirm ist auch viel größer.', trans: 'Menurutmu begitu? Tetapi pada laptop orang kan bisa lebih baik mengetik teks panjang dan layarnya juga jauh lebih besar.' },
+                    { speaker: 'Nadine', gender: 'female', text: 'Das stimmt natürlich. Aber ein guter Laptop kostet meistens mehr als ein Tablet. Und mit einer externen Tastatur funktioniert das Tablet fast genauso gut wie ein Computer.', trans: 'Tentu saja itu benar. Namun sebuah laptop yang bagus biasanya berharga lebih mahal daripada tablet. Dan dengan papan ketik eksternal, tablet berfungsi hampir sama baiknya seperti komputer.' },
+                    { speaker: 'Florian', gender: 'male', text: 'Da hast du recht. Warten Sie mal ... wie heißt das Modell, das du hast?', trans: 'Kamu benar di bagian itu. Tunggu sebentar ... apa nama model yang kamu punya?' },
+                    { speaker: 'Nadine', gender: 'female', text: 'Schau mal im Internet nach diesem Modell hier. Es ist zurzeit am günstigsten im Angebot.', trans: 'Coba cari di internet model yang ini. Perangkat ini sedang paling murah dalam masa penawaran diskon.' }
+                ],
+
+                // Dialog 2 Lines
+                dialog2Lines: [
+                    { speaker: 'Lukas', gender: 'male', text: 'Gloria, du studierst jetzt seit drei Jahren Informatik. Welches Fach gefällt dir am besten?', trans: 'Gloria, kamu sekarang sudah kuliah informatika selama tiga tahun. Mata kuliah mana yang paling kamu sukai?' },
+                    { speaker: 'Gloria', gender: 'female', text: 'Meine Informatik-Professorin finde ich am interessantesten, weil die Vorlesungen bei ihr nie langweilig sind. Wir entwickeln gerade eine neue App.', trans: 'Dosen profesor informatika saya yang menurut saya paling menarik, karena perkuliahan bersama beliau tidak pernah membosankan. Kami sedang mengembangkan sebuah aplikasi baru.' },
+                    { speaker: 'Lukas', gender: 'male', text: 'Klingt spannend! Und was machst du nach der Uni am liebsten?', trans: 'Terdengar menarik! Dan apa yang paling suka kamu lakukan setelah kuliah?' },
+                    { speaker: 'Gloria', gender: 'female', text: 'Am liebsten bin ich draußen im Park und treffe mich mit meinen Freunden. Ich sitze den ganzen Tag vor dem Bildschirm, deshalb ist mir Bewegung in der Natur am wichtigsten.', trans: 'Hal yang paling saya sukai adalah berada di luar di taman dan bertemu teman-teman saya. Saya duduk sepanjang hari di depan layar, oleh karena itu bergerak di alam terbuka adalah yang paling penting bagi saya.' }
+                ],
+
+                // Quiz State & Answer Keys
+                answers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
+                },
+
+                correctAnswers: {
+                    q1: 'a',
+                    q2: 'a',
+                    q3: 'a',
+                    q4: 'a',
+                    q5: 'a',
+                    q6: 'a',
+                    q7: 'a',
+                    q8: 'a'
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const key = 'q' + qNum;
+                    if (this.answers[key] === this.correctAnswers[key]) {
+                        return 'bg-emerald-50/70 border-emerald-300 ring-1 ring-emerald-300';
+                    } else {
+                        return 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-300';
+                    }
+                },
+
+                checkQuiz() {
+                    let score = 0;
+                    for (let i = 1; i <= 8; i++) {
+                        const key = 'q' + i;
+                        if (this.answers[key] === this.correctAnswers[key]) {
+                            score++;
+                        }
+                    }
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                // Audio Logic Web Speech API
+                initAudio() {
+                    if ('speechSynthesis' in window) {
+                        const loadVoices = () => {
+                            const voices = window.speechSynthesis.getVoices();
+                            const deVoices = voices.filter(v => v.lang && (v.lang.startsWith('de') || v.lang.includes('DE')));
+
+                            const findBestVoice = (preferredRegex) => {
+                                const naturalMatch = deVoices.find(v => preferredRegex.test(v.name) && /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (naturalMatch) return naturalMatch;
+
+                                const nameMatch = deVoices.find(v => preferredRegex.test(v.name));
+                                if (nameMatch) return nameMatch;
+
+                                const anyNatural = deVoices.find(v => /natural|neural|online|premium|enhanced/i.test(v.name));
+                                if (anyNatural) return anyNatural;
+
+                                return null;
+                            };
+
+                            this.germanVoiceMale = findBestVoice(/stefan|conrad|christoph|killian|markus|florian|hans|bernd|male|mann/i) || deVoices[0] || null;
+                            this.germanVoiceFemale = findBestVoice(/katja|amala|louisa|marlene|hedda|klarissa|vicki|petra|female|frau/i) || (deVoices.length > 1 ? deVoices[1] : deVoices[0]) || null;
+                        };
+
+                        loadVoices();
+                        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                            window.speechSynthesis.onvoiceschanged = loadVoices;
+                        }
+                    }
+
+                    // Reading progress tracker
+                    window.addEventListener('scroll', () => {
+                        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                        if (totalHeight > 0) {
+                            this.readingProgress = Math.min(100, Math.max(0, Math.round((window.scrollY / totalHeight) * 100)));
+                        }
+                    });
+                },
+
+                speak(text, gender = 'female', onEndedCallback = null) {
+                    if (!('speechSynthesis' in window)) return;
+                    window.speechSynthesis.cancel();
+
+                    const cleanText = text.replace(/<[^>]*>/g, '').trim();
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.lang = 'de-DE';
+
+                    if (gender === 'female' && this.germanVoiceFemale) {
+                        utterance.voice = this.germanVoiceFemale;
+                        utterance.pitch = 1.05;
+                        utterance.rate = 0.94;
+                    } else if (gender === 'male' && this.germanVoiceMale) {
+                        utterance.voice = this.germanVoiceMale;
+                        utterance.pitch = 0.95;
+                        utterance.rate = 0.94;
+                    } else {
+                        utterance.rate = 0.94;
+                    }
+
+                    if (onEndedCallback) {
+                        utterance.onend = onEndedCallback;
+                        utterance.onerror = onEndedCallback;
+                    }
+
+                    window.speechSynthesis.speak(utterance);
+                },
+
+                playFullDialog(dialogNum) {
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        window.speechSynthesis.cancel();
+                        this.isPlayingFullDialog = false;
+                        this.activeDialogPlaying = null;
+                        this.currentSpeakingIndex = null;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isPlayingFullDialog = true;
+                    this.activeDialogPlaying = dialogNum;
+                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
+
+                    const playLine = (index) => {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
+                            this.isPlayingFullDialog = false;
+                            this.activeDialogPlaying = null;
+                            this.currentSpeakingIndex = null;
+                            return;
+                        }
+
+                        this.currentSpeakingIndex = index;
+                        const line = lines[index];
+                        this.speak(line.text, line.gender, () => {
+                            setTimeout(() => {
+                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                                    playLine(index + 1);
+                                }
+                            }, 500);
+                        });
+                    };
+
+                    playLine(0);
+                },
+
+                readFullText() {
+                    if (this.isReadingText) {
+                        window.speechSynthesis.cancel();
+                        this.isReadingText = false;
+                        return;
+                    }
+
+                    window.speechSynthesis.cancel();
+                    this.isReadingText = true;
+
+                    const fullText = "Porträts aus Studium und Beruf: Meine Vorlieben im Alltag. Zwei Personen berichten über ihren Alltag, ihre Motivation und ihre persönlichen Vorlieben. Gloria Rubens: Ich studiere seit drei Jahren an der Universität. Meine Informatik-Professorin finde ich am interessantesten, weil es bei ihr nie langweilig ist. Wir machen jetzt zum Beispiel ein großes Projekt: Wir entwickeln eine App für Studierende zum Thema Günstig leben. Zuerst haben wir eine Umfrage gemacht, jetzt programmieren wir die App. Später möchte ich mit zwei Freunden ein Start-up gründen. Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen, denn das finde ich am wichtigsten. In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur und treffe Menschen. Das ist für mich am schönsten und so bekomme ich auch wieder neue Ideen für Projekte. Lars Brinkhoff: Ich wollte unbedingt Fotograf werden, weil ich Fotos liebe und schon als Kind gern fotografiert habe. Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule. Am Anfang hat mir die Ausbildung nicht so gut gefallen, weil ich vieles noch nicht konnte. Jetzt habe ich schon lange ein eigenes Studio und mache am liebsten Fotos von Tieren. Für so ein Foto brauche ich viel Vorbereitung und natürlich auch nach dem Shooting viel Zeit am Computer. Das dauert manchmal lang, aber ich mache das total gern. Meine Fotos sollen perfekt sein und die Menschen glücklich machen, dann bin ich selbst am glücklichsten!";
+
+                    this.speak(fullText, 'female', () => {
+                        this.isReadingText = false;
+                    });
+                },
+
+                resetState() {
+                    if (this.learningGoals && Array.isArray(this.learningGoals)) {
+                        this.learningGoals.forEach(g => {
+                            if (typeof g === 'object') g.completed = false;
+                        });
+                    }
+                    this.answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '', q7: '', q8: '' };
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                },
+
+                // Initialization & Sync
+                initApp() {
+                    this.initAudio();
+
+                    if (auth) {
+                        auth.onAuthStateChanged((user) => {
+                            if (user) {
+                                this.currentUser = user;
+                                this.authLoading = false;
+                                this.loadFirestoreProgress(user.uid);
+                            } else {
+                                this.currentUser = null;
+                                this.authLoading = false;
+                                this.resetState();
+                                window.location.replace('../dashboard-a2-1/');
+                            }
+                        });
+                    } else {
+                        this.authLoading = false;
+                        window.location.replace('../dashboard-a2-1/');
+                    }
+                },
+
+                loadLocalProgress(uid = 'guest') {
+                    try {
+                        const userKey = `aksaradeutsch_${uid}_lesson_a2_5`;
+                        const saved = localStorage.getItem(userKey);
+                        if (saved) {
+                            const data = JSON.parse(saved);
+                            if (data.goals) this.learningGoals = data.goals;
+                            if (data.answers) this.answers = data.answers;
+                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                            if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                        }
+                    } catch (e) {
+                        console.error('Error loading local progress:', e);
+                    }
+                },
+
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    const dataToSave = {
+                        lessonId: 'lesson_a2_5',
+                        goals: this.learningGoals,
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        showFeedback: this.showFeedback,
+                        lastUpdated: new Date().toISOString()
+                    };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_5`, JSON.stringify(dataToSave));
+                    } catch (e) {}
+                    return dataToSave;
+                },
+
+                async loadFirestoreProgress(uid) {
+                    this.loadLocalProgress(uid);
+                    if (!db || !uid) return;
+
+                    try {
+                        const docRef = db.collection('users').doc(uid).collection('progress').doc('lesson_a2_5');
+                        const docSnap = await docRef.get();
+                        if (docSnap.exists) {
+                            const data = docSnap.data();
+                            if (data.goals) this.learningGoals = data.goals;
+                            if (data.answers) this.answers = data.answers;
+                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                            if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                            this.saveProgressToLocal(uid);
+                        }
+                    } catch (e) {
+                        console.error('Firestore read error:', e);
+                    }
+                },
+
+                async saveProgress() {
+                    const data = this.saveProgressToLocal();
+                    if (!this.currentUser || !db) return;
+
+                    this.syncStatusText = 'Menyimpan...';
+                    try {
+                        const docRef = db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_5');
+                        await docRef.set(data, { merge: true });
+                        this.syncStatusText = 'Tersinkronisasi';
+                    } catch (e) {
+                        console.error('Firestore save error:', e);
+                        this.syncStatusText = 'Disimpan Lokal';
+                    }
+                },
+
+                logout() {
+                    if (auth) {
+                        auth.signOut().then(() => {
+                            window.location.replace('../dashboard-a2-1/');
+                        });
+                    } else {
+                        window.location.replace('../dashboard-a2-1/');
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
+
