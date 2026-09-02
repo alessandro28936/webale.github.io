@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -435,13 +435,13 @@
                                 <div
                                     class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                     <div class="min-w-0 flex-1">
-                                        <div class="flex items-center gap-1.5 mb-1">
+                                        <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                             <template x-if="item.article">
                                                 <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                                     :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                                     x-text="item.article"></span>
                                             </template>
-                                            <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                            <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
@@ -477,13 +477,13 @@
                                 <div
                                     class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                     <div class="min-w-0 flex-1">
-                                        <div class="flex items-center gap-1.5 mb-1">
+                                        <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                             <template x-if="item.article">
                                                 <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                                     :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                                     x-text="item.article"></span>
                                             </template>
-                                            <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                            <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
@@ -799,7 +799,7 @@
                                     class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog
                                     1</span>
                                 <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Acara Makan Malam</h3>
-                                <p class="text-xs text-gray-400">Ben (Pria) & Lea (Wanita)</p>
+                                <p class="text-xs text-gray-400">Ben & Lea</p>
                             </div>
                             <button @click="playFullDialog(1)"
                                 class="w-full sm:w-auto justify-center whitespace-nowrap flex-shrink-0 px-3.5 py-2.5 sm:py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
@@ -824,20 +824,10 @@
                             <template x-for="(line, idx) in dialog1" :key="idx">
                                 <div class="p-3.5 rounded-2xl transition border"
                                     :class="(isPlayingFullDialog && activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50 border-gray-100'">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                    <div class="mb-1">
                                         <span class="font-extrabold text-xs"
                                             :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
-                                            title="Dengarkan Baris Ini">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <div class="font-bold text-navy" x-text="line.text"></div>
                                     <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
@@ -858,7 +848,7 @@
                                     class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Dialog
                                     2</span>
                                 <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Reservasi Restoran Gelap</h3>
-                                <p class="text-xs text-gray-400">Herr Berger (Pria) & Frau Sommer (Wanita)</p>
+                                <p class="text-xs text-gray-400">Herr Berger & Frau Sommer</p>
                             </div>
                             <button @click="playFullDialog(2)"
                                 class="w-full sm:w-auto justify-center whitespace-nowrap flex-shrink-0 px-3.5 py-2.5 sm:py-2 rounded-xl text-white font-bold text-xs flex items-center gap-1.5 shadow-md transition"
@@ -883,20 +873,10 @@
                             <template x-for="(line, idx) in dialog2" :key="idx">
                                 <div class="p-3.5 rounded-2xl transition border"
                                     :class="(isPlayingFullDialog && activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50 border-gray-100'">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
+                                    <div class="mb-1">
                                         <span class="font-extrabold text-xs"
                                             :class="line.gender === 'male' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white text-gray-500 hover:text-orange-600 shadow-xs transition"
-                                            title="Dengarkan Baris Ini">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <div class="font-bold text-navy" x-text="line.text"></div>
                                     <div class="text-[11px] sm:text-xs text-gray-500 mt-0.5" x-text="line.translation">
@@ -929,16 +909,20 @@
                         <h3 class="text-lg font-bold text-navy">Essen ohne Licht. Ein besonderes Erlebnis für die Sinne</h3>
                         <p class="text-xs text-gray-400">Pengalaman bersantap unik dan sensitivitas panca indra di restoran "Lichtlos".</p>
                     </div>
-                    <button @click="speakLesetext()"
-                        class="whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200">
+                    <button @click="toggleLesetextAudio()"
+                        class="whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs"
+                        :class="isPlayingLesetext ? 'bg-red-500 hover:bg-red-600 text-white shadow-md' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                x-show="!isPlayingLesetext"
                                 d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
                             </path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                x-show="isPlayingLesetext"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                            </path>
                         </svg>
-                        <span>Putar Teks Bacaan</span>
+                        <span x-text="isPlayingLesetext ? 'Hentikan Audio' : 'Putar Teks Bacaan'"></span>
                     </button>
                 </div>
 
@@ -1301,21 +1285,22 @@
         <!-- ============================================================= -->
         <!-- BOTTOM NAVIGATION                                            -->
         <!-- ============================================================= -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200">
-            <a href="../dashboard-a2-1/"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-gray-700 font-bold text-xs sm:text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200 mb-12">
+            <a href="../materi-a2-1/"
+                class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white border border-gray-200 hover:border-orange-300 text-navy font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
-                Kembali ke Dashboard A2.1
+                <span>Pertemuan 1: Profil & Perfekt</span>
             </a>
 
-            <div class="flex items-center gap-3 w-full sm:w-auto">
-                <a href="../materi-a2-1/"
-                    class="px-5 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
-                    &larr; Pertemuan 1
-                </a>
-            </div>
+            <a href="../materi-a2-3/"
+                class="w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-bold text-xs sm:text-sm btn-orange shadow-md flex items-center justify-center gap-2">
+                <span>Lanjut ke Pertemuan 3: Schule & Präteritum</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
         </div>
     </main>
 
@@ -1446,23 +1431,23 @@
 
                 // Dialogs
                 dialog1: [
-                    { speaker: 'Ben (Pria)', text: 'Hallo Lea! Ich bin wieder aus Oberstdorf zurück. Hast du morgen Abend Zeit? Ich koche Spezialitäten aus dem Allgäu.', translation: 'Halo Lea! Aku sudah kembali dari Oberstdorf. Apakah kamu ada waktu besok malam? Aku memasak makanan khas dari daerah Allgäu.', gender: 'male' },
-                    { speaker: 'Lea (Wanita)', text: 'Hallo Ben! Danke für die Einladung. Ich möchte gern kommen, aber ich kann leider nicht.', translation: 'Halo Ben! Terima kasih atas undangannya. Aku ingin sekali datang, tetapi sayangnya aku tidak bisa.', gender: 'female' },
-                    { speaker: 'Ben (Pria)', text: 'Oh, das ist aber schade. Warum hast du denn keine Zeit?', translation: 'Oh, sayang sekali. Mengapa kamu tidak punya waktu?', gender: 'male' },
-                    { speaker: 'Lea (Wanita)', text: 'Da kann ich nicht, weil mein Vater krank ist und ich ihn besuchen muss. Er hat die Grippe.', translation: 'Waktu itu aku tidak bisa karena ayahku sedang sakit dan aku harus mengunjunginya. Beliau menderita flu.', gender: 'female' },
-                    { speaker: 'Ben (Pria)', text: 'Gute Besserung für deinen Vater! Dann treffen wir uns nächste Woche, weil wir uns schon so lange nicht gesehen haben.', translation: 'Semoga lekas sembuh untuk ayahmu! Kalau begitu kita bertemu minggu depan, karena kita sudah sangat lama tidak bertemu.', gender: 'male' },
-                    { speaker: 'Lea (Wanita)', text: 'Abgemacht! Mach ich gerne.', translation: 'Sepakat! Dengan senang hati.', gender: 'female' }
+                    { speaker: 'Ben', text: 'Hallo Lea! Ich bin wieder aus Oberstdorf zurück. Hast du morgen Abend Zeit? Ich koche Spezialitäten aus dem Allgäu.', translation: 'Halo Lea! Aku sudah kembali dari Oberstdorf. Apakah kamu ada waktu besok malam? Aku memasak makanan khas dari daerah Allgäu.', gender: 'male' },
+                    { speaker: 'Lea', text: 'Hallo Ben! Danke für die Einladung. Ich möchte gern kommen, aber ich kann leider nicht.', translation: 'Halo Ben! Terima kasih atas undangannya. Aku ingin sekali datang, tetapi sayangnya aku tidak bisa.', gender: 'female' },
+                    { speaker: 'Ben', text: 'Oh, das ist aber schade. Warum hast du denn keine Zeit?', translation: 'Oh, sayang sekali. Mengapa kamu tidak punya waktu?', gender: 'male' },
+                    { speaker: 'Lea', text: 'Da kann ich nicht, weil mein Vater krank ist und ich ihn besuchen muss. Er hat die Grippe.', translation: 'Waktu itu aku tidak bisa karena ayahku sedang sakit dan aku harus mengunjunginya. Beliau menderita flu.', gender: 'female' },
+                    { speaker: 'Ben', text: 'Gute Besserung für deinen Vater! Dann treffen wir uns nächste Woche, weil wir uns schon so lange nicht gesehen haben.', translation: 'Semoga lekas sembuh untuk ayahmu! Kalau begitu kita bertemu minggu depan, karena kita sudah sangat lama tidak bertemu.', gender: 'male' },
+                    { speaker: 'Lea', text: 'Abgemacht! Mach ich gerne.', translation: 'Sepakat! Dengan senang hati.', gender: 'female' }
                 ],
 
                 dialog2: [
-                    { speaker: 'Herr Berger (Pria)', text: 'Restaurant „Lichtlos“, guten Tag. Mein Name ist Berger. Was kann ich für Sie tun?', translation: 'Restoran "Lichtlos", selamat siang. Nama saya Berger. Ada yang bisa saya bantu?', gender: 'male' },
-                    { speaker: 'Frau Sommer (Wanita)', text: 'Guten Tag, mein Name ist Sommer. Ich möchte einen Tisch für zwei Personen reservieren, weil mein Mann am Freitag Geburtstag hat.', translation: 'Selamat siang, nama saya Sommer. Saya ingin memesan meja untuk dua orang karena suami saya berulang tahun pada hari Jumat.', gender: 'female' },
-                    { speaker: 'Herr Berger (Pria)', text: 'Sehr gern, Frau Sommer. Wir empfangen Sie am Eingang im Hellen, aber im Speisesaal ist es absolut dunkel.', translation: 'Dengan senang hati, Ibu Sommer. Kami menyambut Anda di pintu masuk dalam ruangan terang, tetapi di ruang makan keadaannya benar-benar gelap.', gender: 'male' },
-                    { speaker: 'Frau Sommer (Wanita)', text: 'Wie wählen wir das Essen aus?', translation: 'Bagaimana kami memilih makanannya?', gender: 'female' },
-                    { speaker: 'Herr Berger (Pria)', text: 'Sie bestellen an der Rezeption aus der Speisekarte, bevor Sie in den Raum gehen, weil man drinnen nichts sehen kann.', translation: 'Anda memesan di meja penerima tamu dari buku menu sebelum Anda masuk ke ruangan, karena di dalam orang tidak dapat melihat apa pun.', gender: 'male' },
-                    { speaker: 'Frau Sommer (Wanita)', text: 'Verstehe. Darf man das Handy mitnehmen?', translation: 'Saya mengerti. Apakah ponsel boleh dibawa masuk?', gender: 'female' },
-                    { speaker: 'Herr Berger (Pria)', text: 'Sie müssen Handys ausschalten, weil jedes Licht bei uns streng verboten ist.', translation: 'Anda harus mematikan ponsel karena cahaya apa pun dilarang keras di tempat kami.', gender: 'male' },
-                    { speaker: 'Frau Sommer (Wanita)', text: 'Alles klar. Vielen Dank für die Auskunft!', translation: 'Baiklah. Terima kasih banyak atas informasinya!', gender: 'female' }
+                    { speaker: 'Herr Berger', text: 'Restaurant „Lichtlos“, guten Tag. Mein Name ist Berger. Was kann ich für Sie tun?', translation: 'Restoran "Lichtlos", selamat siang. Nama saya Berger. Ada yang bisa saya bantu?', gender: 'male' },
+                    { speaker: 'Frau Sommer', text: 'Guten Tag, mein Name ist Sommer. Ich möchte einen Tisch für zwei Personen reservieren, weil mein Mann am Freitag Geburtstag hat.', translation: 'Selamat siang, nama saya Sommer. Saya ingin memesan meja untuk dua orang karena suami saya berulang tahun pada hari Jumat.', gender: 'female' },
+                    { speaker: 'Herr Berger', text: 'Sehr gern, Frau Sommer. Wir empfangen Sie am Eingang im Hellen, aber im Speisesaal ist es absolut dunkel.', translation: 'Dengan senang hati, Ibu Sommer. Kami menyambut Anda di pintu masuk dalam ruangan terang, tetapi di ruang makan keadaannya benar-benar gelap.', gender: 'male' },
+                    { speaker: 'Frau Sommer', text: 'Wie wählen wir das Essen aus?', translation: 'Bagaimana kami memilih makanannya?', gender: 'female' },
+                    { speaker: 'Herr Berger', text: 'Sie bestellen an der Rezeption aus der Speisekarte, bevor Sie in den Raum gehen, weil man drinnen nichts sehen kann.', translation: 'Anda memesan di meja penerima tamu dari buku menu sebelum Anda masuk ke ruangan, karena di dalam orang tidak dapat melihat apa pun.', gender: 'male' },
+                    { speaker: 'Frau Sommer', text: 'Verstehe. Darf man das Handy mitnehmen?', translation: 'Saya mengerti. Apakah ponsel boleh dibawa masuk?', gender: 'female' },
+                    { speaker: 'Herr Berger', text: 'Sie müssen Handys ausschalten, weil jedes Licht bei uns streng verboten ist.', translation: 'Anda harus mematikan ponsel karena cahaya apa pun dilarang keras di tempat kami.', gender: 'male' },
+                    { speaker: 'Frau Sommer', text: 'Alles klar. Vielen Dank für die Auskunft!', translation: 'Baiklah. Terima kasih banyak atas informasinya!', gender: 'female' }
                 ],
 
                 // Exercises State
@@ -1577,47 +1562,135 @@
                     window.speechSynthesis.speak(utterance);
                 },
 
-                speakLesetext() {
-                    const text = "Das Restaurant „Lichtlos“ bietet ein außergewöhnliches kulinarisches Konzept. Die Gäste lernen dort eine völlig andere Welt kennen. Im Speisesaal gibt es absolut kein Licht. Man kann weder die Speisen noch die Nachbarn sehen, aber dafür werden die anderen Sinne viel aktiver: Das Hören, das Schmecken, das Riechen und das Fühlen werden im Dunkeln besonders intensiv. Der Ablauf ist genau organisiert. Die Gäste kommen zuerst an die Rezeption. Dort wählen sie ihr Menü aus der Speisekarte aus und bezahlen nach dem Essen auch ihre Rechnung. Alle Handys, Uhren und Kameras müssen ausgeschaltet bleiben, weil Licht im Speiseraum verboten ist. Kellnerinnen und Kellner holen die Gäste am Eingang ab und führen sie sicher an ihren Tisch. Viele dieser Servicekräfte sind sehbehindert oder blind, weshalb sie sich in der Dunkelheit perfekt orientieren können.";
-                    this.speak(text, 'female');
-                },
+                isPlayingLesetext: false,
+                lesetextAudio: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
 
-                playFullDialog(dialogNum) {
-                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                toggleLesetextAudio() {
+                    if (this.isPlayingLesetext) {
+                        this.stopLesetextAudio();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+
+                    if (!this.lesetextAudio) {
+                        this.lesetextAudio = new Audio('Lesetext-Pertemuan-2-materi-a2-1.mp3');
+                        this.lesetextAudio.addEventListener('ended', () => {
+                            this.stopLesetextAudio();
+                        });
+                        this.lesetextAudio.addEventListener('error', () => {
+                            console.warn('Gagal memuat Lesetext-Pertemuan-2-materi-a2-1.mp3, mencoba alternatif .wav...');
+                            const altAudio = new Audio('Lesetext-Pertemuan-2-materi-a2-1.wav');
+                            altAudio.addEventListener('ended', () => {
+                                this.stopLesetextAudio();
+                            });
+                            altAudio.play().catch(() => {
+                                this.stopLesetextAudio();
+                            });
+                            this.lesetextAudio = altAudio;
+                        });
+                    }
+
+                    this.isPlayingLesetext = true;
+                    this.lesetextAudio.currentTime = 0;
+                    this.lesetextAudio.play().catch(err => {
+                        console.error('Audio playback error Lesetext:', err);
+                        this.stopLesetextAudio();
+                    });
+                },
+
+                stopLesetextAudio() {
+                    this.isPlayingLesetext = false;
+                    if (this.lesetextAudio) {
+                        this.lesetextAudio.pause();
+                        this.lesetextAudio.currentTime = 0;
+                    }
+                },
+
+                playFullDialog(dialogNum) {
+                    this.stopLesetextAudio();
+                    if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
+                        this.stopPlayingDialog();
+                        return;
+                    }
+
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    this.currentSpeakingIndex = 0;
 
-                    const list = dialogNum === 1 ? this.dialog1 : this.dialog2;
-
-                    const playLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= list.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-2-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-2-materi-a2-1.mp3, mencoba alternatif .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-2-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => {
+                                    this.stopPlayingDialog();
+                                });
+                                this.dialog1Audio = altAudio;
+                            });
                         }
-
-                        this.currentSpeakingIndex = index;
-                        const item = list[index];
-                        this.speak(item.text, item.gender, () => {
-                            setTimeout(() => {
-                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                                    playLine(index + 1);
-                                }
-                            }, 500);
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
                         });
-                    };
+                        return;
+                    }
 
-                    playLine(0);
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-2-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-2-materi-a2-1.mp3, mencoba alternatif .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-2-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => {
+                                    this.stopPlayingDialog();
+                                });
+                                this.dialog2Audio = altAudio;
+                            });
+                        }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
+
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
                 },
 
                 // Progress Storage & Sync
@@ -1764,6 +1837,7 @@
 </body>
 
 </html>
+
 
 
 
