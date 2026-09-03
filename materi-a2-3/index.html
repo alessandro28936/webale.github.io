@@ -94,7 +94,9 @@
         });
 
         document.addEventListener('selectstart', function (e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            const isSelectable = e.target && e.target.closest && e.target.closest('.selectable-text');
+            if (!isInput && !isSelectable) {
                 e.preventDefault();
             }
         });
@@ -137,11 +139,13 @@
 
         input,
         select,
-        textarea {
-            -webkit-user-select: auto;
-            -moz-user-select: auto;
-            -ms-user-select: auto;
-            user-select: auto;
+        textarea,
+        .selectable-text,
+        .selectable-text * {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
         }
 
         .btn-orange {
@@ -422,11 +426,20 @@
                 <!-- Subtopik A: Kehidupan dan Kenangan Masa Sekolah -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
                                 <h3 class="text-lg font-bold text-navy">A. Kehidupan dan Kenangan Masa Sekolah (Schule und Schulerinnerungen)</h3>
                                 <p class="text-xs text-gray-500">Kosakata seputar masa sekolah, kegiatan belajar, ujian, dan suasana kelas.</p>
                             </div>
+                            <button type="button" @click="showPluralForms = !showPluralForms"
+                                class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                                :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                                <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                            </button>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -444,6 +457,12 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -463,11 +482,20 @@
                 <!-- Subtopik B: Pasca Kelulusan dan Pencarian Karier -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
                                 <h3 class="text-lg font-bold text-navy">B. Pasca Kelulusan dan Pencarian Karier (Nach der Schule und Berufsfindung)</h3>
                                 <p class="text-xs text-gray-500">Kosakata seputar pilihan magang, kuliah, pelatihan vokasi, dan pekerjaan.</p>
                             </div>
+                            <button type="button" @click="showPluralForms = !showPluralForms"
+                                class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                                :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                                <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                            </button>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -485,6 +513,12 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -765,6 +799,27 @@
                     <p class="text-xs sm:text-sm text-gray-500 mt-1">Huruf vokal <strong>e</strong> dalam bahasa Jerman memiliki dua variasi artikulasi penting yang membedakan ketegasan suku kata.</p>
                 </div>
 
+                <!-- Panduan Visual Fonetik Legend -->
+                <div class="mb-6 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs text-gray-700">
+                    <span class="font-extrabold text-amber-950 block mb-1.5">Panduan Visual Pembedaan Artikulasi:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-lg bg-orange-100 border border-orange-300 text-orange-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+                            <div>
+                                <strong class="text-navy">Vokal Panjang [eː] (Garis Bawah Oranye Tegas):</strong>
+                                <p class="text-gray-600 mt-0.5">Bibir agak melebar dan tersenyum, vokal tegang dan bertekanan kuat (contoh: <em>S<u>ee</u>, s<u>eh</u>r, W<u>e</u>g, l<u>e</u>sen</em>).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-lg bg-blue-100 border border-blue-300 text-blue-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+                            <div>
+                                <strong class="text-navy">Schwa-Laut [ə] (Garis Titik-Titik Biru):</strong>
+                                <p class="text-gray-600 mt-0.5">Vokal reduksi santai dan pendek tanpa tekanan pada suku kata akhir atau awalan <em>be-, ge-</em> (contoh: <em>Schul<u>e</u>, Not<u>e</u>, les<u>e</u>n</em>).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Vokal e Panjang [eː] -->
                     <div class="p-5 rounded-2xl bg-orange-50/60 border border-orange-200">
@@ -778,11 +833,12 @@
                             <template x-for="(item, idx) in phoneticLongE" :key="idx">
                                 <div class="p-2.5 rounded-xl bg-white border border-orange-100 flex items-center justify-between gap-2 shadow-xs">
                                     <div>
-                                        <strong class="text-xs sm:text-sm text-navy block font-bold" x-text="item.word"></strong>
+                                        <strong class="text-xs sm:text-sm text-navy block font-bold" x-html="item.formatted || item.word"></strong>
                                         <span class="text-[11px] text-gray-500" x-text="item.meaning"></span>
                                     </div>
                                     <button @click="speak(item.word, 'male')"
-                                        class="p-1 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition flex-shrink-0">
+                                        class="p-1 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition flex-shrink-0"
+                                        title="Dengarkan Audio">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
@@ -806,11 +862,12 @@
                             <template x-for="(item, idx) in phoneticSchwaE" :key="idx">
                                 <div class="p-2.5 rounded-xl bg-white border border-blue-100 flex items-center justify-between gap-2 shadow-xs">
                                     <div>
-                                        <strong class="text-xs sm:text-sm text-navy block font-bold" x-text="item.word"></strong>
+                                        <strong class="text-xs sm:text-sm text-navy block font-bold" x-html="item.formatted || item.word"></strong>
                                         <span class="text-[11px] text-gray-500" x-text="item.meaning"></span>
                                     </div>
                                     <button @click="speak(item.word, 'female')"
-                                        class="p-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition flex-shrink-0">
+                                        class="p-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition flex-shrink-0"
+                                        title="Dengarkan Audio">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
@@ -862,7 +919,7 @@
                         </div>
 
                         <!-- Balon Dialog 1 -->
-                        <div class="space-y-4">
+                        <div class="space-y-4 selectable-text">
                             <template x-for="(line, idx) in dialog1Lines" :key="idx">
                                 <div class="p-4 rounded-2xl border transition"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
@@ -901,7 +958,7 @@
                         </div>
 
                         <!-- Balon Dialog 2 -->
-                        <div class="space-y-4">
+                        <div class="space-y-4 selectable-text">
                             <template x-for="(line, idx) in dialog2Lines" :key="idx">
                                 <div class="p-4 rounded-2xl border transition"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
@@ -942,7 +999,7 @@
                 </div>
 
                 <!-- 4 Kontributor Teks Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 selectable-text">
                     <!-- Kontributor 1: Ole Jansen -->
                     <div class="p-5 rounded-2xl bg-orange-50/50 border border-orange-100 transition hover:border-orange-200">
                         <div class="flex items-center justify-between mb-3 pb-2 border-b border-orange-200/60">
@@ -1067,6 +1124,300 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ========================================================= -->
+                <!-- LESEVERSTEHEN-CHECK (Format Goethe-Zertifikat A2)        -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Modul Lesen A2</span>
+                            <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                                Leseverstehen-Check: Wer hat das gesagt? (Richtig oder Falsch?)
+                            </h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Uji pemahaman membaca berdasarkan 4 testimoni alumni di atas untuk melatih format ujian resmi Goethe-Zertifikat A2.</p>
+                        </div>
+
+                        <!-- Live Score Leseverstehen -->
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl border transition shadow-2xs"
+                                :class="leseScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (leseScore >= 3 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                                <span class="text-xs font-bold"
+                                    :class="leseScore === null ? 'text-orange-900/80' : (leseScore >= 3 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Bacaan:</span>
+                                <span class="text-sm sm:text-base font-extrabold"
+                                    :class="leseScore === null ? 'text-orange-600' : (leseScore >= 3 ? 'text-emerald-700' : 'text-amber-700')"
+                                    x-text="leseScore !== null ? `${leseScore} / 4` : '- / 4'">- / 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal-Soal Leseverstehen -->
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 1 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „In den Sommerferien hatte ich so viel Freizeit und konnte jeden Tag mit Freunden ins Schwimmbad fahren.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="leseAnswers.q1 = 'ole'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'ole' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Ole Jansen
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'sybille'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'sybille' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Sybille Michel
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'nael'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'nael' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Nael Sanchez
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'kati'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'kati' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Kati Grubens
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Frau Lindner war sehr geduldig und erlaubte den Schülern viele Fehler im Vokabeltest.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q2 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q2 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Nael fand es furchtbar, dass er jeden Schultag schon um sechs Uhr morgens aufstehen musste.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q3 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q3 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Wir hatten viele AGs und konnten am Nachmittag Theater spielen oder Musik machen.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="leseAnswers.q4 = 'ole'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'ole' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Ole Jansen
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'sybille'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'sybille' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Sybille Michel
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'nael'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'nael' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Nael Sanchez
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'kati'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'kati' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Kati Grubens
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Leseverstehen -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-5 mt-5 border-t border-gray-100">
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                            <button type="button" @click="checkLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-98 text-white font-bold text-xs shadow-sm transition flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Periksa Pemahaman</span>
+                            </button>
+                            <button type="button" @click="resetLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-98 text-gray-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" @click="showLeseKey = !showLeseKey"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-98 text-blue-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <span x-text="showLeseKey ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan'"></span>
+                                <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200" :class="showLeseKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pembahasan Accordion -->
+                    <div x-show="showLeseKey" x-collapse class="mt-4 p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2" x-cloak>
+                        <h5 class="font-bold text-navy border-b border-gray-200 pb-1.5">Pembahasan Leseverstehen:</h5>
+                        <ul class="space-y-1.5 list-disc list-inside">
+                            <li><strong>1 (Ole Jansen)</strong>: Ole menceritakan bahwa di musim panas ia memiliki libur enam minggu dan bisa pergi berenang ke kolam renang bersama teman-teman setiap hari.</li>
+                            <li><strong>2 (Falsch)</strong>: Pernyataan tersebut salah. Sybille menyatakan bahwa Ibu Lindner sangat tegas dan siswa sama sekali tidak boleh membuat kesalahan (<em>„Man durfte keine Fehler machen, sonst war sie sofort wütend.“</em>).</li>
+                            <li><strong>3 (Richtig)</strong>: Pernyataan tersebut benar. Nael secara gamblang menegaskan bahwa bangun jam 6 pagi dan naik bus jam 7 untuk ke sekolah adalah hal yang mengerikan baginya (<em>„Das war furchtbar!“</em>).</li>
+                            <li><strong>4 (Kati Grubens)</strong>: Kati mengenang dengan gembira kegiatan ekstrakurikuler (AGs) teater dan musik pada sore hari serta pertemanan yang awet hingga sekarang.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- KOTAK KOMENTAR SISWA (Freies Schreiben: Kommentare)       -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="mb-4">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Freies Schreiben</span>
+                        <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                            Und du? Wie war deine Schulzeit? (Schreib einen kurzen Kommentar!)
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-0.5">
+                            Tuliskan ulasan reflektif singkat (3–5 kalimat) tentang pengalaman masa sekolahmu atau tanggapanmu terhadap cerita alumni di atas. Gunakan Modalverben im Präteritum (<em>musste, konnte, wollte, durfte</em>).
+                        </p>
+                    </div>
+
+                    <!-- Click-to-Insert Redemittel Chips -->
+                    <div class="mb-3.5">
+                        <div class="text-[11px] font-bold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Klik frasa pembuka (Redemittel) di bawah ini untuk menempelkan kalimat ke kolom komentar:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" @click="insertRedemittel('Das kann ich gut verstehen, denn')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Das kann ich gut verstehen, denn...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Das war bei mir auch so:')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Das war bei mir auch so:“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Das war bei mir ganz anders:')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Das war bei mir ganz anders:“
+                            </button>
+                            <button type="button" @click="insertRedemittel('In meiner Schulzeit musste ich')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „In meiner Schulzeit musste ich...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('In den Sommerferien konnten wir')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „In den Sommerferien konnten wir...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Besonders gern erinnere ich mich daran, dass')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Besonders gern erinnere ich mich daran, dass...“
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Textarea & Action Bar -->
+                    <div class="relative">
+                        <textarea x-model="studentComment" rows="4"
+                            placeholder="Schreib deinen Kommentar hier... z.B. In meiner Schulzeit musste ich jeden Tag früh aufstehen, aber die Sommerferien waren fantastisch..."
+                            class="w-full p-4 rounded-2xl bg-white border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-navy text-xs sm:text-sm font-medium transition resize-y shadow-xs"
+                            @input="saveProgress()"></textarea>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mt-2.5">
+                            <div class="text-[11px] text-gray-500 flex items-center gap-2">
+                                <span x-text="`${studentComment.trim() ? studentComment.trim().split(/\s+/).length : 0} kata`"></span>
+                                <span class="text-gray-300">•</span>
+                                <span x-text="`${studentComment.length} karakter`"></span>
+                                <template x-if="commentLastSaved">
+                                    <span class="text-emerald-600 font-semibold" x-text="`• Tersimpan ${commentLastSaved}`"></span>
+                                </template>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="studentComment = ''; saveProgress();"
+                                    class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold transition"
+                                    x-show="studentComment.length > 0">
+                                    Bersihkan
+                                </button>
+                                <button type="button" @click="saveComment()"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Simpan Komentar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Toast Alert Simpan -->
+                        <div x-show="commentSavedToast" x-transition
+                            class="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2"
+                            x-cloak>
+                            <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Komentarmu berhasil disimpan! Catatan ini tersimpan di akunmu dan dapat ditinjau oleh pengajar.</span>
+                        </div>
+                    </div>
+
+                    <!-- Pratinjau Komentar Terbitan Siswa (Forum Style) -->
+                    <template x-if="studentComment.trim().length > 0">
+                        <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                            <div class="flex items-center justify-between mb-2 pb-2 border-b border-orange-200/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center"
+                                        x-text="currentUser ? (currentUser.displayName || currentUser.email).charAt(0).toUpperCase() : 'S'">
+                                    </div>
+                                    <div>
+                                        <strong class="text-xs font-bold text-navy"
+                                            x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Siswa Aksaradeutsch'"></strong>
+                                        <span class="text-[10px] text-gray-500 block">Komentar Siswa</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-gray-400" x-text="commentLastSaved || 'Draft'"></span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap selectable-text"
+                                x-text="studentComment"></p>
+                        </div>
+                    </template>
+                </div>
             </div>
         </section>
 
@@ -1122,12 +1473,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> konnte
+                                    <strong>a)</strong> konntest
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> konntest
+                                    <strong>b)</strong> konnte
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
@@ -1149,17 +1500,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> durften
+                                    <strong>a)</strong> durfte
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> durfte
+                                    <strong>b)</strong> durftet
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> durftet
+                                    <strong>c)</strong> durften
                                 </button>
                             </div>
                         </div>
@@ -1203,12 +1554,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> wollte
+                                    <strong>a)</strong> wolltest
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> wolltest
+                                    <strong>b)</strong> wollte
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="p-3 rounded-xl border text-left font-semibold transition"
@@ -1230,26 +1581,53 @@
                         <!-- Soal 5 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Vokabeln lernen:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ laut Lehrerin / die Schüler / jeden Tag 30 neue Vokabeln / lernen / sollten / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">5. Vokabeln lernen:</span>
+                                    <button type="button" @click="resetPuzzle('q5')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q5.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q5', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[38px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q5.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q5', sIdx)"
+                                                class="px-2.5 py-0.5 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="space-y-2 text-xs sm:text-sm">
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Die Schüler sollten laut Lehrerin jeden Tag 30 neue Vokabeln lernen.
+                                    <strong>a)</strong> Die Schüler lernen sollten laut Lehrerin jeden Tag 30 neue Vokabeln.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Die Schüler lernen sollten laut Lehrerin jeden Tag 30 neue Vokabeln.
+                                    <strong>b)</strong> Laut Lehrerin die Schüler sollten jeden Tag 30 neue Vokabeln lernen.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Laut Lehrerin die Schüler sollten jeden Tag 30 neue Vokabeln lernen.
+                                    <strong>c)</strong> Die Schüler sollten laut Lehrerin jeden Tag 30 neue Vokabeln lernen.
                                 </button>
                             </div>
                         </div>
@@ -1257,9 +1635,36 @@
                         <!-- Soal 6 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Schuluniform tragen:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ eine Schuluniform / tragen / in der Schule / wir / mussten / früher / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">6. Schuluniform tragen:</span>
+                                    <button type="button" @click="resetPuzzle('q6')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q6.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q6', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[38px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q6.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q6', sIdx)"
+                                                class="px-2.5 py-0.5 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="space-y-2 text-xs sm:text-sm">
@@ -1284,21 +1689,48 @@
                         <!-- Soal 7 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Handys im Unterricht:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ durften / im Unterricht / Handys / die Schüler / keine / benutzen / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">7. Handys im Unterricht:</span>
+                                    <button type="button" @click="resetPuzzle('q7')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q7.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q7', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[38px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q7.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q7', sIdx)"
+                                                class="px-2.5 py-0.5 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="space-y-2 text-xs sm:text-sm">
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Die Schüler durften im Unterricht keine Handys benutzen.
+                                    <strong>a)</strong> Die Schüler benutzen durften im Unterricht keine Handys.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Die Schüler benutzen durften im Unterricht keine Handys.
+                                    <strong>b)</strong> Die Schüler durften im Unterricht keine Handys benutzen.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1311,26 +1743,53 @@
                         <!-- Soal 8 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Praktikum nach der Schule:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ nach der Schule / machen / ein Praktikum / wolltest / du / ? ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">8. Praktikum nach der Schule:</span>
+                                    <button type="button" @click="resetPuzzle('q8')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q8.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q8', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[38px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q8.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q8', sIdx)"
+                                                class="px-2.5 py-0.5 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="space-y-2 text-xs sm:text-sm">
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wolltest du nach der Schule ein Praktikum machen?
+                                    <strong>a)</strong> Du wolltest machen nach der Schule ein Praktikum?
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Du wolltest machen nach der Schule ein Praktikum?
+                                    <strong>b)</strong> Nach der Schule wolltest machen du ein Praktikum?
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Nach der Schule wolltest machen du ein Praktikum?
+                                    <strong>c)</strong> Wolltest du nach der Schule ein Praktikum machen?
                                 </button>
                             </div>
                         </div>
@@ -1380,19 +1839,19 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Kontextueller Lückentext):</strong>
                             <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>a (konnte)</strong>: Subjek kalimat adalah <em>Ole</em> (orang ketiga tunggal / <em>er</em>), sehingga kata kerja modal <em>können</em> dalam bentuk Präteritum memperoleh bentuk <em>konnte</em> tanpa tanda Umlaut.</li>
-                                <li><strong>a (durften)</strong>: Subjek kalimat adalah <em>die Schüler</em> (kata benda jamak / <em>sie Plural</em>), sehingga kata kerja modal <em>dürfen</em> dalam bentuk Präteritum berakhiran <em>-ten</em> menjadi <em>durften</em>.</li>
+                                <li><strong>b (konnte)</strong>: Subjek kalimat adalah <em>Ole</em> (orang ketiga tunggal / <em>er</em>), sehingga kata kerja modal <em>können</em> dalam bentuk Präteritum memperoleh bentuk <em>konnte</em> tanpa tanda Umlaut.</li>
+                                <li><strong>c (durften)</strong>: Subjek kalimat adalah <em>die Schüler</em> (kata benda jamak / <em>sie Plural</em>), sehingga kata kerja modal <em>dürfen</em> dalam bentuk Präteritum berakhiran <em>-ten</em> menjadi <em>durften</em>.</li>
                                 <li><strong>a (musste)</strong>: Subjek kalimat adalah <em>Nael</em> (orang ketiga tunggal / <em>er</em>), sehingga kata kerja modal <em>müssen</em> dalam bentuk Präteritum dikonjugasikan menjadi <em>musste</em>.</li>
-                                <li><strong>a (wollte)</strong>: Subjek kalimat adalah <em>Jonas</em> (orang ketiga tunggal / <em>er</em>), sehingga kata kerja modal <em>wollen</em> dalam bentuk Präteritum dikonjugasikan menjadi <em>wollte</em>.</li>
+                                <li><strong>b (wollte)</strong>: Subjek kalimat adalah <em>Jonas</em> (orang ketiga tunggal / <em>er</em>), sehingga kata kerja modal <em>wollen</em> dalam bentuk Präteritum dikonjugasikan menjadi <em>wollte</em>.</li>
                             </ol>
                         </div>
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
                             <ol start="5" class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>a (Die Schüler sollten laut Lehrerin jeden Tag 30 neue Vokabeln lernen.)</strong>: Kata kerja modal terkonjugasi <em>sollten</em> menempati Posisi 2, sedangkan kata kerja utama <em>lernen</em> dalam bentuk infinitif wajib berada di posisi paling akhir kalimat.</li>
+                                <li><strong>c (Die Schüler sollten laut Lehrerin jeden Tag 30 neue Vokabeln lernen.)</strong>: Kata kerja modal terkonjugasi <em>sollten</em> menempati Posisi 2, sedangkan kata kerja utama <em>lernen</em> dalam bentuk infinitif wajib berada di posisi paling akhir kalimat.</li>
                                 <li><strong>a (Früher mussten wir in der Schule eine Schuluniform tragen.)</strong>: Keterangan waktu <em>Früher</em> berada di Posisi 1, kata kerja modal <em>mussten</em> berada di Posisi 2, diikuti subjek <em>wir</em>, dan kata kerja infinitif <em>tragen</em> berada di ujung kalimat.</li>
-                                <li><strong>a (Die Schüler durften im Unterricht keine Handys benutzen.)</strong>: Subjek <em>Die Schüler</em> di Posisi 1, kata kerja modal <em>durften</em> di Posisi 2, dan kata kerja infinitif <em>benutzen</em> menempati posisi paling akhir kalimat.</li>
-                                <li><strong>a (Wolltest du nach der Schule ein Praktikum machen?)</strong>: Pada kalimat tanya Ya/Tidak (<em>Ja/Nein-Frage</em>), kata kerja modal <em>wolltest</em> mengawali kalimat di Posisi 1, subjek <em>du</em> di Posisi 2, dan kata kerja infinitif <em>machen</em> berada di ujung kalimat.</li>
+                                <li><strong>b (Die Schüler durften im Unterricht keine Handys benutzen.)</strong>: Subjek <em>Die Schüler</em> di Posisi 1, kata kerja modal <em>durften</em> di Posisi 2, dan kata kerja infinitif <em>benutzen</em> menempati posisi paling akhir kalimat.</li>
+                                <li><strong>c (Wolltest du nach der Schule ein Praktikum machen?)</strong>: Pada kalimat tanya Ya/Tidak (<em>Ja/Nein-Frage</em>), kata kerja modal <em>wolltest</em> mengawali kalimat di Posisi 1, subjek <em>du</em> di Posisi 2, dan kata kerja infinitif <em>machen</em> berada di ujung kalimat.</li>
                             </ol>
                         </div>
                     </div>
@@ -1451,6 +1910,16 @@
                 showKey: false,
                 showFeedback: false,
                 quizScore: null,
+                showPluralForms: true,
+
+                // Leseverstehen & Freies Schreiben State
+                leseAnswers: { q1: '', q2: '', q3: '', q4: '' },
+                leseScore: null,
+                showLeseFeedback: false,
+                showLeseKey: false,
+                studentComment: '',
+                commentSavedToast: false,
+                commentLastSaved: '',
 
                 // Audio State
                 isPlayingFullDialog: false,
@@ -1481,40 +1950,40 @@
 
                 // Vocabularies: Subtopic A (Schule und Schulerinnerungen)
                 vocabSchool: [
-                    { article: 'die', word: 'Schulzeit, -en', fullWord: 'die Schulzeit', meaning: 'masa sekolah', gender: 'fem' },
-                    { article: 'das', word: 'Abitur (das Abi)', fullWord: 'das Abitur', meaning: 'ujian kelulusan SMA Jerman', gender: 'neut' },
-                    { article: 'die', word: 'Sommerferien (Pl.)', fullWord: 'die Sommerferien', meaning: 'liburan musim panas', gender: 'fem' },
-                    { article: 'der', word: 'Vokabeltest, -s', fullWord: 'der Vokabeltest', meaning: 'tes kosakata', gender: 'masc' },
-                    { article: 'die', word: 'Note, -n', fullWord: 'die Note', meaning: 'nilai / rapor sekolah', gender: 'fem' },
-                    { article: 'das', word: 'Fach, Fächer', fullWord: 'das Fach', meaning: 'mata pelajaran', gender: 'neut' },
-                    { article: 'die', word: 'Hausaufgabe, -n', fullWord: 'die Hausaufgabe', meaning: 'pekerjaan rumah (PR)', gender: 'fem' },
-                    { article: 'die', word: 'Schuluniform, -en', fullWord: 'die Schuluniform', meaning: 'seragam sekolah', gender: 'fem' },
-                    { article: 'die', word: 'Cafeteria, -s', fullWord: 'die Cafeteria', meaning: 'kantin sekolah', gender: 'fem' },
-                    { article: 'das', word: 'Schulessen', fullWord: 'das Schulessen', meaning: 'makanan sekolah', gender: 'neut' },
-                    { article: 'die', word: 'Klassenfahrt, -en', fullWord: 'die Klassenfahrt', meaning: 'karya wisata / studi tur', gender: 'fem' },
-                    { article: 'die', word: 'AG, -s (Arbeitsgemeinschaft)', fullWord: 'die Arbeitsgemeinschaft', meaning: 'kegiatan ekstrakurikuler', gender: 'fem' },
-                    { article: 'der', word: 'Stundenplan, -pläne', fullWord: 'der Stundenplan', meaning: 'jadwal pelajaran', gender: 'masc' },
-                    { article: '', word: 'streng', fullWord: 'streng', meaning: 'tegas / ketat / galak', gender: 'neut' },
-                    { article: '', word: 'wütend', fullWord: 'wütend', meaning: 'marah besar', gender: 'neut' },
-                    { article: '', word: 'lustig', fullWord: 'lustig', meaning: 'lucu / menyenangkan', gender: 'neut' },
-                    { article: '', word: 'schrecklich', fullWord: 'schrecklich', meaning: 'mengerikan / buruk sekali', gender: 'neut' },
-                    { article: '', word: 'erwachsen sein', fullWord: 'erwachsen sein', meaning: 'menjadi dewasa', gender: 'neut' },
-                    { article: '', word: 'ausschlafen', fullWord: 'ausschlafen', meaning: 'tidur sepuasnya / bangun siang', gender: 'neut' }
+                    { article: 'die', word: 'Schulzeit, -en', fullWord: 'die Schulzeit', plural: 'die Schulzeiten', meaning: 'masa sekolah', gender: 'fem' },
+                    { article: 'das', word: 'Abitur (das Abi)', fullWord: 'das Abitur', plural: 'nur Singular', meaning: 'ujian kelulusan SMA Jerman', gender: 'neut' },
+                    { article: 'die', word: 'Sommerferien (Pl.)', fullWord: 'die Sommerferien', plural: 'nur Plural', meaning: 'liburan musim panas', gender: 'fem' },
+                    { article: 'der', word: 'Vokabeltest, -s', fullWord: 'der Vokabeltest', plural: 'die Vokabeltests', meaning: 'tes kosakata', gender: 'masc' },
+                    { article: 'die', word: 'Note, -n', fullWord: 'die Note', plural: 'die Noten', meaning: 'nilai / rapor sekolah', gender: 'fem' },
+                    { article: 'das', word: 'Fach, Fächer', fullWord: 'das Fach', plural: 'die Fächer', meaning: 'mata pelajaran', gender: 'neut' },
+                    { article: 'die', word: 'Hausaufgabe, -n', fullWord: 'die Hausaufgabe', plural: 'die Hausaufgaben', meaning: 'pekerjaan rumah (PR)', gender: 'fem' },
+                    { article: 'die', word: 'Schuluniform, -en', fullWord: 'die Schuluniform', plural: 'die Schuluniformen', meaning: 'seragam sekolah', gender: 'fem' },
+                    { article: 'die', word: 'Cafeteria, -s', fullWord: 'die Cafeteria', plural: 'die Cafeterias', meaning: 'kantin sekolah', gender: 'fem' },
+                    { article: 'das', word: 'Schulessen', fullWord: 'das Schulessen', plural: 'nur Singular', meaning: 'makanan sekolah', gender: 'neut' },
+                    { article: 'die', word: 'Klassenfahrt, -en', fullWord: 'die Klassenfahrt', plural: 'die Klassenfahrten', meaning: 'karya wisata / studi tur', gender: 'fem' },
+                    { article: 'die', word: 'AG, -s (Arbeitsgemeinschaft)', fullWord: 'die Arbeitsgemeinschaft', plural: 'die AGs', meaning: 'kegiatan ekstrakurikuler', gender: 'fem' },
+                    { article: 'der', word: 'Stundenplan, -pläne', fullWord: 'der Stundenplan', plural: 'die Stundenpläne', meaning: 'jadwal pelajaran', gender: 'masc' },
+                    { article: '', word: 'streng', fullWord: 'streng', plural: null, meaning: 'tegas / ketat / galak', gender: 'neut' },
+                    { article: '', word: 'wütend', fullWord: 'wütend', plural: null, meaning: 'marah besar', gender: 'neut' },
+                    { article: '', word: 'lustig', fullWord: 'lustig', plural: null, meaning: 'lucu / menyenangkan', gender: 'neut' },
+                    { article: '', word: 'schrecklich', fullWord: 'schrecklich', plural: null, meaning: 'mengerikan / buruk sekali', gender: 'neut' },
+                    { article: '', word: 'erwachsen sein', fullWord: 'erwachsen sein', plural: null, meaning: 'menjadi dewasa', gender: 'neut' },
+                    { article: '', word: 'ausschlafen', fullWord: 'ausschlafen', plural: null, meaning: 'tidur sepuasnya / bangun siang', gender: 'neut' }
                 ],
 
                 // Vocabularies: Subtopic B (Nach der Schule und Berufsfindung)
                 vocabCareer: [
-                    { article: 'das', word: 'Praktikum, Praktika', fullWord: 'das Praktikum', meaning: 'program magang kerja', gender: 'neut' },
-                    { article: 'die', word: 'Werbeagentur, -en', fullWord: 'die Werbeagentur', meaning: 'agensi periklanan', gender: 'fem' },
-                    { article: 'die', word: 'Ausbildung, -en', fullWord: 'die Ausbildung', meaning: 'pendidikan vokasi profesi', gender: 'fem' },
-                    { article: 'das', word: 'Au-pair, -s', fullWord: 'das Au-pair', meaning: 'pertukaran pengasuh anak di luar negeri', gender: 'neut' },
-                    { article: 'die', word: 'Messe, -n', fullWord: 'die Messe', meaning: 'pameran dagang / bursa kerja', gender: 'fem' },
-                    { article: 'das', word: 'Reisebüro, -s', fullWord: 'das Reisebüro', meaning: 'biro perjalanan / agen travel', gender: 'neut' },
-                    { article: 'die', word: 'Sprache, -n', fullWord: 'die Sprache', meaning: 'bahasa', gender: 'fem' },
-                    { article: '', word: 'studieren', fullWord: 'studieren', meaning: 'kuliah di perguruan tinggi', gender: 'neut' },
-                    { article: '', word: 'jobben', fullWord: 'jobben', meaning: 'bekerja paruh waktu / sambilan', gender: 'neut' },
-                    { article: '', word: 'reisen', fullWord: 'reisen', meaning: 'bepergian / melancong', gender: 'neut' },
-                    { article: '', word: 'Kontakt haben', fullWord: 'Kontakt haben', meaning: 'menjalin hubungan / kontak', gender: 'neut' }
+                    { article: 'das', word: 'Praktikum, Praktika', fullWord: 'das Praktikum', plural: 'die Praktika', meaning: 'program magang kerja', gender: 'neut' },
+                    { article: 'die', word: 'Werbeagentur, -en', fullWord: 'die Werbeagentur', plural: 'die Werbeagenturen', meaning: 'agensi periklanan', gender: 'fem' },
+                    { article: 'die', word: 'Ausbildung, -en', fullWord: 'die Ausbildung', plural: 'die Ausbildungen', meaning: 'pendidikan vokasi profesi', gender: 'fem' },
+                    { article: 'das', word: 'Au-pair, -s', fullWord: 'das Au-pair', plural: 'die Au-pairs', meaning: 'pertukaran pengasuh anak di luar negeri', gender: 'neut' },
+                    { article: 'die', word: 'Messe, -n', fullWord: 'die Messe', plural: 'die Messen', meaning: 'pameran dagang / bursa kerja', gender: 'fem' },
+                    { article: 'das', word: 'Reisebüro, -s', fullWord: 'das Reisebüro', plural: 'die Reisebüros', meaning: 'biro perjalanan / agen travel', gender: 'neut' },
+                    { article: 'die', word: 'Sprache, -n', fullWord: 'die Sprache', plural: 'die Sprachen', meaning: 'bahasa', gender: 'fem' },
+                    { article: '', word: 'studieren', fullWord: 'studieren', plural: null, meaning: 'kuliah di perguruan tinggi', gender: 'neut' },
+                    { article: '', word: 'jobben', fullWord: 'jobben', plural: null, meaning: 'bekerja paruh waktu / sambilan', gender: 'neut' },
+                    { article: '', word: 'reisen', fullWord: 'reisen', plural: null, meaning: 'bepergian / melancong', gender: 'neut' },
+                    { article: '', word: 'Kontakt haben', fullWord: 'Kontakt haben', plural: null, meaning: 'menjalin hubungan / kontak', gender: 'neut' }
                 ],
 
                 // Redemittel Phrases
@@ -1546,20 +2015,24 @@
 
                 // Phonetics
                 phoneticLongE: [
-                    { word: 'der See', meaning: 'danau' },
-                    { word: 'sehr', meaning: 'sangat' },
-                    { word: 'der Weg', meaning: 'jalan / rute' },
-                    { word: 'die Medizin', meaning: 'kedokteran' },
-                    { word: 'die Idee', meaning: 'ide / gagasan' }
+                    { word: 'der See', formatted: 'der S<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">ee</span>', meaning: 'danau' },
+                    { word: 'sehr', formatted: 's<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">eh</span>r', meaning: 'sangat' },
+                    { word: 'der Weg', formatted: 'der W<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">e</span>g', meaning: 'jalan / rute' },
+                    { word: 'die Medizin', formatted: 'die M<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">e</span>dizin', meaning: 'kedokteran' },
+                    { word: 'die Idee', formatted: 'die Id<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">ee</span>', meaning: 'ide / gagasan' },
+                    { word: 'lesen', formatted: 'l<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">e</span>sen', meaning: 'membaca (e pertama panjang)' },
+                    { word: 'das Gebet', formatted: 'das Geb<span class="underline decoration-[2.5px] decoration-orange-500 underline-offset-4 font-black text-orange-950">e</span>t', meaning: 'doa (e kedua panjang)' }
                 ],
 
                 phoneticSchwaE: [
-                    { word: 'die Schule', meaning: 'sekolah' },
-                    { word: 'heute', meaning: 'hari ini' },
-                    { word: 'die Note', meaning: 'nilai' },
-                    { word: 'die Hausaufgabe', meaning: 'pekerjaan rumah' },
-                    { word: 'der Beruf', meaning: 'profesi (awalan be-)' },
-                    { word: 'das Gespräch', meaning: 'percakapan (awalan ge-)' }
+                    { word: 'die Schule', formatted: 'die Schul<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>', meaning: 'sekolah' },
+                    { word: 'heute', formatted: 'heut<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>', meaning: 'hari ini' },
+                    { word: 'die Note', formatted: 'die Not<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>', meaning: 'nilai' },
+                    { word: 'die Hausaufgabe', formatted: 'die Hausaufgab<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>', meaning: 'pekerjaan rumah' },
+                    { word: 'der Beruf', formatted: 'der B<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>ruf', meaning: 'profesi (awalan be-)' },
+                    { word: 'das Gespräch', formatted: 'das G<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>spräch', meaning: 'percakapan (awalan ge-)' },
+                    { word: 'lesen', formatted: 'les<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>n', meaning: 'membaca (e kedua Schwa)' },
+                    { word: 'das Gebet', formatted: 'das G<span class="border-b-2 border-dotted border-blue-500 font-extrabold text-blue-900">e</span>bet', meaning: 'doa (e pertama Schwa)' }
                 ],
 
                 // Dialog 1 Lines
@@ -1594,14 +2067,14 @@
                 },
 
                 correctAnswers: {
-                    q1: 'a',
-                    q2: 'a',
+                    q1: 'b',
+                    q2: 'c',
                     q3: 'a',
-                    q4: 'a',
-                    q5: 'a',
+                    q4: 'b',
+                    q5: 'c',
                     q6: 'a',
-                    q7: 'a',
-                    q8: 'a'
+                    q7: 'b',
+                    q8: 'c'
                 },
 
                 getQuestionClass(qNum) {
@@ -1611,6 +2084,96 @@
                         return 'bg-emerald-50/70 border-emerald-300 ring-1 ring-emerald-300';
                     } else {
                         return 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-300';
+                    }
+                },
+
+                // Puzzle State & Handlers
+                puzzleState: {
+                    q5: { pool: ['laut Lehrerin', 'die Schüler', 'jeden Tag 30 neue Vokabeln', 'lernen.', 'sollten'], selected: [] },
+                    q6: { pool: ['eine Schuluniform', 'tragen.', 'in der Schule', 'wir', 'mussten', 'Früher'], selected: [] },
+                    q7: { pool: ['durften', 'im Unterricht', 'keine Handys', 'die Schüler', 'benutzen.'], selected: [] },
+                    q8: { pool: ['nach der Schule', 'ein Praktikum', 'machen?', 'Wolltest', 'du'], selected: [] }
+                },
+
+                puzzleInitial: {
+                    q5: ['laut Lehrerin', 'die Schüler', 'jeden Tag 30 neue Vokabeln', 'lernen.', 'sollten'],
+                    q6: ['eine Schuluniform', 'tragen.', 'in der Schule', 'wir', 'mussten', 'Früher'],
+                    q7: ['durften', 'im Unterricht', 'keine Handys', 'die Schüler', 'benutzen.'],
+                    q8: ['nach der Schule', 'ein Praktikum', 'machen?', 'Wolltest', 'du']
+                },
+
+                addWordToPuzzle(qKey, wIdx) {
+                    const item = this.puzzleState[qKey].pool.splice(wIdx, 1)[0];
+                    this.puzzleState[qKey].selected.push(item);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                removeWordFromPuzzle(qKey, sIdx) {
+                    const item = this.puzzleState[qKey].selected.splice(sIdx, 1)[0];
+                    this.puzzleState[qKey].pool.push(item);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                resetPuzzle(qKey) {
+                    this.puzzleState[qKey].pool = [...this.puzzleInitial[qKey]];
+                    this.puzzleState[qKey].selected = [];
+                },
+
+                checkPuzzleMatch(qKey) {
+                    const selected = this.puzzleState[qKey].selected;
+                    if (selected.length !== this.puzzleInitial[qKey].length) return;
+                    const sentence = selected.join(' ').toLowerCase().replace(/[.?]/g, '').trim();
+
+                    if (qKey === 'q5') {
+                        if (sentence === 'die schüler sollten laut lehrerin jeden tag 30 neue vokabeln lernen') {
+                            this.answers.q5 = 'c';
+                            this.saveProgress();
+                        } else if (sentence === 'die schüler lernen sollten laut lehrerin jeden tag 30 neue vokabeln') {
+                            this.answers.q5 = 'a';
+                            this.saveProgress();
+                        } else if (sentence === 'laut lehrerin die schüler sollten jeden tag 30 neue vokabeln lernen') {
+                            this.answers.q5 = 'b';
+                            this.saveProgress();
+                        }
+                    }
+
+                    if (qKey === 'q6') {
+                        if (sentence === 'früher mussten wir in der schule eine schuluniform tragen') {
+                            this.answers.q6 = 'a';
+                            this.saveProgress();
+                        } else if (sentence === 'früher wir mussten eine schuluniform in der schule tragen') {
+                            this.answers.q6 = 'b';
+                            this.saveProgress();
+                        } else if (sentence === 'wir mussten tragen früher in der schule eine schuluniform') {
+                            this.answers.q6 = 'c';
+                            this.saveProgress();
+                        }
+                    }
+
+                    if (qKey === 'q7') {
+                        if (sentence === 'die schüler durften im unterricht keine handys benutzen') {
+                            this.answers.q7 = 'b';
+                            this.saveProgress();
+                        } else if (sentence === 'die schüler benutzen durften im unterricht keine handys') {
+                            this.answers.q7 = 'a';
+                            this.saveProgress();
+                        } else if (sentence === 'im unterricht keine handys die schüler durften benutzen') {
+                            this.answers.q7 = 'c';
+                            this.saveProgress();
+                        }
+                    }
+
+                    if (qKey === 'q8') {
+                        if (sentence === 'wolltest du nach der schule ein praktikum machen') {
+                            this.answers.q8 = 'c';
+                            this.saveProgress();
+                        } else if (sentence === 'du wolltest machen nach der schule ein praktikum') {
+                            this.answers.q8 = 'a';
+                            this.saveProgress();
+                        } else if (sentence === 'nach der schule wolltest machen du ein praktikum') {
+                            this.answers.q8 = 'b';
+                            this.saveProgress();
+                        }
                     }
                 },
 
@@ -1632,6 +2195,62 @@
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;
+                    ['q5', 'q6', 'q7', 'q8'].forEach(q => this.resetPuzzle(q));
+                    this.saveProgress();
+                },
+
+                // Leseverstehen Handlers
+                checkLeseverstehen() {
+                    let score = 0;
+                    if (this.leseAnswers.q1 === 'ole') score++;
+                    if (this.leseAnswers.q2 === 'falsch') score++;
+                    if (this.leseAnswers.q3 === 'richtig') score++;
+                    if (this.leseAnswers.q4 === 'kati') score++;
+                    this.leseScore = score;
+                    this.showLeseFeedback = true;
+                    this.showLeseKey = true;
+                    this.saveProgress();
+                },
+
+                resetLeseverstehen() {
+                    this.leseAnswers = { q1: '', q2: '', q3: '', q4: '' };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    this.saveProgress();
+                },
+
+                getLeseQuestionClass(qNum) {
+                    if (!this.showLeseFeedback) return 'bg-gray-50/70 border-gray-200';
+                    let isCorrect = false;
+                    if (qNum === 1) isCorrect = (this.leseAnswers.q1 === 'ole');
+                    if (qNum === 2) isCorrect = (this.leseAnswers.q2 === 'falsch');
+                    if (qNum === 3) isCorrect = (this.leseAnswers.q3 === 'richtig');
+                    if (qNum === 4) isCorrect = (this.leseAnswers.q4 === 'kati');
+                    return isCorrect ? 'bg-emerald-50/70 border-emerald-300 ring-1 ring-emerald-300' : 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-300';
+                },
+
+                // Freies Schreiben Handlers
+                insertRedemittel(phrase) {
+                    if (!this.studentComment) {
+                        this.studentComment = phrase + ' ';
+                    } else {
+                        const trimmed = this.studentComment.trim();
+                        const lastChar = trimmed.slice(-1);
+                        if (lastChar === '.' || lastChar === '!' || lastChar === '?' || lastChar === ':') {
+                            this.studentComment = trimmed + ' ' + phrase + ' ';
+                        } else {
+                            this.studentComment = trimmed + '. ' + phrase + ' ';
+                        }
+                    }
+                    this.saveProgress();
+                },
+
+                saveComment() {
+                    if (!this.studentComment.trim()) return;
+                    this.commentLastSaved = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+                    this.commentSavedToast = true;
+                    setTimeout(() => { this.commentSavedToast = false; }, 3500);
                     this.saveProgress();
                 },
 
@@ -1872,6 +2491,11 @@
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;
+                    this.leseAnswers = { q1: '', q2: '', q3: '', q4: '' };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    ['q5', 'q6', 'q7', 'q8'].forEach(q => this.resetPuzzle(q));
                 },
 
                 // Initialization & Sync
@@ -1907,6 +2531,12 @@
                             if (data.answers) this.answers = data.answers;
                             if (data.quizScore !== undefined) this.quizScore = data.quizScore;
                             if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                            if (data.leseAnswers) this.leseAnswers = data.leseAnswers;
+                            if (data.leseScore !== undefined) this.leseScore = data.leseScore;
+                            if (data.showLeseFeedback !== undefined) this.showLeseFeedback = data.showLeseFeedback;
+                            if (data.showLeseKey !== undefined) this.showLeseKey = data.showLeseKey;
+                            if (data.studentComment !== undefined) this.studentComment = data.studentComment;
+                            if (data.commentLastSaved !== undefined) this.commentLastSaved = data.commentLastSaved;
                         }
                     } catch (e) {
                         console.error('Error loading local progress:', e);
@@ -1920,6 +2550,12 @@
                         answers: this.answers,
                         quizScore: this.quizScore,
                         showFeedback: this.showFeedback,
+                        leseAnswers: this.leseAnswers,
+                        leseScore: this.leseScore,
+                        showLeseFeedback: this.showLeseFeedback,
+                        showLeseKey: this.showLeseKey,
+                        studentComment: this.studentComment,
+                        commentLastSaved: this.commentLastSaved,
                         lastUpdated: new Date().toISOString()
                     };
                     try {
@@ -1941,6 +2577,12 @@
                             if (data.answers) this.answers = data.answers;
                             if (data.quizScore !== undefined) this.quizScore = data.quizScore;
                             if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                            if (data.leseAnswers) this.leseAnswers = data.leseAnswers;
+                            if (data.leseScore !== undefined) this.leseScore = data.leseScore;
+                            if (data.showLeseFeedback !== undefined) this.showLeseFeedback = data.showLeseFeedback;
+                            if (data.showLeseKey !== undefined) this.showLeseKey = data.showLeseKey;
+                            if (data.studentComment !== undefined) this.studentComment = data.studentComment;
+                            if (data.commentLastSaved !== undefined) this.commentLastSaved = data.commentLastSaved;
                             this.saveProgressToLocal(uid);
                         }
                     } catch (e) {
