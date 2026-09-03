@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -885,7 +885,7 @@
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                             <div class="min-w-0 flex-1">
                                 <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Dialog 1</span>
-                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1 truncate">Percakapan Informal</h3>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Percakapan Informal</h3>
                                 <p class="text-xs text-gray-400">Marc (Pria) & Julia (Wanita)</p>
                             </div>
                             <button @click="playFullDialog(1)"
@@ -931,7 +931,7 @@
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                             <div class="min-w-0 flex-1">
                                 <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Dialog 2</span>
-                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1 truncate">Percakapan Formal</h3>
+                                <h3 class="text-base sm:text-lg font-bold text-navy mt-1">Percakapan Formal</h3>
                                 <p class="text-xs text-gray-400">Frau Dr. Donat (Wanita) & Herr Schöpe (Pria)</p>
                             </div>
                             <button @click="playFullDialog(2)"
@@ -1027,12 +1027,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> die Lehrerin
+                                    <strong>a)</strong> das Lehrerin
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> das Lehrerin
+                                    <strong>b)</strong> die Lehrerin
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1054,17 +1054,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> die Ärztin
+                                    <strong>a)</strong> die Arztin
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> die Arztin
+                                    <strong>b)</strong> das Ärztin
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> das Ärztin
+                                    <strong>c)</strong> die Ärztin
                                 </button>
                             </div>
                         </div>
@@ -1108,12 +1108,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> die Restaurants
+                                    <strong>a)</strong> die Restaurante
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> die Restaurante
+                                    <strong>b)</strong> die Restaurants
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1305,10 +1305,10 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Wortbildungs-Baukasten):</strong>
                             <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                <li><strong>a (die Lehrerin)</strong>: Bentuk profesi perempuan umumnya dibentuk dengan menambahkan akhiran <em>-in</em> pada kata dasar serta menggunakan artikel <em>die</em>.</li>
-                                <li><strong>a (die Ärztin)</strong>: Kata <em>der Arzt</em> mengalami perubahan vokal Umlaut <em>a &rarr; ä</em> dan penambahan akhiran <em>-in</em> menjadi <em>die Ärztin</em>.</li>
+                                <li><strong>b (die Lehrerin)</strong>: Bentuk profesi perempuan umumnya dibentuk dengan menambahkan akhiran <em>-in</em> pada kata dasar serta menggunakan artikel <em>die</em>.</li>
+                                <li><strong>c (die Ärztin)</strong>: Kata <em>der Arzt</em> mengalami perubahan vokal Umlaut <em>a &rarr; ä</em> dan penambahan akhiran <em>-in</em> menjadi <em>die Ärztin</em>.</li>
                                 <li><strong>a (die Bücher)</strong>: Bentuk jamak dari <em>das Buch</em> berubah vokal menjadi <em>ü</em> dan mendapat akhiran <em>-er</em> menjadi <em>die Bücher</em>.</li>
-                                <li><strong>a (die Restaurants)</strong>: Kata serapan dari bahasa asing umumnya membentuk bentuk jamak dengan akhiran <em>-s</em>: <em>die Restaurants</em>.</li>
+                                <li><strong>b (die Restaurants)</strong>: Kata serapan dari bahasa asing umumnya membentuk bentuk jamak dengan akhiran <em>-s</em>: <em>die Restaurants</em>.</li>
                             </ol>
                         </div>
                         <div>
@@ -1505,10 +1505,10 @@
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
                     if (this.answers.q5 === 'c') score++;
                     if (this.answers.q6 === 'c') score++;
                     if (this.answers.q7 === 'd') score++;
@@ -1531,10 +1531,10 @@
                 getQuestionClass(qNum) {
                     if (!this.showFeedback) return 'bg-gray-50/70 border-gray-200';
                     let isCorrect = false;
-                    if (qNum === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (qNum === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (qNum === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (qNum === 2) isCorrect = (this.answers.q2 === 'c');
                     if (qNum === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (qNum === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (qNum === 4) isCorrect = (this.answers.q4 === 'b');
                     if (qNum === 5) isCorrect = (this.answers.q5 === 'c');
                     if (qNum === 6) isCorrect = (this.answers.q6 === 'c');
                     if (qNum === 7) isCorrect = (this.answers.q7 === 'd');
@@ -1765,6 +1765,7 @@
 </body>
 
 </html>
+
 
 
 

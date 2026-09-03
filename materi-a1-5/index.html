@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -955,17 +955,17 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Das ist ein Bahnhof in Hamburg.
+                                    <strong>a)</strong> Das ist keines Bahnhof in Hamburg.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Das ist der Bahnhöfe in Hamburg.
+                                    <strong>b)</strong> Das ist ein Bahnhof in Hamburg.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Das ist keines Bahnhof in Hamburg.
+                                    <strong>c)</strong> Das ist der Bahnhöfe in Hamburg.
                                 </button>
                             </div>
                         </div>
@@ -982,17 +982,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Das Gebäude ist keine Kirche.
+                                    <strong>a)</strong> Das Gebäude keine Kirche ist.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Das Gebäude keine Kirche ist.
+                                    <strong>b)</strong> Das Gebäude ist kein Kirche.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Das Gebäude ist kein Kirche.
+                                    <strong>c)</strong> Das Gebäude ist keine Kirche.
                                 </button>
                             </div>
                         </div>
@@ -1036,12 +1036,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Der Turm ist 110 Meter hoch.
+                                    <strong>a)</strong> Der Turm 110 Meter ist hoch.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Der Turm 110 Meter ist hoch.
+                                    <strong>b)</strong> Der Turm ist 110 Meter hoch.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1221,10 +1221,10 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Fehlerkorrektur):</strong>
                             <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                <li><strong>a (Das ist ein Bahnhof in Hamburg.)</strong>: Kata <em>Bahnhof</em> bergender maskulin (<em>der Bahnhof</em>), sehingga artikel tak tentu yang tepat adalah <em>ein</em> (bukan <em>eine</em>).</li>
-                                <li><strong>a (Das Gebäude ist keine Kirche.)</strong>: Kata kerja <em>ist</em> harus berada di posisi kedua, dan kata benda feminin <em>die Kirche</em> dinegasikan dengan <em>keine</em>.</li>
+                                <li><strong>b (Das ist ein Bahnhof in Hamburg.)</strong>: Kata <em>Bahnhof</em> bergender maskulin (<em>der Bahnhof</em>), sehingga artikel tak tentu yang tepat adalah <em>ein</em> (bukan <em>eine</em>).</li>
+                                <li><strong>c (Das Gebäude ist keine Kirche.)</strong>: Kata kerja <em>ist</em> harus berada di posisi kedua, dan kata benda feminin <em>die Kirche</em> dinegasikan dengan <em>keine</em>.</li>
                                 <li><strong>a (Die Alster ist ein Fluss.)</strong>: <em>Die Alster</em> adalah sungai terkenal di Hamburg yang berartikel <em>die</em> dan merupakan jenis sungai (<em>der Fluss &rarr; ein Fluss</em>).</li>
-                                <li><strong>a (Der Turm ist 110 Meter hoch.)</strong>: Kata sifat predikatif yang terletak setelah kata kerja <em>ist</em> tidak memerlukan akhiran deklinasi tambahan (tetap <em>hoch</em>).</li>
+                                <li><strong>b (Der Turm ist 110 Meter hoch.)</strong>: Kata sifat predikatif yang terletak setelah kata kerja <em>ist</em> tidak memerlukan akhiran deklinasi tambahan (tetap <em>hoch</em>).</li>
                             </ol>
                         </div>
                         <div>
@@ -1448,20 +1448,20 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
                     if ((this.answers.q5 || '').trim() === 'Der Turm ist 112 Meter hoch.') score++;
                     if ((this.answers.q6 || '').trim() === 'Ist das ein Konzerthaus?') score++;
                     if ((this.answers.q7 || '').trim() === 'Die Brücke ist sehr alt.') score++;

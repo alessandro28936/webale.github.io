@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -440,11 +440,11 @@
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                         :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                         x-text="item.article"></span>
-                                    <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                         x-text="item.word"></strong>
                                 </div>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
@@ -480,9 +480,9 @@
                                 <div
                                     class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                     <div class="min-w-0 flex-1">
-                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight"
                                             x-text="status.word"></strong>
-                                        <span class="text-[11px] text-gray-500 truncate block"
+                                        <span class="text-[11px] text-gray-500 block break-words leading-snug"
                                             x-text="status.meaning"></span>
                                     </div>
                                     <button @click="speak(status.word, 'female')"
@@ -516,9 +516,9 @@
                                 <div
                                     class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                     <div class="min-w-0 flex-1">
-                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight"
                                             x-text="term.word"></strong>
-                                        <span class="text-[11px] text-gray-500 truncate block"
+                                        <span class="text-[11px] text-gray-500 block break-words leading-snug"
                                             x-text="term.meaning"></span>
                                     </div>
                                     <button @click="speak(term.word, 'female')"
@@ -1152,12 +1152,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Guten Tag, ich hätte gern einen Termin beim Arzt.
+                                    <strong>a)</strong> Das Rathaus ist 120 Jahre alt.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Das Rathaus ist 120 Jahre alt.
+                                    <strong>b)</strong> Guten Tag, ich hätte gern einen Termin beim Arzt.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1179,17 +1179,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ja, am Freitag um 14:00 Uhr passt es mir gut.
+                                    <strong>a)</strong> Nein, ich heiße nicht Anna.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Nein, ich heiße nicht Anna.
+                                    <strong>b)</strong> Der Käse kostet zwei Euro zwanzig.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Der Käse kostet zwei Euro zwanzig.
+                                    <strong>c)</strong> Ja, am Freitag um 14:00 Uhr passt es mir gut.
                                 </button>
                             </div>
                         </div>
@@ -1233,12 +1233,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ja natürlich, sehr gern!
+                                    <strong>a)</strong> Ich fahre am Montag nach Hamburg.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Ich fahre am Montag nach Hamburg.
+                                    <strong>b)</strong> Ja natürlich, sehr gern!
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1411,10 +1411,10 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Situationsreaktion):</strong>
                             <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                <li><strong>a (Guten Tag, ich hätte gern einen Termin...)</strong>: Kalimat yang sangat sopan dan standar untuk meminta jadwal janji temu dengan dokter.</li>
-                                <li><strong>a (Ja, am Freitag um 14:00 Uhr passt es mir gut.)</strong>: Mengonfirmasi bahwa waktu janji temu yang ditawarkan cocok dengan jadwal kita.</li>
+                                <li><strong>b (Guten Tag, ich hätte gern einen Termin...)</strong>: Kalimat yang sangat sopan dan standar untuk meminta jadwal janji temu dengan dokter.</li>
+                                <li><strong>c (Ja, am Freitag um 14:00 Uhr passt es mir gut.)</strong>: Mengonfirmasi bahwa waktu janji temu yang ditawarkan cocok dengan jadwal kita.</li>
                                 <li><strong>a (Kein Problem, können wir den Termin auf Dienstag verschieben?)</strong>: Cara yang santun untuk menerima pembatalan sekaligus mengusulkan jadwal pengganti.</li>
-                                <li><strong>a (Ja natürlich, sehr gern!)</strong>: Jawaban yang ramah dan bersahabat ketika bersedia memberikan bantuan kepada orang lain.</li>
+                                <li><strong>b (Ja natürlich, sehr gern!)</strong>: Jawaban yang ramah dan bersahabat ketika bersedia memberikan bantuan kepada orang lain.</li>
                             </ol>
                         </div>
                         <div>
@@ -1666,10 +1666,10 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/70 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
@@ -1704,10 +1704,10 @@
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
 
                     const n5 = this.normalizeSentence(this.answers.q5);
                     if (n5 === 'ichmussmorgenzumarztgehen' || n5 === 'morgenmussichzumarztgehen') score++;
@@ -2014,6 +2014,7 @@
 </body>
 
 </html>
+
 
 
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -426,7 +426,7 @@
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
+                                <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight"
                                     x-text="item.word"></strong>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
                             </div>
@@ -468,11 +468,11 @@
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                         :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                         x-text="item.article"></span>
-                                    <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                         x-text="item.word"></strong>
                                 </div>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
@@ -504,7 +504,7 @@
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
+                                <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight"
                                     x-text="time.word"></strong>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="time.meaning"></p>
                             </div>
@@ -736,9 +736,9 @@
                                                 class="px-2 py-0.5 rounded-md bg-navy text-white text-[10px] font-extrabold"
                                                 x-text="clock.time"></span>
                                         </div>
-                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block truncate"
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight"
                                             x-text="clock.text"></strong>
-                                        <span class="text-[11px] text-gray-500 block truncate"
+                                        <span class="text-[11px] text-gray-500 block break-words leading-snug"
                                             x-text="clock.desc"></span>
                                     </div>
 
@@ -1118,12 +1118,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Es ist Viertel nach sieben.
+                                    <strong>a)</strong> Es ist Viertel vor sieben.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Es ist Viertel vor sieben.
+                                    <strong>b)</strong> Es ist Viertel nach sieben.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1145,17 +1145,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Es ist halb drei.
+                                    <strong>a)</strong> Es ist halb zwei.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Es ist halb zwei.
+                                    <strong>b)</strong> Es ist Viertel nach zwei.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Es ist Viertel nach zwei.
+                                    <strong>c)</strong> Es ist halb drei.
                                 </button>
                             </div>
                         </div>
@@ -1199,12 +1199,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> von
+                                    <strong>a)</strong> um
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> um
+                                    <strong>b)</strong> von
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1238,17 +1238,17 @@
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> mein
+                                    <strong>a)</strong> meine
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> meine
+                                    <strong>b)</strong> meinen
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> meinen
+                                    <strong>c)</strong> mein
                                 </button>
                             </div>
                         </div>
@@ -1292,12 +1292,12 @@
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> meinen
+                                    <strong>a)</strong> mein
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> mein
+                                    <strong>b)</strong> meinen
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1319,17 +1319,17 @@
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> meine
+                                    <strong>a)</strong> mein
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> mein
+                                    <strong>b)</strong> meinen
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> meinen
+                                    <strong>c)</strong> meine
                                 </button>
                             </div>
                         </div>
@@ -1377,19 +1377,19 @@
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil A (Uhrzeiten & Präpositionen):</strong>
                                 <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (Es ist Viertel nach sieben.)</strong>: Pukul 07:15 dalam bahasa Jerman lisan diucapkan lewat 15 menit dari jam 7 (<em>Viertel nach sieben</em>).</li>
-                                    <li><strong>a (Es ist halb drei.)</strong>: Pukul 14:30 dalam percakapan sehari-hari disebut setengah jam menuju jam 3 (<em>halb drei</em>).</li>
+                                    <li><strong>b (Es ist Viertel nach sieben.)</strong>: Pukul 07:15 dalam bahasa Jerman lisan diucapkan lewat 15 menit dari jam 7 (<em>Viertel nach sieben</em>).</li>
+                                    <li><strong>c (Es ist halb drei.)</strong>: Pukul 14:30 dalam percakapan sehari-hari disebut setengah jam menuju jam 3 (<em>halb drei</em>).</li>
                                     <li><strong>a (um)</strong>: Menunjukkan waktu jam yang spesifik selalu menggunakan preposisi <em>um</em> (misal: <em>um 09:00 Uhr</em>).</li>
-                                    <li><strong>a (von)</strong>: Menyatakan rentang waktu dari jam awal sampai jam akhir menggunakan pasangan preposisi <em>von ... bis</em>.</li>
+                                    <li><strong>b (von)</strong>: Menyatakan rentang waktu dari jam awal sampai jam akhir menggunakan pasangan preposisi <em>von ... bis</em>.</li>
                                 </ol>
                             </div>
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil B (Kasus-Transformator Possessivartikel):</strong>
                                 <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (mein)</strong>: Kata benda maskulin sebagai subjek (<em>der Sohn</em>) menggunakan kata ganti kepemilikan <em>mein Sohn</em>.</li>
+                                    <li><strong>c (mein)</strong>: Kata benda maskulin sebagai subjek (<em>der Sohn</em>) menggunakan kata ganti kepemilikan <em>mein Sohn</em>.</li>
                                     <li><strong>a (meine)</strong>: Kata benda feminin (<em>die Schwester</em>) menggunakan kata ganti kepemilikan berakhiran <em>-e</em>: <em>meine Schwester</em>.</li>
-                                    <li><strong>a (meinen)</strong>: Kata benda maskulin yang menjadi objek langsung Akkusativ (<em>der Bruder</em>) berubah bentuk menjadi <em>meinen Bruder</em>.</li>
-                                    <li><strong>a (meine)</strong>: Kata benda bentuk jamak (<em>die Kinder</em>) selalu menggunakan kata ganti kepemilikan <em>meine Kinder</em>.</li>
+                                    <li><strong>b (meinen)</strong>: Kata benda maskulin yang menjadi objek langsung Akkusativ (<em>der Bruder</em>) berubah bentuk menjadi <em>meinen Bruder</em>.</li>
+                                    <li><strong>c (meine)</strong>: Kata benda bentuk jamak (<em>die Kinder</em>) selalu menggunakan kata ganti kepemilikan <em>meine Kinder</em>.</li>
                                 </ol>
                             </div>
                         </div>
@@ -1557,28 +1557,28 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
-                    if (num === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
+                    if (num === 5) isCorrect = (this.answers.q5 === 'c');
                     if (num === 6) isCorrect = (this.answers.q6 === 'a');
-                    if (num === 7) isCorrect = (this.answers.q7 === 'a');
-                    if (num === 8) isCorrect = (this.answers.q8 === 'a');
+                    if (num === 7) isCorrect = (this.answers.q7 === 'b');
+                    if (num === 8) isCorrect = (this.answers.q8 === 'c');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
-                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
+                    if (this.answers.q5 === 'c') score++;
                     if (this.answers.q6 === 'a') score++;
-                    if (this.answers.q7 === 'a') score++;
-                    if (this.answers.q8 === 'a') score++;
+                    if (this.answers.q7 === 'b') score++;
+                    if (this.answers.q8 === 'c') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
@@ -1828,6 +1828,7 @@
 </body>
 
 </html>
+
 
 
 

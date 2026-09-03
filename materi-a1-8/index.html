@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -404,7 +404,7 @@
                     <template x-for="(item, idx) in mealItems" :key="idx">
                         <div class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                         :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                         x-text="item.article"></span>
@@ -441,7 +441,7 @@
                                 <template x-for="(t, idx) in dailyAdverbs" :key="idx">
                                     <div class="p-3 rounded-2xl bg-gray-50/80 border border-gray-100 flex items-center justify-between gap-1.5">
                                         <div class="min-w-0 flex-1">
-                                            <strong class="text-xs font-bold text-navy block truncate" x-text="t.word"></strong>
+                                            <strong class="text-xs font-bold text-navy block break-words leading-tight" x-text="t.word"></strong>
                                             <span class="text-[11px] text-gray-500 leading-snug" x-text="t.meaning"></span>
                                         </div>
                                         <button @click="speak(t.word, 'female')" class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition">
@@ -458,7 +458,7 @@
                                 <template x-for="(p, idx) in prepTimes" :key="idx">
                                     <div class="p-3 rounded-2xl bg-gray-50/80 border border-gray-100 flex items-center justify-between gap-1.5">
                                         <div class="min-w-0 flex-1">
-                                            <strong class="text-xs font-bold text-navy block truncate" x-text="p.word"></strong>
+                                            <strong class="text-xs font-bold text-navy block break-words leading-tight" x-text="p.word"></strong>
                                             <span class="text-[11px] text-gray-500 leading-snug" x-text="p.meaning"></span>
                                         </div>
                                         <button @click="speak(p.word, 'female')" class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition">
@@ -882,12 +882,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ich mag keinen Fisch.
+                                    <strong>a)</strong> Ich magst kein Fisch.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Ich magst kein Fisch.
+                                    <strong>b)</strong> Ich mag keinen Fisch.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -909,17 +909,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Möchtest du noch einen Kuchen?
+                                    <strong>a)</strong> Möchtet du noch ein Kuchen?
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Möchtet du noch ein Kuchen?
+                                    <strong>b)</strong> Du möchtest noch Kuchen.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Du möchtest noch Kuchen.
+                                    <strong>c)</strong> Möchtest du noch einen Kuchen?
                                 </button>
                             </div>
                         </div>
@@ -963,12 +963,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wir möchten Kaffee trinken.
+                                    <strong>a)</strong> Wir mag Kaffee trinken.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wir mag Kaffee trinken.
+                                    <strong>b)</strong> Wir möchten Kaffee trinken.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1141,10 +1141,10 @@
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil A (Fehlerkorrektur):</strong>
                                 <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (Ich mag keinen Fisch.)</strong>: Konjugasi kata kerja <em>mögen</em> untuk subjek orang pertama tunggal <em>ich</em> adalah <em>mag</em>.</li>
-                                    <li><strong>a (Möchtest du noch einen Kuchen?)</strong>: Bentuk konjugasi kata kerja kesopanan <em>möchten</em> untuk subjek <em>du</em> adalah <em>möchtest</em>.</li>
+                                    <li><strong>b (Ich mag keinen Fisch.)</strong>: Konjugasi kata kerja <em>mögen</em> untuk subjek orang pertama tunggal <em>ich</em> adalah <em>mag</em>.</li>
+                                    <li><strong>c (Möchtest du noch einen Kuchen?)</strong>: Bentuk konjugasi kata kerja kesopanan <em>möchten</em> untuk subjek <em>du</em> adalah <em>möchtest</em>.</li>
                                     <li><strong>a (Er isst morgens ein Müsli.)</strong>: Kata kerja <em>essen</em> mengalami perubahan vokal (<em>e &rarr; i</em>) pada orang ketiga tunggal menjadi <em>er isst</em>.</li>
-                                    <li><strong>a (Wir möchten Kaffee trinken.)</strong>: Bentuk konjugasi kata kerja <em>möchten</em> untuk subjek jamak <em>wir</em> adalah <em>möchten</em>.</li>
+                                    <li><strong>b (Wir möchten Kaffee trinken.)</strong>: Bentuk konjugasi kata kerja <em>möchten</em> untuk subjek jamak <em>wir</em> adalah <em>möchten</em>.</li>
                                 </ol>
                             </div>
                             <div>
@@ -1387,20 +1387,20 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300' : 'bg-red-50/60 border-red-300';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
                     const a5 = (this.answers.q5 || '').trim();
                     if (a5 === 'Morgens isst Lina ein Müsli.' || a5 === 'Lina isst morgens ein Müsli.') score++;
                     if ((this.answers.q6 || '').trim() === 'Möchtet ihr noch einen Kuchen?') score++;
@@ -1659,6 +1659,7 @@
 </body>
 
 </html>
+
 
 
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -404,7 +404,7 @@
                     <template x-for="(item, idx) in transportItems" :key="idx">
                         <div class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                         :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : (item.gender === 'fem' ? 'bg-purple-100 text-purple-800' : 'bg-gray-200 text-gray-800'))"
                                         x-text="item.article || 'Frase'"></span>
@@ -438,7 +438,7 @@
                     <template x-for="(item, idx) in directionItems" :key="idx">
                         <div class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <template x-if="item.article">
                                         <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                             :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'"
@@ -504,7 +504,7 @@
                         <template x-for="(month, idx) in months" :key="idx">
                             <div class="p-3 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-1.5">
                                 <div class="min-w-0 flex-1">
-                                    <div class="text-xs font-extrabold text-navy truncate">
+                                    <div class="text-xs font-extrabold text-navy break-words leading-tight">
                                         <span class="text-blue-600 font-semibold text-[11px]">der </span><span x-text="month.word"></span>
                                     </div>
                                     <div class="text-[11px] text-gray-500 leading-snug" x-text="month.meaning"></div>
@@ -900,12 +900,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> April
+                                    <strong>a)</strong> Mai
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Mai
+                                    <strong>b)</strong> April
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -927,17 +927,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> der Herbst
+                                    <strong>a)</strong> der Winter
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> der Winter
+                                    <strong>b)</strong> der Montag
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> der Montag
+                                    <strong>c)</strong> der Herbst
                                 </button>
                             </div>
                         </div>
@@ -981,12 +981,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> der Januar
+                                    <strong>a)</strong> der August
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> der August
+                                    <strong>b)</strong> der Januar
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1020,17 +1020,17 @@
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> mit dem
+                                    <strong>a)</strong> zu dem
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> zu dem
+                                    <strong>b)</strong> im
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> im
+                                    <strong>c)</strong> mit dem
                                 </button>
                             </div>
                         </div>
@@ -1074,12 +1074,12 @@
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> am
+                                    <strong>a)</strong> im
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> im
+                                    <strong>b)</strong> am
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1101,17 +1101,17 @@
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> zu
+                                    <strong>a)</strong> mit dem
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> mit dem
+                                    <strong>b)</strong> in
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> in
+                                    <strong>c)</strong> zu
                                 </button>
                             </div>
                         </div>
@@ -1159,19 +1159,19 @@
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil A (Chronologische Timeline):</strong>
                                 <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (April)</strong>: Urutan bulan di awal tahun adalah Januari, Februari, Maret, kemudian <em>April</em>.</li>
-                                    <li><strong>a (der Herbst)</strong>: Urutan empat musim dimulai dari musim semi (<em>Frühling</em>), musim panas (<em>Sommer</em>), lalu musim gugur (<em>Herbst</em>).</li>
+                                    <li><strong>b (April)</strong>: Urutan bulan di awal tahun adalah Januari, Februari, Maret, kemudian <em>April</em>.</li>
+                                    <li><strong>c (der Herbst)</strong>: Urutan empat musim dimulai dari musim semi (<em>Frühling</em>), musim panas (<em>Sommer</em>), lalu musim gugur (<em>Herbst</em>).</li>
                                     <li><strong>a (nach rechts ab)</strong>: Petunjuk arah belok kanan menggunakan frasa kata kerja terpisah <em>„...biegen Sie nach rechts ab“</em>.</li>
-                                    <li><strong>a (der Januar)</strong>: Bulan Januari berada di dalam periode musim dingin (<em>im Winter</em>: Desember, Januari, Februari).</li>
+                                    <li><strong>b (der Januar)</strong>: Bulan Januari berada di dalam periode musim dingin (<em>im Winter</em>: Desember, Januari, Februari).</li>
                                 </ol>
                             </div>
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil B (Kategorienschleuder):</strong>
                                 <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (mit dem)</strong>: Mengendarai kereta (<em>der Zug</em>) menggunakan kombinasi preposisi Dativ <em>mit dem Zug</em>.</li>
+                                    <li><strong>c (mit dem)</strong>: Mengendarai kereta (<em>der Zug</em>) menggunakan kombinasi preposisi Dativ <em>mit dem Zug</em>.</li>
                                     <li><strong>a (im)</strong>: Keterangan waktu untuk nama bulan selalu menggunakan preposisi <em>im</em> (<em>im August</em>).</li>
-                                    <li><strong>a (am)</strong>: Keterangan waktu untuk nama hari dalam seminggu menggunakan preposisi <em>am</em> (<em>am Montag</em>).</li>
-                                    <li><strong>a (zu)</strong>: Ungkapan baku dalam bahasa Jerman untuk bepergian dengan berjalan kaki adalah <em>zu Fuß gehen</em>.</li>
+                                    <li><strong>b (am)</strong>: Keterangan waktu untuk nama hari dalam seminggu menggunakan preposisi <em>am</em> (<em>am Montag</em>).</li>
+                                    <li><strong>c (zu)</strong>: Ungkapan baku dalam bahasa Jerman untuk bepergian dengan berjalan kaki adalah <em>zu Fuß gehen</em>.</li>
                                 </ol>
                             </div>
                         </div>
@@ -1333,28 +1333,28 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
-                    if (num === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
+                    if (num === 5) isCorrect = (this.answers.q5 === 'c');
                     if (num === 6) isCorrect = (this.answers.q6 === 'a');
-                    if (num === 7) isCorrect = (this.answers.q7 === 'a');
-                    if (num === 8) isCorrect = (this.answers.q8 === 'a');
+                    if (num === 7) isCorrect = (this.answers.q7 === 'b');
+                    if (num === 8) isCorrect = (this.answers.q8 === 'c');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
-                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
+                    if (this.answers.q5 === 'c') score++;
                     if (this.answers.q6 === 'a') score++;
-                    if (this.answers.q7 === 'a') score++;
-                    if (this.answers.q8 === 'a') score++;
+                    if (this.answers.q7 === 'b') score++;
+                    if (this.answers.q8 === 'c') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
@@ -1603,6 +1603,7 @@
 </body>
 
 </html>
+
 
 
 

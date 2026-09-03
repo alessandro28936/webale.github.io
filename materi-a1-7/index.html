@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -434,11 +434,11 @@
                         <div
                             class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-1.5 mb-1">
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                         :class="item.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (item.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                         x-text="item.article"></span>
-                                    <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                         x-text="item.word"></strong>
                                 </div>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
@@ -471,11 +471,11 @@
                             <div
                                 class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                 <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-1.5 mb-1">
+                                    <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                         <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                             :class="shop.gender === 'fem' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'"
                                             x-text="shop.article"></span>
-                                        <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                             x-text="shop.word"></strong>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-snug" x-text="shop.meaning"></p>
@@ -507,11 +507,11 @@
                             <div
                                 class="p-3.5 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                                 <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-1.5 mb-1">
+                                    <div class="flex items-center flex-wrap gap-1.5 mb-1">
                                         <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"
                                             :class="qty.gender === 'masc' ? 'bg-blue-100 text-blue-800' : (qty.gender === 'neut' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800')"
                                             x-text="qty.article"></span>
-                                        <strong class="text-xs sm:text-sm font-extrabold text-navy truncate"
+                                        <strong class="text-xs sm:text-sm font-extrabold text-navy break-words leading-tight"
                                             x-text="qty.word"></strong>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-snug" x-text="qty.meaning"></p>
@@ -991,12 +991,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ich, bitte. Ich möchte ein Kilo Brot und vier Brötchen.
+                                    <strong>a)</strong> Das Rathaus ist 100 Jahre alt.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Das Rathaus ist 100 Jahre alt.
+                                    <strong>b)</strong> Ich, bitte. Ich möchte ein Kilo Brot und vier Brötchen.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1018,17 +1018,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ja, bitte. Vielen Dank!
+                                    <strong>a)</strong> Nein, ich trinke lieber Tee.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Nein, ich trinke lieber Tee.
+                                    <strong>b)</strong> Es schneit oft im Winter.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Es schneit oft im Winter.
+                                    <strong>c)</strong> Ja, bitte. Vielen Dank!
                                 </button>
                             </div>
                         </div>
@@ -1072,12 +1072,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wir brauchen noch Tomaten, Gurken und Öl.
+                                    <strong>a)</strong> Wir gehen um 8 Uhr ins Bett.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wir gehen um 8 Uhr ins Bett.
+                                    <strong>b)</strong> Wir brauchen noch Tomaten, Gurken und Öl.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1111,17 +1111,17 @@
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> den
+                                    <strong>a)</strong> dem
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> dem
+                                    <strong>b)</strong> der
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> der
+                                    <strong>c)</strong> den
                                 </button>
                             </div>
                         </div>
@@ -1165,12 +1165,12 @@
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> keinen
+                                    <strong>a)</strong> kein
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> kein
+                                    <strong>b)</strong> keinen
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
@@ -1192,17 +1192,17 @@
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> einen
+                                    <strong>a)</strong> ein
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> ein
+                                    <strong>b)</strong> eine
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-medium transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> eine
+                                    <strong>c)</strong> einen
                                 </button>
                             </div>
                         </div>
@@ -1250,19 +1250,19 @@
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil A (Situationsreaktion):</strong>
                                 <ol class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (Ich, bitte. Ich möchte...)</strong>: Respons yang sopan dan natural saat pelayan toko menyapa siapa pelanggan berikutnya yang akan dilayani.</li>
-                                    <li><strong>a (Ja, bitte. Vielen Dank!)</strong>: Cara menerima struk belanja di kasir dengan sopan dan ramah.</li>
+                                    <li><strong>b (Ich, bitte. Ich möchte...)</strong>: Respons yang sopan dan natural saat pelayan toko menyapa siapa pelanggan berikutnya yang akan dilayani.</li>
+                                    <li><strong>c (Ja, bitte. Vielen Dank!)</strong>: Cara menerima struk belanja di kasir dengan sopan dan ramah.</li>
                                     <li><strong>a (200 Gramm kosten 2 Euro 80.)</strong>: Informasi takaran berat barang yang jelas beserta nominal harganya.</li>
-                                    <li><strong>a (Wir brauchen noch Tomaten, Gurken...)</strong>: Kalimat yang tepat untuk menyebutkan bahan makanan yang masih kurang saat membuat selada.</li>
+                                    <li><strong>b (Wir brauchen noch Tomaten, Gurken...)</strong>: Kalimat yang tepat untuk menyebutkan bahan makanan yang masih kurang saat membuat selada.</li>
                                 </ol>
                             </div>
                             <div>
                                 <strong class="text-orange-600 block mb-1">Teil B (Kasus-Transformator Akkusativ):</strong>
                                 <ol start="5" class="list-decimal list-inside space-y-1.5 text-gray-700">
-                                    <li><strong>a (den)</strong>: Kata benda maskulin <em>der Schinken</em> berubah menjadi <em>den Schinken</em> saat berkedudukan sebagai objek langsung (Akkusativ).</li>
+                                    <li><strong>c (den)</strong>: Kata benda maskulin <em>der Schinken</em> berubah menjadi <em>den Schinken</em> saat berkedudukan sebagai objek langsung (Akkusativ).</li>
                                     <li><strong>a (ein)</strong>: Kata benda netral <em>das Glas</em> mempertahankan bentuk artikel tak tentu <em>ein</em> pada kasus Akkusativ.</li>
-                                    <li><strong>a (keinen)</strong>: Kata benda maskulin <em>der Käse</em> berubah menjadi <em>keinen</em> pada bentuk negasi Akkusativ.</li>
-                                    <li><strong>a (einen)</strong>: Kata benda maskulin <em>der Apfel</em> berubah menjadi <em>einen</em> pada artikel tak tentu Akkusativ.</li>
+                                    <li><strong>b (keinen)</strong>: Kata benda maskulin <em>der Käse</em> berubah menjadi <em>keinen</em> pada bentuk negasi Akkusativ.</li>
+                                    <li><strong>c (einen)</strong>: Kata benda maskulin <em>der Apfel</em> berubah menjadi <em>einen</em> pada artikel tak tentu Akkusativ.</li>
                                 </ol>
                             </div>
                         </div>
@@ -1442,28 +1442,28 @@
                 getQuestionClass(num) {
                     if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
                     let isCorrect = false;
-                    if (num === 1) isCorrect = (this.answers.q1 === 'a');
-                    if (num === 2) isCorrect = (this.answers.q2 === 'a');
+                    if (num === 1) isCorrect = (this.answers.q1 === 'b');
+                    if (num === 2) isCorrect = (this.answers.q2 === 'c');
                     if (num === 3) isCorrect = (this.answers.q3 === 'a');
-                    if (num === 4) isCorrect = (this.answers.q4 === 'a');
-                    if (num === 5) isCorrect = (this.answers.q5 === 'a');
+                    if (num === 4) isCorrect = (this.answers.q4 === 'b');
+                    if (num === 5) isCorrect = (this.answers.q5 === 'c');
                     if (num === 6) isCorrect = (this.answers.q6 === 'a');
-                    if (num === 7) isCorrect = (this.answers.q7 === 'a');
-                    if (num === 8) isCorrect = (this.answers.q8 === 'a');
+                    if (num === 7) isCorrect = (this.answers.q7 === 'b');
+                    if (num === 8) isCorrect = (this.answers.q8 === 'c');
 
                     return isCorrect ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-200' : 'bg-red-50/60 border-red-300 ring-1 ring-red-200';
                 },
 
                 checkQuiz() {
                     let score = 0;
-                    if (this.answers.q1 === 'a') score++;
-                    if (this.answers.q2 === 'a') score++;
+                    if (this.answers.q1 === 'b') score++;
+                    if (this.answers.q2 === 'c') score++;
                     if (this.answers.q3 === 'a') score++;
-                    if (this.answers.q4 === 'a') score++;
-                    if (this.answers.q5 === 'a') score++;
+                    if (this.answers.q4 === 'b') score++;
+                    if (this.answers.q5 === 'c') score++;
                     if (this.answers.q6 === 'a') score++;
-                    if (this.answers.q7 === 'a') score++;
-                    if (this.answers.q8 === 'a') score++;
+                    if (this.answers.q7 === 'b') score++;
+                    if (this.answers.q8 === 'c') score++;
 
                     this.quizScore = score;
                     this.showFeedback = true;
@@ -1713,6 +1713,7 @@
 </body>
 
 </html>
+
 
 
 
