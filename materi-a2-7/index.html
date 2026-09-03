@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -958,7 +958,6 @@
                                     <div class="min-w-0 flex-1">
                                         <div class="flex items-center gap-2 mb-1">
                                             <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
                                         </div>
                                         <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
                                         <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
@@ -1011,7 +1010,6 @@
                                     <div class="min-w-0 flex-1">
                                         <div class="flex items-center gap-2 mb-1">
                                             <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
                                         </div>
                                         <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
                                         <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
@@ -1193,12 +1191,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ich bin total nervös, wenn ich eine schwere Prüfung habe.
+                                    <strong>a)</strong> Ich bin total nervös, wenn habe ich eine schwere Prüfung.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Ich bin total nervös, wenn habe ich eine schwere Prüfung.
+                                    <strong>b)</strong> Ich bin total nervös, wenn ich eine schwere Prüfung habe.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1217,17 +1215,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wenn Nils den Marathonlauf gewinnt, bekommt er eine Goldmedaille.
+                                    <strong>a)</strong> Wenn gewinnt Nils den Marathonlauf, er bekommt eine Goldmedaille.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wenn gewinnt Nils den Marathonlauf, er bekommt eine Goldmedaille.
+                                    <strong>b)</strong> Wenn Nils den Marathonlauf gewinnt, er bekommt eine Goldmedaille.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Wenn Nils den Marathonlauf gewinnt, er bekommt eine Goldmedaille.
+                                    <strong>c)</strong> Wenn Nils den Marathonlauf gewinnt, bekommt er eine Goldmedaille.
                                 </button>
                             </div>
                         </div>
@@ -1265,12 +1263,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wenn wir am Wochenende schönes Wetter haben, machen wir einen Ausflug an den See.
+                                    <strong>a)</strong> Wenn haben wir am Wochenende schönes Wetter, machen wir einen Ausflug an den See.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wenn haben wir am Wochenende schönes Wetter, machen wir einen Ausflug an den See.
+                                    <strong>b)</strong> Wenn wir am Wochenende schönes Wetter haben, machen wir einen Ausflug an den See.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1289,17 +1287,17 @@
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.
+                                    <strong>a)</strong> Die Brautleute freuen sich sehr, wenn sehen sie die Hochzeitsfotos.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Die Brautleute freuen sich sehr, wenn sehen sie die Hochzeitsfotos.
+                                    <strong>b)</strong> Die Brautleute sehr freuen sich, wenn sie die Hochzeitsfotos sehen werden.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Die Brautleute sehr freuen sich, wenn sie die Hochzeitsfotos sehen werden.
+                                    <strong>c)</strong> Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.
                                 </button>
                             </div>
                         </div>
@@ -1352,12 +1350,12 @@
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wenn David einen Horrorfilm sieht, hat er Angst.
+                                    <strong>a)</strong> Wenn David einen Horrorfilm sieht, er hat Angst.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wenn David einen Horrorfilm sieht, er hat Angst.
+                                    <strong>b)</strong> Wenn David einen Horrorfilm sieht, hat er Angst.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1379,17 +1377,17 @@
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.
+                                    <strong>a)</strong> Pia und Jan gratulieren Julia und Nils, wenn heiraten sie.
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Pia und Jan gratulieren Julia und Nils, wenn heiraten sie.
+                                    <strong>b)</strong> Pia und Jan gratulieren wenn Julia und Nils sie heiraten.
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Pia und Jan gratulieren wenn Julia und Nils sie heiraten.
+                                    <strong>c)</strong> Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.
                                 </button>
                             </div>
                         </div>
@@ -1439,19 +1437,19 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Satzverbindung mit wenn):</strong>
                             <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>a (Ich bin total nervös, wenn ich eine schwere Prüfung habe.)</strong>: Konjungsi subordinatif <em>wenn</em> mengawali anak kalimat setelah tanda koma, dan kata kerja terkonjugasi <em>habe</em> bergeser ke posisi paling akhir anak kalimat.</li>
-                                <li><strong>a (Wenn Nils den Marathonlauf gewinnt, bekommt er eine Goldmedaille.)</strong>: Ketika kalimat diawali oleh klausa <em>wenn</em>, kata kerja anak kalimat <em>gewinnt</em> berada di ujung klausa sebelum tanda koma, dan kata kerja induk kalimat <em>bekommt</em> menempati urutan pertama induk kalimat tepat setelah tanda koma.</li>
+                                <li><strong>b (Ich bin total nervös, wenn ich eine schwere Prüfung habe.)</strong>: Konjungsi subordinatif <em>wenn</em> mengawali anak kalimat setelah tanda koma, dan kata kerja terkonjugasi <em>habe</em> bergeser ke posisi paling akhir anak kalimat.</li>
+                                <li><strong>c (Wenn Nils den Marathonlauf gewinnt, bekommt er eine Goldmedaille.)</strong>: Ketika kalimat diawali oleh klausa <em>wenn</em>, kata kerja anak kalimat <em>gewinnt</em> berada di ujung klausa sebelum tanda koma, dan kata kerja induk kalimat <em>bekommt</em> menempati urutan pertama induk kalimat tepat setelah tanda koma.</li>
                                 <li><strong>a (Ich bin sehr traurig, wenn meine beste Freundin für ein Jahr ins Ausland fährt.)</strong>: Kata kerja induk kalimat <em>bin</em> berada di Posisi 2 induk kalimat, sedangkan kata kerja anak kalimat <em>fährt</em> menempati posisi paling akhir dari klausa <em>wenn</em>.</li>
-                                <li><strong>a (Wenn wir am Wochenende schönes Wetter haben, machen wir einen Ausflug an den See.)</strong>: Konjungsi <em>wenn</em> menempatkan kata kerja <em>haben</em> di akhir klausa anak kalimat, disusul tanda koma dan kata kerja induk kalimat <em>machen</em> yang berada langsung setelah tanda koma.</li>
-                                <li><strong>a (Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.)</strong>: Kata kerja refleksif <em>freuen sich</em> menempati posisi induk kalimat, sedangkan kata kerja anak kalimat <em>sehen</em> diletakkan di posisi paling belakang setelah objek <em>die Hochzeitsfotos</em>.</li>
+                                <li><strong>b (Wenn wir am Wochenende schönes Wetter haben, machen wir einen Ausflug an den See.)</strong>: Konjungsi <em>wenn</em> menempatkan kata kerja <em>haben</em> di akhir klausa anak kalimat, disusul tanda koma dan kata kerja induk kalimat <em>machen</em> yang berada langsung setelah tanda koma.</li>
+                                <li><strong>c (Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.)</strong>: Kata kerja refleksif <em>freuen sich</em> menempati posisi induk kalimat, sedangkan kata kerja anak kalimat <em>sehen</em> diletakkan di posisi paling belakang setelah objek <em>die Hochzeitsfotos</em>.</li>
                             </ol>
                         </div>
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
                             <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
                                 <li><strong>a (Ich bin glücklich, wenn ich Urlaub habe.)</strong>: Induk kalimat menempatkan kata kerja kopula <em>bin</em> di Posisi 2, diikuti tanda koma dan anak kalimat <em>wenn</em> dengan kata kerja terkonjugasi <em>habe</em> di posisi paling akhir.</li>
-                                <li><strong>a (Wenn David einen Horrorfilm sieht, hat er Angst.)</strong>: Ketika kalimat diawali oleh anak kalimat <em>wenn</em>, kata kerja <em>sieht</em> berada di ujung anak kalimat sebelum koma, dan kata kerja induk kalimat <em>hat</em> diletakkan langsung setelah tanda koma.</li>
-                                <li><strong>a (Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.)</strong>: Kata kerja induk kalimat <em>gratulieren</em> berada di Posisi 2 induk kalimat, dan kata kerja anak kalimat <em>heiraten</em> diletakkan di posisi akhir setelah subjek <em>sie</em>.</li>
+                                <li><strong>b (Wenn David einen Horrorfilm sieht, hat er Angst.)</strong>: Ketika kalimat diawali oleh anak kalimat <em>wenn</em>, kata kerja <em>sieht</em> berada di ujung anak kalimat sebelum koma, dan kata kerja induk kalimat <em>hat</em> diletakkan langsung setelah tanda koma.</li>
+                                <li><strong>c (Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.)</strong>: Kata kerja induk kalimat <em>gratulieren</em> berada di Posisi 2 induk kalimat, dan kata kerja anak kalimat <em>heiraten</em> diletakkan di posisi akhir setelah subjek <em>sie</em>.</li>
                             </ol>
                         </div>
                     </div>
@@ -1663,14 +1661,14 @@
                 },
 
                 correctAnswers: {
-                    q1: 'a',
-                    q2: 'a',
+                    q1: 'b',
+                    q2: 'c',
                     q3: 'a',
-                    q4: 'a',
-                    q5: 'a',
+                    q4: 'b',
+                    q5: 'c',
                     q6: 'a',
-                    q7: 'a',
-                    q8: 'a'
+                    q7: 'b',
+                    q8: 'c'
                 },
 
                 getQuestionClass(qNum) {

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -898,7 +898,6 @@
                                     <div class="min-w-0 flex-1">
                                         <div class="flex items-center gap-2 mb-1">
                                             <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
                                         </div>
                                         <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
                                         <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
@@ -951,7 +950,6 @@
                                     <div class="min-w-0 flex-1">
                                         <div class="flex items-center gap-2 mb-1">
                                             <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                            <span class="text-[10px] text-gray-400 font-semibold" x-text="line.gender === 'male' ? '(Pria)' : '(Wanita)'"></span>
                                         </div>
                                         <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
                                         <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
@@ -1173,12 +1171,12 @@
                                 <button type="button" @click="answers.q1 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.
+                                    <strong>a)</strong> Carla findet es blöd, dass mitteilen manche Leute jede Aktivität im Internet.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q1 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Carla findet es blöd, dass mitteilen manche Leute jede Aktivität im Internet.
+                                    <strong>b)</strong> Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.
                                 </button>
                                 <button type="button" @click="answers.q1 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1197,17 +1195,17 @@
                                 <button type="button" @click="answers.q2 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.
+                                    <strong>a)</strong> Konstantin freut sich sehr, dass haben seine Freunde die Fotos vom Konzert gelikt.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Konstantin freut sich sehr, dass haben seine Freunde die Fotos vom Konzert gelikt.
+                                    <strong>b)</strong> Konstantin freut sich sehr, seine Freunde haben dass die Fotos vom Konzert gelikt.
                                 </button>
                                 <button type="button" @click="answers.q2 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q2 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Konstantin freut sich sehr, seine Freunde haben dass die Fotos vom Konzert gelikt.
+                                    <strong>c)</strong> Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.
                                 </button>
                             </div>
                         </div>
@@ -1245,12 +1243,12 @@
                                 <button type="button" @click="answers.q4 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.
+                                    <strong>a)</strong> Ferdinand ist der Meinung, dass sollen Eltern keine Fotos von ihren kleinen Kindern veröffentlichen.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q4 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Ferdinand ist der Meinung, dass sollen Eltern keine Fotos von ihren kleinen Kindern veröffentlichen.
+                                    <strong>b)</strong> Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.
                                 </button>
                                 <button type="button" @click="answers.q4 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1269,17 +1267,17 @@
                                 <button type="button" @click="answers.q5 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.
+                                    <strong>a)</strong> Markus weiß genau, dass beginnt der neue Film heute um zwanzig Uhr im Kino.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Markus weiß genau, dass beginnt der neue Film heute um zwanzig Uhr im Kino.
+                                    <strong>b)</strong> Markus weiß genau, dass der neue Film heute im Kino um zwanzig Uhr ist beginnen.
                                 </button>
                                 <button type="button" @click="answers.q5 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Markus weiß genau, dass der neue Film heute im Kino um zwanzig Uhr ist beginnen.
+                                    <strong>c)</strong> Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.
                                 </button>
                             </div>
                         </div>
@@ -1332,12 +1330,12 @@
                                 <button type="button" @click="answers.q7 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Konstantin gefällt es, dass er viele Likes bekommen hat.
+                                    <strong>a)</strong> Konstantin gefällt es, dass er hat viele Likes bekommen.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Konstantin gefällt es, dass er hat viele Likes bekommen.
+                                    <strong>b)</strong> Konstantin gefällt es, dass er viele Likes bekommen hat.
                                 </button>
                                 <button type="button" @click="answers.q7 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
@@ -1359,17 +1357,17 @@
                                 <button type="button" @click="answers.q8 = 'a'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Denkst du, dass die Leute im Internet vorsichtiger sein müssen?
+                                    <strong>a)</strong> Denkst du, dass müssen die Leute im Internet vorsichtiger sein?
                                 </button>
                                 <button type="button" @click="answers.q8 = 'b'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Denkst du, dass müssen die Leute im Internet vorsichtiger sein?
+                                    <strong>b)</strong> Denkst du dass, im Internet die Leute vorsichtiger sein müssen?
                                 </button>
                                 <button type="button" @click="answers.q8 = 'c'; saveProgress();"
                                     class="w-full p-3 rounded-xl border text-left font-semibold transition"
                                     :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Denkst du dass, im Internet die Leute vorsichtiger sein müssen?
+                                    <strong>c)</strong> Denkst du, dass die Leute im Internet vorsichtiger sein müssen?
                                 </button>
                             </div>
                         </div>
@@ -1419,19 +1417,19 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil A (Satzverbindung mit dass):</strong>
                             <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>a (Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.)</strong>: Induk kalimat dipisahkan tanda koma, konjungsi <em>dass</em> diletakkan di awal anak kalimat, dan kata kerja terpisah yang mengalami konjugasi (<em>mitteilen</em>) bergeser secara utuh ke posisi paling akhir kalimat.</li>
-                                <li><strong>a (Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.)</strong>: Kata kerja bantu terkonjugasi <em>haben</em> diletakkan di posisi paling akhir anak kalimat setelah bentuk Partizip II <em>gelikt</em>.</li>
+                                <li><strong>b (Carla findet es blöd, dass manche Leute jede Aktivität im Internet mitteilen.)</strong>: Induk kalimat dipisahkan tanda koma, konjungsi <em>dass</em> diletakkan di awal anak kalimat, dan kata kerja terpisah yang mengalami konjugasi (<em>mitteilen</em>) bergeser secara utuh ke posisi paling akhir kalimat.</li>
+                                <li><strong>c (Konstantin freut sich sehr, dass seine Freunde die Fotos vom Konzert gelikt haben.)</strong>: Kata kerja bantu terkonjugasi <em>haben</em> diletakkan di posisi paling akhir anak kalimat setelah bentuk Partizip II <em>gelikt</em>.</li>
                                 <li><strong>a (Nadica berichtet, dass ein Kollege durch ein Foto seinen Job verloren hat.)</strong>: Konjungsi <em>dass</em> mengawali anak kalimat dan kata kerja bantu terkonjugasi <em>hat</em> menempati posisi paling belakang setelah partisip <em>verloren</em>.</li>
-                                <li><strong>a (Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.)</strong>: Kata kerja modal terkonjugasi <em>sollen</em> ditempatkan di posisi paling akhir anak kalimat setelah kata kerja utama dalam bentuk infinitif <em>veröffentlichen</em>.</li>
-                                <li><strong>a (Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.)</strong>: Kata kerja utama yang mengalami konjugasi <em>beginnt</em> bergeser ke posisi paling akhir anak kalimat setelah seluruh keterangan waktu dan tempat.</li>
+                                <li><strong>b (Ferdinand ist der Meinung, dass Eltern keine Fotos von ihren kleinen Kindern veröffentlichen sollen.)</strong>: Kata kerja modal terkonjugasi <em>sollen</em> ditempatkan di posisi paling akhir anak kalimat setelah kata kerja utama dalam bentuk infinitif <em>veröffentlichen</em>.</li>
+                                <li><strong>c (Markus weiß genau, dass der neue Film heute um zwanzig Uhr im Kino beginnt.)</strong>: Kata kerja utama yang mengalami konjugasi <em>beginnt</em> bergeser ke posisi paling akhir anak kalimat setelah seluruh keterangan waktu dan tempat.</li>
                             </ol>
                         </div>
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
                             <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
                                 <li><strong>a (Ich finde, dass der Film sehr spannend ist.)</strong>: Kata kerja induk kalimat <em>finde</em> menempati Posisi 2, diikuti tanda koma dan klausa <em>dass</em> dengan kata kerja kopula <em>ist</em> di posisi paling akhir.</li>
-                                <li><strong>a (Konstantin gefällt es, dass er viele Likes bekommen hat.)</strong>: Klausa induk memuat kata kerja <em>gefällt</em>, diikuti tanda koma dan anak kalimat <em>dass</em> dengan kata kerja bantu <em>hat</em> di akhir kalimat setelah objek dan Partizip II <em>bekommen</em>.</li>
-                                <li><strong>a (Denkst du, dass die Leute im Internet vorsichtiger sein müssen?)</strong>: Dalam kalimat tanya Ya/Tidak (<em>Ja/Nein-Frage</em>), kata kerja induk kalimat <em>denkst</em> berada di Posisi 1, diikuti subjek <em>du</em>, tanda koma, serta anak kalimat <em>dass</em> dengan Modalverb <em>müssen</em> di urutan paling belakang setelah infinitif kopula <em>sein</em>.</li>
+                                <li><strong>b (Konstantin gefällt es, dass er viele Likes bekommen hat.)</strong>: Klausa induk memuat kata kerja <em>gefällt</em>, diikuti tanda koma dan anak kalimat <em>dass</em> dengan kata kerja bantu <em>hat</em> di akhir kalimat setelah objek dan Partizip II <em>bekommen</em>.</li>
+                                <li><strong>c (Denkst du, dass die Leute im Internet vorsichtiger sein müssen?)</strong>: Dalam kalimat tanya Ya/Tidak (<em>Ja/Nein-Frage</em>), kata kerja induk kalimat <em>denkst</em> berada di Posisi 1, diikuti subjek <em>du</em>, tanda koma, serta anak kalimat <em>dass</em> dengan Modalverb <em>müssen</em> di urutan paling belakang setelah infinitif kopula <em>sein</em>.</li>
                             </ol>
                         </div>
                     </div>
@@ -1647,14 +1645,14 @@
                 },
 
                 correctAnswers: {
-                    q1: 'a',
-                    q2: 'a',
+                    q1: 'b',
+                    q2: 'c',
                     q3: 'a',
-                    q4: 'a',
-                    q5: 'a',
+                    q4: 'b',
+                    q5: 'c',
                     q6: 'a',
-                    q7: 'a',
-                    q8: 'a'
+                    q7: 'b',
+                    q8: 'c'
                 },
 
                 getQuestionClass(qNum) {
