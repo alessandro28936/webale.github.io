@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -523,8 +523,9 @@
                                             <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="phrase.de"></strong>
                                             <span class="text-[11px] text-gray-500" x-text="phrase.id"></span>
                                         </div>
-                                        <button @click="speak(phrase.de, 'male')"
-                                            class="p-1 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition flex-shrink-0">
+                                        <button @click="playSurpriseAudio(phrase)"
+                                            class="p-1 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition flex-shrink-0"
+                                            :title="'Dengarkan ' + phrase.de">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
@@ -865,18 +866,10 @@
                             <template x-for="(line, idx) in dialog1Lines" :key="idx">
                                 <div class="p-4 rounded-2xl border transition"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                                    <div class="flex items-center justify-between mb-1.5">
+                                    <div class="mb-1.5">
                                         <span class="text-xs font-extrabold"
                                             :class="line.speaker === 'Jonas' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 transition shadow-2xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
                                     <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
@@ -912,18 +905,10 @@
                             <template x-for="(line, idx) in dialog2Lines" :key="idx">
                                 <div class="p-4 rounded-2xl border transition"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
-                                    <div class="flex items-center justify-between mb-1.5">
+                                    <div class="mb-1.5">
                                         <span class="text-xs font-extrabold"
                                             :class="line.speaker === 'Leon' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-blue-600 transition shadow-2xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
                                     <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
@@ -951,20 +936,9 @@
 
             <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-100 shadow-sm">
                 <!-- Header Bacaan -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-100">
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-navy">Schule: Eine schöne Zeit? Erinnerungen auf der Schulplattform</h3>
-                        <p class="text-xs text-gray-500 mt-1">Ehemalige Schülerinnen und Schüler einer Gesamtschule berichten über ihre Schulzeit.</p>
-                    </div>
-                    <button @click="readFullText()"
-                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition self-start sm:self-auto flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                :d="isReadingText ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
-                            </path>
-                        </svg>
-                        <span x-text="isReadingText ? 'Hentikan Narasi' : 'Dengarkan Seluruh Teks'"></span>
-                    </button>
+                <div class="pb-6 mb-8 border-b border-gray-100">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-navy">Schule: Eine schöne Zeit? Erinnerungen auf der Schulplattform</h3>
+                    <p class="text-xs text-gray-500 mt-1">Ehemalige Schülerinnen und Schüler einer Gesamtschule berichten über ihre Schulzeit.</p>
                 </div>
 
                 <!-- 4 Kontributor Teks Grid -->
@@ -976,11 +950,13 @@
                                 <strong class="text-sm font-extrabold text-navy block">Ole Jansen</strong>
                                 <span class="text-[11px] text-orange-700 font-semibold">Schulzeit 2005–2014</span>
                             </div>
-                            <button @click="speak('Ich wollte als Schüler immer schnell erwachsen sein. Das verstehe ich jetzt gar nicht mehr! In der Schule hatte ich so viel Freizeit und sechs Wochen Sommerferien. Da musste man im Sommer nichts für die Schule machen und konnte jeden Tag mit Freunden ins Schwimmbad fahren.', 'male')"
-                                class="p-1.5 rounded-xl bg-white text-orange-600 border border-orange-200 shadow-2xs hover:bg-orange-50 transition">
+                            <button @click="playLesetext(1)"
+                                class="p-1.5 rounded-xl border shadow-2xs transition"
+                                :class="activeLesetextPlaying === 1 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-orange-600 border-orange-200 hover:bg-orange-50'"
+                                title="Putar Audio Ole Jansen">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        :d="activeLesetextPlaying === 1 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                     </path>
                                 </svg>
                             </button>
@@ -997,11 +973,13 @@
                                 <strong class="text-sm font-extrabold text-navy block">Sybille Michel</strong>
                                 <span class="text-[11px] text-blue-700 font-semibold">Schulzeit 1996–2002</span>
                             </div>
-                            <button @click="speak('Wer kennt noch unsere Englischlehrerin Frau Lindner? Wir sollten jeden Tag 30 Wörter auswendig lernen und mussten jede Woche einen Vokabeltest schreiben. Man durfte keine Fehler machen, sonst war sie sofort wütend. Aber zum Glück waren die anderen Lehrer sehr nett und der Unterricht hat meistens Spaß gemacht.', 'female')"
-                                class="p-1.5 rounded-xl bg-white text-blue-600 border border-blue-200 shadow-2xs hover:bg-blue-50 transition">
+                            <button @click="playLesetext(2)"
+                                class="p-1.5 rounded-xl border shadow-2xs transition"
+                                :class="activeLesetextPlaying === 2 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'"
+                                title="Putar Audio Sybille Michel">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        :d="activeLesetextPlaying === 2 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                     </path>
                                 </svg>
                             </button>
@@ -1018,11 +996,13 @@
                                 <strong class="text-sm font-extrabold text-navy block">Nael Sanchez</strong>
                                 <span class="text-[11px] text-emerald-700 font-semibold">Schulzeit 2003–2012</span>
                             </div>
-                            <button @click="speak('Ich habe früher auf dem Land gewohnt. Deshalb musste ich jeden Schultag schon um sechs Uhr morgens aufstehen und mit dem Bus um sieben Uhr zur Schule fahren. Das war furchtbar! Jetzt an der Universität kann ich wenigstens an zwei Tagen pro Woche ausschlafen.', 'male')"
-                                class="p-1.5 rounded-xl bg-white text-emerald-600 border border-emerald-200 shadow-2xs hover:bg-emerald-50 transition">
+                            <button @click="playLesetext(3)"
+                                class="p-1.5 rounded-xl border shadow-2xs transition"
+                                :class="activeLesetextPlaying === 3 ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-emerald-600 border-emerald-200 hover:bg-emerald-50'"
+                                title="Putar Audio Nael Sanchez">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        :d="activeLesetextPlaying === 3 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                     </path>
                                 </svg>
                             </button>
@@ -1039,11 +1019,13 @@
                                 <strong class="text-sm font-extrabold text-navy block">Kati Grubens</strong>
                                 <span class="text-[11px] text-purple-700 font-semibold">Schulzeit 1993–2000</span>
                             </div>
-                            <button @click="speak('Ich denke sehr gern an meine Schulzeit zurück. Die Klassenarbeiten waren manchmal stressig, aber die Gemeinschaft war toll. Wir hatten viele AGs und konnten am Nachmittag Theater spielen oder Musik machen. Mit vielen Freunden aus dieser Zeit habe ich heute immer noch regelmäßigen Kontakt.', 'female')"
-                                class="p-1.5 rounded-xl bg-white text-purple-600 border border-purple-200 shadow-2xs hover:bg-purple-50 transition">
+                            <button @click="playLesetext(4)"
+                                class="p-1.5 rounded-xl border shadow-2xs transition"
+                                :class="activeLesetextPlaying === 4 ? 'bg-purple-600 text-white border-purple-600' : 'bg-white text-purple-600 border-purple-200 hover:bg-purple-50'"
+                                title="Putar Audio Kati Grubens">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        :d="activeLesetextPlaying === 4 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                     </path>
                                 </svg>
                             </button>
@@ -1537,10 +1519,10 @@
 
                 // Redemittel Phrases
                 phrasesSurprise: [
-                    { de: 'Ach, nee!', id: 'Ah, tidak mungkin! / Masa sih!' },
-                    { de: 'Echt?', id: 'Benarkah?' },
-                    { de: 'Ehrlich?', id: 'Sungguh?' },
-                    { de: 'Ach, komm!', id: 'Ah, yang benar saja!' }
+                    { de: 'Ach, nee!', id: 'Ah, tidak mungkin! / Masa sih!', audio: 'Ach, nee!.mp3', audioWav: 'Ach, nee!.wav' },
+                    { de: 'Echt?', id: 'Benarkah?', audio: 'echt!.mp3', audioWav: 'echt!.wav' },
+                    { de: 'Ehrlich?', id: 'Sungguh?', audio: 'Ehrlich.mp3', audioWav: 'Ehrlich.wav' },
+                    { de: 'Ach, komm!', id: 'Ah, yang benar saja!', audio: 'Ach, komm!.mp3', audioWav: 'Ach, komm!.wav' }
                 ],
 
                 phrasesSchool: [
@@ -1720,56 +1702,163 @@
                     window.speechSynthesis.speak(utterance);
                 },
 
+                isPlayingFullDialog: false,
+                activeDialogPlaying: null,
+                currentSpeakingIndex: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
+
+                activeLesetextPlaying: null,
+                lesetextAudios: {},
+                surpriseAudios: {},
+
                 playFullDialog(dialogNum) {
+                    this.stopLesetextAudio();
                     if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                        this.stopPlayingDialog();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
 
-                    const playLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-3-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-3-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-3-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog1Audio = altAudio;
+                            });
                         }
-
-                        this.currentSpeakingIndex = index;
-                        const line = lines[index];
-                        this.speak(line.text, line.gender, () => {
-                            setTimeout(() => {
-                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                                    playLine(index + 1);
-                                }
-                            }, 500);
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
                         });
-                    };
-
-                    playLine(0);
-                },
-
-                readFullText() {
-                    if (this.isReadingText) {
-                        window.speechSynthesis.cancel();
-                        this.isReadingText = false;
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
-                    this.isReadingText = true;
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-3-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-3-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-3-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog2Audio = altAudio;
+                            });
+                        }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
 
-                    const fullText = "Schule: Eine schöne Zeit? Auf der Internetplattform einer Gesamtschule schreiben ehemalige Schülerinnen und Schüler über ihre Erfahrungen und Erinnerungen an die Schulzeit. Ole Jansen: Ich wollte als Schüler immer schnell erwachsen sein. Das verstehe ich jetzt gar nicht mehr! In der Schule hatte ich so viel Freizeit und sechs Wochen Sommerferien. Da musste man im Sommer nichts für die Schule machen und konnte jeden Tag mit Freunden ins Schwimmbad fahren. Sybille Michel: Wer kennt noch unsere Englischlehrerin Frau Lindner? Wir sollten jeden Tag 30 Wörter auswendig lernen und mussten jede Woche einen Vokabeltest schreiben. Man durfte keine Fehler machen, sonst war sie sofort wütend. Aber zum Glück waren die anderen Lehrer sehr nett und der Unterricht hat meistens Spaß gemacht. Nael Sanchez: Ich habe früher auf dem Land gewohnt. Deshalb musste ich jeden Schultag schon um sechs Uhr morgens aufstehen und mit dem Bus um sieben Uhr zur Schule fahren. Das war furchtbar! Jetzt an der Universität kann ich wenigstens an zwei Tagen pro Woche ausschlafen. Kati Grubens: Ich denke sehr gern an meine Schulzeit zurück. Die Klassenarbeiten waren manchmal stressig, aber die Gemeinschaft war toll. Wir hatten viele AGs und konnten am Nachmittag Theater spielen oder Musik machen. Mit vielen Freunden aus dieser Zeit habe ich heute immer noch regelmäßigen Kontakt.";
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
 
-                    this.speak(fullText, 'female', () => {
-                        this.isReadingText = false;
+                playLesetext(num) {
+                    this.stopPlayingDialog();
+                    if (this.activeLesetextPlaying === num) {
+                        this.stopLesetextAudio();
+                        return;
+                    }
+
+                    this.stopLesetextAudio();
+                    this.activeLesetextPlaying = num;
+
+                    const mp3File = `Lesetext${num}-Pertemuan-3-materi-a2-1.mp3`;
+                    const wavFile = `Lesetext${num}-Pertemuan-3-materi-a2-1.wav`;
+
+                    if (!this.lesetextAudios[num]) {
+                        const audio = new Audio(mp3File);
+                        audio.addEventListener('ended', () => {
+                            this.stopLesetextAudio();
+                        });
+                        audio.addEventListener('error', () => {
+                            console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
+                            const altAudio = new Audio(wavFile);
+                            altAudio.addEventListener('ended', () => {
+                                this.stopLesetextAudio();
+                            });
+                            altAudio.play().catch(() => this.stopLesetextAudio());
+                            this.lesetextAudios[num] = altAudio;
+                        });
+                        this.lesetextAudios[num] = audio;
+                    }
+
+                    this.lesetextAudios[num].currentTime = 0;
+                    this.lesetextAudios[num].play().catch(err => {
+                        console.error(`Audio playback error Lesetext ${num}:`, err);
+                        this.stopLesetextAudio();
+                    });
+                },
+
+                stopLesetextAudio() {
+                    this.activeLesetextPlaying = null;
+                    Object.values(this.lesetextAudios).forEach(audio => {
+                        if (audio) {
+                            audio.pause();
+                            audio.currentTime = 0;
+                        }
+                    });
+                },
+
+                playSurpriseAudio(phrase) {
+                    this.stopPlayingDialog();
+                    this.stopLesetextAudio();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+
+                    const audioKey = phrase.de;
+                    if (!this.surpriseAudios[audioKey]) {
+                        const audio = new Audio(phrase.audio);
+                        audio.addEventListener('error', () => {
+                            const altAudio = new Audio(phrase.audioWav);
+                            altAudio.play().catch(() => {
+                                this.speak(phrase.de, 'male');
+                            });
+                            this.surpriseAudios[audioKey] = altAudio;
+                        });
+                        this.surpriseAudios[audioKey] = audio;
+                    }
+
+                    this.surpriseAudios[audioKey].currentTime = 0;
+                    this.surpriseAudios[audioKey].play().catch(() => {
+                        this.speak(phrase.de, 'male');
                     });
                 },
 
