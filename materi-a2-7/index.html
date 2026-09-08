@@ -96,7 +96,10 @@
         });
 
         document.addEventListener('selectstart', function (e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            const targetEl = e.target.nodeType === 3 ? e.target.parentElement : e.target;
+            const isSelectable = targetEl && targetEl.closest && targetEl.closest('.selectable-text');
+            if (!isInput && !isSelectable) {
                 e.preventDefault();
             }
         });
@@ -137,6 +140,14 @@
             -moz-user-select: auto;
             -ms-user-select: auto;
             user-select: auto;
+        }
+
+        .selectable-text,
+        .selectable-text * {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
         }
 
         [x-cloak] {
@@ -283,7 +294,7 @@
                         Lebensereignisse und Gefühle: Nebensätze mit wenn
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
-                        Mempelajari cara mendeskripsikan peristiwa-peristiwa penting dalam kehidupan (<em>besondere Lebensereignisse</em>), mengekspresikan ragam suasana hati dan kondisi emosional (<em>Gefühle und Emotionen</em>), menguasai pembentukan anak kalimat pengandaian dan waktu (<em>Nebensatz mit wenn</em>), menyusun kartu ucapan dan ucapan terima kasih (<em>Glückwünsche und Dankeskarten</em>), serta membandingkan tradisi perayaan di Jerman dan Indonesia.
+                        Ceritakan momen penting dalam hidup dan jelaskan apa yang kamu rasakan menggunakan kalimat dengan kata penghubung <em>wenn</em>.
                     </p>
 
                     <!-- Meta Tags -->
@@ -423,9 +434,20 @@
 
             <!-- Subtopik A: Peristiwa Penting dalam Kehidupan -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <div class="mb-6 pb-4 border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-navy">A. Peristiwa Penting dalam Kehidupan (Besondere Lebensereignisse)</h3>
-                    <p class="text-xs text-gray-500">Momen-momen berharga seperti pernikahan, hari pertama sekolah, kelahiran bayi, kelulusan ujian, hingga kejuaraan olahraga.</p>
+                <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">A. Peristiwa Penting dalam Kehidupan (Besondere Lebensereignisse)</h3>
+                        <p class="text-xs text-gray-500">Momen-momen berharga seperti pernikahan, hari pertama sekolah, kelahiran bayi, kelulusan ujian, hingga kejuaraan olahraga.</p>
+                    </div>
+                    <button type="button" @click="showPluralForms = !showPluralForms"
+                        class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                        :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                    </button>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -448,6 +470,12 @@
                                     <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
                                 </div>
                                 <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                                <template x-if="item.plural && showPluralForms">
+                                    <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                        <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                        <span class="font-bold text-navy" x-text="item.plural"></span>
+                                    </div>
+                                </template>
                             </div>
                             <button @click="speak(item.speakWord || item.word, 'female')"
                                 class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -504,9 +532,20 @@
 
             <!-- Subtopik C: Kartu Ucapan dan Balasan -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <div class="mb-6 pb-4 border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-navy">C. Kartu Ucapan dan Balasan (Karten und Grüße)</h3>
-                    <p class="text-xs text-gray-500">Istilah kartu undangan, ucapan selamat, surat terima kasih, kado perayaan, serta verba terkait.</p>
+                <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">C. Kartu Ucapan dan Balasan (Karten und Grüße)</h3>
+                        <p class="text-xs text-gray-500">Istilah kartu undangan, ucapan selamat, surat terima kasih, kado perayaan, serta verba terkait.</p>
+                    </div>
+                    <button type="button" @click="showPluralForms = !showPluralForms"
+                        class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                        :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                    </button>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -529,6 +568,12 @@
                                     <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
                                 </div>
                                 <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                                <template x-if="item.plural && showPluralForms">
+                                    <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                        <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                        <span class="font-bold text-navy" x-text="item.plural"></span>
+                                    </div>
+                                </template>
                             </div>
                             <button @click="speak(item.speakWord || item.word, 'female')"
                                 class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -949,28 +994,18 @@
                     <template x-for="(line, idx) in dialog1" :key="idx">
                         <div class="p-4 rounded-2xl border transition"
                             :class="(activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start justify-between gap-3">
-                                <div class="flex items-start gap-3 min-w-0 flex-1">
-                                    <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                        :class="line.speaker === 'Julia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
-                                        x-text="line.speaker === 'Julia' ? 'J' : 'N'">
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <div class="flex items-center gap-2 mb-1">
-                                            <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                        </div>
-                                        <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
-                                        <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
-                                    </div>
+                            <div class="flex items-start gap-3 min-w-0">
+                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
+                                    :class="line.speaker === 'Julia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
+                                    x-text="line.speaker === 'Julia' ? 'J' : 'N'">
                                 </div>
-                                <button @click="speak(line.de, line.gender)"
-                                    class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-2xs transition flex-shrink-0">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                        </path>
-                                    </svg>
-                                </button>
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
+                                    <p class="text-xs text-gray-500 italic selectable-text" x-text="line.id"></p>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -1001,28 +1036,18 @@
                     <template x-for="(line, idx) in dialog2" :key="idx">
                         <div class="p-4 rounded-2xl border transition"
                             :class="(activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start justify-between gap-3">
-                                <div class="flex items-start gap-3 min-w-0 flex-1">
-                                    <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                        :class="line.speaker === 'Pia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
-                                        x-text="line.speaker === 'Pia' ? 'P' : 'J'">
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <div class="flex items-center gap-2 mb-1">
-                                            <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                        </div>
-                                        <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1" x-text="line.de"></p>
-                                        <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
-                                    </div>
+                            <div class="flex items-start gap-3 min-w-0">
+                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
+                                    :class="line.speaker === 'Pia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
+                                    x-text="line.speaker === 'Pia' ? 'P' : 'J'">
                                 </div>
-                                <button @click="speak(line.de, line.gender)"
-                                    class="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-300 shadow-2xs transition flex-shrink-0">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                        </path>
-                                    </svg>
-                                </button>
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
+                                    <p class="text-xs text-gray-500 italic selectable-text" x-text="line.id"></p>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -1045,21 +1070,10 @@
             </div>
 
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
-                <!-- Header with Title & Read Audio Button -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Karten und Grüße zu besonderen Anlässen: Drei Beispiele zur Hochzeit</h3>
-                        <p class="text-xs text-gray-500">Kartu terima kasih pengantin, kartu ucapan & pembatalan hadir teman, serta ucapan selamat dari tamu.</p>
-                    </div>
-                    <button @click="toggleReadLesetext()"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                            </path>
-                        </svg>
-                        <span x-text="isReadingLesetext ? 'Hentikan Audio Narasi' : 'Dengarkan Seluruh Teks'"></span>
-                    </button>
+                <!-- Header with Title -->
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-base sm:text-lg font-bold text-navy">Karten und Grüße zu besonderen Anlässen: Drei Beispiele zur Hochzeit</h3>
+                    <p class="text-xs text-gray-500">Kartu terima kasih pengantin, kartu ucapan & pembatalan hadir teman, serta ucapan selamat dari tamu.</p>
                 </div>
 
                 <!-- 3 Cards Grid -->
@@ -1073,7 +1087,7 @@
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                                 </button>
                             </div>
-                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3">
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
                                 „Ein Traum in Weiß! Blumen, viele herzliche Glückwünsche, wunderbare Geschenke, Freunde, Spaß und Musik: Unsere Hochzeit war ein unvergesslicher Tag. Wir möchten uns von ganzem Herzen für all die lieben Wünsche und die Unterstützung bedanken. Wenn wir an diesen Tag zurückdenken, sind wir überglücklich.“
                             </p>
                             <p class="text-xs font-bold text-navy">Herzliche Grüße, Julia und Nils</p>
@@ -1089,7 +1103,7 @@
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                                 </button>
                             </div>
-                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3">
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
                                 „Liebe Julia, lieber Nils, wie schön, ihr heiratet! Tausend Dank für die Einladung zu eurer Hochzeit. Leider können wir nicht zu eurem Fest kommen, weil wir zu dieser Zeit schon im Urlaub sind. Wir bedauern das sehr. Wenn wir aus Spanien zurückkommen, besuchen wir euch sofort. Wir gratulieren euch von ganzem Herzen und wünschen euch alles Gute für die gemeinsame Zukunft!“
                             </p>
                             <p class="text-xs font-bold text-navy">Herzliche Grüße, Pia und Jan</p>
@@ -1105,7 +1119,7 @@
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                                 </button>
                             </div>
-                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3">
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
                                 „Liebes Brautpaar, herzlichen Glückwunsch zur Hochzeit! Wir freuen uns sehr, dass wir diesen besonderen Moment heute mit euch feiern können. Für euren gemeinsamen Lebensweg wünschen wir euch Gesundheit, Freude und viel Liebe. Wenn zwei Menschen so gut zusammenpassen wie ihr, wird die Zukunft wunderschön!“
                             </p>
                             <p class="text-xs font-bold text-navy">Alles Liebe, eure Freunde Anna und David</p>
@@ -1137,6 +1151,279 @@
                             <p class="leading-relaxed">„Pasangan Pengantin yang Terkasih, selamat atas pernikahan kalian! Kami sangat gembira dapat merayakan momen istimewa ini bersama kalian hari ini. Untuk perjalanan hidup bersama kalian, kami mendoakan kesehatan, kebahagiaan, dan limpahan cinta. Jika dua insan begitu serasi seperti kalian berdua, masa depan akan menjadi sangat indah! Penuh cinta, sahabat kalian Anna dan David“</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- MODUL INTERAKTIF: LESEVERSTEHEN-CHECK (4 SOAL CEFR A2)   -->
+                <!-- ========================================================= -->
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Leseverstehen-Check</span>
+                            <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">Uji Pemahaman Membaca (Leseverstehen)</h4>
+                            <p class="text-xs text-gray-500">Jawablah pertanyaan berdasarkan isi ketiga kartu ucapan pernikahan di atas.</p>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl border transition shadow-2xs self-start sm:self-auto"
+                            :class="leseScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (leseScore >= 3 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                            <span class="text-xs font-bold"
+                                :class="leseScore === null ? 'text-orange-900/80' : (leseScore >= 3 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Bacaan:</span>
+                            <span class="text-sm sm:text-base font-extrabold"
+                                :class="leseScore === null ? 'text-orange-600' : (leseScore >= 3 ? 'text-emerald-700' : 'text-amber-700')"
+                                x-text="leseScore !== null ? `${leseScore} / 4` : '- / 4'">- / 4</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Soal 1: Wer hat das geschrieben? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Wer hat das geschrieben?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Unsere Hochzeit war ein unvergesslicher Tag. Wenn wir an diesen Tag zurückdenken, sind wir überglücklich.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="leseAnswers.q1 = 'julia_nils'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'julia_nils' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Julia und Nils
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'pia_jan'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'pia_jan' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Pia und Jan
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'anna_david'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'anna_david' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Anna und David
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2: Richtig oder Falsch? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Pia und Jan können nicht zur Hochzeit kommen, weil sie zu dieser Zeit schon im Urlaub in Spanien sind.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q2 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q2 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3: Wer hat das geschrieben? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Wer hat das geschrieben?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Wenn zwei Menschen so gut zusammenpassen wie ihr, wird die Zukunft wunderschön!“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                                <button type="button" @click="leseAnswers.q3 = 'julia_nils'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'julia_nils' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Julia und Nils
+                                </button>
+                                <button type="button" @click="leseAnswers.q3 = 'pia_jan'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'pia_jan' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Pia und Jan
+                                </button>
+                                <button type="button" @click="leseAnswers.q3 = 'anna_david'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'anna_david' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Anna und David
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4: Richtig oder Falsch? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Pia und Jan möchten das Brautpaar erst im nächsten Jahr nach ihrer Rückkehr besuchen.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q4 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Leseverstehen -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-5 mt-5 border-t border-gray-100">
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                            <button type="button" @click="checkLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-98 text-white font-bold text-xs shadow-sm transition flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Periksa Pemahaman</span>
+                            </button>
+                            <button type="button" @click="resetLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-98 text-gray-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" @click="showLeseKey = !showLeseKey"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-98 text-blue-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <span x-text="showLeseKey ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan'"></span>
+                                <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200" :class="showLeseKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pembahasan Accordion -->
+                    <div x-show="showLeseKey" x-collapse class="mt-4 p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2" x-cloak>
+                        <h5 class="font-bold text-navy border-b border-gray-200 pb-1.5">Pembahasan Leseverstehen:</h5>
+                        <ul class="space-y-1.5 list-disc list-inside">
+                            <li><strong>1 (Julia und Nils)</strong>: Julia dan Nils menulis kartu ucapan terima kasih (Dankeskarte) kepada para tamu undangan atas hadiah, doa baik, dan kehadiran mereka pada hari pernikahan yang tak terlupakan.</li>
+                            <li><strong>2 (Richtig)</strong>: Pernyataan tersebut benar. Pia dan Jan menulis kartu pembatalan hadir (Absage) karena pada saat pesta pernikahan digelar, mereka berdua sudah berada di Spanyol untuk berlibur.</li>
+                            <li><strong>3 (Anna und David)</strong>: Kutipan doa tersebut ditulis oleh Anna dan David dalam kartu ucapan selamat pernikahan (Glückwunsch von Gästen) untuk Julia dan Nils.</li>
+                            <li><strong>4 (Falsch)</strong>: Pernyataan tersebut salah. Dalam kartu B, Pia dan Jan menegaskan bahwa mereka akan segera mengunjungi pasangan pengantin begitu mereka kembali dari Spanyol (<em>„Wenn wir aus Spanien zurückkommen, besuchen wir euch sofort“</em>).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- KOTAK KOMENTAR SISWA (Freies Schreiben: Kommentare)       -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="mb-4">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Freies Schreiben</span>
+                        <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                            Und du? Welche Feste feierst du am liebsten? (Schreib einen kurzen Kommentar!)
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-0.5">
+                            Bagikan momen perayaan favoritmu (3–5 kalimat), misalnya pesta ulang tahun, pernikahan teman, atau hari raya. Gunakan anak kalimat pengandaian atau waktu dengan konjungsi <em>wenn</em> (z.B. <em>Wenn ich ein Fest feiere, ... / Ich freue mich immer sehr, wenn ...</em>).
+                        </p>
+                    </div>
+
+                    <!-- Click-to-Insert Redemittel Chips -->
+                    <div class="mb-3.5">
+                        <div class="text-[11px] font-bold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Klik frasa pembuka (Redemittel) di bawah ini untuk menempelkan kalimat ke kolom komentar:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" @click="insertRedemittel('Wenn ich ein Fest feiere, ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Wenn ich ein Fest feiere, ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ich freue mich immer sehr, wenn ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich freue mich immer sehr, wenn ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Am liebsten feiere ich, wenn ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Am liebsten feiere ich, wenn ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Wenn Freunde heiraten, ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Wenn Freunde heiraten, ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ich fühle mich besonders glücklich, wenn ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich fühle mich besonders glücklich, wenn ...“
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Textarea & Action Bar -->
+                    <div class="relative">
+                        <textarea x-model="studentComment" rows="4"
+                            placeholder="Schreib deinen Kommentar hier... z.B. Wenn ich ein Fest feiere, lade ich immer alle meine guten Freunde ein. Ich freue mich besonders, wenn wir zusammen lachen und Musik hören..."
+                            class="w-full p-4 rounded-2xl bg-white border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-navy text-xs sm:text-sm font-medium transition resize-y shadow-xs"
+                            @input="saveProgress()"></textarea>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mt-2.5">
+                            <div class="text-[11px] text-gray-500 flex items-center gap-2">
+                                <span x-text="`${studentComment.trim() ? studentComment.trim().split(/\s+/).length : 0} kata`"></span>
+                                <span class="text-gray-300">•</span>
+                                <span x-text="`${studentComment.length} karakter`"></span>
+                                <template x-if="commentLastSaved">
+                                    <span class="text-emerald-600 font-semibold" x-text="`• Tersimpan ${commentLastSaved}`"></span>
+                                </template>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="studentComment = ''; saveProgress();"
+                                    class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold transition"
+                                    x-show="studentComment.length > 0">
+                                    Bersihkan
+                                </button>
+                                <button type="button" @click="saveComment()"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Simpan Komentar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Toast Alert Simpan -->
+                        <div x-show="commentSavedToast" x-transition
+                            class="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2"
+                            x-cloak>
+                            <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Komentarmu berhasil disimpan! Catatan ini tersimpan di akunmu dan dapat ditinjau oleh pengajar.</span>
+                        </div>
+                    </div>
+
+                    <!-- Pratinjau Komentar Terbitan Siswa (Forum Style) -->
+                    <template x-if="studentComment.trim().length > 0">
+                        <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                            <div class="flex items-center justify-between mb-2 pb-2 border-b border-orange-200/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center"
+                                        x-text="currentUser ? (currentUser.displayName || currentUser.email).charAt(0).toUpperCase() : 'S'">
+                                    </div>
+                                    <div>
+                                        <strong class="text-xs font-bold text-navy"
+                                            x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Siswa Aksaradeutsch'"></strong>
+                                        <span class="text-[10px] text-gray-500 block">Komentar Siswa</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-gray-400" x-text="commentLastSaved || 'Draft'"></span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap selectable-text"
+                                x-text="studentComment"></p>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
@@ -1175,7 +1462,7 @@
                     </div>
                 </div>
 
-                <!-- TEIL A: Was passt? Verbinden Sie die Sätze mit der Konjunktion wenn (Soal 1 - 5) -->
+                <!-- TEIL A: Was passt? Verbinden Sie die Sätze mit der Konjunktion wenn (Soal 1 - 4) -->
                 <div class="mb-10">
                     <h3 class="text-base sm:text-lg font-extrabold text-navy mb-4">
                         Teil A: Was passt? Verbinden Sie die Sätze mit der Konjunktion wenn.
@@ -1277,118 +1564,209 @@
                                 </button>
                             </div>
                         </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Die Brautleute sehen die Hochzeitsfotos. Sie freuen sich sehr.</span>
-                            </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Die Brautleute freuen sich sehr, wenn sehen sie die Hochzeitsfotos.
-                                </button>
-                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Die Brautleute sehr freuen sich, wenn sie die Hochzeitsfotos sehen werden.
-                                </button>
-                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- TEIL B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze (Soal 6 - 8) -->
+                <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (4 Soal: Nomor 5 s.d. 8) -->
                 <div class="mb-10">
-                    <h3 class="text-base sm:text-lg font-extrabold text-navy mb-4">
-                        Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.
-                    </h3>
+                    <div class="mb-5">
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
+                    </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">5. Zeit und Großeltern:</span>
+                                    <button type="button" @click="resetPuzzle('q5')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q5.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q5', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q5.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q5', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q5.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q5 === correctAnswers.q5" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Klausa <em>wenn</em> di awal kalimat: Kata kerja induk kalimat <em>besuche</em> berada tepat setelah tanda koma).</span>
+                                </span>
+                                <span x-show="answers.q5 !== correctAnswers.q5" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja induk kalimat <em>besuche</em> yang berdiri langsung setelah koma.</span>
+                                </span>
+                            </div>
+                        </div>
+
                         <!-- Soal 6 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Urlaub und Freude:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ wenn / bin / glücklich / ich / , / habe / Urlaub / ich / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">6. Freude und Freunde:</span>
+                                    <button type="button" @click="resetPuzzle('q6')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q6.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q6', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q6.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q6', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q6.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Ich bin glücklich, wenn ich Urlaub habe.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Ich bin glücklich, wenn habe ich Urlaub.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Wenn ich Urlaub habe ich bin glücklich.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q6 === correctAnswers.q6" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Anak kalimat <em>wenn</em>: Kata kerja terkonjugasi <em>kommen</em> berada di posisi paling akhir).</span>
+                                </span>
+                                <span x-show="answers.q6 !== correctAnswers.q6" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Pastikan kata kerja terkonjugasi <em>kommen</em> diletakkan di ujung anak kalimat <em>wenn</em>.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 7 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Horrorfilm und Angst:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ Angst / wenn / einen Horrorfilm / sieht / , / hat / David / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">7. Rückkehr aus Spanien:</span>
+                                    <button type="button" @click="resetPuzzle('q7')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q7.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q7', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q7.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q7', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q7.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wenn David einen Horrorfilm sieht, er hat Angst.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wenn David einen Horrorfilm sieht, hat er Angst.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Wenn sieht David einen Horrorfilm, hat er Angst.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q7 === correctAnswers.q7" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Kata kerja terkonjugasi <em>besucht</em> menempati posisi langsung setelah tanda koma).</span>
+                                </span>
+                                <span x-show="answers.q7 !== correctAnswers.q7" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja terkonjugasi <em>besucht</em> langsung setelah koma.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 8 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Hochzeit und Glückwünsche:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ Julia und Nils / Pia und Jan / gratulieren / , / sie / heiraten / wenn / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">8. Einladung und Reaktion:</span>
+                                    <button type="button" @click="resetPuzzle('q8')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q8.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q8', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q8.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q8', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">?</span>
+                                        <span x-show="puzzleState.q8.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Pia und Jan gratulieren Julia und Nils, wenn heiraten sie.
-                                </button>
-                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Pia und Jan gratulieren wenn Julia und Nils sie heiraten.
-                                </button>
-                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q8 === correctAnswers.q8" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Kalimat tanya W-Frage + anak kalimat <em>wenn</em> dengan kata kerja <em>bekommst</em> di akhir).</span>
+                                </span>
+                                <span x-show="answers.q8 !== correctAnswers.q8" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja <em>bekommst</em> di akhir anak kalimat <em>wenn</em>.</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1441,15 +1819,15 @@
                                 <li><strong>c (Wenn Nils den Marathonlauf gewinnt, bekommt er eine Goldmedaille.)</strong>: Ketika kalimat diawali oleh klausa <em>wenn</em>, kata kerja anak kalimat <em>gewinnt</em> berada di ujung klausa sebelum tanda koma, dan kata kerja induk kalimat <em>bekommt</em> menempati urutan pertama induk kalimat tepat setelah tanda koma.</li>
                                 <li><strong>a (Ich bin sehr traurig, wenn meine beste Freundin für ein Jahr ins Ausland fährt.)</strong>: Kata kerja induk kalimat <em>bin</em> berada di Posisi 2 induk kalimat, sedangkan kata kerja anak kalimat <em>fährt</em> menempati posisi paling akhir dari klausa <em>wenn</em>.</li>
                                 <li><strong>b (Wenn wir am Wochenende schönes Wetter haben, machen wir einen Ausflug an den See.)</strong>: Konjungsi <em>wenn</em> menempatkan kata kerja <em>haben</em> di akhir klausa anak kalimat, disusul tanda koma dan kata kerja induk kalimat <em>machen</em> yang berada langsung setelah tanda koma.</li>
-                                <li><strong>c (Die Brautleute freuen sich sehr, wenn sie die Hochzeitsfotos sehen.)</strong>: Kata kerja refleksif <em>freuen sich</em> menempati posisi induk kalimat, sedangkan kata kerja anak kalimat <em>sehen</em> diletakkan di posisi paling belakang setelah objek <em>die Hochzeitsfotos</em>.</li>
                             </ol>
                         </div>
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>a (Ich bin glücklich, wenn ich Urlaub habe.)</strong>: Induk kalimat menempatkan kata kerja kopula <em>bin</em> di Posisi 2, diikuti tanda koma dan anak kalimat <em>wenn</em> dengan kata kerja terkonjugasi <em>habe</em> di posisi paling akhir.</li>
-                                <li><strong>b (Wenn David einen Horrorfilm sieht, hat er Angst.)</strong>: Ketika kalimat diawali oleh anak kalimat <em>wenn</em>, kata kerja <em>sieht</em> berada di ujung anak kalimat sebelum koma, dan kata kerja induk kalimat <em>hat</em> diletakkan langsung setelah tanda koma.</li>
-                                <li><strong>c (Pia und Jan gratulieren Julia und Nils, wenn sie heiraten.)</strong>: Kata kerja induk kalimat <em>gratulieren</em> berada di Posisi 2 induk kalimat, dan kata kerja anak kalimat <em>heiraten</em> diletakkan di posisi akhir setelah subjek <em>sie</em>.</li>
+                            <ol start="5" class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>Wenn ich Zeit habe, besuche ich am Wochenende meine Großeltern.</strong>: Klausa pengandaian/waktu <em>wenn</em> diletakkan di depan sebagai Posisi 1 keseluruhan kalimat, sehingga kata kerja terkonjugasi induk kalimat (<em>besuche</em>) wajib menempati posisi tepat setelah tanda koma, diikuti subjek (<em>ich</em>).</li>
+                                <li><strong>Wir freuen uns sehr, wenn unsere Freunde zur Feier kommen.</strong>: Induk kalimat (<em>Wir freuen uns sehr</em>) mengawali ujaran dengan kata kerja di Posisi 2, kemudian diikuti tanda koma dan anak kalimat subordinatif <em>wenn</em> dengan kata kerja terkonjugasi (<em>kommen</em>) terdorong ke posisi paling belakang.</li>
+                                <li><strong>Wenn Pia aus Spanien zurückkommt, besucht sie sofort das Brautpaar.</strong>: Kalimat diawali oleh anak kalimat <em>wenn</em> dengan kata kerja <em>zurückkommt</em> di akhir klausa, lalu disusul tanda koma dan kata kerja induk kalimat <em>besucht</em> yang berdiri langsung setelah koma.</li>
+                                <li><strong>Was machst du, wenn du eine Einladung bekommst?</strong>: Merupakan kalimat tanya (<em>W-Frage</em>) yang digabungkan dengan anak kalimat <em>wenn</em>. Kata kerja induk kalimat <em>machst</em> berada di Posisi 2 induk kalimat, dan kata kerja terkonjugasi <em>bekommst</em> berada di posisi paling akhir anak kalimat.</li>
                             </ol>
                         </div>
                     </div>
@@ -1501,6 +1879,7 @@
                 showKey: false,
                 showFeedback: false,
                 quizScore: null,
+                showPluralForms: false,
 
                 // Audio Voices
                 voices: [],
@@ -1511,10 +1890,6 @@
                 isPlayingFullDialog: false,
                 activeDialogPlaying: null,
                 currentSpeakingIndex: null,
-
-                // Lesetext Reader State
-                isReadingLesetext: false,
-                currentLesetextIndex: null,
 
                 // Learning Goals (6 Target)
                 learningGoals: [
@@ -1539,27 +1914,27 @@
 
                 // A. Peristiwa Penting dalam Kehidupan
                 vocabEvents: [
-                    { gender: 'fem', word: 'die Hochzeit, -en', speakWord: 'die Hochzeit', meaning: 'pernikahan / perkawinan' },
-                    { gender: 'neut', word: 'das Brautpaar, -e', speakWord: 'das Brautpaar', meaning: 'pasangan pengantin' },
-                    { gender: 'neut', word: 'das Brautkleid, -er', speakWord: 'das Brautkleid', meaning: 'gaun pengantin wanita' },
-                    { gender: 'masc', word: 'der Ring, -e', speakWord: 'der Ring', meaning: 'cincin pernikahan' },
-                    { gender: 'masc', word: 'der erste Schultag, -e', speakWord: 'der erste Schultag', meaning: 'hari pertama masuk sekolah' },
-                    { gender: 'fem', word: 'die Schultüte, -n', speakWord: 'die Schultüte', meaning: 'kerucut hadiah untuk murid baru di Jerman' },
-                    { gender: 'masc', word: 'der Schulranzen, -', speakWord: 'der Schulranzen', meaning: 'tas ransel sekolah anak' },
-                    { gender: 'fem', word: 'die Führerscheinprüfung, -en', speakWord: 'die Führerscheinprüfung', meaning: 'ujian SIM / tes mengemudi' },
+                    { gender: 'fem', word: 'Hochzeit', plural: 'die Hochzeiten', speakWord: 'die Hochzeit', meaning: 'pernikahan / perkawinan' },
+                    { gender: 'neut', word: 'Brautpaar', plural: 'die Brautpaare', speakWord: 'das Brautpaar', meaning: 'pasangan pengantin' },
+                    { gender: 'neut', word: 'Brautkleid', plural: 'die Brautkleider', speakWord: 'das Brautkleid', meaning: 'gaun pengantin wanita' },
+                    { gender: 'masc', word: 'Ring', plural: 'die Ringe', speakWord: 'der Ring', meaning: 'cincin pernikahan' },
+                    { gender: 'masc', word: 'erste Schultag', plural: 'die ersten Schultage', speakWord: 'der erste Schultag', meaning: 'hari pertama masuk sekolah' },
+                    { gender: 'fem', word: 'Schultüte', plural: 'die Schultüten', speakWord: 'die Schultüte', meaning: 'kerucut hadiah untuk murid baru di Jerman' },
+                    { gender: 'masc', word: 'Schulranzen', plural: 'die Schulranzen', speakWord: 'der Schulranzen', meaning: 'tas ransel sekolah anak' },
+                    { gender: 'fem', word: 'Führerscheinprüfung', plural: 'die Führerscheinprüfungen', speakWord: 'die Führerscheinprüfung', meaning: 'ujian SIM / tes mengemudi' },
                     { gender: 'phrase', word: 'die Prüfung bestehen', speakWord: 'die Prüfung bestehen', meaning: 'lulus ujian' },
-                    { gender: 'fem', word: 'die Geburt, -en', speakWord: 'die Geburt', meaning: 'kelahiran bayi' },
-                    { gender: 'neut', word: 'das Baby, -s', speakWord: 'das Baby', meaning: 'bayi' },
-                    { gender: 'fem', word: 'die Babykleidung (Sg.)', speakWord: 'die Babykleidung', meaning: 'pakaian bayi' },
-                    { gender: 'masc', word: 'der Storch, Störche', speakWord: 'der Storch', meaning: 'burung bangau (simbol kelahiran bayi)' },
-                    { gender: 'masc', word: 'der Marathon, -s', speakWord: 'der Marathon', meaning: 'lari maraton' },
-                    { gender: 'masc', word: 'der erste Platz', speakWord: 'der erste Platz', meaning: 'juara pertama / podium satu' },
-                    { gender: 'fem', word: 'die Siegerin, -nen', speakWord: 'die Siegerin', meaning: 'pemenang wanita' },
-                    { gender: 'masc', word: 'der Sieger, -', speakWord: 'der Sieger', meaning: 'pemenang pria' },
-                    { gender: 'fem', word: 'die Medaille, -n', speakWord: 'die Medaille', meaning: 'medali penghargaan' },
+                    { gender: 'fem', word: 'Geburt', plural: 'die Geburten', speakWord: 'die Geburt', meaning: 'kelahiran bayi' },
+                    { gender: 'neut', word: 'Baby', plural: 'die Babys', speakWord: 'das Baby', meaning: 'bayi' },
+                    { gender: 'fem', word: 'Babykleidung', plural: 'nur Singular', speakWord: 'die Babykleidung', meaning: 'pakaian bayi' },
+                    { gender: 'masc', word: 'Storch', plural: 'die Störche', speakWord: 'der Storch', meaning: 'burung bangau (simbol kelahiran bayi)' },
+                    { gender: 'masc', word: 'Marathon', plural: 'die Marathons', speakWord: 'der Marathon', meaning: 'lari maraton' },
+                    { gender: 'masc', word: 'erste Platz', plural: 'die ersten Plätze', speakWord: 'der erste Platz', meaning: 'juara pertama / podium satu' },
+                    { gender: 'fem', word: 'Siegerin', plural: 'die Siegerinnen', speakWord: 'die Siegerin', meaning: 'pemenang wanita' },
+                    { gender: 'masc', word: 'Sieger', plural: 'die Sieger', speakWord: 'der Sieger', meaning: 'pemenang pria' },
+                    { gender: 'fem', word: 'Medaille', plural: 'die Medaillen', speakWord: 'die Medaille', meaning: 'medali penghargaan' },
                     { gender: 'phrase', word: 'neu in der Firma', speakWord: 'neu in der Firma', meaning: 'karyawan baru di perusahaan' },
-                    { gender: 'neut', word: 'das Gebäck (Sg.)', speakWord: 'das Gebäck', meaning: 'kue kering / kue panggang' },
-                    { gender: 'neut', word: 'das Fest, -e', speakWord: 'das Fest', meaning: 'perayaan / pesta' }
+                    { gender: 'neut', word: 'Gebäck', plural: 'nur Singular', speakWord: 'das Gebäck', meaning: 'kue kering / kue panggang' },
+                    { gender: 'neut', word: 'Fest', plural: 'die Feste', speakWord: 'das Fest', meaning: 'perayaan / pesta' }
                 ],
 
                 // B. Perasaan dan Suasana Hati
@@ -1581,16 +1956,16 @@
 
                 // C. Kartu Ucapan dan Balasan
                 vocabCards: [
-                    { gender: 'fem', word: 'die Einladung, -en', speakWord: 'die Einladung', meaning: 'undangan' },
-                    { gender: 'fem', word: 'die Glückwunschkarte, -n', speakWord: 'die Glückwunschkarte', meaning: 'kartu ucapan selamat' },
-                    { gender: 'fem', word: 'die Dankeskarte, -n', speakWord: 'die Dankeskarte', meaning: 'kartu ucapan terima kasih' },
-                    { gender: 'fem', word: 'die Absage, -n', speakWord: 'die Absage', meaning: 'penolakan / pembatalan hadir' },
-                    { gender: 'fem', word: 'die Zusage, -n', speakWord: 'die Zusage', meaning: 'konfirmasi kehadiran' },
-                    { gender: 'masc', word: 'der Glückwunsch, -e', speakWord: 'der Glückwunsch', meaning: 'ucapan selamat' },
-                    { gender: 'neut', word: 'das Geschenk, -e', speakWord: 'das Geschenk', meaning: 'hadiah / kado' },
-                    { gender: 'fem', word: 'die Überraschung, -en', speakWord: 'die Überraschung', meaning: 'kejutan' },
-                    { gender: 'verb', word: 'gratulieren (+ Dat.)', speakWord: 'gratulieren', meaning: 'memberi selamat' },
-                    { gender: 'verb', word: 'sich bedanken (+ bei/für)', speakWord: 'sich bedanken', meaning: 'berterima kasih' }
+                    { gender: 'fem', word: 'Einladung', plural: 'die Einladungen', speakWord: 'die Einladung', meaning: 'undangan' },
+                    { gender: 'fem', word: 'Glückwunschkarte', plural: 'die Glückwunschkarten', speakWord: 'die Glückwunschkarte', meaning: 'kartu ucapan selamat' },
+                    { gender: 'fem', word: 'Dankeskarte', plural: 'die Dankeskarten', speakWord: 'die Dankeskarte', meaning: 'kartu ucapan terima kasih' },
+                    { gender: 'fem', word: 'Absage', plural: 'die Absagen', speakWord: 'die Absage', meaning: 'penolakan / pembatalan hadir' },
+                    { gender: 'fem', word: 'Zusage', plural: 'die Zusagen', speakWord: 'die Zusage', meaning: 'konfirmasi kehadiran' },
+                    { gender: 'masc', word: 'Glückwunsch', plural: 'die Glückwünsche', speakWord: 'der Glückwunsch', meaning: 'ucapan selamat' },
+                    { gender: 'neut', word: 'Geschenk', plural: 'die Geschenke', speakWord: 'das Geschenk', meaning: 'hadiah / kado' },
+                    { gender: 'fem', word: 'Überraschung', plural: 'die Überraschungen', speakWord: 'die Überraschung', meaning: 'kejutan' },
+                    { gender: 'verb', word: 'gratulieren', speakWord: 'gratulieren', meaning: 'memberi selamat (+ Dativ)' },
+                    { gender: 'verb', word: 'sich bedanken', speakWord: 'sich bedanken', meaning: 'berterima kasih (+ bei/für)' }
                 ],
 
                 // D. Redemittel
@@ -1648,7 +2023,90 @@
                     "Karte C: Glückwunschkarte von Gästen. Liebes Brautpaar, herzlichen Glückwunsch zur Hochzeit! Wir freuen uns sehr, dass wir diesen besonderen Moment heute mit euch feiern können. Für euren gemeinsamen Lebensweg wünschen wir euch Gesundheit, Freude und viel Liebe. Wenn zwei Menschen so gut zusammenpassen wie ihr, wird die Zukunft wunderschön! Alles Liebe, eure Freunde Anna und David."
                 ],
 
-                // Answers & Quiz
+                // Modul Leseverstehen-Check (4 Soal)
+                leseAnswers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: ''
+                },
+
+                leseCorrectAnswers: {
+                    q1: 'julia_nils',
+                    q2: 'richtig',
+                    q3: 'anna_david',
+                    q4: 'falsch'
+                },
+
+                leseScore: null,
+                showLeseFeedback: false,
+                showLeseKey: false,
+
+                getLeseQuestionClass(qNum) {
+                    if (!this.showLeseFeedback) return 'bg-gray-50/70 border-gray-200';
+                    const qKey = 'q' + qNum;
+                    const isCorrect = (this.leseAnswers[qKey] === this.leseCorrectAnswers[qKey]);
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                checkLeseverstehen() {
+                    let score = 0;
+                    for (let i = 1; i <= 4; i++) {
+                        const key = 'q' + i;
+                        if (this.leseAnswers[key] === this.leseCorrectAnswers[key]) {
+                            score++;
+                        }
+                    }
+                    this.leseScore = score;
+                    this.showLeseFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetLeseverstehen() {
+                    this.leseAnswers = {
+                        q1: '',
+                        q2: '',
+                        q3: '',
+                        q4: ''
+                    };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    this.saveProgress();
+                },
+
+                // Freies Schreiben State & Methods
+                studentComment: '',
+                commentLastSaved: '',
+                commentSavedToast: false,
+
+                insertRedemittel(phrase) {
+                    if (!this.studentComment) {
+                        this.studentComment = phrase + ' ';
+                    } else if (this.studentComment.endsWith(' ') || this.studentComment.endsWith('\n')) {
+                        this.studentComment += phrase + ' ';
+                    } else {
+                        this.studentComment += ' ' + phrase + ' ';
+                    }
+                    this.saveProgress();
+                },
+
+                saveComment() {
+                    if (!this.studentComment.trim()) return;
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const mins = String(now.getMinutes()).padStart(2, '0');
+                    this.commentLastSaved = `pukul ${hours}:${mins}`;
+                    this.commentSavedToast = true;
+                    this.saveProgress();
+                    setTimeout(() => {
+                        this.commentSavedToast = false;
+                    }, 4000);
+                },
+
+                // Answers & Quiz Übungen
                 answers: {
                     q1: '',
                     q2: '',
@@ -1665,10 +2123,103 @@
                     q2: 'c',
                     q3: 'a',
                     q4: 'b',
-                    q5: 'c',
-                    q6: 'a',
-                    q7: 'b',
-                    q8: 'c'
+                    q5: 'correct',
+                    q6: 'correct',
+                    q7: 'correct',
+                    q8: 'correct'
+                },
+
+                // Teil B Satzbauspiel State & Logic
+                puzzleInitial: {
+                    q5: ['Wenn ich Zeit habe', 'besuche ich', 'am Wochenende', 'meine Großeltern'],
+                    q6: ['Wir freuen uns sehr', 'wenn', 'unsere Freunde', 'zur Feier', 'kommen'],
+                    q7: ['Wenn Pia aus Spanien zurückkommt', 'besucht sie', 'sofort', 'das Brautpaar'],
+                    q8: ['Was machst du', 'wenn', 'du', 'eine Einladung', 'bekommst']
+                },
+
+                puzzleState: {
+                    q5: {
+                        pool: ['besuche ich', 'meine Großeltern', 'Wenn ich Zeit habe', 'am Wochenende'],
+                        selected: []
+                    },
+                    q6: {
+                        pool: ['kommen', 'Wir freuen uns sehr', 'zur Feier', 'wenn', 'unsere Freunde'],
+                        selected: []
+                    },
+                    q7: {
+                        pool: ['das Brautpaar', 'Wenn Pia aus Spanien zurückkommt', 'sofort', 'besucht sie'],
+                        selected: []
+                    },
+                    q8: {
+                        pool: ['wenn', 'Was machst du', 'bekommst', 'du', 'eine Einladung'],
+                        selected: []
+                    }
+                },
+
+                addWordToPuzzle(qKey, index) {
+                    const word = this.puzzleState[qKey].pool.splice(index, 1)[0];
+                    this.puzzleState[qKey].selected.push(word);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                removeWordFromPuzzle(qKey, index) {
+                    const word = this.puzzleState[qKey].selected.splice(index, 1)[0];
+                    this.puzzleState[qKey].pool.push(word);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                resetPuzzle(qKey) {
+                    this.puzzleState[qKey].pool = [...this.puzzleInitial[qKey]].sort(() => Math.random() - 0.5);
+                    this.puzzleState[qKey].selected = [];
+                    this.answers[qKey] = '';
+                },
+
+                checkPuzzleMatch(qKey) {
+                    const selected = this.puzzleState[qKey].selected;
+                    if (selected.length !== this.puzzleInitial[qKey].length) {
+                        this.answers[qKey] = '';
+                        this.saveProgress();
+                        return;
+                    }
+                    const sentence = selected.join(' ').toLowerCase().replace(/[,.?]/g, '').trim();
+
+                    if (qKey === 'q5') {
+                        if (sentence === 'wenn ich zeit habe besuche ich am wochenende meine großeltern' ||
+                            sentence === 'wenn ich zeit habe besuche ich meine großeltern am wochenende' ||
+                            sentence === 'am wochenende besuche ich meine großeltern wenn ich zeit habe') {
+                            this.answers.q5 = 'correct';
+                        } else {
+                            this.answers.q5 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q6') {
+                        if (sentence === 'wir freuen uns sehr wenn unsere freunde zur feier kommen') {
+                            this.answers.q6 = 'correct';
+                        } else {
+                            this.answers.q6 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q7') {
+                        if (sentence === 'wenn pia aus spanien zurückkommt besucht sie sofort das brautpaar' ||
+                            sentence === 'wenn pia aus spanien zurückkommt besucht sie das brautpaar sofort') {
+                            this.answers.q7 = 'correct';
+                        } else {
+                            this.answers.q7 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q8') {
+                        if (sentence === 'was machst du wenn du eine einladung bekommst' ||
+                            sentence === 'wenn du eine einladung bekommst was machst du') {
+                            this.answers.q8 = 'correct';
+                        } else {
+                            this.answers.q8 = 'wrong';
+                        }
+                    }
+
+                    this.saveProgress();
                 },
 
                 getQuestionClass(qNum) {
@@ -1704,6 +2255,12 @@
                         q7: '',
                         q8: ''
                     };
+                    for (let i = 5; i <= 8; i++) {
+                        const qKey = 'q' + i;
+                        if (this.puzzleState[qKey]) {
+                            this.resetPuzzle(qKey);
+                        }
+                    }
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;
@@ -1806,58 +2363,9 @@
                     speakNextLine(0);
                 },
 
-                toggleReadLesetext() {
-                    if (!('speechSynthesis' in window)) return;
-                    if (this.isReadingLesetext) {
-                        window.speechSynthesis.cancel();
-                        this.isReadingLesetext = false;
-                        this.currentLesetextIndex = null;
-                        return;
-                    }
-
-                    window.speechSynthesis.cancel();
-                    this.isReadingLesetext = true;
-                    this.currentLesetextIndex = 0;
-
-                    const speakNextParagraph = (index) => {
-                        if (!this.isReadingLesetext || index >= this.lesetextParagraphs.length) {
-                            this.isReadingLesetext = false;
-                            this.currentLesetextIndex = null;
-                            return;
-                        }
-
-                        this.currentLesetextIndex = index;
-                        const text = this.lesetextParagraphs[index];
-                        const utter = new SpeechSynthesisUtterance(text);
-                        utter.lang = 'de-DE';
-                        utter.rate = 0.9;
-                        const gender = (index % 2 === 0) ? 'female' : 'male';
-                        if (gender === 'male' && this.maleVoice) {
-                            utter.voice = this.maleVoice;
-                        } else if (this.femaleVoice) {
-                            utter.voice = this.femaleVoice;
-                        }
-
-                        utter.onend = () => {
-                            setTimeout(() => {
-                                speakNextParagraph(index + 1);
-                            }, 700);
-                        };
-
-                        utter.onerror = () => {
-                            this.isReadingLesetext = false;
-                            this.currentLesetextIndex = null;
-                        };
-
-                        window.speechSynthesis.speak(utter);
-                    };
-
-                    speakNextParagraph(0);
-                },
-
                 initApp() {
                     this.initVoices();
-                    this.loadSavedProgress('guest');
+                    this.loadLocalProgress('guest');
 
                     // Reading Progress Listener
                     window.addEventListener('scroll', () => {
@@ -1874,45 +2382,73 @@
                                 this.currentUser = user;
                                 this.userName = user.displayName || user.email.split('@')[0];
                                 this.userInitial = this.userName.charAt(0).toUpperCase();
-                                this.syncWithFirestore(user.uid);
+                                this.authLoading = false;
+                                this.loadFirestoreProgress(user.uid);
                             } else {
                                 this.currentUser = null;
                                 this.userName = '';
                                 this.userInitial = 'S';
+                                this.authLoading = false;
+                                window.location.replace('../dashboard-a2-1/');
                             }
-                            this.authLoading = false;
                         });
                     } else {
                         this.authLoading = false;
+                        window.location.replace('../dashboard-a2-1/');
                     }
                 },
 
-                loadSavedProgress(uid) {
+                applyProgressData(data) {
+                    if (!data) return;
+                    if (data.goals) this.learningGoals = data.goals;
+                    if (data.answers) this.answers = data.answers;
+                    if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                    if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                    if (data.leseAnswers) this.leseAnswers = data.leseAnswers;
+                    if (data.leseScore !== undefined) this.leseScore = data.leseScore;
+                    if (data.showLeseFeedback !== undefined) this.showLeseFeedback = data.showLeseFeedback;
+                    if (data.showLeseKey !== undefined) this.showLeseKey = data.showLeseKey;
+                    if (data.studentComment !== undefined) this.studentComment = data.studentComment;
+                    if (data.commentLastSaved !== undefined) this.commentLastSaved = data.commentLastSaved;
+                    if (data.puzzles) this.puzzleState = data.puzzles;
+                },
+
+                loadLocalProgress(uid = 'guest') {
                     try {
                         const local = localStorage.getItem(`aksaradeutsch_${uid}_lesson_a2_7`);
                         if (local) {
-                            const data = JSON.parse(local);
-                            if (data.goals) {
-                                data.goals.forEach((g, i) => {
-                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
-                                });
-                            }
-                            if (data.answers) {
-                                this.answers = { ...this.answers, ...data.answers };
-                            }
-                            if (data.quizScore !== undefined && data.quizScore !== null) {
-                                this.quizScore = data.quizScore;
-                                this.showFeedback = true;
-                            }
+                            this.applyProgressData(JSON.parse(local));
                         }
                     } catch (e) {
                         console.error('Error loading local storage:', e);
                     }
                 },
 
-                async syncWithFirestore(uid) {
-                    this.loadSavedProgress(uid);
-                    if (!db) return;
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    const dataToSave = {
+                        lessonId: 'lesson_a2_7',
+                        goals: this.learningGoals,
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        showFeedback: this.showFeedback,
+                        leseAnswers: this.leseAnswers,
+                        leseScore: this.leseScore,
+                        showLeseFeedback: this.showLeseFeedback,
+                        showLeseKey: this.showLeseKey,
+                        studentComment: this.studentComment,
+                        commentLastSaved: this.commentLastSaved,
+                        puzzles: this.puzzleState,
+                        updatedAt: new Date().toISOString()
+                    };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_7`, JSON.stringify(dataToSave));
+                    } catch (e) {}
+                    return dataToSave;
+                },
+
+                async loadFirestoreProgress(uid) {
+                    this.loadLocalProgress(uid);
+                    if (!db || !uid) return;
 
                     try {
                         let remoteData = null;
@@ -1929,18 +2465,7 @@
                         }
 
                         if (remoteData) {
-                            if (remoteData.goals) {
-                                remoteData.goals.forEach((g, i) => {
-                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
-                                });
-                            }
-                            if (remoteData.answers) {
-                                this.answers = { ...this.answers, ...remoteData.answers };
-                            }
-                            if (remoteData.quizScore !== undefined && remoteData.quizScore !== null) {
-                                this.quizScore = remoteData.quizScore;
-                                this.showFeedback = true;
-                            }
+                            this.applyProgressData(remoteData);
                             this.saveProgressToLocal(uid);
                         }
                     } catch (e) {
@@ -1948,34 +2473,19 @@
                     }
                 },
 
-                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
-                    const data = {
-                        goals: this.learningGoals.map(g => g.completed),
-                        answers: this.answers,
-                        quizScore: this.quizScore,
-                        updatedAt: new Date().toISOString()
-                    };
-                    try {
-                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_7`, JSON.stringify(data));
-                    } catch (e) {}
-                    return data;
-                },
-
                 async saveProgress() {
-                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
-                    const dataToSave = this.saveProgressToLocal(uid);
+                    const dataToSave = this.saveProgressToLocal();
+                    if (!this.currentUser || !db) return;
 
-                    if (this.currentUser && db) {
-                        try {
-                            this.syncStatusText = 'Menyimpan...';
-                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_7').set(dataToSave, { merge: true });
-                            await db.collection('user_progress').doc(this.currentUser.uid).set({
-                                lesson_a2_7: dataToSave
-                            }, { merge: true });
-                            this.syncStatusText = 'Tersinkronisasi';
-                        } catch (err) {
-                            this.syncStatusText = 'Tersimpan lokal';
-                        }
+                    this.syncStatusText = 'Menyimpan...';
+                    try {
+                        await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_7').set(dataToSave, { merge: true });
+                        await db.collection('user_progress').doc(this.currentUser.uid).set({
+                            lesson_a2_7: dataToSave
+                        }, { merge: true });
+                        this.syncStatusText = 'Tersinkronisasi';
+                    } catch (err) {
+                        this.syncStatusText = 'Tersimpan lokal';
                     }
                 },
 

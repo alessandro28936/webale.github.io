@@ -96,7 +96,10 @@
         });
 
         document.addEventListener('selectstart', function (e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            const targetEl = e.target.nodeType === 3 ? e.target.parentElement : e.target;
+            const isSelectable = targetEl && targetEl.closest && targetEl.closest('.selectable-text');
+            if (!isInput && !isSelectable) {
                 e.preventDefault();
             }
         });
@@ -137,6 +140,14 @@
             -moz-user-select: auto;
             -ms-user-select: auto;
             user-select: auto;
+        }
+
+        .selectable-text,
+        .selectable-text * {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
         }
 
         [x-cloak] {
@@ -283,7 +294,7 @@
                         Die Geburtstagsparty und Reflexive Verben
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
-                        Mempelajari perencanaan pesta ulang tahun (<em>die Geburtstagsparty</em>), penggunaan kata kerja refleksif (<em>Reflexive Verben</em>), pengungkapan emosi dan situasi sosial, serta wawasan festival <em>Kieler Woche</em> dan adaptasi hidup di luar negeri.
+                        Gunakan kata kerja refleksif (<em>Reflexive Verben</em>) untuk mengekspresikan rasa senang, meminta maaf, dan berinteraksi saat menghadiri perayaan atau pesta.
                     </p>
 
                     <!-- Meta Tags -->
@@ -411,21 +422,55 @@
             </div>
 
             <!-- Subtopik A: Pesta dan Perayaan Ulang Tahun -->
-            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100 flex items-center justify-between">
-                    <span>A. Pesta dan Perayaan Ulang Tahun (Party und Geburtstag)</span>
-                    <span class="text-xs text-gray-400 font-normal">Klik audio untuk pelafalan</span>
-                </h3>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">A. Pesta dan Perayaan Ulang Tahun (Party und Geburtstag)</h3>
+                        <p class="text-xs text-gray-500">Kosakata seputar perayaan ulang tahun, suasana pesta, hadiah, dan persiapan acara.</p>
+                    </div>
+                    <button type="button" @click="showPluralForms = !showPluralForms"
+                        class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                        :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                    </button>
+                </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                     <template x-for="(item, idx) in vocabParty" :key="idx">
-                        <div class="p-3 rounded-xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                        <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="item.de"></strong>
-                                <span class="text-[11px] sm:text-xs text-gray-500" x-text="item.id"></span>
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                                    <template x-if="item.gender === 'masc'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-blue-100 text-blue-800">der</span>
+                                    </template>
+                                    <template x-if="item.gender === 'fem'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-red-100 text-red-800">die</span>
+                                    </template>
+                                    <template x-if="item.gender === 'neut'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800">das</span>
+                                    </template>
+                                    <template x-if="item.gender === 'phrase'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-purple-100 text-purple-800">Ausdruck</span>
+                                    </template>
+                                    <template x-if="item.gender === 'verb'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800">Verb</span>
+                                    </template>
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
+                                </div>
+                                <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                                <template x-if="item.plural && showPluralForms">
+                                    <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                        <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                        <span class="font-bold text-navy" x-text="item.plural"></span>
+                                    </div>
+                                </template>
                             </div>
-                            <button @click="speak(item.de, 'male')"
-                                class="p-2 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition flex-shrink-0">
+                            <button @click="speak(item.speakWord || item.word, 'male')"
+                                class="p-2 rounded-xl bg-white shadow-xs text-orange-600 hover:bg-orange-50 border border-gray-100 transition flex-shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
@@ -438,21 +483,55 @@
             </div>
 
             <!-- Subtopik B: Festival dan Pengalaman Hidup -->
-            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <h3 class="text-lg sm:text-xl font-bold text-navy mb-4 pb-2 border-b border-gray-100 flex items-center justify-between">
-                    <span>B. Festival dan Pengalaman Hidup (Festveranstaltungen und Leben im Ausland)</span>
-                    <span class="text-xs text-gray-400 font-normal">Kieler Woche & Adaptasi Budaya</span>
-                </h3>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+                <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-navy">B. Festival dan Pengalaman Hidup (Festveranstaltungen und Leben im Ausland)</h3>
+                        <p class="text-xs text-gray-500">Kieler Woche, kegiatan festival maritim, dan adaptasi kehidupan mahasiswa di luar negeri.</p>
+                    </div>
+                    <button type="button" @click="showPluralForms = !showPluralForms"
+                        class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                        :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                    </button>
+                </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                     <template x-for="(item, idx) in vocabFestival" :key="idx">
-                        <div class="p-3 rounded-xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
+                        <div class="p-3.5 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-orange-200 transition flex items-center justify-between gap-2">
                             <div class="min-w-0 flex-1">
-                                <strong class="text-xs sm:text-sm text-navy block font-extrabold" x-text="item.de"></strong>
-                                <span class="text-[11px] sm:text-xs text-gray-500" x-text="item.id"></span>
+                                <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                                    <template x-if="item.gender === 'masc'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-blue-100 text-blue-800">der</span>
+                                    </template>
+                                    <template x-if="item.gender === 'fem'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-red-100 text-red-800">die</span>
+                                    </template>
+                                    <template x-if="item.gender === 'neut'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800">das</span>
+                                    </template>
+                                    <template x-if="item.gender === 'phrase'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-purple-100 text-purple-800">Ausdruck</span>
+                                    </template>
+                                    <template x-if="item.gender === 'verb'">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800">Verb</span>
+                                    </template>
+                                    <strong class="text-xs sm:text-sm font-extrabold text-navy block break-words leading-tight" x-text="item.word"></strong>
+                                </div>
+                                <span class="text-[11px] text-gray-500 leading-snug block" x-text="item.meaning"></span>
+                                <template x-if="item.plural && showPluralForms">
+                                    <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                        <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                        <span class="font-bold text-navy" x-text="item.plural"></span>
+                                    </div>
+                                </template>
                             </div>
-                            <button @click="speak(item.de, 'female')"
-                                class="p-2 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition flex-shrink-0">
+                            <button @click="speak(item.speakWord || item.word, 'female')"
+                                class="p-2 rounded-xl bg-white shadow-xs text-orange-600 hover:bg-orange-50 border border-gray-100 transition flex-shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
@@ -959,23 +1038,13 @@
 
                 <div class="space-y-4">
                     <template x-for="(line, idx) in dialog1Lines" :key="idx">
-                        <div class="p-4 rounded-2xl transition-all duration-200 border"
+                        <div class="p-4 rounded-2xl transition-all duration-200 border selectable-text"
                             :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Tim' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
-                            <div class="flex items-start justify-between gap-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
-                                        :class="line.speaker === 'Tim' ? 'bg-navy' : 'bg-orange-500'"
-                                        x-text="line.speaker.charAt(0)"></span>
-                                    <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
-                                </div>
-                                <button @click="speak(line.de, line.gender)"
-                                    class="p-1.5 rounded-lg text-gray-400 hover:text-orange-600 hover:bg-white transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                        </path>
-                                    </svg>
-                                </button>
+                            <div class="flex items-center gap-2">
+                                <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
+                                    :class="line.speaker === 'Tim' ? 'bg-navy' : 'bg-orange-500'"
+                                    x-text="line.speaker.charAt(0)"></span>
+                                <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
                             </div>
                             <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
                             <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
@@ -1010,23 +1079,13 @@
 
                 <div class="space-y-4">
                     <template x-for="(line, idx) in dialog2Lines" :key="idx">
-                        <div class="p-4 rounded-2xl transition-all duration-200 border"
+                        <div class="p-4 rounded-2xl transition-all duration-200 border selectable-text"
                             :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Florian' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
-                            <div class="flex items-start justify-between gap-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
-                                        :class="line.speaker === 'Florian' ? 'bg-navy' : 'bg-orange-500'"
-                                        x-text="line.speaker.charAt(0)"></span>
-                                    <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
-                                </div>
-                                <button @click="speak(line.de, line.gender)"
-                                    class="p-1.5 rounded-lg text-gray-400 hover:text-orange-600 hover:bg-white transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                        </path>
-                                    </svg>
-                                </button>
+                            <div class="flex items-center gap-2">
+                                <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
+                                    :class="line.speaker === 'Florian' ? 'bg-navy' : 'bg-orange-500'"
+                                    x-text="line.speaker.charAt(0)"></span>
+                                <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
                             </div>
                             <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
                             <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
@@ -1052,50 +1111,25 @@
             </div>
 
             <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-8">
-                <!-- Lesetext Audio Reader Controls -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-orange-50/60 border border-orange-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <strong class="text-xs sm:text-sm text-navy block font-extrabold">Audio Reader Teks Bacaan</strong>
-                            <span class="text-[11px] text-gray-500">Dengarkan narasi bahasa Jerman penutur asli paragraf demi paragraf</span>
-                        </div>
-                    </div>
-
-                    <button @click="toggleReadLesetext()"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                        </svg>
-                        <span x-text="isReadingLesetext ? 'Hentikan Audio' : 'Dengarkan Seluruh Teks'"></span>
-                    </button>
-                </div>
-
                 <!-- Text 1: Die Kieler Woche -->
                 <div class="space-y-4">
                     <h3 class="text-base sm:text-lg font-extrabold text-navy border-b border-gray-100 pb-2">
                         A. Ein Fest im Norden: Die Kieler Woche
                     </h3>
                     <div class="space-y-3 text-xs sm:text-sm text-gray-700 leading-relaxed">
-                        <div class="p-4 rounded-xl transition-all border"
+                        <div class="p-4 rounded-xl transition-all border selectable-text"
                             :class="currentLesetextIndex === 0 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Jedes Jahr im Juni findet in Norddeutschland die weltbekannte <strong>Kieler Woche</strong> statt. Rund drei Millionen Besucher aus aller Welt reisen nach Kiel, um dieses einzigartige maritime Großereignis zu erleben.
                             </p>
                         </div>
-                        <div class="p-4 rounded-xl transition-all border"
+                        <div class="p-4 rounded-xl transition-all border selectable-text"
                             :class="currentLesetextIndex === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Die Kieler Woche ist die größte Segelsport-Veranstaltung der Welt. Mehr als 4.000 Seglerinnen und Segler aus über 70 Nationen nehmen an den spektakulären Segelregatten auf der Ostsee teil. Tausende Zuschauer bewundern vom Ufer aus die historischen Traditionssegelschiffe und modernen Boote.
                             </p>
                         </div>
-                        <div class="p-4 rounded-xl transition-all border"
+                        <div class="p-4 rounded-xl transition-all border selectable-text"
                             :class="currentLesetextIndex === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Neben dem Sport ist die Kieler Woche ein riesiges Sommerfest für Erwachsene und Kinder. Auf zahlreichen Bühnen finden über 400 Live-Konzerte statt, und überall in der Stadt kann man kulinarische Spezialitäten aus vielen Ländern probieren. Das Fest endet traditionell am Sonntagabend mit einem riesigen Feuerwerk über der Kieler Förde. Viele Besucher freuen sich schon während der Abreise auf das nächste Jahr.
@@ -1111,7 +1145,7 @@
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Paula -->
-                        <div class="p-4 rounded-2xl border transition-all"
+                        <div class="p-4 rounded-2xl border transition-all selectable-text"
                             :class="currentLesetextIndex === 3 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <div class="flex items-center gap-2 mb-3">
                                 <div class="w-8 h-8 rounded-full bg-navy text-white flex items-center justify-center font-bold text-xs">P</div>
@@ -1126,7 +1160,7 @@
                         </div>
 
                         <!-- Chandan -->
-                        <div class="p-4 rounded-2xl border transition-all"
+                        <div class="p-4 rounded-2xl border transition-all selectable-text"
                             :class="currentLesetextIndex === 4 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <div class="flex items-center gap-2 mb-3">
                                 <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs">C</div>
@@ -1177,6 +1211,277 @@
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- LESEVERSTEHEN-CHECK (4 Soal Standar Goethe A2)            -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Uji Pemahaman Teks</span>
+                            <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                                Leseverstehen-Check: Das Fest und das Leben im Ausland
+                            </h4>
+                            <p class="text-xs text-gray-500 mt-0.5">
+                                Ujilah pemahamanmu terhadap artikel Kieler Woche dan dua laporan adaptasi hidup di luar negeri oleh Paula dan Chandan (Standar Goethe-Zertifikat A2).
+                            </p>
+                        </div>
+
+                        <!-- Live Score Badge Leseverstehen -->
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border transition shadow-2xs"
+                                :class="leseScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (leseScore >= 3 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                                <span class="text-xs font-bold"
+                                    :class="leseScore === null ? 'text-orange-900/80' : (leseScore >= 3 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Bacaan:</span>
+                                <span class="text-sm font-extrabold"
+                                    :class="leseScore === null ? 'text-orange-600' : (leseScore >= 3 ? 'text-emerald-700' : 'text-amber-700')"
+                                    x-text="leseScore !== null ? `${leseScore} / 4` : '- / 4'">- / 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Soal 1: Richtig oder Falsch? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Die Kieler Woche ist die größte Segelsport-Veranstaltung der Welt und findet jedes Jahr im Juni statt.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q1 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2: Wer hat das gesagt? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Am Anfang habe ich mich darüber geärgert, dass niemand pünktlich kommt, aber inzwischen habe ich mich an die Kultur gewöhnt.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q2 = 'paula'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'paula' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Paula (Buenos Aires)
+                                </button>
+                                <button type="button" @click="leseAnswers.q2 = 'chandan'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'chandan' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Chandan (Kiel)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3: Wer hat das gesagt? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q3 = 'paula'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'paula' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Paula (Buenos Aires)
+                                </button>
+                                <button type="button" @click="leseAnswers.q3 = 'chandan'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'chandan' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Chandan (Kiel)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4: Richtig oder Falsch? -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Chandan fühlt sich in Norddeutschland fremd und hat bisher keine neuen Kontakte geknüpft.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q4 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Leseverstehen -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-5 mt-5 border-t border-gray-100">
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                            <button type="button" @click="checkLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-98 text-white font-bold text-xs shadow-sm transition flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Periksa Pemahaman</span>
+                            </button>
+                            <button type="button" @click="resetLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-98 text-gray-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" @click="showLeseKey = !showLeseKey"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 active:scale-98 text-blue-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <span x-text="showLeseKey ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan'"></span>
+                                <svg class="w-3.5 h-3.5 text-blue-600 transition-transform duration-200" :class="showLeseKey ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pembahasan Accordion -->
+                    <div x-show="showLeseKey" x-collapse class="mt-4 p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2" x-cloak>
+                        <h5 class="font-bold text-navy border-b border-gray-200 pb-1.5">Pembahasan Leseverstehen:</h5>
+                        <ul class="space-y-1.5 list-disc list-inside">
+                            <li><strong>1 (Richtig)</strong>: Pernyataan tersebut benar. Dalam teks A dijelaskan bahwa <em>Kieler Woche</em> merupakan acara olahraga layar terbesar di dunia (<em>die größte Segelsport-Veranstaltung der Welt</em>) dan diselenggarakan secara rutin setiap bulan Juni di Jerman Utara.</li>
+                            <li><strong>2 (Paula)</strong>: Kutipan tersebut merupakan pengalaman Paula di Buenos Aires. Awalnya ia merasa kesal ketika teman-temannya tidak tepat waktu, namun kini ia telah beradaptasi dengan budaya setempat (<em>an die Kultur gewöhnt</em>).</li>
+                            <li><strong>3 (Chandan)</strong>: Pernyataan tersebut diungkapkan oleh Chandan. Mahasiswa asal India di Kiel ini mengagumi tradisi pesta teman-temannya di mana setiap tamu membawa makanan atau minuman sendiri secara gotong royong (<em>bringt jeder Gast etwas mit</em>).</li>
+                            <li><strong>4 (Falsch)</strong>: Pernyataan tersebut salah. Meskipun sempat merasa asing di awal kedatangannya (<em>am Anfang etwas fremd gefühlt</em>), Chandan menegaskan bahwa saat ini ia telah menjalin banyak kontak pertemanan dan merasa sangat betah di Jerman Utara layaknya di rumah sendiri (<em>fühlt sich wie zu Hause</em>).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- KOTAK KOMENTAR SISWA (Freies Schreiben: Kommentare)       -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="mb-4">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Freies Schreiben</span>
+                        <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                            Und du? Wie feierst du deinen Geburtstag? (Schreib einen kurzen Kommentar!)
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-0.5">
+                            Ceritakan bagaimana kamu biasanya merayakan ulang tahun atau suasana pesta yang kamu sukai (3–5 kalimat). Gunakan kata kerja refleksif (z.B. <em>sich freuen auf/über, sich verabreden mit, sich fühlen</em>).
+                        </p>
+                    </div>
+
+                    <!-- Click-to-Insert Redemittel Chips -->
+                    <div class="mb-3.5">
+                        <div class="text-[11px] font-bold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Klik frasa pembuka (Redemittel) di bawah ini untuk menempelkan kalimat ke kolom komentar:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" @click="insertRedemittel('Ich freue mich immer sehr auf ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich freue mich immer sehr auf ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('An meinem Geburtstag fühle ich mich ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „An meinem Geburtstag fühle ich mich ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ich ärgere mich überhaupt nicht, wenn ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich ärgere mich überhaupt nicht, wenn ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ich erinnere mich gern daran, wie ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich erinnere mich gern daran, wie ...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ich treffe mich oft mit meinen Freunden, ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ich treffe mich oft mit meinen Freunden ...“
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Textarea & Action Bar -->
+                    <div class="relative">
+                        <textarea x-model="studentComment" rows="4"
+                            placeholder="Schreib deinen Kommentar hier... z.B. An meinem Geburtstag fühle ich mich immer sehr glücklich. Ich treffe mich oft mit meinen Freunden in einem schönen Café..."
+                            class="w-full p-4 rounded-2xl bg-white border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-navy text-xs sm:text-sm font-medium transition resize-y shadow-xs"
+                            @input="saveProgress()"></textarea>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mt-2.5">
+                            <div class="text-[11px] text-gray-500 flex items-center gap-2">
+                                <span x-text="`${studentComment.trim() ? studentComment.trim().split(/\s+/).length : 0} kata`"></span>
+                                <span class="text-gray-300">•</span>
+                                <span x-text="`${studentComment.length} karakter`"></span>
+                                <template x-if="commentLastSaved">
+                                    <span class="text-emerald-600 font-semibold" x-text="`• Tersimpan ${commentLastSaved}`"></span>
+                                </template>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="studentComment = ''; saveProgress();"
+                                    class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold transition"
+                                    x-show="studentComment.length > 0">
+                                    Bersihkan
+                                </button>
+                                <button type="button" @click="saveComment()"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Simpan Komentar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Toast Alert Simpan -->
+                        <div x-show="commentSavedToast" x-transition
+                            class="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2"
+                            x-cloak>
+                            <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Komentarmu berhasil disimpan! Catatan ini tersimpan di akunmu dan dapat ditinjau oleh pengajar.</span>
+                        </div>
+                    </div>
+
+                    <!-- Pratinjau Komentar Terbitan Siswa (Forum Style) -->
+                    <template x-if="studentComment.trim().length > 0">
+                        <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                            <div class="flex items-center justify-between mb-2 pb-2 border-b border-orange-200/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center"
+                                        x-text="currentUser ? (currentUser.displayName || currentUser.email).charAt(0).toUpperCase() : 'S'">
+                                    </div>
+                                    <div>
+                                        <strong class="text-xs font-bold text-navy"
+                                            x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Siswa Aksaradeutsch'"></strong>
+                                        <span class="text-[10px] text-gray-500 block">Komentar Siswa</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-gray-400" x-text="commentLastSaved || 'Draft'"></span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap selectable-text"
+                                x-text="studentComment"></p>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
@@ -1329,33 +1634,6 @@
                                 </button>
                             </div>
                         </div>
-
-                        <!-- Soal 5 -->
-                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
-                            <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Entscheidung für das Geschenk:</span>
-                                <p class="text-xs sm:text-sm font-bold text-navy">
-                                    Habt ihr _____ schon für ein Geschenk entschieden?
-                                </p>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
-                                    class="p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> sich
-                                </button>
-                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
-                                    class="p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> euch
-                                </button>
-                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
-                                    class="p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> dich
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -1366,84 +1644,199 @@
                     </h3>
 
                     <div class="space-y-4">
+                        <!-- Soal 5 -->
+                        <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">5. Vorfreude auf das Geschenk:</span>
+                                    <button type="button" @click="resetPuzzle('q5')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q5.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q5', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q5.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q5', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q5.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q5 === correctAnswers.q5" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Subjek <em>Florian</em> di Posisi 1, kata kerja <em>freut</em> di Posisi 2, dan <em>Reflexivpronomen sich</em> di Posisi 3).</span>
+                                </span>
+                                <span x-show="answers.q5 !== correctAnswers.q5" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja <em>freut</em> di Posisi 2 dan <em>Reflexivpronomen sich</em> di Posisi 3.</span>
+                                </span>
+                            </div>
+                        </div>
+
                         <!-- Soal 6 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Erinnerung an die Feier:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ erinnert / an die Feier / gern / Tim / sich / vom letzten Jahr / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">6. Ärger am Anfang:</span>
+                                    <button type="button" @click="resetPuzzle('q6')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q6.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q6', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q6.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q6', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q6.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Tim erinnert an die Feier sich gern vom letzten Jahr.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Tim sich erinnert gern an die Feier vom letzten Jahr.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Tim erinnert sich gern an die Feier vom letzten Jahr.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q6 === correctAnswers.q6" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Keterangan waktu <em>Am Anfang</em> di Posisi 1, kata kerja bantu <em>habe</em> di Posisi 2, subjek <em>ich</em> di Posisi 3, dan Partizip II <em>geärgert</em> di posisi akhir).</span>
+                                </span>
+                                <span x-show="answers.q6 !== correctAnswers.q6" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Pastikan kata kerja bantu <em>habe</em> di Posisi 2 dan Partizip II <em>geärgert</em> di ujung kalimat.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 7 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Wohlfühlen im Wohnheim:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ im Wohnheim / Chandan / fühlt / sehr wohl / sich / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">7. Wohlfühlen in Norddeutschland:</span>
+                                    <button type="button" @click="resetPuzzle('q7')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q7.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q7', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q7.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q7', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q7.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Chandan sich fühlt im Wohnheim sehr wohl.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Chandan fühlt sich im Wohnheim sehr wohl.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Chandan fühlt im Wohnheim sich sehr wohl.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q7 === correctAnswers.q7" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat benar! (Kata kerja terkonjugasi <em>fühlt</em> menempati Posisi 2 didampingi oleh <em>Reflexivpronomen sich</em> di Posisi 3).</span>
+                                </span>
+                                <span x-show="answers.q7 !== correctAnswers.q7" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja terkonjugasi <em>fühlt</em> di Posisi 2 dan kata ganti refleksif <em>sich</em> di Posisi 3.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 8 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Verabredung im Park (W-Frage):</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ du / dich / mit deinen Freunden / triffst / wann / im Park / ? ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">8. Vorbereitung auf das Fest (Ja/Nein-Frage):</span>
+                                    <button type="button" @click="resetPuzzle('q8')" class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q8.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q8', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.pool.length === 0" class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q8.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q8', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.selected.length > 0" class="text-sm font-extrabold text-navy self-center select-none ml-0.5">?</span>
+                                        <span x-show="puzzleState.q8.selected.length === 0" class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Wann du triffst dich mit deinen Freunden im Park?
-                                </button>
-                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Wann triffst dich du mit deinen Freunden im Park?
-                                </button>
-                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Wann triffst du dich mit deinen Freunden im Park?
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q8 === correctAnswers.q8" class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Susunan kalimat tanya benar! (Kalimat tanya ya/tidak: Kata kerja <em>Freust</em> di Posisi 1, subjek <em>du</em> di Posisi 2, dan <em>dich</em> di Posisi 3).</span>
+                                </span>
+                                <span x-show="answers.q8 !== correctAnswers.q8" class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span>Susunan belum tepat. Pada Ja/Nein-Frage, kata kerja <em>Freust</em> wajib berada di Posisi 1 diikuti subjek <em>du</em> dan kata ganti refleksif <em>dich</em>.</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1496,20 +1889,20 @@
                             <strong class="text-orange-600 block mb-1">Teil A (Reflexivpronomen):</strong>
                             <ol class="list-decimal list-inside space-y-2 text-gray-700">
                                 <li><strong>a (mich)</strong>: Subjek kalimat adalah <em>ich</em> (orang pertama tunggal), sehingga kata kerja refleksif <em>sich freuen</em> berpasangan dengan kata ganti refleksif <em>mich</em>.</li>
-                                <li><strong>b (dich)</strong>: Subjek kalimat adalah <em>du</em> (orang kedua tunggal), sehingga kata kerja refleksif <em>sich ärgern</em> menuntut kata ganti refleksif <em>dich</em>.</li>
+                                <li><strong>b (dich)</strong>: Subjek kalimat tanya adalah <em>du</em> (orang kedua tunggal), sehingga kata kerja refleksif <em>sich ärgern</em> menuntut kata ganti refleksif <em>dich</em>.</li>
                                 <li><strong>c (sich)</strong>: Subjek kalimat adalah <em>die Gäste</em> (orang ketiga jamak / <em>sie Plural</em>), sehingga kata kerja <em>sich unterhalten</em> menggunakan kata ganti refleksif <em>sich</em>.</li>
                                 <li><strong>a (uns)</strong>: Subjek kalimat adalah <em>wir</em> (orang pertama jamak), sehingga kata kerja <em>sich treffen</em> menggunakan kata ganti refleksif <em>uns</em>.</li>
-                                <li><strong>b (euch)</strong>: Subjek kalimat tanya adalah <em>ihr</em> (orang kedua jamak), sehingga bentuk <em>Reflexivpronomen</em> yang tepat untuk kata kerja <em>sich entscheiden</em> adalah <em>euch</em>.</li>
                             </ol>
                         </div>
 
                         <!-- Kolom Teil B -->
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
-                            <ol start="6" class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>c (Tim erinnert sich gern an die Feier vom letzten Jahr.)</strong>: Subjek <em>Tim</em> berada di Posisi 1, kata kerja terkonjugasi <em>erinnert</em> di Posisi 2, diikuti langsung oleh <em>Reflexivpronomen</em> <em>sich</em> di Posisi 3, kata keterangan <em>gern</em>, dan pelengkap preposisi <em>an die Feier vom letzten Jahr</em>.</li>
-                                <li><strong>b (Chandan fühlt sich im Wohnheim sehr wohl.)</strong>: Kata kerja <em>fühlt</em> menempati Posisi 2 kalimat pernyataan, didampingi kata ganti refleksif <em>sich</em> di Posisi 3, keterangan tempat <em>im Wohnheim</em>, serta kata sifat <em>sehr wohl</em>.</li>
-                                <li><strong>c (Wann triffst du dich mit deinen Freunden im Park?)</strong>: Dalam kalimat tanya dengan kata tanya (<em>W-Frage</em>), kata tanya <em>Wann</em> menempati Posisi 1, kata kerja <em>triffst</em> di Posisi 2, subjek <em>du</em> di Posisi 3, disusul kata ganti refleksif <em>dich</em> di Posisi 4 dan pelengkap keterangan penyerta.</li>
+                            <ol start="5" class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li><strong>Florian freut sich über das tolle Geschenk von seinen Freunden.</strong>: Subjek <em>Florian</em> berada di Posisi 1, kata kerja terkonjugasi <em>freut</em> di Posisi 2, disusul langsung oleh <em>Reflexivpronomen sich</em> di Posisi 3, dan pelengkap preposisi <em>über das tolle Geschenk von seinen Freunden</em>.</li>
+                                <li><strong>Am Anfang habe ich mich über die Verspätung geärgert.</strong>: Keterangan waktu <em>Am Anfang</em> menempati Posisi 1, kata kerja bantu <em>habe</em> di Posisi 2, subjek <em>ich</em> di Posisi 3, diikuti kata ganti refleksif <em>mich</em> di Posisi 4, objek preposisi <em>über die Verspätung</em>, serta partisip lampau <em>geärgert</em> di ujung kalimat.</li>
+                                <li><strong>Chandan fühlt sich in Kiel wie zu Hause.</strong>: Subjek <em>Chandan</em> di Posisi 1, kata kerja terkonjugasi <em>fühlt</em> di Posisi 2, diikuti kata ganti refleksif <em>sich</em> di Posisi 3, keterangan tempat <em>in Kiel</em>, dan perbandingan <em>wie zu Hause</em>.</li>
+                                <li><strong>Freust du dich auf die Geburtstagsparty am Samstag?</strong>: Merupakan kalimat tanya ya/tidak (<em>Ja/Nein-Frage</em>). Kata kerja terkonjugasi <em>Freust</em> menempati Posisi 1, subjek <em>du</em> di Posisi 2, diikuti kata ganti refleksif <em>dich</em> di Posisi 3, dan pelengkap preposisi <em>auf die Geburtstagsparty am Samstag</em>.</li>
                             </ol>
                         </div>
                     </div>
@@ -1570,6 +1963,7 @@
                 showKey: false,
                 showFeedback: false,
                 quizScore: null,
+                showPluralForms: false,
 
                 // Audio Voices
                 voices: [],
@@ -1595,45 +1989,47 @@
                     { text: 'Memahami teks deskriptif festival maritim <em>Kieler Woche</em> dan artikel adaptasi di luar negeri (<em>Leben im Ausland</em>).', completed: false }
                 ],
 
-                // Vocab Data
+                // Vocab Data - Subtopik A: Pesta dan Perayaan Ulang Tahun
                 vocabParty: [
-                    { de: 'die Geburtstagsparty, -s', id: 'pesta ulang tahun' },
-                    { de: 'die Feier, -n / das Fest, -e', id: 'perayaan / pesta' },
-                    { de: 'der Gast, Gäste', id: 'tamu / undangan' },
-                    { de: 'das Geschenk, -e', id: 'hadiah / kado' },
-                    { de: 'der Nachbar, -n / die Nachbarin, -nen', id: 'tetangga pria / wanita' },
-                    { de: 'die Einladung, -en', id: 'undangan' },
-                    { de: 'der Teppich, -e', id: 'karpet / permadani' },
-                    { de: 'das Glas, Gläser', id: 'gelas kaca' },
-                    { de: 'die Musik (Singular)', id: 'musik' },
-                    { de: 'die Laune, -n', id: 'suasana hati / mood' },
-                    { de: 'Essen bestellen', id: 'memesan makanan' },
-                    { de: 'tanzen', id: 'menari / berdansa' },
-                    { de: 'etwas mitbringen', id: 'membawa serta sesuatu' },
-                    { de: 'zu spät sein', id: 'terlambat datang' },
-                    { de: 'auf den Teppich fallen', id: 'jatuh ke atas karpet' },
-                    { de: 'sauber machen', id: 'membersihkan' }
+                    { gender: 'fem', word: 'Geburtstagsparty', plural: 'die Geburtstagspartys', speakWord: 'die Geburtstagsparty', meaning: 'pesta ulang tahun' },
+                    { gender: 'fem', word: 'Feier / Fest', plural: 'die Feiern / die Feste', speakWord: 'die Feier', meaning: 'perayaan / pesta' },
+                    { gender: 'masc', word: 'Gast', plural: 'die Gäste', speakWord: 'der Gast', meaning: 'tamu / undangan' },
+                    { gender: 'neut', word: 'Geschenk', plural: 'die Geschenke', speakWord: 'das Geschenk', meaning: 'hadiah / kado' },
+                    { gender: 'masc', word: 'Nachbar / Nachbarin', plural: 'die Nachbarn / die Nachbarinnen', speakWord: 'der Nachbar', meaning: 'tetangga pria / wanita' },
+                    { gender: 'fem', word: 'Einladung', plural: 'die Einladungen', speakWord: 'die Einladung', meaning: 'undangan' },
+                    { gender: 'masc', word: 'Teppich', plural: 'die Teppiche', speakWord: 'der Teppich', meaning: 'karpet / permadani' },
+                    { gender: 'neut', word: 'Glas', plural: 'die Gläser', speakWord: 'das Glas', meaning: 'gelas kaca' },
+                    { gender: 'fem', word: 'Musik', plural: 'nur Singular', speakWord: 'die Musik', meaning: 'musik' },
+                    { gender: 'fem', word: 'Laune', plural: 'die Launen', speakWord: 'die Laune', meaning: 'suasana hati / mood' },
+                    { gender: 'phrase', word: 'Essen bestellen', plural: '', speakWord: 'Essen bestellen', meaning: 'memesan makanan' },
+                    { gender: 'verb', word: 'tanzen', plural: '', speakWord: 'tanzen', meaning: 'menari / berdansa' },
+                    { gender: 'phrase', word: 'etwas mitbringen', plural: '', speakWord: 'etwas mitbringen', meaning: 'membawa serta sesuatu' },
+                    { gender: 'phrase', word: 'zu spät sein', plural: '', speakWord: 'zu spät sein', meaning: 'terlambat datang' },
+                    { gender: 'phrase', word: 'auf den Teppich fallen', plural: '', speakWord: 'auf den Teppich fallen', meaning: 'jatuh ke atas karpet' },
+                    { gender: 'phrase', word: 'sauber machen', plural: '', speakWord: 'sauber machen', meaning: 'membersihkan' }
                 ],
 
+                // Vocab Data - Subtopik B: Festival dan Pengalaman Hidup
                 vocabFestival: [
-                    { de: 'die Kieler Woche', id: 'pekan festival maritim di Kiel' },
-                    { de: 'die Segelregatta, -s', id: 'lomba balap perahu layar' },
-                    { de: 'das Segelschiff, -e', id: 'kapal layar' },
-                    { de: 'das Feuerwerk, -e', id: 'kembang api' },
-                    { de: 'die Attraktion, -en', id: 'atraksi / wahana hiburan' },
-                    { de: 'die Spezialität, -en', id: 'makanan khas daerah' },
-                    { de: 'das Ausland (Singular)', id: 'luar negeri' },
-                    { de: 'das Wohnheim, -e', id: 'asrama mahasiswa' },
-                    { de: 'die Währung, -en', id: 'mata uang' },
-                    { de: 'die Anmeldung, -en', id: 'registrasi / pendaftaran' },
-                    { de: 'bewundern', id: 'mengagumi' },
-                    { de: 'stattfinden', id: 'terselenggara / berlangsung' },
-                    { de: 'teilnehmen (an + Dativ)', id: 'berpartisipasi / ikut serta' },
-                    { de: 'sich gewöhnen (an + Akkusativ)', id: 'membiasakan diri terhadap sesuatu' },
-                    { de: 'sich fühlen', id: 'merasa / merasakan kondisi diri' },
-                    { de: 'kostenlos', id: 'gratis / tanpa biaya' }
+                    { gender: 'fem', word: 'Kieler Woche', plural: 'nur Singular', speakWord: 'die Kieler Woche', meaning: 'pekan festival maritim di Kiel' },
+                    { gender: 'fem', word: 'Segelregatta', plural: 'die Segelregatten', speakWord: 'die Segelregatta', meaning: 'lomba balap perahu layar' },
+                    { gender: 'neut', word: 'Segelschiff', plural: 'die Segelschiffe', speakWord: 'das Segelschiff', meaning: 'kapal layar' },
+                    { gender: 'neut', word: 'Feuerwerk', plural: 'die Feuerwerke', speakWord: 'das Feuerwerk', meaning: 'kembang api' },
+                    { gender: 'fem', word: 'Attraktion', plural: 'die Attraktionen', speakWord: 'die Attraktion', meaning: 'atraksi / wahana hiburan' },
+                    { gender: 'fem', word: 'Spezialität', plural: 'die Spezialitäten', speakWord: 'die Spezialität', meaning: 'makanan khas daerah' },
+                    { gender: 'neut', word: 'Ausland', plural: 'nur Singular', speakWord: 'das Ausland', meaning: 'luar negeri' },
+                    { gender: 'neut', word: 'Wohnheim', plural: 'die Wohnheime', speakWord: 'das Wohnheim', meaning: 'asrama mahasiswa' },
+                    { gender: 'fem', word: 'Währung', plural: 'die Währungen', speakWord: 'die Währung', meaning: 'mata uang' },
+                    { gender: 'fem', word: 'Anmeldung', plural: 'die Anmeldungen', speakWord: 'die Anmeldung', meaning: 'registrasi / pendaftaran' },
+                    { gender: 'verb', word: 'bewundern', plural: '', speakWord: 'bewundern', meaning: 'mengagumi' },
+                    { gender: 'verb', word: 'stattfinden', plural: '', speakWord: 'stattfinden', meaning: 'terselenggara / berlangsung' },
+                    { gender: 'verb', word: 'teilnehmen', plural: '', speakWord: 'teilnehmen', meaning: 'berpartisipasi / ikut serta (+ Dativ)' },
+                    { gender: 'verb', word: 'sich gewöhnen', plural: '', speakWord: 'sich gewöhnen', meaning: 'membiasakan diri (+ Akkusativ)' },
+                    { gender: 'verb', word: 'sich fühlen', plural: '', speakWord: 'sich fühlen', meaning: 'merasa / merasakan kondisi diri' },
+                    { gender: 'phrase', word: 'kostenlos', plural: '', speakWord: 'kostenlos', meaning: 'gratis / tanpa biaya' }
                 ],
 
+                // Vocab Data - Subtopik C: Kata Sifat Emosi
                 vocabEmotions: [
                     { de: 'fröhlich', id: 'ceria / gembira' },
                     { de: 'traurig', id: 'sedih' },
@@ -1646,6 +2042,7 @@
                     { de: 'pünktlich', id: 'tepat waktu' }
                 ],
 
+                // Redemittel - Subtopik D
                 phrasesFreude: [
                     { de: "Das gibt's doch nicht!", id: 'Luar biasa! / Tidak disangka!' },
                     { de: 'Ich freue mich auch! / riesig!', id: 'Saya juga senang! / sangat gembira!' },
@@ -1702,16 +2099,99 @@
                     'Chandan berichtet: Ich komme aus Indien und studiere seit dem Frühjahr an der Universität in Kiel. Am Anfang habe ich mich etwas fremd gefühlt, aber die Menschen hier sind unglaublich freundlich und hilfsbereit. Die Mitarbeiter an der Uni haben mir bei der Anmeldung im Wohnheim sehr geholfen. Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit. Das finde ich praktisch und unkompliziert. Inzwischen habe ich viele Kontakte geknüpft und fühle mich in Norddeutschland wie zu Hause.'
                 ],
 
-                // Quiz State
+                // Modul Leseverstehen-Check (4 Soal Standar Goethe A2)
+                leseAnswers: {
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: ''
+                },
+
+                leseCorrectAnswers: {
+                    q1: 'richtig',
+                    q2: 'paula',
+                    q3: 'chandan',
+                    q4: 'falsch'
+                },
+
+                leseScore: null,
+                showLeseFeedback: false,
+                showLeseKey: false,
+
+                getLeseQuestionClass(qNum) {
+                    if (!this.showLeseFeedback) return 'bg-gray-50/70 border-gray-200';
+                    const qKey = 'q' + qNum;
+                    const isCorrect = (this.leseAnswers[qKey] === this.leseCorrectAnswers[qKey]);
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                checkLeseverstehen() {
+                    let score = 0;
+                    for (let i = 1; i <= 4; i++) {
+                        const key = 'q' + i;
+                        if (this.leseAnswers[key] === this.leseCorrectAnswers[key]) {
+                            score++;
+                        }
+                    }
+                    this.leseScore = score;
+                    this.showLeseFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetLeseverstehen() {
+                    this.leseAnswers = {
+                        q1: '',
+                        q2: '',
+                        q3: '',
+                        q4: ''
+                    };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    this.saveProgress();
+                },
+
+                // Freies Schreiben State & Methods
+                studentComment: '',
+                commentLastSaved: '',
+                commentSavedToast: false,
+
+                insertRedemittel(phrase) {
+                    if (!this.studentComment) {
+                        this.studentComment = phrase;
+                    } else if (this.studentComment.endsWith(' ') || this.studentComment.endsWith('\n')) {
+                        this.studentComment += phrase;
+                    } else {
+                        this.studentComment += ' ' + phrase;
+                    }
+                    this.saveProgress();
+                },
+
+                saveComment() {
+                    if (!this.studentComment.trim()) return;
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const mins = String(now.getMinutes()).padStart(2, '0');
+                    this.commentLastSaved = `pukul ${hours}:${mins}`;
+                    this.commentSavedToast = true;
+                    this.saveProgress();
+                    setTimeout(() => {
+                        this.commentSavedToast = false;
+                    }, 4000);
+                },
+
+                // Answers & Quiz Übungen
                 answers: {
-                    q1: null,
-                    q2: null,
-                    q3: null,
-                    q4: null,
-                    q5: null,
-                    q6: null,
-                    q7: null,
-                    q8: null
+                    q1: '',
+                    q2: '',
+                    q3: '',
+                    q4: '',
+                    q5: '',
+                    q6: '',
+                    q7: '',
+                    q8: ''
                 },
 
                 correctAnswers: {
@@ -1719,41 +2199,186 @@
                     q2: 'b',
                     q3: 'c',
                     q4: 'a',
-                    q5: 'b',
-                    q6: 'c',
-                    q7: 'b',
-                    q8: 'c'
+                    q5: 'correct',
+                    q6: 'correct',
+                    q7: 'correct',
+                    q8: 'correct'
                 },
 
-                // Audio Speech Synthesis Method
-                speak(text, gender = 'female') {
-                    if (!('speechSynthesis' in window)) return;
-                    window.speechSynthesis.cancel();
-                    const utter = new SpeechSynthesisUtterance(text);
-                    utter.lang = 'de-DE';
-                    utter.rate = 0.92;
+                // Teil B Satzbauspiel State & Logic
+                puzzleInitial: {
+                    q5: ['Florian', 'freut sich', 'über das tolle Geschenk', 'von seinen Freunden'],
+                    q6: ['Am Anfang', 'habe ich mich', 'über die Verspätung', 'geärgert'],
+                    q7: ['Chandan', 'fühlt sich', 'in Kiel', 'wie zu Hause'],
+                    q8: ['Freust du dich', 'auf die Geburtstagsparty', 'am Samstag']
+                },
 
+                puzzleState: {
+                    q5: {
+                        pool: ['von seinen Freunden', 'Florian', 'über das tolle Geschenk', 'freut sich'],
+                        selected: []
+                    },
+                    q6: {
+                        pool: ['über die Verspätung', 'Am Anfang', 'geärgert', 'habe ich mich'],
+                        selected: []
+                    },
+                    q7: {
+                        pool: ['wie zu Hause', 'Chandan', 'in Kiel', 'fühlt sich'],
+                        selected: []
+                    },
+                    q8: {
+                        pool: ['am Samstag', 'Freust du dich', 'auf die Geburtstagsparty'],
+                        selected: []
+                    }
+                },
+
+                addWordToPuzzle(qKey, index) {
+                    const word = this.puzzleState[qKey].pool.splice(index, 1)[0];
+                    this.puzzleState[qKey].selected.push(word);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                removeWordFromPuzzle(qKey, index) {
+                    const word = this.puzzleState[qKey].selected.splice(index, 1)[0];
+                    this.puzzleState[qKey].pool.push(word);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                resetPuzzle(qKey) {
+                    this.puzzleState[qKey].pool = [...this.puzzleInitial[qKey]].sort(() => Math.random() - 0.5);
+                    this.puzzleState[qKey].selected = [];
+                    this.answers[qKey] = '';
+                },
+
+                checkPuzzleMatch(qKey) {
+                    const selected = this.puzzleState[qKey].selected;
+                    if (selected.length !== this.puzzleInitial[qKey].length) {
+                        this.answers[qKey] = '';
+                        this.saveProgress();
+                        return;
+                    }
+                    const sentence = selected.join(' ').toLowerCase().replace(/[,.?]/g, '').trim();
+
+                    if (qKey === 'q5') {
+                        if (sentence === 'florian freut sich über das tolle geschenk von seinen freunden' ||
+                            sentence === 'florian freut sich von seinen freunden über das tolle geschenk') {
+                            this.answers.q5 = 'correct';
+                        } else {
+                            this.answers.q5 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q6') {
+                        if (sentence === 'am anfang habe ich mich über die verspätung geärgert' ||
+                            sentence === 'habe ich mich am anfang über die verspätung geärgert') {
+                            this.answers.q6 = 'correct';
+                        } else {
+                            this.answers.q6 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q7') {
+                        if (sentence === 'chandan fühlt sich in kiel wie zu hause' ||
+                            sentence === 'in kiel fühlt sich chandan wie zu hause') {
+                            this.answers.q7 = 'correct';
+                        } else {
+                            this.answers.q7 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q8') {
+                        if (sentence === 'freust du dich auf die geburtstagsparty am samstag' ||
+                            sentence === 'freust du dich am samstag auf die geburtstagsparty') {
+                            this.answers.q8 = 'correct';
+                        } else {
+                            this.answers.q8 = 'wrong';
+                        }
+                    }
+
+                    this.saveProgress();
+                },
+
+                getQuestionClass(qNum) {
+                    if (!this.showFeedback) return 'bg-gray-50/70 border-gray-200';
+                    const qKey = 'q' + qNum;
+                    const isCorrect = (this.answers[qKey] === this.correctAnswers[qKey]);
+                    return isCorrect
+                        ? 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-400/20'
+                        : 'bg-red-50/60 border-red-300 ring-1 ring-red-400/20';
+                },
+
+                checkQuiz() {
+                    let score = 0;
+                    for (let i = 1; i <= 8; i++) {
+                        const key = 'q' + i;
+                        if (this.answers[key] === this.correctAnswers[key]) {
+                            score++;
+                        }
+                    }
+                    this.quizScore = score;
+                    this.showFeedback = true;
+                    this.saveProgress();
+                },
+
+                resetQuiz() {
+                    this.answers = {
+                        q1: '',
+                        q2: '',
+                        q3: '',
+                        q4: '',
+                        q5: '',
+                        q6: '',
+                        q7: '',
+                        q8: ''
+                    };
+                    for (let i = 5; i <= 8; i++) {
+                        const qKey = 'q' + i;
+                        if (this.puzzleState[qKey]) {
+                            this.resetPuzzle(qKey);
+                        }
+                    }
+                    this.quizScore = null;
+                    this.showFeedback = false;
+                    this.showKey = false;
+                    this.saveProgress();
+                },
+
+                // Audio Voices Management
+                initVoices() {
+                    if ('speechSynthesis' in window) {
+                        const load = () => {
+                            this.voices = window.speechSynthesis.getVoices();
+                            const deVoices = this.voices.filter(v => v.lang.startsWith('de'));
+                            if (deVoices.length > 0) {
+                                this.femaleVoice = deVoices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('hedda') || v.name.toLowerCase().includes('katja') || v.name.toLowerCase().includes('marlene')) || deVoices[0];
+                                this.maleVoice = deVoices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('stefan') || v.name.toLowerCase().includes('bernd') || v.name.toLowerCase().includes('hans')) || deVoices[deVoices.length - 1];
+                            }
+                        };
+                        load();
+                        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                            window.speechSynthesis.onvoiceschanged = load;
+                        }
+                    }
+                },
+
+                speak(text, gender = 'female') {
+                    if (!('speechSynthesis' in window)) {
+                        alert('Browser Anda belum mendukung fitur Web Speech Audio.');
+                        return;
+                    }
+                    window.speechSynthesis.cancel();
+                    const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
+                    const utter = new SpeechSynthesisUtterance(cleanText);
+                    utter.lang = 'de-DE';
+                    utter.rate = 0.9;
                     if (gender === 'male' && this.maleVoice) {
                         utter.voice = this.maleVoice;
+                        utter.pitch = 0.95;
                     } else if (this.femaleVoice) {
                         utter.voice = this.femaleVoice;
+                        utter.pitch = 1.05;
                     }
                     window.speechSynthesis.speak(utter);
-                },
-
-                initVoices() {
-                    if (!('speechSynthesis' in window)) return;
-                    const updateVoices = () => {
-                        this.voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('de'));
-                        if (this.voices.length > 0) {
-                            this.femaleVoice = this.voices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('hedda') || v.name.toLowerCase().includes('katja') || v.name.toLowerCase().includes('marlene')) || this.voices[0];
-                            this.maleVoice = this.voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('stefan') || v.name.toLowerCase().includes('hans')) || this.voices[1] || this.voices[0];
-                        }
-                    };
-                    updateVoices();
-                    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-                        window.speechSynthesis.onvoiceschanged = updateVoices;
-                    }
                 },
 
                 playFullDialog(dialogNum) {
@@ -1769,10 +2394,12 @@
                     window.speechSynthesis.cancel();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
+                    this.currentSpeakingIndex = 0;
+
+                    const dialogData = (dialogNum === 1) ? this.dialog1Lines : this.dialog2Lines;
 
                     const speakNextLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
+                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= dialogData.length) {
                             this.isPlayingFullDialog = false;
                             this.activeDialogPlaying = null;
                             this.currentSpeakingIndex = null;
@@ -1780,21 +2407,24 @@
                         }
 
                         this.currentSpeakingIndex = index;
-                        const line = lines[index];
-                        const utter = new SpeechSynthesisUtterance(line.de);
+                        const line = dialogData[index];
+                        const cleanText = line.de.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
+                        const utter = new SpeechSynthesisUtterance(cleanText);
                         utter.lang = 'de-DE';
-                        utter.rate = 0.92;
+                        utter.rate = 0.88;
 
                         if (line.gender === 'male' && this.maleVoice) {
                             utter.voice = this.maleVoice;
+                            utter.pitch = 0.95;
                         } else if (this.femaleVoice) {
                             utter.voice = this.femaleVoice;
+                            utter.pitch = 1.05;
                         }
 
                         utter.onend = () => {
                             setTimeout(() => {
                                 speakNextLine(index + 1);
-                            }, 500);
+                            }, 600);
                         };
 
                         utter.onerror = () => {
@@ -1809,58 +2439,9 @@
                     speakNextLine(0);
                 },
 
-                toggleReadLesetext() {
-                    if (!('speechSynthesis' in window)) return;
-                    if (this.isReadingLesetext) {
-                        window.speechSynthesis.cancel();
-                        this.isReadingLesetext = false;
-                        this.currentLesetextIndex = null;
-                        return;
-                    }
-
-                    window.speechSynthesis.cancel();
-                    this.isReadingLesetext = true;
-                    this.currentLesetextIndex = 0;
-
-                    const speakNextParagraph = (index) => {
-                        if (!this.isReadingLesetext || index >= this.lesetextParagraphs.length) {
-                            this.isReadingLesetext = false;
-                            this.currentLesetextIndex = null;
-                            return;
-                        }
-
-                        this.currentLesetextIndex = index;
-                        const text = this.lesetextParagraphs[index];
-                        const utter = new SpeechSynthesisUtterance(text);
-                        utter.lang = 'de-DE';
-                        utter.rate = 0.9;
-                        const gender = (index % 2 === 0) ? 'female' : 'male';
-                        if (gender === 'male' && this.maleVoice) {
-                            utter.voice = this.maleVoice;
-                        } else if (this.femaleVoice) {
-                            utter.voice = this.femaleVoice;
-                        }
-
-                        utter.onend = () => {
-                            setTimeout(() => {
-                                speakNextParagraph(index + 1);
-                            }, 700);
-                        };
-
-                        utter.onerror = () => {
-                            this.isReadingLesetext = false;
-                            this.currentLesetextIndex = null;
-                        };
-
-                        window.speechSynthesis.speak(utter);
-                    };
-
-                    speakNextParagraph(0);
-                },
-
                 initApp() {
                     this.initVoices();
-                    this.loadSavedProgress('guest');
+                    this.loadLocalProgress('guest');
 
                     // Reading Progress Listener
                     window.addEventListener('scroll', () => {
@@ -1877,45 +2458,83 @@
                                 this.currentUser = user;
                                 this.userName = user.displayName || user.email.split('@')[0];
                                 this.userInitial = this.userName.charAt(0).toUpperCase();
-                                this.syncWithFirestore(user.uid);
+                                this.authLoading = false;
+                                this.loadFirestoreProgress(user.uid);
                             } else {
                                 this.currentUser = null;
                                 this.userName = '';
                                 this.userInitial = 'S';
+                                this.authLoading = false;
+                                window.location.replace('../dashboard-a2-1/');
                             }
-                            this.authLoading = false;
                         });
                     } else {
                         this.authLoading = false;
+                        window.location.replace('../dashboard-a2-1/');
                     }
                 },
 
-                loadSavedProgress(uid) {
+                applyProgressData(data) {
+                    if (!data) return;
+                    if (data.goals && Array.isArray(data.goals)) {
+                        data.goals.forEach((g, i) => {
+                            if (this.learningGoals[i]) {
+                                if (typeof g === 'boolean') {
+                                    this.learningGoals[i].completed = g;
+                                } else if (typeof g === 'object' && g !== null && g.completed !== undefined) {
+                                    this.learningGoals[i].completed = Boolean(g.completed);
+                                }
+                            }
+                        });
+                    }
+                    if (data.answers) this.answers = { ...this.answers, ...data.answers };
+                    if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                    if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                    if (data.leseAnswers) this.leseAnswers = { ...this.leseAnswers, ...data.leseAnswers };
+                    if (data.leseScore !== undefined) this.leseScore = data.leseScore;
+                    if (data.showLeseFeedback !== undefined) this.showLeseFeedback = data.showLeseFeedback;
+                    if (data.showLeseKey !== undefined) this.showLeseKey = data.showLeseKey;
+                    if (data.studentComment !== undefined) this.studentComment = data.studentComment;
+                    if (data.commentLastSaved !== undefined) this.commentLastSaved = data.commentLastSaved;
+                    if (data.puzzles) this.puzzleState = data.puzzles;
+                },
+
+                loadLocalProgress(uid = 'guest') {
                     try {
                         const local = localStorage.getItem(`aksaradeutsch_${uid}_lesson_a2_8`);
                         if (local) {
-                            const data = JSON.parse(local);
-                            if (data.goals) {
-                                data.goals.forEach((g, i) => {
-                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
-                                });
-                            }
-                            if (data.answers) {
-                                this.answers = { ...this.answers, ...data.answers };
-                            }
-                            if (data.quizScore !== undefined && data.quizScore !== null) {
-                                this.quizScore = data.quizScore;
-                                this.showFeedback = true;
-                            }
+                            this.applyProgressData(JSON.parse(local));
                         }
                     } catch (e) {
                         console.error('Error loading local storage:', e);
                     }
                 },
 
-                async syncWithFirestore(uid) {
-                    this.loadSavedProgress(uid);
-                    if (!db) return;
+                saveProgressToLocal(uid = (this.currentUser ? this.currentUser.uid : 'guest')) {
+                    const dataToSave = {
+                        lessonId: 'lesson_a2_8',
+                        goals: this.learningGoals.map(g => g.completed),
+                        answers: this.answers,
+                        quizScore: this.quizScore,
+                        showFeedback: this.showFeedback,
+                        leseAnswers: this.leseAnswers,
+                        leseScore: this.leseScore,
+                        showLeseFeedback: this.showLeseFeedback,
+                        showLeseKey: this.showLeseKey,
+                        studentComment: this.studentComment,
+                        commentLastSaved: this.commentLastSaved,
+                        puzzles: this.puzzleState,
+                        updatedAt: new Date().toISOString()
+                    };
+                    try {
+                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_8`, JSON.stringify(dataToSave));
+                    } catch (e) {}
+                    return dataToSave;
+                },
+
+                async loadFirestoreProgress(uid) {
+                    this.loadLocalProgress(uid);
+                    if (!db || !uid) return;
 
                     try {
                         let remoteData = null;
@@ -1932,18 +2551,7 @@
                         }
 
                         if (remoteData) {
-                            if (remoteData.goals) {
-                                remoteData.goals.forEach((g, i) => {
-                                    if (this.learningGoals[i]) this.learningGoals[i].completed = Boolean(g);
-                                });
-                            }
-                            if (remoteData.answers) {
-                                this.answers = { ...this.answers, ...remoteData.answers };
-                            }
-                            if (remoteData.quizScore !== undefined && remoteData.quizScore !== null) {
-                                this.quizScore = remoteData.quizScore;
-                                this.showFeedback = true;
-                            }
+                            this.applyProgressData(remoteData);
                             this.saveProgressToLocal(uid);
                         }
                     } catch (e) {
@@ -1951,93 +2559,28 @@
                     }
                 },
 
-                saveProgressToLocal(uid = 'guest') {
-                    try {
-                        const data = {
-                            goals: this.learningGoals.map(g => g.completed),
-                            answers: this.answers,
-                            quizScore: this.quizScore,
-                            updatedAt: new Date().toISOString()
-                        };
-                        localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_8`, JSON.stringify(data));
-                    } catch (e) {
-                        console.error('Error saving local storage:', e);
-                    }
-                },
-
                 async saveProgress() {
-                    const uid = this.currentUser ? this.currentUser.uid : 'guest';
-                    this.saveProgressToLocal(uid);
+                    const dataToSave = this.saveProgressToLocal();
+                    if (!this.currentUser || !db) return;
 
-                    if (this.currentUser && db) {
-                        try {
-                            const payload = {
-                                goals: this.learningGoals.map(g => g.completed),
-                                answers: this.answers,
-                                quizScore: this.quizScore,
-                                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                            };
-                            await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_8').set(payload, { merge: true });
-                            await db.collection('user_progress').doc(this.currentUser.uid).set({
-                                lesson_a2_8: payload
-                            }, { merge: true });
-                        } catch (e) {
-                            console.error('Error saving Firestore:', e);
-                        }
+                    this.syncStatusText = 'Menyimpan...';
+                    try {
+                        await db.collection('users').doc(this.currentUser.uid).collection('progress').doc('lesson_a2_8').set(dataToSave, { merge: true });
+                        await db.collection('user_progress').doc(this.currentUser.uid).set({
+                            lesson_a2_8: dataToSave
+                        }, { merge: true });
+                        this.syncStatusText = 'Tersinkronisasi';
+                    } catch (err) {
+                        this.syncStatusText = 'Tersimpan lokal';
                     }
                 },
 
-                getQuestionClass(qNum) {
-                    if (!this.showFeedback) return 'bg-gray-50/50 border-gray-200';
-                    const userAns = this.answers['q' + qNum];
-                    const corrAns = this.correctAnswers['q' + qNum];
-                    if (userAns === corrAns) {
-                        return 'bg-emerald-50/60 border-emerald-300 ring-1 ring-emerald-300';
-                    } else {
-                        return 'bg-red-50/60 border-red-300 ring-1 ring-red-300';
-                    }
-                },
-
-                checkQuiz() {
-                    let score = 0;
-                    for (let i = 1; i <= 8; i++) {
-                        if (this.answers['q' + i] === this.correctAnswers['q' + i]) {
-                            score++;
-                        }
-                    }
-                    this.quizScore = score;
-                    this.showFeedback = true;
-                    this.saveProgress();
-                },
-
-                resetQuiz() {
-                    this.answers = {
-                        q1: null,
-                        q2: null,
-                        q3: null,
-                        q4: null,
-                        q5: null,
-                        q6: null,
-                        q7: null,
-                        q8: null
-                    };
-                    this.quizScore = null;
-                    this.showFeedback = false;
-                    this.showKey = false;
-                    this.saveProgress();
-                },
-
-                logout() {
+                async logout() {
                     if (auth) {
-                        auth.signOut().then(() => {
-                            window.location.href = '../login.html';
-                        }).catch(e => {
-                            console.error('Logout error:', e);
-                            window.location.href = '../login.html';
-                        });
-                    } else {
-                        window.location.href = '../login.html';
+                        await auth.signOut();
                     }
+                    this.currentUser = null;
+                    window.location.replace('../dashboard-a2-1/');
                 }
             };
         }
