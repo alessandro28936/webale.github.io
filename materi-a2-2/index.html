@@ -291,7 +291,7 @@
                         Verabredungen und Begründungen. Nebensätze mit weil
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
-                        Mempelajari cara membuat janji temu, menerima atau menolak ajakan secara santun, serta menyatakan alasan menggunakan anak kalimat <em>Nebensatz mit weil</em> dengan kaidah kata kerja di akhir kalimat. Selain itu, mengenali bentuk penyingkatan pesan singkat informal (<em>Kurzformen in Nachrichten</em>) dan pengalaman bersantap di restoran tanpa cahaya (<em>Essen ohne Licht</em>).
+                        Buat janji temu, tanggapi ajakan teman, dan jelaskan alasanmu menggunakan kata <em>weil</em> dalam percakapan sehari-hari maupun situasi formal.
                     </p>
 
                     <!-- Meta Tags -->
@@ -408,14 +408,28 @@
         <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
         <!-- ============================================================= -->
         <section id="wortschatz" class="mb-14 scroll-mt-24">
-            <div class="flex items-start sm:items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
-                    1
+            <div class="flex flex-col sm:flex-row sm:items-start sm:items-center justify-between gap-3 mb-6">
+                <div class="flex items-start sm:items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                        1
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                        <p class="text-xs sm:text-sm text-gray-500">Dengarkan pelafalan kosakata dan frasa komunikasi janji temu penutur asli.</p>
+                    </div>
                 </div>
-                <div class="min-w-0 flex-1">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
-                    <p class="text-xs sm:text-sm text-gray-500">Dengarkan pelafalan kosakata dan frasa komunikasi janji temu penutur asli.</p>
-                </div>
+                <button type="button" @click="showPluralForms = !showPluralForms"
+                    class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                    :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                        </path>
+                    </svg>
+                    <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                </button>
             </div>
 
             <!-- Grid 2 Box Putih: Sub-topik A & Sub-topik B -->
@@ -445,6 +459,13 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span
+                                                    class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -487,6 +508,13 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span
+                                                    class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -1321,6 +1349,7 @@
                 userInitial: 'S',
                 syncStatusText: 'Tersinkronisasi',
                 readingProgress: 0,
+                showPluralForms: false,
 
                 // Dialog State
                 isPlayingFullDialog: false,
@@ -1353,39 +1382,37 @@
                 },
 
                 // ==========================================
-                // VOCABULARY DATA
-                // ==========================================
                 // A. Janji Temu dan Undangan
                 vocabAppointments: [
-                    { article: 'die', gender: 'fem', word: 'Einladung, -en', fullWord: 'die Einladung', meaning: 'undangan' },
-                    { article: 'die', gender: 'fem', word: 'Verabredung, -en', fullWord: 'die Verabredung', meaning: 'janji bertemu' },
-                    { article: 'die', gender: 'fem', word: 'Überstunde, -n', fullWord: 'die Überstunde', meaning: 'kerja lembur' },
-                    { article: 'die', gender: 'fem', word: 'Grippe, -n', fullWord: 'die Grippe', meaning: 'penyakit flu' },
-                    { article: 'die', gender: 'fem', word: 'Spezialität, -en', fullWord: 'die Spezialität', meaning: 'makanan khas daerah' },
-                    { article: 'der', gender: 'masc', word: 'Flohmarkt, Flohmärkte', fullWord: 'der Flohmarkt', meaning: 'pasar barang bekas' },
-                    { article: '', gender: 'verb', word: 'einladen', fullWord: 'einladen', meaning: 'mengundang' },
-                    { article: '', gender: 'verb', word: 'mitbringen', fullWord: 'mitbringen', meaning: 'membawa serta' },
-                    { article: '', gender: 'verb', word: 'vorbeikommen', fullWord: 'vorbeikommen', meaning: 'mampir berkunjung' },
-                    { article: '', gender: 'verb', word: 'absagen', fullWord: 'absagen', meaning: 'membatalkan janji' },
-                    { article: '', gender: 'verb', word: 'zusagen', fullWord: 'zusagen', meaning: 'menyetujui janji' },
-                    { article: '', gender: 'phrase', word: 'Lust haben', fullWord: 'Lust haben', meaning: 'berminat' },
-                    { article: '', gender: 'phrase', word: 'Zeit haben', fullWord: 'Zeit haben', meaning: 'memiliki waktu luang' }
+                    { article: 'die', gender: 'fem', word: 'Einladung', fullWord: 'die Einladung', plural: 'die Einladungen', meaning: 'undangan' },
+                    { article: 'die', gender: 'fem', word: 'Verabredung', fullWord: 'die Verabredung', plural: 'die Verabredungen', meaning: 'janji bertemu' },
+                    { article: 'die', gender: 'fem', word: 'Überstunde', fullWord: 'die Überstunde', plural: 'die Überstunden', meaning: 'kerja lembur' },
+                    { article: 'die', gender: 'fem', word: 'Grippe', fullWord: 'die Grippe', plural: 'die Grippen', meaning: 'penyakit flu' },
+                    { article: 'die', gender: 'fem', word: 'Spezialität', fullWord: 'die Spezialität', plural: 'die Spezialitäten', meaning: 'makanan khas daerah' },
+                    { article: 'der', gender: 'masc', word: 'Flohmarkt', fullWord: 'der Flohmarkt', plural: 'die Flohmärkte', meaning: 'pasar barang bekas' },
+                    { article: '', gender: 'verb', word: 'einladen', fullWord: 'einladen', plural: null, meaning: 'mengundang' },
+                    { article: '', gender: 'verb', word: 'mitbringen', fullWord: 'mitbringen', plural: null, meaning: 'membawa serta' },
+                    { article: '', gender: 'verb', word: 'vorbeikommen', fullWord: 'vorbeikommen', plural: null, meaning: 'mampir berkunjung' },
+                    { article: '', gender: 'verb', word: 'absagen', fullWord: 'absagen', plural: null, meaning: 'membatalkan janji' },
+                    { article: '', gender: 'verb', word: 'zusagen', fullWord: 'zusagen', plural: null, meaning: 'menyetujui janji' },
+                    { article: '', gender: 'phrase', word: 'Lust haben', fullWord: 'Lust haben', plural: null, meaning: 'berminat' },
+                    { article: '', gender: 'phrase', word: 'Zeit haben', fullWord: 'Zeit haben', plural: null, meaning: 'memiliki waktu luang' }
                 ],
 
                 // B. Restoran dan Pengalaman Sensorik
                 vocabRestaurant: [
-                    { article: 'der', gender: 'masc', word: 'Eingang, Eingänge', fullWord: 'der Eingang', meaning: 'pintu masuk' },
-                    { article: 'die', gender: 'fem', word: 'Rezeption, -en', fullWord: 'die Rezeption', meaning: 'meja penerima tamu' },
-                    { article: 'die', gender: 'fem', word: 'Speisekarte, -n', fullWord: 'die Speisekarte', meaning: 'buku menu' },
-                    { article: 'die', gender: 'fem', word: 'Rechnung, -en', fullWord: 'die Rechnung', meaning: 'nota tagihan' },
-                    { article: 'der', gender: 'masc', word: 'Sinn, -e', fullWord: 'der Sinn', meaning: 'panca indra' },
-                    { article: 'das', gender: 'neut', word: 'Dunkle', fullWord: 'das Dunkle', meaning: 'kegelapan' },
-                    { article: 'das', gender: 'neut', word: 'Erlebnis, -se', fullWord: 'das Erlebnis', meaning: 'pengalaman' },
-                    { article: '', gender: 'verb', word: 'empfangen', fullWord: 'empfangen', meaning: 'menyambut kedatangan' },
-                    { article: '', gender: 'verb', word: 'auswählen', fullWord: 'auswählen', meaning: 'memilih' },
-                    { article: '', gender: 'verb', word: 'reservieren', fullWord: 'reservieren', meaning: 'memesan tempat' },
-                    { article: '', gender: 'adj', word: 'verboten', fullWord: 'verboten', meaning: 'terlarang' },
-                    { article: '', gender: 'adj', word: 'dunkel', fullWord: 'dunkel', meaning: 'gelap' }
+                    { article: 'der', gender: 'masc', word: 'Eingang', fullWord: 'der Eingang', plural: 'die Eingänge', meaning: 'pintu masuk' },
+                    { article: 'die', gender: 'fem', word: 'Rezeption', fullWord: 'die Rezeption', plural: 'die Rezeptionen', meaning: 'meja penerima tamu' },
+                    { article: 'die', gender: 'fem', word: 'Speisekarte', fullWord: 'die Speisekarte', plural: 'die Speisekarten', meaning: 'buku menu' },
+                    { article: 'die', gender: 'fem', word: 'Rechnung', fullWord: 'die Rechnung', plural: 'die Rechnungen', meaning: 'nota tagihan' },
+                    { article: 'der', gender: 'masc', word: 'Sinn', fullWord: 'der Sinn', plural: 'die Sinne', meaning: 'panca indra' },
+                    { article: 'das', gender: 'neut', word: 'Dunkle', fullWord: 'das Dunkle', plural: 'nur Singular', meaning: 'kegelapan' },
+                    { article: 'das', gender: 'neut', word: 'Erlebnis', fullWord: 'das Erlebnis', plural: 'die Erlebnisse', meaning: 'pengalaman' },
+                    { article: '', gender: 'verb', word: 'empfangen', fullWord: 'empfangen', plural: null, meaning: 'menyambut kedatangan' },
+                    { article: '', gender: 'verb', word: 'auswählen', fullWord: 'auswählen', plural: null, meaning: 'memilih' },
+                    { article: '', gender: 'verb', word: 'reservieren', fullWord: 'reservieren', plural: null, meaning: 'memesan tempat' },
+                    { article: '', gender: 'adj', word: 'verboten', fullWord: 'verboten', plural: null, meaning: 'terlarang' },
+                    { article: '', gender: 'adj', word: 'dunkel', fullWord: 'dunkel', plural: null, meaning: 'gelap' }
                 ],
 
                 // C. Redemittel
