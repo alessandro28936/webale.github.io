@@ -283,10 +283,7 @@
                         Über Vergangenes berichten. Profil und Perfekt
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
-                        Mempelajari cara menceritakan profil diri serta pengalaman masa lalu menggunakan bentuk kalimat lampau
-                        <em>Perfekt</em> dengan kata kerja bantu <em>haben</em> dan <em>sein</em>, memahami sistematika pembentukan
-                        <em>Partizip II</em>, menerapkan aturan kepemilikan nama (<em>Genitiv bei Eigennamen</em>), serta membedakan pelafalan fonetik bunyi
-                        <em>ch</em> (<em>ich-Laut</em> dan <em>ach-Laut</em>).
+                        Ceritakan riwayat hidup dan kegiatan masa lalumu menggunakan bentuk <em>Perfekt</em> saat berkenalan maupun bertukar cerita dengan orang lain.
                     </p>
 
                     <!-- Meta Tags -->
@@ -414,14 +411,28 @@
         <!-- 1. KOSAKATA (WORTSCHATZ)                                      -->
         <!-- ============================================================= -->
         <section id="wortschatz" class="mb-14 scroll-mt-24">
-            <div class="flex items-start sm:items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
-                    1
+            <div class="flex flex-col sm:flex-row sm:items-start sm:items-center justify-between gap-3 mb-6">
+                <div class="flex items-start sm:items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-navy text-white flex items-center justify-center font-extrabold text-lg shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                        1
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
+                        <p class="text-xs sm:text-sm text-gray-500">Klik tombol audio untuk mendengarkan pelafalan bahasa Jerman yang jernih.</p>
+                    </div>
                 </div>
-                <div class="min-w-0 flex-1">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Kosakata (Wortschatz)</h2>
-                    <p class="text-xs sm:text-sm text-gray-500">Klik tombol audio untuk mendengarkan pelafalan bahasa Jerman yang jernih.</p>
-                </div>
+                <button type="button" @click="showPluralForms = !showPluralForms"
+                    class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                    :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                        </path>
+                    </svg>
+                    <span x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                </button>
             </div>
 
             <!-- Sub-Bagian A: Kehidupan Pribadi dan Keluarga (Familie und Leben) -->
@@ -454,6 +465,12 @@
                                         x-text="item.word"></strong>
                                 </div>
                                 <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                <template x-if="item.plural && showPluralForms">
+                                    <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                        <span class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                        <span class="font-bold text-navy" x-text="item.plural"></span>
+                                    </div>
+                                </template>
                             </div>
                             <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                 class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -496,6 +513,13 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span
+                                                    class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -537,6 +561,13 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span
+                                                    class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -1383,6 +1414,7 @@
                 userInitial: 'S',
                 syncStatusText: 'Tersinkronisasi',
                 readingProgress: 0,
+                showPluralForms: false,
 
                 // Dialog State
                 isPlayingFullDialog: false,
@@ -1420,42 +1452,42 @@
                 // ==========================================
                 // A. Kehidupan Pribadi & Keluarga
                 vocabFamily: [
-                    { article: 'die', gender: 'fem', word: 'Eltern (Pl.)', fullWord: 'die Eltern', meaning: 'orang tua (ayah & ibu)' },
-                    { article: 'der', gender: 'masc', word: 'Rentner, -', fullWord: 'der Rentner', meaning: 'pensiunan pria' },
-                    { article: 'die', gender: 'fem', word: 'Rentnerin, -nen', fullWord: 'die Rentnerin', meaning: 'pensiunan wanita' },
-                    { article: 'das', gender: 'neut', word: 'Land', fullWord: 'das Land', meaning: 'desa / luar kota (auf dem Land)' },
-                    { article: 'die', gender: 'fem', word: 'Muttersprache, -n', fullWord: 'die Muttersprache', meaning: 'bahasa ibu' },
-                    { article: 'die', gender: 'fem', word: 'Hochzeit, -en', fullWord: 'die Hochzeit', meaning: 'pernikahan' },
-                    { article: 'das', gender: 'neut', word: 'Fest, -e', fullWord: 'das Fest', meaning: 'pesta perayaan' },
-                    { article: 'das', gender: 'neut', word: 'Pferd, -e', fullWord: 'das Pferd', meaning: 'kuda' },
-                    { article: 'der', gender: 'masc', word: 'Verein, -e', fullWord: 'der Verein', meaning: 'klub / perkumpulan' },
-                    { article: 'die', gender: 'fem', word: 'Großeltern (Pl.)', fullWord: 'die Großeltern', meaning: 'kakek dan nenek' },
-                    { article: 'die', gender: 'fem', word: 'Verwandten (Pl.)', fullWord: 'die Verwandten', meaning: 'kerabat / keluarga besar' },
-                    { article: 'die', gender: 'fem', word: 'Geschwister (Pl.)', fullWord: 'die Geschwister', meaning: 'saudara kandung' }
+                    { article: 'die', gender: 'fem', word: 'Eltern', fullWord: 'die Eltern', plural: 'nur Plural', meaning: 'orang tua (ayah & ibu)' },
+                    { article: 'der', gender: 'masc', word: 'Rentner', fullWord: 'der Rentner', plural: 'die Rentner', meaning: 'pensiunan pria' },
+                    { article: 'die', gender: 'fem', word: 'Rentnerin', fullWord: 'die Rentnerin', plural: 'die Rentnerinnen', meaning: 'pensiunan wanita' },
+                    { article: 'das', gender: 'neut', word: 'Land', fullWord: 'das Land', plural: 'auf dem Land / die Länder', meaning: 'desa / luar kota (auf dem Land)' },
+                    { article: 'die', gender: 'fem', word: 'Muttersprache', fullWord: 'die Muttersprache', plural: 'die Muttersprachen', meaning: 'bahasa ibu' },
+                    { article: 'die', gender: 'fem', word: 'Hochzeit', fullWord: 'die Hochzeit', plural: 'die Hochzeiten', meaning: 'pernikahan' },
+                    { article: 'das', gender: 'neut', word: 'Fest', fullWord: 'das Fest', plural: 'die Feste', meaning: 'pesta perayaan' },
+                    { article: 'das', gender: 'neut', word: 'Pferd', fullWord: 'das Pferd', plural: 'die Pferde', meaning: 'kuda' },
+                    { article: 'der', gender: 'masc', word: 'Verein', fullWord: 'der Verein', plural: 'die Vereine', meaning: 'klub / perkumpulan' },
+                    { article: 'die', gender: 'fem', word: 'Großeltern', fullWord: 'die Großeltern', plural: 'nur Plural', meaning: 'kakek dan nenek' },
+                    { article: 'die', gender: 'fem', word: 'Verwandten', fullWord: 'die Verwandten', plural: 'nur Plural', meaning: 'kerabat / keluarga besar' },
+                    { article: 'die', gender: 'fem', word: 'Geschwister', fullWord: 'die Geschwister', plural: 'nur Plural', meaning: 'saudara kandung' }
                 ],
 
                 // B. Pendidikan & Jalur Vokasi
                 vocabEducation: [
-                    { article: 'die', gender: 'fem', word: 'Ausbildung, -en', fullWord: 'die Ausbildung', meaning: 'pelatihan vokasi kerja' },
-                    { article: 'das', gender: 'neut', word: 'Studium, Studien', fullWord: 'das Studium', meaning: 'studi perkuliahan' },
-                    { article: 'die', gender: 'fem', word: 'Uni, -s (Universität)', fullWord: 'die Universität', meaning: 'universitas' },
-                    { article: 'die', gender: 'fem', word: 'Prüfung, -en', fullWord: 'die Prüfung', meaning: 'ujian / tes' },
-                    { article: 'die', gender: 'fem', word: 'Note, -n', fullWord: 'die Note', meaning: 'nilai ujian' },
-                    { article: 'das', gender: 'neut', word: 'Zeugnis, -se', fullWord: 'das Zeugnis', meaning: 'sertifikat kelulusan / rapor' },
-                    { article: 'der', gender: 'masc', word: 'Schulabschluss', fullWord: 'der Schulabschluss', meaning: 'ijazah tamat sekolah' },
-                    { article: 'das', gender: 'neut', word: 'Praktikum, Praktika', fullWord: 'das Praktikum', meaning: 'magang kerja' }
+                    { article: 'die', gender: 'fem', word: 'Ausbildung', fullWord: 'die Ausbildung', plural: 'die Ausbildungen', meaning: 'pelatihan vokasi kerja' },
+                    { article: 'das', gender: 'neut', word: 'Studium', fullWord: 'das Studium', plural: 'die Studien', meaning: 'studi perkuliahan' },
+                    { article: 'die', gender: 'fem', word: 'Uni (Universität)', fullWord: 'die Universität', plural: 'die Unis / Universitäten', meaning: 'universitas' },
+                    { article: 'die', gender: 'fem', word: 'Prüfung', fullWord: 'die Prüfung', plural: 'die Prüfungen', meaning: 'ujian / tes' },
+                    { article: 'die', gender: 'fem', word: 'Note', fullWord: 'die Note', plural: 'die Noten', meaning: 'nilai ujian' },
+                    { article: 'das', gender: 'neut', word: 'Zeugnis', fullWord: 'das Zeugnis', plural: 'die Zeugnisse', meaning: 'sertifikat kelulusan / rapor' },
+                    { article: 'der', gender: 'masc', word: 'Schulabschluss', fullWord: 'der Schulabschluss', plural: 'die Schulabschlüsse', meaning: 'ijazah tamat sekolah' },
+                    { article: 'das', gender: 'neut', word: 'Praktikum', fullWord: 'das Praktikum', plural: 'die Praktika', meaning: 'magang kerja' }
                 ],
 
                 // C. Pekerjaan & Tempat Tinggal
                 vocabJobsHousing: [
-                    { article: 'die', gender: 'fem', word: 'Bankkauffrau, -en', fullWord: 'die Bankkauffrau', meaning: 'pegawai bank wanita' },
-                    { article: 'die', gender: 'fem', word: 'Augenoptikerin, -nen', fullWord: 'die Augenoptikerin', meaning: 'ahli optik wanita' },
-                    { article: 'die', gender: 'fem', word: 'Wohnung, -en', fullWord: 'die Wohnung', meaning: 'apartemen / hunian' },
-                    { article: 'das', gender: 'neut', word: 'Apartment, -s', fullWord: 'das Apartment', meaning: 'apartemen studio' },
-                    { article: 'das', gender: 'neut', word: 'Stadtzentrum', fullWord: 'das Stadtzentrum', meaning: 'pusat kota' },
-                    { article: 'die', gender: 'fem', word: 'WG (Wohngemeinschaft)', fullWord: 'die Wohngemeinschaft', meaning: 'apartemen sewa bersama' },
-                    { article: 'die', gender: 'fem', word: 'Miete, -n', fullWord: 'die Miete', meaning: 'uang sewa bulanan' },
-                    { article: 'der', gender: 'masc', word: 'Umzug, Umzüge', fullWord: 'der Umzug', meaning: 'proses pindah rumah' }
+                    { article: 'die', gender: 'fem', word: 'Bankkauffrau', fullWord: 'die Bankkauffrau', plural: 'die Bankkauffrauen', meaning: 'pegawai bank wanita' },
+                    { article: 'die', gender: 'fem', word: 'Augenoptikerin', fullWord: 'die Augenoptikerin', plural: 'die Augenoptikerinnen', meaning: 'ahli optik wanita' },
+                    { article: 'die', gender: 'fem', word: 'Wohnung', fullWord: 'die Wohnung', plural: 'die Wohnungen', meaning: 'apartemen / hunian' },
+                    { article: 'das', gender: 'neut', word: 'Apartment', fullWord: 'das Apartment', plural: 'die Apartments', meaning: 'apartemen studio' },
+                    { article: 'das', gender: 'neut', word: 'Stadtzentrum', fullWord: 'das Stadtzentrum', plural: 'die Stadtzentren', meaning: 'pusat kota' },
+                    { article: 'die', gender: 'fem', word: 'WG (Wohngemeinschaft)', fullWord: 'die Wohngemeinschaft', plural: 'die WGs / Wohngemeinschaften', meaning: 'apartemen sewa bersama' },
+                    { article: 'die', gender: 'fem', word: 'Miete', fullWord: 'die Miete', plural: 'die Mieten', meaning: 'uang sewa bulanan' },
+                    { article: 'der', gender: 'masc', word: 'Umzug', fullWord: 'der Umzug', plural: 'die Umzüge', meaning: 'proses pindah rumah' }
                 ],
 
                 // D. Kata Kerja Aktivitas & Tahapan Hidup
