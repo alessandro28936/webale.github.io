@@ -94,7 +94,10 @@
         });
 
         document.addEventListener('selectstart', function (e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            const isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+            const targetEl = e.target.nodeType === 3 ? e.target.parentElement : e.target;
+            const isSelectable = targetEl && targetEl.closest && targetEl.closest('.selectable-text');
+            if (!isInput && !isSelectable) {
                 e.preventDefault();
             }
         });
@@ -137,11 +140,13 @@
 
         input,
         select,
-        textarea {
-            -webkit-user-select: auto;
-            -moz-user-select: auto;
-            -ms-user-select: auto;
-            user-select: auto;
+        textarea,
+        .selectable-text,
+        .selectable-text * {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
         }
 
         .btn-orange {
@@ -291,7 +296,7 @@
                         Digitale Medien und Vergleiche: Komparativ und Superlativ
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-6 font-normal">
-                        Mempelajari kosakata gawai dan aktivitas media digital modern, menguasai tingkat perbandingan lebih (<em>Komparativ</em>) dengan partikel <em>als</em> dan kesetaraan <em>(genau) so ... wie</em>, menyatakan keunggulan maksimal dengan tingkat paling (<em>Superlativ: am ...-sten</em>), serta strategi percakapan mengulur waktu berpikir saat berbicara spontan (<em>Beim Sprechen Zeit gewinnen</em>).
+                        Bandingkan kelebihan perangkat elektronik dan aplikasi menggunakan bentuk <em>Komparativ</em> dan <em>Superlativ</em> saat mendiskusikan teknologi sehari-hari.
                     </p>
 
                     <!-- Meta Tags -->
@@ -422,11 +427,24 @@
                 <!-- Subtopik A: Perangkat dan Media Digital -->
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="mb-6 pb-4 border-b border-gray-100 flex items-center justify-between">
+                        <div class="mb-6 pb-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
                                 <h3 class="text-lg font-bold text-navy">A. Perangkat dan Media Digital (Digitale Medien und Geräte)</h3>
                                 <p class="text-xs text-gray-500">Kosakata gawai elektronik, komputer, dan perangkat display visual.</p>
                             </div>
+                            <button type="button" @click="showPluralForms = !showPluralForms"
+                                class="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-xl border transition flex items-center gap-1.5 flex-shrink-0 shadow-2xs active:scale-95"
+                                :class="showPluralForms ? 'bg-orange-50 border-orange-200 text-orange-800' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                                <span
+                                    x-text="showPluralForms ? 'Sembunyikan Bentuk Jamak' : 'Lihat Bentuk Jamak (Plural)'"></span>
+                            </button>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -444,6 +462,13 @@
                                                 x-text="item.word"></strong>
                                         </div>
                                         <p class="text-xs text-gray-500 leading-snug" x-text="item.meaning"></p>
+                                        <template x-if="item.plural && showPluralForms">
+                                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] leading-tight">
+                                                <span
+                                                    class="px-1.5 py-0.5 rounded bg-orange-100/80 text-orange-900 font-bold text-[10px]">Plural:</span>
+                                                <span class="font-bold text-navy" x-text="item.plural"></span>
+                                            </div>
+                                        </template>
                                     </div>
                                     <button @click="speak(item.fullWord || item.word, item.gender === 'fem' ? 'female' : 'male')"
                                         class="p-1.5 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-xs transition flex-shrink-0"
@@ -806,20 +831,12 @@
                         <!-- Balon Dialog 1 -->
                         <div class="space-y-4">
                             <template x-for="(line, idx) in dialog1Lines" :key="idx">
-                                <div class="p-4 rounded-2xl border transition"
+                                <div class="p-4 rounded-2xl border transition selectable-text"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                                    <div class="flex items-center justify-between mb-1.5">
+                                    <div class="mb-1.5">
                                         <span class="text-xs font-extrabold"
                                             :class="line.speaker === 'Florian' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 transition shadow-2xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
                                     <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
@@ -853,20 +870,12 @@
                         <!-- Balon Dialog 2 -->
                         <div class="space-y-4">
                             <template x-for="(line, idx) in dialog2Lines" :key="idx">
-                                <div class="p-4 rounded-2xl border transition"
+                                <div class="p-4 rounded-2xl border transition selectable-text"
                                     :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
-                                    <div class="flex items-center justify-between mb-1.5">
+                                    <div class="mb-1.5">
                                         <span class="text-xs font-extrabold"
                                             :class="line.speaker === 'Lukas' ? 'text-blue-700' : 'text-purple-700'"
                                             x-text="line.speaker"></span>
-                                        <button @click="speak(line.text, line.gender)"
-                                            class="p-1 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-blue-600 transition shadow-2xs">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                                </path>
-                                            </svg>
-                                        </button>
                                     </div>
                                     <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.text"></p>
                                     <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.trans"></p>
@@ -894,37 +903,27 @@
 
             <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-100 shadow-sm">
                 <!-- Header Bacaan -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-100">
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-navy">Porträts aus Studium und Beruf: Meine Vorlieben im Alltag</h3>
-                        <p class="text-xs text-gray-500 mt-1">Zwei Personen berichten über ihren Alltag, ihre Motivation und ihre persönlichen Vorlieben.</p>
-                    </div>
-                    <button @click="readFullText()"
-                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition self-start sm:self-auto flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                :d="isReadingText ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
-                            </path>
-                        </svg>
-                        <span x-text="isReadingText ? 'Hentikan Narasi' : 'Dengarkan Seluruh Teks'"></span>
-                    </button>
+                <div class="pb-6 mb-8 border-b border-gray-100">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-navy">Porträts aus Studium und Beruf: Meine Vorlieben im Alltag</h3>
+                    <p class="text-xs text-gray-500 mt-1">Zwei Personen berichten über ihren Alltag, ihre Motivation und ihre persönlichen Vorlieben.</p>
                 </div>
 
                 <!-- 2 Kontributor Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <!-- Kontributor 1: Gloria Rubens -->
-                    <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100 transition hover:border-orange-200 flex flex-col justify-between">
+                    <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100 transition hover:border-orange-200 flex flex-col justify-between selectable-text">
                         <div>
                             <div class="flex items-center justify-between mb-3 pb-2 border-b border-orange-200/60">
                                 <div>
                                     <strong class="text-sm font-extrabold text-navy block">Gloria Rubens</strong>
                                     <span class="text-[11px] text-orange-700 font-semibold">Informatik-Studentin • App-Entwicklung</span>
                                 </div>
-                                <button @click="speak('Ich studiere seit drei Jahren an der Universität. Meine Informatik-Professorin finde ich am interessantesten, weil es bei ihr nie langweilig ist. Wir machen jetzt zum Beispiel ein großes Projekt: Wir entwickeln eine App für Studierende zum Thema Günstig leben. Zuerst haben wir eine Umfrage gemacht, jetzt programmieren wir die App. Später möchte ich mit zwei Freunden ein Start-up gründen. Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen, denn das finde ich am wichtigsten. In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur und treffe Menschen. Das ist für mich am schönsten und so bekomme ich auch wieder neue Ideen für Projekte.', 'female')"
-                                    class="p-1.5 rounded-xl bg-white text-orange-600 border border-orange-200 shadow-2xs hover:bg-orange-50 transition">
+                                <button @click="playLesetext(1)" class="p-1.5 rounded-xl border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 1 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-orange-600 border-orange-200 hover:bg-orange-50'"
+                                    title="Putar Audio Gloria Rubens">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            :d="activeLesetextPlaying === 1 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                         </path>
                                     </svg>
                                 </button>
@@ -936,18 +935,19 @@
                     </div>
 
                     <!-- Kontributor 2: Lars Brinkhoff -->
-                    <div class="p-6 rounded-2xl bg-blue-50/50 border border-blue-100 transition hover:border-blue-200 flex flex-col justify-between">
+                    <div class="p-6 rounded-2xl bg-blue-50/50 border border-blue-100 transition hover:border-blue-200 flex flex-col justify-between selectable-text">
                         <div>
                             <div class="flex items-center justify-between mb-3 pb-2 border-b border-blue-200/60">
                                 <div>
                                     <strong class="text-sm font-extrabold text-navy block">Lars Brinkhoff</strong>
                                     <span class="text-[11px] text-blue-700 font-semibold">Fotograf • Tierfotografie & Studio</span>
                                 </div>
-                                <button @click="speak('Ich wollte unbedingt Fotograf werden, weil ich Fotos liebe und schon als Kind gern fotografiert habe. Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule. Am Anfang hat mir die Ausbildung nicht so gut gefallen, weil ich vieles noch nicht konnte. Jetzt habe ich schon lange ein eigenes Studio und mache am liebsten Fotos von Tieren. Für so ein Foto brauche ich viel Vorbereitung und natürlich auch nach dem Shooting viel Zeit am Computer. Das dauert manchmal lang, aber ich mache das total gern. Meine Fotos sollen perfekt sein und die Menschen glücklich machen, dann bin ich selbst am glücklichsten!', 'male')"
-                                    class="p-1.5 rounded-xl bg-white text-blue-600 border border-blue-200 shadow-2xs hover:bg-blue-50 transition">
+                                <button @click="playLesetext(2)" class="p-1.5 rounded-xl border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 2 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'"
+                                    title="Putar Audio Lars Brinkhoff">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                            :d="activeLesetextPlaying === 2 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
                                         </path>
                                     </svg>
                                 </button>
@@ -987,6 +987,280 @@
                             <p><strong>Lars Brinkhoff (Fotografer):</strong> „Saya sangat ingin menjadi fotografer, karena saya menyukai foto dan sejak masih kecil sudah gemar memotret. Setelah lulus sekolah saya menempuh pendidikan vokasi profesi fotografer, hal itu jauh lebih seru dibandingkan masa sekolah. Pada awalnya saya tidak terlalu menyukai pendidikan vokasi tersebut karena banyak hal yang belum saya kuasai. Sekarang saya sudah lama memiliki studio sendiri dan paling suka memotret binatang. Untuk foto seperti itu saya memerlukan banyak persiapan dan tentu saja setelah sesi pemotretan memerlukan banyak waktu di depan komputer. Proses tersebut terkadang memakan waktu lama, tetapi saya sangat suka melakukannya. Foto-foto saya harus sempurna dan membuat orang lain bahagia, maka saat itulah saya sendiri merasa paling bahagia!“</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- LESEVERSTEHEN-CHECK (Format Goethe-Zertifikat A2)         -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Format Goethe-Zertifikat A2</span>
+                                <span class="text-xs font-semibold text-gray-500">• Modul Lesen</span>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">Leseverstehen-Check: Porträts im Alltag</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Uji pemahaman isi bacaan profil Gloria Rubens dan Lars Brinkhoff.</p>
+                        </div>
+
+                        <!-- Live Score Leseverstehen -->
+                        <div class="flex-shrink-0 self-start sm:self-auto">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl border transition shadow-2xs"
+                                :class="leseScore === null ? 'bg-orange-50 border-orange-200 text-orange-800' : (leseScore >= 3 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800')">
+                                <span class="text-xs font-bold"
+                                    :class="leseScore === null ? 'text-orange-900/80' : (leseScore >= 3 ? 'text-emerald-900/80' : 'text-amber-900/80')">Skor Bacaan:</span>
+                                <span class="text-sm sm:text-base font-extrabold"
+                                    :class="leseScore === null ? 'text-orange-600' : (leseScore >= 3 ? 'text-emerald-700' : 'text-amber-700')"
+                                    x-text="leseScore !== null ? `${leseScore} / 4` : '- / 4'">- / 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal-Soal Leseverstehen -->
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <!-- Soal 1 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(1)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">1. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „In meiner Freizeit bin ich weniger online als meine Freunde und am liebsten draußen in der Natur.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q1 = 'gloria'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'gloria' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Gloria Rubens
+                                </button>
+                                <button type="button" @click="leseAnswers.q1 = 'lars'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q1 === 'lars' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Lars Brinkhoff
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(2)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">2. Aussage beurteilen: Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Gloria Rubens möchte später eine App entwickeln, um Studierenden und anderen Menschen mit praktischen Tipps zu helfen.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q2 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q2 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q2 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(3)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">3. Wer hat das gesagt?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    „Nach der Schule habe ich eine Ausbildung gemacht, das war viel spannender als die Schule.“
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q3 = 'gloria'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'gloria' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Gloria Rubens
+                                </button>
+                                <button type="button" @click="leseAnswers.q3 = 'lars'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q3 === 'lars' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Lars Brinkhoff
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="p-4 sm:p-5 rounded-2xl border transition" :class="getLeseQuestionClass(4)">
+                            <div class="mb-3">
+                                <span class="text-xs font-bold text-orange-600 block mb-1">4. Aussage beurteilen: Richtig oder Falsch?</span>
+                                <p class="text-xs sm:text-sm font-bold text-navy">
+                                    Lars Brinkhoff fotografiert am liebsten Autos und braucht nach dem Shooting keine Zeit am Computer.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm max-w-xs">
+                                <button type="button" @click="leseAnswers.q4 = 'richtig'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'richtig' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Richtig
+                                </button>
+                                <button type="button" @click="leseAnswers.q4 = 'falsch'; saveProgress();"
+                                    class="p-2.5 rounded-xl border text-center font-semibold transition"
+                                    :class="leseAnswers.q4 === 'falsch' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'">
+                                    Falsch
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Leseverstehen -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-5 mt-5 border-t border-gray-100">
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                            <button type="button" @click="checkLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-98 text-white font-bold text-xs shadow-sm transition flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Periksa Pemahaman</span>
+                            </button>
+                            <button type="button" @click="resetLeseverstehen()"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-98 text-gray-700 font-bold text-xs transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                    </path>
+                                </svg>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                        <button type="button" @click="showLeseKey = !showLeseKey"
+                            class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 text-blue-700 font-bold text-xs transition flex items-center gap-2">
+                            <span x-text="showLeseKey ? 'Tutup Pembahasan' : 'Lihat Pembahasan'"></span>
+                            <svg class="w-3.5 h-3.5 transition-transform duration-200" :class="showLeseKey ? 'rotate-180' : ''"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Pembahasan Leseverstehen Accordion -->
+                    <div x-show="showLeseKey" x-collapse
+                        class="mt-4 p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2"
+                        x-cloak>
+                        <h5 class="font-bold text-navy border-b border-gray-200 pb-1.5">Pembahasan Leseverstehen:</h5>
+                        <ul class="space-y-1.5 list-disc list-inside">
+                            <li><strong>1 (Gloria Rubens)</strong>: Gloria menceritakan bahwa di waktu luang ia lebih sedikit online dibanding teman-temannya dan paling suka berada di alam terbuka (<em>„In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur...“</em>).</li>
+                            <li><strong>2 (Richtig)</strong>: Pernyataan benar. Gloria ingin mendirikan start-up bersama temannya untuk mengembangkan aplikasi berisi tips praktis sehari-hari guna membantu orang lain (<em>„Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen...“</em>).</li>
+                            <li><strong>3 (Lars Brinkhoff)</strong>: Lars menceritakan bahwa setelah lulus sekolah ia menempuh Ausbildung sebagai fotografer dan merasa hal itu jauh lebih seru daripada masa sekolah (<em>„Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule.“</em>).</li>
+                            <li><strong>4 (Falsch)</strong>: Pernyataan salah. Lars paling suka memotret hewan (bukan mobil) dan tentu saja ia membutuhkan banyak waktu di depan komputer setelah sesi pemotretan (<em>„mache am liebsten Fotos von Tieren... und natürlich auch nach dem Shooting viel Zeit am Computer“</em>).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- KOTAK KOMENTAR SISWA (Freies Schreiben: Kommentare)       -->
+                <!-- ========================================================= -->
+                <div class="mt-10 pt-8 border-t border-gray-100">
+                    <div class="mb-4">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">Freies Schreiben</span>
+                        <h4 class="text-base sm:text-lg font-extrabold text-navy mt-1">
+                            Und du? Welche digitalen Geräte benutzt du am liebsten und was ist für dich am wichtigsten? (Schreib einen kurzen Kommentar!)
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-0.5">
+                            Tuliskan ulasan reflektif singkat (3–5 kalimat) tentang perangkat digital favoritmu, aktivitas online yang sering kamu lakukan, dan perbandingannya dengan perangkat lain. Terapkan Komparativ dengan <em>als</em> / <em>(genau) so ... wie</em> dan Superlativ (<em>am liebsten, am wichtigsten, am schnellsten</em>).
+                        </p>
+                    </div>
+
+                    <!-- Click-to-Insert Redemittel Chips -->
+                    <div class="mb-3.5">
+                        <div class="text-[11px] font-bold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Klik frasa pembuka (Redemittel) di bawah ini untuk menempelkan kalimat ke kolom komentar:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" @click="insertRedemittel('Am liebsten benutze ich ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Am liebsten benutze ich...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Für mein Studium / meine Arbeit ist ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Für mein Studium / meine Arbeit ist... am wichtigsten.“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Ein Laptop ist praktischer als ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Ein Laptop ist praktischer als..., weil...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('Auf dem Smartphone tippe ich schneller als ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „Auf dem Smartphone tippe ich schneller als...“
+                            </button>
+                            <button type="button" @click="insertRedemittel('In meiner Freizeit bin ich am liebsten ')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold transition active:scale-95">
+                                + „In meiner Freizeit bin ich am liebsten...“
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Textarea & Action Bar -->
+                    <div class="relative">
+                        <textarea x-model="studentComment" rows="4"
+                            placeholder="Schreib deinen Kommentar hier... z.B. Am liebsten benutze ich mein Smartphone, weil es super praktisch ist. Für mein Studium ist aber der Laptop am wichtigsten..."
+                            class="w-full p-4 rounded-2xl bg-white border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-navy text-xs sm:text-sm font-medium transition resize-y shadow-xs"
+                            @input="saveProgress()"></textarea>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mt-2.5">
+                            <div class="text-[11px] text-gray-500 flex items-center gap-2">
+                                <span x-text="`${studentComment.trim() ? studentComment.trim().split(/\s+/).length : 0} kata`"></span>
+                                <span class="text-gray-300">•</span>
+                                <span x-text="`${studentComment.length} karakter`"></span>
+                                <template x-if="commentLastSaved">
+                                    <span class="text-emerald-600 font-semibold" x-text="`• Tersimpan ${commentLastSaved}`"></span>
+                                </template>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="studentComment = ''; saveProgress();"
+                                    class="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold transition"
+                                    x-show="studentComment.length > 0">
+                                    Bersihkan
+                                </button>
+                                <button type="button" @click="saveComment()"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Simpan Komentar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Toast Alert Simpan -->
+                        <div x-show="commentSavedToast" x-transition
+                            class="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2"
+                            x-cloak>
+                            <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Komentarmu berhasil disimpan! Catatan ini tersimpan di akunmu dan dapat ditinjau oleh pengajar.</span>
+                        </div>
+                    </div>
+
+                    <!-- Pratinjau Komentar Terbitan Siswa (Forum Style) -->
+                    <template x-if="studentComment.trim().length > 0">
+                        <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-orange-50/60 border border-orange-200/80">
+                            <div class="flex items-center justify-between mb-2 pb-2 border-b border-orange-200/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center"
+                                        x-text="currentUser ? (currentUser.displayName || currentUser.email).charAt(0).toUpperCase() : 'S'">
+                                    </div>
+                                    <div>
+                                        <strong class="text-xs font-bold text-navy"
+                                            x-text="currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : 'Siswa Aksaradeutsch'"></strong>
+                                        <span class="text-[10px] text-gray-500 block">Komentar Siswa</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-gray-400" x-text="commentLastSaved || 'Draft'"></span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap selectable-text"
+                                x-text="studentComment"></p>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
@@ -1144,115 +1418,283 @@
                 <!-- Bagian B: Satzbauspiel & Syntax-Puzzle (4 Soal: Nomor 5 s.d. 8) -->
                 <div class="mb-10">
                     <div class="mb-5">
-                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und wählen Sie den korrekten Satz.</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-navy">Teil B: Bringen Sie die Wörter in die richtige Reihenfolge und schreiben Sie die Sätze.</h3>
                     </div>
 
                     <div class="space-y-4 text-xs sm:text-sm">
                         <!-- Soal 5 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(5)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">5. Wichtigste Aktivität:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ in der Freizeit / für Gloria / am wichtigsten / das Naturerlebnis / ist / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">5. Wichtigste Aktivität:</span>
+                                    <button type="button" @click="resetPuzzle('q5')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q5.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q5', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.pool.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div
+                                        class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q5.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q5', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q5.selected.length > 0"
+                                            class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q5.selected.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk
+                                            menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q5 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Für Gloria das Naturerlebnis ist am wichtigsten in der Freizeit.
-                                </button>
-                                <button type="button" @click="answers.q5 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Am wichtigsten für Gloria das Naturerlebnis in der Freizeit ist.
-                                </button>
-                                <button type="button" @click="answers.q5 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q5 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Für Gloria ist das Naturerlebnis in der Freizeit am wichtigsten.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q5 === correctAnswers.q5"
+                                    class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Susunan kalimat benar! (Posisi 2: <em>ist</em>, predikat Superlativ: <em>am wichtigsten</em>).</span>
+                                </span>
+                                <span x-show="answers.q5 !== correctAnswers.q5"
+                                    class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja <em>ist</em> di posisi kedua dan letak predikat <em>am wichtigsten</em> di akhir kalimat.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 6 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(6)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">6. Gerätevergleich:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ praktischer / das Tablet / der Laptop / ist / als / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">6. Gerätevergleich:</span>
+                                    <button type="button" @click="resetPuzzle('q6')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q6.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q6', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.pool.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div
+                                        class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q6.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q6', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q6.selected.length > 0"
+                                            class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q6.selected.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk
+                                            menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q6 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Das Tablet ist praktischer als der Laptop.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Das Tablet praktischer ist als der Laptop.
-                                </button>
-                                <button type="button" @click="answers.q6 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q6 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Als der Laptop das Tablet ist praktischer.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q6 === correctAnswers.q6"
+                                    class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Susunan kalimat benar! (Posisi 2: <em>ist</em>, Komparativ + als: <em>praktischer als der Laptop</em>).</span>
+                                </span>
+                                <span x-show="answers.q6 !== correctAnswers.q6"
+                                    class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja <em>ist</em> di posisi kedua dan struktur perbandingan <em>praktischer als...</em></span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 7 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(7)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">7. Preisvergleich:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ genauso teuer / die Smartwatch / das Smartphone / ist / wie / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">7. Preisvergleich:</span>
+                                    <button type="button" @click="resetPuzzle('q7')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q7.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q7', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.pool.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div
+                                        class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q7.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q7', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q7.selected.length > 0"
+                                            class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q7.selected.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk
+                                            menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q7 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Die Smartwatch genauso teuer ist wie das Smartphone.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Die Smartwatch ist genauso teuer wie das Smartphone.
-                                </button>
-                                <button type="button" @click="answers.q7 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q7 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Wie das Smartphone die Smartwatch ist genauso teuer.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q7 === correctAnswers.q7"
+                                    class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Susunan kalimat benar! (Posisi 2: <em>ist</em>, kesetaraan: <em>genauso teuer wie</em>).</span>
+                                </span>
+                                <span x-show="answers.q7 !== correctAnswers.q7"
+                                    class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <span>Susunan belum tepat. Perhatikan struktur kesetaraan <em>genauso + kata sifat dasar (teuer) + wie</em>.</span>
+                                </span>
                             </div>
                         </div>
 
                         <!-- Soal 8 -->
                         <div class="p-5 rounded-2xl border transition" :class="getQuestionClass(8)">
                             <div class="mb-3">
-                                <span class="text-xs font-bold text-orange-600 block mb-1">8. Lernintensität am Wochenende:</span>
-                                <div class="p-3 sm:p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl text-navy font-bold">
-                                    [ lernt / am Wochenende / am meisten / von allen Schülern / Eric / . ]
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-bold text-orange-600 block">8. Lernintensität am Wochenende:</span>
+                                    <button type="button" @click="resetPuzzle('q8')"
+                                        class="text-[11px] font-semibold text-gray-400 hover:text-orange-600 transition flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                        <span>Reset Susunan</span>
+                                    </button>
+                                </div>
+                                <!-- Wadah Puzzle Balok Interaktif -->
+                                <div class="p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl space-y-2.5">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="text-[11px] font-bold text-gray-500 mr-1">Balok kata:</span>
+                                        <template x-for="(word, wIdx) in puzzleState.q8.pool" :key="wIdx">
+                                            <button type="button" @click="addWordToPuzzle('q8', wIdx)"
+                                                class="px-2.5 py-1 rounded-xl bg-white border border-gray-200 text-xs font-bold text-navy shadow-2xs hover:border-orange-400 hover:bg-orange-50 active:scale-95 transition cursor-pointer">
+                                                <span x-text="word"></span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.pool.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Semua balok telah terpakai.</span>
+                                    </div>
+                                    <div
+                                        class="p-2.5 min-h-[42px] bg-white border border-dashed border-gray-300 rounded-lg flex flex-wrap items-center gap-1.5">
+                                        <template x-for="(w, sIdx) in puzzleState.q8.selected" :key="sIdx">
+                                            <button type="button" @click="removeWordFromPuzzle('q8', sIdx)"
+                                                class="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold shadow-2xs hover:bg-orange-700 active:scale-95 transition flex items-center gap-1 cursor-pointer"
+                                                title="Klik untuk kembalikan balok">
+                                                <span x-text="w"></span>
+                                                <span class="text-[10px] opacity-75 font-normal">✕</span>
+                                            </button>
+                                        </template>
+                                        <span x-show="puzzleState.q8.selected.length > 0"
+                                            class="text-sm font-extrabold text-navy self-center select-none ml-0.5">.</span>
+                                        <span x-show="puzzleState.q8.selected.length === 0"
+                                            class="text-[11px] text-gray-400 italic">Klik balok kata di atas untuk
+                                            menyusun kalimat...</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-2 text-xs sm:text-sm">
-                                <button type="button" @click="answers.q8 = 'a'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'a' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>a)</strong> Eric am meisten lernt am Wochenende von allen Schülern.
-                                </button>
-                                <button type="button" @click="answers.q8 = 'b'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'b' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>b)</strong> Von allen Schülern Eric lernt am meisten am Wochenende.
-                                </button>
-                                <button type="button" @click="answers.q8 = 'c'; saveProgress();"
-                                    class="w-full p-3 rounded-xl border text-left font-semibold transition"
-                                    :class="answers.q8 === 'c' ? 'bg-orange-50 border-orange-400 text-orange-950 font-bold ring-1 ring-orange-400' : 'bg-gray-50/70 border-gray-200 hover:bg-white text-gray-700'">
-                                    <strong>c)</strong> Eric lernt am Wochenende am meisten von allen Schülern.
-                                </button>
+                            <!-- Feedback Status Susunan -->
+                            <div x-show="showFeedback" class="mt-2 text-xs font-bold">
+                                <span x-show="answers.q8 === correctAnswers.q8"
+                                    class="text-emerald-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Susunan kalimat benar! (Posisi 2: <em>lernt</em>, Superlativ tak beraturan: <em>am meisten</em>).</span>
+                                </span>
+                                <span x-show="answers.q8 !== correctAnswers.q8"
+                                    class="text-rose-700 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <span>Susunan belum tepat. Perhatikan posisi kata kerja terkonjugasi <em>lernt</em> di posisi kedua.</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1310,10 +1752,10 @@
                         <div>
                             <strong class="text-orange-600 block mb-1">Teil B (Satzbauspiel & Syntax-Puzzle):</strong>
                             <ol start="5" class="list-decimal list-inside space-y-2 text-gray-700">
-                                <li><strong>c (Für Gloria ist das Naturerlebnis in der Freizeit am wichtigsten.)</strong>: Kata kerja kopula <em>ist</em> berada di Posisi 2 kalimat pernyataan, dan bentuk <em>Superlativ</em> dari <em>wichtig</em> adalah <em>am wichtigsten</em> yang diletakkan di bagian akhir predikat.</li>
-                                <li><strong>a (Das Tablet ist praktischer als der Laptop.)</strong>: Kata kerja kopula <em>ist</em> menempati Posisi 2 kalimat pernyataan, diikuti kata sifat perbandingan bentuk Komparativ <em>praktischer</em> dan partikel pembanding <em>als</em>.</li>
-                                <li><strong>b (Die Smartwatch ist genauso teuer wie das Smartphone.)</strong>: Untuk menyatakan perbandingan yang setara nilainya, gunakan struktur <em>genau so / genauso + kata sifat bentuk dasar (teuer) + wie</em>.</li>
-                                <li><strong>c (Eric lernt am Wochenende am meisten von allen Schülern.)</strong>: Kata kerja terkonjugasi <em>lernt</em> berada di Posisi 2, dan bentuk <em>Superlativ</em> tidak beraturan dari <em>viel</em> adalah <em>am meisten</em> yang diletakkan di bagian predikat kalimat.</li>
+                                <li><strong>Für Gloria ist das Naturerlebnis in der Freizeit am wichtigsten.</strong> (atau: <em>In der Freizeit ist für Gloria das Naturerlebnis am wichtigsten.</em> / <em>Das Naturerlebnis ist für Gloria in der Freizeit am wichtigsten.</em>): Kata kerja kopula <em>ist</em> menempati Posisi 2 kalimat pernyataan, dan bentuk <em>Superlativ</em> dari <em>wichtig</em> adalah <em>am wichtigsten</em> yang diletakkan di bagian akhir predikat.</li>
+                                <li><strong>Das Tablet ist praktischer als der Laptop.</strong>: Kata kerja kopula <em>ist</em> menempati Posisi 2 kalimat pernyataan, diikuti kata sifat perbandingan bentuk Komparativ <em>praktischer</em> dan partikel pembanding <em>als</em>.</li>
+                                <li><strong>Die Smartwatch ist genauso teuer wie das Smartphone.</strong> (atau: <em>Das Smartphone ist genauso teuer wie die Smartwatch.</em>): Untuk menyatakan perbandingan yang setara nilainya, gunakan struktur <em>genau so / genauso + kata sifat bentuk dasar (teuer) + wie</em> dengan kata kerja kopula <em>ist</em> di Posisi 2.</li>
+                                <li><strong>Eric lernt am Wochenende am meisten von allen Schülern.</strong> (atau: <em>Am Wochenende lernt Eric am meisten von allen Schülern.</em>): Kata kerja terkonjugasi <em>lernt</em> wajib berada di Posisi 2, dan bentuk <em>Superlativ</em> tidak beraturan dari <em>viel</em> adalah <em>am meisten</em> yang diletakkan di bagian predikat kalimat.</li>
                             </ol>
                         </div>
                     </div>
@@ -1369,6 +1811,7 @@
                 syncStatusText: 'Tersinkronisasi',
                 readingProgress: 0,
                 showTranslation: false,
+                showPluralForms: false,
                 showKey: false,
                 showFeedback: false,
                 quizScore: null,
@@ -1377,9 +1820,36 @@
                 isPlayingFullDialog: false,
                 activeDialogPlaying: null,
                 currentSpeakingIndex: null,
-                isReadingText: false,
                 germanVoiceMale: null,
                 germanVoiceFemale: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
+                activeLesetextPlaying: null,
+                lesetextAudios: {},
+
+                // Leseverstehen & Freies Schreiben State
+                leseAnswers: { q1: '', q2: '', q3: '', q4: '' },
+                leseScore: null,
+                showLeseFeedback: false,
+                showLeseKey: false,
+                studentComment: '',
+                commentLastSaved: '',
+                commentSavedToast: false,
+
+                // Puzzle State & Handlers
+                puzzleState: {
+                    q5: { pool: ['in der Freizeit', 'für Gloria', 'ist', 'das Naturerlebnis', 'am wichtigsten'], selected: [] },
+                    q6: { pool: ['praktischer', 'das Tablet', 'der Laptop', 'ist', 'als'], selected: [] },
+                    q7: { pool: ['die Smartwatch', 'genauso teuer', 'wie', 'das Smartphone', 'ist'], selected: [] },
+                    q8: { pool: ['lernt', 'am Wochenende', 'Eric', 'am meisten', 'von allen Schülern'], selected: [] }
+                },
+
+                puzzleInitial: {
+                    q5: ['in der Freizeit', 'für Gloria', 'ist', 'das Naturerlebnis', 'am wichtigsten'],
+                    q6: ['praktischer', 'das Tablet', 'der Laptop', 'ist', 'als'],
+                    q7: ['die Smartwatch', 'genauso teuer', 'wie', 'das Smartphone', 'ist'],
+                    q8: ['lernt', 'am Wochenende', 'Eric', 'am meisten', 'von allen Schülern']
+                },
 
                 // Learning Goals Checklist
                 learningGoals: [
@@ -1402,20 +1872,20 @@
 
                 // Vocabularies: Subtopic A (Digitale Medien und Geräte)
                 vocabDevices: [
-                    { article: 'der', word: 'Computer, -', fullWord: 'der Computer', meaning: 'komputer', gender: 'masc' },
-                    { article: 'der', word: 'Laptop, -s', fullWord: 'der Laptop', meaning: 'laptop / komputer jinjing', gender: 'masc' },
-                    { article: 'das', word: 'Tablet, -s', fullWord: 'das Tablet', meaning: 'tablet', gender: 'neut' },
-                    { article: 'das', word: 'Smartphone, -s / das Handy, -s', fullWord: 'das Smartphone', meaning: 'ponsel pintar / handphone', gender: 'neut' },
-                    { article: 'die', word: 'Smartwatch, -es', fullWord: 'die Smartwatch', meaning: 'jam tangan pintar', gender: 'fem' },
-                    { article: 'der', word: 'Fernseher, -', fullWord: 'der Fernseher', meaning: 'televisi', gender: 'masc' },
-                    { article: 'das', word: 'Radio, -s', fullWord: 'das Radio', meaning: 'radio', gender: 'neut' },
-                    { article: 'die', word: 'Spielekonsole, -n', fullWord: 'die Spielekonsole', meaning: 'konsol permainan game', gender: 'fem' },
-                    { article: 'die', word: 'VR-Brille, -n', fullWord: 'die VR-Brille', meaning: 'kacamata virtual reality', gender: 'fem' },
-                    { article: 'das', word: 'E-Book, -s', fullWord: 'das E-Book', meaning: 'buku elektronik', gender: 'neut' },
-                    { article: 'der', word: 'E-Book-Reader, -', fullWord: 'der E-Book-Reader', meaning: 'perangkat pembaca buku digital', gender: 'masc' },
-                    { article: 'die', word: 'Zeitung, -en', fullWord: 'die Zeitung', meaning: 'koran / surat kabar', gender: 'fem' },
-                    { article: 'die', word: 'Zeitschrift, -en', fullWord: 'die Zeitschrift', meaning: 'majalah', gender: 'fem' },
-                    { article: 'der', word: 'Bildschirm, -e', fullWord: 'der Bildschirm', meaning: 'layar monitor / display', gender: 'masc' }
+                    { article: 'der', word: 'Computer', fullWord: 'der Computer', plural: 'die Computer', meaning: 'komputer', gender: 'masc' },
+                    { article: 'der', word: 'Laptop', fullWord: 'der Laptop', plural: 'die Laptops', meaning: 'laptop / komputer jinjing', gender: 'masc' },
+                    { article: 'das', word: 'Tablet', fullWord: 'das Tablet', plural: 'die Tablets', meaning: 'tablet', gender: 'neut' },
+                    { article: 'das', word: 'Smartphone / Handy', fullWord: 'das Smartphone', plural: 'die Smartphones / die Handys', meaning: 'ponsel pintar / handphone', gender: 'neut' },
+                    { article: 'die', word: 'Smartwatch', fullWord: 'die Smartwatch', plural: 'die Smartwatches', meaning: 'jam tangan pintar', gender: 'fem' },
+                    { article: 'der', word: 'Fernseher', fullWord: 'der Fernseher', plural: 'die Fernseher', meaning: 'televisi', gender: 'masc' },
+                    { article: 'das', word: 'Radio', fullWord: 'das Radio', plural: 'die Radios', meaning: 'radio', gender: 'neut' },
+                    { article: 'die', word: 'Spielekonsole', fullWord: 'die Spielekonsole', plural: 'die Spielekonsolen', meaning: 'konsol permainan game', gender: 'fem' },
+                    { article: 'die', word: 'VR-Brille', fullWord: 'die VR-Brille', plural: 'die VR-Brillen', meaning: 'kacamata virtual reality', gender: 'fem' },
+                    { article: 'das', word: 'E-Book', fullWord: 'das E-Book', plural: 'die E-Books', meaning: 'buku elektronik', gender: 'neut' },
+                    { article: 'der', word: 'E-Book-Reader', fullWord: 'der E-Book-Reader', plural: 'die E-Book-Reader', meaning: 'perangkat pembaca buku digital', gender: 'masc' },
+                    { article: 'die', word: 'Zeitung', fullWord: 'die Zeitung', plural: 'die Zeitungen', meaning: 'koran / surat kabar', gender: 'fem' },
+                    { article: 'die', word: 'Zeitschrift', fullWord: 'die Zeitschrift', plural: 'die Zeitschriften', meaning: 'majalah', gender: 'fem' },
+                    { article: 'der', word: 'Bildschirm', fullWord: 'der Bildschirm', plural: 'die Bildschirme', meaning: 'layar monitor / display', gender: 'masc' }
                 ],
 
                 // Vocabularies: Subtopic B (Online-Aktivitäten)
@@ -1502,10 +1972,10 @@
                     q2: 'c',
                     q3: 'a',
                     q4: 'b',
-                    q5: 'c',
-                    q6: 'a',
-                    q7: 'b',
-                    q8: 'c'
+                    q5: 'correct',
+                    q6: 'correct',
+                    q7: 'correct',
+                    q8: 'correct'
                 },
 
                 getQuestionClass(qNum) {
@@ -1516,6 +1986,74 @@
                     } else {
                         return 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-300';
                     }
+                },
+
+                // Puzzle Handlers
+                addWordToPuzzle(qKey, wIdx) {
+                    const item = this.puzzleState[qKey].pool.splice(wIdx, 1)[0];
+                    this.puzzleState[qKey].selected.push(item);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                removeWordFromPuzzle(qKey, sIdx) {
+                    const item = this.puzzleState[qKey].selected.splice(sIdx, 1)[0];
+                    this.puzzleState[qKey].pool.push(item);
+                    this.checkPuzzleMatch(qKey);
+                },
+
+                resetPuzzle(qKey) {
+                    this.puzzleState[qKey].pool = [...this.puzzleInitial[qKey]];
+                    this.puzzleState[qKey].selected = [];
+                    this.answers[qKey] = '';
+                },
+
+                checkPuzzleMatch(qKey) {
+                    const selected = this.puzzleState[qKey].selected;
+                    if (selected.length !== this.puzzleInitial[qKey].length) {
+                        this.answers[qKey] = '';
+                        this.saveProgress();
+                        return;
+                    }
+                    const sentence = selected.join(' ').toLowerCase().replace(/[.?]/g, '').trim();
+
+                    if (qKey === 'q5') {
+                        if (sentence === 'für gloria ist das naturerlebnis in der freizeit am wichtigsten' ||
+                            sentence === 'in der freizeit ist für gloria das naturerlebnis am wichtigsten' ||
+                            sentence === 'das naturerlebnis ist für gloria in der freizeit am wichtigsten' ||
+                            sentence === 'das naturerlebnis ist in der freizeit für gloria am wichtigsten') {
+                            this.answers.q5 = 'correct';
+                        } else {
+                            this.answers.q5 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q6') {
+                        if (sentence === 'das tablet ist praktischer als der laptop') {
+                            this.answers.q6 = 'correct';
+                        } else {
+                            this.answers.q6 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q7') {
+                        if (sentence === 'die smartwatch ist genauso teuer wie das smartphone' ||
+                            sentence === 'das smartphone ist genauso teuer wie die smartwatch') {
+                            this.answers.q7 = 'correct';
+                        } else {
+                            this.answers.q7 = 'wrong';
+                        }
+                    }
+
+                    if (qKey === 'q8') {
+                        if (sentence === 'eric lernt am wochenende am meisten von allen schülern' ||
+                            sentence === 'am wochenende lernt eric am meisten von allen schülern') {
+                            this.answers.q8 = 'correct';
+                        } else {
+                            this.answers.q8 = 'wrong';
+                        }
+                    }
+
+                    this.saveProgress();
                 },
 
                 checkQuiz() {
@@ -1536,7 +2074,68 @@
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;
+                    this.resetPuzzle('q5');
+                    this.resetPuzzle('q6');
+                    this.resetPuzzle('q7');
+                    this.resetPuzzle('q8');
                     this.saveProgress();
+                },
+
+                // Leseverstehen & Freies Schreiben Handlers
+                getLeseQuestionClass(qNum) {
+                    if (!this.showLeseFeedback) return 'bg-gray-50/50 border-gray-200';
+                    const correctLese = {
+                        q1: 'gloria',
+                        q2: 'richtig',
+                        q3: 'lars',
+                        q4: 'falsch'
+                    };
+                    const key = 'q' + qNum;
+                    if (this.leseAnswers[key] === correctLese[key]) {
+                        return 'bg-emerald-50/70 border-emerald-300 ring-1 ring-emerald-300';
+                    } else {
+                        return 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-300';
+                    }
+                },
+
+                checkLeseverstehen() {
+                    let score = 0;
+                    if (this.leseAnswers.q1 === 'gloria') score++;
+                    if (this.leseAnswers.q2 === 'richtig') score++;
+                    if (this.leseAnswers.q3 === 'lars') score++;
+                    if (this.leseAnswers.q4 === 'falsch') score++;
+                    this.leseScore = score;
+                    this.showLeseFeedback = true;
+                    this.showLeseKey = true;
+                    this.saveProgress();
+                },
+
+                resetLeseverstehen() {
+                    this.leseAnswers = { q1: '', q2: '', q3: '', q4: '' };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    this.saveProgress();
+                },
+
+                insertRedemittel(text) {
+                    if (!this.studentComment) {
+                        this.studentComment = text + ' ';
+                    } else {
+                        this.studentComment += (this.studentComment.endsWith(' ') ? '' : ' ') + text + ' ';
+                    }
+                    this.saveProgress();
+                },
+
+                saveComment() {
+                    if (!this.studentComment.trim()) return;
+                    const now = new Date();
+                    this.commentLastSaved = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    this.commentSavedToast = true;
+                    this.saveProgress();
+                    setTimeout(() => {
+                        this.commentSavedToast = false;
+                    }, 4000);
                 },
 
                 // Audio Logic Web Speech API
@@ -1579,6 +2178,7 @@
                 },
 
                 speak(text, gender = 'female', onEndedCallback = null) {
+                    this.stopPlayingDialog();
                     if (!('speechSynthesis' in window)) return;
                     window.speechSynthesis.cancel();
 
@@ -1608,58 +2208,138 @@
 
                 playFullDialog(dialogNum) {
                     if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                        this.stopPlayingDialog();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    const lines = dialogNum === 1 ? this.dialog1Lines : this.dialog2Lines;
 
-                    const playLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= lines.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-5-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-5-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-5-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog1Audio = altAudio;
+                            });
                         }
-
-                        this.currentSpeakingIndex = index;
-                        const line = lines[index];
-                        this.speak(line.text, line.gender, () => {
-                            setTimeout(() => {
-                                if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                                    playLine(index + 1);
-                                }
-                            }, 500);
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
                         });
-                    };
-
-                    playLine(0);
-                },
-
-                readFullText() {
-                    if (this.isReadingText) {
-                        window.speechSynthesis.cancel();
-                        this.isReadingText = false;
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
-                    this.isReadingText = true;
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-5-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-5-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-5-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog2Audio = altAudio;
+                            });
+                        }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
 
-                    const fullText = "Porträts aus Studium und Beruf: Meine Vorlieben im Alltag. Zwei Personen berichten über ihren Alltag, ihre Motivation und ihre persönlichen Vorlieben. Gloria Rubens: Ich studiere seit drei Jahren an der Universität. Meine Informatik-Professorin finde ich am interessantesten, weil es bei ihr nie langweilig ist. Wir machen jetzt zum Beispiel ein großes Projekt: Wir entwickeln eine App für Studierende zum Thema Günstig leben. Zuerst haben wir eine Umfrage gemacht, jetzt programmieren wir die App. Später möchte ich mit zwei Freunden ein Start-up gründen. Wir wollen Apps mit praktischen Tipps für das normale Leben entwickeln und so Menschen helfen, denn das finde ich am wichtigsten. In meiner Freizeit bin ich weniger online als meine Freunde. Ich bin am liebsten draußen in der Natur und treffe Menschen. Das ist für mich am schönsten und so bekomme ich auch wieder neue Ideen für Projekte. Lars Brinkhoff: Ich wollte unbedingt Fotograf werden, weil ich Fotos liebe und schon als Kind gern fotografiert habe. Nach der Schule habe ich eine Ausbildung zum Fotografen gemacht, das war viel spannender als die Schule. Am Anfang hat mir die Ausbildung nicht so gut gefallen, weil ich vieles noch nicht konnte. Jetzt habe ich schon lange ein eigenes Studio und mache am liebsten Fotos von Tieren. Für so ein Foto brauche ich viel Vorbereitung und natürlich auch nach dem Shooting viel Zeit am Computer. Das dauert manchmal lang, aber ich mache das total gern. Meine Fotos sollen perfekt sein und die Menschen glücklich machen, dann bin ich selbst am glücklichsten!";
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    this.stopLesetextAudio();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
 
-                    this.speak(fullText, 'female', () => {
-                        this.isReadingText = false;
+                playLesetext(num) {
+                    this.stopPlayingDialog();
+                    if (this.activeLesetextPlaying === num) {
+                        this.stopLesetextAudio();
+                        return;
+                    }
+
+                    this.stopLesetextAudio();
+                    this.activeLesetextPlaying = num;
+
+                    const mp3File = `Lesetext${num}-Pertemuan-5-materi-a2-1.mp3`;
+                    const wavFile = `Lesetext${num}-Pertemuan-5-materi-a2-1.wav`;
+
+                    if (!this.lesetextAudios[num]) {
+                        const audio = new Audio(mp3File);
+                        audio.addEventListener('ended', () => {
+                            this.stopLesetextAudio();
+                        });
+                        audio.addEventListener('error', () => {
+                            console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
+                            const altAudio = new Audio(wavFile);
+                            altAudio.addEventListener('ended', () => {
+                                this.stopLesetextAudio();
+                            });
+                            altAudio.play().catch(e => {
+                                console.error(`Gagal memuat ${wavFile}:`, e);
+                                this.stopLesetextAudio();
+                            });
+                            this.lesetextAudios[num] = altAudio;
+                        });
+                        this.lesetextAudios[num] = audio;
+                    }
+
+                    this.lesetextAudios[num].currentTime = 0;
+                    this.lesetextAudios[num].play().catch(err => {
+                        console.error(`Audio playback error Lesetext ${num}:`, err);
+                        this.stopLesetextAudio();
                     });
                 },
 
+                stopLesetextAudio() {
+                    this.activeLesetextPlaying = null;
+                    if (this.lesetextAudios) {
+                        Object.values(this.lesetextAudios).forEach(audio => {
+                            if (audio) {
+                                audio.pause();
+                                audio.currentTime = 0;
+                            }
+                        });
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
+
                 resetState() {
+                    this.stopPlayingDialog();
                     if (this.learningGoals && Array.isArray(this.learningGoals)) {
                         this.learningGoals.forEach(g => {
                             if (typeof g === 'object') g.completed = false;
@@ -1669,6 +2349,16 @@
                     this.quizScore = null;
                     this.showFeedback = false;
                     this.showKey = false;
+                    this.leseAnswers = { q1: '', q2: '', q3: '', q4: '' };
+                    this.leseScore = null;
+                    this.showLeseFeedback = false;
+                    this.showLeseKey = false;
+                    this.studentComment = '';
+                    this.commentLastSaved = '';
+                    this.resetPuzzle('q5');
+                    this.resetPuzzle('q6');
+                    this.resetPuzzle('q7');
+                    this.resetPuzzle('q8');
                 },
 
                 // Initialization & Sync
@@ -1694,16 +2384,27 @@
                     }
                 },
 
+                applyProgressData(data) {
+                    if (!data) return;
+                    if (data.goals) this.learningGoals = data.goals;
+                    if (data.answers) this.answers = data.answers;
+                    if (data.quizScore !== undefined) this.quizScore = data.quizScore;
+                    if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                    if (data.leseAnswers) this.leseAnswers = data.leseAnswers;
+                    if (data.leseScore !== undefined) this.leseScore = data.leseScore;
+                    if (data.showLeseFeedback !== undefined) this.showLeseFeedback = data.showLeseFeedback;
+                    if (data.showLeseKey !== undefined) this.showLeseKey = data.showLeseKey;
+                    if (data.studentComment !== undefined) this.studentComment = data.studentComment;
+                    if (data.commentLastSaved !== undefined) this.commentLastSaved = data.commentLastSaved;
+                    if (data.puzzles) this.puzzleState = data.puzzles;
+                },
+
                 loadLocalProgress(uid = 'guest') {
                     try {
                         const userKey = `aksaradeutsch_${uid}_lesson_a2_5`;
                         const saved = localStorage.getItem(userKey);
                         if (saved) {
-                            const data = JSON.parse(saved);
-                            if (data.goals) this.learningGoals = data.goals;
-                            if (data.answers) this.answers = data.answers;
-                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
-                            if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                            this.applyProgressData(JSON.parse(saved));
                         }
                     } catch (e) {
                         console.error('Error loading local progress:', e);
@@ -1717,11 +2418,18 @@
                         answers: this.answers,
                         quizScore: this.quizScore,
                         showFeedback: this.showFeedback,
+                        leseAnswers: this.leseAnswers,
+                        leseScore: this.leseScore,
+                        showLeseFeedback: this.showLeseFeedback,
+                        showLeseKey: this.showLeseKey,
+                        studentComment: this.studentComment,
+                        commentLastSaved: this.commentLastSaved,
+                        puzzles: this.puzzleState,
                         lastUpdated: new Date().toISOString()
                     };
                     try {
                         localStorage.setItem(`aksaradeutsch_${uid}_lesson_a2_5`, JSON.stringify(dataToSave));
-                    } catch (e) {}
+                    } catch (e) { }
                     return dataToSave;
                 },
 
@@ -1733,11 +2441,7 @@
                         const docRef = db.collection('users').doc(uid).collection('progress').doc('lesson_a2_5');
                         const docSnap = await docRef.get();
                         if (docSnap.exists) {
-                            const data = docSnap.data();
-                            if (data.goals) this.learningGoals = data.goals;
-                            if (data.answers) this.answers = data.answers;
-                            if (data.quizScore !== undefined) this.quizScore = data.quizScore;
-                            if (data.showFeedback !== undefined) this.showFeedback = data.showFeedback;
+                            this.applyProgressData(docSnap.data());
                             this.saveProgressToLocal(uid);
                         }
                     } catch (e) {
