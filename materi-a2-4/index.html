@@ -2863,12 +2863,30 @@
 
                 playLesetext(num) {
                     this.stopPlayingDialog();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+
+                    // Jika sedang memutar track yang sama, jeda (pause) audio tanpa mereset currentTime
                     if (this.activeLesetextPlaying === num) {
-                        this.stopLesetextAudio();
+                        if (this.lesetextAudios && this.lesetextAudios[num]) {
+                            this.lesetextAudios[num].pause();
+                        }
+                        this.activeLesetextPlaying = null;
                         return;
                     }
 
-                    this.stopLesetextAudio();
+                    // Jika berpindah dari track lain, jeda dan reset track lain tersebut
+                    if (this.lesetextAudios) {
+                        Object.keys(this.lesetextAudios).forEach(key => {
+                            const k = parseInt(key);
+                            if (k !== num && this.lesetextAudios[k]) {
+                                this.lesetextAudios[k].pause();
+                                this.lesetextAudios[k].currentTime = 0;
+                            }
+                        });
+                    }
+
                     this.activeLesetextPlaying = num;
 
                     const mp3File = `Lesetext${num}-Pertemuan-4-materi-a2-1.mp3`;
@@ -2877,27 +2895,32 @@
                     if (!this.lesetextAudios[num]) {
                         const audio = new Audio(mp3File);
                         audio.addEventListener('ended', () => {
-                            this.stopLesetextAudio();
+                            this.activeLesetextPlaying = null;
+                            if (this.lesetextAudios[num]) {
+                                this.lesetextAudios[num].currentTime = 0;
+                            }
                         });
                         audio.addEventListener('error', () => {
                             console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
                             const altAudio = new Audio(wavFile);
                             altAudio.addEventListener('ended', () => {
-                                this.stopLesetextAudio();
+                                this.activeLesetextPlaying = null;
+                                if (this.lesetextAudios[num]) {
+                                    this.lesetextAudios[num].currentTime = 0;
+                                }
                             });
                             altAudio.play().catch(e => {
                                 console.error(`Gagal memuat ${wavFile}:`, e);
-                                this.stopLesetextAudio();
+                                this.activeLesetextPlaying = null;
                             });
                             this.lesetextAudios[num] = altAudio;
                         });
                         this.lesetextAudios[num] = audio;
                     }
 
-                    this.lesetextAudios[num].currentTime = 0;
                     this.lesetextAudios[num].play().catch(err => {
                         console.error(`Audio playback error Lesetext ${num}:`, err);
-                        this.stopLesetextAudio();
+                        this.activeLesetextPlaying = null;
                     });
                 },
 
