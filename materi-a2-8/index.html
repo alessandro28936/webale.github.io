@@ -39,7 +39,8 @@
         }
     </script>
 
-    <!-- Alpine.js CDN -->
+    <!-- Alpine.js Collapse Plugin & Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 
     <!-- Firebase SDKs -->
@@ -1012,85 +1013,83 @@
                 </div>
             </div>
 
-            <!-- Dialog 1 -->
-            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dialog 1 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg sm:text-xl font-bold text-navy">
-                            A. Merencanakan Pesta dan Masalah Suara (Die Geburtstagsparty planen)
-                        </h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Tim dan Alia.</p>
-                    </div>
-
-                    <!-- Full Dialog Player Button -->
-                    <button @click="playFullDialog(1)"
-                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog1Lines" :key="idx">
-                        <div class="p-4 rounded-2xl transition-all duration-200 border selectable-text"
-                            :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Tim' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
-                            <div class="flex items-center gap-2">
-                                <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
-                                    :class="line.speaker === 'Tim' ? 'bg-navy' : 'bg-orange-500'"
-                                    x-text="line.speaker.charAt(0)"></span>
-                                <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold tracking-wider">Dialog 1</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Merencanakan Pesta Ulang Tahun (Geburtstagsparty planen)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Tim dan Alia mengenai rencana pesta dan antisipasi keluhan tetangga.</p>
                             </div>
-                            <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
-                            <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
+                            <button @click="playFullDialog(1)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 1 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
-                </div>
-            </div>
 
-            <!-- Dialog 2 -->
-            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                        <!-- Balon Dialog 1 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog1Lines" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Tim' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg sm:text-xl font-bold text-navy">
-                            B. Insiden Canggung di Tengah Acara Pesta (Ein Missgeschick auf der Feier)
-                        </h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Florian dan Sarah.</p>
-                    </div>
-
-                    <!-- Full Dialog Player Button -->
-                    <button @click="playFullDialog(2)"
-                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog2Lines" :key="idx">
-                        <div class="p-4 rounded-2xl transition-all duration-200 border selectable-text"
-                            :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : (line.speaker === 'Florian' ? 'bg-gray-50/70 border-gray-100' : 'bg-orange-50/30 border-orange-100/60')">
-                            <div class="flex items-center gap-2">
-                                <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
-                                    :class="line.speaker === 'Florian' ? 'bg-navy' : 'bg-orange-500'"
-                                    x-text="line.speaker.charAt(0)"></span>
-                                <strong class="text-xs sm:text-sm text-navy" x-text="line.speaker"></strong>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold tracking-wider">Dialog 2</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Insiden Canggung di Tengah Pesta (Ein Missgeschick auf der Feier)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Florian dan Sarah ketika gelas jus tumpah ke atas karpet baru.</p>
                             </div>
-                            <p class="text-xs sm:text-sm font-semibold text-gray-800 mt-2" x-text="line.de"></p>
-                            <p class="text-xs text-gray-500 italic mt-1" x-text="line.id"></p>
+                            <button @click="playFullDialog(2)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-blue-600 text-white hover:bg-blue-700'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 2 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
+
+                        <!-- Balon Dialog 2 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog2Lines" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Florian' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1113,24 +1112,36 @@
             <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-8">
                 <!-- Text 1: Die Kieler Woche -->
                 <div class="space-y-4">
-                    <h3 class="text-base sm:text-lg font-extrabold text-navy border-b border-gray-100 pb-2">
-                        A. Ein Fest im Norden: Die Kieler Woche
-                    </h3>
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <h3 class="text-base sm:text-lg font-extrabold text-navy">
+                            A. Ein Fest im Norden: Die Kieler Woche
+                        </h3>
+                        <button @click="playLesetext(1)" class="p-1.5 rounded-xl border shadow-2xs transition flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold"
+                            :class="activeLesetextPlaying === 1 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-orange-600 border-orange-200 hover:bg-orange-50'"
+                            title="Putar Audio Die Kieler Woche">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    :d="activeLesetextPlaying === 1 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
+                                </path>
+                            </svg>
+                            <span x-text="activeLesetextPlaying === 1 ? 'Jeda Audio' : 'Putar Audio'"></span>
+                        </button>
+                    </div>
                     <div class="space-y-3 text-xs sm:text-sm text-gray-700 leading-relaxed">
                         <div class="p-4 rounded-xl transition-all border selectable-text"
-                            :class="currentLesetextIndex === 0 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            :class="activeLesetextPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Jedes Jahr im Juni findet in Norddeutschland die weltbekannte <strong>Kieler Woche</strong> statt. Rund drei Millionen Besucher aus aller Welt reisen nach Kiel, um dieses einzigartige maritime Großereignis zu erleben.
                             </p>
                         </div>
                         <div class="p-4 rounded-xl transition-all border selectable-text"
-                            :class="currentLesetextIndex === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            :class="activeLesetextPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Die Kieler Woche ist die größte Segelsport-Veranstaltung der Welt. Mehr als 4.000 Seglerinnen und Segler aus über 70 Nationen nehmen an den spektakulären Segelregatten auf der Ostsee teil. Tausende Zuschauer bewundern vom Ufer aus die historischen Traditionssegelschiffe und modernen Boote.
                             </p>
                         </div>
                         <div class="p-4 rounded-xl transition-all border selectable-text"
-                            :class="currentLesetextIndex === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            :class="activeLesetextPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
                             <p>
                                 Neben dem Sport ist die Kieler Woche ein riesiges Sommerfest für Erwachsene und Kinder. Auf zahlreichen Bühnen finden über 400 Live-Konzerte statt, und überall in der Stadt kann man kulinarische Spezialitäten aus vielen Ländern probieren. Das Fest endet traditionell am Sonntagabend mit einem riesigen Feuerwerk über der Kieler Förde. Viele Besucher freuen sich schon während der Abreise auf das nächste Jahr.
                             </p>
@@ -1145,70 +1156,111 @@
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Paula -->
-                        <div class="p-4 rounded-2xl border transition-all selectable-text"
-                            :class="currentLesetextIndex === 3 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
-                            <div class="flex items-center gap-2 mb-3">
-                                <div class="w-8 h-8 rounded-full bg-navy text-white flex items-center justify-center font-bold text-xs">P</div>
-                                <div>
-                                    <strong class="text-xs sm:text-sm text-navy block font-extrabold">Paula (29 Jahre)</strong>
-                                    <span class="text-[11px] text-gray-500">In Buenos Aires, Argentinien</span>
+                        <div class="p-4 rounded-2xl border transition-all selectable-text flex flex-col justify-between"
+                            :class="activeLesetextPlaying === 2 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-gray-100">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-navy text-white flex items-center justify-center font-bold text-xs">P</div>
+                                        <div>
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold">Paula (29 Jahre)</strong>
+                                            <span class="text-[11px] text-gray-500">In Buenos Aires, Argentinien</span>
+                                        </div>
+                                    </div>
+                                    <button @click="playLesetext(2)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                        :class="activeLesetextPlaying === 2 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white border-orange-200 text-orange-600 hover:bg-orange-50'"
+                                        title="Putar Audio Paula">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                :d="activeLesetextPlaying === 2 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </div>
+                                <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                    „Ich wollte schon lange ins Ausland gehen und lebe jetzt seit zwei Monaten in Buenos Aires. Ich arbeite an einer Sprachschule und unterrichte Deutsch. Die Arbeit macht mir großen Spaß. Manchmal vermisse ich meine Familie in Deutschland, besonders wenn jemand Geburtstag feiert und ich nicht dabei sein kann. Aber ich habe hier schnell neue Freunde gefunden. Wenn wir uns verabreden, kommt meistens niemand pünktlich, alle treffen sich ziemlich spät am Abend. Am Anfang habe ich mich darüber geärgert, aber inzwischen habe ich mich an die Kultur gewöhnt und fühle mich sehr wohl.“
+                                </p>
                             </div>
-                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                                „Ich wollte schon lange ins Ausland gehen und lebe jetzt seit zwei Monaten in Buenos Aires. Ich arbeite an einer Sprachschule und unterrichte Deutsch. Die Arbeit macht mir großen Spaß. Manchmal vermisse ich meine Familie in Deutschland, besonders wenn jemand Geburtstag feiert und ich nicht dabei sein kann. Aber ich habe hier schnell neue Freunde gefunden. Wenn wir uns verabreden, kommt meistens niemand pünktlich, alle treffen sich ziemlich spät am Abend. Am Anfang habe ich mich darüber geärgert, aber inzwischen habe ich mich an die Kultur gewöhnt und fühle mich sehr wohl.“
-                            </p>
                         </div>
 
                         <!-- Chandan -->
-                        <div class="p-4 rounded-2xl border transition-all selectable-text"
-                            :class="currentLesetextIndex === 4 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
-                            <div class="flex items-center gap-2 mb-3">
-                                <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs">C</div>
-                                <div>
-                                    <strong class="text-xs sm:text-sm text-navy block font-extrabold">Chandan (25 Jahre)</strong>
-                                    <span class="text-[11px] text-gray-500">In Kiel, Deutschland</span>
+                        <div class="p-4 rounded-2xl border transition-all selectable-text flex flex-col justify-between"
+                            :class="activeLesetextPlaying === 3 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/60 border-gray-100'">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-gray-100">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs">C</div>
+                                        <div>
+                                            <strong class="text-xs sm:text-sm text-navy block font-extrabold">Chandan (25 Jahre)</strong>
+                                            <span class="text-[11px] text-gray-500">In Kiel, Deutschland</span>
+                                        </div>
+                                    </div>
+                                    <button @click="playLesetext(3)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                        :class="activeLesetextPlaying === 3 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white border-orange-200 text-orange-600 hover:bg-orange-50'"
+                                        title="Putar Audio Chandan">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                :d="activeLesetextPlaying === 3 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </div>
+                                <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                    „Ich komme aus Indien und studiere seit dem Frühjahr an der Universität in Kiel. Am Anfang habe ich mich etwas fremd gefühlt, aber die Menschen hier sind unglaublich freundlich und hilfsbereit. Die Mitarbeiter an der Uni haben mir bei der Anmeldung im Wohnheim sehr geholfen. Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit. Das finde ich praktisch und unkompliziert. Inzwischen habe ich viele Kontakte geknüpft und fühle mich in Norddeutschland wie zu Hause.“
+                                </p>
                             </div>
-                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                                „Ich komme aus Indien und studiere seit dem Frühjahr an der Universität in Kiel. Am Anfang habe ich mich etwas fremd gefühlt, aber die Menschen hier sind unglaublich freundlich und hilfsbereit. Die Mitarbeiter an der Uni haben mir bei der Anmeldung im Wohnheim sehr geholfen. Wenn meine Freunde Partys organisieren, bringt jeder Gast etwas zu essen oder zu trinken mit. Das finde ich praktisch und unkompliziert. Inzwischen habe ich viele Kontakte geknüpft und fühle mich in Norddeutschland wie zu Hause.“
-                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Terjemahan Accordion -->
-                <div class="pt-4 border-t border-gray-100">
+                <!-- Terjemahan Teks Accordion -->
+                <div class="mt-4">
                     <button @click="showTranslation = !showTranslation"
-                        class="w-full py-3 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-between">
-                        <span>Lihat Terjemahan Bahasa Indonesia</span>
-                        <svg class="w-4 h-4 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        class="w-full flex items-center justify-between p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-900 font-bold text-xs sm:text-sm hover:bg-amber-100/70 transition">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                </path>
+                            </svg>
+                            <span>Terjemahan Teks Bacaan (Bahasa Indonesia)</span>
+                        </span>
+                        <svg class="w-4 h-4 transition-transform duration-200"
+                            :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
 
-                    <div x-show="showTranslation" x-cloak class="mt-4 p-5 rounded-2xl bg-gray-50 border border-gray-200 text-xs sm:text-sm text-gray-700 space-y-4">
-                        <div>
-                            <strong class="text-navy block mb-1">Teks 1: Festival di Wilayah Utara: Pekan Kiel (Kieler Woche)</strong>
-                            <p class="mb-2">
-                                Setiap tahun pada bulan Juni, perhelatan terkenal dunia <strong>Kieler Woche</strong> diselenggarakan di Jerman Utara. Sekitar tiga juta pengunjung dari berbagai penjuru dunia melakukan perjalanan ke kota Kiel untuk merasakan kemeriahan acara maritim akbar yang unik ini.
-                            </p>
-                            <p class="mb-2">
-                                Kieler Woche merupakan ajang olahraga layar terbesar di dunia. Lebih dari 4.000 atlet layar dari 70 negara lebih berpartisipasi dalam regata perlombaan perahu layar yang spektakuler di Laut Baltik. Ribuan penonton mengagumi kapal-kapal layar tradisional bersejarah dan perahu-perahu modern dari tepi dermaga.
-                            </p>
-                            <p>
-                                Di samping olahraga, Kieler Woche merupakan sebuah pesta musim panas raksasa untuk kalangan dewasa maupun anak-anak. Di berbagai panggung pertunjukan terselenggara lebih dari 400 konser musik langsung, dan di seluruh penjuru kota orang dapat mencicipi hidangan khas kuliner dari berbagai negara. Perayaan ini secara tradisional ditutup pada Minggu malam dengan atraksi kembang api akbar di atas Teluk Kiel. Banyak pengunjung sudah menantikan perayaan tahun berikutnya saat perjalanan pulang.
-                            </p>
-                        </div>
+                    <div x-show="showTranslation" x-collapse
+                        class="mt-3 p-5 sm:p-6 rounded-2xl bg-amber-50/40 border border-amber-200/60 text-xs sm:text-sm text-gray-700 space-y-4"
+                        x-cloak>
+                        <p><strong>Feste und Leben im Ausland: Dua Laporan Pengalaman Budaya</strong></p>
+                        <p class="text-xs text-gray-600">Terjemahan lengkap teks perayaan Kieler Woche dan adaptasi hidup di luar negeri:</p>
+                        <div class="space-y-3 pt-2 border-t border-amber-200/60">
+                            <div>
+                                <strong class="text-navy block mb-1">Teks 1: Festival di Wilayah Utara: Pekan Kiel (Kieler Woche)</strong>
+                                <p class="mb-2 leading-relaxed">
+                                    Setiap tahun pada bulan Juni, perhelatan terkenal dunia <strong>Kieler Woche</strong> diselenggarakan di Jerman Utara. Sekitar tiga juta pengunjung dari berbagai penjuru dunia melakukan perjalanan ke kota Kiel untuk merasakan kemeriahan acara maritim akbar yang unik ini.
+                                </p>
+                                <p class="mb-2 leading-relaxed">
+                                    Kieler Woche merupakan ajang olahraga layar terbesar di dunia. Lebih dari 4.000 atlet layar dari 70 negara lebih berpartisipasi dalam regata perlombaan perahu layar yang spektakuler di Laut Baltik. Ribuan penonton mengagumi kapal-kapal layar tradisional bersejarah dan perahu-perahu modern dari tepi dermaga.
+                                </p>
+                                <p class="leading-relaxed">
+                                    Di samping olahraga, Kieler Woche merupakan sebuah pesta musim panas raksasa untuk kalangan dewasa maupun anak-anak. Di berbagai panggung pertunjukan terselenggara lebih dari 400 konser musik langsung, dan di seluruh penjuru kota orang dapat mencicipi hidangan khas kuliner dari berbagai negara. Perayaan ini secara tradisional ditutup pada Minggu malam dengan atraksi kembang api akbar di atas Teluk Kiel. Banyak pengunjung sudah menantikan perayaan tahun berikutnya saat perjalanan pulang.
+                                </p>
+                            </div>
 
-                        <div class="pt-3 border-t border-gray-200">
-                            <strong class="text-navy block mb-1">Teks 2: Di Sini Saya Merasa Nyaman: Dua Laporan Pengalaman dari Luar Negeri</strong>
-                            <p class="mb-2">
-                                <strong>Paula (29 tahun, di Argentina):</strong> „Saya sudah lama ingin tinggal di luar negeri dan sekarang menetap selama dua bulan di Buenos Aires. Saya bekerja di sebuah sekolah bahasa dan mengajar bahasa Jerman. Pekerjaan ini memberi saya banyak kegembiraan. Terkadang saya merindukan keluarga saya di Jerman, terutama saat seseorang merayakan ulang tahun dan saya tidak dapat hadir bersama mereka. Namun saya cepat menemukan teman-teman baru di sini. Saat kami membuat janji bertemu, biasanya hampir tidak ada orang yang datang tepat waktu, semua berkumpul larut malam. Pada awalnya saya merasa kesal dengan hal tersebut, tetapi sekarang saya telah terbiasa dengan kebiasaan budayanya dan merasa sangat nyaman.“
-                            </p>
-                            <p>
-                                <strong>Chandan (25 tahun, di Jerman):</strong> „Saya berasal dari India dan berkuliah sejak musim semi di Universitas Kiel. Pada awalnya saya sempat merasa asing, tetapi orang-orang di sini luar biasa ramah dan gemar menolong. Para petugas di universitas sangat membantu saya saat pendaftaran di asrama. Ketika teman-teman saya menyelenggarakan pesta, setiap tamu membawa makanan atau minuman sendiri. Saya menganggap hal tersebut sangat praktis dan menyenangkan. Saat ini saya sudah menjalin banyak pertemanan dan merasa sangat betah di Jerman Utara layaknya di rumah sendiri.“
-                            </p>
+                            <div class="pt-3 border-t border-amber-200/60">
+                                <strong class="text-navy block mb-1">Teks 2: Di Sini Saya Merasa Nyaman: Dua Laporan Pengalaman dari Luar Negeri</strong>
+                                <p class="mb-2 leading-relaxed">
+                                    <strong>Paula (29 tahun, di Argentina):</strong> „Saya sudah lama ingin tinggal di luar negeri dan sekarang menetap selama dua bulan di Buenos Aires. Saya bekerja di sebuah sekolah bahasa dan mengajar bahasa Jerman. Pekerjaan ini memberi saya banyak kegembiraan. Terkadang saya merindukan keluarga saya di Jerman, terutama saat seseorang merayakan ulang tahun dan saya tidak dapat hadir bersama mereka. Namun saya cepat menemukan teman-teman baru di sini. Saat kami membuat janji bertemu, biasanya hampir tidak ada orang yang datang tepat waktu, semua berkumpul larut malam. Pada awalnya saya merasa kesal dengan hal tersebut, tetapi sekarang saya telah terbiasa dengan kebiasaan budayanya dan merasa sangat nyaman.“
+                                </p>
+                                <p class="leading-relaxed">
+                                    <strong>Chandan (25 tahun, di Jerman):</strong> „Saya berasal dari India dan berkuliah sejak musim semi di Universitas Kiel. Pada awalnya saya sempat merasa asing, tetapi orang-orang di sini luar biasa ramah dan gemar menolong. Para petugas di universitas sangat membantu saya saat pendaftaran di asrama. Ketika teman-teman saya menyelenggarakan pesta, setiap tamu membawa makanan atau minuman sendiri. Saya menganggap hal tersebut sangat praktis dan menyenangkan. Saat ini saya sudah menjalin banyak pertemanan dan merasa sangat betah di Jerman Utara layaknya di rumah sendiri.“
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1970,14 +2022,14 @@
                 maleVoice: null,
                 femaleVoice: null,
 
-                // Dialog Player State
+                // Dialog & Lesetext Audio State
                 isPlayingFullDialog: false,
                 activeDialogPlaying: null,
                 currentSpeakingIndex: null,
-
-                // Lesetext Reader State
-                isReadingLesetext: false,
-                currentLesetextIndex: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
+                activeLesetextPlaying: null,
+                lesetextAudios: {},
 
                 // Learning Goals Data
                 learningGoals: [
@@ -2362,6 +2414,7 @@
                 },
 
                 speak(text, gender = 'female') {
+                    this.stopPlayingDialog();
                     if (!('speechSynthesis' in window)) {
                         alert('Browser Anda belum mendukung fitur Web Speech Audio.');
                         return;
@@ -2382,61 +2435,158 @@
                 },
 
                 playFullDialog(dialogNum) {
-                    if (!('speechSynthesis' in window)) return;
                     if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                        this.stopPlayingDialog();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    this.currentSpeakingIndex = 0;
 
-                    const dialogData = (dialogNum === 1) ? this.dialog1Lines : this.dialog2Lines;
-
-                    const speakNextLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= dialogData.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-8-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-8-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-8-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog1Audio = altAudio;
+                            });
                         }
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
 
-                        this.currentSpeakingIndex = index;
-                        const line = dialogData[index];
-                        const cleanText = line.de.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
-                        const utter = new SpeechSynthesisUtterance(cleanText);
-                        utter.lang = 'de-DE';
-                        utter.rate = 0.88;
-
-                        if (line.gender === 'male' && this.maleVoice) {
-                            utter.voice = this.maleVoice;
-                            utter.pitch = 0.95;
-                        } else if (this.femaleVoice) {
-                            utter.voice = this.femaleVoice;
-                            utter.pitch = 1.05;
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-8-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-8-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-8-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog2Audio = altAudio;
+                            });
                         }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
 
-                        utter.onend = () => {
-                            setTimeout(() => {
-                                speakNextLine(index + 1);
-                            }, 600);
-                        };
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    this.stopLesetextAudio();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
 
-                        utter.onerror = () => {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                        };
+                playLesetext(num) {
+                    this.stopPlayingDialog();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
 
-                        window.speechSynthesis.speak(utter);
-                    };
+                    // Jika sedang memutar track yang sama, jeda (pause) audio tanpa mereset currentTime
+                    if (this.activeLesetextPlaying === num) {
+                        if (this.lesetextAudios && this.lesetextAudios[num]) {
+                            this.lesetextAudios[num].pause();
+                        }
+                        this.activeLesetextPlaying = null;
+                        return;
+                    }
 
-                    speakNextLine(0);
+                    // Jika berpindah dari track lain, jeda dan reset track lain tersebut
+                    if (this.lesetextAudios) {
+                        Object.keys(this.lesetextAudios).forEach(key => {
+                            const k = parseInt(key);
+                            if (k !== num && this.lesetextAudios[k]) {
+                                this.lesetextAudios[k].pause();
+                                this.lesetextAudios[k].currentTime = 0;
+                            }
+                        });
+                    }
+
+                    this.activeLesetextPlaying = num;
+
+                    const mp3File = `Lesetext${num}-Pertemuan-8-materi-a2-1.mp3`;
+                    const wavFile = `Lesetext${num}-Pertemuan-8-materi-a2-1.wav`;
+
+                    if (!this.lesetextAudios[num]) {
+                        const audio = new Audio(mp3File);
+                        audio.addEventListener('ended', () => {
+                            this.activeLesetextPlaying = null;
+                            if (this.lesetextAudios[num]) {
+                                this.lesetextAudios[num].currentTime = 0;
+                            }
+                        });
+                        audio.addEventListener('error', () => {
+                            console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
+                            const altAudio = new Audio(wavFile);
+                            altAudio.addEventListener('ended', () => {
+                                this.activeLesetextPlaying = null;
+                                if (this.lesetextAudios[num]) {
+                                    this.lesetextAudios[num].currentTime = 0;
+                                }
+                            });
+                            altAudio.play().catch(e => {
+                                console.error(`Gagal memuat ${wavFile}:`, e);
+                                this.activeLesetextPlaying = null;
+                            });
+                            this.lesetextAudios[num] = altAudio;
+                        });
+                        this.lesetextAudios[num] = audio;
+                    }
+
+                    this.lesetextAudios[num].play().catch(err => {
+                        console.error(`Audio playback error Lesetext ${num}:`, err);
+                        this.activeLesetextPlaying = null;
+                    });
+                },
+
+                stopLesetextAudio() {
+                    this.activeLesetextPlaying = null;
+                    if (this.lesetextAudios) {
+                        Object.values(this.lesetextAudios).forEach(audio => {
+                            if (audio) {
+                                audio.pause();
+                                audio.currentTime = 0;
+                            }
+                        });
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
                 },
 
                 initApp() {
