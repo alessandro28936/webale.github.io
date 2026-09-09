@@ -947,10 +947,10 @@
                             </path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 x-show="isPlayingLesetext"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9 10a1 1 0 011-1h4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z">
+                                d="M10 9v6m4-6v6">
                             </path>
                         </svg>
-                        <span x-text="isPlayingLesetext ? 'Hentikan Audio' : 'Putar Teks Bacaan'"></span>
+                        <span x-text="isPlayingLesetext ? 'Jeda Audio' : 'Putar Teks Bacaan'"></span>
                     </button>
                 </div>
 
@@ -1596,7 +1596,10 @@
 
                 toggleLesetextAudio() {
                     if (this.isPlayingLesetext) {
-                        this.stopLesetextAudio();
+                        if (this.lesetextAudio) {
+                            this.lesetextAudio.pause();
+                        }
+                        this.isPlayingLesetext = false;
                         return;
                     }
 
@@ -1608,26 +1611,31 @@
                     if (!this.lesetextAudio) {
                         this.lesetextAudio = new Audio('Lesetext-Pertemuan-2-materi-a2-1.mp3');
                         this.lesetextAudio.addEventListener('ended', () => {
-                            this.stopLesetextAudio();
+                            this.isPlayingLesetext = false;
+                            if (this.lesetextAudio) {
+                                this.lesetextAudio.currentTime = 0;
+                            }
                         });
                         this.lesetextAudio.addEventListener('error', () => {
                             console.warn('Gagal memuat Lesetext-Pertemuan-2-materi-a2-1.mp3, mencoba alternatif .wav...');
                             const altAudio = new Audio('Lesetext-Pertemuan-2-materi-a2-1.wav');
                             altAudio.addEventListener('ended', () => {
-                                this.stopLesetextAudio();
+                                this.isPlayingLesetext = false;
+                                if (this.lesetextAudio) {
+                                    this.lesetextAudio.currentTime = 0;
+                                }
                             });
                             altAudio.play().catch(() => {
-                                this.stopLesetextAudio();
+                                this.isPlayingLesetext = false;
                             });
                             this.lesetextAudio = altAudio;
                         });
                     }
 
                     this.isPlayingLesetext = true;
-                    this.lesetextAudio.currentTime = 0;
                     this.lesetextAudio.play().catch(err => {
                         console.error('Audio playback error Lesetext:', err);
-                        this.stopLesetextAudio();
+                        this.isPlayingLesetext = false;
                     });
                 },
 
