@@ -39,7 +39,8 @@
         }
     </script>
 
-    <!-- Alpine.js CDN -->
+    <!-- Alpine.js Collapse Plugin & Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 
     <!-- Firebase SDKs -->
@@ -970,87 +971,83 @@
                 </div>
             </div>
 
-            <!-- Dialog 1: Membicarakan Situasi dan Perasaan -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dialog 1 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-navy">Dialog 1: Membicarakan Situasi dan Perasaan (Über Gefühle und Situationen sprechen)</h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Julia dan Nils mengenai suasana hati akhir pekan dan perasaan cemas menjelang tes mengemudi.</p>
-                    </div>
-                    <button @click="playFullDialog(1)"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 1) ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog1" :key="idx">
-                        <div class="p-4 rounded-2xl border transition"
-                            :class="(activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start gap-3 min-w-0">
-                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                    :class="line.speaker === 'Julia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
-                                    x-text="line.speaker === 'Julia' ? 'J' : 'N'">
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                    </div>
-                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
-                                    <p class="text-xs text-gray-500 italic selectable-text" x-text="line.id"></p>
-                                </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold tracking-wider">Dialog 1</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Momen Penting dan Perasaan (Lebensereignisse)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Julia dan Nils mengenai suasana hati dan ujian mengemudi.</p>
                             </div>
+                            <button @click="playFullDialog(1)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 1 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
-                </div>
-            </div>
 
-            <!-- Dialog 2: Menanggapi Undangan Pernikahan -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                        <!-- Balon Dialog 1 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog1" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Julia' ? 'text-purple-700' : 'text-blue-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-navy">Dialog 2: Menanggapi Undangan Pernikahan (Auf eine Hochzeitseinladung reagieren)</h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Pia dan Jan ketika menerima kartu undangan pernikahan namun berhalangan hadir karena liburan.</p>
-                    </div>
-                    <button @click="playFullDialog(2)"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 2) ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog2" :key="idx">
-                        <div class="p-4 rounded-2xl border transition"
-                            :class="(activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start gap-3 min-w-0">
-                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                    :class="line.speaker === 'Pia' ? 'bg-rose-500 text-white' : 'bg-blue-600 text-white'"
-                                    x-text="line.speaker === 'Pia' ? 'P' : 'J'">
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                    </div>
-                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
-                                    <p class="text-xs text-gray-500 italic selectable-text" x-text="line.id"></p>
-                                </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold tracking-wider">Dialog 2</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Menanggapi Undangan Pernikahan (Hochzeitseinladung)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Pia dan Jan ketika menerima kartu undangan pernikahan.</p>
                             </div>
+                            <button @click="playFullDialog(2)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-blue-600 text-white hover:bg-blue-700'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 2 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
+
+                        <!-- Balon Dialog 2 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog2" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Pia' ? 'text-purple-700' : 'text-blue-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1079,12 +1076,18 @@
                 <!-- 3 Cards Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                     <!-- Karte A -->
-                    <div class="p-5 rounded-2xl bg-orange-50/40 border border-orange-200 flex flex-col justify-between">
+                    <div class="p-5 rounded-2xl border flex flex-col justify-between transition-all"
+                        :class="activeLesetextPlaying === 1 ? 'bg-orange-50/90 border-orange-300 ring-2 ring-orange-200' : 'bg-orange-50/40 border-orange-200'">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-950 text-xs font-extrabold">Karte A: Dankeskarte</span>
-                                <button @click="speak(lesetextParagraphs[0], 'female')" class="p-1.5 rounded-lg bg-white border border-orange-200 text-orange-600 hover:bg-orange-50 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(1)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 1 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white border-orange-200 text-orange-600 hover:bg-orange-50'"
+                                    title="Putar Audio Karte A">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 1 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
@@ -1095,12 +1098,18 @@
                     </div>
 
                     <!-- Karte B -->
-                    <div class="p-5 rounded-2xl bg-blue-50/40 border border-blue-200 flex flex-col justify-between">
+                    <div class="p-5 rounded-2xl border flex flex-col justify-between transition-all"
+                        :class="activeLesetextPlaying === 2 ? 'bg-blue-50/90 border-blue-300 ring-2 ring-blue-200' : 'bg-blue-50/40 border-blue-200'">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-950 text-xs font-extrabold">Karte B: Absage von Freunden</span>
-                                <button @click="speak(lesetextParagraphs[1], 'male')" class="p-1.5 rounded-lg bg-white border border-blue-200 text-blue-600 hover:bg-blue-50 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(2)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 2 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-blue-200 text-blue-600 hover:bg-blue-50'"
+                                    title="Putar Audio Karte B">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 2 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
@@ -1111,12 +1120,18 @@
                     </div>
 
                     <!-- Karte C -->
-                    <div class="p-5 rounded-2xl bg-emerald-50/40 border border-emerald-200 flex flex-col justify-between">
+                    <div class="p-5 rounded-2xl border flex flex-col justify-between transition-all"
+                        :class="activeLesetextPlaying === 3 ? 'bg-emerald-50/90 border-emerald-300 ring-2 ring-emerald-200' : 'bg-emerald-50/40 border-emerald-200'">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-950 text-xs font-extrabold">Karte C: Glückwunsch von Gästen</span>
-                                <button @click="speak(lesetextParagraphs[2], 'female')" class="p-1.5 rounded-lg bg-white border border-emerald-200 text-emerald-600 hover:bg-emerald-50 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(3)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 3 ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-emerald-200 text-emerald-600 hover:bg-emerald-50'"
+                                    title="Putar Audio Karte C">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 3 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mb-3 selectable-text">
@@ -1127,28 +1142,44 @@
                     </div>
                 </div>
 
-                <!-- Accordion Terjemahan Bahasa Indonesia -->
-                <div class="pt-4 border-t border-gray-100">
+                <!-- Terjemahan Teks Accordion -->
+                <div class="mt-4">
                     <button @click="showTranslation = !showTranslation"
-                        class="w-full py-3 px-5 rounded-2xl bg-gray-50 hover:bg-orange-50/60 border border-gray-200 text-navy font-bold text-xs sm:text-sm transition flex items-center justify-between">
-                        <span x-text="showTranslation ? 'Sembunyikan Terjemahan Bahasa Indonesia' : 'Lihat Terjemahan Lengkap Bahasa Indonesia'"></span>
-                        <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        class="w-full flex items-center justify-between p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-900 font-bold text-xs sm:text-sm hover:bg-amber-100/70 transition">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                </path>
+                            </svg>
+                            <span>Terjemahan Teks Bacaan (Bahasa Indonesia)</span>
+                        </span>
+                        <svg class="w-4 h-4 transition-transform duration-200"
+                            :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
 
-                    <div x-show="showTranslation" class="mt-4 p-5 rounded-2xl bg-gray-50/90 border border-gray-200 text-xs sm:text-sm space-y-4 text-gray-700" x-cloak>
-                        <div>
-                            <strong class="text-navy block mb-1">Kartu A: Kartu Ucapan Terima Kasih Pasca Pernikahan</strong>
-                            <p class="leading-relaxed">„Sebuah mimpi berbalut warna putih! Bunga-bunga, begitu banyak ucapan selamat yang tulus, hadiah-hadiah yang luar biasa, teman-teman, kegembiraan, dan musik: Pernikahan kami adalah hari yang tak terlupakan. Kami ingin mengucapkan terima kasih dari lubuk hati yang terdalam atas semua doa baik dan dukungannya. Ketika kami mengenang kembali hari tersebut, kami merasa sangat bahagia. Salam hangat, Julia dan Nils“</p>
-                        </div>
-                        <div>
-                            <strong class="text-navy block mb-1">Kartu B: Kartu Ucapan Selamat dan Penolakan Hadir dari Teman</strong>
-                            <p class="leading-relaxed">„Julia dan Nils yang terkasih, betapa bahagianya, kalian menikah! Beribu terima kasih atas undangan ke pernikahan kalian. Sayangnya kami tidak bisa datang ke pesta kalian karena pada waktu tersebut kami sudah sedang berlibur. Kami sangat menyayangkan hal itu. Ketika kami kembali dari Spanyol, kami akan langsung mengunjungi kalian. Kami mengucapkan selamat dengan setulus hati dan mendoakan yang terbaik untuk masa depan kalian bersama! Salam hangat, Pia dan Jan“</p>
-                        </div>
-                        <div>
-                            <strong class="text-navy block mb-1">Kartu C: Kartu Ucapan Selamat dari Para Tamu</strong>
-                            <p class="leading-relaxed">„Pasangan Pengantin yang Terkasih, selamat atas pernikahan kalian! Kami sangat gembira dapat merayakan momen istimewa ini bersama kalian hari ini. Untuk perjalanan hidup bersama kalian, kami mendoakan kesehatan, kebahagiaan, dan limpahan cinta. Jika dua insan begitu serasi seperti kalian berdua, masa depan akan menjadi sangat indah! Penuh cinta, sahabat kalian Anna dan David“</p>
+                    <div x-show="showTranslation" x-collapse
+                        class="mt-3 p-5 sm:p-6 rounded-2xl bg-amber-50/40 border border-amber-200/60 text-xs sm:text-sm text-gray-700 space-y-4"
+                        x-cloak>
+                        <p><strong>Karten und Grüße zu besonderen Anlässen: Tiga Contoh Kartu Ucapan Pernikahan</strong></p>
+                        <p class="text-xs text-gray-600">Terjemahan lengkap kartu ucapan terima kasih, penolakan hadir, dan ucapan selamat:</p>
+                        <div class="space-y-3 pt-2 border-t border-amber-200/60">
+                            <div>
+                                <strong class="text-navy block mb-1">Kartu A: Kartu Ucapan Terima Kasih Pasca Pernikahan</strong>
+                                <p class="leading-relaxed">„Sebuah mimpi berbalut warna putih! Bunga-bunga, begitu banyak ucapan selamat yang tulus, hadiah-hadiah yang luar biasa, teman-teman, kegembiraan, dan musik: Pernikahan kami adalah hari yang tak terlupakan. Kami ingin mengucapkan terima kasih dari lubuk hati yang terdalam atas semua doa baik dan dukungannya. Ketika kami mengenang kembali hari tersebut, kami merasa sangat bahagia. Salam hangat, Julia dan Nils“</p>
+                            </div>
+                            <div>
+                                <strong class="text-navy block mb-1">Kartu B: Kartu Ucapan Selamat dan Penolakan Hadir dari Teman</strong>
+                                <p class="leading-relaxed">„Julia dan Nils yang terkasih, betapa bahagianya, kalian menikah! Beribu terima kasih atas undangan ke pernikahan kalian. Sayangnya kami tidak bisa datang ke pesta kalian karena pada waktu tersebut kami sudah sedang berlibur. Kami sangat menyayangkan hal itu. Ketika kami kembali dari Spanyol, kami akan langsung mengunjungi kalian. Kami mengucapkan selamat dengan setulus hati dan mendoakan yang terbaik untuk masa depan kalian bersama! Salam hangat, Pia dan Jan“</p>
+                            </div>
+                            <div>
+                                <strong class="text-navy block mb-1">Kartu C: Kartu Ucapan Selamat dari Para Tamu</strong>
+                                <p class="leading-relaxed">„Pasangan Pengantin yang Terkasih, selamat atas pernikahan kalian! Kami sangat gembira dapat merayakan momen istimewa ini bersama kalian hari ini. Untuk perjalanan hidup bersama kalian, kami mendoakan kesehatan, kebahagiaan, dan limpahan cinta. Jika dua insan begitu serasi seperti kalian berdua, masa depan akan menjadi sangat indah! Penuh cinta, sahabat kalian Anna dan David“</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1886,10 +1917,14 @@
                 maleVoice: null,
                 femaleVoice: null,
 
-                // Dialog Player State
+                // Dialog & Lesetext Audio State
                 isPlayingFullDialog: false,
                 activeDialogPlaying: null,
                 currentSpeakingIndex: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
+                activeLesetextPlaying: null,
+                lesetextAudios: {},
 
                 // Learning Goals (6 Target)
                 learningGoals: [
@@ -2285,13 +2320,14 @@
                     }
                 },
 
-                speak(text, gender = 'female') {
+                speak(text, gender = 'female', onEndedCallback = null) {
+                    this.stopPlayingDialog();
                     if (!('speechSynthesis' in window)) {
                         alert('Browser Anda belum mendukung fitur Web Speech Audio.');
                         return;
                     }
                     window.speechSynthesis.cancel();
-                    const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
+                    const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ').trim();
                     const utter = new SpeechSynthesisUtterance(cleanText);
                     utter.lang = 'de-DE';
                     utter.rate = 0.9;
@@ -2302,65 +2338,166 @@
                         utter.voice = this.femaleVoice;
                         utter.pitch = 1.05;
                     }
+                    if (onEndedCallback) {
+                        utter.onend = onEndedCallback;
+                        utter.onerror = onEndedCallback;
+                    }
                     window.speechSynthesis.speak(utter);
                 },
 
                 playFullDialog(dialogNum) {
-                    if (!('speechSynthesis' in window)) return;
                     if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                        this.stopPlayingDialog();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    this.currentSpeakingIndex = 0;
 
-                    const dialogData = (dialogNum === 1) ? this.dialog1 : this.dialog2;
-
-                    const speakNextLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= dialogData.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-7-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-7-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-7-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog1Audio = altAudio;
+                            });
                         }
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
 
-                        this.currentSpeakingIndex = index;
-                        const line = dialogData[index];
-                        const cleanText = line.de.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ');
-                        const utter = new SpeechSynthesisUtterance(cleanText);
-                        utter.lang = 'de-DE';
-                        utter.rate = 0.88;
-
-                        if (line.gender === 'male' && this.maleVoice) {
-                            utter.voice = this.maleVoice;
-                            utter.pitch = 0.95;
-                        } else if (this.femaleVoice) {
-                            utter.voice = this.femaleVoice;
-                            utter.pitch = 1.05;
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-7-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-7-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-7-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog2Audio = altAudio;
+                            });
                         }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
 
-                        utter.onend = () => {
-                            setTimeout(() => {
-                                speakNextLine(index + 1);
-                            }, 600);
-                        };
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    this.stopLesetextAudio();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
 
-                        utter.onerror = () => {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                        };
+                playLesetext(num) {
+                    this.stopPlayingDialog();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
 
-                        window.speechSynthesis.speak(utter);
-                    };
+                    // Jika sedang memutar track yang sama, jeda (pause) audio tanpa mereset currentTime
+                    if (this.activeLesetextPlaying === num) {
+                        if (this.lesetextAudios && this.lesetextAudios[num]) {
+                            this.lesetextAudios[num].pause();
+                        }
+                        this.activeLesetextPlaying = null;
+                        return;
+                    }
 
-                    speakNextLine(0);
+                    // Jika berpindah dari track lain, jeda dan reset track lain tersebut
+                    if (this.lesetextAudios) {
+                        Object.keys(this.lesetextAudios).forEach(key => {
+                            const k = parseInt(key);
+                            if (k !== num && this.lesetextAudios[k]) {
+                                this.lesetextAudios[k].pause();
+                                this.lesetextAudios[k].currentTime = 0;
+                            }
+                        });
+                    }
+
+                    this.activeLesetextPlaying = num;
+
+                    const mp3File = `Lesetext${num}-Pertemuan-7-materi-a2-1.mp3`;
+                    const wavFile = `Lesetext${num}-Pertemuan-7-materi-a2-1.wav`;
+
+                    if (!this.lesetextAudios[num]) {
+                        const audio = new Audio(mp3File);
+                        audio.addEventListener('ended', () => {
+                            this.activeLesetextPlaying = null;
+                            if (this.lesetextAudios[num]) {
+                                this.lesetextAudios[num].currentTime = 0;
+                            }
+                        });
+                        audio.addEventListener('error', () => {
+                            console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
+                            const altAudio = new Audio(wavFile);
+                            altAudio.addEventListener('ended', () => {
+                                this.activeLesetextPlaying = null;
+                                if (this.lesetextAudios[num]) {
+                                    this.lesetextAudios[num].currentTime = 0;
+                                }
+                            });
+                            altAudio.play().catch(e => {
+                                console.error(`Gagal memuat ${wavFile}:`, e);
+                                this.activeLesetextPlaying = null;
+                            });
+                            this.lesetextAudios[num] = altAudio;
+                        });
+                        this.lesetextAudios[num] = audio;
+                    }
+
+                    this.lesetextAudios[num].play().catch(err => {
+                        console.error(`Audio playback error Lesetext ${num}:`, err);
+                        this.activeLesetextPlaying = null;
+                    });
+                },
+
+                stopLesetextAudio() {
+                    this.activeLesetextPlaying = null;
+                    if (this.lesetextAudios) {
+                        Object.values(this.lesetextAudios).forEach(audio => {
+                            if (audio) {
+                                audio.pause();
+                                audio.currentTime = 0;
+                            }
+                        });
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
                 },
 
                 initApp() {

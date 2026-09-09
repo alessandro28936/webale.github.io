@@ -39,7 +39,8 @@
         }
     </script>
 
-    <!-- Alpine.js CDN -->
+    <!-- Alpine.js Collapse Plugin & Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 
     <!-- Firebase SDKs -->
@@ -910,87 +911,83 @@
                 </div>
             </div>
 
-            <!-- Dialog 1: Berdiskusi tentang Berbagi Foto di Media Sosial -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dialog 1 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-navy">Dialog 1: Berdiskusi tentang Berbagi Foto di Media Sosial (Fotos in sozialen Netzwerken)</h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Konstantin dan Nadica mengenai kebiasaan mengunggah foto konser di Instagram.</p>
-                    </div>
-                    <button @click="playFullDialog(1)"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 1) ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog1" :key="idx">
-                        <div class="p-4 rounded-2xl border transition"
-                            :class="(activeDialogPlaying === 1 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start gap-3 min-w-0">
-                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                    :class="line.speaker === 'Konstantin' ? 'bg-blue-600 text-white' : 'bg-rose-500 text-white'"
-                                    x-text="line.speaker === 'Konstantin' ? 'K' : 'N'">
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                    </div>
-                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
-                                    <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
-                                </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold tracking-wider">Dialog 1</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Berbagi Foto di Media Sosial (Fotos im Netz)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Konstantin dan Nadica mengenai kebiasaan mengunggah foto konser di Instagram.</p>
                             </div>
+                            <button @click="playFullDialog(1)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 1 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 1 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 1 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
-                </div>
-            </div>
 
-            <!-- Dialog 2: Membicarakan Rekomendasi Film di Bioskop -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                        <!-- Balon Dialog 1 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog1" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 1 ? 'bg-orange-50/80 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Konstantin' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialog 2 -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-navy">Dialog 2: Membicarakan Rekomendasi Film di Bioskop (Ein Abend im Kino)</h3>
-                        <p class="text-xs text-gray-500">Percakapan antara Markus dan Julia dalam memilih antara genre kriminal, komedi, dan film biografi.</p>
-                    </div>
-                    <button @click="playFullDialog(2)"
-                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span x-text="(isPlayingFullDialog && activeDialogPlaying === 2) ? 'Menghentikan Audio...' : 'Putar Seluruh Dialog'"></span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(line, idx) in dialog2" :key="idx">
-                        <div class="p-4 rounded-2xl border transition"
-                            :class="(activeDialogPlaying === 2 && currentSpeakingIndex === idx) ? 'bg-orange-50 border-orange-300 ring-2 ring-orange-200' : 'bg-gray-50/70 border-gray-100'">
-                            <div class="flex items-start gap-3 min-w-0">
-                                <div class="w-8 h-8 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0 mt-0.5"
-                                    :class="line.speaker === 'Markus' ? 'bg-blue-600 text-white' : 'bg-rose-500 text-white'"
-                                    x-text="line.speaker === 'Markus' ? 'M' : 'J'">
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <strong class="text-xs font-bold text-navy" x-text="line.speaker"></strong>
-                                    </div>
-                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed mb-1 selectable-text" x-text="line.de"></p>
-                                    <p class="text-xs text-gray-500 italic" x-text="line.id"></p>
-                                </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-gray-100">
+                            <div class="min-w-0 flex-1">
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold tracking-wider">Dialog 2</span>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy mt-1">Rekomendasi Film di Bioskop (Ein Abend im Kino)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Percakapan antara Markus dan Julia dalam memilih antara genre kriminal, komedi, dan film biografi.</p>
                             </div>
+                            <button @click="playFullDialog(2)"
+                                class="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs flex items-center gap-2"
+                                :class="isPlayingFullDialog && activeDialogPlaying === 2 ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-blue-600 text-white hover:bg-blue-700'">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        :d="isPlayingFullDialog && activeDialogPlaying === 2 ? 'M10 9v6m4-6v6' : 'M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z'">
+                                    </path>
+                                </svg>
+                                <span x-text="isPlayingFullDialog && activeDialogPlaying === 2 ? 'Hentikan Audio' : 'Putar Seluruh Dialog'"></span>
+                            </button>
                         </div>
-                    </template>
+
+                        <!-- Balon Dialog 2 -->
+                        <div class="space-y-4 selectable-text">
+                            <template x-for="(line, idx) in dialog2" :key="idx">
+                                <div class="p-4 rounded-2xl border transition"
+                                    :class="currentSpeakingIndex === idx && activeDialogPlaying === 2 ? 'bg-blue-50/80 border-blue-300 ring-2 ring-blue-200' : 'bg-gray-50/70 border-gray-100'">
+                                    <div class="mb-1.5">
+                                        <span class="text-xs font-extrabold"
+                                            :class="line.speaker === 'Markus' ? 'text-blue-700' : 'text-purple-700'"
+                                            x-text="line.speaker"></span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm font-semibold text-navy leading-relaxed" x-text="line.de"></p>
+                                    <p class="text-[11px] text-gray-500 italic mt-1 leading-snug" x-text="line.id"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1029,8 +1026,13 @@
                                         <span class="text-[10px] text-gray-400">Kritik terhadap oversharing</span>
                                     </div>
                                 </div>
-                                <button @click="speak(lesetextParagraphs[0], 'female')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(1)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 1 ? 'bg-orange-600 text-white border-orange-600' : 'bg-white border-gray-200 text-gray-600 hover:text-orange-600'"
+                                    title="Putar Audio Carla Riemer">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 1 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic selectable-text">
@@ -1050,8 +1052,13 @@
                                         <span class="text-[10px] text-gray-400">Positif terhadap berbagi momen</span>
                                     </div>
                                 </div>
-                                <button @click="speak(lesetextParagraphs[1], 'male')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(2)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 2 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 text-gray-600 hover:text-blue-600'"
+                                    title="Putar Audio Konstantin Bührer">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 2 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic selectable-text">
@@ -1071,8 +1078,13 @@
                                         <span class="text-[10px] text-gray-400">Peringatan etika tempat kerja</span>
                                     </div>
                                 </div>
-                                <button @click="speak(lesetextParagraphs[2], 'female')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(3)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 3 ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-gray-200 text-gray-600 hover:text-emerald-600'"
+                                    title="Putar Audio Nadica Horvat">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 3 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic selectable-text">
@@ -1092,8 +1104,13 @@
                                         <span class="text-[10px] text-gray-400">Privasi anak di internet</span>
                                     </div>
                                 </div>
-                                <button @click="speak(lesetextParagraphs[3], 'male')" class="p-1.5 rounded-lg bg-white border border-gray-200 text-gray-600 hover:text-orange-600 shadow-2xs">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <button @click="playLesetext(4)" class="p-1.5 rounded-lg border shadow-2xs transition"
+                                    :class="activeLesetextPlaying === 4 ? 'bg-purple-600 text-white border-purple-600' : 'bg-white border-gray-200 text-gray-600 hover:text-purple-600'"
+                                    title="Putar Audio Ferdinand Weisensee">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="activeLesetextPlaying === 4 ? 'M10 9v6m4-6v6' : 'M15.536 8.464a5 5 0 010 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic selectable-text">
@@ -1103,32 +1120,48 @@
                     </div>
                 </div>
 
-                <!-- Accordion Terjemahan Bahasa Indonesia -->
-                <div class="pt-4 border-t border-gray-100">
+                <!-- Terjemahan Teks Accordion -->
+                <div class="mt-4">
                     <button @click="showTranslation = !showTranslation"
-                        class="w-full py-3 px-5 rounded-2xl bg-gray-50 hover:bg-orange-50/60 border border-gray-200 text-navy font-bold text-xs sm:text-sm transition flex items-center justify-between">
-                        <span x-text="showTranslation ? 'Sembunyikan Terjemahan Bahasa Indonesia' : 'Lihat Terjemahan Lengkap Bahasa Indonesia'"></span>
-                        <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        class="w-full flex items-center justify-between p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-900 font-bold text-xs sm:text-sm hover:bg-amber-100/70 transition">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                </path>
+                            </svg>
+                            <span>Terjemahan Teks Bacaan (Bahasa Indonesia)</span>
+                        </span>
+                        <svg class="w-4 h-4 transition-transform duration-200"
+                            :class="showTranslation ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
 
-                    <div x-show="showTranslation" class="mt-4 p-5 rounded-2xl bg-gray-50/90 border border-gray-200 text-xs sm:text-sm space-y-4 text-gray-700" x-cloak>
-                        <div>
-                            <strong class="text-navy block mb-1">Carla Riemer:</strong>
-                            <p class="leading-relaxed">„Bagi saya, tentu saja saya menganggap ponsel pintar saya sangat praktis. Namun saya merasa sangat konyol bahwa beberapa orang harus memberitahukan setiap aktivitas kecil di internet. Untuk apa sebenarnya hal itu? Saya tidak tertarik mengetahui bahwa seorang kenalan sedang memakan roti keju di pegunungan. Saya jauh lebih ingin teman-teman menelepon saya secara pribadi dan menceritakan kehidupan mereka kepada saya. Sungguh menjengkelkan bahwa sebagian orang selalu mengirimkan foto ke semua kontak hanya untuk menunjukkan bahwa mereka sangat aktif.“</p>
-                        </div>
-                        <div>
-                            <strong class="text-navy block mb-1">Konstantin Bührer:</strong>
-                            <p class="leading-relaxed">„Saya menilai sangat baik bahwa orang bisa selalu terhubung dengan teman-temannya melalui media sosial. Kemarin misalnya saya menghadiri sebuah konser musik yang luar biasa. Teman-teman saya sangat senang bahwa saya langsung mengunggah foto dan video pendek dari konser tersebut. Saya mendapatkan banyak likes dan komentar yang ramah. Saya menyukai kenyataan bahwa saya dapat membagikan momen-momen indah secara langsung.“</p>
-                        </div>
-                        <div>
-                            <strong class="text-navy block mb-1">Nadica Horvat:</strong>
-                            <p class="leading-relaxed">„Saya merasa luar biasa bahwa orang dapat memberi kabar kepada keluarga dan kenalan dengan cepat. Namun saya berpendapat bahwa ponsel tidak harus selalu menyala. Orang tidak perlu memposting setiap acara pesta di internet. Hal tersebut bisa menjadi sangat memalukan! Seorang rekan kerja saya mengajukan izin sakit dan pada malam yang sama mengunggah foto-foto pesta. Dia lupa bahwa rekan-rekan kerja dan bos wanitanya dapat melihat foto tersebut. Sekarang dia harus mencari tempat kerja baru.“</p>
-                        </div>
-                        <div>
-                            <strong class="text-navy block mb-1">Ferdinand Weisensee:</strong>
-                            <p class="leading-relaxed">„Saya memandang hal ini secara cukup kritis. Memang menyenangkan bahwa seorang nenek dapat melihat foto cucunya setiap hari. Tetapi saya sama sekali tidak menganggap baik bahwa banyak orang tua memublikasikan foto anak-anak kecil mereka. Bagaimanapun juga anak-anak belum dapat memutuskan sendiri bahwa mereka tidak menginginkan hal itu. Saya berpikir bahwa orang-orang harus jauh lebih berhati-hati dengan data pribadi di internet.“</p>
+                    <div x-show="showTranslation" x-collapse
+                        class="mt-3 p-5 sm:p-6 rounded-2xl bg-amber-50/40 border border-amber-200/60 text-xs sm:text-sm text-gray-700 space-y-4"
+                        x-cloak>
+                        <p><strong>Immer und überall: Opini dan Pengalaman Berbagi Foto di Internet</strong></p>
+                        <p class="text-xs text-gray-600">Empat warganet menyampaikan argumen mereka seputar privasi, pertemanan, dan etika foto anak di media sosial:</p>
+                        <div class="space-y-3 pt-2 border-t border-amber-200/60">
+                            <div>
+                                <strong class="text-navy block mb-1">Carla Riemer (Kritik terhadap oversharing):</strong>
+                                <p class="leading-relaxed">„Bagi saya, tentu saja saya menganggap ponsel pintar saya sangat praktis. Namun saya merasa sangat konyol bahwa beberapa orang harus memberitahukan setiap aktivitas kecil di internet. Untuk apa sebenarnya hal itu? Saya tidak tertarik mengetahui bahwa seorang kenalan sedang memakan roti keju di pegunungan. Saya jauh lebih ingin teman-teman menelepon saya secara pribadi dan menceritakan kehidupan mereka kepada saya. Sungguh menjengkelkan bahwa sebagian orang selalu mengirimkan foto ke semua kontak hanya untuk menunjukkan bahwa mereka sangat aktif.“</p>
+                            </div>
+                            <div>
+                                <strong class="text-navy block mb-1">Konstantin Bührer (Positif terhadap berbagi momen):</strong>
+                                <p class="leading-relaxed">„Saya menilai sangat baik bahwa orang bisa selalu terhubung dengan teman-temannya melalui media sosial. Kemarin misalnya saya menghadiri sebuah konser musik yang luar biasa. Teman-teman saya sangat senang bahwa saya langsung mengunggah foto dan video pendek dari konser tersebut. Saya mendapatkan banyak likes dan komentar yang ramah. Saya menyukai kenyataan bahwa saya dapat membagikan momen-momen indah secara langsung.“</p>
+                            </div>
+                            <div>
+                                <strong class="text-navy block mb-1">Nadica Horvat (Peringatan terhadap kecerobohan privasi):</strong>
+                                <p class="leading-relaxed">„Saya merasa luar biasa bahwa orang dapat memberi kabar kepada keluarga dan kenalan dengan cepat. Namun saya berpendapat bahwa ponsel tidak harus selalu menyala. Orang tidak perlu memposting setiap acara pesta di internet. Hal tersebut bisa menjadi sangat memalukan! Seorang rekan kerja saya mengajukan izin sakit dan pada malam yang sama mengunggah foto-foto pesta. Dia lupa bahwa rekan-rekan kerja dan bos wanitanya dapat melihat foto tersebut. Sekarang dia harus mencari tempat kerja baru.“</p>
+                            </div>
+                            <div>
+                                <strong class="text-navy block mb-1">Ferdinand Weisensee (Kritis terhadap etika foto anak & data pribadi):</strong>
+                                <p class="leading-relaxed">„Saya memandang hal ini secara cukup kritis. Memang menyenangkan bahwa seorang nenek dapat melihat foto cucunya setiap hari. Tetapi saya sama sekali tidak menganggap baik bahwa banyak orang tua memublikasikan foto anak-anak kecil mereka. Bagaimanapun juga anak-anak belum dapat memutuskan sendiri bahwa mereka tidak menginginkan hal itu. Saya berpikir bahwa orang-orang harus jauh lebih berhati-hati dengan data pribadi di internet.“</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1877,10 +1910,14 @@
                 germanVoiceMale: null,
                 germanVoiceFemale: null,
 
-                // Dialog Player State
+                // Dialog & Lesetext Audio State
                 isPlayingFullDialog: false,
                 activeDialogPlaying: null,
                 currentSpeakingIndex: null,
+                dialog1Audio: null,
+                dialog2Audio: null,
+                activeLesetextPlaying: null,
+                lesetextAudios: {},
 
                 // Learning Goals (6 Target)
                 learningGoals: [
@@ -2283,6 +2320,7 @@
                 },
 
                 speak(text, gender = 'female', onEndedCallback = null) {
+                    this.stopPlayingDialog();
                     if (!('speechSynthesis' in window)) return;
                     window.speechSynthesis.cancel();
                     const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\/\(\)\-\+]/g, ' ').trim();
@@ -2304,40 +2342,158 @@
                 },
 
                 playFullDialog(dialogNum) {
-                    if (!('speechSynthesis' in window)) return;
                     if (this.isPlayingFullDialog && this.activeDialogPlaying === dialogNum) {
-                        window.speechSynthesis.cancel();
-                        this.isPlayingFullDialog = false;
-                        this.activeDialogPlaying = null;
-                        this.currentSpeakingIndex = null;
+                        this.stopPlayingDialog();
                         return;
                     }
 
-                    window.speechSynthesis.cancel();
+                    this.stopPlayingDialog();
                     this.isPlayingFullDialog = true;
                     this.activeDialogPlaying = dialogNum;
-                    this.currentSpeakingIndex = 0;
 
-                    const dialogData = (dialogNum === 1) ? this.dialog1 : this.dialog2;
-
-                    const speakNextLine = (index) => {
-                        if (!this.isPlayingFullDialog || this.activeDialogPlaying !== dialogNum || index >= dialogData.length) {
-                            this.isPlayingFullDialog = false;
-                            this.activeDialogPlaying = null;
-                            this.currentSpeakingIndex = null;
-                            return;
+                    if (dialogNum === 1) {
+                        if (!this.dialog1Audio) {
+                            this.dialog1Audio = new Audio('Dialog-1-Pertemuan-6-materi-a2-1.mp3');
+                            this.dialog1Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog1Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-1-Pertemuan-6-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-1-Pertemuan-6-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog1Audio = altAudio;
+                            });
                         }
-
-                        this.currentSpeakingIndex = index;
-                        const line = dialogData[index];
-                        this.speak(line.de, line.gender || (line.speaker === 'Konstantin' || line.speaker === 'Markus' ? 'male' : 'female'), () => {
-                            setTimeout(() => {
-                                speakNextLine(index + 1);
-                            }, 600);
+                        this.dialog1Audio.currentTime = 0;
+                        this.dialog1Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 1:', err);
+                            this.stopPlayingDialog();
                         });
-                    };
+                        return;
+                    }
 
-                    speakNextLine(0);
+                    if (dialogNum === 2) {
+                        if (!this.dialog2Audio) {
+                            this.dialog2Audio = new Audio('Dialog-2-Pertemuan-6-materi-a2-1.mp3');
+                            this.dialog2Audio.addEventListener('ended', () => {
+                                this.stopPlayingDialog();
+                            });
+                            this.dialog2Audio.addEventListener('error', () => {
+                                console.warn('Gagal memuat Dialog-2-Pertemuan-6-materi-a2-1.mp3, mencoba .wav...');
+                                const altAudio = new Audio('Dialog-2-Pertemuan-6-materi-a2-1.wav');
+                                altAudio.addEventListener('ended', () => {
+                                    this.stopPlayingDialog();
+                                });
+                                altAudio.play().catch(() => this.stopPlayingDialog());
+                                this.dialog2Audio = altAudio;
+                            });
+                        }
+                        this.dialog2Audio.currentTime = 0;
+                        this.dialog2Audio.play().catch(err => {
+                            console.error('Audio playback error Dialog 2:', err);
+                            this.stopPlayingDialog();
+                        });
+                        return;
+                    }
+                },
+
+                stopPlayingDialog() {
+                    this.isPlayingFullDialog = false;
+                    this.activeDialogPlaying = null;
+                    this.currentSpeakingIndex = null;
+                    if (this.dialog1Audio) {
+                        this.dialog1Audio.pause();
+                        this.dialog1Audio.currentTime = 0;
+                    }
+                    if (this.dialog2Audio) {
+                        this.dialog2Audio.pause();
+                        this.dialog2Audio.currentTime = 0;
+                    }
+                    this.stopLesetextAudio();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+                },
+
+                playLesetext(num) {
+                    this.stopPlayingDialog();
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
+
+                    // Jika sedang memutar track yang sama, jeda (pause) audio tanpa mereset currentTime
+                    if (this.activeLesetextPlaying === num) {
+                        if (this.lesetextAudios && this.lesetextAudios[num]) {
+                            this.lesetextAudios[num].pause();
+                        }
+                        this.activeLesetextPlaying = null;
+                        return;
+                    }
+
+                    // Jika berpindah dari track lain, jeda dan reset track lain tersebut
+                    if (this.lesetextAudios) {
+                        Object.keys(this.lesetextAudios).forEach(key => {
+                            const k = parseInt(key);
+                            if (k !== num && this.lesetextAudios[k]) {
+                                this.lesetextAudios[k].pause();
+                                this.lesetextAudios[k].currentTime = 0;
+                            }
+                        });
+                    }
+
+                    this.activeLesetextPlaying = num;
+
+                    const mp3File = `Lesetext${num}-Pertemuan-6-materi-a2-1.mp3`;
+                    const wavFile = `Lesetext${num}-Pertemuan-6-materi-a2-1.wav`;
+
+                    if (!this.lesetextAudios[num]) {
+                        const audio = new Audio(mp3File);
+                        audio.addEventListener('ended', () => {
+                            this.activeLesetextPlaying = null;
+                            if (this.lesetextAudios[num]) {
+                                this.lesetextAudios[num].currentTime = 0;
+                            }
+                        });
+                        audio.addEventListener('error', () => {
+                            console.warn(`Gagal memuat ${mp3File}, mencoba ${wavFile}...`);
+                            const altAudio = new Audio(wavFile);
+                            altAudio.addEventListener('ended', () => {
+                                this.activeLesetextPlaying = null;
+                                if (this.lesetextAudios[num]) {
+                                    this.lesetextAudios[num].currentTime = 0;
+                                }
+                            });
+                            altAudio.play().catch(e => {
+                                console.error(`Gagal memuat ${wavFile}:`, e);
+                                this.activeLesetextPlaying = null;
+                            });
+                            this.lesetextAudios[num] = altAudio;
+                        });
+                        this.lesetextAudios[num] = audio;
+                    }
+
+                    this.lesetextAudios[num].play().catch(err => {
+                        console.error(`Audio playback error Lesetext ${num}:`, err);
+                        this.activeLesetextPlaying = null;
+                    });
+                },
+
+                stopLesetextAudio() {
+                    this.activeLesetextPlaying = null;
+                    if (this.lesetextAudios) {
+                        Object.values(this.lesetextAudios).forEach(audio => {
+                            if (audio) {
+                                audio.pause();
+                                audio.currentTime = 0;
+                            }
+                        });
+                    }
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                    }
                 },
 
                 initApp() {
