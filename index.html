@@ -827,7 +827,7 @@
                     { name: 'Raka', initial: 'R', meta: 'Learner A1.1, belajar setelah kerja', text: 'Aku suka karena kelasnya nggak mengintimidasi. Kalau bingung bisa tanya, terus dibantu sampai paham.', color: 'blue' },
                     { name: 'Maya', initial: 'M', meta: 'Learner A1.2, lanjut dari dasar', text: 'Materinya urut banget. Dari perkenalan, keluarga, sampai aktivitas harian, jadi terasa jelas harus belajar apa dulu.', color: 'green' },
                     { name: 'Dini', initial: 'D', meta: 'Learner A1.1, persiapan studi', text: 'Kelasnya santai, tapi tetap terstruktur. Aku jadi tahu harus mulai dari mana dan latihan apa dulu.', color: 'purple' },
-                    { name: 'Fajar', initial: 'F', meta: 'Learner A1.2, latihan speaking', text: 'Bagian latihan percakapannya membantu banget. Aku jadi lebih berani ngomong walaupun masih pelan-pelan.', color: 'orange' },
+                    { name: 'Fajar', initial: 'F', meta: 'Learner A1.2, latihan sprechen', text: 'Bagian latihan percakapannya membantu banget. Aku jadi lebih berani ngomong walaupun masih pelan-pelan.', color: 'orange' },
                     { name: 'Nabila', initial: 'N', meta: 'Learner A1.1, pemula total', text: 'Penjelasannya nggak ribet. Contohnya dekat dengan aktivitas sehari-hari, jadi gampang kebayang.', color: 'blue' },
                     { name: 'Kevin', initial: 'K', meta: 'Learner A1.2, belajar malam', text: 'Jadwal malamnya cocok untuk aku. Rekaman dan materi juga membantu saat mau mengulang.', color: 'green' },
                     { name: 'Salsa', initial: 'S', meta: 'Learner A1.1, belajar mandiri', text: 'Aku merasa ditemani belajar, bukan cuma dikasih materi. Grup belajarnya juga bikin semangat.', color: 'purple' },
@@ -2615,8 +2615,319 @@
         </div>
     </section>
 
+    <!-- Section Cuplikan Video Pembelajaran -->
+    <section id="cuplikan-kelas" class="py-12 md:py-16 lg:py-20 bg-[#F9FAFB] overflow-hidden border-t border-gray-100">
+        <div class="container mx-auto px-6 md:px-16">
+            <div class="flex flex-col lg:flex-row-reverse gap-6 lg:gap-8 xl:gap-10 items-center lg:items-stretch"
+                x-data="{
+                activeVideo: 0,
+                scrollNext() {
+                    const track = this.$refs.videoTrack;
+                    if (!track) return;
+                    const card = track.querySelector('.video-card');
+                    if (!card) return;
+                    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+                    track.scrollBy({ left: card.offsetWidth + gap, behavior: 'smooth' });
+                },
+                scrollPrev() {
+                    const track = this.$refs.videoTrack;
+                    if (!track) return;
+                    const card = track.querySelector('.video-card');
+                    if (!card) return;
+                    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+                    track.scrollBy({ left: -(card.offsetWidth + gap), behavior: 'smooth' });
+                },
+                updateActive() {
+                    const track = this.$refs.videoTrack;
+                    if (!track) return;
+                    const card = track.querySelector('.video-card');
+                    if (!card) return;
+                    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+                    const step = card.offsetWidth + gap;
+                    this.activeVideo = Math.max(0, Math.min(3, Math.round(track.scrollLeft / step)));
+                },
+                scrollTo(index) {
+                    const track = this.$refs.videoTrack;
+                    if (!track) return;
+                    const card = track.querySelector('.video-card');
+                    if (!card) return;
+                    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+                    const step = card.offsetWidth + gap;
+                    track.scrollTo({ left: index * step, behavior: 'smooth' });
+                }
+            }">
+
+                <!-- Sisi Kanan: Teks & Gambar Karakter Maskot -->
+                <div
+                    class="lg:w-[35%] xl:w-[36%] text-center lg:text-left flex flex-col items-center lg:items-start justify-between w-full">
+                    <div class="section-heading-wrap lg-left lg-narrow is-compact">
+                        <div class="section-kicker">
+                            <span class="section-kicker-text">Cuplikan Pembelajaran</span>
+                        </div>
+                        <h2 class="section-title">
+                            Belajar Tanpa Takut Salah dengan <span class="text-orange-500">Bimbingan Tutor
+                                Profesional</span>
+                        </h2>
+                        <p class="section-subtitle">
+                            Lihat langsung bagaimana interaktifnya proses belajar dan latihan percakapan di kelas online
+                            bersama tutor aksaradeutsch.
+                        </p>
+                    </div>
+
+                    <!-- Gambar Maskot (Desktop) -->
+                    <img src="maskot-section-video.png" alt="Maskot Aksaradeutsch Belajar Bahasa Jerman"
+                        class="w-full max-w-[340px] lg:max-w-[380px] xl:max-w-[400px] hidden lg:block mt-auto -translate-y-5 lg:-translate-y-7 drop-shadow-sm select-none"
+                        loading="lazy" decoding="async">
+                </div>
+
+                <!-- Sisi Kiri: Cuplikan Video dengan Fitur Swipe -->
+                <div class="lg:flex-1 w-full min-w-0 flex flex-col justify-center">
+                    <div class="relative">
+                        <!-- Track Swipeable -->
+                        <div x-ref="videoTrack" @scroll.passive="updateActive()"
+                            class="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 pt-1 px-1 scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none]">
+
+                            <!-- Kartu 1: POV Kelas A2 -->
+                            <div
+                                class="video-card flex-shrink-0 w-[240px] sm:w-[270px] md:w-[290px] snap-center bg-white border border-gray-200 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col justify-between group">
+                                <a href="https://www.instagram.com/p/Dc3Sgo7ypmD/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block relative aspect-[9/13] w-full overflow-hidden bg-gray-900 cursor-pointer"
+                                    aria-label="Tonton video POV Ikut Kelas Bahasa Jerman A2 di Instagram">
+                                    <img src="Thumbnail-section-video/POV%20Ikut%20Kelas%20Bahasa%20Jerman%20A2%20yang%20Bikin%20Kamu%20Aktif%20Berbicara%20(1).png"
+                                        alt="POV Ikut Kelas Bahasa Jerman A2"
+                                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none">
+                                    </div>
+
+                                    <!-- Floating Play Button -->
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                        <div
+                                            class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 text-orange-600 flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 translate-x-0.5 fill-current"
+                                                viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="p-4 sm:p-5 flex flex-col justify-between flex-grow">
+                                    <h3
+                                        class="text-sm sm:text-base font-extrabold text-navy leading-snug group-hover:text-orange-600 transition-colors mb-4">
+                                        POV Ikut Kelas Bahasa Jerman A2 yang Bikin Aktif Berbicara
+                                    </h3>
+
+                                    <a href="https://www.instagram.com/p/Dc3Sgo7ypmD/" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="w-full py-2.5 px-4 rounded-xl border border-orange-200 bg-orange-50/80 hover:bg-orange-500 hover:text-white text-orange-600 font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-2xs active:scale-[0.98] cursor-pointer">
+                                        <span>Tonton di Instagram</span>
+                                        <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Kartu 2: Cara Baca Jam -->
+                            <div
+                                class="video-card flex-shrink-0 w-[240px] sm:w-[270px] md:w-[290px] snap-center bg-white border border-gray-200 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col justify-between group">
+                                <a href="https://www.instagram.com/p/DcdZ5pnh5gK/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block relative aspect-[9/13] w-full overflow-hidden bg-gray-900 cursor-pointer"
+                                    aria-label="Tonton video Cara Gampang Baca Jam dalam Bahasa Jerman di Instagram">
+                                    <img src="Thumbnail-section-video/Content%204%20(2).png"
+                                        alt="Cara Gampang Baca Jam Bahasa Jerman"
+                                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none">
+                                    </div>
+
+                                    <!-- Floating Play Button -->
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                        <div
+                                            class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 text-orange-600 flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 translate-x-0.5 fill-current"
+                                                viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="p-4 sm:p-5 flex flex-col justify-between flex-grow">
+                                    <h3
+                                        class="text-sm sm:text-base font-extrabold text-navy leading-snug group-hover:text-orange-600 transition-colors mb-4">
+                                        Gak Perlu Pusing, Ini Cara Gampang Baca Jam Jerman
+                                    </h3>
+
+                                    <a href="https://www.instagram.com/p/DcdZ5pnh5gK/" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="w-full py-2.5 px-4 rounded-xl border border-orange-200 bg-orange-50/80 hover:bg-orange-500 hover:text-white text-orange-600 font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-2xs active:scale-[0.98] cursor-pointer">
+                                        <span>Tonton di Instagram</span>
+                                        <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Kartu 3: Belajar 1 Minggu -->
+                            <div
+                                class="video-card flex-shrink-0 w-[240px] sm:w-[270px] md:w-[290px] snap-center bg-white border border-gray-200 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col justify-between group">
+                                <a href="https://www.instagram.com/p/Dbnb9sBpY1l/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block relative aspect-[9/13] w-full overflow-hidden bg-gray-900 cursor-pointer"
+                                    aria-label="Tonton video Belajar 1 Minggu Udah Bisa Bahasa Jerman di Instagram">
+                                    <img src="Thumbnail-section-video/776020767_18097828244122112_6832236985087216389_n.jpg"
+                                        alt="Progress Belajar 1 Minggu Bahasa Jerman"
+                                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none">
+                                    </div>
+
+                                    <!-- Floating Play Button -->
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                        <div
+                                            class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 text-orange-600 flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 translate-x-0.5 fill-current"
+                                                viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="p-4 sm:p-5 flex flex-col justify-between flex-grow">
+                                    <h3
+                                        class="text-sm sm:text-base font-extrabold text-navy leading-snug group-hover:text-orange-600 transition-colors mb-4">
+                                        Baru Belajar 1 Minggu, Sudah Mulai Lancar Bahasa Jerman?
+                                    </h3>
+
+                                    <a href="https://www.instagram.com/p/Dbnb9sBpY1l/" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="w-full py-2.5 px-4 rounded-xl border border-orange-200 bg-orange-50/80 hover:bg-orange-500 hover:text-white text-orange-600 font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-2xs active:scale-[0.98] cursor-pointer">
+                                        <span>Tonton di Instagram</span>
+                                        <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Kartu 4: Redemittel Penyelamat -->
+                            <div
+                                class="video-card flex-shrink-0 w-[240px] sm:w-[270px] md:w-[290px] snap-center bg-white border border-gray-200 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col justify-between group">
+                                <a href="https://www.instagram.com/p/Dc-vqnPvyRA/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block relative aspect-[9/13] w-full overflow-hidden bg-gray-900 cursor-pointer"
+                                    aria-label="Tonton video Redemittel Penyelamat Percakapan Bahasa Jerman di Instagram">
+                                    <img src="Thumbnail-section-video/thumbnail_4.jpg"
+                                        alt="Redemittel Penyelamat Percakapan Bahasa Jerman"
+                                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none">
+                                    </div>
+
+                                    <!-- Floating Play Button -->
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                        <div
+                                            class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 text-orange-600 flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 translate-x-0.5 fill-current"
+                                                viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="p-4 sm:p-5 flex flex-col justify-between flex-grow">
+                                    <h3
+                                        class="text-sm sm:text-base font-extrabold text-navy leading-snug group-hover:text-orange-600 transition-colors mb-4">
+                                        Redemittel Penyelamat Pas Kamu Nggak Paham Orang Jerman Ngomong Apa
+                                    </h3>
+
+                                    <a href="https://www.instagram.com/p/Dc-vqnPvyRA/" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="w-full py-2.5 px-4 rounded-xl border border-orange-200 bg-orange-50/80 hover:bg-orange-500 hover:text-white text-orange-600 font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-2xs active:scale-[0.98] cursor-pointer">
+                                        <span>Tonton di Instagram</span>
+                                        <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Swipe Navigation & Indicator Controls -->
+                        <div class="flex items-center justify-between pt-3 px-1">
+                            <!-- Indicator Dots -->
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" @click="scrollTo(0)"
+                                    :class="activeVideo === 0 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
+                                    class="h-2 rounded-full transition-all duration-200 cursor-pointer"
+                                    aria-label="Lihat video 1"></button>
+                                <button type="button" @click="scrollTo(1)"
+                                    :class="activeVideo === 1 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
+                                    class="h-2 rounded-full transition-all duration-200 cursor-pointer"
+                                    aria-label="Lihat video 2"></button>
+                                <button type="button" @click="scrollTo(2)"
+                                    :class="activeVideo === 2 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
+                                    class="h-2 rounded-full transition-all duration-200 cursor-pointer"
+                                    aria-label="Lihat video 3"></button>
+                                <button type="button" @click="scrollTo(3)"
+                                    :class="activeVideo === 3 ? 'w-6 bg-orange-500' : 'w-2 bg-gray-300'"
+                                    class="h-2 rounded-full transition-all duration-200 cursor-pointer"
+                                    aria-label="Lihat video 4"></button>
+                            </div>
+
+                            <!-- Swipe Arrow Buttons -->
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="scrollPrev()"
+                                    class="w-9 h-9 rounded-full border border-gray-200 bg-white hover:bg-orange-50 hover:border-orange-300 text-gray-600 hover:text-orange-600 flex items-center justify-center transition-all shadow-2xs active:scale-95 cursor-pointer"
+                                    aria-label="Geser ke video sebelumnya">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button type="button" @click="scrollNext()"
+                                    class="w-9 h-9 rounded-full border border-gray-200 bg-white hover:bg-orange-50 hover:border-orange-300 text-gray-600 hover:text-orange-600 flex items-center justify-center transition-all shadow-2xs active:scale-95 cursor-pointer"
+                                    aria-label="Geser ke video berikutnya">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Section Coba Kelas Gratis -->
-    <section id="kelas-gratis" class="py-16 md:py-20 bg-[#F9FAFB] overflow-hidden">
+    <section id="kelas-gratis" class="py-16 md:py-20 bg-white overflow-hidden">
         <div class="container mx-auto px-6 md:px-16">
             <div class="section-heading-wrap">
                 <div class="section-kicker">
